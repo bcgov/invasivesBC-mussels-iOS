@@ -10,4 +10,10 @@ import Foundation
 
 struct StringConstants {
     static let appTitle: String = "InvasivesBC"
+    struct Alerts {
+        struct Logout {
+            static let title: String = "Would you like to logout?"
+            static let message: String = "All of your local data will be lost.\nBe sure to sync first"
+        }
+    }
 }

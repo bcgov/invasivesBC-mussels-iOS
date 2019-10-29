@@ -15,17 +15,16 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
                         <segue destination="mUX-cz-9L9" kind="show" identifier="performLogin" id="YeJ-0a-Xdj"/>
-                        <segue destination="JwX-i7-BNh" kind="show" identifier="showHomePage" id="8fh-1h-gMj"/>
+                        <segue destination="6RJ-R1-2SE" kind="show" identifier="showHomePage" id="NR0-QC-wd7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="139" y="138"/>
+            <point key="canvasLocation" x="-417" y="-364"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="oqx-Jp-mkB">
@@ -95,7 +94,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gEs-MR-1fG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="997" y="-221"/>
+            <point key="canvasLocation" x="286" y="-830"/>
         </scene>
         <!--Home View Controller-->
         <scene sceneID="u0t-z8-zdG">
@@ -177,28 +176,77 @@
                                     <constraint firstItem="C0H-M0-0am" firstAttribute="leading" secondItem="oEL-Ux-yq2" secondAttribute="leading" constant="15" id="w3p-S8-ysA"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="avH-r0-8vm">
+                                <rect key="frame" x="554" y="133" width="199" height="42"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="42" id="PS7-sd-gaH"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="199" id="hHC-Rh-Sqt"/>
+                                </constraints>
+                                <state key="normal" title="Add Entry"/>
+                                <connections>
+                                    <action selector="addEntryClicked:" destination="JwX-i7-BNh" eventType="touchUpInside" id="vg4-rN-YmO"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="avH-r0-8vm" firstAttribute="top" secondItem="oEL-Ux-yq2" secondAttribute="bottom" constant="15" id="G3Z-Sf-cQ1"/>
                             <constraint firstItem="C9w-bx-Ty9" firstAttribute="trailing" secondItem="oEL-Ux-yq2" secondAttribute="trailing" id="IeB-2N-k9H"/>
                             <constraint firstItem="oEL-Ux-yq2" firstAttribute="top" secondItem="c0f-Dq-1g0" secondAttribute="top" id="KjF-3e-a2W"/>
                             <constraint firstItem="oEL-Ux-yq2" firstAttribute="leading" secondItem="C9w-bx-Ty9" secondAttribute="leading" id="WAv-Si-AMS"/>
+                            <constraint firstItem="C9w-bx-Ty9" firstAttribute="trailing" secondItem="avH-r0-8vm" secondAttribute="trailing" constant="15" id="rTf-Gv-o0b"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="C9w-bx-Ty9"/>
                     </view>
                     <navigationItem key="navigationItem" id="SEZ-jX-fnz"/>
+                    <nil key="simulatedTopBarMetrics"/>
                     <connections>
+                        <outlet property="addEntryButton" destination="avH-r0-8vm" id="Rd5-E0-05A"/>
                         <outlet property="appTitle" destination="4eR-8r-kOm" id="nNX-fD-1fy"/>
                         <outlet property="lastSyncLabel" destination="Fj2-GR-1yn" id="fKi-Ui-54e"/>
                         <outlet property="navigationBar" destination="oEL-Ux-yq2" id="cCb-cB-SxG"/>
                         <outlet property="reachabilityIndicator" destination="G3o-nN-cQJ" id="iNX-NX-Rou"/>
                         <outlet property="reachabilityLabel" destination="BhB-gb-4tS" id="63R-G4-qzp"/>
                         <outlet property="userButton" destination="qs0-Z8-kOT" id="xoK-6C-NR5"/>
+                        <segue destination="fxD-jA-8IB" kind="show" identifier="showFormEntry" id="Iqn-O2-aSN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9MC-ax-5X6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="996.875" y="424.8046875"/>
+            <point key="canvasLocation" x="1160" y="87"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="8tC-4p-w6g">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nOn-xC-dlr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <navigationController modalPresentationStyle="fullScreen" id="6RJ-R1-2SE" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="YEv-ZA-zSN"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Nwy-xe-Jgf">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="50"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="JwX-i7-BNh" kind="relationship" relationship="rootViewController" id="vkW-WE-ZWJ"/>
+                    </connections>
+                </navigationController>
+            </objects>
+            <point key="canvasLocation" x="286" y="87"/>
+        </scene>
+        <!--Form Entry View Controller-->
+        <scene sceneID="sQu-BZ-g0V">
+            <objects>
+                <viewController id="fxD-jA-8IB" customClass="FormEntryViewController" customModule="Boilerplate" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Q7a-6c-L9o">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="l3A-02-pOs"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="KZK-kg-WfU"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="evM-IS-50e" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2104" y="87"/>
         </scene>
     </scenes>
     <resources>

@@ -18,11 +18,12 @@ class HomeViewController: BaseViewController {
     @IBOutlet weak var reachabilityLabel: UILabel!
     @IBOutlet weak var lastSyncLabel: UILabel!
     @IBOutlet weak var userButton: UIButton!
+    @IBOutlet weak var addEntryButton: UIButton!
     
     // MARK: Constants
     let reachability =  try! Reachability()
     
-    // MARK: Computer variables
+    // MARK: Computed variables
     var online: Bool = false {
         didSet {
             updateStyleAccordingToNetworkStatus()
@@ -37,10 +38,14 @@ class HomeViewController: BaseViewController {
     // MARK: Class Functions
     override func viewDidLoad() {
         super.viewDidLoad()
+       
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        if let navigationController = self.navigationController {
+            navigationController.navigationBar.isHidden = true
+        }
         initirialize()
     }
     
@@ -52,11 +57,15 @@ class HomeViewController: BaseViewController {
     // MARK: Outlet actions
     @IBAction func userButtonAction(_ sender: Any) {
         showOptions(options: [.Logout], on: sender as! UIButton) { (selected) in
-            Alert.show(title: "Would you like to logout?", message: "All of your local data will be lost.\nBe sure to sync first", yes: {
+            Alert.show(title: StringConstants.Alerts.Logout.title, message: StringConstants.Alerts.Logout.message, yes: {
                 Auth.logout()
                 self.dismiss(animated: true, completion: nil)
             }) {}
         }
+    }
+    
+    @IBAction func addEntryClicked(_ sender: Any) {
+        self.performSegue(withIdentifier: "showFormEntry", sender: self)
     }
     
     // MARK: Functions
@@ -67,8 +76,12 @@ class HomeViewController: BaseViewController {
     
     // MARK: Style
     private func style() {
+        if let navigationController = self.navigationController {
+            navigationController.navigationBar.barStyle = UIBarStyle.black
+        }
         styleNavigationBar()
         styleUserButton()
+        styleFillButton(button: addEntryButton)
     }
     
     // Style gradiant navigation
