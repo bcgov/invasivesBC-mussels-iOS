@@ -7,9 +7,11 @@
 //
 
 import Foundation
+
 protocol BaseRealmObject {
     var localId: String { get set }
     var remoteId: Int { get set }
+    
     
     var syncable: Bool { get set}
     var shouldSync: Bool { get set}

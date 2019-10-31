@@ -30,8 +30,8 @@ class Auth {
                                          idpHint: idpHint)
     }
     
-    public static func getIdpHint() -> String {
-        return "";
+    private static func getIdpHint() -> String {
+        return SSO.idpHint;
     }
     
     public static func authenticate(completion: @escaping(_ success: Bool) -> Void) {

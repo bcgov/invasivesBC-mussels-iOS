@@ -72,6 +72,7 @@ class HomeViewController: BaseViewController {
     private func initirialize() {
         beginReachabilityNotification()
         style()
+        print(Auth.getAccessToken())
     }
     
     // MARK: Style
