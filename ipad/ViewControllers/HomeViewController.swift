@@ -19,9 +19,13 @@ class HomeViewController: BaseViewController {
     @IBOutlet weak var lastSyncLabel: UILabel!
     @IBOutlet weak var userButton: UIButton!
     @IBOutlet weak var addEntryButton: UIButton!
+    @IBOutlet weak var switcherHolder: UIView!
     
     // MARK: Constants
+    let switcherItems: [String] = ["All", "Drafts", "Pending Sync", "Submitted"]
     let reachability =  try! Reachability()
+    
+    // MARK: Variables
     
     // MARK: Computed variables
     var online: Bool = false {
@@ -43,9 +47,7 @@ class HomeViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if let navigationController = self.navigationController {
-            navigationController.navigationBar.isHidden = true
-        }
+        setNavigationBar(hidden: true, style: UIBarStyle.black)
         initirialize()
     }
     
@@ -72,14 +74,18 @@ class HomeViewController: BaseViewController {
     private func initirialize() {
         beginReachabilityNotification()
         style()
-        print(Auth.getAccessToken())
+        setupSwitcher()
+    }
+    
+    private func setupSwitcher() {
+        _ = Switcher.show(items: switcherItems, in: switcherHolder, initial: switcherItems.first) { (selection) in
+            // TODO: handle filter
+            // Alert.show(title: "Selected", message: selection)
+        }
     }
     
     // MARK: Style
     private func style() {
-        if let navigationController = self.navigationController {
-            navigationController.navigationBar.barStyle = UIBarStyle.black
-        }
         styleNavigationBar()
         styleUserButton()
         styleFillButton(button: addEntryButton)

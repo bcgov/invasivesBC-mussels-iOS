@@ -22,6 +22,10 @@ extension Theme {
         return Fonts.getPrimary(size: 15)
     }
     
+    public func getSwitcherFont() -> UIFont {
+        return Fonts.getPrimaryBold(size: 17)
+    }
+    
     // MARK: Label Text
     // App Title
     public func setAppTitle(label: UILabel, darkBackground: Bool? = false) {
@@ -129,8 +133,52 @@ extension Theme {
         toView.trailingAnchor.constraint(equalTo: fromView.trailingAnchor, constant: 0).isActive = true
     }
     
-    // Mark: View & Layer
+    // MARK: View & Layer
     public func roundCorners(layer: CALayer) {
         layer.cornerRadius = 8
+    }
+    
+    public func styleCard(layer: CALayer) {
+        roundCorners(layer: layer)
+        addShadow(to: layer, opacity: 08, height: 2)
+    }
+    
+    // MARK: ANIMATIONS
+    public func fadeLabelMessage(label: UILabel, tempText: String, delay: Double? = 3) {
+        let defaultDelay: Double = 3
+        let visibleAlpha: CGFloat = 1
+        let invisibleAlpha: CGFloat = 0
+        let originalText: String = label.text ?? ""
+        let originalTextColor: UIColor = label.textColor
+        // fade out current text
+        UIView.animate(withDuration: SettingsConstants.shortAnimationDuration, animations: {
+            label.alpha = invisibleAlpha
+            label.layoutIfNeeded()
+        }) { (done) in
+            // change text
+            label.text = tempText
+            // fade in warning text
+            UIView.animate(withDuration: SettingsConstants.shortAnimationDuration, animations: {
+                label.textColor = Colors.accent.red
+                label.alpha = visibleAlpha
+                label.layoutIfNeeded()
+            }, completion: { (done) in
+                // revert after 3 seconds
+                UIView.animate(withDuration: SettingsConstants.shortAnimationDuration, delay: delay ?? defaultDelay, animations: {
+                    // fade out text
+                    label.alpha = invisibleAlpha
+                    label.layoutIfNeeded()
+                }, completion: { (done) in
+                    // change text
+                    label.text = originalText
+                    // fade in text
+                    UIView.animate(withDuration: SettingsConstants.shortAnimationDuration, animations: {
+                        label.textColor = originalTextColor
+                        label.alpha = visibleAlpha
+                        label.layoutIfNeeded()
+                    })
+                })
+            })
+        }
     }
 }

@@ -11,19 +11,19 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="InputModal" customModule="Boilerplate" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <rect key="frame" x="0.0" y="0.0" width="424" height="235"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bse-Dp-eXB">
-                    <rect key="frame" x="5" y="5" width="404" height="886"/>
+                    <rect key="frame" x="5" y="5" width="414" height="225"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="euS-Zl-Xv0">
-                            <rect key="frame" x="15" y="8" width="374" height="20.5"/>
+                            <rect key="frame" x="15" y="8" width="384" height="20.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Wqw-2s-odn">
-                            <rect key="frame" x="15" y="43.5" width="374" height="46.5"/>
+                            <rect key="frame" x="15" y="43.5" width="384" height="46.5"/>
                             <accessibility key="accessibilityConfiguration" identifier="PopupInput"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="46.5" id="9Uk-Wg-WAm"/>
@@ -35,10 +35,10 @@
                             </connections>
                         </textField>
                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="COl-zQ-lTx">
-                            <rect key="frame" x="15" y="105" width="374" height="766"/>
+                            <rect key="frame" x="15" y="105" width="384" height="105"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FwF-Na-HR0">
-                                    <rect key="frame" x="0.0" y="0.0" width="184.5" height="766"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="189.5" height="105"/>
                                     <accessibility key="accessibilityConfiguration" identifier="PopUpCancelButton"/>
                                     <state key="normal" title="Cancel"/>
                                     <connections>
@@ -46,7 +46,7 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IMh-P0-YfK">
-                                    <rect key="frame" x="189.5" y="0.0" width="184.5" height="766"/>
+                                    <rect key="frame" x="194.5" y="0.0" width="189.5" height="105"/>
                                     <accessibility key="accessibilityConfiguration" identifier="PopUpAddButton"/>
                                     <state key="normal" title="Add"/>
                                     <connections>
@@ -78,6 +78,7 @@
                 <constraint firstItem="Bse-Dp-eXB" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="5" id="ZzK-zz-iia"/>
                 <constraint firstItem="Bse-Dp-eXB" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="5" id="d8L-Lp-AY2"/>
             </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <connections>
                 <outlet property="addButton" destination="IMh-P0-YfK" id="eAa-cL-wgK"/>
@@ -86,7 +87,7 @@
                 <outlet property="inputHeight" destination="9Uk-Wg-WAm" id="Zwi-oV-6KY"/>
                 <outlet property="titleLabel" destination="euS-Zl-Xv0" id="qHd-o1-cmU"/>
             </connections>
-            <point key="canvasLocation" x="139" y="124"/>
+            <point key="canvasLocation" x="144.92753623188406" y="-97.433035714285708"/>
         </view>
     </objects>
 </document>

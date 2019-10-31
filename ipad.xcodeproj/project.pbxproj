@@ -49,6 +49,14 @@
 		29CEC92623676425003B21B9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 29CEC92423676425003B21B9 /* LaunchScreen.storyboard */; };
 		29CEC93123676425003B21B9 /* ipadTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29CEC93023676425003B21B9 /* ipadTests.swift */; };
 		29CEC93C23676691003B21B9 /* KeycloakConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29CEC93B23676691003B21B9 /* KeycloakConstants.swift */; };
+		29F29F90236B6A03004F12E7 /* SwitcherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F29F8F236B6A03004F12E7 /* SwitcherView.swift */; };
+		29F29F93236B6A22004F12E7 /* SwitcherView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29F29F92236B6A22004F12E7 /* SwitcherView.xib */; };
+		29F29F98236B6B9C004F12E7 /* SwitcherCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F29F96236B6B9C004F12E7 /* SwitcherCollectionViewCell.swift */; };
+		29F29F99236B6B9C004F12E7 /* SwitcherCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29F29F97236B6B9C004F12E7 /* SwitcherCollectionViewCell.xib */; };
+		29F29F9D236B7750004F12E7 /* Switcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F29F9C236B7750004F12E7 /* Switcher.swift */; };
+		29F29FA1236B8670004F12E7 /* DropdownCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F29F9F236B8670004F12E7 /* DropdownCollectionViewCell.swift */; };
+		29F29FA2236B8670004F12E7 /* DropdownCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29F29FA0236B8670004F12E7 /* DropdownCollectionViewCell.xib */; };
+		29F29FA4236B9114004F12E7 /* InputItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F29FA3236B9114004F12E7 /* InputItem.swift */; };
 		9FB225820DBE019B5CE1031C /* Pods_ipadTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CED730649CF3E43FB1AD51F6 /* Pods_ipadTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -108,6 +116,14 @@
 		29CEC93023676425003B21B9 /* ipadTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ipadTests.swift; sourceTree = "<group>"; };
 		29CEC93223676425003B21B9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		29CEC93B23676691003B21B9 /* KeycloakConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeycloakConstants.swift; sourceTree = "<group>"; };
+		29F29F8F236B6A03004F12E7 /* SwitcherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitcherView.swift; sourceTree = "<group>"; };
+		29F29F92236B6A22004F12E7 /* SwitcherView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SwitcherView.xib; sourceTree = "<group>"; };
+		29F29F96236B6B9C004F12E7 /* SwitcherCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitcherCollectionViewCell.swift; sourceTree = "<group>"; };
+		29F29F97236B6B9C004F12E7 /* SwitcherCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SwitcherCollectionViewCell.xib; sourceTree = "<group>"; };
+		29F29F9C236B7750004F12E7 /* Switcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Switcher.swift; sourceTree = "<group>"; };
+		29F29F9F236B8670004F12E7 /* DropdownCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropdownCollectionViewCell.swift; sourceTree = "<group>"; };
+		29F29FA0236B8670004F12E7 /* DropdownCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DropdownCollectionViewCell.xib; sourceTree = "<group>"; };
+		29F29FA3236B9114004F12E7 /* InputItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputItem.swift; sourceTree = "<group>"; };
 		5E19532C9F39231DE6E43099 /* Pods_ipad.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ipad.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		654A566D8395B17BDF172F9F /* Pods-ipad.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ipad.release.xcconfig"; path = "Target Support Files/Pods-ipad/Pods-ipad.release.xcconfig"; sourceTree = "<group>"; };
 		763C8716EF742F6764FFE7D7 /* Pods-ipad.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ipad.debug.xcconfig"; path = "Target Support Files/Pods-ipad/Pods-ipad.debug.xcconfig"; sourceTree = "<group>"; };
@@ -148,8 +164,10 @@
 		1E5D7D492369F1A400707D08 /* Input Cells */ = {
 			isa = PBXGroup;
 			children = (
+				29F29F9E236B8655004F12E7 /* Dropdown */,
 				1E5D7D4A2369F1CF00707D08 /* TestTableViewCell.swift */,
 				1E5D7D4B2369F1CF00707D08 /* TestTableViewCell.xib */,
+				29F29FA3236B9114004F12E7 /* InputItem.swift */,
 			);
 			path = "Input Cells";
 			sourceTree = "<group>";
@@ -174,6 +192,7 @@
 		29514BD12368A6CF00DC89C4 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				29F29F91236B6A0D004F12E7 /* Switcher */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -350,6 +369,27 @@
 			path = Constants;
 			sourceTree = "<group>";
 		};
+		29F29F91236B6A0D004F12E7 /* Switcher */ = {
+			isa = PBXGroup;
+			children = (
+				29F29F8F236B6A03004F12E7 /* SwitcherView.swift */,
+				29F29F92236B6A22004F12E7 /* SwitcherView.xib */,
+				29F29F96236B6B9C004F12E7 /* SwitcherCollectionViewCell.swift */,
+				29F29F97236B6B9C004F12E7 /* SwitcherCollectionViewCell.xib */,
+				29F29F9C236B7750004F12E7 /* Switcher.swift */,
+			);
+			path = Switcher;
+			sourceTree = "<group>";
+		};
+		29F29F9E236B8655004F12E7 /* Dropdown */ = {
+			isa = PBXGroup;
+			children = (
+				29F29F9F236B8670004F12E7 /* DropdownCollectionViewCell.swift */,
+				29F29FA0236B8670004F12E7 /* DropdownCollectionViewCell.xib */,
+			);
+			path = Dropdown;
+			sourceTree = "<group>";
+		};
 		718555F643FB0D413A8C0B7B /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -447,10 +487,13 @@
 			files = (
 				29514BF12368CB5D00DC89C4 /* DropdownTableViewCell.xib in Resources */,
 				29514BD72368AD6F00DC89C4 /* OptionsTableViewCell.xib in Resources */,
+				29F29F93236B6A22004F12E7 /* SwitcherView.xib in Resources */,
 				29514BDD2368AEE400DC89C4 /* Options.storyboard in Resources */,
 				1E5D7D4D2369F1CF00707D08 /* TestTableViewCell.xib in Resources */,
 				29CEC92623676425003B21B9 /* LaunchScreen.storyboard in Resources */,
 				2907E4B92368D25800946B3F /* InputModal.xib in Resources */,
+				29F29FA2236B8670004F12E7 /* DropdownCollectionViewCell.xib in Resources */,
+				29F29F99236B6B9C004F12E7 /* SwitcherCollectionViewCell.xib in Resources */,
 				29CEC92323676425003B21B9 /* Assets.xcassets in Resources */,
 				29CEC92123676424003B21B9 /* Main.storyboard in Resources */,
 				29514BED2368CAAA00DC89C4 /* Dropdown.storyboard in Resources */,
@@ -540,6 +583,7 @@
 				29BAC5192367B34000A620F4 /* Fonts.swift in Sources */,
 				29BAC5102367984000A620F4 /* GradiantView.swift in Sources */,
 				29514BE32368B5AF00DC89C4 /* Notifications.swift in Sources */,
+				29F29FA1236B8670004F12E7 /* DropdownCollectionViewCell.swift in Sources */,
 				29514BD92368ADB100DC89C4 /* OptionType.swift in Sources */,
 				29BAC5122367A21300A620F4 /* StringConstants.swift in Sources */,
 				29514BD62368AD6F00DC89C4 /* OptionsTableViewCell.swift in Sources */,
@@ -551,15 +595,19 @@
 				29BAC4FE23676C3000A620F4 /* Auth.swift in Sources */,
 				2907E4B72368D24900946B3F /* InputModal.swift in Sources */,
 				29CEC91E23676424003B21B9 /* ViewController.swift in Sources */,
+				29F29F9D236B7750004F12E7 /* Switcher.swift in Sources */,
 				29CEC91A23676424003B21B9 /* AppDelegate.swift in Sources */,
 				29514BE92368C41900DC89C4 /* DropdownModel.swift in Sources */,
+				29F29F90236B6A03004F12E7 /* SwitcherView.swift in Sources */,
 				29BAC50C23677EDC00A620F4 /* LoginViewController.swift in Sources */,
 				29BAC50E236790C900A620F4 /* HomeViewController.swift in Sources */,
 				29514BE62368B70900DC89C4 /* Options.swift in Sources */,
+				29F29FA4236B9114004F12E7 /* InputItem.swift in Sources */,
 				29514BE12368B4BE00DC89C4 /* SettingsConstants.swift in Sources */,
 				29514BDB2368AED600DC89C4 /* OptionsViewController.swift in Sources */,
 				29BAC5172367B12300A620F4 /* Colors.swift in Sources */,
 				2907E4BB2368FEA500946B3F /* FormEntryViewController.swift in Sources */,
+				29F29F98236B6B9C004F12E7 /* SwitcherCollectionViewCell.swift in Sources */,
 				29CEC93C23676691003B21B9 /* KeycloakConstants.swift in Sources */,
 				29CEC91C23676424003B21B9 /* SceneDelegate.swift in Sources */,
 				29BAC50923676FDC00A620F4 /* Theme.swift in Sources */,

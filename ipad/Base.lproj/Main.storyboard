@@ -5,6 +5,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -46,21 +47,41 @@
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bclogo" translatesAutoresizingMaskIntoConstraints="NO" id="xMA-l7-a4f">
                                         <rect key="frame" x="8" y="45" width="474" height="148"/>
                                     </imageView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yed-rD-Fhc">
-                                        <rect key="frame" x="105" y="336" width="280" height="54"/>
-                                        <color key="backgroundColor" red="0.13725490200000001" green="0.25098039220000001" blue="0.45882352939999999" alpha="1" colorSpace="calibratedRGB"/>
-                                        <accessibility key="accessibilityConfiguration" identifier="loginButton"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="54" id="83d-RU-AWu"/>
-                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="280" id="q8v-QB-1Z1"/>
-                                        </constraints>
-                                        <state key="normal" title="Login">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="loginButtonAction:" destination="mUX-cz-9L9" eventType="touchUpInside" id="1Gy-OS-uwI"/>
-                                        </connections>
-                                    </button>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="dft-do-w0L">
+                                        <rect key="frame" x="105" y="309" width="280" height="116"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rli-kb-fGi">
+                                                <rect key="frame" x="0.0" y="0.0" width="280" height="54"/>
+                                                <color key="backgroundColor" red="0.13725490200000001" green="0.25098039220000001" blue="0.45882352939999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                <accessibility key="accessibilityConfiguration" identifier="loginButton"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="54" id="Jx1-vT-56f"/>
+                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="280" id="vjK-sv-rqv"/>
+                                                </constraints>
+                                                <state key="normal" title="Login with IDIR">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="loginWithIdirAction:" destination="mUX-cz-9L9" eventType="touchUpInside" id="70n-ju-jmB"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yed-rD-Fhc">
+                                                <rect key="frame" x="0.0" y="62" width="280" height="54"/>
+                                                <color key="backgroundColor" red="0.13725490200000001" green="0.25098039220000001" blue="0.45882352939999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                <accessibility key="accessibilityConfiguration" identifier="loginButton"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="54" id="83d-RU-AWu"/>
+                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="280" id="q8v-QB-1Z1"/>
+                                                </constraints>
+                                                <state key="normal" title="Login with BCeID">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="loginWithBCeIDAction:" destination="mUX-cz-9L9" eventType="touchUpInside" id="7no-Pm-cmB"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -68,14 +89,14 @@
                                     <constraint firstAttribute="width" constant="490" id="8aa-6P-ukk"/>
                                     <constraint firstItem="vvc-QZ-8vt" firstAttribute="leading" secondItem="cVa-U7-NGL" secondAttribute="leading" constant="8" id="BTh-Ox-8mJ"/>
                                     <constraint firstAttribute="trailing" secondItem="vvc-QZ-8vt" secondAttribute="trailing" constant="8" id="FdD-Q8-cUV"/>
-                                    <constraint firstItem="yed-rD-Fhc" firstAttribute="top" secondItem="vvc-QZ-8vt" secondAttribute="bottom" constant="52" id="PsM-Xx-YZR"/>
+                                    <constraint firstItem="dft-do-w0L" firstAttribute="leading" secondItem="cVa-U7-NGL" secondAttribute="leading" constant="105" id="P4g-3e-nkz"/>
+                                    <constraint firstAttribute="bottom" secondItem="dft-do-w0L" secondAttribute="bottom" constant="15" id="bOR-YU-RK4"/>
                                     <constraint firstAttribute="trailing" secondItem="xMA-l7-a4f" secondAttribute="trailing" constant="8" id="e9e-2G-hi4"/>
                                     <constraint firstItem="xMA-l7-a4f" firstAttribute="leading" secondItem="cVa-U7-NGL" secondAttribute="leading" constant="8" id="iDm-PK-CVZ"/>
-                                    <constraint firstItem="yed-rD-Fhc" firstAttribute="leading" secondItem="cVa-U7-NGL" secondAttribute="leading" constant="105" id="r5m-Qh-W5N"/>
+                                    <constraint firstAttribute="trailing" secondItem="dft-do-w0L" secondAttribute="trailing" constant="105" id="mbt-xU-h6o"/>
+                                    <constraint firstItem="dft-do-w0L" firstAttribute="top" relation="greaterThanOrEqual" secondItem="vvc-QZ-8vt" secondAttribute="bottom" constant="15" id="p62-Zv-bzw"/>
                                     <constraint firstItem="vvc-QZ-8vt" firstAttribute="top" secondItem="xMA-l7-a4f" secondAttribute="bottom" constant="50" id="tYJ-SD-ekz"/>
-                                    <constraint firstAttribute="bottom" secondItem="yed-rD-Fhc" secondAttribute="bottom" constant="50" id="viX-kY-Pml"/>
                                     <constraint firstItem="xMA-l7-a4f" firstAttribute="top" secondItem="cVa-U7-NGL" secondAttribute="top" constant="45" id="wGv-DN-i2z"/>
-                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="yed-rD-Fhc" secondAttribute="trailing" constant="105" id="wY7-aQ-n3J"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -89,7 +110,9 @@
                     <navigationItem key="navigationItem" id="DEE-F6-cyN"/>
                     <connections>
                         <outlet property="appTitle" destination="vvc-QZ-8vt" id="oJr-la-GX3"/>
-                        <outlet property="loginButton" destination="yed-rD-Fhc" id="wG8-Bc-Zfa"/>
+                        <outlet property="loginContainer" destination="cVa-U7-NGL" id="UAW-nr-MZ1"/>
+                        <outlet property="loginWithBCeIDButton" destination="yed-rD-Fhc" id="PI4-Zy-R1v"/>
+                        <outlet property="loginWithIdirButton" destination="rli-kb-fGi" id="SWa-8a-1jo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gEs-MR-1fG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -176,25 +199,45 @@
                                     <constraint firstItem="C0H-M0-0am" firstAttribute="leading" secondItem="oEL-Ux-yq2" secondAttribute="leading" constant="15" id="w3p-S8-ysA"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="avH-r0-8vm">
-                                <rect key="frame" x="554" y="133" width="199" height="42"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5QE-6C-c2i">
+                                <rect key="frame" x="0.0" y="118" width="768" height="72"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mee-2o-RFj">
+                                        <rect key="frame" x="0.0" y="0.0" width="539" height="72"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                    </view>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="avH-r0-8vm">
+                                        <rect key="frame" x="554" y="15" width="199" height="42"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="42" id="PS7-sd-gaH"/>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="199" id="hHC-Rh-Sqt"/>
+                                        </constraints>
+                                        <state key="normal" title="Add Entry"/>
+                                        <connections>
+                                            <action selector="addEntryClicked:" destination="JwX-i7-BNh" eventType="touchUpInside" id="vg4-rN-YmO"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="42" id="PS7-sd-gaH"/>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="199" id="hHC-Rh-Sqt"/>
+                                    <constraint firstAttribute="trailing" secondItem="avH-r0-8vm" secondAttribute="trailing" constant="15" id="GG8-pc-9A2"/>
+                                    <constraint firstItem="Mee-2o-RFj" firstAttribute="top" secondItem="5QE-6C-c2i" secondAttribute="top" id="UHm-HR-JKr"/>
+                                    <constraint firstItem="avH-r0-8vm" firstAttribute="leading" secondItem="Mee-2o-RFj" secondAttribute="trailing" constant="15" id="a8w-bj-Z0F"/>
+                                    <constraint firstItem="avH-r0-8vm" firstAttribute="top" secondItem="5QE-6C-c2i" secondAttribute="top" constant="15" id="bg0-bZ-lGX"/>
+                                    <constraint firstAttribute="bottom" secondItem="avH-r0-8vm" secondAttribute="bottom" constant="15" id="dfs-Px-0K5"/>
+                                    <constraint firstItem="Mee-2o-RFj" firstAttribute="leading" secondItem="5QE-6C-c2i" secondAttribute="leading" id="djN-Z8-hrS"/>
+                                    <constraint firstAttribute="bottom" secondItem="Mee-2o-RFj" secondAttribute="bottom" id="fnX-J9-5op"/>
                                 </constraints>
-                                <state key="normal" title="Add Entry"/>
-                                <connections>
-                                    <action selector="addEntryClicked:" destination="JwX-i7-BNh" eventType="touchUpInside" id="vg4-rN-YmO"/>
-                                </connections>
-                            </button>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="avH-r0-8vm" firstAttribute="top" secondItem="oEL-Ux-yq2" secondAttribute="bottom" constant="15" id="G3Z-Sf-cQ1"/>
+                            <constraint firstItem="5QE-6C-c2i" firstAttribute="top" secondItem="oEL-Ux-yq2" secondAttribute="bottom" id="BoG-DX-NUQ"/>
                             <constraint firstItem="C9w-bx-Ty9" firstAttribute="trailing" secondItem="oEL-Ux-yq2" secondAttribute="trailing" id="IeB-2N-k9H"/>
                             <constraint firstItem="oEL-Ux-yq2" firstAttribute="top" secondItem="c0f-Dq-1g0" secondAttribute="top" id="KjF-3e-a2W"/>
                             <constraint firstItem="oEL-Ux-yq2" firstAttribute="leading" secondItem="C9w-bx-Ty9" secondAttribute="leading" id="WAv-Si-AMS"/>
-                            <constraint firstItem="C9w-bx-Ty9" firstAttribute="trailing" secondItem="avH-r0-8vm" secondAttribute="trailing" constant="15" id="rTf-Gv-o0b"/>
+                            <constraint firstItem="5QE-6C-c2i" firstAttribute="leading" secondItem="C9w-bx-Ty9" secondAttribute="leading" id="c0F-kS-2m7"/>
+                            <constraint firstItem="5QE-6C-c2i" firstAttribute="trailing" secondItem="C9w-bx-Ty9" secondAttribute="trailing" id="hZt-ap-1aI"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="C9w-bx-Ty9"/>
                     </view>
@@ -207,13 +250,14 @@
                         <outlet property="navigationBar" destination="oEL-Ux-yq2" id="cCb-cB-SxG"/>
                         <outlet property="reachabilityIndicator" destination="G3o-nN-cQJ" id="iNX-NX-Rou"/>
                         <outlet property="reachabilityLabel" destination="BhB-gb-4tS" id="63R-G4-qzp"/>
+                        <outlet property="switcherHolder" destination="Mee-2o-RFj" id="JvT-Yr-KK6"/>
                         <outlet property="userButton" destination="qs0-Z8-kOT" id="xoK-6C-NR5"/>
                         <segue destination="fxD-jA-8IB" kind="show" identifier="showFormEntry" id="Iqn-O2-aSN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9MC-ax-5X6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1160" y="87"/>
+            <point key="canvasLocation" x="1159.375" y="86.71875"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="8tC-4p-w6g">
@@ -240,23 +284,39 @@
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="fA3-wr-3Xp">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Dvt-76-A2N">
                                 <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                            </tableView>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="AC9-cZ-ssR">
+                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="oyQ-VY-PIC">
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="sA2-Fz-ZCv">
+                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </collectionViewCellContentView>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="l3A-02-pOs" firstAttribute="trailing" secondItem="fA3-wr-3Xp" secondAttribute="trailing" id="BPW-ZQ-7bH"/>
-                            <constraint firstItem="l3A-02-pOs" firstAttribute="bottom" secondItem="fA3-wr-3Xp" secondAttribute="bottom" id="Upd-pv-Z8K"/>
-                            <constraint firstItem="fA3-wr-3Xp" firstAttribute="leading" secondItem="l3A-02-pOs" secondAttribute="leading" id="XyR-iN-cIh"/>
-                            <constraint firstItem="fA3-wr-3Xp" firstAttribute="top" secondItem="l3A-02-pOs" secondAttribute="top" id="akk-eb-g06"/>
+                            <constraint firstItem="l3A-02-pOs" firstAttribute="trailing" secondItem="Dvt-76-A2N" secondAttribute="trailing" id="npq-dh-oLZ"/>
+                            <constraint firstItem="Dvt-76-A2N" firstAttribute="leading" secondItem="l3A-02-pOs" secondAttribute="leading" id="o0c-OB-QXF"/>
+                            <constraint firstItem="Dvt-76-A2N" firstAttribute="top" secondItem="l3A-02-pOs" secondAttribute="top" id="o7a-Vx-IAa"/>
+                            <constraint firstItem="l3A-02-pOs" firstAttribute="bottom" secondItem="Dvt-76-A2N" secondAttribute="bottom" id="oqA-DR-NCB"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="l3A-02-pOs"/>
                     </view>
                     <navigationItem key="navigationItem" id="KZK-kg-WfU"/>
                     <connections>
-                        <outlet property="tableView" destination="fA3-wr-3Xp" id="HZW-kc-kYA"/>
+                        <outlet property="collectionView" destination="Dvt-76-A2N" id="L16-Zy-FBG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="evM-IS-50e" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

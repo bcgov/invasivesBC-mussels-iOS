@@ -11,7 +11,7 @@ import UIKit
 
 class Colors {
     struct active {
-        static let blue = UIColor(hex: "#234075")
+        static let blue = UIColor(hex: "#002C71")
         static let lightBlue = UIColor(hex: "#65799E")
         static let yellow = UIColor(hex: "#E3A82B")
     }

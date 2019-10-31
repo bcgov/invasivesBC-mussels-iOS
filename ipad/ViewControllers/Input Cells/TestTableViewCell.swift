@@ -12,7 +12,7 @@ class TestTableViewCell: UITableViewCell {
 
     @IBOutlet weak var testButton: UIButton!
 
-    var dropdownDelegate: DropdownProtocol?
+    var dropdownDelegate: InputProtocol?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -21,8 +21,6 @@ class TestTableViewCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
     
     @IBAction func testButtonClickd(_ sender: UIButton) {
@@ -31,7 +29,7 @@ class TestTableViewCell: UITableViewCell {
         options.append(DropdownModel(display: "Something else here"))
         options.append(DropdownModel(display: "Something more here"))
         options.append(DropdownModel(display: "Another thing"))
-        dropdownDelegate!.show(items: options, on: sender, callback: { selection in
+        dropdownDelegate!.showDropdownDelegate(items: options, on: sender, callback: { selection in
             sender.setTitle(selection.display, for: .normal)
         })
         

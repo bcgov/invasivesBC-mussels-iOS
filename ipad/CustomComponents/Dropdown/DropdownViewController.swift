@@ -84,7 +84,7 @@ class DropdownViewController: UIViewController, Theme {
     
     // MARK: Functions
     // MARK: Setup
-    func setup(header: String? = "", objects: [DropdownModel], onButton: UIButton, otherEnabled: Bool, completion: @escaping (_ result: DropdownModel?) -> Void) -> PopoverSize {
+    func setup(header: String? = "", objects: [DropdownModel], otherEnabled: Bool, completion: @escaping (_ result: DropdownModel?) -> Void) -> PopoverSize {
         self.completion = completion
         self.objects = objects
         self.headerTxt = header ?? ""

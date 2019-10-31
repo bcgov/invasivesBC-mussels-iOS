@@ -32,8 +32,15 @@ class BaseViewController: UIViewController, Theme {
         self.view.endEditing(true)
     }
     
+    public func setNavigationBar(hidden: Bool, style: UIBarStyle) {
+        if let navigationController = self.navigationController {
+            navigationController.navigationBar.isHidden = hidden
+            navigationController.navigationBar.barStyle = style
+        }
+    }
+    
     // MARK: Popover
-    private func showPopOver(on: UIButton, popOverVC: UIViewController, height: Double, width: Double, arrowColor: UIColor?) {
+    private func showPopOver(on button: UIButton, popOverVC: UIViewController, height: Double, width: Double, arrowColor: UIColor?) {
         self.view.endEditing(true)
         dismissPopOver()
         popOverVC.modalPresentationStyle = .popover
@@ -41,13 +48,13 @@ class BaseViewController: UIViewController, Theme {
         guard let popover = popOverVC.popoverPresentationController else {return}
         popover.backgroundColor = arrowColor ?? UIColor.white
         popover.permittedArrowDirections = .any
-        popover.sourceView = on
-        popover.sourceRect = CGRect(x: on.bounds.midX, y: on.bounds.midY, width: 0, height: 0)
+        popover.sourceView = button
+        popover.sourceRect = CGRect(x: button.bounds.midX, y: button.bounds.midY, width: 0, height: 0)
         self.currentPopOver = popOverVC
         present(popOverVC, animated: true, completion: nil)
     }
     
-    private func showPopOver(on: CALayer, inView: UIView, vc: UIViewController, height: Double, width: Double, arrowColor: UIColor?) {
+    private func showPopOver(on view: UIView, popOverVC vc: UIViewController, height: Double, width: Double, arrowColor: UIColor?) {
         self.view.endEditing(true)
         dismissPopOver()
         vc.modalPresentationStyle = .popover
@@ -55,8 +62,8 @@ class BaseViewController: UIViewController, Theme {
         guard let popover = vc.popoverPresentationController else {return}
         popover.backgroundColor = arrowColor ?? UIColor.white
         popover.permittedArrowDirections = .any
-        popover.sourceView = inView
-        popover.sourceRect = CGRect(x: on.frame.midX, y: on.frame.midY, width: 0, height: 0)
+        popover.sourceView = view
+        popover.sourceRect = CGRect(x: view.frame.midX, y: view.frame.midY, width: 0, height: 0)
         self.currentPopOver = vc
         present(vc, animated: true, completion: nil)
     }
@@ -68,32 +75,32 @@ class BaseViewController: UIViewController, Theme {
         }
     }
     
-    public func showOptions(options: [OptionType], on button: UIButton, completion: @escaping (_ option: OptionType) -> Void) {
+    public func showOptions(options: [OptionType], on view: UIView, completion: @escaping (_ option: OptionType) -> Void) {
         let optionsObject = Options()
         let optionsViewController = optionsObject.getVC()
         let popoverSize = optionsViewController.setup(options: options, completion: completion)
-        showPopOver(on: button, popOverVC: optionsViewController, height: popoverSize.height, width: popoverSize.width, arrowColor: nil)
+        showPopOver(on: view, popOverVC: optionsViewController, height: popoverSize.height, width: popoverSize.width, arrowColor: nil)
     }
     
-    public func showDropdown(items: [DropdownModel], header: String? = "", on button: UIButton, enableOtherOption: Bool? = false, completion: @escaping (_ result: DropdownModel?) -> Void) {
+    public func showDropdown(items: [DropdownModel], header: String? = "", on view: UIView, enableOtherOption: Bool? = false, completion: @escaping (_ result: DropdownModel?) -> Void) {
         let dropdownObject = Dropdown()
         let dropdownViewController = dropdownObject.getVC()
-        let popoverSize = dropdownViewController.setup(objects: items, onButton: button, otherEnabled: enableOtherOption ?? false, completion: completion)
-        showPopOver(on: button, popOverVC: dropdownViewController, height: popoverSize.height, width: popoverSize.width, arrowColor: nil)
+        let popoverSize = dropdownViewController.setup(objects: items, otherEnabled: enableOtherOption ?? false, completion: completion)
+        showPopOver(on: view, popOverVC: dropdownViewController, height: popoverSize.height, width: popoverSize.width, arrowColor: nil)
     }
     
-    public func showDropdownMultiSelect(items: [DropdownModel], selectedItems: [DropdownModel], header: String? = "", on button: UIButton, enableOtherOption: Bool? = false, completion: @escaping (_ done: Bool,_ result: [DropdownModel]?) -> Void) {
+    public func showDropdownMultiSelect(items: [DropdownModel], selectedItems: [DropdownModel], header: String? = "", on view: UIView, enableOtherOption: Bool? = false, completion: @escaping (_ done: Bool,_ result: [DropdownModel]?) -> Void) {
         let dropdownObject = Dropdown()
         let dropdownViewController = dropdownObject.getVC()
         let popoverSize = dropdownViewController.setupMultiSelect(header: header, selectedItems: selectedItems, items: items, otherEnabled: enableOtherOption ?? false, completion: completion)
-        showPopOver(on: button, popOverVC: dropdownViewController, height: popoverSize.height, width: popoverSize.width, arrowColor: nil)
+        showPopOver(on: view, popOverVC: dropdownViewController, height: popoverSize.height, width: popoverSize.width, arrowColor: nil)
     }
     
-    public func showDropdownMultiSelectLive(items: [DropdownModel], selectedItems: [DropdownModel], header: String? = "", on button: UIButton, enableOtherOption: Bool? = false, completion: @escaping (_ result: [DropdownModel]?) -> Void) {
+    public func showDropdownMultiSelectLive(items: [DropdownModel], selectedItems: [DropdownModel], header: String? = "", on view: UIView, enableOtherOption: Bool? = false, completion: @escaping (_ result: [DropdownModel]?) -> Void) {
         let dropdownObject = Dropdown()
         let dropdownViewController = dropdownObject.getVC()
         let popoverSize = dropdownViewController.setupMultiSelectLive(header: header, selectedItems: selectedItems, items: items, otherEnabled: enableOtherOption ?? false, completion: completion)
-        showPopOver(on: button, popOverVC: dropdownViewController, height: popoverSize.height, width: popoverSize.width, arrowColor: nil)
+        showPopOver(on: view, popOverVC: dropdownViewController, height: popoverSize.height, width: popoverSize.width, arrowColor: nil)
     }
     
     // MARK: Animations
@@ -110,7 +117,8 @@ class BaseViewController: UIViewController, Theme {
     }
     
     // MARK: Custom messages
-    public func fadeLabelMessage(label: UILabel, text: String) {
+    public func fadeLabelMessage(label: UILabel, text: String, delay: Double? = 3) {
+        let defaultDelay: Double = 3
         let originalText: String = label.text ?? ""
         let originalTextColor: UIColor = label.textColor
         // fade out current text
@@ -127,7 +135,7 @@ class BaseViewController: UIViewController, Theme {
                 self.view.layoutIfNeeded()
             }, completion: { (done) in
                 // revert after 3 seconds
-                UIView.animate(withDuration: SettingsConstants.shortAnimationDuration, delay: 3, animations: {
+                UIView.animate(withDuration: SettingsConstants.shortAnimationDuration, delay: delay ?? defaultDelay, animations: {
                     // fade out text
                     label.alpha = self.invisibleAlpha
                     self.view.layoutIfNeeded()
