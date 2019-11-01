@@ -9,9 +9,9 @@
 import Foundation
 import UIKit
 
-class BaseInputCell: UICollectionViewCell,Theme {
+class BaseInputCell<Model: InputItem>: UICollectionViewCell,Theme {
     // MARK: Variables
-    var model: InputItem?
+    var model: Model?
     var InputDelegate: InputProtocol?
     
     // MARK: Class functions
@@ -31,11 +31,11 @@ class BaseInputCell: UICollectionViewCell,Theme {
     }
     
     // MARK: Setup
-    func setup(with model: InputItem, delegate: InputProtocol) {
+    func setup(with model: Model, delegate: InputProtocol) {
         self.model = model
         self.InputDelegate = delegate
         initialize(with: model)
     }
     
-    func initialize(with model: InputItem) {}
+    func initialize(with model: Model) {}
 }

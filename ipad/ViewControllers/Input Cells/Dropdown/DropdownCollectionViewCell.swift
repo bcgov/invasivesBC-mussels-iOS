@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DropdownCollectionViewCell: BaseInputCell {
+class DropdownCollectionViewCell: BaseInputCell<DropdownInput> {
     
     // MARK: Outlets
     @IBOutlet weak var headerLabel: UILabel!
@@ -26,16 +26,16 @@ class DropdownCollectionViewCell: BaseInputCell {
         guard let model = self.model, let delegate = self.InputDelegate else {return}
         if model.editable {
             delegate.showDropdownDelegate(items: model.dropdownItems, on: sender) { (selectedItem) in
-                model.value = selectedItem.key
+                model.value.set(value: selectedItem.key, type: .Dropdown)
                 self.setCurrentField(value: selectedItem.key)
             }
         }
     }
     
     // MARK: Setup
-    override func initialize(with model: InputItem) {
+    override func initialize(with model: DropdownInput) {
         self.headerLabel.text = model.header
-        if let currentValue = model.value {
+        if let currentValue = model.value.get(type: .Dropdown) as? String {
             for item in model.dropdownItems where item.key == currentValue {
                 self.textField.text = item.key
             }
