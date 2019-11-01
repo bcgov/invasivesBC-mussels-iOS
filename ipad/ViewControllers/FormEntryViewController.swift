@@ -40,7 +40,7 @@ class FormEntryViewController: BaseViewController, InputProtocol {
     // MARK: Outlet actions
     @IBAction func testAction(_ sender: UIButton) {
         for item in self.inputItems {
-            print(item.value)
+            print(item.value!)
         }
     }
     

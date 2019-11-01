@@ -55,6 +55,7 @@
 		29F29FA1236B8670004F12E7 /* DropdownCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F29F9F236B8670004F12E7 /* DropdownCollectionViewCell.swift */; };
 		29F29FA2236B8670004F12E7 /* DropdownCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29F29FA0236B8670004F12E7 /* DropdownCollectionViewCell.xib */; };
 		29F29FA4236B9114004F12E7 /* InputItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F29FA3236B9114004F12E7 /* InputItem.swift */; };
+		29F29FA6236BB541004F12E7 /* BaseInputCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F29FA5236BB541004F12E7 /* BaseInputCell.swift */; };
 		9FB225820DBE019B5CE1031C /* Pods_ipadTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CED730649CF3E43FB1AD51F6 /* Pods_ipadTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -120,6 +121,7 @@
 		29F29F9F236B8670004F12E7 /* DropdownCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropdownCollectionViewCell.swift; sourceTree = "<group>"; };
 		29F29FA0236B8670004F12E7 /* DropdownCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DropdownCollectionViewCell.xib; sourceTree = "<group>"; };
 		29F29FA3236B9114004F12E7 /* InputItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputItem.swift; sourceTree = "<group>"; };
+		29F29FA5236BB541004F12E7 /* BaseInputCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseInputCell.swift; sourceTree = "<group>"; };
 		5E19532C9F39231DE6E43099 /* Pods_ipad.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ipad.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		654A566D8395B17BDF172F9F /* Pods-ipad.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ipad.release.xcconfig"; path = "Target Support Files/Pods-ipad/Pods-ipad.release.xcconfig"; sourceTree = "<group>"; };
 		763C8716EF742F6764FFE7D7 /* Pods-ipad.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ipad.debug.xcconfig"; path = "Target Support Files/Pods-ipad/Pods-ipad.debug.xcconfig"; sourceTree = "<group>"; };
@@ -162,6 +164,7 @@
 			children = (
 				29F29F9E236B8655004F12E7 /* Dropdown */,
 				29F29FA3236B9114004F12E7 /* InputItem.swift */,
+				29F29FA5236BB541004F12E7 /* BaseInputCell.swift */,
 			);
 			path = "Input Cells";
 			sourceTree = "<group>";
@@ -576,6 +579,7 @@
 				29BAC5192367B34000A620F4 /* Fonts.swift in Sources */,
 				29BAC5102367984000A620F4 /* GradiantView.swift in Sources */,
 				29514BE32368B5AF00DC89C4 /* Notifications.swift in Sources */,
+				29F29FA6236BB541004F12E7 /* BaseInputCell.swift in Sources */,
 				29F29FA1236B8670004F12E7 /* DropdownCollectionViewCell.swift in Sources */,
 				29514BD92368ADB100DC89C4 /* OptionType.swift in Sources */,
 				29BAC5122367A21300A620F4 /* StringConstants.swift in Sources */,
