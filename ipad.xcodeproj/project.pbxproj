@@ -27,6 +27,10 @@
 		29514BED2368CAAA00DC89C4 /* Dropdown.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 29514BEC2368CAAA00DC89C4 /* Dropdown.storyboard */; };
 		29514BF02368CB5D00DC89C4 /* DropdownTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29514BEE2368CB5D00DC89C4 /* DropdownTableViewCell.swift */; };
 		29514BF12368CB5D00DC89C4 /* DropdownTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29514BEF2368CB5D00DC89C4 /* DropdownTableViewCell.xib */; };
+		29A9742D236CB59F006C668F /* SwitchInputCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A9742B236CB59F006C668F /* SwitchInputCollectionViewCell.swift */; };
+		29A9742E236CB59F006C668F /* SwitchInputCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29A9742C236CB59F006C668F /* SwitchInputCollectionViewCell.xib */; };
+		29A97433236CDD8F006C668F /* DateInputCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A97431236CDD8F006C668F /* DateInputCollectionViewCell.swift */; };
+		29A97434236CDD8F006C668F /* DateInputCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29A97432236CDD8F006C668F /* DateInputCollectionViewCell.xib */; };
 		29BAC4FE23676C3000A620F4 /* Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29BAC4FD23676C3000A620F4 /* Auth.swift */; };
 		29BAC50623676EA400A620F4 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29BAC50523676EA400A620F4 /* Alert.swift */; };
 		29BAC50923676FDC00A620F4 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29BAC50823676FDC00A620F4 /* Theme.swift */; };
@@ -91,6 +95,10 @@
 		29514BEC2368CAAA00DC89C4 /* Dropdown.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Dropdown.storyboard; sourceTree = "<group>"; };
 		29514BEE2368CB5D00DC89C4 /* DropdownTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropdownTableViewCell.swift; sourceTree = "<group>"; };
 		29514BEF2368CB5D00DC89C4 /* DropdownTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DropdownTableViewCell.xib; sourceTree = "<group>"; };
+		29A9742B236CB59F006C668F /* SwitchInputCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchInputCollectionViewCell.swift; sourceTree = "<group>"; };
+		29A9742C236CB59F006C668F /* SwitchInputCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SwitchInputCollectionViewCell.xib; sourceTree = "<group>"; };
+		29A97431236CDD8F006C668F /* DateInputCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateInputCollectionViewCell.swift; sourceTree = "<group>"; };
+		29A97432236CDD8F006C668F /* DateInputCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DateInputCollectionViewCell.xib; sourceTree = "<group>"; };
 		29BAC4FD23676C3000A620F4 /* Auth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Auth.swift; sourceTree = "<group>"; };
 		29BAC50523676EA400A620F4 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		29BAC50823676FDC00A620F4 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
@@ -167,7 +175,9 @@
 			isa = PBXGroup;
 			children = (
 				29F29FA7236CA906004F12E7 /* Base and Model */,
-				29F29FA8236CA925004F12E7 /* TextInput */,
+				29A9742F236CBEBA006C668F /* Date Input */,
+				29A9742A236CB588006C668F /* Switch Input */,
+				29F29FA8236CA925004F12E7 /* Text Input */,
 				29F29F9E236B8655004F12E7 /* Dropdown */,
 			);
 			path = "Input Cells";
@@ -240,6 +250,24 @@
 				2907E4B02368CD6700946B3F /* Dropdown.swift */,
 			);
 			path = Dropdown;
+			sourceTree = "<group>";
+		};
+		29A9742A236CB588006C668F /* Switch Input */ = {
+			isa = PBXGroup;
+			children = (
+				29A9742B236CB59F006C668F /* SwitchInputCollectionViewCell.swift */,
+				29A9742C236CB59F006C668F /* SwitchInputCollectionViewCell.xib */,
+			);
+			path = "Switch Input";
+			sourceTree = "<group>";
+		};
+		29A9742F236CBEBA006C668F /* Date Input */ = {
+			isa = PBXGroup;
+			children = (
+				29A97431236CDD8F006C668F /* DateInputCollectionViewCell.swift */,
+				29A97432236CDD8F006C668F /* DateInputCollectionViewCell.xib */,
+			);
+			path = "Date Input";
 			sourceTree = "<group>";
 		};
 		29BAC4FC23676C2300A620F4 /* Utilities */ = {
@@ -400,13 +428,13 @@
 			path = "Base and Model";
 			sourceTree = "<group>";
 		};
-		29F29FA8236CA925004F12E7 /* TextInput */ = {
+		29F29FA8236CA925004F12E7 /* Text Input */ = {
 			isa = PBXGroup;
 			children = (
 				29F29FA9236CA948004F12E7 /* TextInputCollectionViewCell.swift */,
 				29F29FAA236CA948004F12E7 /* TextInputCollectionViewCell.xib */,
 			);
-			path = TextInput;
+			path = "Text Input";
 			sourceTree = "<group>";
 		};
 		718555F643FB0D413A8C0B7B /* Pods */ = {
@@ -507,9 +535,11 @@
 				29514BF12368CB5D00DC89C4 /* DropdownTableViewCell.xib in Resources */,
 				29514BD72368AD6F00DC89C4 /* OptionsTableViewCell.xib in Resources */,
 				29F29F93236B6A22004F12E7 /* SwitcherView.xib in Resources */,
+				29A97434236CDD8F006C668F /* DateInputCollectionViewCell.xib in Resources */,
 				29514BDD2368AEE400DC89C4 /* Options.storyboard in Resources */,
 				29F29FAC236CA948004F12E7 /* TextInputCollectionViewCell.xib in Resources */,
 				29CEC92623676425003B21B9 /* LaunchScreen.storyboard in Resources */,
+				29A9742E236CB59F006C668F /* SwitchInputCollectionViewCell.xib in Resources */,
 				2907E4B92368D25800946B3F /* InputModal.xib in Resources */,
 				29F29FA2236B8670004F12E7 /* DropdownCollectionViewCell.xib in Resources */,
 				29F29F99236B6B9C004F12E7 /* SwitcherCollectionViewCell.xib in Resources */,
@@ -611,9 +641,11 @@
 				29514BF02368CB5D00DC89C4 /* DropdownTableViewCell.swift in Sources */,
 				29BAC51E2367B6FA00A620F4 /* BaseRealmObject.swift in Sources */,
 				29BAC50623676EA400A620F4 /* Alert.swift in Sources */,
+				29A97433236CDD8F006C668F /* DateInputCollectionViewCell.swift in Sources */,
 				29BAC4FE23676C3000A620F4 /* Auth.swift in Sources */,
 				2907E4B72368D24900946B3F /* InputModal.swift in Sources */,
 				29CEC91E23676424003B21B9 /* ViewController.swift in Sources */,
+				29A9742D236CB59F006C668F /* SwitchInputCollectionViewCell.swift in Sources */,
 				29F29F9D236B7750004F12E7 /* Switcher.swift in Sources */,
 				29CEC91A23676424003B21B9 /* AppDelegate.swift in Sources */,
 				29514BE92368C41900DC89C4 /* DropdownModel.swift in Sources */,

@@ -8,19 +8,20 @@
 
 import UIKit
 
-protocol InputProtocol: class {
+protocol InputDelegate: class {
     func showDropdownDelegate(items: [DropdownModel], on view: UIView, callback: @escaping (_ selection: DropdownModel) -> Void)
+    func showDatepickerDelegate(on view: UIView, initialDate: Date?, minDate: Date?, maxDate: Date?, callback: @escaping (_ date: Date) -> Void)
 }
 
-class FormEntryViewController: BaseViewController, InputProtocol {
-    
+class FormEntryViewController: BaseViewController, InputDelegate {
     // MARK: Outlets
     @IBOutlet weak var collectionView: UICollectionView!
     
     // MARK: Constants
     let collectionCells = [
         "TextInputCollectionViewCell",
-        "DropdownCollectionViewCell"
+        "DropdownCollectionViewCell",
+        "SwitchInputCollectionViewCell"
     ]
     
     // MARK: Variables
@@ -52,6 +53,10 @@ class FormEntryViewController: BaseViewController, InputProtocol {
         }
     }
     
+    func showDatepickerDelegate(on view: UIView, initialDate: Date?, minDate: Date?, maxDate: Date?, callback: @escaping (Date) -> Void) {
+         
+     }
+    
     // MARK: Temporary
     private func addTestData() {
         var options: [DropdownModel] = []
@@ -74,10 +79,20 @@ class FormEntryViewController: BaseViewController, InputProtocol {
         let drodownItem8 = DropdownInput(key: "drodownItem8", header: "Test drop 8", editable: true, width: .Third, dropdownItems: options)
         
         /// Text Input
-        let textInput1 = TextInput(key: "input1", header: "input1", editable: true, width: .Third)
+        let textInput1 = TextInput(key: "input1", header: "input 1", editable: true, width: .Half)
+        let textInput2 = TextInput(key: "input2", header: "input 2", editable: true, width: .Half)
+        
+        let textInput3 = TextInput(key: "input3", header: "input 3", editable: true, width: .Third)
+        let textInput4 = TextInput(key: "input4", header: "input 4", editable: true, width: .Third)
+        let textInput5 = TextInput(key: "input5", header: "input 5", editable: true, width: .Third)
+        
+        /// Switch
+        let switch1 =  SwitchInput(key: "switch1", header: "Switch 1", editable: true, value: true, width: .Forth)
+        let switch2 =  SwitchInput(key: "switch2", header: "Switch 2", editable: true, width: .Forth)
+        let switch3 =  SwitchInput(key: "switch3", header: "Switch 3", editable: true, width: .Forth)
+        let switch4 =  SwitchInput(key: "switch4", header: "Switch 4", editable: true, width: .Forth)
         
         self.inputItems.append(drodownItem1)
-        self.inputItems.append(textInput1)
         self.inputItems.append(drodownItem2)
         self.inputItems.append(drodownItem3)
         self.inputItems.append(drodownItem4)
@@ -85,6 +100,17 @@ class FormEntryViewController: BaseViewController, InputProtocol {
         self.inputItems.append(drodownItem6)
         self.inputItems.append(drodownItem7)
         self.inputItems.append(drodownItem8)
+        
+        self.inputItems.append(textInput5)
+        self.inputItems.append(textInput4)
+        self.inputItems.append(textInput3)
+        self.inputItems.append(textInput2)
+        self.inputItems.append(textInput1)
+        
+        self.inputItems.append(switch1)
+        self.inputItems.append(switch2)
+        self.inputItems.append(switch3)
+        self.inputItems.append(switch4)
     }
     
 }
@@ -111,6 +137,10 @@ extension FormEntryViewController: UICollectionViewDataSource, UICollectionViewD
         return collectionView.dequeueReusableCell(withReuseIdentifier: "TextInputCollectionViewCell", for: indexPath as IndexPath) as! TextInputCollectionViewCell
     }
     
+    func getSwitchInputCell(indexPath: IndexPath) -> SwitchInputCollectionViewCell {
+        return collectionView.dequeueReusableCell(withReuseIdentifier: "SwitchInputCollectionViewCell", for: indexPath as IndexPath) as! SwitchInputCollectionViewCell
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return inputItems.count
     }
@@ -118,26 +148,29 @@ extension FormEntryViewController: UICollectionViewDataSource, UICollectionViewD
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let item = inputItems[indexPath.row]
         switch item.type {
-            
         case .Dropdown:
             let cell = getDropdownCell(indexPath: indexPath)
-            cell.setup(with: inputItems[indexPath.row] as! DropdownInput, delegate: self)
+            cell.setup(with: item as! DropdownInput, delegate: self)
             return cell
         case .Text:
             let cell = getTextInputCell(indexPath: indexPath)
-            cell.setup(with: inputItems[indexPath.row] as! TextInput, delegate: self)
+            cell.setup(with: item as! TextInput, delegate: self)
             return cell
         case .Int:
             let cell = getTextInputCell(indexPath: indexPath)
-            cell.setup(with: inputItems[indexPath.row] as! TextInput, delegate: self)
+            cell.setup(with: item as! TextInput, delegate: self)
             return cell
         case .Double:
             let cell = getTextInputCell(indexPath: indexPath)
-            cell.setup(with: inputItems[indexPath.row] as! TextInput, delegate: self)
+            cell.setup(with: item as! TextInput, delegate: self)
             return cell
         case .Date:
             let cell = getTextInputCell(indexPath: indexPath)
-            cell.setup(with: inputItems[indexPath.row] as! TextInput, delegate: self)
+            cell.setup(with: item as! TextInput, delegate: self)
+            return cell
+        case .Switch:
+            let cell = getSwitchInputCell(indexPath: indexPath)
+            cell.setup(with: item as! SwitchInput, delegate: self)
             return cell
         }
     }

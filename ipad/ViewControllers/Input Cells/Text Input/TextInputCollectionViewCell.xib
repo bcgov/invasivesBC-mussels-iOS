@@ -18,16 +18,16 @@
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aR7-lB-yaN">
-                        <rect key="frame" x="0.0" y="0.0" width="462" height="46"/>
+                        <rect key="frame" x="0.0" y="0.0" width="462" height="25"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="25" id="D3n-QK-ICR"/>
+                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LdL-Bf-YL7">
-                        <rect key="frame" x="0.0" y="51" width="462" height="45"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="45" id="W2G-Tj-cWT"/>
-                        </constraints>
+                        <rect key="frame" x="0.0" y="30" width="462" height="66"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <textInputTraits key="textInputTraits"/>
                     </textField>

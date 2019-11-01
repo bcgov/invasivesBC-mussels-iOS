@@ -15,6 +15,7 @@ enum InputItemType {
     case Int
     case Double
     case Date
+    case Switch
 }
 
 enum InputItemWidthSize {
@@ -30,26 +31,29 @@ struct InputValue {
     var date: Date?
     var int: Int?
     var double: Double?
+    var itemId: String?
     
     func get(type: InputItemType) -> Any? {
         switch type {
         case .Dropdown:
-            return self.string
+            return self.itemId != "" ? self.string : nil
         case .Text:
-            return self.string
+            return self.string != "" ? self.string : nil
         case .Int:
             return self.int
         case .Double:
             return self.double
         case .Date:
             return self.date
+        case .Switch:
+            return self.boolean
         }
     }
     
-    mutating func set(value: Any, type: InputItemType) {
+    mutating func set(value: Any?, type: InputItemType) {
         switch type {
         case .Dropdown:
-            self.string = value as? String
+            self.itemId = value as? String
         case .Text:
             self.string = value as? String
         case .Int:
@@ -58,6 +62,8 @@ struct InputValue {
             self.double = value as? Double
         case .Date:
             self.date = value as? Date
+        case .Switch:
+            self.boolean = value as? Bool
         }
     }
 }
@@ -110,7 +116,7 @@ class TextInput: InputItem {
     
     init(key: String, header: String, editable: Bool, value: String? = "", width: InputItemWidthSize? = .Full) {
         self.value = InputValue()
-        self.value.set(value: value ?? "", type: type)
+        self.value.set(value: value, type: type)
         self.key = key
         self.header = header
         self.editable = editable
@@ -118,24 +124,41 @@ class TextInput: InputItem {
     }
 }
 
-//class InputItemm {
-//    var type: InputItemType
-//    var key: String
-//    var header: String
-//    var value: String?
-//    var editable: Bool
-//    var width: InputItemWidthSize
-//    var height: CGFloat = 70
-//    
-//    var dropdownItems: [DropdownModel] = []
-//    
-//    init(type: InputItemType, key: String, header: String, editable: Bool, value: String? = "", width: InputItemWidthSize? = .Full, dropdownItems: [DropdownModel]? = []) {
-//        self.type = type
-//        self.key = key
-//        self.header = header
-//        self.editable = editable
-//        self.value = value
-//        self.width = width ?? .Full
-//        self.dropdownItems = dropdownItems ?? []
-//    }
-//}
+
+class SwitchInput: InputItem {
+    var type: InputItemType = .Switch
+    var width: InputItemWidthSize
+    var height: CGFloat = 70
+    var key: String
+    var value: InputValue
+    var header: String
+    var editable: Bool
+    
+    init(key: String, header: String, editable: Bool, value: Bool? = false, width: InputItemWidthSize? = .Full) {
+        self.value = InputValue()
+        self.value.set(value: value ?? false, type: type)
+        self.key = key
+        self.header = header
+        self.editable = editable
+        self.width = width ?? .Full
+    }
+}
+
+class DateInput: InputItem {
+    var type: InputItemType = .Date
+    var width: InputItemWidthSize
+    var height: CGFloat = 70
+    var key: String
+    var value: InputValue
+    var header: String
+    var editable: Bool
+    
+    init(key: String, header: String, editable: Bool, value: Date? = nil, width: InputItemWidthSize? = .Full) {
+        self.value = InputValue()
+        self.value.set(value: value, type: type)
+        self.key = key
+        self.header = header
+        self.editable = editable
+        self.width = width ?? .Full
+    }
+}

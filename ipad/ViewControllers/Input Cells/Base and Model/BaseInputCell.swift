@@ -12,7 +12,7 @@ import UIKit
 class BaseInputCell<Model: InputItem>: UICollectionViewCell,Theme {
     // MARK: Variables
     var model: Model?
-    var InputDelegate: InputProtocol?
+    var inputDelegate: InputDelegate?
     
     // MARK: Class functions
     override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
@@ -31,9 +31,9 @@ class BaseInputCell<Model: InputItem>: UICollectionViewCell,Theme {
     }
     
     // MARK: Setup
-    func setup(with model: Model, delegate: InputProtocol) {
+    func setup(with model: Model, delegate: InputDelegate) {
         self.model = model
-        self.InputDelegate = delegate
+        self.inputDelegate = delegate
         initialize(with: model)
     }
     

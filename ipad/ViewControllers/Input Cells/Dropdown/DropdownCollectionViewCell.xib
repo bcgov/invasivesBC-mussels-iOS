@@ -18,42 +18,29 @@
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ylm-Dn-0yj">
-                        <rect key="frame" x="0.0" y="0.0" width="432" height="32"/>
+                        <rect key="frame" x="0.0" y="0.0" width="432" height="25"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="25" id="EaT-q3-4Tw"/>
+                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rvU-CH-N0l">
-                        <rect key="frame" x="0.0" y="37" width="432" height="45"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="45" id="W0f-jl-hQq"/>
-                        </constraints>
+                        <rect key="frame" x="0.0" y="30" width="432" height="52"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <textInputTraits key="textInputTraits"/>
                     </textField>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HkZ-OR-A5q">
-                        <rect key="frame" x="0.0" y="37" width="432" height="45"/>
-                        <connections>
-                            <action selector="onClick:" destination="gTV-IL-0wX" eventType="touchUpInside" id="y4G-8F-tEj"/>
-                        </connections>
-                    </button>
                 </subviews>
             </view>
             <constraints>
                 <constraint firstItem="ylm-Dn-0yj" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="2eg-Za-CWi"/>
                 <constraint firstItem="rvU-CH-N0l" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="5Bw-8u-muu"/>
-                <constraint firstItem="HkZ-OR-A5q" firstAttribute="width" secondItem="rvU-CH-N0l" secondAttribute="width" id="7Bi-OP-IH0"/>
                 <constraint firstAttribute="trailing" secondItem="ylm-Dn-0yj" secondAttribute="trailing" id="BfT-Fr-rdh"/>
                 <constraint firstItem="rvU-CH-N0l" firstAttribute="top" secondItem="ylm-Dn-0yj" secondAttribute="bottom" constant="5" id="FFJ-n5-dmD"/>
-                <constraint firstItem="HkZ-OR-A5q" firstAttribute="centerY" secondItem="rvU-CH-N0l" secondAttribute="centerY" id="HZ6-0u-Wa8"/>
-                <constraint firstItem="HkZ-OR-A5q" firstAttribute="height" secondItem="rvU-CH-N0l" secondAttribute="height" id="SlA-7t-J6O"/>
                 <constraint firstAttribute="bottom" secondItem="rvU-CH-N0l" secondAttribute="bottom" id="Z0e-cc-MLT"/>
                 <constraint firstAttribute="trailing" secondItem="rvU-CH-N0l" secondAttribute="trailing" id="ZpQ-C2-UZR"/>
-                <constraint firstItem="HkZ-OR-A5q" firstAttribute="trailing" secondItem="rvU-CH-N0l" secondAttribute="trailing" id="fYE-Jc-Mc6"/>
-                <constraint firstItem="HkZ-OR-A5q" firstAttribute="top" secondItem="rvU-CH-N0l" secondAttribute="top" id="j1F-rv-Ggh"/>
                 <constraint firstItem="ylm-Dn-0yj" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="koV-iy-RCF"/>
-                <constraint firstItem="HkZ-OR-A5q" firstAttribute="bottom" secondItem="rvU-CH-N0l" secondAttribute="bottom" id="srv-ag-Tuu"/>
-                <constraint firstItem="HkZ-OR-A5q" firstAttribute="leading" secondItem="rvU-CH-N0l" secondAttribute="leading" id="tGx-af-3kj"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <size key="customSize" width="432" height="82"/>

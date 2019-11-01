@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DropdownCollectionViewCell: BaseInputCell<DropdownInput> {
+class DropdownCollectionViewCell: BaseInputCell<DropdownInput>, UITextFieldDelegate {
     
     // MARK: Outlets
     @IBOutlet weak var headerLabel: UILabel!
@@ -22,14 +22,9 @@ class DropdownCollectionViewCell: BaseInputCell<DropdownInput> {
         style()
     }
     
-    @IBAction func onClick(_ sender: UIButton) {
-        guard let model = self.model, let delegate = self.InputDelegate else {return}
-        if model.editable {
-            delegate.showDropdownDelegate(items: model.dropdownItems, on: sender) { (selectedItem) in
-                model.value.set(value: selectedItem.key, type: .Dropdown)
-                self.setCurrentField(value: selectedItem.key)
-            }
-        }
+    // MARK: UITextFieldDelegate
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        return false;
     }
     
     // MARK: Setup
@@ -38,6 +33,19 @@ class DropdownCollectionViewCell: BaseInputCell<DropdownInput> {
         if let currentValue = model.value.get(type: .Dropdown) as? String {
             for item in model.dropdownItems where item.key == currentValue {
                 self.textField.text = item.key
+            }
+        }
+        textField.delegate = self
+        let gesture = UITapGestureRecognizer(target: self, action:  #selector(self.onClick))
+        self.textField.addGestureRecognizer(gesture)
+    }
+    
+    @objc func onClick(sender : UITapGestureRecognizer) {
+        guard let model = self.model, let delegate = self.inputDelegate else {return}
+        if model.editable {
+            delegate.showDropdownDelegate(items: model.dropdownItems, on: textField) { (selectedItem) in
+                model.value.set(value: selectedItem.key, type: .Dropdown)
+                self.setCurrentField(value: selectedItem.key)
             }
         }
     }
@@ -52,7 +60,6 @@ class DropdownCollectionViewCell: BaseInputCell<DropdownInput> {
     
     // MARK: Style
     private func style() {
-        self.textField.isUserInteractionEnabled = false
         styleFieldInput(textField: textField)
         styleFieldHeader(label: headerLabel)
     }
