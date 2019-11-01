@@ -19,6 +19,7 @@ class FormEntryViewController: BaseViewController, InputProtocol {
     
     // MARK: Constants
     let collectionCells = [
+        "TextInputCollectionViewCell",
         "DropdownCollectionViewCell"
     ]
     
@@ -60,18 +61,23 @@ class FormEntryViewController: BaseViewController, InputProtocol {
         options.append(DropdownModel(display: "Something more here"))
         options.append(DropdownModel(display: "Another thing"))
         
-        let drodownItem1 = DropdownInput(type: .Dropdown, key: "drodownItem1", header: "Test drop", editable: true, dropdownItems: options)
+        /// Dropdowns
+        let drodownItem1 = DropdownInput(key: "drodownItem1", header: "Test drop", editable: true, dropdownItems: options)
         
-        let drodownItem2 = DropdownInput(type: .Dropdown, key: "drodownItem2", header: "Test drop 2", editable: true, width: .Half, dropdownItems: options)
-        let drodownItem3 = DropdownInput(type: .Dropdown, key: "drodownItem3", header: "Test drop 3", editable: true, width: .Half, dropdownItems: options)
+        let drodownItem2 = DropdownInput(key: "drodownItem2", header: "Test drop 2", editable: true, width: .Half, dropdownItems: options)
+        let drodownItem3 = DropdownInput(key: "drodownItem3", header: "Test drop 3", editable: true, width: .Half, dropdownItems: options)
         
-        let drodownItem4 = DropdownInput(type: .Dropdown, key: "drodownItem4", header: "Test drop 4", editable: true, width: .Third, dropdownItems: options)
-        let drodownItem5 = DropdownInput(type: .Dropdown, key: "drodownItem5", header: "Test drop 5", editable: true, width: .Third, dropdownItems: options)
-        let drodownItem6 = DropdownInput(type: .Dropdown, key: "drodownItem6", header: "Test drop 6", editable: true, width: .Third, dropdownItems: options)
-        let drodownItem7 = DropdownInput(type: .Dropdown, key: "drodownItem7", header: "Test drop 7", editable: true, width: .Half, dropdownItems: options)
-        let drodownItem8 = DropdownInput(type: .Dropdown, key: "drodownItem8", header: "Test drop 8", editable: true, width: .Third, dropdownItems: options)
+        let drodownItem4 = DropdownInput(key: "drodownItem4", header: "Test drop 4", editable: true, width: .Third, dropdownItems: options)
+        let drodownItem5 = DropdownInput(key: "drodownItem5", header: "Test drop 5", editable: true, width: .Third, dropdownItems: options)
+        let drodownItem6 = DropdownInput(key: "drodownItem6", header: "Test drop 6", editable: true, width: .Third, dropdownItems: options)
+        let drodownItem7 = DropdownInput(key: "drodownItem7", header: "Test drop 7", editable: true, width: .Half, dropdownItems: options)
+        let drodownItem8 = DropdownInput(key: "drodownItem8", header: "Test drop 8", editable: true, width: .Third, dropdownItems: options)
+        
+        /// Text Input
+        let textInput1 = TextInput(key: "input1", header: "input1", editable: true, width: .Third)
         
         self.inputItems.append(drodownItem1)
+        self.inputItems.append(textInput1)
         self.inputItems.append(drodownItem2)
         self.inputItems.append(drodownItem3)
         self.inputItems.append(drodownItem4)
@@ -101,14 +107,39 @@ extension FormEntryViewController: UICollectionViewDataSource, UICollectionViewD
         return collectionView.dequeueReusableCell(withReuseIdentifier: "DropdownCollectionViewCell", for: indexPath as IndexPath) as! DropdownCollectionViewCell
     }
     
+    func getTextInputCell(indexPath: IndexPath) -> TextInputCollectionViewCell {
+        return collectionView.dequeueReusableCell(withReuseIdentifier: "TextInputCollectionViewCell", for: indexPath as IndexPath) as! TextInputCollectionViewCell
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return inputItems.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = getDropdownCell(indexPath: indexPath)
-        cell.setup(with: inputItems[indexPath.row] as! DropdownInput, delegate: self)
-        return cell
+        let item = inputItems[indexPath.row]
+        switch item.type {
+            
+        case .Dropdown:
+            let cell = getDropdownCell(indexPath: indexPath)
+            cell.setup(with: inputItems[indexPath.row] as! DropdownInput, delegate: self)
+            return cell
+        case .Text:
+            let cell = getTextInputCell(indexPath: indexPath)
+            cell.setup(with: inputItems[indexPath.row] as! TextInput, delegate: self)
+            return cell
+        case .Int:
+            let cell = getTextInputCell(indexPath: indexPath)
+            cell.setup(with: inputItems[indexPath.row] as! TextInput, delegate: self)
+            return cell
+        case .Double:
+            let cell = getTextInputCell(indexPath: indexPath)
+            cell.setup(with: inputItems[indexPath.row] as! TextInput, delegate: self)
+            return cell
+        case .Date:
+            let cell = getTextInputCell(indexPath: indexPath)
+            cell.setup(with: inputItems[indexPath.row] as! TextInput, delegate: self)
+            return cell
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

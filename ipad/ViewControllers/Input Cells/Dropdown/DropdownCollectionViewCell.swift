@@ -53,6 +53,8 @@ class DropdownCollectionViewCell: BaseInputCell<DropdownInput> {
     // MARK: Style
     private func style() {
         self.textField.isUserInteractionEnabled = false
+        styleFieldInput(textField: textField)
+        styleFieldHeader(label: headerLabel)
     }
     
 }

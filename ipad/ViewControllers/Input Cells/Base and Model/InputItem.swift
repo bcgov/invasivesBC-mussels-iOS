@@ -68,6 +68,7 @@ protocol InputItem {
     var height: CGFloat { get set }
     var key: String { get set }
     var value: InputValue { get set }
+    var header: String { get set }
     var editable: Bool { get set }
 }
 
@@ -78,7 +79,7 @@ protocol StringInputItem: InputItem {
 class DropdownInput: InputItem {
     var value: InputValue
     
-    var type: InputItemType
+    var type: InputItemType = .Dropdown
     var width: InputItemWidthSize
     var height: CGFloat = 70
     var key: String
@@ -87,16 +88,33 @@ class DropdownInput: InputItem {
     var dropdownItems: [DropdownModel] = []
     var header: String
     
-    init(type: InputItemType, key: String, header: String, editable: Bool, value: String? = "", width: InputItemWidthSize? = .Full, dropdownItems: [DropdownModel]? = []) {
+    init(key: String, header: String, editable: Bool, value: String? = "", width: InputItemWidthSize? = .Full, dropdownItems: [DropdownModel]? = []) {
         self.value = InputValue()
         self.value.set(value: value ?? "", type: type)
-        self.type = type
         self.key = key
         self.header = header
         self.editable = editable
-        
         self.width = width ?? .Full
         self.dropdownItems = dropdownItems ?? []
+    }
+}
+
+class TextInput: InputItem {
+    var type: InputItemType = .Text
+    var width: InputItemWidthSize
+    var height: CGFloat = 70
+    var key: String
+    var value: InputValue
+    var editable: Bool
+    var header: String
+    
+    init(key: String, header: String, editable: Bool, value: String? = "", width: InputItemWidthSize? = .Full) {
+        self.value = InputValue()
+        self.value.set(value: value ?? "", type: type)
+        self.key = key
+        self.header = header
+        self.editable = editable
+        self.width = width ?? .Full
     }
 }
 
