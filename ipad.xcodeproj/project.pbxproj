@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1E5D7D4C2369F1CF00707D08 /* TestTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5D7D4A2369F1CF00707D08 /* TestTableViewCell.swift */; };
-		1E5D7D4D2369F1CF00707D08 /* TestTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1E5D7D4B2369F1CF00707D08 /* TestTableViewCell.xib */; };
 		22692B6074F0478BDEE57B10 /* Pods_ipad.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E19532C9F39231DE6E43099 /* Pods_ipad.framework */; };
 		2907E4B12368CD6700946B3F /* Dropdown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2907E4B02368CD6700946B3F /* Dropdown.swift */; };
 		2907E4B42368CE3600946B3F /* PopoverSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2907E4B32368CE3600946B3F /* PopoverSize.swift */; };
@@ -71,8 +69,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		1E5D7D4A2369F1CF00707D08 /* TestTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestTableViewCell.swift; sourceTree = "<group>"; };
-		1E5D7D4B2369F1CF00707D08 /* TestTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TestTableViewCell.xib; sourceTree = "<group>"; };
 		2907E4B02368CD6700946B3F /* Dropdown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dropdown.swift; sourceTree = "<group>"; };
 		2907E4B32368CE3600946B3F /* PopoverSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopoverSize.swift; sourceTree = "<group>"; };
 		2907E4B62368D24900946B3F /* InputModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputModal.swift; sourceTree = "<group>"; };
@@ -165,8 +161,6 @@
 			isa = PBXGroup;
 			children = (
 				29F29F9E236B8655004F12E7 /* Dropdown */,
-				1E5D7D4A2369F1CF00707D08 /* TestTableViewCell.swift */,
-				1E5D7D4B2369F1CF00707D08 /* TestTableViewCell.xib */,
 				29F29FA3236B9114004F12E7 /* InputItem.swift */,
 			);
 			path = "Input Cells";
@@ -489,7 +483,6 @@
 				29514BD72368AD6F00DC89C4 /* OptionsTableViewCell.xib in Resources */,
 				29F29F93236B6A22004F12E7 /* SwitcherView.xib in Resources */,
 				29514BDD2368AEE400DC89C4 /* Options.storyboard in Resources */,
-				1E5D7D4D2369F1CF00707D08 /* TestTableViewCell.xib in Resources */,
 				29CEC92623676425003B21B9 /* LaunchScreen.storyboard in Resources */,
 				2907E4B92368D25800946B3F /* InputModal.xib in Resources */,
 				29F29FA2236B8670004F12E7 /* DropdownCollectionViewCell.xib in Resources */,
@@ -590,7 +583,6 @@
 				29514BDF2368AFC100DC89C4 /* BaseViewController.swift in Sources */,
 				29514BF02368CB5D00DC89C4 /* DropdownTableViewCell.swift in Sources */,
 				29BAC51E2367B6FA00A620F4 /* BaseRealmObject.swift in Sources */,
-				1E5D7D4C2369F1CF00707D08 /* TestTableViewCell.swift in Sources */,
 				29BAC50623676EA400A620F4 /* Alert.swift in Sources */,
 				29BAC4FE23676C3000A620F4 /* Auth.swift in Sources */,
 				2907E4B72368D24900946B3F /* InputModal.swift in Sources */,

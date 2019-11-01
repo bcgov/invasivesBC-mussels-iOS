@@ -37,6 +37,13 @@ class FormEntryViewController: BaseViewController, InputProtocol {
         setupCollectionView()
     }
     
+    // MARK: Outlet actions
+    @IBAction func testAction(_ sender: UIButton) {
+        for item in self.inputItems {
+            print(item.value)
+        }
+    }
+    
     // MARK: Delegates
     func showDropdownDelegate(items: [DropdownModel], on view: UIView, callback:  @escaping (_ selection: DropdownModel) -> Void) {
         self.showDropdown(items: items, on: view) { (result) in
@@ -54,10 +61,24 @@ class FormEntryViewController: BaseViewController, InputProtocol {
         options.append(DropdownModel(display: "Another thing"))
         
         let drodownItem1 = InputItem(type: .Dropdown, key: "drodownItem1", header: "Test drop", editable: true, dropdownItems: options)
-        let drodownItem2 = InputItem(type: .Dropdown, key: "drodownItem2", header: "Test drop 2", editable: true, dropdownItems: options)
+        
+        let drodownItem2 = InputItem(type: .Dropdown, key: "drodownItem2", header: "Test drop 2", editable: true, width: .Half, dropdownItems: options)
+        let drodownItem3 = InputItem(type: .Dropdown, key: "drodownItem3", header: "Test drop 3", editable: true, width: .Half, dropdownItems: options)
+        
+        let drodownItem4 = InputItem(type: .Dropdown, key: "drodownItem4", header: "Test drop 4", editable: true, width: .Third, dropdownItems: options)
+        let drodownItem5 = InputItem(type: .Dropdown, key: "drodownItem5", header: "Test drop 5", editable: true, width: .Third, dropdownItems: options)
+        let drodownItem6 = InputItem(type: .Dropdown, key: "drodownItem6", header: "Test drop 6", editable: true, width: .Third, dropdownItems: options)
+        let drodownItem7 = InputItem(type: .Dropdown, key: "drodownItem7", header: "Test drop 7", editable: true, width: .Half, dropdownItems: options)
+        let drodownItem8 = InputItem(type: .Dropdown, key: "drodownItem8", header: "Test drop 8", editable: true, width: .Third, dropdownItems: options)
         
         self.inputItems.append(drodownItem1)
         self.inputItems.append(drodownItem2)
+        self.inputItems.append(drodownItem3)
+        self.inputItems.append(drodownItem4)
+        self.inputItems.append(drodownItem5)
+        self.inputItems.append(drodownItem6)
+        self.inputItems.append(drodownItem7)
+        self.inputItems.append(drodownItem8)
     }
     
 }
@@ -91,17 +112,29 @@ extension FormEntryViewController: UICollectionViewDataSource, UICollectionViewD
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let assumedCellSpacing: CGFloat = 10
+        var cellSpacing = assumedCellSpacing
+        let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout
+        if let layoutUnwrapped = layout {
+            cellSpacing = layoutUnwrapped.minimumInteritemSpacing
+        }
+        
         let item = inputItems[indexPath.row]
+        let containerWidth = collectionView.frame.width
+        var multiplier: CGFloat = 1
         switch item.width {
         case .Full:
-            return CGSize(width: collectionView.frame.width, height: item.height)
+//            multiplier = 1
+            return CGSize(width: containerWidth, height: item.height)
         case .Half:
-            return CGSize(width: collectionView.frame.width / 2, height: item.height)
+            multiplier = 2
         case .Third:
-            return CGSize(width: collectionView.frame.width / 3, height: item.height)
+            multiplier = 3
         case .Forth:
-            return CGSize(width: collectionView.frame.width / 4, height: item.height)
+            multiplier = 4
         }
+    
+        return CGSize(width: (containerWidth - (multiplier * cellSpacing)) / multiplier, height: item.height)
     }
     
 }
