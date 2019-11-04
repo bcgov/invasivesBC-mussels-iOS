@@ -38,4 +38,8 @@ class BaseInputCell<Model: InputItem>: UICollectionViewCell,Theme {
     }
     
     func initialize(with model: Model) {}
+    
+    func emitChange() {
+        NotificationCenter.default.post(name: .InputItemValueChanged, object: self.model)
+    }
 }

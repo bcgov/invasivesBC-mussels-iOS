@@ -283,17 +283,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Dvt-76-A2N">
-                                <rect key="frame" x="0.0" y="60" width="768" height="964"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0EG-9f-7OL">
+                                <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="15" minimumInteritemSpacing="10" id="AC9-cZ-ssR">
-                                    <size key="itemSize" width="50" height="50"/>
-                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                </collectionViewFlowLayout>
-                                <cells/>
-                            </collectionView>
+                            </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pUi-BP-MfW">
                                 <rect key="frame" x="723" y="15" width="30" height="30"/>
                                 <state key="normal" title="test"/>
@@ -304,18 +297,18 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="l3A-02-pOs" firstAttribute="trailing" secondItem="0EG-9f-7OL" secondAttribute="trailing" id="1Dv-yh-M2T"/>
                             <constraint firstItem="pUi-BP-MfW" firstAttribute="top" secondItem="l3A-02-pOs" secondAttribute="top" constant="15" id="2l1-MD-c8x"/>
+                            <constraint firstItem="0EG-9f-7OL" firstAttribute="leading" secondItem="l3A-02-pOs" secondAttribute="leading" id="6vj-HN-4sR"/>
                             <constraint firstItem="l3A-02-pOs" firstAttribute="trailing" secondItem="pUi-BP-MfW" secondAttribute="trailing" constant="15" id="Mhb-1x-43m"/>
-                            <constraint firstItem="Dvt-76-A2N" firstAttribute="top" secondItem="pUi-BP-MfW" secondAttribute="bottom" constant="15" id="VHa-92-OhJ"/>
-                            <constraint firstItem="l3A-02-pOs" firstAttribute="trailing" secondItem="Dvt-76-A2N" secondAttribute="trailing" id="npq-dh-oLZ"/>
-                            <constraint firstItem="Dvt-76-A2N" firstAttribute="leading" secondItem="l3A-02-pOs" secondAttribute="leading" id="o0c-OB-QXF"/>
-                            <constraint firstItem="l3A-02-pOs" firstAttribute="bottom" secondItem="Dvt-76-A2N" secondAttribute="bottom" id="oqA-DR-NCB"/>
+                            <constraint firstItem="l3A-02-pOs" firstAttribute="bottom" secondItem="0EG-9f-7OL" secondAttribute="bottom" id="SbH-C3-0K7"/>
+                            <constraint firstItem="0EG-9f-7OL" firstAttribute="top" secondItem="l3A-02-pOs" secondAttribute="top" id="yQG-9Z-p27"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="l3A-02-pOs"/>
                     </view>
                     <navigationItem key="navigationItem" id="KZK-kg-WfU"/>
                     <connections>
-                        <outlet property="collectionView" destination="Dvt-76-A2N" id="L16-Zy-FBG"/>
+                        <outlet property="container" destination="0EG-9f-7OL" id="0fy-NQ-7TN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="evM-IS-50e" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

@@ -14,17 +14,8 @@ protocol InputDelegate: class {
 }
 
 class FormEntryViewController: BaseViewController, InputDelegate {
-    // MARK: Outlets
-    @IBOutlet weak var collectionView: UICollectionView!
     
-    // MARK: Constants
-    let collectionCells = [
-        "TextInputCollectionViewCell",
-        "DropdownCollectionViewCell",
-        "SwitchInputCollectionViewCell",
-        "DateInputCollectionViewCell"
-    ]
-    
+    @IBOutlet weak var container: UIView!
     // MARK: Variables
     var inputItems: [InputItem] = []
     
@@ -37,7 +28,10 @@ class FormEntryViewController: BaseViewController, InputDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setNavigationBar(hidden: false, style: UIBarStyle.default)
-        setupCollectionView()
+        addTestData()
+        let inputGroup: InputGroup = InputGroup()
+        inputGroup.initialize(with: self.inputItems, delegate: self, in: container)
+        
     }
     
     // MARK: Outlet actions
@@ -58,6 +52,7 @@ class FormEntryViewController: BaseViewController, InputDelegate {
     
     // MARK: Temporary
     private func addTestData() {
+        self.inputItems = []
         var options: [DropdownModel] = []
         
         options.append(DropdownModel(display: "Something here"))
@@ -114,98 +109,6 @@ class FormEntryViewController: BaseViewController, InputDelegate {
         self.inputItems.append(switch2)
         self.inputItems.append(switch3)
         self.inputItems.append(switch4)
-    }
-    
-}
-
-extension FormEntryViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
-    private func setupCollectionView() {
-        for cell in collectionCells {
-            register(cell: cell)
-        }
-        collectionView.delegate = self
-        collectionView.dataSource = self
-    }
-    
-    func register(cell name: String) {
-        let nib = UINib(nibName: name, bundle: nil)
-        collectionView.register(nib, forCellWithReuseIdentifier: name)
-    }
-    
-    func getDropdownCell(indexPath: IndexPath) -> DropdownCollectionViewCell {
-        return collectionView.dequeueReusableCell(withReuseIdentifier: "DropdownCollectionViewCell", for: indexPath as IndexPath) as! DropdownCollectionViewCell
-    }
-    
-    func getTextInputCell(indexPath: IndexPath) -> TextInputCollectionViewCell {
-        return collectionView.dequeueReusableCell(withReuseIdentifier: "TextInputCollectionViewCell", for: indexPath as IndexPath) as! TextInputCollectionViewCell
-    }
-    
-    func getSwitchInputCell(indexPath: IndexPath) -> SwitchInputCollectionViewCell {
-        return collectionView.dequeueReusableCell(withReuseIdentifier: "SwitchInputCollectionViewCell", for: indexPath as IndexPath) as! SwitchInputCollectionViewCell
-    }
-    
-    func getDateInputCell(indexPath: IndexPath) -> DateInputCollectionViewCell {
-        return collectionView.dequeueReusableCell(withReuseIdentifier: "DateInputCollectionViewCell", for: indexPath as IndexPath) as! DateInputCollectionViewCell
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return inputItems.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let item = inputItems[indexPath.row]
-        switch item.type {
-        case .Dropdown:
-            let cell = getDropdownCell(indexPath: indexPath)
-            cell.setup(with: item as! DropdownInput, delegate: self)
-            return cell
-        case .Text:
-            let cell = getTextInputCell(indexPath: indexPath)
-            cell.setup(with: item as! TextInput, delegate: self)
-            return cell
-        case .Int:
-            let cell = getTextInputCell(indexPath: indexPath)
-            cell.setup(with: item as! TextInput, delegate: self)
-            return cell
-        case .Double:
-            let cell = getTextInputCell(indexPath: indexPath)
-            cell.setup(with: item as! TextInput, delegate: self)
-            return cell
-        case .Date:
-            let cell = getDateInputCell(indexPath: indexPath)
-            cell.setup(with: item as! DateInput, delegate: self)
-            return cell
-        case .Switch:
-            let cell = getSwitchInputCell(indexPath: indexPath)
-            cell.setup(with: item as! SwitchInput, delegate: self)
-            return cell
-        }
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let assumedCellSpacing: CGFloat = 10
-        var cellSpacing = assumedCellSpacing
-        let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout
-        if let layoutUnwrapped = layout {
-            cellSpacing = layoutUnwrapped.minimumInteritemSpacing
-        }
-        
-        let item = inputItems[indexPath.row]
-        let containerWidth = collectionView.frame.width
-        var multiplier: CGFloat = 1
-        switch item.width {
-        case .Full:
-//            multiplier = 1
-            return CGSize(width: containerWidth, height: item.height)
-        case .Half:
-            multiplier = 2
-        case .Third:
-            multiplier = 3
-        case .Forth:
-            multiplier = 4
-        }
-    
-        return CGSize(width: (containerWidth - (multiplier * cellSpacing)) / multiplier, height: item.height)
     }
     
 }

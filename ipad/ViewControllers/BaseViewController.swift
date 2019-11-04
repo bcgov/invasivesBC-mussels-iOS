@@ -109,8 +109,14 @@ class BaseViewController: UIViewController, Theme {
     // MARK: Datepicker Popover
     func showDatepicker(on view: UIView, initialDate: Date?, minDate: Date?, maxDate: Date?, completion: @escaping (Date?) -> Void) {
         let datepicker = DatePicker()
-        datepicker.setup { (done, date) in
-            return completion(date)
+        if let min = minDate, let max = maxDate {
+            datepicker.setup(beginWith: initialDate, min: min, max: max) { (done, selectedDate) in
+                return completion(selectedDate)
+            }
+        } else {
+            datepicker.setup(beginWith: initialDate) { (done, selectedDate) in
+                return completion(selectedDate)
+            }
         }
         datepicker.displayPopOver(on: view, in: self, completion: {})
     }

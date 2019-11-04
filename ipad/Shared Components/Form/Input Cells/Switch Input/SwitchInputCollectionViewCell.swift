@@ -21,6 +21,7 @@ class SwitchInputCollectionViewCell: BaseInputCell<SwitchInput> {
     @IBAction func switchChanged(_ sender: UISwitch) {
         guard let model = self.model else {return}
         model.value.set(value: sender.isOn, type: model.type)
+        self.emitChange()
     }
     
     // MARK: Setup

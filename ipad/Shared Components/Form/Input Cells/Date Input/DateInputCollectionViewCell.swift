@@ -26,6 +26,7 @@ class DateInputCollectionViewCell: BaseInputCell<DateInput>, UITextFieldDelegate
     // MARK: Setup
     override func initialize(with model: DateInput) {
         self.headerLabel.text = model.header
+        textFieldText()
         let gesture = UITapGestureRecognizer(target: self, action:  #selector(self.onClick))
         self.textField.addGestureRecognizer(gesture)
     }
@@ -35,7 +36,15 @@ class DateInputCollectionViewCell: BaseInputCell<DateInput>, UITextFieldDelegate
         if model.editable {
             delegate.showDatepickerDelegate(on: textField, initialDate: model.value.get(type: .Date) as? Date ?? nil, minDate: nil, maxDate: nil) { (selectedDate) in
                 model.value.set(value: selectedDate, type: .Date)
+                self.textFieldText()
+                self.emitChange()
             }
+        }
+    }
+    
+    private func textFieldText() {
+        if let model = self.model, let value: Date = model.value.get(type: model.type) as? Date  {
+            self.textField.text = value.string()
         }
     }
     

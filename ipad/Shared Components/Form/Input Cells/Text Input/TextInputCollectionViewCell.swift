@@ -22,6 +22,7 @@ class TextInputCollectionViewCell: BaseInputCell<TextInput>, UITextFieldDelegate
     func textFieldDidEndEditing(_ textField: UITextField) {
         guard let model = self.model else {return}
         model.value.set(value: textField.text ?? "", type: model.type)
+        self.emitChange()
     }
     
     // MARK: Setup

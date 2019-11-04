@@ -31,27 +31,61 @@ class InputGroup: UIView {
      }
      */
     
-    public func initialize(with Items: [InputItem], delegate: InputDelegate) {
+    public func initialize(with Items: [InputItem], delegate: InputDelegate, in container: UIView) {
+        container.addSubview(self)
+        self.addConstraints(for: container)
         self.inputItems = Items
         self.inputDelegate = delegate
         self.createCollectionView()
         self.setupCollectionView()
+        addFildChangeListener()
+        container.layoutIfNeeded()
+    }
+    
+    private func addFildChangeListener() {
+        NotificationCenter.default.addObserver(self, selector: #selector(self.inputItemValueChanged(notification:)), name: .InputItemValueChanged, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.screenOrientationChanged(notification:)), name: .screenOrientationChanged, object: nil)
+    }
+    
+    @objc func inputItemValueChanged(notification: Notification) {
+        guard let item: InputItem = notification.object as? InputItem else {
+            return
+        }
+        print("\(item.value.get(type: item.type) ?? "")")
+    }
+    
+    @objc func screenOrientationChanged(notification: Notification) {
+        guard let collectionView = collectionView, let flowLayout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout else {
+            return
+        }
+        flowLayout.invalidateLayout()
+        
+    }
+    
+    private func addConstraints(for view: UIView) {
+        self.translatesAutoresizingMaskIntoConstraints = false
+        self.heightAnchor.constraint(equalTo: view.heightAnchor).isActive = true
+        self.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+        self.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        self.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
     }
     
     private func createCollectionView() {
-        let collection = UICollectionView(frame: CGRect(x: 0, y: 0, width: self.frame.height, height: self.frame.height))
+        let layout = UICollectionViewFlowLayout()
+        let collection = UICollectionView(frame: CGRect(x: 0, y: 0, width: self.frame.height, height: self.frame.height), collectionViewLayout: layout)
         collection.translatesAutoresizingMaskIntoConstraints = false
-        collection.backgroundColor = UIColor.darkGray
+        collection.backgroundColor = .clear
         collection.isScrollEnabled = true
         self.collectionView = collection
+        self.addSubview(collection)
         addCollectionVIewConstraints()
     }
     
     private func addCollectionVIewConstraints() {
         guard let collection = self.collectionView else {return}
         collection.translatesAutoresizingMaskIntoConstraints = false
-        collection.heightAnchor.constraint(equalToConstant: self.frame.height).isActive = true
-        collection.widthAnchor.constraint(equalToConstant: self.frame.width).isActive = true
+        collection.heightAnchor.constraint(equalTo: self.heightAnchor).isActive = true
+        collection.widthAnchor.constraint(equalTo: self.widthAnchor).isActive = true
         collection.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
         collection.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
     }

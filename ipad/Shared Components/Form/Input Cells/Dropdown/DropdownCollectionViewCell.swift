@@ -47,6 +47,7 @@ class DropdownCollectionViewCell: BaseInputCell<DropdownInput>, UITextFieldDeleg
                 guard let selectedItem = selectedItem else {return}
                 model.value.set(value: selectedItem.key, type: .Dropdown)
                 self.setCurrentField(value: selectedItem.key)
+                self.emitChange()
             }
         }
     }

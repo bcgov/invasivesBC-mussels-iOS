@@ -36,9 +36,9 @@ struct InputValue {
     func get(type: InputItemType) -> Any? {
         switch type {
         case .Dropdown:
-            return self.itemId != "" ? self.string : nil
+            return self.itemId
         case .Text:
-            return self.string != "" ? self.string : nil
+            return self.string
         case .Int:
             return self.int
         case .Double:
