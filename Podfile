@@ -21,6 +21,10 @@ target 'ipad' do
   pod 'Extended'
   # Custom Modal 
   pod 'Modal'
+  # Datepicker
+  pod 'DatePicker'
+  # JSON handler
+  pod 'SwiftyJSON'
   target 'ipadTests' do
     inherit! :search_paths
     # Pods for testing

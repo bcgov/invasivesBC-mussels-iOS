@@ -11,14 +11,26 @@ import UIKit
 class LoginViewController: BaseViewController {
 
     @IBOutlet weak var appTitle: UILabel!
-    @IBOutlet weak var loginButton: UIButton!
+    @IBOutlet weak var loginWithIdirButton: UIButton!
+    @IBOutlet weak var loginWithBCeIDButton: UIButton!
+    @IBOutlet weak var loginContainer: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         style()
     }
     
-    @IBAction func loginButtonAction(_ sender: Any) {
+    @IBAction func loginWithIdirAction(_ sender: UIButton) {
+        Auth.refreshEnviormentConstants(withIdpHint: "idir")
+        Auth.authenticate { (success) in
+            if (success) {
+                 self.dismiss(animated: true, completion: nil)
+            }
+        }
+    }
+    
+    @IBAction func loginWithBCeIDAction(_ sender: UIButton) {
+        Auth.refreshEnviormentConstants(withIdpHint: "bceid")
         Auth.authenticate { (success) in
             if (success) {
                  self.dismiss(animated: true, completion: nil)
@@ -28,6 +40,9 @@ class LoginViewController: BaseViewController {
     
     private func style() {
         setAppTitle(label: appTitle, darkBackground: false)
+        styleFillButton(button: loginWithIdirButton)
+        styleHollowButton(button: loginWithBCeIDButton)
+        styleCard(layer: loginContainer.layer)
     }
     
 }

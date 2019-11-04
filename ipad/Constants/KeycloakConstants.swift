@@ -30,5 +30,5 @@ struct SSO {
     static let redirectUri = "ibc-ios://client"
     static let clientId = "lucy"
     static let realmName = "dfmlcg7z"
-    static let idpHint = "idir"
+    static var idpHint = ""
 }
