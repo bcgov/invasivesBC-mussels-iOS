@@ -12,14 +12,13 @@ import Foundation
 import UIKit
 
 class Banner {
-    static let shared = Banner()
-    let displayDuration: TimeInterval = 5
-    var messages: [String] = [String]()
-    var showing = false
+    
+    public static let displayDuration: TimeInterval = 5
+    private static var messages: [String] = [String]()
+    private static var showing = false
 
-    private init() {}
 
-    func show(message: String) {
+    public static func show(message: String) {
         if message.isEmpty {return}
         /* Avoid repeating the same messsage */
         if !messages.contains(message) {
@@ -30,7 +29,7 @@ class Banner {
         }
     }
 
-    func recursiveShow() {
+    private static func recursiveShow() {
         guard let message = self.messages.first else {
             self.showing = false
             return
@@ -57,7 +56,7 @@ class Banner {
         }
     }
     
-    func bannerTextFont() -> UIFont {
+    public static func bannerTextFont() -> UIFont {
         return Fonts.getPrimaryBold(size: 14)
     }
 }

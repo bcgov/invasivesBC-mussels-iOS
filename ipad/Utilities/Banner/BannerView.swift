@@ -17,7 +17,7 @@ class BannerView: UIView, Theme {
     
 
     // MARK: Variables
-    var displayDuration: TimeInterval = Banner.shared.displayDuration
+    var displayDuration: TimeInterval = Banner.displayDuration
     var animationDuration: TimeInterval = 0.4
     
     var dimissInitiated: Bool = false
@@ -43,7 +43,7 @@ class BannerView: UIView, Theme {
         self.originY = y
         self.originX = x
 
-        self.width = message.width(withConstrainedHeight: height, font: Banner.shared.bannerTextFont()) + 30
+        self.width = message.width(withConstrainedHeight: height, font: Banner.bannerTextFont()) + 30
 
         setupGesture()
         beginDisplayAnimation()
@@ -123,7 +123,7 @@ class BannerView: UIView, Theme {
 
     func style() {
         addShadow(to: self.layer, opacity: 0.4, height: 2)
-        self.label.font = Banner.shared.bannerTextFont()
+        self.label.font = Banner.bannerTextFont()
         self.label.textColor = Colors.active.blue
     }
 }

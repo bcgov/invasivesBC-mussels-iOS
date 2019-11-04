@@ -44,7 +44,7 @@ class API {
         DispatchQueue.main.asyncAfter(deadline: .now() + 20) {
             if !completed {
                 timedOut = true
-                Banner.shared.show(message: "Request Time Out")
+                Banner.show(message: "Request Time Out")
                 return completion(false)
             }
         }
@@ -81,7 +81,7 @@ class API {
         DispatchQueue.main.asyncAfter(deadline: .now() + 20) {
             if !completed {
                 timedOut = true
-                Banner.shared.show(message: "Request Time Out")
+                Banner.show(message: "Request Time Out")
                 return completion(false)
             }
         }
@@ -129,7 +129,7 @@ class API {
         DispatchQueue.main.asyncAfter(deadline: .now() + 20) {
             if !completed {
                 timedOut = true
-                Banner.shared.show(message: "Request Time Out")
+                Banner.show(message: "Request Time Out")
                 return completion(nil)
             }
         }

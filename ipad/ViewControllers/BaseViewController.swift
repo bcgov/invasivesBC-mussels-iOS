@@ -9,7 +9,12 @@
 import UIKit
 import DatePicker
 
-class BaseViewController: UIViewController, Theme {
+protocol InputDelegate: class {
+    func showDropdownDelegate(items: [DropdownModel], on view: UIView, callback: @escaping (_ selection: DropdownModel?) -> Void)
+    func showDatepickerDelegate(on view: UIView, initialDate: Date?, minDate: Date?, maxDate: Date?, callback: @escaping (_ date: Date?) -> Void)
+}
+
+class BaseViewController: UIViewController, Theme, InputDelegate {
     
     // MARK: Constants
     let visibleAlpha: CGFloat = 1
@@ -119,6 +124,15 @@ class BaseViewController: UIViewController, Theme {
             }
         }
         datepicker.displayPopOver(on: view, in: self, completion: {})
+    }
+    
+    // MARK: Delegates
+    func showDropdownDelegate(items: [DropdownModel], on view: UIView, callback:  @escaping (_ selection: DropdownModel?) -> Void) {
+        self.showDropdown(items: items, on: view, completion: callback)
+    }
+    
+    func showDatepickerDelegate(on view: UIView, initialDate: Date?, minDate: Date?, maxDate: Date?, callback: @escaping (Date?) -> Void) {
+        showDatepicker(on: view, initialDate: initialDate, minDate: minDate, maxDate: maxDate, completion: callback)
     }
     
     // MARK: Animations

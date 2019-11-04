@@ -8,12 +8,7 @@
 
 import UIKit
 
-protocol InputDelegate: class {
-    func showDropdownDelegate(items: [DropdownModel], on view: UIView, callback: @escaping (_ selection: DropdownModel?) -> Void)
-    func showDatepickerDelegate(on view: UIView, initialDate: Date?, minDate: Date?, maxDate: Date?, callback: @escaping (_ date: Date?) -> Void)
-}
-
-class FormEntryViewController: BaseViewController, InputDelegate {
+class FormEntryViewController: BaseViewController {
     
     @IBOutlet weak var container: UIView!
     // MARK: Variables
@@ -36,19 +31,11 @@ class FormEntryViewController: BaseViewController, InputDelegate {
     
     // MARK: Outlet actions
     @IBAction func testAction(_ sender: UIButton) {
+        Banner.show(message: "hello!!!")
         for item in self.inputItems {
             print(item.value.get(type: item.type) ?? "Not Set")
         }
     }
-    
-    // MARK: Delegates
-    func showDropdownDelegate(items: [DropdownModel], on view: UIView, callback:  @escaping (_ selection: DropdownModel?) -> Void) {
-        self.showDropdown(items: items, on: view, completion: callback)
-    }
-    
-    func showDatepickerDelegate(on view: UIView, initialDate: Date?, minDate: Date?, maxDate: Date?, callback: @escaping (Date?) -> Void) {
-         showDatepicker(on: view, initialDate: initialDate, minDate: minDate, maxDate: maxDate, completion: callback)
-     }
     
     // MARK: Temporary
     private func addTestData() {
