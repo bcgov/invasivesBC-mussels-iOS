@@ -44,6 +44,7 @@ class DropdownCollectionViewCell: BaseInputCell<DropdownInput>, UITextFieldDeleg
         guard let model = self.model, let delegate = self.inputDelegate else {return}
         if model.editable {
             delegate.showDropdownDelegate(items: model.dropdownItems, on: textField) { (selectedItem) in
+                guard let selectedItem = selectedItem else {return}
                 model.value.set(value: selectedItem.key, type: .Dropdown)
                 self.setCurrentField(value: selectedItem.key)
             }

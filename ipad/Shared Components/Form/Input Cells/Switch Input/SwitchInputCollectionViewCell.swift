@@ -32,6 +32,5 @@ class SwitchInputCollectionViewCell: BaseInputCell<SwitchInput> {
     // MARK: Style
     private func style() {
         styleFieldHeader(label: headerLabel)
-        
     }
 }

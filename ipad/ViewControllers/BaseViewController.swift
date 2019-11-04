@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import DatePicker
 
 class BaseViewController: UIViewController, Theme {
     
@@ -75,6 +76,7 @@ class BaseViewController: UIViewController, Theme {
         }
     }
     
+    // MARK: Options Popover
     public func showOptions(options: [OptionType], on view: UIView, completion: @escaping (_ option: OptionType) -> Void) {
         let optionsObject = Options()
         let optionsViewController = optionsObject.getVC()
@@ -82,6 +84,7 @@ class BaseViewController: UIViewController, Theme {
         showPopOver(on: view, popOverVC: optionsViewController, height: popoverSize.height, width: popoverSize.width, arrowColor: nil)
     }
     
+    // MARK: Dropdown popover
     public func showDropdown(items: [DropdownModel], header: String? = "", on view: UIView, enableOtherOption: Bool? = false, completion: @escaping (_ result: DropdownModel?) -> Void) {
         let dropdownObject = Dropdown()
         let dropdownViewController = dropdownObject.getVC()
@@ -101,6 +104,15 @@ class BaseViewController: UIViewController, Theme {
         let dropdownViewController = dropdownObject.getVC()
         let popoverSize = dropdownViewController.setupMultiSelectLive(header: header, selectedItems: selectedItems, items: items, otherEnabled: enableOtherOption ?? false, completion: completion)
         showPopOver(on: view, popOverVC: dropdownViewController, height: popoverSize.height, width: popoverSize.width, arrowColor: nil)
+    }
+    
+    // MARK: Datepicker Popover
+    func showDatepicker(on view: UIView, initialDate: Date?, minDate: Date?, maxDate: Date?, completion: @escaping (Date?) -> Void) {
+        let datepicker = DatePicker()
+        datepicker.setup { (done, date) in
+            return completion(date)
+        }
+        datepicker.displayPopOver(on: view, in: self, completion: {})
     }
     
     // MARK: Animations

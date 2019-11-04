@@ -42,7 +42,7 @@ class DateInputCollectionViewCell: BaseInputCell<DateInput>, UITextFieldDelegate
     // MARK: Style
     private func style() {
         styleFieldHeader(label: headerLabel)
-        
+        styleFieldInput(textField: textField)
     }
     
 }

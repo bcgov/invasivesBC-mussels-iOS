@@ -9,8 +9,8 @@
 import UIKit
 
 protocol InputDelegate: class {
-    func showDropdownDelegate(items: [DropdownModel], on view: UIView, callback: @escaping (_ selection: DropdownModel) -> Void)
-    func showDatepickerDelegate(on view: UIView, initialDate: Date?, minDate: Date?, maxDate: Date?, callback: @escaping (_ date: Date) -> Void)
+    func showDropdownDelegate(items: [DropdownModel], on view: UIView, callback: @escaping (_ selection: DropdownModel?) -> Void)
+    func showDatepickerDelegate(on view: UIView, initialDate: Date?, minDate: Date?, maxDate: Date?, callback: @escaping (_ date: Date?) -> Void)
 }
 
 class FormEntryViewController: BaseViewController, InputDelegate {
@@ -21,7 +21,8 @@ class FormEntryViewController: BaseViewController, InputDelegate {
     let collectionCells = [
         "TextInputCollectionViewCell",
         "DropdownCollectionViewCell",
-        "SwitchInputCollectionViewCell"
+        "SwitchInputCollectionViewCell",
+        "DateInputCollectionViewCell"
     ]
     
     // MARK: Variables
@@ -47,14 +48,12 @@ class FormEntryViewController: BaseViewController, InputDelegate {
     }
     
     // MARK: Delegates
-    func showDropdownDelegate(items: [DropdownModel], on view: UIView, callback:  @escaping (_ selection: DropdownModel) -> Void) {
-        self.showDropdown(items: items, on: view) { (result) in
-            return callback(result!)
-        }
+    func showDropdownDelegate(items: [DropdownModel], on view: UIView, callback:  @escaping (_ selection: DropdownModel?) -> Void) {
+        self.showDropdown(items: items, on: view, completion: callback)
     }
     
-    func showDatepickerDelegate(on view: UIView, initialDate: Date?, minDate: Date?, maxDate: Date?, callback: @escaping (Date) -> Void) {
-         
+    func showDatepickerDelegate(on view: UIView, initialDate: Date?, minDate: Date?, maxDate: Date?, callback: @escaping (Date?) -> Void) {
+         showDatepicker(on: view, initialDate: initialDate, minDate: minDate, maxDate: maxDate, completion: callback)
      }
     
     // MARK: Temporary
@@ -76,7 +75,10 @@ class FormEntryViewController: BaseViewController, InputDelegate {
         let drodownItem5 = DropdownInput(key: "drodownItem5", header: "Test drop 5", editable: true, width: .Third, dropdownItems: options)
         let drodownItem6 = DropdownInput(key: "drodownItem6", header: "Test drop 6", editable: true, width: .Third, dropdownItems: options)
         let drodownItem7 = DropdownInput(key: "drodownItem7", header: "Test drop 7", editable: true, width: .Half, dropdownItems: options)
-        let drodownItem8 = DropdownInput(key: "drodownItem8", header: "Test drop 8", editable: true, width: .Third, dropdownItems: options)
+        let drodownItem8 = DropdownInput(key: "drodownItem8", header: "Test drop 8", editable: true, width: .Forth, dropdownItems: options)
+        
+        /// Datepicker
+        let dateItem1 = DateInput(key: "dateItem1", header: "Some Date", editable: true, width: .Forth)
         
         /// Text Input
         let textInput1 = TextInput(key: "input1", header: "input 1", editable: true, width: .Half)
@@ -100,6 +102,7 @@ class FormEntryViewController: BaseViewController, InputDelegate {
         self.inputItems.append(drodownItem6)
         self.inputItems.append(drodownItem7)
         self.inputItems.append(drodownItem8)
+        self.inputItems.append(dateItem1)
         
         self.inputItems.append(textInput5)
         self.inputItems.append(textInput4)
@@ -141,6 +144,10 @@ extension FormEntryViewController: UICollectionViewDataSource, UICollectionViewD
         return collectionView.dequeueReusableCell(withReuseIdentifier: "SwitchInputCollectionViewCell", for: indexPath as IndexPath) as! SwitchInputCollectionViewCell
     }
     
+    func getDateInputCell(indexPath: IndexPath) -> DateInputCollectionViewCell {
+        return collectionView.dequeueReusableCell(withReuseIdentifier: "DateInputCollectionViewCell", for: indexPath as IndexPath) as! DateInputCollectionViewCell
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return inputItems.count
     }
@@ -165,8 +172,8 @@ extension FormEntryViewController: UICollectionViewDataSource, UICollectionViewD
             cell.setup(with: item as! TextInput, delegate: self)
             return cell
         case .Date:
-            let cell = getTextInputCell(indexPath: indexPath)
-            cell.setup(with: item as! TextInput, delegate: self)
+            let cell = getDateInputCell(indexPath: indexPath)
+            cell.setup(with: item as! DateInput, delegate: self)
             return cell
         case .Switch:
             let cell = getSwitchInputCell(indexPath: indexPath)

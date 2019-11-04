@@ -31,6 +31,7 @@
 		29A9742E236CB59F006C668F /* SwitchInputCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29A9742C236CB59F006C668F /* SwitchInputCollectionViewCell.xib */; };
 		29A97433236CDD8F006C668F /* DateInputCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A97431236CDD8F006C668F /* DateInputCollectionViewCell.swift */; };
 		29A97434236CDD8F006C668F /* DateInputCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29A97432236CDD8F006C668F /* DateInputCollectionViewCell.xib */; };
+		29A97436236FD5FC006C668F /* InputGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A97435236FD5FC006C668F /* InputGroup.swift */; };
 		29BAC4FE23676C3000A620F4 /* Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29BAC4FD23676C3000A620F4 /* Auth.swift */; };
 		29BAC50623676EA400A620F4 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29BAC50523676EA400A620F4 /* Alert.swift */; };
 		29BAC50923676FDC00A620F4 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29BAC50823676FDC00A620F4 /* Theme.swift */; };
@@ -99,6 +100,7 @@
 		29A9742C236CB59F006C668F /* SwitchInputCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SwitchInputCollectionViewCell.xib; sourceTree = "<group>"; };
 		29A97431236CDD8F006C668F /* DateInputCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateInputCollectionViewCell.swift; sourceTree = "<group>"; };
 		29A97432236CDD8F006C668F /* DateInputCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DateInputCollectionViewCell.xib; sourceTree = "<group>"; };
+		29A97435236FD5FC006C668F /* InputGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputGroup.swift; sourceTree = "<group>"; };
 		29BAC4FD23676C3000A620F4 /* Auth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Auth.swift; sourceTree = "<group>"; };
 		29BAC50523676EA400A620F4 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		29BAC50823676FDC00A620F4 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
@@ -208,14 +210,15 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		29514BD22368ACF700DC89C4 /* CustomComponents */ = {
+		29514BD22368ACF700DC89C4 /* Shared Components */ = {
 			isa = PBXGroup;
 			children = (
+				29A97437236FD615006C668F /* Form */,
 				2907E4B52368D21D00946B3F /* Input Modal */,
 				29514BE72368C3E400DC89C4 /* Dropdown */,
 				29514BD32368AD4A00DC89C4 /* Options */,
 			);
-			path = CustomComponents;
+			path = "Shared Components";
 			sourceTree = "<group>";
 		};
 		29514BD32368AD4A00DC89C4 /* Options */ = {
@@ -270,6 +273,15 @@
 			path = "Date Input";
 			sourceTree = "<group>";
 		};
+		29A97437236FD615006C668F /* Form */ = {
+			isa = PBXGroup;
+			children = (
+				29A97435236FD5FC006C668F /* InputGroup.swift */,
+				1E5D7D492369F1A400707D08 /* Input Cells */,
+			);
+			path = Form;
+			sourceTree = "<group>";
+		};
 		29BAC4FC23676C2300A620F4 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
@@ -313,7 +325,6 @@
 		29BAC50A23677EB200A620F4 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				1E5D7D492369F1A400707D08 /* Input Cells */,
 				29514BDE2368AFC100DC89C4 /* BaseViewController.swift */,
 				29CEC91D23676424003B21B9 /* ViewController.swift */,
 				29BAC50B23677EDC00A620F4 /* LoginViewController.swift */,
@@ -364,7 +375,7 @@
 			isa = PBXGroup;
 			children = (
 				2907E4B22368CE2700946B3F /* Models */,
-				29514BD22368ACF700DC89C4 /* CustomComponents */,
+				29514BD22368ACF700DC89C4 /* Shared Components */,
 				29BAC50A23677EB200A620F4 /* ViewControllers */,
 				29514BD12368A6CF00DC89C4 /* Views */,
 				29BAC4FC23676C2300A620F4 /* Utilities */,
@@ -643,6 +654,7 @@
 				29BAC50623676EA400A620F4 /* Alert.swift in Sources */,
 				29A97433236CDD8F006C668F /* DateInputCollectionViewCell.swift in Sources */,
 				29BAC4FE23676C3000A620F4 /* Auth.swift in Sources */,
+				29A97436236FD5FC006C668F /* InputGroup.swift in Sources */,
 				2907E4B72368D24900946B3F /* InputModal.swift in Sources */,
 				29CEC91E23676424003B21B9 /* ViewController.swift in Sources */,
 				29A9742D236CB59F006C668F /* SwitchInputCollectionViewCell.swift in Sources */,
