@@ -79,8 +79,6 @@ class AutoSync {
         
          print("Executing Autosync...")
         
-        // set some variables
-        self.manualSyncRequiredShown = false
         // Block autosync from being re-executed.
         self.isSynchronizing = true
         
@@ -129,11 +127,10 @@ class AutoSync {
         
         if !Auth.isAuthenticated() {
             if !manualSyncRequiredShown {
-                manualSyncRequiredShown = true
                 Alert.show(title: "Authentication Required", message: "You have items that need to be synced.\n Would you like to authenticate now and synchronize?\n\nIf you select no, Autosync will be turned off until the app is reopened.\n", yes: {
                     Auth.authenticate(completion: { (success) in
                         if success {
-                            self.sync()
+                            self.autoSynchronizeIfPossible()
                         }
                     })
                 }) {

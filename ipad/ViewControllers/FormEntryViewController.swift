@@ -24,7 +24,7 @@ class FormEntryViewController: BaseViewController {
         super.viewWillAppear(animated)
         setNavigationBar(hidden: false, style: UIBarStyle.default)
         addTestData()
-        let inputGroup: InputGroup = InputGroup()
+        let inputGroup: InputGroupView = InputGroupView()
         inputGroup.initialize(with: self.inputItems, delegate: self, in: container)
         
     }

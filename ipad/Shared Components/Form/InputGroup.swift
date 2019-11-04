@@ -8,7 +8,7 @@
 
 import UIKit
 
-class InputGroup: UIView {
+class InputGroupView: UIView {
     
     // MARK: Constants
     private let collectionCells = [
@@ -90,7 +90,7 @@ class InputGroup: UIView {
         collection.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
     }
 }
-extension InputGroup: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+extension InputGroupView: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     private func setupCollectionView() {
         guard let collectionView = self.collectionView else {return}
         for cell in collectionCells {
