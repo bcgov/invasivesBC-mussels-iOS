@@ -252,6 +252,7 @@
                         <outlet property="switcherHolder" destination="Mee-2o-RFj" id="JvT-Yr-KK6"/>
                         <outlet property="userButton" destination="qs0-Z8-kOT" id="xoK-6C-NR5"/>
                         <segue destination="fxD-jA-8IB" kind="show" identifier="showFormEntry" id="Iqn-O2-aSN"/>
+                        <segue destination="wRQ-S5-s9o" kind="show" identifier="showWatercraftInspectionForm" id="4OX-36-Cn0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9MC-ax-5X6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -314,6 +315,44 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="evM-IS-50e" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2103.90625" y="86.71875"/>
+        </scene>
+        <!--Watercraft Inspection View Controller-->
+        <scene sceneID="riO-oX-bCE">
+            <objects>
+                <viewController modalPresentationStyle="fullScreen" id="wRQ-S5-s9o" customClass="WatercraftInspectionViewController" customModule="Boilerplate" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="1Uh-bw-RIl">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="gUM-D8-l98">
+                                <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="i7t-2b-K4s">
+                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                            </collectionView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="zPU-Zd-6z0" firstAttribute="bottom" secondItem="gUM-D8-l98" secondAttribute="bottom" id="Lbn-Fg-Qe9"/>
+                            <constraint firstItem="zPU-Zd-6z0" firstAttribute="trailing" secondItem="gUM-D8-l98" secondAttribute="trailing" id="P4v-Tu-1gi"/>
+                            <constraint firstItem="gUM-D8-l98" firstAttribute="top" secondItem="zPU-Zd-6z0" secondAttribute="top" id="X3D-yt-XOp"/>
+                            <constraint firstItem="gUM-D8-l98" firstAttribute="leading" secondItem="zPU-Zd-6z0" secondAttribute="leading" id="oEn-EB-H3A"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="zPU-Zd-6z0"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="IrF-cu-uMQ"/>
+                    <connections>
+                        <outlet property="collectionView" destination="gUM-D8-l98" id="RuF-Ja-W2y"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Rll-yD-UIl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2104" y="-647"/>
         </scene>
     </scenes>
     <resources>

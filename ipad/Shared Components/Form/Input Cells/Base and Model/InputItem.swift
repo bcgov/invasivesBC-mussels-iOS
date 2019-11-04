@@ -16,6 +16,7 @@ enum InputItemType {
     case Double
     case Date
     case Switch
+    case TextArea
 }
 
 enum InputItemWidthSize {
@@ -47,6 +48,8 @@ struct InputValue {
             return self.date
         case .Switch:
             return self.boolean
+        case .TextArea:
+            return self.string
         }
     }
     
@@ -64,6 +67,8 @@ struct InputValue {
             self.date = value as? Date
         case .Switch:
             self.boolean = value as? Bool
+        case .TextArea:
+            self.string = value as? String
         }
     }
 }
@@ -154,6 +159,25 @@ class DateInput: InputItem {
     var editable: Bool
     
     init(key: String, header: String, editable: Bool, value: Date? = nil, width: InputItemWidthSize? = .Full) {
+        self.value = InputValue()
+        self.value.set(value: value, type: type)
+        self.key = key
+        self.header = header
+        self.editable = editable
+        self.width = width ?? .Full
+    }
+}
+
+class TextAreaInput: InputItem {
+    var type: InputItemType = .TextArea
+    var width: InputItemWidthSize
+    var height: CGFloat = 100
+    var key: String
+    var value: InputValue
+    var header: String
+    var editable: Bool
+    
+    init(key: String, header: String, editable: Bool, value: String? = nil, width: InputItemWidthSize? = .Full) {
         self.value = InputValue()
         self.value.set(value: value, type: type)
         self.key = key

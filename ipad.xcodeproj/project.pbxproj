@@ -59,6 +59,8 @@
 		29CEC92623676425003B21B9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 29CEC92423676425003B21B9 /* LaunchScreen.storyboard */; };
 		29CEC93123676425003B21B9 /* ipadTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29CEC93023676425003B21B9 /* ipadTests.swift */; };
 		29CEC93C23676691003B21B9 /* KeycloakConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29CEC93B23676691003B21B9 /* KeycloakConstants.swift */; };
+		29DB01092370EFD60046E605 /* TextAreaInputCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29DB01072370EFD60046E605 /* TextAreaInputCollectionViewCell.swift */; };
+		29DB010A2370EFD60046E605 /* TextAreaInputCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29DB01082370EFD60046E605 /* TextAreaInputCollectionViewCell.xib */; };
 		29F29F90236B6A03004F12E7 /* SwitcherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F29F8F236B6A03004F12E7 /* SwitcherView.swift */; };
 		29F29F93236B6A22004F12E7 /* SwitcherView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29F29F92236B6A22004F12E7 /* SwitcherView.xib */; };
 		29F29F98236B6B9C004F12E7 /* SwitcherCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F29F96236B6B9C004F12E7 /* SwitcherCollectionViewCell.swift */; };
@@ -70,6 +72,9 @@
 		29F29FA6236BB541004F12E7 /* BaseInputCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F29FA5236BB541004F12E7 /* BaseInputCell.swift */; };
 		29F29FAB236CA948004F12E7 /* TextInputCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F29FA9236CA948004F12E7 /* TextInputCollectionViewCell.swift */; };
 		29F29FAC236CA948004F12E7 /* TextInputCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29F29FAA236CA948004F12E7 /* TextInputCollectionViewCell.xib */; };
+		29F4EC512370B007001D5CFA /* WatercraftInspectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F4EC502370B007001D5CFA /* WatercraftInspectionViewController.swift */; };
+		29F4EC562370B1F8001D5CFA /* BasicCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F4EC542370B1F8001D5CFA /* BasicCollectionViewCell.swift */; };
+		29F4EC572370B1F8001D5CFA /* BasicCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29F4EC552370B1F8001D5CFA /* BasicCollectionViewCell.xib */; };
 		9FB225820DBE019B5CE1031C /* Pods_ipadTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CED730649CF3E43FB1AD51F6 /* Pods_ipadTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -139,6 +144,8 @@
 		29CEC93023676425003B21B9 /* ipadTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ipadTests.swift; sourceTree = "<group>"; };
 		29CEC93223676425003B21B9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		29CEC93B23676691003B21B9 /* KeycloakConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeycloakConstants.swift; sourceTree = "<group>"; };
+		29DB01072370EFD60046E605 /* TextAreaInputCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextAreaInputCollectionViewCell.swift; sourceTree = "<group>"; };
+		29DB01082370EFD60046E605 /* TextAreaInputCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextAreaInputCollectionViewCell.xib; sourceTree = "<group>"; };
 		29F29F8F236B6A03004F12E7 /* SwitcherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitcherView.swift; sourceTree = "<group>"; };
 		29F29F92236B6A22004F12E7 /* SwitcherView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SwitcherView.xib; sourceTree = "<group>"; };
 		29F29F96236B6B9C004F12E7 /* SwitcherCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitcherCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -150,6 +157,9 @@
 		29F29FA5236BB541004F12E7 /* BaseInputCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseInputCell.swift; sourceTree = "<group>"; };
 		29F29FA9236CA948004F12E7 /* TextInputCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextInputCollectionViewCell.swift; sourceTree = "<group>"; };
 		29F29FAA236CA948004F12E7 /* TextInputCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextInputCollectionViewCell.xib; sourceTree = "<group>"; };
+		29F4EC502370B007001D5CFA /* WatercraftInspectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatercraftInspectionViewController.swift; sourceTree = "<group>"; };
+		29F4EC542370B1F8001D5CFA /* BasicCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicCollectionViewCell.swift; sourceTree = "<group>"; };
+		29F4EC552370B1F8001D5CFA /* BasicCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BasicCollectionViewCell.xib; sourceTree = "<group>"; };
 		5E19532C9F39231DE6E43099 /* Pods_ipad.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ipad.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		654A566D8395B17BDF172F9F /* Pods-ipad.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ipad.release.xcconfig"; path = "Target Support Files/Pods-ipad/Pods-ipad.release.xcconfig"; sourceTree = "<group>"; };
 		763C8716EF742F6764FFE7D7 /* Pods-ipad.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ipad.debug.xcconfig"; path = "Target Support Files/Pods-ipad/Pods-ipad.debug.xcconfig"; sourceTree = "<group>"; };
@@ -191,6 +201,7 @@
 			isa = PBXGroup;
 			children = (
 				29F29FA7236CA906004F12E7 /* Base and Model */,
+				29F4EC592370DB72001D5CFA /* TextArea Input */,
 				29A9742F236CBEBA006C668F /* Date Input */,
 				29A9742A236CB588006C668F /* Switch Input */,
 				29F29FA8236CA925004F12E7 /* Text Input */,
@@ -375,6 +386,7 @@
 				29BAC50B23677EDC00A620F4 /* LoginViewController.swift */,
 				29BAC50D236790C900A620F4 /* HomeViewController.swift */,
 				2907E4BA2368FEA500946B3F /* FormEntryViewController.swift */,
+				29F4EC522370B142001D5CFA /* Watercraft Inspection */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -493,6 +505,33 @@
 			path = "Text Input";
 			sourceTree = "<group>";
 		};
+		29F4EC522370B142001D5CFA /* Watercraft Inspection */ = {
+			isa = PBXGroup;
+			children = (
+				29F4EC532370B1BB001D5CFA /* Cells */,
+				29F4EC502370B007001D5CFA /* WatercraftInspectionViewController.swift */,
+			);
+			path = "Watercraft Inspection";
+			sourceTree = "<group>";
+		};
+		29F4EC532370B1BB001D5CFA /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				29F4EC542370B1F8001D5CFA /* BasicCollectionViewCell.swift */,
+				29F4EC552370B1F8001D5CFA /* BasicCollectionViewCell.xib */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		29F4EC592370DB72001D5CFA /* TextArea Input */ = {
+			isa = PBXGroup;
+			children = (
+				29DB01072370EFD60046E605 /* TextAreaInputCollectionViewCell.swift */,
+				29DB01082370EFD60046E605 /* TextAreaInputCollectionViewCell.xib */,
+			);
+			path = "TextArea Input";
+			sourceTree = "<group>";
+		};
 		718555F643FB0D413A8C0B7B /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -601,6 +640,8 @@
 				2907E4B92368D25800946B3F /* InputModal.xib in Resources */,
 				29F29FA2236B8670004F12E7 /* DropdownCollectionViewCell.xib in Resources */,
 				29F29F99236B6B9C004F12E7 /* SwitcherCollectionViewCell.xib in Resources */,
+				29DB010A2370EFD60046E605 /* TextAreaInputCollectionViewCell.xib in Resources */,
+				29F4EC572370B1F8001D5CFA /* BasicCollectionViewCell.xib in Resources */,
 				29CEC92323676425003B21B9 /* Assets.xcassets in Resources */,
 				29CEC92123676424003B21B9 /* Main.storyboard in Resources */,
 				29514BED2368CAAA00DC89C4 /* Dropdown.storyboard in Resources */,
@@ -695,6 +736,7 @@
 				29514BD92368ADB100DC89C4 /* OptionType.swift in Sources */,
 				29BAC5122367A21300A620F4 /* StringConstants.swift in Sources */,
 				294EF30F2370845700EEB3B6 /* SyncView.swift in Sources */,
+				29F4EC562370B1F8001D5CFA /* BasicCollectionViewCell.swift in Sources */,
 				29514BD62368AD6F00DC89C4 /* OptionsTableViewCell.swift in Sources */,
 				294EF3122370885100EEB3B6 /* BannerView.swift in Sources */,
 				29514BDF2368AFC100DC89C4 /* BaseViewController.swift in Sources */,
@@ -705,6 +747,7 @@
 				29BAC4FE23676C3000A620F4 /* Auth.swift in Sources */,
 				29A97436236FD5FC006C668F /* InputGroup.swift in Sources */,
 				2907E4B72368D24900946B3F /* InputModal.swift in Sources */,
+				29DB01092370EFD60046E605 /* TextAreaInputCollectionViewCell.swift in Sources */,
 				29CEC91E23676424003B21B9 /* ViewController.swift in Sources */,
 				29A9742D236CB59F006C668F /* SwitchInputCollectionViewCell.swift in Sources */,
 				29F29F9D236B7750004F12E7 /* Switcher.swift in Sources */,
@@ -718,6 +761,7 @@
 				29F29FA4236B9114004F12E7 /* InputItem.swift in Sources */,
 				29514BE12368B4BE00DC89C4 /* SettingsConstants.swift in Sources */,
 				29514BDB2368AED600DC89C4 /* OptionsViewController.swift in Sources */,
+				29F4EC512370B007001D5CFA /* WatercraftInspectionViewController.swift in Sources */,
 				29BAC5172367B12300A620F4 /* Colors.swift in Sources */,
 				294EF31923708A2100EEB3B6 /* API.swift in Sources */,
 				2907E4BB2368FEA500946B3F /* FormEntryViewController.swift in Sources */,

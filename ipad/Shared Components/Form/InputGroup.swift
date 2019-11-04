@@ -15,7 +15,8 @@ class InputGroupView: UIView {
         "TextInputCollectionViewCell",
         "DropdownCollectionViewCell",
         "SwitchInputCollectionViewCell",
-        "DateInputCollectionViewCell"
+        "DateInputCollectionViewCell",
+        "TextAreaInputCollectionViewCell"
     ]
     
     // MARK: Variables
@@ -90,6 +91,7 @@ class InputGroupView: UIView {
         collection.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
     }
 }
+
 extension InputGroupView: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     private func setupCollectionView() {
         guard let collectionView = self.collectionView else {return}
@@ -122,6 +124,10 @@ extension InputGroupView: UICollectionViewDataSource, UICollectionViewDelegate, 
         return collectionView!.dequeueReusableCell(withReuseIdentifier: "DateInputCollectionViewCell", for: indexPath as IndexPath) as! DateInputCollectionViewCell
     }
     
+    func getTextAreaInputCell(indexPath: IndexPath) -> TextAreaInputCollectionViewCell {
+        return collectionView!.dequeueReusableCell(withReuseIdentifier: "TextAreaInputCollectionViewCell", for: indexPath as IndexPath) as! TextAreaInputCollectionViewCell
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return inputItems.count
     }
@@ -152,6 +158,10 @@ extension InputGroupView: UICollectionViewDataSource, UICollectionViewDelegate, 
         case .Switch:
             let cell = getSwitchInputCell(indexPath: indexPath)
             cell.setup(with: item as! SwitchInput, delegate: inputDelegate!)
+            return cell
+        case .TextArea:
+            let cell = getTextAreaInputCell(indexPath: indexPath)
+            cell.setup(with: item as! TextAreaInput, delegate: inputDelegate!)
             return cell
         }
     }
