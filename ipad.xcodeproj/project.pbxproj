@@ -15,6 +15,9 @@
 		2907E4BB2368FEA500946B3F /* FormEntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2907E4BA2368FEA500946B3F /* FormEntryViewController.swift */; };
 		294EF30B2370841B00EEB3B6 /* SyncView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 294EF30A2370841B00EEB3B6 /* SyncView.xib */; };
 		294EF30F2370845700EEB3B6 /* SyncView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294EF30E2370845700EEB3B6 /* SyncView.swift */; };
+		294EF3122370885100EEB3B6 /* BannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294EF3112370885100EEB3B6 /* BannerView.swift */; };
+		294EF3142370885B00EEB3B6 /* BannerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 294EF3132370885B00EEB3B6 /* BannerView.xib */; };
+		294EF3162370888600EEB3B6 /* Banner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294EF3152370888600EEB3B6 /* Banner.swift */; };
 		29514BD62368AD6F00DC89C4 /* OptionsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29514BD42368AD6F00DC89C4 /* OptionsTableViewCell.swift */; };
 		29514BD72368AD6F00DC89C4 /* OptionsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29514BD52368AD6F00DC89C4 /* OptionsTableViewCell.xib */; };
 		29514BD92368ADB100DC89C4 /* OptionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29514BD82368ADB100DC89C4 /* OptionType.swift */; };
@@ -87,6 +90,9 @@
 		2907E4BA2368FEA500946B3F /* FormEntryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormEntryViewController.swift; sourceTree = "<group>"; };
 		294EF30A2370841B00EEB3B6 /* SyncView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SyncView.xib; sourceTree = "<group>"; };
 		294EF30E2370845700EEB3B6 /* SyncView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncView.swift; sourceTree = "<group>"; };
+		294EF3112370885100EEB3B6 /* BannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerView.swift; sourceTree = "<group>"; };
+		294EF3132370885B00EEB3B6 /* BannerView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BannerView.xib; sourceTree = "<group>"; };
+		294EF3152370888600EEB3B6 /* Banner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Banner.swift; sourceTree = "<group>"; };
 		29514BD42368AD6F00DC89C4 /* OptionsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsTableViewCell.swift; sourceTree = "<group>"; };
 		29514BD52368AD6F00DC89C4 /* OptionsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OptionsTableViewCell.xib; sourceTree = "<group>"; };
 		29514BD82368ADB100DC89C4 /* OptionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionType.swift; sourceTree = "<group>"; };
@@ -217,17 +223,20 @@
 			path = "Sync view";
 			sourceTree = "<group>";
 		};
-		29514BD12368A6CF00DC89C4 /* Views */ = {
+		294EF3102370884300EEB3B6 /* Banner */ = {
 			isa = PBXGroup;
 			children = (
-				29F29F91236B6A0D004F12E7 /* Switcher */,
+				294EF3152370888600EEB3B6 /* Banner.swift */,
+				294EF3112370885100EEB3B6 /* BannerView.swift */,
+				294EF3132370885B00EEB3B6 /* BannerView.xib */,
 			);
-			path = Views;
+			path = Banner;
 			sourceTree = "<group>";
 		};
 		29514BD22368ACF700DC89C4 /* Shared Components */ = {
 			isa = PBXGroup;
 			children = (
+				29F29F91236B6A0D004F12E7 /* Switcher */,
 				29A97437236FD615006C668F /* Form */,
 				2907E4B52368D21D00946B3F /* Input Modal */,
 				29514BE72368C3E400DC89C4 /* Dropdown */,
@@ -309,7 +318,7 @@
 		29BAC4FC23676C2300A620F4 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				29A9743923700408006C668F /* Database */,
+				294EF3102370884300EEB3B6 /* Banner */,
 				29514BE42368B5BA00DC89C4 /* Notifications */,
 				29BAC5132367AD6E00A620F4 /* sync */,
 				29BAC50723676FD000A620F4 /* UI */,
@@ -349,6 +358,7 @@
 		29BAC50A23677EB200A620F4 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				29CEC91F23676424003B21B9 /* Main.storyboard */,
 				29514BDE2368AFC100DC89C4 /* BaseViewController.swift */,
 				29CEC91D23676424003B21B9 /* ViewController.swift */,
 				29BAC50B23677EDC00A620F4 /* LoginViewController.swift */,
@@ -399,15 +409,14 @@
 		29CEC91823676424003B21B9 /* ipad */ = {
 			isa = PBXGroup;
 			children = (
+				29BAC50A23677EB200A620F4 /* ViewControllers */,
+				29A9743923700408006C668F /* Database */,
 				2907E4B22368CE2700946B3F /* Models */,
 				29514BD22368ACF700DC89C4 /* Shared Components */,
-				29BAC50A23677EB200A620F4 /* ViewControllers */,
-				29514BD12368A6CF00DC89C4 /* Views */,
 				29BAC4FC23676C2300A620F4 /* Utilities */,
 				29CEC93D236766A0003B21B9 /* Constants */,
 				29CEC91923676424003B21B9 /* AppDelegate.swift */,
 				29CEC91B23676424003B21B9 /* SceneDelegate.swift */,
-				29CEC91F23676424003B21B9 /* Main.storyboard */,
 				29CEC92223676425003B21B9 /* Assets.xcassets */,
 				29CEC92423676425003B21B9 /* LaunchScreen.storyboard */,
 				29CEC92723676425003B21B9 /* Info.plist */,
@@ -568,6 +577,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				294EF3142370885B00EEB3B6 /* BannerView.xib in Resources */,
 				29514BF12368CB5D00DC89C4 /* DropdownTableViewCell.xib in Resources */,
 				29514BD72368AD6F00DC89C4 /* OptionsTableViewCell.xib in Resources */,
 				29F29F93236B6A22004F12E7 /* SwitcherView.xib in Resources */,
@@ -675,6 +685,7 @@
 				29BAC5122367A21300A620F4 /* StringConstants.swift in Sources */,
 				294EF30F2370845700EEB3B6 /* SyncView.swift in Sources */,
 				29514BD62368AD6F00DC89C4 /* OptionsTableViewCell.swift in Sources */,
+				294EF3122370885100EEB3B6 /* BannerView.swift in Sources */,
 				29514BDF2368AFC100DC89C4 /* BaseViewController.swift in Sources */,
 				29514BF02368CB5D00DC89C4 /* DropdownTableViewCell.swift in Sources */,
 				29BAC51E2367B6FA00A620F4 /* BaseRealmObject.swift in Sources */,
@@ -700,6 +711,7 @@
 				2907E4BB2368FEA500946B3F /* FormEntryViewController.swift in Sources */,
 				29A9743B2370042E006C668F /* Storage.swift in Sources */,
 				29F29F98236B6B9C004F12E7 /* SwitcherCollectionViewCell.swift in Sources */,
+				294EF3162370888600EEB3B6 /* Banner.swift in Sources */,
 				29CEC93C23676691003B21B9 /* KeycloakConstants.swift in Sources */,
 				29CEC91C23676424003B21B9 /* SceneDelegate.swift in Sources */,
 				29BAC50923676FDC00A620F4 /* Theme.swift in Sources */,
