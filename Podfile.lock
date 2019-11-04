@@ -15,6 +15,7 @@ PODS:
     - Alamofire (~> 4.7.3)
     - SwiftKeychainWrapper (~> 3.0.1)
   - SwiftKeychainWrapper (3.0.1)
+  - SwiftyJSON (5.0.0)
 
 DEPENDENCIES:
   - Alamofire
@@ -26,6 +27,7 @@ DEPENDENCIES:
   - Realm
   - RealmSwift
   - SingleSignOn (from `https://github.com/bcgov/mobile-authentication-ios.git`, tag `v1.0.6`)
+  - SwiftyJSON
 
 SPEC REPOS:
   trunk:
@@ -38,6 +40,7 @@ SPEC REPOS:
     - Realm
     - RealmSwift
     - SwiftKeychainWrapper
+    - SwiftyJSON
 
 EXTERNAL SOURCES:
   SingleSignOn:
@@ -60,7 +63,8 @@ SPEC CHECKSUMS:
   RealmSwift: 1949ef26a279e1845bd51d591b9103adfcd121df
   SingleSignOn: ea4f43078da8c97b2a3a31783795e6fe83ec97eb
   SwiftKeychainWrapper: 38952a3636320ae61bad3513cadd870929de7a4a
+  SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
 
-PODFILE CHECKSUM: fec463a5de09151a60377eaaae7e88722224ee50
+PODFILE CHECKSUM: 4adeca77503938f83b251f1e054ee9b443a61f60
 
 COCOAPODS: 1.8.4
