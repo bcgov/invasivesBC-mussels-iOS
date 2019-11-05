@@ -52,72 +52,6 @@ class WatercraftInspectionViewController: BaseViewController {
         style()
     }
     
-    private func getDummyOptions() -> [DropdownModel]{
-        var options: [DropdownModel] = []
-        options.append(DropdownModel(display: "Something here"))
-        options.append(DropdownModel(display: "Something else here"))
-        options.append(DropdownModel(display: "Something more here"))
-        options.append(DropdownModel(display: "Another thing"))
-        return options
-    }
-    
-    private func getBasciInfoInputs() -> [InputItem] {
-        var sectionItems: [InputItem] = []
-        let dateOfInspection = DateInput(key: "dateOfInspection", header: "Date of inspection", editable: isEditable, width: .Forth)
-        let provinceOfBoatResidence = DropdownInput(key: "provinceOfBoatResidence", header: "State / Province of boat residence", editable: isEditable, width: .Forth, dropdownItems: getDummyOptions())
-        let numberOfWatercrafts = DropdownInput(key: "numberOfWatercrafts", header: "Number of Watercrafts", editable: isEditable, width: .Forth, dropdownItems: getDummyOptions())
-        let multipleTypesOfCraft =  SwitchInput(key: "multipleTypesOfCraft", header: "Multiple types of watercraft?", editable: isEditable, width: .Forth)
-        sectionItems.append(dateOfInspection)
-        sectionItems.append(provinceOfBoatResidence)
-        sectionItems.append(numberOfWatercrafts)
-        sectionItems.append(multipleTypesOfCraft)
-        return sectionItems
-    }
-    
-    private func getWatercraftDetailsInputs() -> [InputItem] {
-        var sectionItems: [InputItem] = []
-        let numberOfPeople = TextInput(key: "numberOfPeople", header: "Number of people in the party?", editable: isEditable, width: .Third)
-        
-        let commerciallyHauled =  SwitchInput(key: "commerciallyHauled", header: "Was the watercraft/equipment commercially hauled?", editable: isEditable, width: .Third)
-        let highRiskArea =  SwitchInput(key: "highRiskArea", header: "Is the watercraft coming froma high risk area for whirling disease?", editable: isEditable, width: .Third)
-        let previousInspection =  SwitchInput(key: "previousInspection", header: "Any previous inspection and/ or agency notification?", editable: isEditable, width: .Third)
-        let previousAISknowledge =  SwitchInput(key: "previousAISknowledge", header: "Previous knowledge of AIS or Clean, Drai, Dry?", editable: isEditable, width: .Third)
-        
-        sectionItems.append(numberOfPeople)
-        sectionItems.append(commerciallyHauled)
-        sectionItems.append(highRiskArea)
-        sectionItems.append(previousInspection)
-        sectionItems.append(previousAISknowledge)
-        return sectionItems
-    }
-    
-    private func getInspectionDetailsInputs() -> [InputItem] {
-        var sectionItems: [InputItem] = []
-        
-        let aquaticPlantsFound =  SwitchInput(key: "aquaticPlantsFound", header: "Any Aquatic plants found?", editable: isEditable, width: .Third)
-        let marineMusslesFound =  SwitchInput(key: "marineMusslesFound", header: "Any marine mussels or barnacles found?", editable: isEditable, width: .Third)
-        let failedToStop =  SwitchInput(key: "failedToStop", header: "Was the watercraft pulled over for failing to stop at the inspection station?", editable: isEditable, width: .Third)
-        let adultDreissenidFound =  SwitchInput(key: "adultDreissenidFound", header: "Were adult dreissenid mussels found?", editable: isEditable, width: .Third)
-        let highRiskForDreissenid =  SwitchInput(key: "highRiskForDreissenid", header: "Is the wartercraft/equipment high risk for dreissenid or other AIS? *", editable: isEditable, width: .Third)
-        let passportIssued =  SwitchInput(key: "passportIssued", header: "Was a Passport issued?", editable: isEditable, width: .Third)
-        
-        sectionItems.append(aquaticPlantsFound)
-        sectionItems.append(marineMusslesFound)
-        sectionItems.append(failedToStop)
-        sectionItems.append(adultDreissenidFound)
-        sectionItems.append(highRiskForDreissenid)
-        sectionItems.append(passportIssued)
-        return sectionItems
-    }
-    
-    private func getCommentSectionInputs() -> [InputItem] {
-        var sectionItems: [InputItem] = []
-        let generalComments = TextAreaInput(key: "generalComments", header: "General Comments", editable: isEditable)
-        sectionItems.append(generalComments)
-        return sectionItems
-    }
-    
-    
     // Navigation bar right button action
     @objc func action(sender: UIBarButtonItem) {
     }
@@ -206,21 +140,21 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
         switch sectionType {
         case .BasicInformation:
             let cell = getBasicCell(indexPath: indexPath)
-            cell.setup(title: "Basic Information", input: getBasciInfoInputs(), delegate: self)
+            cell.setup(title: "Basic Information", input: FormHelper.watercraftInspectionBasciInfoInputs(isEditable: isEditable), delegate: self)
             return cell
         case .WatercraftDetails:
             let cell = getBasicCell(indexPath: indexPath)
-            cell.setup(title: "Watercraft Details", input: getWatercraftDetailsInputs(), delegate: self)
+            cell.setup(title: "Watercraft Details", input: FormHelper.watercraftInspectionWatercraftDetailsInputs(isEditable: isEditable), delegate: self)
             return cell
         case .JourneyDetails:
             return getJourneyDetailsCell(for: indexPath)
         case .InspectionDetails:
             let cell = getBasicCell(indexPath: indexPath)
-            cell.setup(title: "Inspection Details", input: getInspectionDetailsInputs(), delegate: self)
+            cell.setup(title: "Inspection Details", input: FormHelper.watercraftInspectionInspectionDetailsInputs(isEditable: isEditable), delegate: self)
             return cell
         case .GeneralComments:
             let cell = getBasicCell(indexPath: indexPath)
-            cell.setup(title: "Comments", input: getCommentSectionInputs(), delegate: self)
+            cell.setup(title: "Comments", input: FormHelper.watercraftInspectionCommentSectionInputs(isEditable: isEditable), delegate: self)
             return cell
         }
     }
@@ -231,18 +165,18 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
         }
         switch sectionType {
         case .BasicInformation:
-            let estimatedContentHeight = estimateBasicCellContentHeight(for: getBasciInfoInputs())
+            let estimatedContentHeight = estimateBasicCellContentHeight(for: FormHelper.watercraftInspectionBasciInfoInputs())
             return CGSize(width: self.collectionView.frame.width, height: estimatedContentHeight)
         case .WatercraftDetails:
-            let estimatedContentHeight = estimateBasicCellContentHeight(for: getWatercraftDetailsInputs())
+            let estimatedContentHeight = estimateBasicCellContentHeight(for: FormHelper.watercraftInspectionWatercraftDetailsInputs())
             return CGSize(width: self.collectionView.frame.width, height: estimatedContentHeight)
         case .JourneyDetails:
             return estimateJourneyDetailsCellHeight(for: indexPath)
         case .InspectionDetails:
-            let estimatedContentHeight = estimateBasicCellContentHeight(for: getInspectionDetailsInputs())
+            let estimatedContentHeight = estimateBasicCellContentHeight(for: FormHelper.watercraftInspectionInspectionDetailsInputs())
             return CGSize(width: self.collectionView.frame.width, height: estimatedContentHeight)
         case .GeneralComments:
-            let estimatedContentHeight = estimateBasicCellContentHeight(for: getCommentSectionInputs())
+            let estimatedContentHeight = estimateBasicCellContentHeight(for: FormHelper.watercraftInspectionCommentSectionInputs())
             return CGSize(width: self.collectionView.frame.width, height: estimatedContentHeight)
         }
     }

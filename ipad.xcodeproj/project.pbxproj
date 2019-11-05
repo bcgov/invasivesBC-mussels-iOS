@@ -74,6 +74,7 @@
 		29E4BBEF237218500079475F /* PreviousWaterBodyCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29E4BBED237218500079475F /* PreviousWaterBodyCollectionViewCell.xib */; };
 		29E4BBF2237218610079475F /* DestinationWaterBodyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E4BBF0237218610079475F /* DestinationWaterBodyCollectionViewCell.swift */; };
 		29E4BBF3237218610079475F /* DestinationWaterBodyCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29E4BBF1237218610079475F /* DestinationWaterBodyCollectionViewCell.xib */; };
+		29E4BBF6237221EB0079475F /* FormHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E4BBF5237221EB0079475F /* FormHelper.swift */; };
 		29F29F90236B6A03004F12E7 /* SwitcherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F29F8F236B6A03004F12E7 /* SwitcherView.swift */; };
 		29F29F93236B6A22004F12E7 /* SwitcherView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29F29F92236B6A22004F12E7 /* SwitcherView.xib */; };
 		29F29F98236B6B9C004F12E7 /* SwitcherCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F29F96236B6B9C004F12E7 /* SwitcherCollectionViewCell.swift */; };
@@ -172,6 +173,7 @@
 		29E4BBED237218500079475F /* PreviousWaterBodyCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PreviousWaterBodyCollectionViewCell.xib; sourceTree = "<group>"; };
 		29E4BBF0237218610079475F /* DestinationWaterBodyCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestinationWaterBodyCollectionViewCell.swift; sourceTree = "<group>"; };
 		29E4BBF1237218610079475F /* DestinationWaterBodyCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DestinationWaterBodyCollectionViewCell.xib; sourceTree = "<group>"; };
+		29E4BBF5237221EB0079475F /* FormHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormHelper.swift; sourceTree = "<group>"; };
 		29F29F8F236B6A03004F12E7 /* SwitcherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitcherView.swift; sourceTree = "<group>"; };
 		29F29F92236B6A22004F12E7 /* SwitcherView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SwitcherView.xib; sourceTree = "<group>"; };
 		29F29F96236B6B9C004F12E7 /* SwitcherCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitcherCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -366,6 +368,7 @@
 		29BAC4FC23676C2300A620F4 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				29E4BBF4237221D40079475F /* Form Helper */,
 				294EF31723708A1700EEB3B6 /* API */,
 				29BAC50723676FD000A620F4 /* UI */,
 				29BAC50323676E8F00A620F4 /* Alert */,
@@ -554,6 +557,14 @@
 				29E4BBF1237218610079475F /* DestinationWaterBodyCollectionViewCell.xib */,
 			);
 			path = "Destination Water Body";
+			sourceTree = "<group>";
+		};
+		29E4BBF4237221D40079475F /* Form Helper */ = {
+			isa = PBXGroup;
+			children = (
+				29E4BBF5237221EB0079475F /* FormHelper.swift */,
+			);
+			path = "Form Helper";
 			sourceTree = "<group>";
 		};
 		29F29F91236B6A0D004F12E7 /* Switcher */ = {
@@ -866,6 +877,7 @@
 				29BAC50E236790C900A620F4 /* HomeViewController.swift in Sources */,
 				29514BE62368B70900DC89C4 /* Options.swift in Sources */,
 				29F29FA4236B9114004F12E7 /* InputItem.swift in Sources */,
+				29E4BBF6237221EB0079475F /* FormHelper.swift in Sources */,
 				29514BE12368B4BE00DC89C4 /* SettingsConstants.swift in Sources */,
 				29DB0116237206D30046E605 /* HeaderCollectionViewCell.swift in Sources */,
 				29514BDB2368AED600DC89C4 /* OptionsViewController.swift in Sources */,
