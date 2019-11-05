@@ -21,14 +21,6 @@ class HighRiskModalView: ModalView, Theme {
     
     var completion: (() -> Void)?
     
-    /*
-     // Only override draw() if you perform custom drawing.
-     // An empty implementation adversely affects performance during animation.
-     override func draw(_ rect: CGRect) {
-     // Drawing code
-     }
-     */
-    
     @IBAction func confirmAction(_ sender: UIButton) {
         guard let onClick = self.completion else {
             return
@@ -57,7 +49,6 @@ class HighRiskModalView: ModalView, Theme {
         styleDividerGrey(view: topDividerView)
         styleDividerGrey(view: bottomDividerView)
         titleLabel.textColor = Colors.primary
-//        checkmarkImage.image = UIImage(named: "../../Assets.xcassets/checkmarkIcon")
     }
     
 }
