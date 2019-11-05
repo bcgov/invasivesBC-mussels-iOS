@@ -286,8 +286,8 @@
 		29514BD22368ACF700DC89C4 /* Shared Components */ = {
 			isa = PBXGroup;
 			children = (
-				29F29F91236B6A0D004F12E7 /* Switcher */,
 				29A97437236FD615006C668F /* Form */,
+				29F29F91236B6A0D004F12E7 /* Switcher */,
 				2907E4B52368D21D00946B3F /* Input Modal */,
 				29514BE72368C3E400DC89C4 /* Dropdown */,
 				29514BD32368AD4A00DC89C4 /* Options */,

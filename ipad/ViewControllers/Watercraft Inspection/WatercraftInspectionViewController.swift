@@ -118,9 +118,7 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        guard let sectionType = FromSection(rawValue: Int(section)) else {
-            return 0
-        }
+        guard let sectionType = FromSection(rawValue: Int(section)) else {return 0}
         
         if sectionType == .JourneyDetails {
             return journeyDetails.previousWaterBodies.count + journeyDetails.destinationWaterBodies.count + 4
@@ -201,15 +199,19 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
         case .AddPreviousWaterBody:
             let cell = getButtonCell(indexPath: indexPath)
             cell.setup(with: "Add Prveious Water Body") {
-                self.journeyDetails.previousWaterBodies.append([])
-                self.collectionView.reloadSections(IndexSet(integer: indexPath.section))
+                self.journeyDetails.previousWaterBodies.append(FormHelper.watercraftInspectionPreviousWaterBodyInputs(index: self.journeyDetails.previousWaterBodies.count, isEditable: self.isEditable))
+                self.collectionView.performBatchUpdates({
+                    self.collectionView.reloadSections(IndexSet(integer: indexPath.section))
+                }, completion: nil)
             }
             return cell
         case .AddDestinationWaterBody:
             let cell = getButtonCell(indexPath: indexPath)
             cell.setup(with: "Add Destination Water Body") {
-                self.journeyDetails.destinationWaterBodies.append([])
-                self.collectionView.reloadSections(IndexSet(integer: indexPath.section))
+                self.journeyDetails.destinationWaterBodies.append(FormHelper.watercraftInspectionDestinationWaterBodyInputs(index: self.journeyDetails.destinationWaterBodies.count, isEditable: self.isEditable))
+                self.collectionView.performBatchUpdates({
+                    self.collectionView.reloadSections(IndexSet(integer: indexPath.section))
+                }, completion: nil)
             }
             return cell
         case .Divider:
