@@ -32,8 +32,9 @@ class WatercraftInspectionViewController: BaseViewController {
     // MARK: Class Functions
     override func viewDidLoad() {
         super.viewDidLoad()
-        setNavigationBar(hidden: false, style: UIBarStyle.default)
+        setNavigationBar(hidden: false, style: UIBarStyle.black)
         setupCollectionView()
+        style()
     }
     
     private func getDummyOptions() -> [DropdownModel]{
@@ -96,10 +97,35 @@ class WatercraftInspectionViewController: BaseViewController {
     
     private func getCommentSectionInputs() -> [InputItem] {
         var sectionItems: [InputItem] = []
-        let generalComments = TextAreaInput(key: "generalComments", header: "General COmments", editable: isEditable)
+        let generalComments = TextAreaInput(key: "generalComments", header: "General Comments", editable: isEditable)
         sectionItems.append(generalComments)
         return sectionItems
     }
+    
+    
+    // Navigation bar right button action
+    @objc func action(sender: UIBarButtonItem) {
+    }
+    
+    private func style() {
+        self.styleNavBar()
+    }
+    
+    private func styleNavBar() {
+        guard let navigation = self.navigationController else { return }
+        self.title = "Watercraft Inspection"
+        navigation.navigationBar.isTranslucent = false
+        navigation.navigationBar.tintColor = .white
+//        navigation.navigationBar.barTintColor = Colors.primary
+        navigation.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
+        setGradiantBackground(navigationBar: navigation.navigationBar)
+        setRightNavButtonTo(type: .save)
+    }
+    
+    private func setRightNavButtonTo(type: UIBarButtonItem.SystemItem) {
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: type, target: self, action: #selector(self.action(sender:)))
+    }
+    
     
 }
 
@@ -150,7 +176,7 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
             return cell
         case .GeneralComments:
             let cell = getBasicCell(indexPath: indexPath)
-            cell.setup(title: "Inspection Details", input: getCommentSectionInputs(), delegate: self)
+            cell.setup(title: "Comments", input: getCommentSectionInputs(), delegate: self)
             return cell
         }
     }

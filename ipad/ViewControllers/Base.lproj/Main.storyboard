@@ -324,8 +324,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="gUM-D8-l98">
-                                <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="gUM-D8-l98">
+                                <rect key="frame" x="42" y="0.0" width="684" height="1024"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="i7t-2b-K4s">
                                     <size key="itemSize" width="50" height="50"/>
@@ -339,9 +339,9 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="zPU-Zd-6z0" firstAttribute="bottom" secondItem="gUM-D8-l98" secondAttribute="bottom" id="Lbn-Fg-Qe9"/>
-                            <constraint firstItem="zPU-Zd-6z0" firstAttribute="trailing" secondItem="gUM-D8-l98" secondAttribute="trailing" id="P4v-Tu-1gi"/>
+                            <constraint firstItem="zPU-Zd-6z0" firstAttribute="trailing" secondItem="gUM-D8-l98" secondAttribute="trailing" constant="42" id="P4v-Tu-1gi"/>
                             <constraint firstItem="gUM-D8-l98" firstAttribute="top" secondItem="zPU-Zd-6z0" secondAttribute="top" id="X3D-yt-XOp"/>
-                            <constraint firstItem="gUM-D8-l98" firstAttribute="leading" secondItem="zPU-Zd-6z0" secondAttribute="leading" id="oEn-EB-H3A"/>
+                            <constraint firstItem="gUM-D8-l98" firstAttribute="leading" secondItem="zPU-Zd-6z0" secondAttribute="leading" constant="42" id="oEn-EB-H3A"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="zPU-Zd-6z0"/>
                     </view>

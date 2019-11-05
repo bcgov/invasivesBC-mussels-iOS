@@ -61,6 +61,8 @@
 		29CEC93C23676691003B21B9 /* KeycloakConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29CEC93B23676691003B21B9 /* KeycloakConstants.swift */; };
 		29DB01092370EFD60046E605 /* TextAreaInputCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29DB01072370EFD60046E605 /* TextAreaInputCollectionViewCell.swift */; };
 		29DB010A2370EFD60046E605 /* TextAreaInputCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29DB01082370EFD60046E605 /* TextAreaInputCollectionViewCell.xib */; };
+		29DB010F2371EE590046E605 /* JourneyDetailsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29DB010D2371EE590046E605 /* JourneyDetailsCollectionViewCell.swift */; };
+		29DB01102371EE590046E605 /* JourneyDetailsCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29DB010E2371EE590046E605 /* JourneyDetailsCollectionViewCell.xib */; };
 		29F29F90236B6A03004F12E7 /* SwitcherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F29F8F236B6A03004F12E7 /* SwitcherView.swift */; };
 		29F29F93236B6A22004F12E7 /* SwitcherView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29F29F92236B6A22004F12E7 /* SwitcherView.xib */; };
 		29F29F98236B6B9C004F12E7 /* SwitcherCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F29F96236B6B9C004F12E7 /* SwitcherCollectionViewCell.swift */; };
@@ -146,6 +148,8 @@
 		29CEC93B23676691003B21B9 /* KeycloakConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeycloakConstants.swift; sourceTree = "<group>"; };
 		29DB01072370EFD60046E605 /* TextAreaInputCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextAreaInputCollectionViewCell.swift; sourceTree = "<group>"; };
 		29DB01082370EFD60046E605 /* TextAreaInputCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextAreaInputCollectionViewCell.xib; sourceTree = "<group>"; };
+		29DB010D2371EE590046E605 /* JourneyDetailsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyDetailsCollectionViewCell.swift; sourceTree = "<group>"; };
+		29DB010E2371EE590046E605 /* JourneyDetailsCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JourneyDetailsCollectionViewCell.xib; sourceTree = "<group>"; };
 		29F29F8F236B6A03004F12E7 /* SwitcherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitcherView.swift; sourceTree = "<group>"; };
 		29F29F92236B6A22004F12E7 /* SwitcherView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SwitcherView.xib; sourceTree = "<group>"; };
 		29F29F96236B6B9C004F12E7 /* SwitcherCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitcherCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -466,6 +470,24 @@
 			path = Constants;
 			sourceTree = "<group>";
 		};
+		29DB010B2371EE2F0046E605 /* Basic */ = {
+			isa = PBXGroup;
+			children = (
+				29F4EC542370B1F8001D5CFA /* BasicCollectionViewCell.swift */,
+				29F4EC552370B1F8001D5CFA /* BasicCollectionViewCell.xib */,
+			);
+			path = Basic;
+			sourceTree = "<group>";
+		};
+		29DB010C2371EE3D0046E605 /* Journey Details */ = {
+			isa = PBXGroup;
+			children = (
+				29DB010D2371EE590046E605 /* JourneyDetailsCollectionViewCell.swift */,
+				29DB010E2371EE590046E605 /* JourneyDetailsCollectionViewCell.xib */,
+			);
+			path = "Journey Details";
+			sourceTree = "<group>";
+		};
 		29F29F91236B6A0D004F12E7 /* Switcher */ = {
 			isa = PBXGroup;
 			children = (
@@ -517,8 +539,8 @@
 		29F4EC532370B1BB001D5CFA /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				29F4EC542370B1F8001D5CFA /* BasicCollectionViewCell.swift */,
-				29F4EC552370B1F8001D5CFA /* BasicCollectionViewCell.xib */,
+				29DB010C2371EE3D0046E605 /* Journey Details */,
+				29DB010B2371EE2F0046E605 /* Basic */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -636,6 +658,7 @@
 				29514BDD2368AEE400DC89C4 /* Options.storyboard in Resources */,
 				29F29FAC236CA948004F12E7 /* TextInputCollectionViewCell.xib in Resources */,
 				29CEC92623676425003B21B9 /* LaunchScreen.storyboard in Resources */,
+				29DB01102371EE590046E605 /* JourneyDetailsCollectionViewCell.xib in Resources */,
 				29A9742E236CB59F006C668F /* SwitchInputCollectionViewCell.xib in Resources */,
 				2907E4B92368D25800946B3F /* InputModal.xib in Resources */,
 				29F29FA2236B8670004F12E7 /* DropdownCollectionViewCell.xib in Resources */,
@@ -737,6 +760,7 @@
 				29BAC5122367A21300A620F4 /* StringConstants.swift in Sources */,
 				294EF30F2370845700EEB3B6 /* SyncView.swift in Sources */,
 				29F4EC562370B1F8001D5CFA /* BasicCollectionViewCell.swift in Sources */,
+				29DB010F2371EE590046E605 /* JourneyDetailsCollectionViewCell.swift in Sources */,
 				29514BD62368AD6F00DC89C4 /* OptionsTableViewCell.swift in Sources */,
 				294EF3122370885100EEB3B6 /* BannerView.swift in Sources */,
 				29514BDF2368AFC100DC89C4 /* BaseViewController.swift in Sources */,

@@ -93,7 +93,7 @@ class HomeViewController: BaseViewController {
     
     // Style gradiant navigation
     private func styleNavigationBar() {
-        setGradiantNavBar(view: navigationBar)
+        setGradiantBackground(view: navigationBar)
         setAppTitle(label: appTitle, darkBackground: true)
         styleBody(label: reachabilityLabel, darkBackground: true)
         styleBody(label: lastSyncLabel, darkBackground: true)

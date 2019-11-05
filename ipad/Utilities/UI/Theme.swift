@@ -104,12 +104,17 @@ extension Theme {
     }
     
     // MARK: Colors
-    // Style a garadiant nav bar
-    public func setGradiantNavBar(view: UIView) {
+    // Gradiant UIView
+    public func setGradiantBackground(view: UIView) {
         setGradientBackground(view: view, colorOne: UIColor(hex: "#0053A4"), colorTwo: UIColor(hex:"#002C71"));
     }
     
-    // Set grediant branckground
+    // Gradiant Navbar
+    public func setGradiantBackground(navigationBar: UINavigationBar) {
+         navigationBar.setGradientBackground(colors: [UIColor(hex:"#002C71"), UIColor(hex: "#0053A4")], startPoint: .bottomRight, endPoint: .bottomLeft)
+     }
+    
+    // Gradiant UIView with custom colors
     public func setGradientBackground(view: UIView, colorOne: UIColor, colorTwo: UIColor) {
         view.insertHorizontalGradient(colorTwo, colorOne)
     }
