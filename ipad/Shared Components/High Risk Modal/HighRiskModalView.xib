@@ -14,7 +14,7 @@
             <rect key="frame" x="0.0" y="0.0" width="713" height="323"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="niq-kQ-Tu7">
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Exclamation Circle" translatesAutoresizingMaskIntoConstraints="NO" id="niq-kQ-Tu7">
                     <rect key="frame" x="24" y="24" width="24" height="24"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="niq-kQ-Tu7" secondAttribute="height" multiplier="1:1" id="KAN-RA-NRN"/>
@@ -28,14 +28,14 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="snX-kK-6LH">
-                    <rect key="frame" x="24" y="72" width="665" height="2"/>
+                    <rect key="frame" x="24" y="72" width="665" height="1"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="2" id="kPB-Uo-oTE"/>
+                        <constraint firstAttribute="height" constant="1" id="kPB-Uo-oTE"/>
                     </constraints>
                 </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You have selected yes for the following option(s):" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aGu-N5-rGj">
-                    <rect key="frame" x="24" y="98" width="665" height="20.5"/>
+                    <rect key="frame" x="24" y="97" width="665" height="20.5"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
@@ -69,8 +69,8 @@
                         <action selector="confirmAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="2k6-cH-8JR"/>
                     </connections>
                 </button>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Is the watercraft/equipment high risk for dressenid mussels or other AIS?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g5x-OE-jKL">
-                    <rect key="frame" x="58" y="142.5" width="470.5" height="18"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Is the watercraft/equipment high risk for dressenid mussels or other AIS?" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g5x-OE-jKL">
+                    <rect key="frame" x="58" y="141.5" width="470.5" height="24"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="18" id="j2R-SW-FKs"/>
                     </constraints>
@@ -78,13 +78,24 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checkIcon" translatesAutoresizingMaskIntoConstraints="NO" id="KgL-Mx-Vgz">
+                    <rect key="frame" x="24" y="141.5" width="34" height="24"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="KgL-Mx-Vgz" secondAttribute="height" multiplier="1:1" id="1E4-sZ-ftd"/>
+                        <constraint firstAttribute="height" constant="24" id="jbP-9J-833"/>
+                    </constraints>
+                </imageView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="PWn-kG-2yw" secondAttribute="trailing" constant="24" id="3l1-VY-zU7"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="PWn-kG-2yw" secondAttribute="trailing" constant="24" id="4dQ-SL-GF4"/>
+                <constraint firstItem="KgL-Mx-Vgz" firstAttribute="centerY" secondItem="g5x-OE-jKL" secondAttribute="centerY" id="5el-Xq-Ded"/>
                 <constraint firstItem="niq-kQ-Tu7" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="24" id="8Ip-1X-lMT"/>
+                <constraint firstItem="KgL-Mx-Vgz" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="24" id="8Yn-GB-8ZP"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="1OK-P4-Oat" secondAttribute="trailing" constant="24" id="AE5-ax-TZd"/>
+                <constraint firstItem="g5x-OE-jKL" firstAttribute="leading" secondItem="KgL-Mx-Vgz" secondAttribute="trailing" constant="10" id="Agv-aH-LGM"/>
+                <constraint firstItem="KgL-Mx-Vgz" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="24" id="CDL-Su-MmA"/>
                 <constraint firstItem="aGu-N5-rGj" firstAttribute="top" secondItem="snX-kK-6LH" secondAttribute="bottom" constant="24" id="KKi-G2-w7Y"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="PWn-kG-2yw" secondAttribute="bottom" constant="24" id="KMN-1f-NrD"/>
                 <constraint firstItem="N4p-hE-b8D" firstAttribute="top" secondItem="1OK-P4-Oat" secondAttribute="bottom" constant="24" id="L0t-mB-otA"/>
@@ -94,6 +105,8 @@
                 <constraint firstItem="g5x-OE-jKL" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="58" id="P7g-mM-zUN"/>
                 <constraint firstItem="N4p-hE-b8D" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="24" id="QDK-nA-RDb"/>
                 <constraint firstItem="g5x-OE-jKL" firstAttribute="top" secondItem="aGu-N5-rGj" secondAttribute="bottom" constant="24" id="RQ3-54-tTS"/>
+                <constraint firstItem="g5x-OE-jKL" firstAttribute="leading" secondItem="KgL-Mx-Vgz" secondAttribute="trailing" id="Th3-nO-bUO"/>
+                <constraint firstItem="g5x-OE-jKL" firstAttribute="top" secondItem="aGu-N5-rGj" secondAttribute="bottom" constant="27" id="UjV-y6-oMe"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="PWn-kG-2yw" secondAttribute="bottom" constant="24" id="WTq-zL-Q2g"/>
                 <constraint firstItem="aGu-N5-rGj" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="24" id="YIG-14-3jo"/>
                 <constraint firstItem="N4p-hE-b8D" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" constant="0.23999999999999999" id="YRV-uU-06e"/>
@@ -102,6 +115,7 @@
                 <constraint firstItem="1OK-P4-Oat" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="24" id="dFl-qC-0F8"/>
                 <constraint firstAttribute="trailing" secondItem="hfH-gs-ASo" secondAttribute="trailing" id="eky-Wf-BoK"/>
                 <constraint firstItem="hfH-gs-ASo" firstAttribute="leading" secondItem="niq-kQ-Tu7" secondAttribute="trailing" constant="18" id="gjG-Sj-Ih2"/>
+                <constraint firstItem="KgL-Mx-Vgz" firstAttribute="top" secondItem="aGu-N5-rGj" secondAttribute="bottom" constant="24" id="leU-tI-9KO"/>
                 <constraint firstItem="g5x-OE-jKL" firstAttribute="top" secondItem="aGu-N5-rGj" secondAttribute="bottom" constant="24" id="m36-ZY-8bn"/>
                 <constraint firstItem="snX-kK-6LH" firstAttribute="top" secondItem="niq-kQ-Tu7" secondAttribute="bottom" constant="24" id="nXw-sI-wvK"/>
                 <constraint firstItem="N4p-hE-b8D" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" constant="24" id="qBA-7o-QEL"/>
@@ -116,10 +130,14 @@
                 <outlet property="backButton" destination="N4p-hE-b8D" id="GZk-cS-D7N"/>
                 <outlet property="bottomDividerView" destination="1OK-P4-Oat" id="6g9-Mm-oba"/>
                 <outlet property="confirmButton" destination="PWn-kG-2yw" id="se3-QW-uQj"/>
-                <outlet property="dividerView" destination="snX-kK-6LH" id="Z8B-eQ-PGR"/>
                 <outlet property="titleLabel" destination="hfH-gs-ASo" id="eRf-jV-9Mr"/>
+                <outlet property="topDividerView" destination="snX-kK-6LH" id="Gnf-1h-ntD"/>
             </connections>
             <point key="canvasLocation" x="383.33333333333337" y="-111.49553571428571"/>
         </view>
     </objects>
+    <resources>
+        <image name="Exclamation Circle" width="166.66667175292969" height="166.66667175292969"/>
+        <image name="checkIcon" width="24" height="24"/>
+    </resources>
 </document>
