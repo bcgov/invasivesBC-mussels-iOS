@@ -8,7 +8,16 @@
 
 import UIKit
 
-public enum FromSection: Int, CaseIterable {
+private enum JourneyDetailsSectionRow {
+    case Header
+    case PreviousWaterBody
+    case DestinationWaterBody
+    case AddPreviousWaterBody
+    case AddDestinationWaterBody
+    case Divider
+}
+
+private enum FromSection: Int, CaseIterable {
     case BasicInformation = 0
     case WatercraftDetails
     case JourneyDetails
@@ -24,6 +33,11 @@ class WatercraftInspectionViewController: BaseViewController {
     // MARK: Constants
     private let collectionCells = [
         "BasicCollectionViewCell",
+        "FormButtonCollectionViewCell",
+        "HeaderCollectionViewCell",
+        "DividerCollectionViewCell",
+        "DestinationWaterBodyCollectionViewCell",
+        "PreviousWaterBodyCollectionViewCell"
     ]
     
     // MARK: Variables
@@ -149,13 +163,33 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
         return collectionView!.dequeueReusableCell(withReuseIdentifier: "BasicCollectionViewCell", for: indexPath as IndexPath) as! BasicCollectionViewCell
     }
     
+    func getHeaderCell(indexPath: IndexPath) -> HeaderCollectionViewCell {
+        return collectionView!.dequeueReusableCell(withReuseIdentifier: "HeaderCollectionViewCell", for: indexPath as IndexPath) as! HeaderCollectionViewCell
+    }
+    
+    func getButtonCell(indexPath: IndexPath) -> FormButtonCollectionViewCell {
+        return collectionView!.dequeueReusableCell(withReuseIdentifier: "FormButtonCollectionViewCell", for: indexPath as IndexPath) as! FormButtonCollectionViewCell
+    }
+    
+    func getDividerCell(indexPath: IndexPath) -> DividerCollectionViewCell {
+        return collectionView!.dequeueReusableCell(withReuseIdentifier: "DividerCollectionViewCell", for: indexPath as IndexPath) as! DividerCollectionViewCell
+    }
+    
+    func getPreviousWaterBodyCell(indexPath: IndexPath) -> PreviousWaterBodyCollectionViewCell {
+        return collectionView!.dequeueReusableCell(withReuseIdentifier: "PreviousWaterBodyCollectionViewCell", for: indexPath as IndexPath) as! PreviousWaterBodyCollectionViewCell
+    }
+    
+    func getDestinationWaterBodyCell(indexPath: IndexPath) -> DestinationWaterBodyCollectionViewCell {
+        return collectionView!.dequeueReusableCell(withReuseIdentifier: "DestinationWaterBodyCollectionViewCell", for: indexPath as IndexPath) as! DestinationWaterBodyCollectionViewCell
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         guard let sectionType = FromSection(rawValue: Int(section)) else {
             return 0
         }
         
         if sectionType == .JourneyDetails {
-            return journeyDetails.previousWaterBodies.count + journeyDetails.destinationWaterBodies.count + 3
+            return journeyDetails.previousWaterBodies.count + journeyDetails.destinationWaterBodies.count + 4
         } else {
             return 1
         }
@@ -197,49 +231,146 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
         }
         switch sectionType {
         case .BasicInformation:
-            let estimatedContentHeight = InputGroupView.estimateBasicCellContentHeight(for: getBasciInfoInputs())
+            let estimatedContentHeight = estimateBasicCellContentHeight(for: getBasciInfoInputs())
             return CGSize(width: self.collectionView.frame.width, height: estimatedContentHeight)
         case .WatercraftDetails:
-            let estimatedContentHeight = InputGroupView.estimateBasicCellContentHeight(for: getWatercraftDetailsInputs())
+            let estimatedContentHeight = estimateBasicCellContentHeight(for: getWatercraftDetailsInputs())
             return CGSize(width: self.collectionView.frame.width, height: estimatedContentHeight)
         case .JourneyDetails:
-            return CGSize(width: self.collectionView.frame.width, height: 230)
+            return estimateJourneyDetailsCellHeight(for: indexPath)
         case .InspectionDetails:
-            let estimatedContentHeight = InputGroupView.estimateBasicCellContentHeight(for: getInspectionDetailsInputs())
+            let estimatedContentHeight = estimateBasicCellContentHeight(for: getInspectionDetailsInputs())
             return CGSize(width: self.collectionView.frame.width, height: estimatedContentHeight)
         case .GeneralComments:
-            let estimatedContentHeight = InputGroupView.estimateBasicCellContentHeight(for: getCommentSectionInputs())
+            let estimatedContentHeight = estimateBasicCellContentHeight(for: getCommentSectionInputs())
             return CGSize(width: self.collectionView.frame.width, height: estimatedContentHeight)
         }
     }
     
     private func getJourneyDetailsCell(for indexPath: IndexPath) -> UICollectionViewCell {
-        
-        if indexPath.row == 0 {
-            // Header cell
+        switch getJourneyDetailsCellType(for: indexPath) {
             
+        case .Header:
+            let cell = getHeaderCell(indexPath: indexPath)
+            cell.setup(with: "Journey Details")
+            return cell
+        case .PreviousWaterBody:
+            let cell = getPreviousWaterBodyCell(indexPath: indexPath)
+            let itemsIndex: Int = indexPath.row - 1
+            cell.setup(with: journeyDetails.previousWaterBodies[itemsIndex])
+            return cell
+        case .DestinationWaterBody:
+            let cell = getDestinationWaterBodyCell(indexPath: indexPath)
+            let itemsIndex: Int = indexPath.row - (journeyDetails.previousWaterBodies.count + 2)
+            cell.setup(with: journeyDetails.destinationWaterBodies[itemsIndex])
+            return cell
+        case .AddPreviousWaterBody:
+            let cell = getButtonCell(indexPath: indexPath)
+            cell.setup(with: "Add Prveious Water Body") {
+                self.journeyDetails.previousWaterBodies.append([])
+                self.collectionView.reloadSections(IndexSet(integer: indexPath.section))
+            }
+            return cell
+        case .AddDestinationWaterBody:
+            let cell = getButtonCell(indexPath: indexPath)
+            cell.setup(with: "Add Destination Water Body") {
+                self.journeyDetails.destinationWaterBodies.append([])
+                self.collectionView.reloadSections(IndexSet(integer: indexPath.section))
+            }
+            return cell
+        case .Divider:
+            return getDividerCell(indexPath: indexPath)
+        }
+    }
+    
+    private func estimateJourneyDetailsCellHeight(for indexPath: IndexPath) -> CGSize {
+        let width = self.collectionView.frame.width
+        switch getJourneyDetailsCellType(for: indexPath) {
+            
+        case .Header:
+            return CGSize(width: width, height: 40)
+        case .PreviousWaterBody:
+            return CGSize(width: width, height: 152)
+        case .DestinationWaterBody:
+            return CGSize(width: width, height: 152)
+        case .AddPreviousWaterBody:
+            return CGSize(width: width, height: 50)
+        case .AddDestinationWaterBody:
+            return CGSize(width: width, height: 50)
+        case .Divider:
+            return CGSize(width: width, height: 10)
+        }
+    }
+    
+    private func getJourneyDetailsCellType(for indexPath: IndexPath) -> JourneyDetailsSectionRow {
+        if indexPath.row == 0 {
+            return .Header
         }
         
         if indexPath.row == journeyDetails.previousWaterBodies.count + 1 {
-            // Add Previous Water Body Button
+            return .AddPreviousWaterBody
+        }
+        
+        if indexPath.row == journeyDetails.previousWaterBodies.count + journeyDetails.destinationWaterBodies.count + 2 {
+            return .AddDestinationWaterBody
+        }
+        
+        if indexPath.row <= journeyDetails.previousWaterBodies.count {
+            return .PreviousWaterBody
+        }
+        
+        if indexPath.row <= (journeyDetails.previousWaterBodies.count + journeyDetails.destinationWaterBodies.count + 1) {
+            return .DestinationWaterBody
+        }
+        
+        return .Divider
+    }
+    
+    // Calculates the estimated height needed to display an array of input items
+    private func estimateBasicCellContentHeight(for items: [InputItem]) -> CGFloat {
+        let assumedCellSpacing: CGFloat = 10
+        var rowHeights: [CGFloat] = []
+        var widthCounter: CGFloat = 0
+        var tempMaxRowItemHeight: CGFloat = 0
+        for (index, item) in items.enumerated()  {
+            var itemWidth: CGFloat = 0
+            // Get Width in terms of screen %
+            switch item.width {
+            case .Full:
+                itemWidth = 100
+            case .Half:
+                itemWidth = 50
+            case .Third:
+                itemWidth = 33.3
+            case .Forth:
+                itemWidth = 25
+            }
+            // If the new row witdh + current row width exceeds 100, item will be in the next row
+            if (widthCounter + (itemWidth + assumedCellSpacing)) > 100 {
+                // Store previous row's max height
+                rowHeights.append(tempMaxRowItemHeight + assumedCellSpacing)
+                tempMaxRowItemHeight = 0
+                widthCounter = 0
+            }
             
-        }
-        
-        if indexPath.row == journeyDetails.previousWaterBodies.count + journeyDetails.destinationWaterBodies.count + 1 {
-            // Add Destination Water Body Button
+            // If current item's height is greater than the max item height for row
+            // set max item hight for row
+            if tempMaxRowItemHeight < item.height {
+                tempMaxRowItemHeight = item.height
+            }
+            // increase width counter
+            widthCounter = widthCounter + itemWidth
             
+            // if its the last item, add rowheight
+            if index == (items.count - 1) {
+                rowHeights.append(tempMaxRowItemHeight)
+            }
         }
         
-        if indexPath.row < journeyDetails.previousWaterBodies.count {
-            // Previous Water Body Cell
+        var computedHeight: CGFloat = 0
+        for rowHeight in rowHeights {
+            computedHeight = computedHeight + rowHeight
         }
-        
-        if indexPath.row == journeyDetails.previousWaterBodies.count + journeyDetails.destinationWaterBodies.count {
-            // Destination Water Body Cell
-        }
-        
-        let cell = getBasicCell(indexPath: indexPath)
-        cell.setup(title: "hello", input: getWatercraftDetailsInputs(), delegate: self)
-        return cell
+        return computedHeight
     }
 }

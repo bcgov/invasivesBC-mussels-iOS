@@ -10,6 +10,6 @@ import Foundation
 
 
 struct JourneyDetailsModel {
-    var previousWaterBodies: [InputItem] = []
-    var destinationWaterBodies: [InputItem] = []
+    var previousWaterBodies: [[InputItem]] = []
+    var destinationWaterBodies: [[InputItem]] = []
 }

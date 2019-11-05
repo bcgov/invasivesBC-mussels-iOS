@@ -90,54 +90,6 @@ class InputGroupView: UIView {
         collection.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
         collection.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
     }
-    
-    // Calculates the estimated height needed to display an array of input items
-    public static func estimateBasicCellContentHeight(for items: [InputItem]) -> CGFloat {
-        let assumedCellSpacing: CGFloat = 10
-        var rowHeights: [CGFloat] = []
-        var widthCounter: CGFloat = 0
-        var tempMaxRowItemHeight: CGFloat = 0
-        for (index, item) in items.enumerated()  {
-            var itemWidth: CGFloat = 0
-            // Get Width in terms of screen %
-            switch item.width {
-            case .Full:
-                itemWidth = 100
-            case .Half:
-                itemWidth = 50
-            case .Third:
-                itemWidth = 33.3
-            case .Forth:
-                itemWidth = 25
-            }
-            // If the new row witdh + current row width exceeds 100, item will be in the next row
-            if (widthCounter + (itemWidth + assumedCellSpacing)) > 100 {
-                // Store previous row's max height
-                rowHeights.append(tempMaxRowItemHeight + assumedCellSpacing)
-                tempMaxRowItemHeight = 0
-                widthCounter = 0
-            }
-            
-            // If current item's height is greater than the max item height for row
-            // set max item hight for row
-            if tempMaxRowItemHeight < item.height {
-                tempMaxRowItemHeight = item.height
-            }
-            // increase width counter
-            widthCounter = widthCounter + itemWidth
-            
-            // if its the last item, add rowheight
-            if index == (items.count - 1) {
-                rowHeights.append(tempMaxRowItemHeight)
-            }
-        }
-        
-        var computedHeight: CGFloat = 0
-        for rowHeight in rowHeights {
-            computedHeight = computedHeight + rowHeight
-        }
-        return computedHeight
-    }
 }
 
 extension InputGroupView: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {

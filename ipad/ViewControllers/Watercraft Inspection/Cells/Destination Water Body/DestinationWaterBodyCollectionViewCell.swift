@@ -1,5 +1,5 @@
 //
-//  HeaderCollectionViewCell.swift
+//  DestinationWaterBodyCollectionViewCell.swift
 //  ipad
 //
 //  Created by Amir Shayegh on 2019-11-05.
@@ -8,11 +8,14 @@
 
 import UIKit
 
-class HeaderCollectionViewCell: UICollectionViewCell {
+class DestinationWaterBodyCollectionViewCell: UICollectionViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+    }
+    
+    func setup(with items: [InputItem]) {
+        
     }
 
 }
