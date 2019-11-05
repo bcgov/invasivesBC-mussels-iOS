@@ -28,6 +28,7 @@ class WatercraftInspectionViewController: BaseViewController {
     
     // MARK: Variables
     private var isEditable: Bool = true
+    private var journeyDetails: JourneyDetailsModel = JourneyDetailsModel()
     
     // MARK: Class Functions
     override func viewDidLoad() {
@@ -116,7 +117,6 @@ class WatercraftInspectionViewController: BaseViewController {
         self.title = "Watercraft Inspection"
         navigation.navigationBar.isTranslucent = false
         navigation.navigationBar.tintColor = .white
-//        navigation.navigationBar.barTintColor = Colors.primary
         navigation.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
         setGradiantBackground(navigationBar: navigation.navigationBar)
         setRightNavButtonTo(type: .save)
@@ -150,11 +150,23 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        guard let sectionType = FromSection(rawValue: Int(section)) else {
+            return 0
+        }
+        
+        if sectionType == .JourneyDetails {
+            return journeyDetails.previousWaterBodies.count + journeyDetails.destinationWaterBodies.count + 3
+        } else {
+            return 1
+        }
+    }
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
         return FromSection.allCases.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let sectionType = FromSection(rawValue: Int(indexPath.row)) else {
+        guard let sectionType = FromSection(rawValue: Int(indexPath.section)) else {
             return UICollectionViewCell()
         }
         switch sectionType {
@@ -167,9 +179,7 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
             cell.setup(title: "Watercraft Details", input: getWatercraftDetailsInputs(), delegate: self)
             return cell
         case .JourneyDetails:
-            let cell = getBasicCell(indexPath: indexPath)
-            cell.setup(title: "hello", input: getWatercraftDetailsInputs(), delegate: self)
-            return cell
+            return getJourneyDetailsCell(for: indexPath)
         case .InspectionDetails:
             let cell = getBasicCell(indexPath: indexPath)
             cell.setup(title: "Inspection Details", input: getInspectionDetailsInputs(), delegate: self)
@@ -182,20 +192,54 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        guard let sectionType = FromSection(rawValue: Int(indexPath.row)) else {
+        guard let sectionType = FromSection(rawValue: Int(indexPath.section)) else {
             return CGSize(width: 0, height: 0)
         }
         switch sectionType {
         case .BasicInformation:
-            return CGSize(width: self.collectionView.frame.width, height: 150)
+            let estimatedContentHeight = InputGroupView.estimateBasicCellContentHeight(for: getBasciInfoInputs())
+            return CGSize(width: self.collectionView.frame.width, height: estimatedContentHeight)
         case .WatercraftDetails:
-            return CGSize(width: self.collectionView.frame.width, height: 230)
+            let estimatedContentHeight = InputGroupView.estimateBasicCellContentHeight(for: getWatercraftDetailsInputs())
+            return CGSize(width: self.collectionView.frame.width, height: estimatedContentHeight)
         case .JourneyDetails:
             return CGSize(width: self.collectionView.frame.width, height: 230)
         case .InspectionDetails:
-            return CGSize(width: self.collectionView.frame.width, height: 230)
+            let estimatedContentHeight = InputGroupView.estimateBasicCellContentHeight(for: getInspectionDetailsInputs())
+            return CGSize(width: self.collectionView.frame.width, height: estimatedContentHeight)
         case .GeneralComments:
-            return CGSize(width: self.collectionView.frame.width, height: 230)
+            let estimatedContentHeight = InputGroupView.estimateBasicCellContentHeight(for: getCommentSectionInputs())
+            return CGSize(width: self.collectionView.frame.width, height: estimatedContentHeight)
         }
+    }
+    
+    private func getJourneyDetailsCell(for indexPath: IndexPath) -> UICollectionViewCell {
+        
+        if indexPath.row == 0 {
+            // Header cell
+            
+        }
+        
+        if indexPath.row == journeyDetails.previousWaterBodies.count + 1 {
+            // Add Previous Water Body Button
+            
+        }
+        
+        if indexPath.row == journeyDetails.previousWaterBodies.count + journeyDetails.destinationWaterBodies.count + 1 {
+            // Add Destination Water Body Button
+            
+        }
+        
+        if indexPath.row < journeyDetails.previousWaterBodies.count {
+            // Previous Water Body Cell
+        }
+        
+        if indexPath.row == journeyDetails.previousWaterBodies.count + journeyDetails.destinationWaterBodies.count {
+            // Destination Water Body Cell
+        }
+        
+        let cell = getBasicCell(indexPath: indexPath)
+        cell.setup(title: "hello", input: getWatercraftDetailsInputs(), delegate: self)
+        return cell
     }
 }

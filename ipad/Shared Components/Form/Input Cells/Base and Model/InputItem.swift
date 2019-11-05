@@ -171,7 +171,7 @@ class DateInput: InputItem {
 class TextAreaInput: InputItem {
     var type: InputItemType = .TextArea
     var width: InputItemWidthSize
-    var height: CGFloat = 150
+    var height: CGFloat = 200
     var key: String
     var value: InputValue
     var header: String
