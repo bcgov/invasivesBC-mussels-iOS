@@ -77,7 +77,7 @@ class FormHelper {
     
     public static func watercraftInspectionPreviousWaterBodyInputs(index: Int, isEditable: Bool? = true) -> [InputItem] {
         var sectionItems: [InputItem] = []
-        let previousWaterBody = DropdownInput(key: "previousWaterBody\(index)", header: "Previous WaterBody", editable: isEditable ?? true, width: .Forth, dropdownItems: getDummyOptions())
+        let previousWaterBody = DropdownInput(key: "previousWaterBody-\(index)", header: "Previous WaterBody", editable: isEditable ?? true, width: .Forth, dropdownItems: getDummyOptions())
         let nearestCity = DropdownInput(key: "previousWaterBody-nearestCity-\(index)", header: "Nearest City", editable: isEditable ?? true, width: .Forth, dropdownItems: getDummyOptions())
         let province = DropdownInput(key: "previousWaterBody-province-\(index)", header: "Province / State", editable: isEditable ?? true, width: .Forth, dropdownItems: getDummyOptions())
         let numberOfDaysOut = TextInput(key: "previousWaterBody-numberOfDaysOut-\(index)", header: "Number of days out of waterbody?", editable: isEditable ?? true, width: .Forth)
@@ -91,7 +91,7 @@ class FormHelper {
     
     public static func watercraftInspectionDestinationWaterBodyInputs(index: Int, isEditable: Bool? = true) -> [InputItem] {
         var sectionItems: [InputItem] = []
-        let destinationWaterBody = DropdownInput(key: "destinationWaterBody\(index)", header: "Destination WaterBody", editable: isEditable ?? true, width: .Third, dropdownItems: getDummyOptions())
+        let destinationWaterBody = DropdownInput(key: "destinationWaterBody-\(index)", header: "Destination WaterBody", editable: isEditable ?? true, width: .Third, dropdownItems: getDummyOptions())
         let nearestCity = DropdownInput(key: "destinationWaterBody-NearestCity-\(index)", header: "Nearest City", editable: isEditable ?? true, width: .Third, dropdownItems: getDummyOptions())
         let province = DropdownInput(key: "destinationWaterBody-province-\(index)", header: "Province / State", editable: isEditable ?? true, width: .Third, dropdownItems: getDummyOptions())
         

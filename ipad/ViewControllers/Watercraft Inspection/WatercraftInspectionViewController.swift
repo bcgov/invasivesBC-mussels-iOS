@@ -43,17 +43,33 @@ class WatercraftInspectionViewController: BaseViewController {
     // MARK: Variables
     private var isEditable: Bool = true
     private var journeyDetails: JourneyDetailsModel = JourneyDetailsModel()
+    private var formResult: [String: Any?] = [String: Any]()
     
     // MARK: Class Functions
     override func viewDidLoad() {
         super.viewDidLoad()
         setNavigationBar(hidden: false, style: UIBarStyle.black)
         setupCollectionView()
+        addListeners()
         style()
+    }
+    
+    private func addListeners() {
+           NotificationCenter.default.addObserver(self, selector: #selector(self.inputItemValueChanged(notification:)), name: .InputItemValueChanged, object: nil)
+    }
+    
+    @objc func inputItemValueChanged(notification: Notification) {
+        guard let item: InputItem = notification.object as? InputItem else {return}
+        formResult[item.key] = item.value.get(type: item.type)
+        print(formResult)
     }
     
     // Navigation bar right button action
     @objc func action(sender: UIBarButtonItem) {
+    }
+    
+    private func refreshJourneyDetails(index: Int) {
+        
     }
     
     private func style() {

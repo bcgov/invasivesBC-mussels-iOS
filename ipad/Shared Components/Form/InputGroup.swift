@@ -39,20 +39,12 @@ class InputGroupView: UIView {
         self.inputDelegate = delegate
         self.createCollectionView()
         self.setupCollectionView()
-        addFildChangeListener()
+        addListeners()
         container.layoutIfNeeded()
     }
     
-    private func addFildChangeListener() {
-        NotificationCenter.default.addObserver(self, selector: #selector(self.inputItemValueChanged(notification:)), name: .InputItemValueChanged, object: nil)
+    private func addListeners() {
         NotificationCenter.default.addObserver(self, selector: #selector(self.screenOrientationChanged(notification:)), name: .screenOrientationChanged, object: nil)
-    }
-    
-    @objc func inputItemValueChanged(notification: Notification) {
-        guard let item: InputItem = notification.object as? InputItem else {
-            return
-        }
-//        print("\(item.value.get(type: item.type) ?? "")")
     }
     
     @objc func screenOrientationChanged(notification: Notification) {
@@ -136,7 +128,6 @@ class InputGroupView: UIView {
         for rowHeight in rowHeights {
             computedHeight = computedHeight + rowHeight
         }
-        print("\(rowHeights.count) rows -> \(computedHeight)")
         return computedHeight
     }
 }

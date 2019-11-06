@@ -9,7 +9,7 @@
 import Foundation
 
 
-struct JourneyDetailsModel {
+class JourneyDetailsModel {
     var previousWaterBodies: [[InputItem]] = []
     var destinationWaterBodies: [[InputItem]] = []
 }
