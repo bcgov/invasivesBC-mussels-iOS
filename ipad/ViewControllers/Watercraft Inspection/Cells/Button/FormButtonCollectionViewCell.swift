@@ -13,11 +13,6 @@ class FormButtonCollectionViewCell: UICollectionViewCell, Theme {
     @IBOutlet weak var button: UIButton!
     var completion: (()-> Void)?
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-    
     @IBAction func buttonAction(_ sender: UIButton) {
         guard let onClick = self.completion else {return}
         return onClick()

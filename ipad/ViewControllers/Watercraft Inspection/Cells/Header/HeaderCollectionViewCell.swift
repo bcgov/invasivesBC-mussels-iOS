@@ -11,11 +11,7 @@ import UIKit
 class HeaderCollectionViewCell: UICollectionViewCell, Theme {
 
     @IBOutlet weak var titleLabel: UILabel!
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-    
+
     func setup(with title: String) {
         self.titleLabel.text = title
         style()

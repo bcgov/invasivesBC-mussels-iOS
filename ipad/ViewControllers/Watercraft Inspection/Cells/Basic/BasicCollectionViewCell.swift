@@ -19,10 +19,10 @@ class BasicCollectionViewCell: UICollectionViewCell, Theme {
         style()
     }
     
-    public func setup(title: String, input Items: [InputItem], delegate: InputDelegate) {
+    public func setup(title: String, input items: [InputItem], delegate: InputDelegate) {
         self.titleLabel.text = title
         let inputGroup: InputGroupView = InputGroupView()
-        inputGroup.initialize(with: Items, delegate: delegate, in: container)
+        inputGroup.initialize(with: items, delegate: delegate, in: container)
     }
     
     private func style() {
