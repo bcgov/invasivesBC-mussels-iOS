@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="ipad9_7" orientation="landscape" layout="fullscreen" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner">
+            <connections>
+                <outlet property="syncModalView" destination="OOE-aE-Ukk" id="8xN-IK-j7s"/>
+                <outlet property="titleLabel" destination="lAe-eE-ou5" id="EoO-Q1-Qid"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OOE-aE-Ukk" userLabel="ModalView">
+                    <rect key="frame" x="312" y="139" width="400" height="390"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Sync Changes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lAe-eE-ou5" userLabel="titleLabel">
+                            <rect key="frame" x="144" y="24" width="111" height="21"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8BS-lx-Aav" userLabel="dividerView">
+                            <rect key="frame" x="16" y="87" width="368" height="1"/>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <constraints>
+                        <constraint firstItem="8BS-lx-Aav" firstAttribute="top" secondItem="lAe-eE-ou5" secondAttribute="bottom" constant="24" id="90s-Gh-boq"/>
+                        <constraint firstItem="8BS-lx-Aav" firstAttribute="leading" secondItem="OOE-aE-Ukk" secondAttribute="leading" constant="16" id="D93-jC-59M"/>
+                        <constraint firstItem="lAe-eE-ou5" firstAttribute="top" secondItem="OOE-aE-Ukk" secondAttribute="top" constant="24" id="F7R-5N-cab"/>
+                        <constraint firstAttribute="height" constant="390" id="ZU2-P0-Fg2"/>
+                        <constraint firstAttribute="width" constant="400" id="c18-4c-xrd"/>
+                        <constraint firstAttribute="trailing" secondItem="8BS-lx-Aav" secondAttribute="trailing" constant="16" id="gpq-fP-Dko"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="OOE-aE-Ukk" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="139" id="5Wf-dB-Q0T"/>
+                <constraint firstItem="OOE-aE-Ukk" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="BJS-Qx-VI0"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <point key="canvasLocation" x="132" y="128"/>
+        </view>
+    </objects>
+</document>
