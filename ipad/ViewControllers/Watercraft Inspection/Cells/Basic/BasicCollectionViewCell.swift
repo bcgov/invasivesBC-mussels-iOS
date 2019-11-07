@@ -25,7 +25,6 @@ class BasicCollectionViewCell: UICollectionViewCell, Theme {
         self.inputGroup?.removeFromSuperview()
         self.titleLabel.text = title
         let inputGroup: InputGroupView = InputGroupView()
-        
         self.inputGroup = inputGroup
         inputGroup.initialize(with: items, delegate: delegate, in: container)
     }

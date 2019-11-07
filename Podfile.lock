@@ -6,11 +6,11 @@ PODS:
   - IQKeyboardManagerSwift (6.5.2)
   - Modal (1.0.1)
   - ReachabilitySwift (5.0.0)
-  - Realm (3.20.0):
-    - Realm/Headers (= 3.20.0)
-  - Realm/Headers (3.20.0)
-  - RealmSwift (3.20.0):
-    - Realm (= 3.20.0)
+  - Realm (3.21.0):
+    - Realm/Headers (= 3.21.0)
+  - Realm/Headers (3.21.0)
+  - RealmSwift (3.21.0):
+    - Realm (= 3.21.0)
   - SingleSignOn (1.0.6):
     - Alamofire (~> 4.7.3)
     - SwiftKeychainWrapper (~> 3.0.1)
@@ -59,8 +59,8 @@ SPEC CHECKSUMS:
   IQKeyboardManagerSwift: c75366f1f19590e8caeae45fcd5815c9289d6099
   Modal: ab2412e5bb9a3b7966338e58b08bca019236ba29
   ReachabilitySwift: 985039c6f7b23a1da463388634119492ff86c825
-  Realm: 8b2ca5bc6479a91f379b6b42b5922e396cd5ba5a
-  RealmSwift: 1949ef26a279e1845bd51d591b9103adfcd121df
+  Realm: 38e9dcb19104b58407167d99f70d4995f7c16023
+  RealmSwift: 3183cc1ad48378fbcd634311b22c0e6c44021152
   SingleSignOn: ea4f43078da8c97b2a3a31783795e6fe83ec97eb
   SwiftKeychainWrapper: 38952a3636320ae61bad3513cadd870929de7a4a
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7

@@ -15,6 +15,7 @@ class PreviousWaterBodyCollectionViewCell: UICollectionViewCell, Theme {
     
     var completion: (()-> Void)?
     var delegate: InputDelegate?
+    weak var inputGroup: UIView?
     
     @IBAction func optionsAction(_ sender: UIButton) {
         guard let onDelete = completion, let delegate = delegate else {return}
@@ -26,7 +27,9 @@ class PreviousWaterBodyCollectionViewCell: UICollectionViewCell, Theme {
     }
     
     func setup(with items: [InputItem], delegate: InputDelegate, onDelete: @escaping ()-> Void) {
+        self.inputGroup?.removeFromSuperview()
         let inputGroup: InputGroupView = InputGroupView()
+        self.inputGroup = inputGroup
         inputGroup.initialize(with: items, delegate: delegate, in: inputGroupContainer)
         completion = onDelete
         self.delegate = delegate
