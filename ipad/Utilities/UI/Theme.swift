@@ -142,6 +142,10 @@ extension Theme {
         addShadow(to: layer, opacity: 08, height: 2)
     }
     
+    public func styleDividerGrey(view: UIView) {
+        view.backgroundColor = Colors.Status.LightGray
+    }
+    
     // MARK: ANIMATIONS
     public func fadeLabelMessage(label: UILabel, tempText: String, delay: Double? = 3) {
         let defaultDelay: Double = 3

@@ -31,7 +31,7 @@ class FormEntryViewController: BaseViewController {
     
     // MARK: Outlet actions
     @IBAction func testAction(_ sender: UIButton) {
-        let syncModal: SyncModalView = SyncModalView.fromNib()
+        let syncModal: SyncView = SyncView.fromNib()
         syncModal.initialize()
 //        Banner.show(message: "hello!!!")
 //        for item in self.inputItems {
