@@ -16,6 +16,7 @@ enum InputItemType {
     case Double
     case Date
     case Switch
+    case TextArea
 }
 
 enum InputItemWidthSize {
@@ -47,6 +48,8 @@ struct InputValue {
             return self.date
         case .Switch:
             return self.boolean
+        case .TextArea:
+            return self.string
         }
     }
     
@@ -64,6 +67,8 @@ struct InputValue {
             self.date = value as? Date
         case .Switch:
             self.boolean = value as? Bool
+        case .TextArea:
+            self.string = value as? String
         }
     }
 }
@@ -90,7 +95,7 @@ class DropdownInput: InputItem {
     var height: CGFloat = 70
     var key: String
     var editable: Bool
-
+    
     var dropdownItems: [DropdownModel] = []
     var header: String
     
@@ -102,6 +107,14 @@ class DropdownInput: InputItem {
         self.editable = editable
         self.width = width ?? .Full
         self.dropdownItems = dropdownItems ?? []
+    }
+    
+    func getValue() -> String? {
+        return self.value.get(type: self.type) as? String ?? nil
+    }
+    
+    func setValue(value: String) {
+        self.value.set(value: value, type: self.type)
     }
 }
 
@@ -121,6 +134,14 @@ class TextInput: InputItem {
         self.header = header
         self.editable = editable
         self.width = width ?? .Full
+    }
+    
+    func getValue() -> String? {
+        return self.value.get(type: self.type) as? String ?? nil
+    }
+    
+    func setValue(value: String) {
+        self.value.set(value: value, type: self.type)
     }
 }
 
@@ -142,6 +163,14 @@ class SwitchInput: InputItem {
         self.editable = editable
         self.width = width ?? .Full
     }
+    
+    func getValue() -> Bool? {
+        return self.value.get(type: self.type) as? Bool ?? nil
+    }
+    
+    func setValue(value: Bool) {
+        self.value.set(value: value, type: self.type)
+    }
 }
 
 class DateInput: InputItem {
@@ -160,5 +189,94 @@ class DateInput: InputItem {
         self.header = header
         self.editable = editable
         self.width = width ?? .Full
+    }
+    
+    func getValue() -> Date? {
+        return self.value.get(type: self.type) as? Date ?? nil
+    }
+    
+    func setValue(value: Date) {
+        self.value.set(value: value, type: self.type)
+    }
+}
+
+class TextAreaInput: InputItem {
+    var type: InputItemType = .TextArea
+    var width: InputItemWidthSize
+    var height: CGFloat = 200
+    var key: String
+    var value: InputValue
+    var header: String
+    var editable: Bool
+    
+    init(key: String, header: String, editable: Bool, value: String? = nil, width: InputItemWidthSize? = .Full) {
+        self.value = InputValue()
+        self.value.set(value: value, type: type)
+        self.key = key
+        self.header = header
+        self.editable = editable
+        self.width = width ?? .Full
+    }
+    
+    func getValue() -> String? {
+        return self.value.get(type: self.type) as? String ?? nil
+    }
+    
+    func setValue(value: String) {
+        self.value.set(value: value, type: self.type)
+    }
+}
+
+class IntegerInput: InputItem {
+    var type: InputItemType = .Int
+    var width: InputItemWidthSize
+    var height: CGFloat = 70
+    var key: String
+    var value: InputValue
+    var header: String
+    var editable: Bool
+    
+    init(key: String, header: String, editable: Bool, value: Int? = nil, width: InputItemWidthSize? = .Full) {
+        self.value = InputValue()
+        self.value.set(value: value, type: type)
+        self.key = key
+        self.header = header
+        self.editable = editable
+        self.width = width ?? .Full
+    }
+    
+    func getValue() -> Int? {
+        return self.value.get(type: self.type) as? Int ?? nil
+    }
+    
+    func setValue(value: Int) {
+        self.value.set(value: value, type: self.type)
+    }
+}
+
+class DoubleInput: InputItem {
+    var type: InputItemType = .Int
+    var width: InputItemWidthSize
+    var height: CGFloat = 70
+    var key: String
+    var value: InputValue
+    var header: String
+    var editable: Bool
+    
+    init(key: String, header: String, editable: Bool, value: Double? = nil, width: InputItemWidthSize? = .Full) {
+        self.value = InputValue()
+        self.value.set(value: value, type: type)
+        self.key = key
+        self.header = header
+        self.editable = editable
+        self.width = width ?? .Full
+    }
+    
+    func getValue() -> Double? {
+        return self.value.get(type: self.type) as? Double ?? nil
+    }
+    
+    func setValue(value: Double) {
+        self.value.set(value: value, type: self.type)
     }
 }
