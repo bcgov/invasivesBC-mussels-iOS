@@ -15,7 +15,8 @@ class InputGroupView: UIView {
         "TextInputCollectionViewCell",
         "DropdownCollectionViewCell",
         "SwitchInputCollectionViewCell",
-        "DateInputCollectionViewCell"
+        "DateInputCollectionViewCell",
+        "TextAreaInputCollectionViewCell"
     ]
     
     // MARK: Variables
@@ -38,20 +39,12 @@ class InputGroupView: UIView {
         self.inputDelegate = delegate
         self.createCollectionView()
         self.setupCollectionView()
-        addFildChangeListener()
+        addListeners()
         container.layoutIfNeeded()
     }
     
-    private func addFildChangeListener() {
-        NotificationCenter.default.addObserver(self, selector: #selector(self.inputItemValueChanged(notification:)), name: .InputItemValueChanged, object: nil)
+    private func addListeners() {
         NotificationCenter.default.addObserver(self, selector: #selector(self.screenOrientationChanged(notification:)), name: .screenOrientationChanged, object: nil)
-    }
-    
-    @objc func inputItemValueChanged(notification: Notification) {
-        guard let item: InputItem = notification.object as? InputItem else {
-            return
-        }
-        print("\(item.value.get(type: item.type) ?? "")")
     }
     
     @objc func screenOrientationChanged(notification: Notification) {
@@ -75,7 +68,7 @@ class InputGroupView: UIView {
         let collection = UICollectionView(frame: CGRect(x: 0, y: 0, width: self.frame.height, height: self.frame.height), collectionViewLayout: layout)
         collection.translatesAutoresizingMaskIntoConstraints = false
         collection.backgroundColor = .clear
-        collection.isScrollEnabled = true
+        collection.isScrollEnabled = false
         self.collectionView = collection
         self.addSubview(collection)
         addCollectionVIewConstraints()
@@ -89,7 +82,56 @@ class InputGroupView: UIView {
         collection.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
         collection.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
     }
+    
+    // Calculates the estimated height needed to display an array of input items
+    public static func estimateContentHeight(for items: [InputItem]) -> CGFloat {
+        let assumedCellSpacing: CGFloat = 10
+        var rowHeights: [CGFloat] = []
+        var widthCounter: CGFloat = 0
+        var tempMaxRowItemHeight: CGFloat = 0
+        for (index, item) in items.enumerated()  {
+            var itemWidth: CGFloat = 0
+            // Get Width in terms of screen %
+            switch item.width {
+            case .Full:
+                itemWidth = 100
+            case .Half:
+                itemWidth = 50
+            case .Third:
+                itemWidth = 33
+            case .Forth:
+                itemWidth = 25
+            }
+            // If the new row witdh + current row width exceeds 100, item will be in the next row
+            if (widthCounter + itemWidth) > 100 {
+                // Store previous row's max height
+                rowHeights.append(tempMaxRowItemHeight + assumedCellSpacing)
+                tempMaxRowItemHeight = 0
+                widthCounter = 0
+            }
+            
+            // If current item's height is greater than the max item height for row
+            // set max item hight for row
+            if tempMaxRowItemHeight < item.height {
+                tempMaxRowItemHeight = item.height
+            }
+            // increase width counter
+            widthCounter = widthCounter + itemWidth
+            
+            // if its the last item, add rowheight
+            if index == (items.count - 1) {
+                rowHeights.append(tempMaxRowItemHeight)
+            }
+        }
+        
+        var computedHeight: CGFloat = 0
+        for rowHeight in rowHeights {
+            computedHeight = computedHeight + rowHeight
+        }
+        return computedHeight
+    }
 }
+
 extension InputGroupView: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     private func setupCollectionView() {
         guard let collectionView = self.collectionView else {return}
@@ -122,6 +164,10 @@ extension InputGroupView: UICollectionViewDataSource, UICollectionViewDelegate, 
         return collectionView!.dequeueReusableCell(withReuseIdentifier: "DateInputCollectionViewCell", for: indexPath as IndexPath) as! DateInputCollectionViewCell
     }
     
+    func getTextAreaInputCell(indexPath: IndexPath) -> TextAreaInputCollectionViewCell {
+        return collectionView!.dequeueReusableCell(withReuseIdentifier: "TextAreaInputCollectionViewCell", for: indexPath as IndexPath) as! TextAreaInputCollectionViewCell
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return inputItems.count
     }
@@ -152,6 +198,10 @@ extension InputGroupView: UICollectionViewDataSource, UICollectionViewDelegate, 
         case .Switch:
             let cell = getSwitchInputCell(indexPath: indexPath)
             cell.setup(with: item as! SwitchInput, delegate: inputDelegate!)
+            return cell
+        case .TextArea:
+            let cell = getTextAreaInputCell(indexPath: indexPath)
+            cell.setup(with: item as! TextAreaInput, delegate: inputDelegate!)
             return cell
         }
     }
