@@ -50,6 +50,10 @@ class HomeViewController: BaseViewController {
         initirialize()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillAppear(animated)
         endReachabilityNotification()

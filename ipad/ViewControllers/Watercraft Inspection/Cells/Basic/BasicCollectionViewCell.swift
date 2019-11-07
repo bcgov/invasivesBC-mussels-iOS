@@ -14,14 +14,19 @@ class BasicCollectionViewCell: UICollectionViewCell, Theme {
     @IBOutlet weak var container: UIView!
     @IBOutlet weak var divider: UIView!
     
+    weak var inputGroup: UIView?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         style()
     }
     
     public func setup(title: String, input items: [InputItem], delegate: InputDelegate) {
+        self.inputGroup?.removeFromSuperview()
         self.titleLabel.text = title
         let inputGroup: InputGroupView = InputGroupView()
+        
+        self.inputGroup = inputGroup
         inputGroup.initialize(with: items, delegate: delegate, in: container)
     }
     

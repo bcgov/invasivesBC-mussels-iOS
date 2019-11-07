@@ -90,7 +90,6 @@ class WatercraftInspectionViewController: BaseViewController {
         self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: type, target: self, action: #selector(self.action(sender:)))
     }
     
-    
 }
 
 //UICollectionViewDelegateFlowLayout
@@ -208,10 +207,8 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
             cell.setup(with: journeyDetails.previousWaterBodies[itemsIndex], delegate: self, onDelete: {
                 self.journeyDetails.previousWaterBodies.remove(at: itemsIndex)
                 self.collectionView.performBatchUpdates({
-                    self.collectionView.deleteItems(at: [indexPath])
                     self.collectionView.reloadSections(IndexSet(integer: indexPath.section))
                 }, completion: nil)
-                self.collectionView.deleteItems(at: [indexPath])
             })
             return cell
         case .DestinationWaterBody:
@@ -220,10 +217,8 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
             cell.setup(with: journeyDetails.destinationWaterBodies[itemsIndex], delegate: self, onDelete: {
                 self.journeyDetails.destinationWaterBodies.remove(at: itemsIndex)
                 self.collectionView.performBatchUpdates({
-                    self.collectionView.deleteItems(at: [indexPath])
                     self.collectionView.reloadSections(IndexSet(integer: indexPath.section))
                 }, completion: nil)
-                self.collectionView.deleteItems(at: [indexPath])
             })
             return cell
         case .AddPreviousWaterBody:
