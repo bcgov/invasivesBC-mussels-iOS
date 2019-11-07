@@ -166,6 +166,9 @@ extension Theme {
     public func styleDivider(view: UIView) {
         view.backgroundColor = Colors.secondary
     }
+    public func styleDividerGrey(view: UIView) {
+        view.backgroundColor = Colors.Status.LightGray
+    }
     
     // MARK: ANIMATIONS
     public func fadeLabelMessage(label: UILabel, tempText: String, delay: Double? = 3) {

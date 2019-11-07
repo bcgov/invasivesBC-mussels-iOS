@@ -34,6 +34,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launch" translatesAutoresizingMaskIntoConstraints="NO" id="Mbs-xL-uYt">
+                                <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                            </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cVa-U7-NGL">
                                 <rect key="frame" x="139" y="292" width="490" height="440"/>
                                 <subviews>
@@ -101,6 +104,10 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="EHi-C8-sfw" firstAttribute="trailing" secondItem="Mbs-xL-uYt" secondAttribute="trailing" id="0Az-X5-sVm"/>
+                            <constraint firstItem="Mbs-xL-uYt" firstAttribute="leading" secondItem="EHi-C8-sfw" secondAttribute="leading" id="1zz-cM-21s"/>
+                            <constraint firstItem="EHi-C8-sfw" firstAttribute="bottom" secondItem="Mbs-xL-uYt" secondAttribute="bottom" id="7Wr-02-f4i"/>
+                            <constraint firstItem="Mbs-xL-uYt" firstAttribute="top" secondItem="EHi-C8-sfw" secondAttribute="top" id="C63-2I-J75"/>
                             <constraint firstItem="cVa-U7-NGL" firstAttribute="centerY" secondItem="djJ-c0-Aw4" secondAttribute="centerY" id="QKY-A8-smk"/>
                             <constraint firstItem="cVa-U7-NGL" firstAttribute="centerX" secondItem="djJ-c0-Aw4" secondAttribute="centerX" id="pHs-ln-0FL"/>
                         </constraints>
@@ -357,5 +364,6 @@
     </scenes>
     <resources>
         <image name="bclogo" width="172" height="148"/>
+        <image name="launch" width="1024" height="768"/>
     </resources>
 </document>
