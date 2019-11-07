@@ -1,5 +1,11 @@
 # Created by https://www.gitignore.io/api/xcode,swift
 
+# Ignore user workspace data
+ipad.xcworkspace/xcuserdata/
+Pods/
+**/Pods/
+**/xcuserdata/
+
 ## Various settings
 *.pbxuser
 !default.pbxuser
@@ -9,7 +15,7 @@
 !default.mode2v3
 *.perspectivev3
 !default.perspectivev3
-xcuserdata
+xcuserdata/
 
 ## Other
 *.xccheckout
