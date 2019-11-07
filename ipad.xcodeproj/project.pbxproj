@@ -88,6 +88,8 @@
 		29F4EC562370B1F8001D5CFA /* BasicCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F4EC542370B1F8001D5CFA /* BasicCollectionViewCell.swift */; };
 		29F4EC572370B1F8001D5CFA /* BasicCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29F4EC552370B1F8001D5CFA /* BasicCollectionViewCell.xib */; };
 		5C82D3D32374A0D400B065BA /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 5C82D3D22374A0D400B065BA /* .gitignore */; };
+		5C82D3D72374AECC00B065BA /* HighRiskModalView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C82D3D52374AECC00B065BA /* HighRiskModalView.xib */; };
+		5C82D3D82374AECC00B065BA /* HighRiskModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C82D3D62374AECC00B065BA /* HighRiskModalView.swift */; };
 		9FB225820DBE019B5CE1031C /* Pods_ipadTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CED730649CF3E43FB1AD51F6 /* Pods_ipadTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -187,6 +189,8 @@
 		29F4EC542370B1F8001D5CFA /* BasicCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicCollectionViewCell.swift; sourceTree = "<group>"; };
 		29F4EC552370B1F8001D5CFA /* BasicCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BasicCollectionViewCell.xib; sourceTree = "<group>"; };
 		5C82D3D22374A0D400B065BA /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		5C82D3D52374AECC00B065BA /* HighRiskModalView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HighRiskModalView.xib; sourceTree = "<group>"; };
+		5C82D3D62374AECC00B065BA /* HighRiskModalView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HighRiskModalView.swift; sourceTree = "<group>"; };
 		5E19532C9F39231DE6E43099 /* Pods_ipad.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ipad.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		654A566D8395B17BDF172F9F /* Pods-ipad.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ipad.release.xcconfig"; path = "Target Support Files/Pods-ipad/Pods-ipad.release.xcconfig"; sourceTree = "<group>"; };
 		763C8716EF742F6764FFE7D7 /* Pods-ipad.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ipad.debug.xcconfig"; path = "Target Support Files/Pods-ipad/Pods-ipad.debug.xcconfig"; sourceTree = "<group>"; };
@@ -290,6 +294,8 @@
 		29514BD22368ACF700DC89C4 /* Shared Components */ = {
 			isa = PBXGroup;
 			children = (
+				5C82D3D42374AECC00B065BA /* High Risk Modal */,
+				29F29F91236B6A0D004F12E7 /* Switcher */,
 				29A97437236FD615006C668F /* Form */,
 				29F29F91236B6A0D004F12E7 /* Switcher */,
 				2907E4B52368D21D00946B3F /* Input Modal */,
@@ -631,6 +637,15 @@
 			path = "TextArea Input";
 			sourceTree = "<group>";
 		};
+		5C82D3D42374AECC00B065BA /* High Risk Modal */ = {
+			isa = PBXGroup;
+			children = (
+				5C82D3D52374AECC00B065BA /* HighRiskModalView.xib */,
+				5C82D3D62374AECC00B065BA /* HighRiskModalView.swift */,
+			);
+			path = "High Risk Modal";
+			sourceTree = "<group>";
+		};
 		718555F643FB0D413A8C0B7B /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -735,6 +750,7 @@
 				29514BD72368AD6F00DC89C4 /* OptionsTableViewCell.xib in Resources */,
 				29F29F93236B6A22004F12E7 /* SwitcherView.xib in Resources */,
 				5C82D3D32374A0D400B065BA /* .gitignore in Resources */,
+				5C82D3D72374AECC00B065BA /* HighRiskModalView.xib in Resources */,
 				29A97434236CDD8F006C668F /* DateInputCollectionViewCell.xib in Resources */,
 				294EF30B2370841B00EEB3B6 /* SyncView.xib in Resources */,
 				29514BDD2368AEE400DC89C4 /* Options.storyboard in Resources */,
@@ -841,6 +857,7 @@
 				2907E4B12368CD6700946B3F /* Dropdown.swift in Sources */,
 				29BAC5192367B34000A620F4 /* Fonts.swift in Sources */,
 				29DB0112237204A90046E605 /* JourneyDetailsModel.swift in Sources */,
+				5C82D3D82374AECC00B065BA /* HighRiskModalView.swift in Sources */,
 				29BAC5102367984000A620F4 /* GradiantView.swift in Sources */,
 				29514BE32368B5AF00DC89C4 /* Notifications.swift in Sources */,
 				29F29FA6236BB541004F12E7 /* BaseInputCell.swift in Sources */,
