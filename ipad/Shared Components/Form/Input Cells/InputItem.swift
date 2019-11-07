@@ -109,12 +109,12 @@ class DropdownInput: InputItem {
         self.dropdownItems = dropdownItems ?? []
     }
     
-    func getValue() -> String {
-        return self.value.get(type: self.type) as? String ?? ""
+    func getValue() -> String? {
+        return self.value.get(type: self.type) as? String ?? nil
     }
     
     func setValue(value: String) {
-        self.value.get(type: self.type)
+        self.value.set(value: value, type: self.type)
     }
 }
 
@@ -136,12 +136,12 @@ class TextInput: InputItem {
         self.width = width ?? .Full
     }
     
-    func getValue() -> String {
-        return self.value.get(type: self.type) as? String ?? ""
+    func getValue() -> String? {
+        return self.value.get(type: self.type) as? String ?? nil
     }
     
     func setValue(value: String) {
-        self.value.get(type: self.type)
+        self.value.set(value: value, type: self.type)
     }
 }
 
@@ -164,12 +164,12 @@ class SwitchInput: InputItem {
         self.width = width ?? .Full
     }
     
-    func getValue() -> Bool {
-        return self.value.get(type: self.type) as? Bool ?? ""
+    func getValue() -> Bool? {
+        return self.value.get(type: self.type) as? Bool ?? nil
     }
     
     func setValue(value: Bool) {
-        self.value.get(type: self.type)
+        self.value.set(value: value, type: self.type)
     }
 }
 
@@ -191,12 +191,12 @@ class DateInput: InputItem {
         self.width = width ?? .Full
     }
     
-    func getValue() -> Date {
-        return self.value.get(type: self.type) as? Date ?? ""
+    func getValue() -> Date? {
+        return self.value.get(type: self.type) as? Date ?? nil
     }
     
     func setValue(value: Date) {
-        self.value.get(type: self.type)
+        self.value.set(value: value, type: self.type)
     }
 }
 
@@ -217,8 +217,15 @@ class TextAreaInput: InputItem {
         self.editable = editable
         self.width = width ?? .Full
     }
+    
+    func getValue() -> String? {
+        return self.value.get(type: self.type) as? String ?? nil
+    }
+    
+    func setValue(value: String) {
+        self.value.set(value: value, type: self.type)
+    }
 }
-
 
 class IntegerInput: InputItem {
     var type: InputItemType = .Int
@@ -236,5 +243,40 @@ class IntegerInput: InputItem {
         self.header = header
         self.editable = editable
         self.width = width ?? .Full
+    }
+    
+    func getValue() -> Int? {
+        return self.value.get(type: self.type) as? Int ?? nil
+    }
+    
+    func setValue(value: Int) {
+        self.value.set(value: value, type: self.type)
+    }
+}
+
+class DoubleInput: InputItem {
+    var type: InputItemType = .Int
+    var width: InputItemWidthSize
+    var height: CGFloat = 70
+    var key: String
+    var value: InputValue
+    var header: String
+    var editable: Bool
+    
+    init(key: String, header: String, editable: Bool, value: Double? = nil, width: InputItemWidthSize? = .Full) {
+        self.value = InputValue()
+        self.value.set(value: value, type: type)
+        self.key = key
+        self.header = header
+        self.editable = editable
+        self.width = width ?? .Full
+    }
+    
+    func getValue() -> Double? {
+        return self.value.get(type: self.type) as? Double ?? nil
+    }
+    
+    func setValue(value: Double) {
+        self.value.set(value: value, type: self.type)
     }
 }
