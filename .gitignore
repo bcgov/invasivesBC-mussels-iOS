@@ -2,9 +2,11 @@
 
 # Ignore user workspace data
 ipad.xcworkspace/xcuserdata/
+ipad.xcworkspace/xcshareddata/
 Pods/
 **/Pods/
 **/xcuserdata/
+**/xcshareddata/
 
 ## Various settings
 *.pbxuser
