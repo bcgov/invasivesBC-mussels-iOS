@@ -31,10 +31,14 @@ class FormEntryViewController: BaseViewController {
     
     // MARK: Outlet actions
     @IBAction func testAction(_ sender: UIButton) {
-        Banner.show(message: "hello!!!")
-        for item in self.inputItems {
-            print(item.value.get(type: item.type) ?? "Not Set")
+        let highRiskModal: HighRiskModalView = HighRiskModalView.fromNib()
+        highRiskModal.initialize {
+            Alert.show(title: "submit clicked", message: "")
         }
+//        Banner.show(message: "hello!!!")
+//        for item in self.inputItems {
+//            print(item.value.get(type: item.type) ?? "Not Set")
+//        }
     }
     
     // MARK: Temporary
