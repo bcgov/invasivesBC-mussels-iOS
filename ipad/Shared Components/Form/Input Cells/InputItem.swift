@@ -95,7 +95,7 @@ class DropdownInput: InputItem {
     var height: CGFloat = 70
     var key: String
     var editable: Bool
-
+    
     var dropdownItems: [DropdownModel] = []
     var header: String
     
@@ -107,6 +107,14 @@ class DropdownInput: InputItem {
         self.editable = editable
         self.width = width ?? .Full
         self.dropdownItems = dropdownItems ?? []
+    }
+    
+    func getValue() -> String {
+        return self.value.get(type: self.type) as? String ?? ""
+    }
+    
+    func setValue(value: String) {
+        self.value.get(type: self.type)
     }
 }
 
@@ -126,6 +134,14 @@ class TextInput: InputItem {
         self.header = header
         self.editable = editable
         self.width = width ?? .Full
+    }
+    
+    func getValue() -> String {
+        return self.value.get(type: self.type) as? String ?? ""
+    }
+    
+    func setValue(value: String) {
+        self.value.get(type: self.type)
     }
 }
 
@@ -147,6 +163,14 @@ class SwitchInput: InputItem {
         self.editable = editable
         self.width = width ?? .Full
     }
+    
+    func getValue() -> Bool {
+        return self.value.get(type: self.type) as? Bool ?? ""
+    }
+    
+    func setValue(value: Bool) {
+        self.value.get(type: self.type)
+    }
 }
 
 class DateInput: InputItem {
@@ -166,6 +190,14 @@ class DateInput: InputItem {
         self.editable = editable
         self.width = width ?? .Full
     }
+    
+    func getValue() -> Date {
+        return self.value.get(type: self.type) as? Date ?? ""
+    }
+    
+    func setValue(value: Date) {
+        self.value.get(type: self.type)
+    }
 }
 
 class TextAreaInput: InputItem {
@@ -178,6 +210,26 @@ class TextAreaInput: InputItem {
     var editable: Bool
     
     init(key: String, header: String, editable: Bool, value: String? = nil, width: InputItemWidthSize? = .Full) {
+        self.value = InputValue()
+        self.value.set(value: value, type: type)
+        self.key = key
+        self.header = header
+        self.editable = editable
+        self.width = width ?? .Full
+    }
+}
+
+
+class IntegerInput: InputItem {
+    var type: InputItemType = .Int
+    var width: InputItemWidthSize
+    var height: CGFloat = 70
+    var key: String
+    var value: InputValue
+    var header: String
+    var editable: Bool
+    
+    init(key: String, header: String, editable: Bool, value: Int? = nil, width: InputItemWidthSize? = .Full) {
         self.value = InputValue()
         self.value.set(value: value, type: type)
         self.key = key

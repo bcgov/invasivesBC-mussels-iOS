@@ -224,7 +224,9 @@
 		1E5D7D492369F1A400707D08 /* Input Cells */ = {
 			isa = PBXGroup;
 			children = (
-				29F29FA7236CA906004F12E7 /* Base and Model */,
+				29F29FA3236B9114004F12E7 /* InputItem.swift */,
+				29F29FA5236BB541004F12E7 /* BaseInputCell.swift */,
+				2975C3762374A29700751E89 /* Number */,
 				29F4EC592370DB72001D5CFA /* TextArea Input */,
 				29A9742F236CBEBA006C668F /* Date Input */,
 				29A9742A236CB588006C668F /* Switch Input */,
@@ -323,6 +325,13 @@
 				2907E4B02368CD6700946B3F /* Dropdown.swift */,
 			);
 			path = Dropdown;
+			sourceTree = "<group>";
+		};
+		2975C3762374A29700751E89 /* Number */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Number;
 			sourceTree = "<group>";
 		};
 		29A9742A236CB588006C668F /* Switch Input */ = {
@@ -573,15 +582,6 @@
 				29F29FA0236B8670004F12E7 /* DropdownCollectionViewCell.xib */,
 			);
 			path = Dropdown;
-			sourceTree = "<group>";
-		};
-		29F29FA7236CA906004F12E7 /* Base and Model */ = {
-			isa = PBXGroup;
-			children = (
-				29F29FA3236B9114004F12E7 /* InputItem.swift */,
-				29F29FA5236BB541004F12E7 /* BaseInputCell.swift */,
-			);
-			path = "Base and Model";
 			sourceTree = "<group>";
 		};
 		29F29FA8236CA925004F12E7 /* Text Input */ = {
