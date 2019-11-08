@@ -98,6 +98,7 @@
 		5C82D3EE2374BD2900B065BA /* ApplicationLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C82D3ED2374BD2800B065BA /* ApplicationLogger.swift */; };
 		5C82D3F02374BECD00B065BA /* ApplicationErrorConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C82D3EF2374BECD00B065BA /* ApplicationErrorConst.swift */; };
 		5C82D3F52374D09000B065BA /* UtilityObjC.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C82D3F32374D09000B065BA /* UtilityObjC.m */; };
+		5C82D3F72375E56400B065BA /* RemoteAPITest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C82D3F62375E56400B065BA /* RemoteAPITest.swift */; };
 		9FB225820DBE019B5CE1031C /* Pods_ipadTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CED730649CF3E43FB1AD51F6 /* Pods_ipadTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -209,6 +210,7 @@
 		5C82D3F22374D08F00B065BA /* ipad-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ipad-Bridging-Header.h"; sourceTree = "<group>"; };
 		5C82D3F32374D09000B065BA /* UtilityObjC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UtilityObjC.m; sourceTree = "<group>"; };
 		5C82D3F42374D09000B065BA /* UtilityObjC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UtilityObjC.h; sourceTree = "<group>"; };
+		5C82D3F62375E56400B065BA /* RemoteAPITest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteAPITest.swift; sourceTree = "<group>"; };
 		5E19532C9F39231DE6E43099 /* Pods_ipad.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ipad.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		654A566D8395B17BDF172F9F /* Pods-ipad.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ipad.release.xcconfig"; path = "Target Support Files/Pods-ipad/Pods-ipad.release.xcconfig"; sourceTree = "<group>"; };
 		763C8716EF742F6764FFE7D7 /* Pods-ipad.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ipad.debug.xcconfig"; path = "Target Support Files/Pods-ipad/Pods-ipad.debug.xcconfig"; sourceTree = "<group>"; };
@@ -520,6 +522,7 @@
 			children = (
 				29CEC93023676425003B21B9 /* ipadTests.swift */,
 				29CEC93223676425003B21B9 /* Info.plist */,
+				5C82D3F62375E56400B065BA /* RemoteAPITest.swift */,
 			);
 			path = ipadTests;
 			sourceTree = "<group>";
@@ -966,6 +969,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5C82D3F72375E56400B065BA /* RemoteAPITest.swift in Sources */,
 				29CEC93123676425003B21B9 /* ipadTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1121,7 +1125,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = YJY3GTSU5J;
+				DEVELOPMENT_TEAM = 224RNFGRZM;
 				INFOPLIST_FILE = ipad/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1143,7 +1147,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = YJY3GTSU5J;
+				DEVELOPMENT_TEAM = 224RNFGRZM;
 				INFOPLIST_FILE = ipad/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1164,7 +1168,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = YJY3GTSU5J;
+				DEVELOPMENT_TEAM = 224RNFGRZM;
 				INFOPLIST_FILE = ipadTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1176,7 +1180,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ipad.app/ipad";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Boilerplate.app/Boilerplate";
 			};
 			name = Debug;
 		};
@@ -1187,7 +1191,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = YJY3GTSU5J;
+				DEVELOPMENT_TEAM = 224RNFGRZM;
 				INFOPLIST_FILE = ipadTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1199,7 +1203,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ipad.app/ipad";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Boilerplate.app/Boilerplate";
 			};
 			name = Release;
 		};

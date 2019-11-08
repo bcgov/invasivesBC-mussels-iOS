@@ -13,6 +13,7 @@ var ApplicationDomain: String = {
     return "ca.bc.pathfinder.invasivesbc.musselsapp"
 }()
 
+var AppFullName: String = "MusselApp"
 public func SetAppName(_ name: String) {
     AppFullName = name
 }

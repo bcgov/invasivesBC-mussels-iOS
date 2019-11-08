@@ -12,8 +12,6 @@ import Alamofire
 typealias RequestHeader = HTTPHeaders
 typealias BodyParameters = Parameters
 
-var AppFullName: String = "MusselApp"
-
 
 typealias NetworkDecodeStatus = (status: Bool, data: Data?, error: Error?)
 

@@ -8,11 +8,21 @@
 
 import Foundation
 
-let remoteURLDev: String = "https://api-dev-invasivesbc.pathfinder.gov.bc.ca/api"
+/**
+  * Remote URL
+ */
+let remoteURL: String = "https://api-dev-invasivesbc.pathfinder.gov.bc.ca/api"
 
+/**
+  * Diffirent EndPoints
+ */
 enum EndPoints: String {
     case none = ""
+    case workflow = "mussels/workflow"
 }
 
+/**
+ * API
+ */
 struct API {
 }
