@@ -21,6 +21,8 @@ target 'ipad' do
   pod 'Extended'
   # Custom Modal 
   pod 'Modal'
+  # Lottie
+  pod 'lottie-ios'
   # Datepicker
   pod 'DatePicker'
   # JSON handler
