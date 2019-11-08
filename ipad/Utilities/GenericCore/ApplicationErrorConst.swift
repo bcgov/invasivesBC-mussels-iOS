@@ -25,6 +25,7 @@ let ApplicationNoLocationInfoError: Int = 2002
 let ApplicationEmptyResponseError = 1003
 let ApplicationCloudError = 1004
 let ApplicationInvalidURLError: Int = 1010
+let ApplicationRemoteStatusError: Int = 1011
 
 let AppUserAlereadyConfirmed: String = "User is already confirmed."
 let AppInfoNotAvailable: String = "N.A."

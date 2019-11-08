@@ -31,7 +31,18 @@ class RemoteAPIManager {
             if let data: Data =  response.result.value {
                 InfoLog("[SUCCESS]")
                 InfoLog("[VALUE] : \n \(data.string)")
-                callback(nil, data)
+                
+                // Check Status
+                let statusCode: Int = response.response?.statusCode ?? 500
+                if statusCode >= 200 && statusCode < 299 {
+                    InfoLog("[SUCCESS] => [STATUS] => \(statusCode)")
+                    callback(nil, data)
+                } else {
+                    InfoLog("[FAIL] => [STATUS] => \(statusCode)")
+                    let error: Error = AppError(code: ApplicationRemoteStatusError, description: RemoteAPIDataErrorMessage)
+                    callback(error, data)
+                }
+                
             } else {
                 InfoLog("[FAIL] - NO DATA RECEIVED")
                 let error: Error = AppError(code: AppErrorNetworkDataError, description: RemoteAPIDataErrorMessage)
@@ -41,7 +52,7 @@ class RemoteAPIManager {
         case .failure(let error):
             ErrorLog("[ERROR = \(url)]")
             ErrorLog("Error: \(error)")
-            callback(error, "".data)
+            callback(error, response.result.value ?? "".data)
             
         }
     }
@@ -69,9 +80,9 @@ class RemoteAPIManager {
                 .responseData(completionHandler: { (response) in
                 self._handleResp(response, url, { (error, info) in
                     if let e: Error = error {
-                        reject(e, nil)
+                        reject(e, info)
                     } else {
-                        resolve(info, nil)
+                        resolve(info, info)
                     }
                 })
             })
@@ -85,9 +96,9 @@ class RemoteAPIManager {
                 .responseData(completionHandler: { (response) in
                 self._handleResp(response, url, { (error, info) in
                     if let e: Error = error {
-                        reject(e, nil)
+                        reject(e, info)
                     } else {
-                        resolve(info, nil)
+                        resolve(info, info)
                     }
                 })
             })
@@ -102,9 +113,9 @@ class RemoteAPIManager {
                 .responseData(completionHandler: { (response) in
                     self._handleResp(response, url, { (error, info) in
                         if let e: Error = error {
-                            reject(e, nil)
+                            reject(e, info)
                         } else {
-                            resolve(info, nil)
+                            resolve(info, info)
                         }
                     })
                 })
