@@ -13,6 +13,9 @@ protocol JSONCodable {
     func json() -> Data
 }
 
+typealias JSONMap = Dictionary<String, Any>
+typealias JSONArray = Array<Any>
+
 extension String: JSONCodable {
     func json() -> Data {
         return self.data(using: .utf8) ?? Data()
@@ -32,10 +35,9 @@ struct VoidResponse: Codable {
 }
 
 typealias PromiseVoidResp = Promise<VoidResponse>
-
 typealias APIMethod = HTTPMethod
 
-class RemoteAPI<R: Codable>: ExpressibleByStringLiteral {
+class RemoteAPI<R>: ExpressibleByStringLiteral {
     typealias Response = R
     typealias StringLiteralType = String
     
@@ -73,7 +75,6 @@ class RemoteAPI<R: Codable>: ExpressibleByStringLiteral {
     internal var _url: String = ""
     internal var _unformattedURL: String = ""
     internal var _promise: Promise<Data>? = nil
-    
     required init(url: String) {
         _url = url
         _unformattedURL = url
@@ -81,6 +82,11 @@ class RemoteAPI<R: Codable>: ExpressibleByStringLiteral {
     
     convenience required init(stringLiteral value: RemoteAPI.StringLiteralType) {
         self.init(url: value)
+    }
+    
+    // Subclass must override this
+    func processData(data: Data, more: Any?) -> (Response?, Any?) {
+        return (nil, more)
     }
     
     
@@ -110,9 +116,13 @@ class RemoteAPI<R: Codable>: ExpressibleByStringLiteral {
             // Success case
             self._promise?.then({ (info, _) in
                 do {
-                    let decoder = JSONDecoder()
-                    let decodedStore = try decoder.decode(Response.self, from: info)
-                    resolve(decodedStore, nil)
+                    // Process req.
+                    let p = self.processData(data: info, more: nil)
+                    if let resp: Response = p.0 {
+                        resolve(resp, nil)
+                    } else {
+                        throw AppError(description: "Unable to process json data")
+                    }
                 } catch (let excp) {
                     
                     if R.self == VoidResponse.self {
@@ -126,7 +136,7 @@ class RemoteAPI<R: Codable>: ExpressibleByStringLiteral {
                         InfoLog("Reason: \(excp)")
                         InfoLog("Des: \(excp.localizedDescription): \((excp as NSError).code)")
                         let error: Error = AppError(code: ApplicationJSONParsingError, description:ApplicationJSONParsingErrorMessage , userInfo: nil)
-                        reject(error, nil)
+                        reject(error, info)
                     }
                     
                 }
@@ -171,6 +181,60 @@ class RemoteAPI<R: Codable>: ExpressibleByStringLiteral {
     
     
 }
+
+
+extension RemoteAPI where R == JSONMap {
+    func processData(data: Data, more: Any?) -> (JSONMap?, Any?) {
+        do {
+            let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? JSONMap
+            return (json, more)
+        } catch let excp {
+            InfoLog("JSON Parsing Fail")
+            InfoLog("Reason: \(excp)")
+            InfoLog("Des: \(excp.localizedDescription): \((excp as NSError).code)")
+            return (nil, more)
+        }
+        
+    }
+}
+
+extension RemoteAPI where R == JSONArray {
+    func processData(data: Data, more: Any?) -> (JSONArray?, Any?) {
+        do {
+            let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? JSONArray
+            return (json, more)
+        } catch let excp {
+            InfoLog("JSON Parsing Fail")
+            InfoLog("Reason: \(excp)")
+            InfoLog("Des: \(excp.localizedDescription): \((excp as NSError).code)")
+            return (nil, more)
+        }
+        
+    }
+}
+
+extension RemoteAPI where R == Data {
+    func processData(data: Data, more: Any?) -> (Data?, Any?) {
+        return (data, more)
+    }
+}
+
+class RemoteCodableAPI<R: Codable>: RemoteAPI<R> {
+    override func processData(data: Data, more: Any?) -> (R?, Any?) {
+        do {
+            let decoder = JSONDecoder()
+            let decodedStore: R = try decoder.decode(R.self, from: data)
+            return (decodedStore, more)
+        } catch let excp {
+            InfoLog("JSON Parsing Fail")
+            InfoLog("Reason: \(excp)")
+            InfoLog("Des: \(excp.localizedDescription): \((excp as NSError).code)")
+            return (nil, more)
+        }
+    }
+}
+
+
 
 
 
