@@ -80,6 +80,12 @@ class FormEntryViewController: BaseViewController {
         let switch3 =  SwitchInput(key: "switch3", header: "Switch 3", editable: true, width: .Forth)
         let switch4 =  SwitchInput(key: "switch4", header: "Switch 4", editable: true, width: .Forth)
         
+        // Radio Switch
+        let rs1 = RadioSwitchInput(key: "radioSwirch1", header: "Switch Radio", editable: true, width: .Forth)
+        
+        // Double Input
+        let dbi1 = DoubleInput(key: "doubleInput1", header: "Double", editable: true, width: .Forth)
+        
         self.inputItems.append(drodownItem1)
         self.inputItems.append(drodownItem2)
         self.inputItems.append(drodownItem3)
@@ -100,6 +106,9 @@ class FormEntryViewController: BaseViewController {
         self.inputItems.append(switch2)
         self.inputItems.append(switch3)
         self.inputItems.append(switch4)
+        
+        self.inputItems.append(rs1)
+        self.inputItems.append(dbi1)
     }
     
 }

@@ -16,7 +16,9 @@ class InputGroupView: UIView {
         "DropdownCollectionViewCell",
         "SwitchInputCollectionViewCell",
         "DateInputCollectionViewCell",
-        "TextAreaInputCollectionViewCell"
+        "TextAreaInputCollectionViewCell",
+        "RadioSwitchInputCollectionViewCell",
+        "DoubleInputCollectionViewCell"
     ]
     
     // MARK: Variables
@@ -168,6 +170,14 @@ extension InputGroupView: UICollectionViewDataSource, UICollectionViewDelegate, 
         return collectionView!.dequeueReusableCell(withReuseIdentifier: "TextAreaInputCollectionViewCell", for: indexPath as IndexPath) as! TextAreaInputCollectionViewCell
     }
     
+    func getRadioSwitchInputCell(indexPath: IndexPath) -> RadioSwitchInputCollectionViewCell {
+        return collectionView!.dequeueReusableCell(withReuseIdentifier: "RadioSwitchInputCollectionViewCell", for: indexPath as IndexPath) as! RadioSwitchInputCollectionViewCell
+    }
+    
+    func getDoubleInputCell(indexPath: IndexPath) -> DoubleInputCollectionViewCell {
+        return collectionView!.dequeueReusableCell(withReuseIdentifier: "DoubleInputCollectionViewCell", for: indexPath as IndexPath) as! DoubleInputCollectionViewCell
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return inputItems.count
     }
@@ -188,8 +198,8 @@ extension InputGroupView: UICollectionViewDataSource, UICollectionViewDelegate, 
             cell.setup(with: item as! TextInput, delegate: inputDelegate!)
             return cell
         case .Double:
-            let cell = getTextInputCell(indexPath: indexPath)
-            cell.setup(with: item as! TextInput, delegate: inputDelegate!)
+            let cell = getDoubleInputCell(indexPath: indexPath)
+            cell.setup(with: item as! DoubleInput, delegate: inputDelegate!)
             return cell
         case .Date:
             let cell = getDateInputCell(indexPath: indexPath)
@@ -202,6 +212,10 @@ extension InputGroupView: UICollectionViewDataSource, UICollectionViewDelegate, 
         case .TextArea:
             let cell = getTextAreaInputCell(indexPath: indexPath)
             cell.setup(with: item as! TextAreaInput, delegate: inputDelegate!)
+            return cell
+        case .RadioSwitch:
+            let cell = getRadioSwitchInputCell(indexPath: indexPath)
+            cell.setup(with: item as! RadioSwitchInput, delegate: inputDelegate!)
             return cell
         }
     }

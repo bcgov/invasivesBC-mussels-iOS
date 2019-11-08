@@ -17,6 +17,7 @@ enum InputItemType {
     case Date
     case Switch
     case TextArea
+    case RadioSwitch
 }
 
 enum InputItemWidthSize {
@@ -50,6 +51,8 @@ struct InputValue {
             return self.boolean
         case .TextArea:
             return self.string
+        case .RadioSwitch:
+            return self.boolean
         }
     }
     
@@ -69,6 +72,8 @@ struct InputValue {
             self.boolean = value as? Bool
         case .TextArea:
             self.string = value as? String
+        case .RadioSwitch:
+            self.boolean = value as? Bool
         }
     }
 }
@@ -113,7 +118,7 @@ class DropdownInput: InputItem {
         return self.value.get(type: self.type) as? String ?? nil
     }
     
-    func setValue(value: String) {
+    func setValue(value: String?) {
         self.value.set(value: value, type: self.type)
     }
 }
@@ -140,11 +145,10 @@ class TextInput: InputItem {
         return self.value.get(type: self.type) as? String ?? nil
     }
     
-    func setValue(value: String) {
+    func setValue(value: String?) {
         self.value.set(value: value, type: self.type)
     }
 }
-
 
 class SwitchInput: InputItem {
     var type: InputItemType = .Switch
@@ -168,7 +172,7 @@ class SwitchInput: InputItem {
         return self.value.get(type: self.type) as? Bool ?? nil
     }
     
-    func setValue(value: Bool) {
+    func setValue(value: Bool?) {
         self.value.set(value: value, type: self.type)
     }
 }
@@ -195,7 +199,7 @@ class DateInput: InputItem {
         return self.value.get(type: self.type) as? Date ?? nil
     }
     
-    func setValue(value: Date) {
+    func setValue(value: Date?) {
         self.value.set(value: value, type: self.type)
     }
 }
@@ -222,7 +226,7 @@ class TextAreaInput: InputItem {
         return self.value.get(type: self.type) as? String ?? nil
     }
     
-    func setValue(value: String) {
+    func setValue(value: String?) {
         self.value.set(value: value, type: self.type)
     }
 }
@@ -249,13 +253,13 @@ class IntegerInput: InputItem {
         return self.value.get(type: self.type) as? Int ?? nil
     }
     
-    func setValue(value: Int) {
+    func setValue(value: Int?) {
         self.value.set(value: value, type: self.type)
     }
 }
 
 class DoubleInput: InputItem {
-    var type: InputItemType = .Int
+    var type: InputItemType = .Double
     var width: InputItemWidthSize
     var height: CGFloat = 70
     var key: String
@@ -276,7 +280,34 @@ class DoubleInput: InputItem {
         return self.value.get(type: self.type) as? Double ?? nil
     }
     
-    func setValue(value: Double) {
+    func setValue(value: Double?) {
+        self.value.set(value: value, type: self.type)
+    }
+}
+
+class RadioSwitchInput: InputItem {
+    var type: InputItemType = .RadioSwitch
+    var width: InputItemWidthSize
+    var height: CGFloat = 70
+    var key: String
+    var value: InputValue
+    var header: String
+    var editable: Bool
+    
+    init(key: String, header: String, editable: Bool, value: Bool? = nil, width: InputItemWidthSize? = .Full) {
+        self.value = InputValue()
+        self.value.set(value: value, type: type)
+        self.key = key
+        self.header = header
+        self.editable = editable
+        self.width = width ?? .Full
+    }
+    
+    func getValue() -> Bool? {
+        return self.value.get(type: self.type) as? Bool ?? nil
+    }
+    
+    func setValue(value: Bool?) {
         self.value.set(value: value, type: self.type)
     }
 }

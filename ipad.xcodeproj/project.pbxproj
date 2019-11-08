@@ -19,6 +19,9 @@
 		294EF3142370885B00EEB3B6 /* BannerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 294EF3132370885B00EEB3B6 /* BannerView.xib */; };
 		294EF3162370888600EEB3B6 /* Banner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294EF3152370888600EEB3B6 /* Banner.swift */; };
 		294EF31923708A2100EEB3B6 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294EF31823708A2100EEB3B6 /* API.swift */; };
+		295051092374D764000FBD6E /* DoubleInputCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 295051072374D764000FBD6E /* DoubleInputCollectionViewCell.swift */; };
+		2950510A2374D764000FBD6E /* DoubleInputCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 295051082374D764000FBD6E /* DoubleInputCollectionViewCell.xib */; };
+		2950510D2374DFF7000FBD6E /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2950510C2374DFF7000FBD6E /* StringExtension.swift */; };
 		29514BD62368AD6F00DC89C4 /* OptionsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29514BD42368AD6F00DC89C4 /* OptionsTableViewCell.swift */; };
 		29514BD72368AD6F00DC89C4 /* OptionsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29514BD52368AD6F00DC89C4 /* OptionsTableViewCell.xib */; };
 		29514BD92368ADB100DC89C4 /* OptionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29514BD82368ADB100DC89C4 /* OptionType.swift */; };
@@ -33,6 +36,8 @@
 		29514BED2368CAAA00DC89C4 /* Dropdown.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 29514BEC2368CAAA00DC89C4 /* Dropdown.storyboard */; };
 		29514BF02368CB5D00DC89C4 /* DropdownTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29514BEE2368CB5D00DC89C4 /* DropdownTableViewCell.swift */; };
 		29514BF12368CB5D00DC89C4 /* DropdownTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29514BEF2368CB5D00DC89C4 /* DropdownTableViewCell.xib */; };
+		296237D62374B6B400032BB5 /* RadioSwitchInputCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 296237D42374B6B400032BB5 /* RadioSwitchInputCollectionViewCell.swift */; };
+		296237D72374B6B400032BB5 /* RadioSwitchInputCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 296237D52374B6B400032BB5 /* RadioSwitchInputCollectionViewCell.xib */; };
 		29A9742D236CB59F006C668F /* SwitchInputCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A9742B236CB59F006C668F /* SwitchInputCollectionViewCell.swift */; };
 		29A9742E236CB59F006C668F /* SwitchInputCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29A9742C236CB59F006C668F /* SwitchInputCollectionViewCell.xib */; };
 		29A97433236CDD8F006C668F /* DateInputCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A97431236CDD8F006C668F /* DateInputCollectionViewCell.swift */; };
@@ -116,6 +121,9 @@
 		294EF3132370885B00EEB3B6 /* BannerView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BannerView.xib; sourceTree = "<group>"; };
 		294EF3152370888600EEB3B6 /* Banner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Banner.swift; sourceTree = "<group>"; };
 		294EF31823708A2100EEB3B6 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		295051072374D764000FBD6E /* DoubleInputCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleInputCollectionViewCell.swift; sourceTree = "<group>"; };
+		295051082374D764000FBD6E /* DoubleInputCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DoubleInputCollectionViewCell.xib; sourceTree = "<group>"; };
+		2950510C2374DFF7000FBD6E /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		29514BD42368AD6F00DC89C4 /* OptionsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsTableViewCell.swift; sourceTree = "<group>"; };
 		29514BD52368AD6F00DC89C4 /* OptionsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OptionsTableViewCell.xib; sourceTree = "<group>"; };
 		29514BD82368ADB100DC89C4 /* OptionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionType.swift; sourceTree = "<group>"; };
@@ -130,6 +138,8 @@
 		29514BEC2368CAAA00DC89C4 /* Dropdown.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Dropdown.storyboard; sourceTree = "<group>"; };
 		29514BEE2368CB5D00DC89C4 /* DropdownTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropdownTableViewCell.swift; sourceTree = "<group>"; };
 		29514BEF2368CB5D00DC89C4 /* DropdownTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DropdownTableViewCell.xib; sourceTree = "<group>"; };
+		296237D42374B6B400032BB5 /* RadioSwitchInputCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioSwitchInputCollectionViewCell.swift; sourceTree = "<group>"; };
+		296237D52374B6B400032BB5 /* RadioSwitchInputCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RadioSwitchInputCollectionViewCell.xib; sourceTree = "<group>"; };
 		29A9742B236CB59F006C668F /* SwitchInputCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchInputCollectionViewCell.swift; sourceTree = "<group>"; };
 		29A9742C236CB59F006C668F /* SwitchInputCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SwitchInputCollectionViewCell.xib; sourceTree = "<group>"; };
 		29A97431236CDD8F006C668F /* DateInputCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateInputCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -236,7 +246,9 @@
 			children = (
 				29F29FA3236B9114004F12E7 /* InputItem.swift */,
 				29F29FA5236BB541004F12E7 /* BaseInputCell.swift */,
-				2975C3762374A29700751E89 /* Number */,
+				296237D32374B69800032BB5 /* Radio Switch Input */,
+				296237D22374B69100032BB5 /* Double Input */,
+				296237D12374B68000032BB5 /* Integer Input */,
 				29F4EC592370DB72001D5CFA /* TextArea Input */,
 				29A9742F236CBEBA006C668F /* Date Input */,
 				29A9742A236CB588006C668F /* Switch Input */,
@@ -291,6 +303,14 @@
 			path = API;
 			sourceTree = "<group>";
 		};
+		2950510B2374DFAB000FBD6E /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				2950510C2374DFF7000FBD6E /* StringExtension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		29514BD22368ACF700DC89C4 /* Shared Components */ = {
 			isa = PBXGroup;
 			children = (
@@ -338,11 +358,29 @@
 			path = Dropdown;
 			sourceTree = "<group>";
 		};
-		2975C3762374A29700751E89 /* Number */ = {
+		296237D12374B68000032BB5 /* Integer Input */ = {
 			isa = PBXGroup;
 			children = (
 			);
-			path = Number;
+			path = "Integer Input";
+			sourceTree = "<group>";
+		};
+		296237D22374B69100032BB5 /* Double Input */ = {
+			isa = PBXGroup;
+			children = (
+				295051072374D764000FBD6E /* DoubleInputCollectionViewCell.swift */,
+				295051082374D764000FBD6E /* DoubleInputCollectionViewCell.xib */,
+			);
+			path = "Double Input";
+			sourceTree = "<group>";
+		};
+		296237D32374B69800032BB5 /* Radio Switch Input */ = {
+			isa = PBXGroup;
+			children = (
+				296237D42374B6B400032BB5 /* RadioSwitchInputCollectionViewCell.swift */,
+				296237D52374B6B400032BB5 /* RadioSwitchInputCollectionViewCell.xib */,
+			);
+			path = "Radio Switch Input";
 			sourceTree = "<group>";
 		};
 		29A9742A236CB588006C668F /* Switch Input */ = {
@@ -384,6 +422,7 @@
 		29BAC4FC23676C2300A620F4 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				2950510B2374DFAB000FBD6E /* Extensions */,
 				29E4BBF4237221D40079475F /* Form Helper */,
 				294EF31723708A1700EEB3B6 /* API */,
 				29BAC50723676FD000A620F4 /* UI */,
@@ -755,6 +794,7 @@
 				29514BDD2368AEE400DC89C4 /* Options.storyboard in Resources */,
 				29F29FAC236CA948004F12E7 /* TextInputCollectionViewCell.xib in Resources */,
 				29CEC92623676425003B21B9 /* LaunchScreen.storyboard in Resources */,
+				2950510A2374D764000FBD6E /* DoubleInputCollectionViewCell.xib in Resources */,
 				29E4BBE92372120F0079475F /* DividerCollectionViewCell.xib in Resources */,
 				29A9742E236CB59F006C668F /* SwitchInputCollectionViewCell.xib in Resources */,
 				2907E4B92368D25800946B3F /* InputModal.xib in Resources */,
@@ -767,6 +807,7 @@
 				29DB010A2370EFD60046E605 /* TextAreaInputCollectionViewCell.xib in Resources */,
 				29F4EC572370B1F8001D5CFA /* BasicCollectionViewCell.xib in Resources */,
 				29CEC92323676425003B21B9 /* Assets.xcassets in Resources */,
+				296237D72374B6B400032BB5 /* RadioSwitchInputCollectionViewCell.xib in Resources */,
 				29CEC92123676424003B21B9 /* Main.storyboard in Resources */,
 				29514BED2368CAAA00DC89C4 /* Dropdown.storyboard in Resources */,
 			);
@@ -860,6 +901,7 @@
 				29BAC5102367984000A620F4 /* GradiantView.swift in Sources */,
 				29514BE32368B5AF00DC89C4 /* Notifications.swift in Sources */,
 				29F29FA6236BB541004F12E7 /* BaseInputCell.swift in Sources */,
+				295051092374D764000FBD6E /* DoubleInputCollectionViewCell.swift in Sources */,
 				29F29FA1236B8670004F12E7 /* DropdownCollectionViewCell.swift in Sources */,
 				29514BD92368ADB100DC89C4 /* OptionType.swift in Sources */,
 				29BAC5122367A21300A620F4 /* StringConstants.swift in Sources */,
@@ -897,6 +939,7 @@
 				29BAC5172367B12300A620F4 /* Colors.swift in Sources */,
 				294EF31923708A2100EEB3B6 /* API.swift in Sources */,
 				2907E4BB2368FEA500946B3F /* FormEntryViewController.swift in Sources */,
+				296237D62374B6B400032BB5 /* RadioSwitchInputCollectionViewCell.swift in Sources */,
 				29A9743B2370042E006C668F /* Storage.swift in Sources */,
 				29F29F98236B6B9C004F12E7 /* SwitcherCollectionViewCell.swift in Sources */,
 				294EF3162370888600EEB3B6 /* Banner.swift in Sources */,
@@ -906,6 +949,7 @@
 				29BAC5152367AD7D00A620F4 /* AutoSync.swift in Sources */,
 				2907E4B42368CE3600946B3F /* PopoverSize.swift in Sources */,
 				29BAC51C2367B5B500A620F4 /* RealmRequests.swift in Sources */,
+				2950510D2374DFF7000FBD6E /* StringExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
