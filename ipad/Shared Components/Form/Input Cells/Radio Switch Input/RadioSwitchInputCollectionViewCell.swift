@@ -32,7 +32,6 @@ class RadioSwitchInputCollectionViewCell: BaseInputCell<RadioSwitchInput> {
     }
     
     private func addGestureRecognizers() {
-        
         self.yesImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action:  #selector(self.selectedYes)))
         self.yesLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action:  #selector(self.selectedYes)))
         self.yesView.addGestureRecognizer(UITapGestureRecognizer(target: self, action:  #selector(self.selectedYes)))
@@ -52,6 +51,8 @@ class RadioSwitchInputCollectionViewCell: BaseInputCell<RadioSwitchInput> {
     }
     
     func set(to on: Bool?) {
+        guard let model = self.model else {return}
+        model.setValue(value: on)
         setYes(on: false)
         setNo(on: false)
         if let yesSelected = on {

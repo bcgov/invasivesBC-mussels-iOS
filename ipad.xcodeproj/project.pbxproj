@@ -58,6 +58,8 @@
 		29BAC5192367B34000A620F4 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29BAC5182367B34000A620F4 /* Fonts.swift */; };
 		29BAC51C2367B5B500A620F4 /* RealmRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29BAC51B2367B5B500A620F4 /* RealmRequests.swift */; };
 		29BAC51E2367B6FA00A620F4 /* BaseRealmObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29BAC51D2367B6FA00A620F4 /* BaseRealmObject.swift */; };
+		29CE5E1C2375E48000C54F96 /* ConditionalInputCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29CE5E1A2375E48000C54F96 /* ConditionalInputCollectionViewCell.swift */; };
+		29CE5E1D2375E48000C54F96 /* ConditionalInputCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29CE5E1B2375E48000C54F96 /* ConditionalInputCollectionViewCell.xib */; };
 		29CEC91A23676424003B21B9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29CEC91923676424003B21B9 /* AppDelegate.swift */; };
 		29CEC91C23676424003B21B9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29CEC91B23676424003B21B9 /* SceneDelegate.swift */; };
 		29CEC91E23676424003B21B9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29CEC91D23676424003B21B9 /* ViewController.swift */; };
@@ -162,6 +164,8 @@
 		29BAC5182367B34000A620F4 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 		29BAC51B2367B5B500A620F4 /* RealmRequests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmRequests.swift; sourceTree = "<group>"; };
 		29BAC51D2367B6FA00A620F4 /* BaseRealmObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseRealmObject.swift; sourceTree = "<group>"; };
+		29CE5E1A2375E48000C54F96 /* ConditionalInputCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConditionalInputCollectionViewCell.swift; sourceTree = "<group>"; };
+		29CE5E1B2375E48000C54F96 /* ConditionalInputCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConditionalInputCollectionViewCell.xib; sourceTree = "<group>"; };
 		29CEC91623676424003B21B9 /* Boilerplate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Boilerplate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		29CEC91923676424003B21B9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		29CEC91B23676424003B21B9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -250,6 +254,7 @@
 			children = (
 				29F29FA3236B9114004F12E7 /* InputItem.swift */,
 				29F29FA5236BB541004F12E7 /* BaseInputCell.swift */,
+				29CE5E192375E44A00C54F96 /* Conditional Input */,
 				296237D32374B69800032BB5 /* Radio Switch Input */,
 				296237D22374B69100032BB5 /* Double Input */,
 				296237D12374B68000032BB5 /* Integer Input */,
@@ -498,6 +503,15 @@
 				29BAC51D2367B6FA00A620F4 /* BaseRealmObject.swift */,
 			);
 			path = Realm;
+			sourceTree = "<group>";
+		};
+		29CE5E192375E44A00C54F96 /* Conditional Input */ = {
+			isa = PBXGroup;
+			children = (
+				29CE5E1A2375E48000C54F96 /* ConditionalInputCollectionViewCell.swift */,
+				29CE5E1B2375E48000C54F96 /* ConditionalInputCollectionViewCell.xib */,
+			);
+			path = "Conditional Input";
 			sourceTree = "<group>";
 		};
 		29CEC90D23676424003B21B9 = {
@@ -817,6 +831,7 @@
 				296237D72374B6B400032BB5 /* RadioSwitchInputCollectionViewCell.xib in Resources */,
 				29CEC92123676424003B21B9 /* Main.storyboard in Resources */,
 				29514BED2368CAAA00DC89C4 /* Dropdown.storyboard in Resources */,
+				29CE5E1D2375E48000C54F96 /* ConditionalInputCollectionViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -943,6 +958,7 @@
 				29514BE12368B4BE00DC89C4 /* SettingsConstants.swift in Sources */,
 				29DB0116237206D30046E605 /* HeaderCollectionViewCell.swift in Sources */,
 				29514BDB2368AED600DC89C4 /* OptionsViewController.swift in Sources */,
+				29CE5E1C2375E48000C54F96 /* ConditionalInputCollectionViewCell.swift in Sources */,
 				29F4EC512370B007001D5CFA /* WatercraftInspectionViewController.swift in Sources */,
 				29BAC5172367B12300A620F4 /* Colors.swift in Sources */,
 				294EF31923708A2100EEB3B6 /* API.swift in Sources */,

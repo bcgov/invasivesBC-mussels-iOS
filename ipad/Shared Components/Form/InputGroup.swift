@@ -26,11 +26,14 @@ class InputGroupView: UIView {
     private weak var collectionView: UICollectionView? = nil
     private var inputDelegate: InputDelegate? = nil
     private var inputItems: [InputItem] = []
+    private var displayableInputItems: [InputItem] = []
+    private var dependencyKeys: [String] = []
     
     public func initialize(with Items: [InputItem], delegate: InputDelegate, in container: UIView) {
         container.addSubview(self)
         self.addConstraints(for: container)
         self.inputItems = Items
+        self.setDisplayableItems()
         self.inputDelegate = delegate
         self.createCollectionView()
         self.setupCollectionView()
@@ -38,8 +41,40 @@ class InputGroupView: UIView {
         container.layoutIfNeeded()
     }
     
+    private func setDisplayableItems() {
+        displayableInputItems = []
+        dependencyKeys = []
+        for item in inputItems {
+            if let dependency = item.dependency {
+                self.dependencyKeys.append(dependency.item.key)
+                if(!dependency.isSatisfied()) {
+                    continue
+                } else {
+                    self.displayableInputItems.append(item)
+                }
+            } else {
+                self.displayableInputItems.append(item)
+            }
+        }
+    }
+    
     private func addListeners() {
         NotificationCenter.default.addObserver(self, selector: #selector(self.screenOrientationChanged(notification:)), name: .screenOrientationChanged, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.inputItemValueChanged(notification:)), name: .InputItemValueChanged, object: nil)
+    }
+    
+    @objc func inputItemValueChanged(notification: Notification) {
+        guard let item: InputItem = notification.object as? InputItem else {return}
+        if dependencyKeys.contains(item.key) {
+            self.setDisplayableItems()
+            self.collectionView?.performBatchUpdates({
+                 let indexSet = IndexSet(integersIn: 0...0)
+                self.collectionView?.reloadSections(indexSet)
+            }, completion: { (done) in
+                NotificationCenter.default.post(name: .ShouldResizeInputGroup, object: self)
+            })
+            
+        }
     }
     
     @objc func screenOrientationChanged(notification: Notification) {
@@ -84,6 +119,11 @@ class InputGroupView: UIView {
         var widthCounter: CGFloat = 0
         var tempMaxRowItemHeight: CGFloat = 0
         for (index, item) in items.enumerated()  {
+            /*
+            if let dependency = item.dependency, !dependency.isSatisfied() {
+                continue
+            }
+            */
             var itemWidth: CGFloat = 0
             // Get Width in terms of screen %
             switch item.width {
@@ -169,17 +209,17 @@ extension InputGroupView: UICollectionViewDataSource, UICollectionViewDelegate, 
     func getDoubleInputCell(indexPath: IndexPath) -> DoubleInputCollectionViewCell {
         return collectionView!.dequeueReusableCell(withReuseIdentifier: "DoubleInputCollectionViewCell", for: indexPath as IndexPath) as! DoubleInputCollectionViewCell
     }
-
+    
     func getIntInputCell(indexPath: IndexPath) -> IntegerInputCollectionViewCell {
         return collectionView!.dequeueReusableCell(withReuseIdentifier: "IntegerInputCollectionViewCell", for: indexPath as IndexPath) as! IntegerInputCollectionViewCell
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return inputItems.count
+        return displayableInputItems.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let item = inputItems[indexPath.row]
+        let item = displayableInputItems[indexPath.row]
         switch item.type {
         case .Dropdown:
             let cell = getDropdownCell(indexPath: indexPath)
@@ -224,7 +264,7 @@ extension InputGroupView: UICollectionViewDataSource, UICollectionViewDelegate, 
             cellSpacing = layoutUnwrapped.minimumInteritemSpacing
         }
         
-        let item = inputItems[indexPath.row]
+        let item = displayableInputItems[indexPath.row]
         let containerWidth = collectionView.frame.width
         var multiplier: CGFloat = 1
         switch item.width {

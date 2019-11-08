@@ -84,10 +84,11 @@ class FormEntryViewController: BaseViewController {
         let rs1 = RadioSwitchInput(key: "radioSwirch1", header: "Switch Radio", editable: true, width: .Forth)
         
         // Double Input
-        let dbi1 = DoubleInput(key: "doubleInput1", header: "Double", editable: true, width: .Forth)
+        let dbi1 = DoubleInput(key: "doubleInput1", header: "Double", editable: true, width: .Full)
         
         // Integer Input
-        let inti1 = IntegerInput(key: "intInput1", header: "Integer", editable: true, width: .Forth)
+        let inti1 = IntegerInput(key: "intInput1", header: "Integer", editable: true, width: .Full)
+        inti1.dependency = InputDependency(to: rs1, equalTo: true)
         
         self.inputItems.append(drodownItem1)
         self.inputItems.append(drodownItem2)

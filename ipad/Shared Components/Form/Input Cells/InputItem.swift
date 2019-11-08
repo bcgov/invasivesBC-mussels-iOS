@@ -78,6 +78,39 @@ struct InputValue {
     }
 }
 
+class InputDependency {
+    var item: InputItem
+    private var _value: InputValue
+    
+    init(to item: InputItem, equalTo value: Any) {
+        self.item = item
+        self._value = InputValue()
+        self._value.set(value: value, type: item.type)
+    }
+    
+    func isSatisfied() -> Bool {
+        switch item.type {
+        case .Dropdown:
+            return item.value.get(type: item.type) as? String == _value.get(type: item.type) as? String
+        case .Text:
+            return item.value.get(type: item.type) as? String == _value.get(type: item.type) as? String
+        case .Int:
+            return item.value.get(type: item.type) as? Int == _value.get(type: item.type) as? Int
+        case .Double:
+            return item.value.get(type: item.type) as? Double == _value.get(type: item.type) as? Double
+        case .Date:
+            return item.value.get(type: item.type) as? Date == _value.get(type: item.type) as? Date
+        case .Switch:
+            return item.value.get(type: item.type) as? Bool == _value.get(type: item.type) as? Bool
+        case .TextArea:
+            return item.value.get(type: item.type) as? String == _value.get(type: item.type) as? String
+        case .RadioSwitch:
+            return item.value.get(type: item.type) as? Bool == _value.get(type: item.type) as? Bool
+        }
+    }
+    
+}
+
 protocol InputItem {
     var type: InputItemType { get set }
     var width: InputItemWidthSize { get set }
@@ -86,6 +119,7 @@ protocol InputItem {
     var value: InputValue { get set }
     var header: String { get set }
     var editable: Bool { get set }
+    var dependency: InputDependency? { get set }
 }
 
 protocol StringInputItem: InputItem {
@@ -93,8 +127,8 @@ protocol StringInputItem: InputItem {
 }
 
 class DropdownInput: InputItem {
+    var dependency: InputDependency?
     var value: InputValue
-    
     var type: InputItemType = .Dropdown
     var width: InputItemWidthSize
     var height: CGFloat = 70
@@ -124,6 +158,7 @@ class DropdownInput: InputItem {
 }
 
 class TextInput: InputItem {
+    var dependency: InputDependency?
     var type: InputItemType = .Text
     var width: InputItemWidthSize
     var height: CGFloat = 70
@@ -151,6 +186,7 @@ class TextInput: InputItem {
 }
 
 class SwitchInput: InputItem {
+    var dependency: InputDependency?
     var type: InputItemType = .Switch
     var width: InputItemWidthSize
     var height: CGFloat = 70
@@ -178,6 +214,7 @@ class SwitchInput: InputItem {
 }
 
 class DateInput: InputItem {
+    var dependency: InputDependency?
     var type: InputItemType = .Date
     var width: InputItemWidthSize
     var height: CGFloat = 70
@@ -205,6 +242,7 @@ class DateInput: InputItem {
 }
 
 class TextAreaInput: InputItem {
+    var dependency: InputDependency?
     var type: InputItemType = .TextArea
     var width: InputItemWidthSize
     var height: CGFloat = 200
@@ -232,6 +270,7 @@ class TextAreaInput: InputItem {
 }
 
 class IntegerInput: InputItem {
+    var dependency: InputDependency?
     var type: InputItemType = .Int
     var width: InputItemWidthSize
     var height: CGFloat = 70
@@ -259,6 +298,7 @@ class IntegerInput: InputItem {
 }
 
 class DoubleInput: InputItem {
+    var dependency: InputDependency?
     var type: InputItemType = .Double
     var width: InputItemWidthSize
     var height: CGFloat = 70
@@ -286,6 +326,7 @@ class DoubleInput: InputItem {
 }
 
 class RadioSwitchInput: InputItem {
+    var dependency: InputDependency?
     var type: InputItemType = .RadioSwitch
     var width: InputItemWidthSize
     var height: CGFloat = 70
@@ -311,3 +352,4 @@ class RadioSwitchInput: InputItem {
         self.value.set(value: value, type: self.type)
     }
 }
+

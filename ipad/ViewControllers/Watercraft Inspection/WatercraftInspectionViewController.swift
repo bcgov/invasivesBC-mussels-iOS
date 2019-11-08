@@ -55,7 +55,12 @@ class WatercraftInspectionViewController: BaseViewController {
     }
     
     private func addListeners() {
-           NotificationCenter.default.addObserver(self, selector: #selector(self.inputItemValueChanged(notification:)), name: .InputItemValueChanged, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.inputItemValueChanged(notification:)), name: .InputItemValueChanged, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.shouldResizeInputGroup(notification:)), name: .ShouldResizeInputGroup, object: nil)
+    }
+    
+    @objc func shouldResizeInputGroup(notification: Notification) {
+        self.collectionView.collectionViewLayout.invalidateLayout()
     }
     
     @objc func inputItemValueChanged(notification: Notification) {
