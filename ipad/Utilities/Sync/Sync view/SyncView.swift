@@ -7,8 +7,8 @@
 //
 
 import UIKit
-import Modal
 import Lottie
+import Modal
 
 class SyncView: ModalView, Theme {
     
@@ -17,12 +17,10 @@ class SyncView: ModalView, Theme {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var syncImageView: UIImageView!
     @IBOutlet weak var titleView: UIView!
-    @IBOutlet weak var statusIconView: UIImageView!
+    @IBOutlet weak var statusIconView: UIView!
     @IBOutlet weak var hollowButton: UIButton!
     @IBOutlet weak var fillButton: UIButton!
     @IBOutlet weak var dividerView: UIView!
-    
-    let inProgressImageProvider = FilepathImageProvider(filepath: "ipad/ipad/Utilities/Lottie/sync-icon.json")
     
     
     let syncIconTag = 200
@@ -46,27 +44,28 @@ class SyncView: ModalView, Theme {
         styleDivider(view: dividerView)
         styleHollowButton(button: hollowButton)
         styleFillButton(button: fillButton)
-        addSyncIcon()
+//        addSyncIcon()
 //        styleSyncInProgress()
 //        styleSyncError()
         styleSyncSuccess()
     }
     
-    private func addSyncIcon() {
-        let animationView = AnimationView()
-        animationView.frame = statusIconView.frame
-        animationView.center.y = statusIconView.center.y
-        animationView.center.x = statusIconView.center.x
-        
-        animationView.contentMode = .scaleAspectFit
-        animationView.loopMode = .loop
-        
-        statusIconView.addSubview(animationView)
-        NSLayoutConstraint.activate([
-            animationView.centerXAnchor.constraint(equalTo: statusIconView.centerXAnchor),
-            animationView.centerYAnchor.constraint(equalTo: statusIconView.centerYAnchor)
-        ])
-    }
+//    private func addSyncIcon() {
+//        let animatedSync = AnimationView(name: "sync_icon")
+//        animatedSync.center.y = statusIconView.center.y
+//        animatedSync.center.x = statusIconView.center.x
+//        animatedSync.contentMode = .scaleAspectFit
+//        animatedSync.tag = syncIconTag
+//        statusIconView.addSubview(animatedSync)
+//
+//        animatedSync.translatesAutoresizingMaskIntoConstraints = false
+//        NSLayoutConstraint.activate([
+//            animatedSync.widthAnchor.constraint(equalToConstant: statusIconView.frame.width),
+//            animatedSync.heightAnchor.constraint(equalToConstant: statusIconView.frame.height),
+//            animatedSync.centerXAnchor.constraint(equalTo: statusIconView.centerXAnchor),
+//            animatedSync.centerYAnchor.constraint(equalTo: statusIconView.centerYAnchor),
+//        ])
+//    }
     
     private func clearIcon() {
         for subview in statusIconView.subviews {
@@ -98,36 +97,75 @@ class SyncView: ModalView, Theme {
         showSyncFailedAnimation()
     }
     
-    func animateSyncIcon() {
-        if let animation = self.viewWithTag(syncIconTag) as? AnimationView {
-            animation.alpha = visibleAlpha
-            animation.loopMode = .loop
-            animation.play()
-        }
-    }
+//    func animateSyncIcon() {
+//        if let animation = self.viewWithTag(syncIconTag) as? AnimationView {
+//            animation.alpha = visibleAlpha
+//            animation.loopMode = .loop
+//            animation.play()
+//        }
+//    }
     
     func showSyncInProgressAnimation() {
-//        clearIcon()
-//        let animation = Animation.filepath("ipad/ipad/Utilities/Lottie/spinner.json")
-        let animationView = AnimationView()
-        animationView.imageProvider = inProgressImageProvider
-//        let animationView = AnimationView(name: "spinner")
+        clearIcon()
+        let animationView = AnimationView(name: "sync-circle")
         animationView.frame = statusIconView.frame
         animationView.center.y = statusIconView.center.y
         animationView.center.x = statusIconView.center.x
         animationView.contentMode = .scaleAspectFit
         animationView.loopMode = .loop
         statusIconView.addSubview(animationView)
-        
+
+        animationView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            animationView.widthAnchor.constraint(equalToConstant: statusIconView.frame.width),
+            animationView.heightAnchor.constraint(equalToConstant: statusIconView.frame.height),
+            animationView.centerXAnchor.constraint(equalTo: statusIconView.centerXAnchor),
+            animationView.centerYAnchor.constraint(equalTo: statusIconView.centerYAnchor),
+        ])
+
         animationView.play()
     }
     
     func showSyncFailedAnimation() {
-        
+        clearIcon()
+        let animationView = AnimationView(name: "unapproved-cross")
+        animationView.frame = statusIconView.frame
+        animationView.center.y = statusIconView.center.y
+        animationView.center.x = statusIconView.center.x
+        animationView.contentMode = .scaleAspectFit
+        animationView.loopMode = .playOnce
+        statusIconView.addSubview(animationView)
+
+        animationView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            animationView.widthAnchor.constraint(equalToConstant: statusIconView.frame.width),
+            animationView.heightAnchor.constraint(equalToConstant: statusIconView.frame.height),
+            animationView.centerXAnchor.constraint(equalTo: statusIconView.centerXAnchor),
+            animationView.centerYAnchor.constraint(equalTo: statusIconView.centerYAnchor),
+        ])
+
+        animationView.play()
     }
     
     func showSyncCompletedAnimation() {
-        
+        clearIcon()
+        let animationView = AnimationView(name: "check-mark-success")
+        animationView.frame = statusIconView.frame
+        animationView.center.y = statusIconView.center.y
+        animationView.center.x = statusIconView.center.x
+        animationView.contentMode = .scaleAspectFit
+        animationView.loopMode = .playOnce
+        statusIconView.addSubview(animationView)
+
+        animationView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            animationView.widthAnchor.constraint(equalToConstant: statusIconView.frame.width),
+            animationView.heightAnchor.constraint(equalToConstant: statusIconView.frame.height),
+            animationView.centerXAnchor.constraint(equalTo: statusIconView.centerXAnchor),
+            animationView.centerYAnchor.constraint(equalTo: statusIconView.centerYAnchor),
+        ])
+
+        animationView.play()
     }
 
 }
