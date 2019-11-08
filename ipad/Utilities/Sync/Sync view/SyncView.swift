@@ -19,6 +19,7 @@ class SyncView: ModalView, Theme {
     @IBOutlet weak var titleView: UIView!
     @IBOutlet weak var statusIconView: UIImageView!
     @IBOutlet weak var hollowButton: UIButton!
+    @IBOutlet weak var fillButton: UIButton!
     @IBOutlet weak var dividerView: UIView!
     
     let inProgressImageProvider = FilepathImageProvider(filepath: "ipad/ipad/Utilities/Lottie/sync-icon.json")
@@ -44,8 +45,11 @@ class SyncView: ModalView, Theme {
         titleLabel.textColor = Colors.primary
         styleDivider(view: dividerView)
         styleHollowButton(button: hollowButton)
+        styleFillButton(button: fillButton)
         addSyncIcon()
-        styleSyncInProgress()
+//        styleSyncInProgress()
+//        styleSyncError()
+        styleSyncSuccess()
     }
     
     private func addSyncIcon() {
@@ -74,7 +78,24 @@ class SyncView: ModalView, Theme {
 //        animateSyncIcon()
         statusLabel.text = "Now syncing your data..."
         hollowButton.setTitle("Cancel Sync", for: .normal)
+        fillButton.isHidden = true
         showSyncInProgressAnimation()
+    }
+    
+    private func styleSyncSuccess() {
+        statusLabel.text = "Syncing Complete"
+        hollowButton.isHidden = true
+        fillButton.isHidden = false
+        fillButton.setTitle("Continue", for: .normal)
+        showSyncCompletedAnimation()
+    }
+    
+    private func styleSyncError() {
+        statusLabel.text = "There was an error while syncing your data"
+        hollowButton.setTitle("Skip for now...", for: .normal)
+        fillButton.setTitle("Try again", for: .normal)
+        fillButton.isHidden = false
+        showSyncFailedAnimation()
     }
     
     func animateSyncIcon() {
