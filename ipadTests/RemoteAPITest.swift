@@ -1,15 +1,14 @@
 //
-//  ipadTests.swift
+//  RemoteAPITest.swift
 //  ipadTests
 //
-//  Created by Amir Shayegh on 2019-10-28.
+//  Created by Pushan  on 2019-11-08.
 //  Copyright © 2019 Amir Shayegh. All rights reserved.
 //
 
 import XCTest
-@testable import Boilerplate
 
-class ipadTests: XCTestCase {
+class RemoteAPITest: XCTestCase {
 
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.
