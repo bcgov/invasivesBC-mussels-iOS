@@ -18,21 +18,14 @@ class InputGroupView: UIView {
         "DateInputCollectionViewCell",
         "TextAreaInputCollectionViewCell",
         "RadioSwitchInputCollectionViewCell",
-        "DoubleInputCollectionViewCell"
+        "DoubleInputCollectionViewCell",
+        "IntegerInputCollectionViewCell"
     ]
     
     // MARK: Variables
     private weak var collectionView: UICollectionView? = nil
     private var inputDelegate: InputDelegate? = nil
     private var inputItems: [InputItem] = []
-    
-    /*
-     // Only override draw() if you perform custom drawing.
-     // An empty implementation adversely affects performance during animation.
-     override func draw(_ rect: CGRect) {
-     // Drawing code
-     }
-     */
     
     public func initialize(with Items: [InputItem], delegate: InputDelegate, in container: UIView) {
         container.addSubview(self)
@@ -54,7 +47,6 @@ class InputGroupView: UIView {
             return
         }
         flowLayout.invalidateLayout()
-        
     }
     
     private func addConstraints(for view: UIView) {
@@ -177,6 +169,10 @@ extension InputGroupView: UICollectionViewDataSource, UICollectionViewDelegate, 
     func getDoubleInputCell(indexPath: IndexPath) -> DoubleInputCollectionViewCell {
         return collectionView!.dequeueReusableCell(withReuseIdentifier: "DoubleInputCollectionViewCell", for: indexPath as IndexPath) as! DoubleInputCollectionViewCell
     }
+
+    func getIntInputCell(indexPath: IndexPath) -> IntegerInputCollectionViewCell {
+        return collectionView!.dequeueReusableCell(withReuseIdentifier: "IntegerInputCollectionViewCell", for: indexPath as IndexPath) as! IntegerInputCollectionViewCell
+    }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return inputItems.count
@@ -194,8 +190,8 @@ extension InputGroupView: UICollectionViewDataSource, UICollectionViewDelegate, 
             cell.setup(with: item as! TextInput, delegate: inputDelegate!)
             return cell
         case .Int:
-            let cell = getTextInputCell(indexPath: indexPath)
-            cell.setup(with: item as! TextInput, delegate: inputDelegate!)
+            let cell = getIntInputCell(indexPath: indexPath)
+            cell.setup(with: item as! IntegerInput, delegate: inputDelegate!)
             return cell
         case .Double:
             let cell = getDoubleInputCell(indexPath: indexPath)

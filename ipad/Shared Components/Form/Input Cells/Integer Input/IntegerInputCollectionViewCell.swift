@@ -1,5 +1,5 @@
 //
-//  DoubleInputCollectionViewCell.swift
+//  IntegerInputCollectionViewCell.swift
 //  ipad
 //
 //  Created by Amir Shayegh on 2019-11-07.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DoubleInputCollectionViewCell: BaseInputCell<DoubleInput>, UITextFieldDelegate {
+class IntegerInputCollectionViewCell: BaseInputCell<IntegerInput>, UITextFieldDelegate {
     
     @IBOutlet weak var headerLabel: UILabel!
     @IBOutlet weak var textField: UITextField!
@@ -21,7 +21,7 @@ class DoubleInputCollectionViewCell: BaseInputCell<DoubleInput>, UITextFieldDele
     // MARK: UITextFieldDelegate
     func textFieldDidEndEditing(_ textField: UITextField) {
         guard let model = self.model else {return}
-        if let stringValue = textField.text, let number = Double(stringValue) {
+        if let stringValue = textField.text, let number = Int(stringValue) {
             model.setValue(value: number)
         } else {
             model.setValue(value: nil)
@@ -34,23 +34,18 @@ class DoubleInputCollectionViewCell: BaseInputCell<DoubleInput>, UITextFieldDele
             return false
         }
         let finalText = "\(current)\(string)"
-        if Double(finalText) != nil {
-            return true
-        } else {
-            return finalText.first != "." && finalText.last == "." && finalText.occurrences(of: ".") == 1
-        }
+        return Int(finalText) != nil
     }
     
     // MARK: Setup
-    override func initialize(with model: DoubleInput) {
+    override func initialize(with model: IntegerInput) {
         self.textField.keyboardType = .decimalPad
         self.headerLabel.text = model.header
         self.textField.text = model.value.get(type: model.type) as? String ?? ""
         textField.delegate = self
     }
     
-    // MARK: Style
-    private func style() {
+    func style() {
         styleFieldInput(textField: textField)
         styleFieldHeader(label: headerLabel)
     }

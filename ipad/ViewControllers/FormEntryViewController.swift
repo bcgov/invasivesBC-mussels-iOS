@@ -86,6 +86,9 @@ class FormEntryViewController: BaseViewController {
         // Double Input
         let dbi1 = DoubleInput(key: "doubleInput1", header: "Double", editable: true, width: .Forth)
         
+        // Integer Input
+        let inti1 = IntegerInput(key: "intInput1", header: "Integer", editable: true, width: .Forth)
+        
         self.inputItems.append(drodownItem1)
         self.inputItems.append(drodownItem2)
         self.inputItems.append(drodownItem3)
@@ -109,6 +112,7 @@ class FormEntryViewController: BaseViewController {
         
         self.inputItems.append(rs1)
         self.inputItems.append(dbi1)
+        self.inputItems.append(inti1)
     }
     
 }
