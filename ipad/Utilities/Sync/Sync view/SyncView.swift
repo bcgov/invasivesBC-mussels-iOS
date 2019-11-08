@@ -44,28 +44,10 @@ class SyncView: ModalView, Theme {
         styleDivider(view: dividerView)
         styleHollowButton(button: hollowButton)
         styleFillButton(button: fillButton)
-//        addSyncIcon()
 //        styleSyncInProgress()
 //        styleSyncError()
         styleSyncSuccess()
     }
-    
-//    private func addSyncIcon() {
-//        let animatedSync = AnimationView(name: "sync_icon")
-//        animatedSync.center.y = statusIconView.center.y
-//        animatedSync.center.x = statusIconView.center.x
-//        animatedSync.contentMode = .scaleAspectFit
-//        animatedSync.tag = syncIconTag
-//        statusIconView.addSubview(animatedSync)
-//
-//        animatedSync.translatesAutoresizingMaskIntoConstraints = false
-//        NSLayoutConstraint.activate([
-//            animatedSync.widthAnchor.constraint(equalToConstant: statusIconView.frame.width),
-//            animatedSync.heightAnchor.constraint(equalToConstant: statusIconView.frame.height),
-//            animatedSync.centerXAnchor.constraint(equalTo: statusIconView.centerXAnchor),
-//            animatedSync.centerYAnchor.constraint(equalTo: statusIconView.centerYAnchor),
-//        ])
-//    }
     
     private func clearIcon() {
         for subview in statusIconView.subviews {
@@ -74,7 +56,6 @@ class SyncView: ModalView, Theme {
     }
     
     private func styleSyncInProgress() {
-//        animateSyncIcon()
         statusLabel.text = "Now syncing your data..."
         hollowButton.setTitle("Cancel Sync", for: .normal)
         fillButton.isHidden = true
@@ -96,14 +77,6 @@ class SyncView: ModalView, Theme {
         fillButton.isHidden = false
         showSyncFailedAnimation()
     }
-    
-//    func animateSyncIcon() {
-//        if let animation = self.viewWithTag(syncIconTag) as? AnimationView {
-//            animation.alpha = visibleAlpha
-//            animation.loopMode = .loop
-//            animation.play()
-//        }
-//    }
     
     func showSyncInProgressAnimation() {
         clearIcon()
