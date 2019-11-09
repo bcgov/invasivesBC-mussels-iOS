@@ -35,6 +35,9 @@ class SyncView: ModalView, Theme {
     let visibleAlpha: CGFloat = 1
     
     public func initialize() {
+        let syncBlurb: SyncBlurb = SyncBlurb.fromNib()
+        syncBlurb.initialize(syncState: syncState)
+
         setFixed(width: 400, height: 390)
         style()
         present()
