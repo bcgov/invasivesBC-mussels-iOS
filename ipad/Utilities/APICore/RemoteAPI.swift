@@ -13,14 +13,28 @@ protocol JSONCodable {
     func json() -> Data
 }
 
-typealias JSONMap = Dictionary<String, Any>
-typealias JSONArray = Array<Any>
+typealias JSONMap = [String: Any]
+typealias JSONArray = [Any]
 
 extension String: JSONCodable {
     func json() -> Data {
         return self.data(using: .utf8) ?? Data()
     }
     
+}
+
+
+extension Dictionary: JSONCodable {
+    func json() -> Data {
+        do {
+            let data = try JSONSerialization.data(withJSONObject: self, options: .prettyPrinted)
+            return data
+        } catch let exp {
+            InfoLog("Exception while parsing dict: \(exp)")
+            InfoLog("DICT: \(self)")
+            return "".data
+        }
+    }
 }
 
 extension RemoteAPI {
@@ -60,9 +74,18 @@ class RemoteAPI<R>: ExpressibleByStringLiteral {
         return ""
     }
     
+    func postBody() -> JSONCodable? {
+        return self.reqBody
+    }
+    
+    func putBody() -> JSONCodable? {
+        return self.reqBody
+    }
+    
     var isValid: Bool {
         return !self._url.isEmpty && URL(string: self._url) != nil
     }
+    
     
     var token: String {
         return "";
@@ -70,14 +93,23 @@ class RemoteAPI<R>: ExpressibleByStringLiteral {
     
     
     var headers: RequestHeader  {
-        return ["Content-Type" : "application/json","Authorization": self.token ]
+        return ["Content-Type" : "application/json","Authorization": "Bearer \(token)"]
     }
     internal var _url: String = ""
     internal var _unformattedURL: String = ""
     internal var _promise: Promise<Data>? = nil
+    internal var reqBody: JSONCodable? = nil
     required init(url: String) {
         _url = url
         _unformattedURL = url
+    }
+    
+    var urlOptions: [String] {
+        return [String]();
+    }
+    
+    var url: String {
+        return self._url
     }
     
     convenience required init(stringLiteral value: RemoteAPI.StringLiteralType) {
@@ -86,7 +118,27 @@ class RemoteAPI<R>: ExpressibleByStringLiteral {
     
     // Subclass must override this
     func processData(data: Data, more: Any?) -> (Response?, Any?) {
-        return (nil, more)
+        // Try JSON parsing here
+        do {
+            let parse = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? Response
+            return (parse, more)
+        } catch let excp {
+            InfoLog("Parsing Exception: \(excp)")
+            return (nil, more)
+            
+        }
+    }
+    
+    func processError(_ errorData: Data) -> Any? {
+        // Parse error data
+        do {
+            let parse = try JSONSerialization.jsonObject(with: errorData, options: .mutableContainers)
+            return parse
+        } catch let excp {
+            InfoLog("Parsing Exception: \(excp)")
+            return nil
+            
+        }
     }
     
     
@@ -105,9 +157,11 @@ class RemoteAPI<R>: ExpressibleByStringLiteral {
             case .get:
                 self._promise = RemoteAPIManager.default.get(self._url, self.headers)
             case .post:
-                self._promise = RemoteAPIManager.default.post(self._url, body: self.body(method: method).json(), headers)
+                let body = self.postBody() ?? self.body(method: method)
+                self._promise = RemoteAPIManager.default.post(self._url, body: body.json(), headers)
             case .put:
-                self._promise = RemoteAPIManager.default.put(self._url, body: self.body(method: method).json(), headers)
+                let body = self.putBody() ?? self.body(method: method)
+                self._promise = RemoteAPIManager.default.put(self._url, body: body.json(), headers)
             default:
                 self._promise = RemoteAPIManager.default.api(self._url, body: self.body(method: method).json(), method: method, headers)
             }
@@ -118,8 +172,9 @@ class RemoteAPI<R>: ExpressibleByStringLiteral {
                 do {
                     // Process req.
                     let p = self.processData(data: info, more: nil)
+                    InfoLog("Data: \(p)")
                     if let resp: Response = p.0 {
-                        resolve(resp, nil)
+                        resolve(resp, p.1)
                     } else {
                         throw AppError(description: "Unable to process json data")
                     }
@@ -144,17 +199,25 @@ class RemoteAPI<R>: ExpressibleByStringLiteral {
             
             
             // Fail Case
-            self._promise?.error({ (error, _) in
-                reject(error, nil)
+            self._promise?.error({ (error, data) in
+                if let errData: Data = data as? Data {
+                    reject(error, self.processError(errData))
+                } else {
+                    reject(error, nil)
+                }
             })
         })
     }
     
-    func get() -> Promise<Response>? {
+    func get(_ arg: [String: String]? = nil) -> Promise<Response>? {
+        if let a = arg {
+            self.argMap = self.argMap.merge(a)
+        }
         return self._invokeAPI(.get)
     }
     
-    func post() -> Promise<Response>? {
+    func post(_ data: JSONCodable? = nil) -> Promise<Response>? {
+        self.reqBody = data
         return self._invokeAPI(.post)
     }
     
@@ -162,16 +225,35 @@ class RemoteAPI<R>: ExpressibleByStringLiteral {
         return self._invokeAPI(.delete)
     }
     
-    func put() -> Promise<Response>? {
+    func put(_ data: JSONCodable? = nil) -> Promise<Response>? {
+        self.reqBody = data
         return self._invokeAPI(.put)
     }
     
     func _createURL() {
         var url: String = self._unformattedURL
         let finalArgMap = self.willCreateURL(from: self.argMap)
+        
+        // Now Replacing Url with dynamic key present on url
         for (key,val) in finalArgMap {
             url = url.replacingOccurrences(of: key, with: val)
         }
+        var options: String = ""
+        for option in urlOptions {
+            guard let value: String = finalArgMap[option] else {
+                continue
+            }
+            let subOption: String = (option.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? option) + "=" + (value.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? value)
+            options = options + subOption + "&"
+        }
+        options = String(options.dropLast())
+        // Now check url already have options or not
+        if let _ = url.firstIndex(of: "?") {
+            url = url + "&\(options)"
+        } else {
+            url = url + "?\(options)"
+        }
+        
         self._url = url
     }
     
@@ -182,36 +264,6 @@ class RemoteAPI<R>: ExpressibleByStringLiteral {
     
 }
 
-
-extension RemoteAPI where R == JSONMap {
-    func processData(data: Data, more: Any?) -> (JSONMap?, Any?) {
-        do {
-            let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? JSONMap
-            return (json, more)
-        } catch let excp {
-            InfoLog("JSON Parsing Fail")
-            InfoLog("Reason: \(excp)")
-            InfoLog("Des: \(excp.localizedDescription): \((excp as NSError).code)")
-            return (nil, more)
-        }
-        
-    }
-}
-
-extension RemoteAPI where R == JSONArray {
-    func processData(data: Data, more: Any?) -> (JSONArray?, Any?) {
-        do {
-            let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? JSONArray
-            return (json, more)
-        } catch let excp {
-            InfoLog("JSON Parsing Fail")
-            InfoLog("Reason: \(excp)")
-            InfoLog("Des: \(excp.localizedDescription): \((excp as NSError).code)")
-            return (nil, more)
-        }
-        
-    }
-}
 
 extension RemoteAPI where R == Data {
     func processData(data: Data, more: Any?) -> (Data?, Any?) {
