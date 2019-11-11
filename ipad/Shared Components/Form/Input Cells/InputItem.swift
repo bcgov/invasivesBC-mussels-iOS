@@ -18,6 +18,7 @@ enum InputItemType {
     case Switch
     case TextArea
     case RadioSwitch
+    case ViewField
 }
 
 enum InputItemWidthSize {
@@ -53,6 +54,8 @@ struct InputValue {
             return self.string
         case .RadioSwitch:
             return self.boolean
+        case .ViewField:
+            return self.string
         }
     }
     
@@ -74,21 +77,35 @@ struct InputValue {
             self.string = value as? String
         case .RadioSwitch:
             self.boolean = value as? Bool
+        case .ViewField:
+            self.string = value as? String
         }
     }
 }
 
-class InputDependency {
-    var item: InputItem
+struct InputDependency {
+    public var item: InputItem
     private var _value: InputValue
+    private var notNull: Bool = false
     
-    init(to item: InputItem, equalTo value: Any) {
+    
+    /// Set the Input item and value to watch for. If not value is specified,
+    /// it will watch for any value existing ( != ni l)
+    /// - Parameter item: Input item to watch for.
+    /// - Parameter value: Input item value to watch for.
+    public init(to item: InputItem, equalTo value: Any? = nil) {
         self.item = item
         self._value = InputValue()
         self._value.set(value: value, type: item.type)
+        if value == nil {
+            self.notNull = true
+        }
     }
     
-    func isSatisfied() -> Bool {
+    public func isSatisfied() -> Bool {
+        if self.notNull {
+            return item.value.get(type: item.type) != nil
+        }
         switch item.type {
         case .Dropdown:
             return item.value.get(type: item.type) as? String == _value.get(type: item.type) as? String
@@ -106,9 +123,28 @@ class InputDependency {
             return item.value.get(type: item.type) as? String == _value.get(type: item.type) as? String
         case .RadioSwitch:
             return item.value.get(type: item.type) as? Bool == _value.get(type: item.type) as? Bool
+        case .ViewField:
+            return item.value.get(type: item.type) as? String == _value.get(type: item.type) as? String
         }
     }
+}
+
+enum ComputedFieldRule {
+    case Multiply
+    case Add
+}
+
+struct FieldComputation {
+    var rule: ComputedFieldRule
+    var dependees: [InputDependency]
     
+    public init(fields: [InputItem], rule: ComputedFieldRule) {
+        self.dependees = []
+        for field in fields {
+            self.dependees.append(InputDependency(to: field))
+        }
+        self.rule = rule
+    }
 }
 
 protocol InputItem {
@@ -124,6 +160,34 @@ protocol InputItem {
 
 protocol StringInputItem: InputItem {
     var value: String? {get set}
+}
+
+class ViewField: InputItem {
+    var type: InputItemType = .ViewField
+    var width: InputItemWidthSize
+    var height: CGFloat = 70
+    var key: String = ""
+    var value: InputValue
+    var header: String = ""
+    var editable: Bool = false
+    var dependency: InputDependency?
+    var computation: FieldComputation?
+    
+    init(header: String, computation: FieldComputation? = nil, width: InputItemWidthSize? = .Full) {
+        self.header = header
+        self.computation = computation ?? nil
+        self.width = width ?? .Full
+        self.value = InputValue()
+        self.value.set(value: "", type: type)
+    }
+    
+    func getValue() -> String? {
+        return self.value.get(type: self.type) as? String ?? nil
+    }
+    
+    func setValue(value: String?) {
+        self.value.set(value: value, type: self.type)
+    }
 }
 
 class DropdownInput: InputItem {
@@ -352,4 +416,3 @@ class RadioSwitchInput: InputItem {
         self.value.set(value: value, type: self.type)
     }
 }
-

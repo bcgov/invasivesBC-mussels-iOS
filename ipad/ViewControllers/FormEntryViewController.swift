@@ -84,11 +84,15 @@ class FormEntryViewController: BaseViewController {
         let rs1 = RadioSwitchInput(key: "radioSwirch1", header: "Switch Radio", editable: true, width: .Forth)
         
         // Double Input
-        let dbi1 = DoubleInput(key: "doubleInput1", header: "Double", editable: true, width: .Full)
+        let dbi1 = DoubleInput(key: "doubleInput1", header: "Double", editable: true, width: .Third)
         
         // Integer Input
-        let inti1 = IntegerInput(key: "intInput1", header: "Integer", editable: true, width: .Full)
+        let inti1 = IntegerInput(key: "intInput1", header: "Integer", editable: true, width: .Third)
         inti1.dependency = InputDependency(to: rs1, equalTo: true)
+        
+        // View field with computation
+        let compute1 = FieldComputation(fields: [dbi1, inti1], rule: .Add)
+        let view1 = ViewField(header: "view 1", computation: compute1, width: .Forth)
         
         self.inputItems.append(drodownItem1)
         self.inputItems.append(drodownItem2)
@@ -114,6 +118,8 @@ class FormEntryViewController: BaseViewController {
         self.inputItems.append(rs1)
         self.inputItems.append(dbi1)
         self.inputItems.append(inti1)
+        
+        self.inputItems.append(view1)
     }
     
 }

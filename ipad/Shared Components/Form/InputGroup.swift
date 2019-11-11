@@ -19,7 +19,8 @@ class InputGroupView: UIView {
         "TextAreaInputCollectionViewCell",
         "RadioSwitchInputCollectionViewCell",
         "DoubleInputCollectionViewCell",
-        "IntegerInputCollectionViewCell"
+        "IntegerInputCollectionViewCell",
+        "ViewFieldCollectionViewCell"
     ]
     
     // MARK: Variables
@@ -73,7 +74,6 @@ class InputGroupView: UIView {
             }, completion: { (done) in
                 NotificationCenter.default.post(name: .ShouldResizeInputGroup, object: self)
             })
-            
         }
     }
     
@@ -119,11 +119,7 @@ class InputGroupView: UIView {
         var widthCounter: CGFloat = 0
         var tempMaxRowItemHeight: CGFloat = 0
         for (index, item) in items.enumerated()  {
-            /*
-            if let dependency = item.dependency, !dependency.isSatisfied() {
-                continue
-            }
-            */
+        
             var itemWidth: CGFloat = 0
             // Get Width in terms of screen %
             switch item.width {
@@ -143,6 +139,12 @@ class InputGroupView: UIView {
                 tempMaxRowItemHeight = 0
                 widthCounter = 0
             }
+            
+            // TODO: handle height for items with dependency where dependency is not satisfied
+//            if let dependency = item.dependency, !dependency.isSatisfied() {
+//                continue
+//            }
+//
             
             // If current item's height is greater than the max item height for row
             // set max item hight for row
@@ -214,6 +216,10 @@ extension InputGroupView: UICollectionViewDataSource, UICollectionViewDelegate, 
         return collectionView!.dequeueReusableCell(withReuseIdentifier: "IntegerInputCollectionViewCell", for: indexPath as IndexPath) as! IntegerInputCollectionViewCell
     }
     
+    func getViewFieldCell(indexPath: IndexPath) -> ViewFieldCollectionViewCell {
+        return collectionView!.dequeueReusableCell(withReuseIdentifier: "ViewFieldCollectionViewCell", for: indexPath as IndexPath) as! ViewFieldCollectionViewCell
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return displayableInputItems.count
     }
@@ -252,6 +258,10 @@ extension InputGroupView: UICollectionViewDataSource, UICollectionViewDelegate, 
         case .RadioSwitch:
             let cell = getRadioSwitchInputCell(indexPath: indexPath)
             cell.setup(with: item as! RadioSwitchInput, delegate: inputDelegate!)
+            return cell
+        case .ViewField:
+            let cell = getViewFieldCell(indexPath: indexPath)
+            cell.setup(with: item as! ViewField, delegate: inputDelegate!)
             return cell
         }
     }
