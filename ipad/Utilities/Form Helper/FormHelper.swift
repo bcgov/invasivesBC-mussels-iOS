@@ -8,6 +8,13 @@
 
 import Foundation
 
+struct FormField {
+    var type: InputItemType
+    var key: String
+    var header: String
+    var width: InputItemWidthSize
+}
+
 class FormHelper {
     
     public static func getDummyOptions() -> [DropdownModel]{
@@ -17,6 +24,12 @@ class FormHelper {
         options.append(DropdownModel(display: "Something more here"))
         options.append(DropdownModel(display: "Another thing"))
         return options
+    }
+    
+    public static func passportFields(isEditable: Bool? = true) -> [InputItem] {
+        var sectionItems: [InputItem] = []
+        
+        return sectionItems
     }
     
     public static func watercraftInspectionBasciInfoInputs(isEditable: Bool? = true) -> [InputItem] {

@@ -11,21 +11,10 @@ import Realm
 import RealmSwift
 
 
-class BaseRealmObject: Object {
-    @objc dynamic var localId: String = {
-           return UUID().uuidString
-    }()
-       
-    override class func primaryKey() -> String? {
-        return "localId"
-    }
-    var remoteId: Int = -1
-    var syncable: Bool = true
-    var shouldSync: Bool = false
-    
-    func toDictionary() -> [String : Any] {
-        return [:]
-    }
-    
-    
+protocol BaseRealmObject {
+    var localId: String { get set }
+    var remoteId: Int { get set }
+    var shouldSync: Bool { get set }
+
+    func toDictionary() -> [String: Any]
 }

@@ -8,7 +8,6 @@
 
 import Foundation
 
-
 class JourneyDetailsModel {
     var previousWaterBodies: [[InputItem]] = []
     var destinationWaterBodies: [[InputItem]] = []

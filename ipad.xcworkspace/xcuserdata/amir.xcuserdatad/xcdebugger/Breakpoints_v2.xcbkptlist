@@ -55,17 +55,129 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "3440E3F4-49CC-4E9E-81C8-6EEA1A980DCC"
+            uuid = "47BD785D-350C-4927-9711-93894CCEAC8F"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ipad/Models/WatercraftInspectionModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "19"
+            endingLineNumber = "19"
+            landmarkName = "PropertyReflectable"
+            landmarkType = "21">
+            <Locations>
+               <Location
+                  uuid = "47BD785D-350C-4927-9711-93894CCEAC8F - cacbfc8eba9a0ec6"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(extension in Boilerplate):Boilerplate.PropertyReflectable.subscript.getter : (Swift.String) -&gt; Swift.Optional&lt;Any&gt;"
+                  moduleName = "Boilerplate"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/amir/Desktop/git/ipad/ipad/Models/WatercraftInspectionModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "19"
+                  endingLineNumber = "19"
+                  offsetFromSymbolStart = "341">
+               </Location>
+               <Location
+                  uuid = "47BD785D-350C-4927-9711-93894CCEAC8F - aba074f42e672ebc"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 ((label: Swift.Optional&lt;Swift.String&gt;, value: Any)) -&gt; Swift.Bool in (extension in Boilerplate):Boilerplate.PropertyReflectable.subscript.getter : (Swift.String) -&gt; Swift.Optional&lt;Any&gt;"
+                  moduleName = "Boilerplate"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/amir/Desktop/git/ipad/ipad/Models/WatercraftInspectionModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "19"
+                  endingLineNumber = "19"
+                  offsetFromSymbolStart = "98">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "6054F6B7-37FA-45C3-BF1F-DCF5BF32773B"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ipad/Shared Components/Form/Input Cells/Radio Switch Input/RadioSwitchInputCollectionViewCell.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "31"
+            endingLineNumber = "31"
+            landmarkName = "initialize(with:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E5DBB2B5-DAD1-4183-9F55-65C182D63A35"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ipad/Shared Components/Form/InputGroup.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "145"
-            endingLineNumber = "145"
-            landmarkName = "estimateContentHeight(for:)"
+            startingLineNumber = "259"
+            endingLineNumber = "259"
+            landmarkName = "collectionView(_:cellForItemAt:)"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "66DC30B9-81D1-4F2A-9FBE-9CDDA239D00D"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ipad/ViewControllers/Watercraft Inspection/WatercraftInspectionViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "81"
+            endingLineNumber = "81"
+            landmarkName = "inputItemValueChanged(notification:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "7C967D2F-1436-4065-9CFD-C2981535AA4D"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ipad/ViewControllers/Watercraft Inspection/WatercraftInspectionViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "91"
+            endingLineNumber = "91"
+            landmarkName = "inputItemValueChanged(notification:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "84895782-8A8B-4809-B28B-F3C17E3F32A8"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ipad/Models/WatercraftInspectionModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "100"
+            endingLineNumber = "100"
+            landmarkName = "Passport"
+            landmarkType = "14">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

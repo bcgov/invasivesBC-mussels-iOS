@@ -18,7 +18,8 @@ private enum JourneyDetailsSectionRow {
 }
 
 private enum FromSection: Int, CaseIterable {
-    case BasicInformation = 0
+    case PassportInfo = 0
+    case BasicInformation
     case WatercraftDetails
     case JourneyDetails
     case InspectionDetails
@@ -41,6 +42,8 @@ class WatercraftInspectionViewController: BaseViewController {
     ]
     
     // MARK: Variables
+    private var model: WatercradftInspectionModel? = nil
+    private var showFullInspection: Bool = false
     private var isEditable: Bool = true
     private var journeyDetails: JourneyDetailsModel = JourneyDetailsModel()
     private var formResult: [String: Any?] = [String: Any]()
@@ -51,6 +54,7 @@ class WatercraftInspectionViewController: BaseViewController {
         setNavigationBar(hidden: false, style: UIBarStyle.black)
         setupCollectionView()
         addListeners()
+        self.model = WatercradftInspectionModel()
         style()
     }
     
@@ -61,12 +65,42 @@ class WatercraftInspectionViewController: BaseViewController {
     
     @objc func shouldResizeInputGroup(notification: Notification) {
         self.collectionView.collectionViewLayout.invalidateLayout()
+        
     }
     
     @objc func inputItemValueChanged(notification: Notification) {
         guard let item: InputItem = notification.object as? InputItem else {return}
         formResult[item.key] = item.value.get(type: item.type)
-        print(formResult)
+        // Set value in Realm object
+        if let m = model {
+            // TODO: needs cleanup for nil case
+            m.set(value: item.value.get(type: item.type), for: item.key)
+        }
+        // Handle Keys that alter form
+        if item.key == "isPassportHolder" {
+            // If is NOT passport holder, Show full form
+            let fieldValue = item.value.get(type: item.type) as? Bool ?? nil
+            if fieldValue == false {
+                self.showFullInspection = true
+            } else {
+                self.showFullInspection = false
+            }
+            self.collectionView.reloadData()
+        }
+        if item.key == "launchedOutsideBC" {
+            // If IS passport holder, && launched outside BC, Show full form
+            let fieldValue = item.value.get(type: item.type) as? Bool ?? nil
+            let isPassportHolder = formResult["isPassportHolder"] as? Bool ?? nil
+            if (fieldValue == true && isPassportHolder == true) {
+                self.showFullInspection = true
+            } else {
+                self.showFullInspection = false
+            }
+
+            self.collectionView.reloadData()
+        }
+        
+        print(model?.toDictionary())
     }
     
     // Navigation bar right button action
@@ -97,7 +131,7 @@ class WatercraftInspectionViewController: BaseViewController {
     
 }
 
-//UICollectionViewDelegateFlowLayout
+// UICollectionViewDelegateFlowLayout
 extension WatercraftInspectionViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     private func setupCollectionView() {
         for cell in collectionCells {
@@ -148,14 +182,22 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return FromSection.allCases.count
+        if showFullInspection {
+            return FromSection.allCases.count
+        } else {
+            return 1
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let sectionType = FromSection(rawValue: Int(indexPath.section)) else {
+        guard let sectionType = FromSection(rawValue: Int(indexPath.section)), let model = self.model else {
             return UICollectionViewCell()
         }
         switch sectionType {
+        case .PassportInfo:
+            let cell = getBasicCell(indexPath: indexPath)
+            cell.setup(title: "Passport Information", input: model.getPassportFields(editable: isEditable), delegate: self)
+            return cell
         case .BasicInformation:
             let cell = getBasicCell(indexPath: indexPath)
             cell.setup(title: "Basic Information", input: FormHelper.watercraftInspectionBasciInfoInputs(isEditable: isEditable), delegate: self)
@@ -178,10 +220,13 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        guard let sectionType = FromSection(rawValue: Int(indexPath.section)) else {
+        guard let sectionType = FromSection(rawValue: Int(indexPath.section)), let model = self.model else {
             return CGSize(width: 0, height: 0)
         }
         switch sectionType {
+        case .PassportInfo:
+            let estimatedContentHeight = InputGroupView.estimateContentHeight(for: model.getPassportFields(editable: isEditable))
+            return CGSize(width: self.collectionView.frame.width, height: estimatedContentHeight + 80)
         case .BasicInformation:
             let estimatedContentHeight = InputGroupView.estimateContentHeight(for: FormHelper.watercraftInspectionBasciInfoInputs())
             return CGSize(width: self.collectionView.frame.width, height: estimatedContentHeight + 80)
@@ -201,7 +246,6 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
     
     private func getJourneyDetailsCell(for indexPath: IndexPath) -> UICollectionViewCell {
         switch getJourneyDetailsCellType(for: indexPath) {
-            
         case .Header:
             let cell = getHeaderCell(indexPath: indexPath)
             cell.setup(with: "Journey Details")
