@@ -55,9 +55,18 @@ class WatercraftInspectionViewController: BaseViewController {
         super.viewDidLoad()
         setNavigationBar(hidden: false, style: UIBarStyle.black)
         setupCollectionView()
-        addListeners()
         self.model = WatercradftInspectionModel()
         style()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        addListeners()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        NotificationCenter.default.removeObserver(self)
     }
     
     private func addListeners() {
@@ -65,6 +74,33 @@ class WatercraftInspectionViewController: BaseViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(self.shouldResizeInputGroup(notification:)), name: .ShouldResizeInputGroup, object: nil)
     }
     
+    private func refreshJourneyDetails(index: Int) {
+        
+    }
+    
+    private func style() {
+        self.styleNavBar()
+    }
+    
+    private func styleNavBar() {
+        guard let navigation = self.navigationController else { return }
+        self.title = "Watercraft Inspection"
+        navigation.navigationBar.isTranslucent = false
+        navigation.navigationBar.tintColor = .white
+        navigation.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
+        setGradiantBackground(navigationBar: navigation.navigationBar)
+        setRightNavButtonTo(type: .save)
+    }
+    
+    private func setRightNavButtonTo(type: UIBarButtonItem.SystemItem) {
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: type, target: self, action: #selector(self.action(sender:)))
+    }
+    
+    // Navigation bar right button action
+    @objc func action(sender: UIBarButtonItem) {
+    }
+    
+    // MARK: Notification functions
     @objc func shouldResizeInputGroup(notification: Notification) {
         self.collectionView.collectionViewLayout.invalidateLayout()
     }
@@ -82,7 +118,8 @@ class WatercraftInspectionViewController: BaseViewController {
                     highRiskModal.initialize(onSubmit: {
                         // Confirmed
                         m.set(value: true, for: item.key)
-                        // SHow high risk modal
+                        // Show high risk form
+                        self.performSegue(withIdentifier: "showHighRiskForm", sender: self)
                     }) {
                         // Cancelled
                         m.set(value: false, for: item.key)
@@ -117,37 +154,11 @@ class WatercraftInspectionViewController: BaseViewController {
             } else {
                 self.showFullInspection = false
             }
-
+            
             self.collectionView.reloadData()
         }
         
         print(model?.toDictionary())
-    }
-    
-    // Navigation bar right button action
-    @objc func action(sender: UIBarButtonItem) {
-    }
-    
-    private func refreshJourneyDetails(index: Int) {
-        
-    }
-    
-    private func style() {
-        self.styleNavBar()
-    }
-    
-    private func styleNavBar() {
-        guard let navigation = self.navigationController else { return }
-        self.title = "Watercraft Inspection"
-        navigation.navigationBar.isTranslucent = false
-        navigation.navigationBar.tintColor = .white
-        navigation.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
-        setGradiantBackground(navigationBar: navigation.navigationBar)
-        setRightNavButtonTo(type: .save)
-    }
-    
-    private func setRightNavButtonTo(type: UIBarButtonItem.SystemItem) {
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: type, target: self, action: #selector(self.action(sender:)))
     }
     
 }

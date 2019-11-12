@@ -43,6 +43,10 @@
 		29514BED2368CAAA00DC89C4 /* Dropdown.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 29514BEC2368CAAA00DC89C4 /* Dropdown.storyboard */; };
 		29514BF02368CB5D00DC89C4 /* DropdownTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29514BEE2368CB5D00DC89C4 /* DropdownTableViewCell.swift */; };
 		29514BF12368CB5D00DC89C4 /* DropdownTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29514BEF2368CB5D00DC89C4 /* DropdownTableViewCell.xib */; };
+		29588745237B50CC00224FFA /* HighRiskFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29588744237B50CC00224FFA /* HighRiskFormViewController.swift */; };
+		29588748237B52F000224FFA /* HighRiskAssessmentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29588747237B52F000224FFA /* HighRiskAssessmentModel.swift */; };
+		2958874A237B583C00224FFA /* HighRiskFormHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29588749237B583C00224FFA /* HighRiskFormHelper.swift */; };
+		2958874D237B58D600224FFA /* HighRiskFormFieldHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2958874C237B58D600224FFA /* HighRiskFormFieldHeaders.swift */; };
 		296237D62374B6B400032BB5 /* RadioSwitchInputCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 296237D42374B6B400032BB5 /* RadioSwitchInputCollectionViewCell.swift */; };
 		296237D72374B6B400032BB5 /* RadioSwitchInputCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 296237D52374B6B400032BB5 /* RadioSwitchInputCollectionViewCell.xib */; };
 		29A9742D236CB59F006C668F /* SwitchInputCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A9742B236CB59F006C668F /* SwitchInputCollectionViewCell.swift */; };
@@ -154,6 +158,10 @@
 		29514BEC2368CAAA00DC89C4 /* Dropdown.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Dropdown.storyboard; sourceTree = "<group>"; };
 		29514BEE2368CB5D00DC89C4 /* DropdownTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropdownTableViewCell.swift; sourceTree = "<group>"; };
 		29514BEF2368CB5D00DC89C4 /* DropdownTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DropdownTableViewCell.xib; sourceTree = "<group>"; };
+		29588744237B50CC00224FFA /* HighRiskFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighRiskFormViewController.swift; sourceTree = "<group>"; };
+		29588747237B52F000224FFA /* HighRiskAssessmentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighRiskAssessmentModel.swift; sourceTree = "<group>"; };
+		29588749237B583C00224FFA /* HighRiskFormHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighRiskFormHelper.swift; sourceTree = "<group>"; };
+		2958874C237B58D600224FFA /* HighRiskFormFieldHeaders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighRiskFormFieldHeaders.swift; sourceTree = "<group>"; };
 		296237D42374B6B400032BB5 /* RadioSwitchInputCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioSwitchInputCollectionViewCell.swift; sourceTree = "<group>"; };
 		296237D52374B6B400032BB5 /* RadioSwitchInputCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RadioSwitchInputCollectionViewCell.xib; sourceTree = "<group>"; };
 		29A9742B236CB59F006C668F /* SwitchInputCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchInputCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -309,6 +317,7 @@
 			children = (
 				294D9A872379C62F00BD4928 /* WatercraftInspectionModel.swift */,
 				29DB0111237204A90046E605 /* JourneyDetailsModel.swift */,
+				29588747237B52F000224FFA /* HighRiskAssessmentModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -317,6 +326,7 @@
 			isa = PBXGroup;
 			children = (
 				294D9A8B237B1E7400BD4928 /* WatercraftInspectionFieldHeaders.swift */,
+				2958874C237B58D600224FFA /* HighRiskFormFieldHeaders.swift */,
 			);
 			path = Contants;
 			sourceTree = "<group>";
@@ -325,6 +335,7 @@
 			isa = PBXGroup;
 			children = (
 				294D9A8E237B1EA300BD4928 /* WatercraftInspectionFormHelper.swift */,
+				29588749237B583C00224FFA /* HighRiskFormHelper.swift */,
 			);
 			path = "Fields Generator";
 			sourceTree = "<group>";
@@ -716,6 +727,7 @@
 				294D9A89237B1D8100BD4928 /* Model */,
 				29F4EC532370B1BB001D5CFA /* Cells */,
 				29F4EC502370B007001D5CFA /* WatercraftInspectionViewController.swift */,
+				29588744237B50CC00224FFA /* HighRiskFormViewController.swift */,
 			);
 			path = "Watercraft Inspection";
 			sourceTree = "<group>";
@@ -1001,6 +1013,7 @@
 				29BAC50C23677EDC00A620F4 /* LoginViewController.swift in Sources */,
 				29E4BBEE237218500079475F /* PreviousWaterBodyCollectionViewCell.swift in Sources */,
 				29F29FAB236CA948004F12E7 /* TextInputCollectionViewCell.swift in Sources */,
+				29588745237B50CC00224FFA /* HighRiskFormViewController.swift in Sources */,
 				29BAC50E236790C900A620F4 /* HomeViewController.swift in Sources */,
 				29514BE62368B70900DC89C4 /* Options.swift in Sources */,
 				29F29FA4236B9114004F12E7 /* InputItem.swift in Sources */,
@@ -1012,6 +1025,7 @@
 				2944AF9B2379B243007517DC /* ViewFieldCollectionViewCell.swift in Sources */,
 				29F4EC512370B007001D5CFA /* WatercraftInspectionViewController.swift in Sources */,
 				29BAC5172367B12300A620F4 /* Colors.swift in Sources */,
+				2958874D237B58D600224FFA /* HighRiskFormFieldHeaders.swift in Sources */,
 				294EF31923708A2100EEB3B6 /* API.swift in Sources */,
 				2907E4BB2368FEA500946B3F /* FormEntryViewController.swift in Sources */,
 				296237D62374B6B400032BB5 /* RadioSwitchInputCollectionViewCell.swift in Sources */,
@@ -1020,6 +1034,8 @@
 				294EF3162370888600EEB3B6 /* Banner.swift in Sources */,
 				29CEC93C23676691003B21B9 /* KeycloakConstants.swift in Sources */,
 				29CEC91C23676424003B21B9 /* SceneDelegate.swift in Sources */,
+				2958874A237B583C00224FFA /* HighRiskFormHelper.swift in Sources */,
+				29588748237B52F000224FFA /* HighRiskAssessmentModel.swift in Sources */,
 				29BAC50923676FDC00A620F4 /* Theme.swift in Sources */,
 				29BAC5152367AD7D00A620F4 /* AutoSync.swift in Sources */,
 				2907E4B42368CE3600946B3F /* PopoverSize.swift in Sources */,

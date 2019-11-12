@@ -355,11 +355,50 @@
                     <navigationItem key="navigationItem" id="IrF-cu-uMQ"/>
                     <connections>
                         <outlet property="collectionView" destination="gUM-D8-l98" id="RuF-Ja-W2y"/>
+                        <segue destination="k5I-JH-KcY" kind="show" identifier="showHighRiskForm" id="Pdm-pz-vcz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rll-yD-UIl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2104" y="-647"/>
+        </scene>
+        <!--High Risk Form View Controller-->
+        <scene sceneID="UsZ-hl-ade">
+            <objects>
+                <viewController modalPresentationStyle="fullScreen" id="k5I-JH-KcY" customClass="HighRiskFormViewController" customModule="Boilerplate" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Q8k-Xc-LJW">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ziD-f4-f9Y">
+                                <rect key="frame" x="42" y="0.0" width="684" height="1024"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="OoW-6g-UKw">
+                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                            </collectionView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="ziD-f4-f9Y" firstAttribute="top" secondItem="WjB-rK-fFc" secondAttribute="top" id="C07-6a-F7n"/>
+                            <constraint firstItem="ziD-f4-f9Y" firstAttribute="leading" secondItem="WjB-rK-fFc" secondAttribute="leading" constant="42" id="H3c-bj-VWJ"/>
+                            <constraint firstItem="WjB-rK-fFc" firstAttribute="bottom" secondItem="ziD-f4-f9Y" secondAttribute="bottom" id="Kzz-fX-UVK"/>
+                            <constraint firstItem="WjB-rK-fFc" firstAttribute="trailing" secondItem="ziD-f4-f9Y" secondAttribute="trailing" constant="42" id="PBm-WF-CDo"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="WjB-rK-fFc"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="9km-6a-IOn"/>
+                    <connections>
+                        <outlet property="collectionView" destination="ziD-f4-f9Y" id="iLL-Rv-A7P"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZWP-HC-Rdc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2971" y="-647"/>
         </scene>
     </scenes>
     <resources>
