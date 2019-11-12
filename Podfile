@@ -1,3 +1,4 @@
+
 # Uncomment the next line to define a global platform for your project
 # platform :ios, '9.0'
 
@@ -11,6 +12,8 @@ target 'ipad' do
   # Storage
   pod 'Realm'
   pod 'RealmSwift'
+  # Animations
+  pod 'lottie-ios'
   # Keybord manager
   pod 'IQKeyboardManagerSwift'
   # Reachability
@@ -19,7 +22,7 @@ target 'ipad' do
   pod 'SingleSignOn', :git => 'https://github.com/bcgov/mobile-authentication-ios.git', :tag => 'v1.0.6'
   # Extensions
   pod 'Extended'
-  # Custom Modal 
+  # Custom Modal
   pod 'Modal'
   # Datepicker
   pod 'DatePicker'
