@@ -7,7 +7,7 @@
 //
 
 import Foundation
-typealias RemoteResponse = [String : Any]
+typealias RemoteResponse = Any
 let APIErrorKey: String = "errors"
 let APIDataKey: String = "data"
 class API: RemoteAPI<RemoteResponse>  {
@@ -20,9 +20,9 @@ class API: RemoteAPI<RemoteResponse>  {
     override func processData(data: Data, more: Any?) -> (RemoteResponse?, Any?) {
         // Try JSON parsing here
         do {
-            let parse: RemoteResponse = try (JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? RemoteResponse ?? [:])
+            let parse: [String : Any] = try (JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: Any] ?? [:])
             // Now check for error
-            if let data = parse[APIDataKey] as? RemoteResponse {
+            if let data = parse[APIDataKey] {
                 return (data, parse)
             } else {
                 return (parse, more)
