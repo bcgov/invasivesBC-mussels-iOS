@@ -34,6 +34,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launch" translatesAutoresizingMaskIntoConstraints="NO" id="Mbs-xL-uYt">
+                                <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                            </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cVa-U7-NGL">
                                 <rect key="frame" x="139" y="292" width="490" height="440"/>
                                 <subviews>
@@ -101,6 +104,10 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="EHi-C8-sfw" firstAttribute="trailing" secondItem="Mbs-xL-uYt" secondAttribute="trailing" id="0Az-X5-sVm"/>
+                            <constraint firstItem="Mbs-xL-uYt" firstAttribute="leading" secondItem="EHi-C8-sfw" secondAttribute="leading" id="1zz-cM-21s"/>
+                            <constraint firstItem="EHi-C8-sfw" firstAttribute="bottom" secondItem="Mbs-xL-uYt" secondAttribute="bottom" id="7Wr-02-f4i"/>
+                            <constraint firstItem="Mbs-xL-uYt" firstAttribute="top" secondItem="EHi-C8-sfw" secondAttribute="top" id="C63-2I-J75"/>
                             <constraint firstItem="cVa-U7-NGL" firstAttribute="centerY" secondItem="djJ-c0-Aw4" secondAttribute="centerY" id="QKY-A8-smk"/>
                             <constraint firstItem="cVa-U7-NGL" firstAttribute="centerX" secondItem="djJ-c0-Aw4" secondAttribute="centerX" id="pHs-ln-0FL"/>
                         </constraints>
@@ -184,6 +191,20 @@
                                             <action selector="userButtonAction:" destination="JwX-i7-BNh" eventType="touchUpInside" id="fjD-Vy-E6O"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jtj-bV-8r4">
+                                        <rect key="frame" x="576" y="41" width="120" height="46"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="120" id="Qeo-xa-8qE"/>
+                                            <constraint firstAttribute="height" constant="36" id="uBx-aT-V4k"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <state key="normal" title="Button">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="syncButtonAction:" destination="JwX-i7-BNh" eventType="touchUpInside" id="MB5-N8-Jci"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -193,9 +214,11 @@
                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="4eR-8r-kOm" secondAttribute="trailing" constant="20" symbolic="YES" id="Oef-AI-2p2"/>
                                     <constraint firstItem="qs0-Z8-kOT" firstAttribute="centerY" secondItem="oEL-Ux-yq2" secondAttribute="centerY" id="WS8-wD-RKe"/>
                                     <constraint firstItem="4eR-8r-kOm" firstAttribute="leading" secondItem="G3o-nN-cQJ" secondAttribute="leading" id="WUt-O9-MSF"/>
+                                    <constraint firstItem="qs0-Z8-kOT" firstAttribute="leading" secondItem="Jtj-bV-8r4" secondAttribute="trailing" constant="11" id="gtv-dz-DXp"/>
                                     <constraint firstItem="C0H-M0-0am" firstAttribute="top" secondItem="oEL-Ux-yq2" secondAttribute="top" constant="30" id="lyq-gL-cOy"/>
                                     <constraint firstItem="qs0-Z8-kOT" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="C0H-M0-0am" secondAttribute="trailing" constant="8" symbolic="YES" id="vtd-FV-Fsn"/>
                                     <constraint firstItem="C0H-M0-0am" firstAttribute="leading" secondItem="oEL-Ux-yq2" secondAttribute="leading" constant="15" id="w3p-S8-ysA"/>
+                                    <constraint firstItem="Jtj-bV-8r4" firstAttribute="centerY" secondItem="qs0-Z8-kOT" secondAttribute="centerY" id="yqK-ze-QFb"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5QE-6C-c2i">
@@ -250,8 +273,10 @@
                         <outlet property="reachabilityIndicator" destination="G3o-nN-cQJ" id="iNX-NX-Rou"/>
                         <outlet property="reachabilityLabel" destination="BhB-gb-4tS" id="63R-G4-qzp"/>
                         <outlet property="switcherHolder" destination="Mee-2o-RFj" id="JvT-Yr-KK6"/>
+                        <outlet property="syncButton" destination="Jtj-bV-8r4" id="o7S-k6-SQf"/>
                         <outlet property="userButton" destination="qs0-Z8-kOT" id="xoK-6C-NR5"/>
                         <segue destination="fxD-jA-8IB" kind="show" identifier="showFormEntry" id="Iqn-O2-aSN"/>
+                        <segue destination="wRQ-S5-s9o" kind="show" identifier="showWatercraftInspectionForm" id="4OX-36-Cn0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9MC-ax-5X6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -315,8 +340,47 @@
             </objects>
             <point key="canvasLocation" x="2103.90625" y="86.71875"/>
         </scene>
+        <!--Watercraft Inspection View Controller-->
+        <scene sceneID="riO-oX-bCE">
+            <objects>
+                <viewController modalPresentationStyle="fullScreen" id="wRQ-S5-s9o" customClass="WatercraftInspectionViewController" customModule="Boilerplate" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="1Uh-bw-RIl">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="gUM-D8-l98">
+                                <rect key="frame" x="42" y="0.0" width="684" height="1024"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="i7t-2b-K4s">
+                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                            </collectionView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="zPU-Zd-6z0" firstAttribute="bottom" secondItem="gUM-D8-l98" secondAttribute="bottom" id="Lbn-Fg-Qe9"/>
+                            <constraint firstItem="zPU-Zd-6z0" firstAttribute="trailing" secondItem="gUM-D8-l98" secondAttribute="trailing" constant="42" id="P4v-Tu-1gi"/>
+                            <constraint firstItem="gUM-D8-l98" firstAttribute="top" secondItem="zPU-Zd-6z0" secondAttribute="top" id="X3D-yt-XOp"/>
+                            <constraint firstItem="gUM-D8-l98" firstAttribute="leading" secondItem="zPU-Zd-6z0" secondAttribute="leading" constant="42" id="oEn-EB-H3A"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="zPU-Zd-6z0"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="IrF-cu-uMQ"/>
+                    <connections>
+                        <outlet property="collectionView" destination="gUM-D8-l98" id="RuF-Ja-W2y"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Rll-yD-UIl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2104" y="-647"/>
+        </scene>
     </scenes>
     <resources>
         <image name="bclogo" width="172" height="148"/>
+        <image name="launch" width="1024" height="768"/>
     </resources>
 </document>

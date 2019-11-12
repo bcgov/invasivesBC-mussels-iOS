@@ -18,6 +18,7 @@ class HomeViewController: BaseViewController {
     @IBOutlet weak var reachabilityLabel: UILabel!
     @IBOutlet weak var lastSyncLabel: UILabel!
     @IBOutlet weak var userButton: UIButton!
+    @IBOutlet weak var syncButton: UIButton!
     @IBOutlet weak var addEntryButton: UIButton!
     @IBOutlet weak var switcherHolder: UIView!
     
@@ -50,6 +51,10 @@ class HomeViewController: BaseViewController {
         initirialize()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillAppear(animated)
         endReachabilityNotification()
@@ -65,8 +70,14 @@ class HomeViewController: BaseViewController {
         }
     }
     
+    @IBAction func syncButtonAction(_ sender: Any) {
+        let syncView: SyncView = SyncView.fromNib()
+        syncView.initialize()
+    }
+    
     @IBAction func addEntryClicked(_ sender: Any) {
-        self.performSegue(withIdentifier: "showFormEntry", sender: self)
+//        self.performSegue(withIdentifier: "showFormEntry", sender: self)
+        self.performSegue(withIdentifier: "showWatercraftInspectionForm", sender: self)
     }
     
     // MARK: Functions
@@ -87,12 +98,13 @@ class HomeViewController: BaseViewController {
     private func style() {
         styleNavigationBar()
         styleUserButton()
+        styleSyncButton()
         styleFillButton(button: addEntryButton)
     }
     
     // Style gradiant navigation
     private func styleNavigationBar() {
-        setGradiantNavBar(view: navigationBar)
+        setGradiantBackground(view: navigationBar)
         setAppTitle(label: appTitle, darkBackground: true)
         styleBody(label: reachabilityLabel, darkBackground: true)
         styleBody(label: lastSyncLabel, darkBackground: true)
@@ -115,6 +127,15 @@ class HomeViewController: BaseViewController {
         userButton.backgroundColor = UIColor.white
         userButton.setTitleColor(Colors.primary, for: .normal)
         userButton.setTitle("AB", for: .normal)
+    }
+    
+    private func styleSyncButton() {
+        syncButton.backgroundColor = .none
+        syncButton.layer.cornerRadius = 18
+        syncButton.layer.borderWidth = 3
+        syncButton.layer.borderColor = UIColor.white.cgColor
+        syncButton.setTitleColor(.white, for: .normal)
+        syncButton.setTitle("Sync Now", for: .normal)
     }
     
     // MARK: Reachability

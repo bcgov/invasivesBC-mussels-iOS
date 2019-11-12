@@ -12,6 +12,7 @@ import DatePicker
 protocol InputDelegate: class {
     func showDropdownDelegate(items: [DropdownModel], on view: UIView, callback: @escaping (_ selection: DropdownModel?) -> Void)
     func showDatepickerDelegate(on view: UIView, initialDate: Date?, minDate: Date?, maxDate: Date?, callback: @escaping (_ date: Date?) -> Void)
+    func showOptionsDelegate(options: [OptionType], on button: UIButton, completion: @escaping (_ option: OptionType) -> Void)
 }
 
 class BaseViewController: UIViewController, Theme, InputDelegate {
@@ -129,12 +130,17 @@ class BaseViewController: UIViewController, Theme, InputDelegate {
     
     // MARK: Delegates
     func showDropdownDelegate(items: [DropdownModel], on view: UIView, callback:  @escaping (_ selection: DropdownModel?) -> Void) {
-        self.showDropdown(items: items, on: view, completion: callback)
+        showDropdown(items: items, on: view, completion: callback)
     }
     
     func showDatepickerDelegate(on view: UIView, initialDate: Date?, minDate: Date?, maxDate: Date?, callback: @escaping (Date?) -> Void) {
         showDatepicker(on: view, initialDate: initialDate, minDate: minDate, maxDate: maxDate, completion: callback)
     }
+    
+    func showOptionsDelegate(options: [OptionType], on button: UIButton, completion: @escaping (OptionType) -> Void) {
+        showOptions(options: options, on: button, completion: completion)
+    }
+    
     
     // MARK: Animations
     public func animateIt() {

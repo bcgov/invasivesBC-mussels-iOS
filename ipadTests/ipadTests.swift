@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import ipad
+@testable import Boilerplate
 
 class ipadTests: XCTestCase {
 

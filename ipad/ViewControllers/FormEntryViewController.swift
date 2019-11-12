@@ -31,10 +31,13 @@ class FormEntryViewController: BaseViewController {
     
     // MARK: Outlet actions
     @IBAction func testAction(_ sender: UIButton) {
-        Banner.show(message: "hello!!!")
-        for item in self.inputItems {
-            print(item.value.get(type: item.type) ?? "Not Set")
-        }
+        let syncModal: SyncView = SyncView.fromNib()
+        syncModal.initialize()
+
+//        Banner.show(message: "hello!!!")
+//        for item in self.inputItems {
+//            print(item.value.get(type: item.type) ?? "Not Set")
+//        }
     }
     
     // MARK: Temporary

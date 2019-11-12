@@ -27,24 +27,24 @@ pool:
   vmImage: 'macos-latest'
 
 variables:
-  ProfileFileName: 'My_Range_BC.mobileprovision' #TODO 
-  ProfileUUID: 'efb503e7-d542-44f3-bef5-4c43e21248bf' #TODO
-  CertificateFileName: 'itunes-store.p12' #TODO
-  WorkspacePath: '**/Myra.xcworkspace' #TODO
-  SchemaName: 'Myra' #TODO
+  ProfileFileName: 'Invasive_Species.mobileprovision'
+  ProfileUUID: 'c7e46a9d-5cd2-4508-94ac-924300256c25'
+  CertificateFileName: 'itunes-store.p12'
+  WorkspacePath: '**/ipad.xcworkspace'
+  SchemaName: 'ipad'
   ExportOptionsFileName: 'options.plist'
   ExportMethod: 'app-store'
   # Variables below are used for ITC uploads
   BundleID: 'ca.bc.gov.InvasivesBC'
   AppStoreServiceConnectionName: 'BCDevX'
-  ITCTeamID: 908186 #TODO
+  ITCTeamID: 908186
 
 steps:
 - task: InstallAppleCertificate@2
   inputs:
     certSecureFile: $(CertificateFileName)
     certPwd: '$(P12password)'
-    keychain: 'temp' #TODO
+    keychain: 'temp'
 - task: InstallAppleProvisioningProfile@1
   inputs:
     provisioningProfileLocation: 'secureFiles'

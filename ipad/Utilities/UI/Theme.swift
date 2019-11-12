@@ -46,18 +46,20 @@ extension Theme {
     
     // Sub-header
     public func styleSubHeader(label: UILabel, darkBackground: Bool? = false) {
-          label.textColor = darkBackground ?? false ? UIColor.white : Colors.bodyText
-          label.font = getSubHeaderFont()
-          label.change(kernValue: -0.52)
-          label.adjustsFontSizeToFitWidth = true
+        label.textColor = darkBackground ?? false ? UIColor.white : Colors.bodyText
+        label.font = getSubHeaderFont()
+        label.change(kernValue: -0.52)
+        label.adjustsFontSizeToFitWidth = true
     }
     
+    // Input field header
     public func styleFieldHeader(label: UILabel) {
         label.textColor = Colors.inputHeaderText
         label.font = Fonts.getPrimaryBold(size: 12)
         label.adjustsFontSizeToFitWidth = true
     }
     
+    // Input field content
     public func styleFieldInput(textField: UITextField) {
         textField.textColor = Colors.inputText
         textField.backgroundColor = Colors.inputBackground
@@ -67,33 +69,52 @@ extension Theme {
         textField.layer.borderColor = Colors.inputBackground.cgColor
     }
     
+    // Input field content
+    public func styleFieldInput(textField: UITextView) {
+        textField.textColor = Colors.inputText
+        textField.backgroundColor = Colors.inputBackground
+        textField.font = getInputFieldFont()
+        textField.layer.cornerRadius = 3
+        textField.layer.borderColor = Colors.inputBackground.cgColor
+    }
+    
+    // Form Section title
+    public func styleSectionTitle(label: UILabel) {
+        label.font = Fonts.getPrimaryBold(size: 22)
+    }
+    
     // MARK: Buttons
     public func styleHollowButton(button: UIButton) {
         styleButton(button: button, bg: UIColor.white, borderColor: Colors.primary.cgColor, titleColor:Colors.primary)
     }
-
+    
     public func styleFillButton(button: UIButton) {
         styleButton(button: button, bg: Colors.primary, borderColor: Colors.primary.cgColor, titleColor: UIColor.white)
         if let label = button.titleLabel {
             label.font = Fonts.getPrimary(size: 17)
         }
     }
-
+    
     private func styleButton(button: UIButton, bg: UIColor, borderColor: CGColor, titleColor: UIColor) {
-           button.layer.cornerRadius = 5
-           button.backgroundColor = bg
-           button.layer.borderWidth = 1
-           button.layer.borderColor = borderColor
-           button.setTitleColor(titleColor, for: .normal)
+        button.layer.cornerRadius = 5
+        button.backgroundColor = bg
+        button.layer.borderWidth = 1
+        button.layer.borderColor = borderColor
+        button.setTitleColor(titleColor, for: .normal)
     }
     
     // MARK: Colors
-    // Style a garadiant nav bar
-    public func setGradiantNavBar(view: UIView) {
+    // Gradiant UIView
+    public func setGradiantBackground(view: UIView) {
         setGradientBackground(view: view, colorOne: UIColor(hex: "#0053A4"), colorTwo: UIColor(hex:"#002C71"));
     }
     
-    // Set grediant branckground
+    // Gradiant Navbar
+    public func setGradiantBackground(navigationBar: UINavigationBar) {
+         navigationBar.setGradientBackground(colors: [UIColor(hex:"#002C71"), UIColor(hex: "#0053A4")], startPoint: .bottomRight, endPoint: .bottomLeft)
+     }
+    
+    // Gradiant UIView with custom colors
     public func setGradientBackground(view: UIView, colorOne: UIColor, colorTwo: UIColor) {
         view.insertHorizontalGradient(colorTwo, colorOne)
     }
@@ -111,12 +132,12 @@ extension Theme {
     public func makeCircle(view: UIView) {
         view.layer.cornerRadius = view.frame.size.height/2
     }
-
+    
     // Circular button
     public func makeCircle(button: UIButton) {
         makeCircle(layer: button.layer, height: button.bounds.height)
     }
-
+    
     // Circular layer
     public func makeCircle(layer: CALayer, height: CGFloat) {
         layer.cornerRadius = height/2
@@ -140,6 +161,13 @@ extension Theme {
     public func styleCard(layer: CALayer) {
         roundCorners(layer: layer)
         addShadow(to: layer, opacity: 08, height: 2)
+    }
+    
+    public func styleDivider(view: UIView) {
+        view.backgroundColor = Colors.secondary
+    }
+    public func styleDividerGrey(view: UIView) {
+        view.backgroundColor = Colors.Status.LightGray
     }
     
     // MARK: ANIMATIONS

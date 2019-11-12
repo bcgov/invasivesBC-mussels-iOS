@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>teamID</key>
+    <string>L796QSLV3E</string>
+	<key>method</key>
+	<string>app-store</string>
+	<key>signingStyle</key>
+	<string>automatic</string>
+	<key>stripSwiftSymbols</key>
+	<true/>
+	<key>uploadBitcode</key>
+	<true/>
+	<key>uploadSymbols</key>
+	<true/>
+	<key>provisioningProfiles</key>
+	<dict>
+		<key>ca.bc.gov.InvasivesBC</key>
+		<string>c7e46a9d-5cd2-4508-94ac-924300256c25</string>
+	</dict>
+</dict>
+</plist>
