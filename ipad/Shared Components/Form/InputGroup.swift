@@ -141,10 +141,9 @@ class InputGroupView: UIView {
             }
             
             // TODO: handle height for items with dependency where dependency is not satisfied
-//            if let dependency = item.dependency, !dependency.isSatisfied() {
-//                continue
-//            }
-//
+            if let dependency = item.dependency, !dependency.isSatisfied() {
+                continue
+            }
             
             // If current item's height is greater than the max item height for row
             // set max item hight for row

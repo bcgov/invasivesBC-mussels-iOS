@@ -71,7 +71,7 @@ class FormHelper {
         let adultDreissenidFound =  SwitchInput(key: "adultDreissenidFound", header: "Were adult dreissenid mussels found?", editable: isEditable ?? true, width: .Third)
         let highRiskForDreissenid =  SwitchInput(key: "highRiskForDreissenid", header: "Is the wartercraft/equipment high risk for dreissenid or other AIS? *", editable: isEditable ?? true, width: .Third)
         let passportIssued =  SwitchInput(key: "passportIssued", header: "Was a Passport issued?", editable: isEditable ?? true, width: .Third)
-        passportIssued.dependency = InputDependency(to: aquaticPlantsFound, equalTo: true)
+//        passportIssued.dependency = InputDependency(to: aquaticPlantsFound, equalTo: true)
         
         sectionItems.append(aquaticPlantsFound)
         sectionItems.append(marineMusslesFound)

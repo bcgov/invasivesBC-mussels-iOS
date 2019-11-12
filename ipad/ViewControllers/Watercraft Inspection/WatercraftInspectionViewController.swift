@@ -17,7 +17,7 @@ private enum JourneyDetailsSectionRow {
     case Divider
 }
 
-private enum FromSection: Int, CaseIterable {
+public enum WatercraftFromSection: Int, CaseIterable {
     case PassportInfo = 0
     case BasicInformation
     case WatercraftDetails
@@ -172,7 +172,7 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        guard let sectionType = FromSection(rawValue: Int(section)) else {return 0}
+        guard let sectionType = WatercraftFromSection(rawValue: Int(section)) else {return 0}
         
         if sectionType == .JourneyDetails {
             return journeyDetails.previousWaterBodies.count + journeyDetails.destinationWaterBodies.count + 4
@@ -183,28 +183,28 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         if showFullInspection {
-            return FromSection.allCases.count
+            return WatercraftFromSection.allCases.count
         } else {
             return 1
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let sectionType = FromSection(rawValue: Int(indexPath.section)), let model = self.model else {
+        guard let sectionType = WatercraftFromSection(rawValue: Int(indexPath.section)), let model = self.model else {
             return UICollectionViewCell()
         }
         switch sectionType {
         case .PassportInfo:
             let cell = getBasicCell(indexPath: indexPath)
-            cell.setup(title: "Passport Information", input: model.getPassportFields(editable: isEditable), delegate: self)
+            cell.setup(title: "Passport Information", input: model.getInputputFields(for: sectionType, editable: isEditable), delegate: self)
             return cell
         case .BasicInformation:
             let cell = getBasicCell(indexPath: indexPath)
-            cell.setup(title: "Basic Information", input: FormHelper.watercraftInspectionBasciInfoInputs(isEditable: isEditable), delegate: self)
+            cell.setup(title: "Basic Information", input: model.getInputputFields(for: sectionType, editable: isEditable), delegate: self)
             return cell
         case .WatercraftDetails:
             let cell = getBasicCell(indexPath: indexPath)
-            cell.setup(title: "Watercraft Details", input: FormHelper.watercraftInspectionWatercraftDetailsInputs(isEditable: isEditable), delegate: self)
+            cell.setup(title: "Watercraft Details", input: model.getInputputFields(for: sectionType, editable: isEditable), delegate: self)
             return cell
         case .JourneyDetails:
             return getJourneyDetailsCell(for: indexPath)
@@ -220,18 +220,18 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        guard let sectionType = FromSection(rawValue: Int(indexPath.section)), let model = self.model else {
+        guard let sectionType = WatercraftFromSection(rawValue: Int(indexPath.section)), let model = self.model else {
             return CGSize(width: 0, height: 0)
         }
         switch sectionType {
         case .PassportInfo:
-            let estimatedContentHeight = InputGroupView.estimateContentHeight(for: model.getPassportFields(editable: isEditable))
+            let estimatedContentHeight = InputGroupView.estimateContentHeight(for: model.getInputputFields(for: sectionType))
             return CGSize(width: self.collectionView.frame.width, height: estimatedContentHeight + 80)
         case .BasicInformation:
-            let estimatedContentHeight = InputGroupView.estimateContentHeight(for: FormHelper.watercraftInspectionBasciInfoInputs())
+            let estimatedContentHeight = InputGroupView.estimateContentHeight(for: model.getInputputFields(for: sectionType))
             return CGSize(width: self.collectionView.frame.width, height: estimatedContentHeight + 80)
         case .WatercraftDetails:
-            let estimatedContentHeight = InputGroupView.estimateContentHeight(for: FormHelper.watercraftInspectionWatercraftDetailsInputs())
+            let estimatedContentHeight = InputGroupView.estimateContentHeight(for: model.getInputputFields(for: sectionType))
             return CGSize(width: self.collectionView.frame.width, height: estimatedContentHeight + 80)
         case .JourneyDetails:
             return estimateJourneyDetailsCellHeight(for: indexPath)

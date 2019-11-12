@@ -16,6 +16,8 @@
 		2944AF9B2379B243007517DC /* ViewFieldCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2944AF992379B243007517DC /* ViewFieldCollectionViewCell.swift */; };
 		2944AF9C2379B243007517DC /* ViewFieldCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2944AF9A2379B243007517DC /* ViewFieldCollectionViewCell.xib */; };
 		294D9A882379C62F00BD4928 /* WatercraftInspectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294D9A872379C62F00BD4928 /* WatercraftInspectionModel.swift */; };
+		294D9A8C237B1E7400BD4928 /* WatercraftInspectionFieldHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294D9A8B237B1E7400BD4928 /* WatercraftInspectionFieldHeaders.swift */; };
+		294D9A8F237B1EA300BD4928 /* WatercraftInspectionFormHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294D9A8E237B1EA300BD4928 /* WatercraftInspectionFormHelper.swift */; };
 		294EF30B2370841B00EEB3B6 /* SyncView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 294EF30A2370841B00EEB3B6 /* SyncView.xib */; };
 		294EF30F2370845700EEB3B6 /* SyncView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294EF30E2370845700EEB3B6 /* SyncView.swift */; };
 		294EF3122370885100EEB3B6 /* BannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294EF3112370885100EEB3B6 /* BannerView.swift */; };
@@ -125,6 +127,8 @@
 		2944AF992379B243007517DC /* ViewFieldCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewFieldCollectionViewCell.swift; sourceTree = "<group>"; };
 		2944AF9A2379B243007517DC /* ViewFieldCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ViewFieldCollectionViewCell.xib; sourceTree = "<group>"; };
 		294D9A872379C62F00BD4928 /* WatercraftInspectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatercraftInspectionModel.swift; sourceTree = "<group>"; };
+		294D9A8B237B1E7400BD4928 /* WatercraftInspectionFieldHeaders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatercraftInspectionFieldHeaders.swift; sourceTree = "<group>"; };
+		294D9A8E237B1EA300BD4928 /* WatercraftInspectionFormHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatercraftInspectionFormHelper.swift; sourceTree = "<group>"; };
 		294EF30A2370841B00EEB3B6 /* SyncView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SyncView.xib; sourceTree = "<group>"; };
 		294EF30E2370845700EEB3B6 /* SyncView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncView.swift; sourceTree = "<group>"; };
 		294EF3112370885100EEB3B6 /* BannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerView.swift; sourceTree = "<group>"; };
@@ -279,7 +283,6 @@
 			children = (
 				2907E4B32368CE3600946B3F /* PopoverSize.swift */,
 				29DB0111237204A90046E605 /* JourneyDetailsModel.swift */,
-				294D9A872379C62F00BD4928 /* WatercraftInspectionModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -300,6 +303,30 @@
 				2944AF9A2379B243007517DC /* ViewFieldCollectionViewCell.xib */,
 			);
 			path = "View Field";
+			sourceTree = "<group>";
+		};
+		294D9A89237B1D8100BD4928 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				294D9A872379C62F00BD4928 /* WatercraftInspectionModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		294D9A8A237B1D9100BD4928 /* Contants */ = {
+			isa = PBXGroup;
+			children = (
+				294D9A8B237B1E7400BD4928 /* WatercraftInspectionFieldHeaders.swift */,
+			);
+			path = Contants;
+			sourceTree = "<group>";
+		};
+		294D9A8D237B1E8900BD4928 /* Fields Generator */ = {
+			isa = PBXGroup;
+			children = (
+				294D9A8E237B1EA300BD4928 /* WatercraftInspectionFormHelper.swift */,
+			);
+			path = "Fields Generator";
 			sourceTree = "<group>";
 		};
 		294EF309237083F600EEB3B6 /* Sync view */ = {
@@ -684,6 +711,9 @@
 		29F4EC522370B142001D5CFA /* Watercraft Inspection */ = {
 			isa = PBXGroup;
 			children = (
+				294D9A8D237B1E8900BD4928 /* Fields Generator */,
+				294D9A8A237B1D9100BD4928 /* Contants */,
+				294D9A89237B1D8100BD4928 /* Model */,
 				29F4EC532370B1BB001D5CFA /* Cells */,
 				29F4EC502370B007001D5CFA /* WatercraftInspectionViewController.swift */,
 			);
@@ -940,6 +970,7 @@
 				5C82D3D82374AECC00B065BA /* HighRiskModalView.swift in Sources */,
 				29BAC5102367984000A620F4 /* GradiantView.swift in Sources */,
 				29514BE32368B5AF00DC89C4 /* Notifications.swift in Sources */,
+				294D9A8F237B1EA300BD4928 /* WatercraftInspectionFormHelper.swift in Sources */,
 				29F29FA6236BB541004F12E7 /* BaseInputCell.swift in Sources */,
 				295051092374D764000FBD6E /* DoubleInputCollectionViewCell.swift in Sources */,
 				29F29FA1236B8670004F12E7 /* DropdownCollectionViewCell.swift in Sources */,
@@ -947,6 +978,7 @@
 				29BAC5122367A21300A620F4 /* StringConstants.swift in Sources */,
 				294EF30F2370845700EEB3B6 /* SyncView.swift in Sources */,
 				29F4EC562370B1F8001D5CFA /* BasicCollectionViewCell.swift in Sources */,
+				294D9A8C237B1E7400BD4928 /* WatercraftInspectionFieldHeaders.swift in Sources */,
 				29DB011B237207BF0046E605 /* FormButtonCollectionViewCell.swift in Sources */,
 				29514BD62368AD6F00DC89C4 /* OptionsTableViewCell.swift in Sources */,
 				294EF3122370885100EEB3B6 /* BannerView.swift in Sources */,
