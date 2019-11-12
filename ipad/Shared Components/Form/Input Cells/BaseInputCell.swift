@@ -30,11 +30,23 @@ class BaseInputCell<Model: InputItem>: UICollectionViewCell,Theme {
         return autoLayoutAttributes
     }
     
+    func beginListener() {
+        NotificationCenter.default.addObserver(self, selector: #selector(self.InputFieldshouldUpdate(notification:)), name: .InputFieldShouldUpdate, object: nil)
+    }
+    
+    @objc func InputFieldshouldUpdate(notification: Notification) {
+        guard let model = self.model, let notificationInput = notification.object as? InputItem, model.key == notificationInput.key else {return}
+        self.updateValue(value: notificationInput.value)
+    }
+    
+    func updateValue(value: InputValue) {}
+    
     // MARK: Setup
     func setup(with model: Model, delegate: InputDelegate) {
         self.model = model
         self.inputDelegate = delegate
         initialize(with: model)
+        beginListener()
     }
     
     func initialize(with model: Model) {}

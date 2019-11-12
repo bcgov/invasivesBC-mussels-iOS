@@ -282,7 +282,6 @@
 			isa = PBXGroup;
 			children = (
 				2907E4B32368CE3600946B3F /* PopoverSize.swift */,
-				29DB0111237204A90046E605 /* JourneyDetailsModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -309,6 +308,7 @@
 			isa = PBXGroup;
 			children = (
 				294D9A872379C62F00BD4928 /* WatercraftInspectionModel.swift */,
+				29DB0111237204A90046E605 /* JourneyDetailsModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";

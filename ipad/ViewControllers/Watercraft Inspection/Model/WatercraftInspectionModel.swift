@@ -60,7 +60,6 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
     @objc dynamic var previousInspection: Bool = false
     @objc dynamic var previousInspectionSource: String = ""
     @objc dynamic var previousInspectionDays: Int = 0
-    //
     // Inspection Details
     @objc dynamic var marineMusslesFound: Bool = false
     @objc dynamic var failedToStop: Bool = false
@@ -71,7 +70,7 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
     // General comments
     @objc dynamic var generalComments: String = ""
     // Journey
-    private var journeyDetails: JourneyDetailsModel = JourneyDetailsModel()
+    private var journeyDetails: List<JourneyDetailsModel> = List<JourneyDetailsModel>()
     
     // Form Objects (Cached - Not stored)
     private var inputItems : [WatercraftFromSection: [InputItem]] = [WatercraftFromSection: [InputItem]]()
@@ -85,7 +84,31 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
             "k9Inspection": k9Inspection,
             "decontaminationPerformed": decontaminationPerformed,
             "marineSpeciesFound": marineSpeciesFound,
-            "aquaticPlantsFound": aquaticPlantsFound
+            "aquaticPlantsFound": aquaticPlantsFound,
+            
+            "province": province,
+            "nonMotorized": province,
+            "simple": simple,
+            "complex": complex,
+            "veryComplex": veryComplex,
+            
+            "numberOfPeopleInParty": numberOfPeopleInParty,
+            "commerciallyHauled": commerciallyHauled,
+            "highRiskArea": highRiskArea,
+            "previousAISKnowlede": previousAISKnowlede,
+            "previousAISKnowledeSource": previousAISKnowledeSource,
+            "previousInspection": previousInspection,
+            "previousInspectionSource": previousInspectionSource,
+            "previousInspectionDays": previousInspectionDays,
+            
+            "marineMusslesFound": marineMusslesFound,
+            "failedToStop": marineMusslesFound,
+            "ticketIssued": marineMusslesFound,
+            
+            "highriskAIS": highriskAIS,
+            "adultDreissenidFound": adultDreissenidFound,
+            
+            "generalComments": generalComments
         ]
     }
     

@@ -67,16 +67,35 @@ class WatercraftInspectionViewController: BaseViewController {
     
     @objc func shouldResizeInputGroup(notification: Notification) {
         self.collectionView.collectionViewLayout.invalidateLayout()
-        
     }
     
     @objc func inputItemValueChanged(notification: Notification) {
-        guard let item: InputItem = notification.object as? InputItem else {return}
+        guard var item: InputItem = notification.object as? InputItem else {return}
         formResult[item.key] = item.value.get(type: item.type)
         // Set value in Realm object
         if let m = model {
-            // TODO: needs cleanup for nil case
-            m.set(value: item.value.get(type: item.type), for: item.key)
+            // Keys that need a pop up/ additional actions
+            if (item.key == "highriskAIS" || item.key == "adultDreissenidFound" ) {
+                let value = item.value.get(type: item.type) as? Bool
+                if value == true {
+                    let highRiskModal: HighRiskModalView = HighRiskModalView.fromNib()
+                    highRiskModal.initialize(onSubmit: {
+                        // Confirmed
+                        m.set(value: true, for: item.key)
+                        // SHow high risk modal
+                    }) {
+                        // Cancelled
+                        m.set(value: false, for: item.key)
+                        item.value.set(value: false, type: item.type)
+                        NotificationCenter.default.post(name: .InputFieldShouldUpdate, object: item)
+                    }
+                }
+            } else {
+                // All other keys, store directly
+                // TODO: needs cleanup for nil case
+                m.set(value: item.value.get(type: item.type), for: item.key)
+            }
+            
         }
         // Handle Keys that alter form
         if item.key == "isPassportHolder" {
@@ -217,7 +236,6 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
         case .HighRiskAssessmentFields:
             let cell = getBasicCell(indexPath: indexPath)
             cell.setup(title: "High Risk Assessment Fields", input: model.getInputputFields(for: sectionType, editable: isEditable), delegate: self, boxed: true, showDivider: false)
-            cell.autoresizesSubviews = true
             return cell
         case .GeneralComments:
             let cell = getBasicCell(indexPath: indexPath)
