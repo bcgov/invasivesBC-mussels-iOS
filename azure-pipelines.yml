@@ -27,7 +27,7 @@ pool:
   vmImage: 'macos-latest'
 
 variables:
-  ProfileFileName: 'My_Range_BC.mobileprovision' #TODO
+  ProfileFileName: 'My_Range_BC.mobileprovision' #TODO 
   ProfileUUID: 'efb503e7-d542-44f3-bef5-4c43e21248bf' #TODO
   CertificateFileName: 'itunes-store.p12' #TODO
   WorkspacePath: '**/Myra.xcworkspace' #TODO
@@ -35,7 +35,7 @@ variables:
   ExportOptionsFileName: 'options.plist'
   ExportMethod: 'app-store'
   # Variables below are used for ITC uploads
-  BundleID: 'ca.bc.gov.myrangebc' #TODO
+  BundleID: 'ca.bc.gov.InvasivesBC'
   AppStoreServiceConnectionName: 'BCDevX'
   ITCTeamID: 908186 #TODO
 
