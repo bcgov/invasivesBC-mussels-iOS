@@ -240,7 +240,7 @@ class WatercraftInspectionFormHelper {
             header: WatercraftFieldHeaderConstants.InspectionDetails.aquaticPlantsFound,
             editable: editable ?? true,
             value: object?.aquaticPlantsFound ?? nil,
-            width: .Full
+            width: .Forth
         )
         sectionItems.append(aquaticPlantsFound)
         
@@ -249,7 +249,7 @@ class WatercraftInspectionFormHelper {
             header: WatercraftFieldHeaderConstants.InspectionDetails.marineMusslesFound,
             editable: editable ?? true,
             value: object?.marineMusslesFound ?? nil,
-            width: .Full
+            width: .Forth
         )
         sectionItems.append(marineMusslesFound)
         
@@ -258,7 +258,7 @@ class WatercraftInspectionFormHelper {
             header: WatercraftFieldHeaderConstants.InspectionDetails.failedToStop,
             editable: editable ?? true,
             value: object?.failedToStop ?? nil,
-            width: .Full
+            width: .Forth
         )
         sectionItems.append(failedToStop)
         
@@ -267,7 +267,7 @@ class WatercraftInspectionFormHelper {
             header: WatercraftFieldHeaderConstants.InspectionDetails.ticketIssued,
             editable: editable ?? true,
             value: object?.ticketIssued ?? nil,
-            width: .Full
+            width: .Forth
         )
         sectionItems.append(ticketIssued)
         return sectionItems
@@ -280,7 +280,7 @@ class WatercraftInspectionFormHelper {
             header: WatercraftFieldHeaderConstants.HighriskAssessmentFields.highriskAIS,
             editable: editable ?? true,
             value: object?.highriskAIS ?? nil,
-            width: .Full
+            width: .Half
         )
         sectionItems.append(highriskAIS)
         
@@ -289,7 +289,7 @@ class WatercraftInspectionFormHelper {
             header: WatercraftFieldHeaderConstants.HighriskAssessmentFields.adultDreissenidFound,
             editable: editable ?? true,
             value: object?.adultDreissenidFound ?? nil,
-            width: .Full
+            width: .Half
         )
         sectionItems.append(adultDreissenidFound)
         return sectionItems

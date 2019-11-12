@@ -60,6 +60,7 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
     @objc dynamic var previousInspection: Bool = false
     @objc dynamic var previousInspectionSource: String = ""
     @objc dynamic var previousInspectionDays: Int = 0
+    //
     // Inspection Details
     @objc dynamic var marineMusslesFound: Bool = false
     @objc dynamic var failedToStop: Bool = false
@@ -69,6 +70,8 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
     @objc dynamic var adultDreissenidFound: Bool = false
     // General comments
     @objc dynamic var generalComments: String = ""
+    // Journey
+    private var journeyDetails: JourneyDetailsModel = JourneyDetailsModel()
     
     // Form Objects (Cached - Not stored)
     private var inputItems : [WatercraftFromSection: [InputItem]] = [WatercraftFromSection: [InputItem]]()
@@ -112,11 +115,16 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
                 inputItems[section] = WatercraftInspectionFormHelper.getPassportFields(for: self, editable: editable)
                 return inputItems[section] ?? []
             case .InspectionDetails:
-                inputItems[section] = WatercraftInspectionFormHelper.getPassportFields(for: self, editable: editable)
+                inputItems[section] = WatercraftInspectionFormHelper.getInspectionDetailsFields(for: self, editable: editable)
                 return inputItems[section] ?? []
             case .GeneralComments:
-                inputItems[section] = WatercraftInspectionFormHelper.getPassportFields(for: self, editable: editable)
+                inputItems[section] = WatercraftInspectionFormHelper.getGeneralCommentsFields(for: self, editable: editable)
                 return inputItems[section] ?? []
+            case .HighRiskAssessmentFields:
+                inputItems[section] = WatercraftInspectionFormHelper.getHighriskAssessmentFieldsFields(for: self, editable: editable)
+                return inputItems[section] ?? []
+            case .Divider:
+                return []
             }
         }
     }

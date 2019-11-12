@@ -23,6 +23,8 @@ public enum WatercraftFromSection: Int, CaseIterable {
     case WatercraftDetails
     case JourneyDetails
     case InspectionDetails
+    case HighRiskAssessmentFields
+    case Divider
     case GeneralComments
 }
 
@@ -38,7 +40,7 @@ class WatercraftInspectionViewController: BaseViewController {
         "HeaderCollectionViewCell",
         "DividerCollectionViewCell",
         "DestinationWaterBodyCollectionViewCell",
-        "PreviousWaterBodyCollectionViewCell"
+        "PreviousWaterBodyCollectionViewCell",
     ]
     
     // MARK: Variables
@@ -210,12 +212,19 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
             return getJourneyDetailsCell(for: indexPath)
         case .InspectionDetails:
             let cell = getBasicCell(indexPath: indexPath)
-            cell.setup(title: "Inspection Details", input: FormHelper.watercraftInspectionInspectionDetailsInputs(isEditable: isEditable), delegate: self)
+            cell.setup(title: "Inspection Details", input: model.getInputputFields(for: sectionType, editable: isEditable), delegate: self, showDivider: false)
+            return cell
+        case .HighRiskAssessmentFields:
+            let cell = getBasicCell(indexPath: indexPath)
+            cell.setup(title: "High Risk Assessment Fields", input: model.getInputputFields(for: sectionType, editable: isEditable), delegate: self, boxed: true, showDivider: false)
+            cell.autoresizesSubviews = true
             return cell
         case .GeneralComments:
             let cell = getBasicCell(indexPath: indexPath)
-            cell.setup(title: "Comments", input: FormHelper.watercraftInspectionCommentSectionInputs(isEditable: isEditable), delegate: self)
+            cell.setup(title: "Comments", input: model.getInputputFields(for: sectionType, editable: isEditable), delegate: self)
             return cell
+        case .Divider:
+            return getDividerCell(indexPath: indexPath)
         }
     }
     
@@ -236,11 +245,16 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
         case .JourneyDetails:
             return estimateJourneyDetailsCellHeight(for: indexPath)
         case .InspectionDetails:
-            let estimatedContentHeight = InputGroupView.estimateContentHeight(for: FormHelper.watercraftInspectionInspectionDetailsInputs())
+            let estimatedContentHeight = InputGroupView.estimateContentHeight(for: model.getInputputFields(for: sectionType))
             return CGSize(width: self.collectionView.frame.width, height: estimatedContentHeight + 80)
+        case .HighRiskAssessmentFields:
+            let estimatedContentHeight = InputGroupView.estimateContentHeight(for: model.getInputputFields(for: sectionType))
+            return CGSize(width: self.collectionView.bounds.width - 16, height: estimatedContentHeight + 80)
         case .GeneralComments:
-            let estimatedContentHeight = InputGroupView.estimateContentHeight(for: FormHelper.watercraftInspectionCommentSectionInputs())
+            let estimatedContentHeight = InputGroupView.estimateContentHeight(for: model.getInputputFields(for: sectionType))
             return CGSize(width: self.collectionView.frame.width, height: estimatedContentHeight + 80)
+        case .Divider:
+            return CGSize(width: self.collectionView.frame.width, height: 30)
         }
     }
     

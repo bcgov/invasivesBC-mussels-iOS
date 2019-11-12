@@ -616,13 +616,13 @@
 			path = Constants;
 			sourceTree = "<group>";
 		};
-		29DB010B2371EE2F0046E605 /* Basic */ = {
+		29DB010B2371EE2F0046E605 /* Basic (header + Input group) */ = {
 			isa = PBXGroup;
 			children = (
 				29F4EC542370B1F8001D5CFA /* BasicCollectionViewCell.swift */,
 				29F4EC552370B1F8001D5CFA /* BasicCollectionViewCell.xib */,
 			);
-			path = Basic;
+			path = "Basic (header + Input group)";
 			sourceTree = "<group>";
 		};
 		29DB0113237206B90046E605 /* Header */ = {
@@ -723,7 +723,7 @@
 		29F4EC532370B1BB001D5CFA /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				29DB010B2371EE2F0046E605 /* Basic */,
+				29DB010B2371EE2F0046E605 /* Basic (header + Input group) */,
 				29E4BBE5237211F10079475F /* Divider */,
 				29DB0118237207AD0046E605 /* Button */,
 				29DB0113237206B90046E605 /* Header */,
