@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import Boilerplate
+@testable import InvasivesBC
 
 class WorkflowAPITest: XCTestCase {
     let api: WorkflowAPI = WorkflowAPI.api()
@@ -29,7 +29,12 @@ class WorkflowAPITest: XCTestCase {
             "endOfDayForm": ["test": "From ipad"],
             "info": ["test" : "testing"]
         ])
-        promise?.then({ (data, resp) in
+        promise?.then({ (dat, resp) in
+            guard let data = dat as? [String : Any] else {
+                XCTAssert(false)
+                expectation.fulfill()
+                return
+            }
             let map: [String : Any] = resp as? [String : Any] ?? [:]
             XCTAssertNotNil(map)
             XCTAssertNotNil(map["data"])
@@ -62,6 +67,10 @@ class WorkflowAPITest: XCTestCase {
             expectation.fulfill()
         })
         wait(for: [expectation], timeout: 20.0)
+    }
+    
+    func testGet() {
+        
     }
 
     func testPerformanceExample() {

@@ -19,6 +19,9 @@ let remoteURL: String = "https://api-dev-invasivesbc.pathfinder.gov.bc.ca/api"
 enum EndPoints: String {
     case none = ""
     case workflow = "/mussels/workflow"
+    case watercraftAssessment = "/mussels/wra"
+    case waterBody = "/mussels/water-body"
+    case codes = "/mussels/codes"
 }
 
 /**
@@ -27,6 +30,18 @@ enum EndPoints: String {
 struct APIURL {
     static let wokrflow: String =  {
         return remoteURL + EndPoints.workflow.rawValue
+    }()
+    
+    static let watercraftRiskAssessment: String = {
+        return remoteURL + EndPoints.watercraftAssessment.rawValue
+    }()
+    
+    static let waterBody: String = {
+        return remoteURL + EndPoints.waterBody.rawValue
+    }()
+    
+    static let codes: String = {
+        return remoteURL + EndPoints.codes.rawValue
     }()
 }
 
