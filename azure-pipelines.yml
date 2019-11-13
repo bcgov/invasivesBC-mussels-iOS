@@ -27,8 +27,6 @@ pool:
   vmImage: 'macos-latest'
 
 variables:
-
-variables:
 - group: CertsAndKeys
 - name: 'ProfileFileName'
   value: 'Invasive_Species.mobileprovision'
