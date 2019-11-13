@@ -24,7 +24,7 @@ TARGET=$1
 PROJECT_FILE=$(find . -d 1 -iname '*.xcodeproj')
 APP_PLIST=$(
     xcodebuild -project "$PROJECT_FILE" -target "$TARGET" -showBuildSettings \
-    | grep "INFOPLIST_FILE" \
+    | grep -Ei "^\s*INFOPLIST_FILE\s." \
     | awk -F  "=" '{print $2}' \
     | awk '{$1=$1};1'
 )
