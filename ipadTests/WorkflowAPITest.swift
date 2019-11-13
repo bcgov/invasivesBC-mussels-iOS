@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import Boilerplate
+@testable import InvasivesBC
 
 class WorkflowAPITest: XCTestCase {
     let api: WorkflowAPI = WorkflowAPI.api()

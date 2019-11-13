@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import Boilerplate
+@testable import InvasivesBC
 
 class MusselAppAPITest: XCTestCase {
     let waterBodyAPI: WaterBodyAPI =  WaterBodyAPI.api()

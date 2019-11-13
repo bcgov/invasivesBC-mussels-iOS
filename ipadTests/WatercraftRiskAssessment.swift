@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import Boilerplate
+@testable import InvasivesBC
 class WatercraftRiskAssessment: XCTestCase {
     let api: WatercraftRiskAssessmentAPI = WatercraftRiskAssessmentAPI.api()
     let workflow: WorkflowAPI = WorkflowAPI.api()
