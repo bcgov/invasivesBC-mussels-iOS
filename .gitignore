@@ -5,6 +5,8 @@ ipad.xcworkspace/xcuserdata/
 ipad.xcworkspace/xcshareddata/
 Pods/
 **/Pods/
+**/Pods/*
+Pods/**
 **/xcuserdata/
 **/xcshareddata/
 
