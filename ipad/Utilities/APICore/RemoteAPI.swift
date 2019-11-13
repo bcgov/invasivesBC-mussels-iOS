@@ -112,6 +112,10 @@ class RemoteAPI<R>: ExpressibleByStringLiteral {
         return self._url
     }
     
+    var tag: String {
+        return self._url.lastPathComponent;
+    }
+    
     convenience required init(stringLiteral value: RemoteAPI.StringLiteralType) {
         self.init(url: value)
     }
@@ -142,7 +146,7 @@ class RemoteAPI<R>: ExpressibleByStringLiteral {
     }
     
     
-    func _invokeAPI(_ method: APIMethod) -> Promise<R>? {
+    func _invokeAPI(_ method: APIMethod,_ id: String? = nil) -> Promise<R>? {
         return Promise<Response>({ (resolve, reject) in
             if !isValid {
                 InfoLog("Invalid URL : \(self._url)")
@@ -155,13 +159,23 @@ class RemoteAPI<R>: ExpressibleByStringLiteral {
             }
             switch method {
             case .get:
-                self._promise = RemoteAPIManager.default.get(self._url, self.headers)
+                if let i: String = id {
+                    let tempURL = self._url + "/\(i)"
+                    self._promise = RemoteAPIManager.default.get(tempURL, self.headers)
+                } else {
+                    self._promise = RemoteAPIManager.default.get(self._url, self.headers)
+                }
             case .post:
                 let body = self.postBody() ?? self.body(method: method)
                 self._promise = RemoteAPIManager.default.post(self._url, body: body.json(), headers)
             case .put:
                 let body = self.putBody() ?? self.body(method: method)
-                self._promise = RemoteAPIManager.default.put(self._url, body: body.json(), headers)
+                if let i: String = id {
+                    let tempURL = self._url + "/\(i)"
+                    self._promise = RemoteAPIManager.default.put(tempURL, body: body.json(), headers)
+                } else {
+                    self._promise = RemoteAPIManager.default.put(self._url, body: body.json(), headers)
+                }
             default:
                 self._promise = RemoteAPIManager.default.api(self._url, body: self.body(method: method).json(), method: method, headers)
             }
@@ -172,7 +186,7 @@ class RemoteAPI<R>: ExpressibleByStringLiteral {
                 do {
                     // Process req.
                     let p = self.processData(data: info, more: nil)
-                    InfoLog("Data: \(p)")
+                    // InfoLog("Data: \(p)")
                     if let resp: Response = p.0 {
                         resolve(resp, p.1)
                     } else {
@@ -209,11 +223,11 @@ class RemoteAPI<R>: ExpressibleByStringLiteral {
         })
     }
     
-    func get(_ arg: [String: String]? = nil) -> Promise<Response>? {
+    func get(arg: [String: String]? = nil, id: String? = nil) -> Promise<Response>? {
         if let a = arg {
             self.argMap = self.argMap.merge(a)
         }
-        return self._invokeAPI(.get)
+        return self._invokeAPI(.get, id)
     }
     
     func post(_ data: JSONCodable? = nil) -> Promise<Response>? {
@@ -225,9 +239,9 @@ class RemoteAPI<R>: ExpressibleByStringLiteral {
         return self._invokeAPI(.delete)
     }
     
-    func put(_ data: JSONCodable? = nil) -> Promise<Response>? {
+    func put(id: String? = nil, _ data: JSONCodable? = nil) -> Promise<Response>? {
         self.reqBody = data
-        return self._invokeAPI(.put)
+        return self._invokeAPI(.put, id)
     }
     
     func _createURL() {

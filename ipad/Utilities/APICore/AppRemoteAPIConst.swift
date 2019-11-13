@@ -20,6 +20,8 @@ enum EndPoints: String {
     case none = ""
     case workflow = "/mussels/workflow"
     case watercraftAssessment = "/mussels/wra"
+    case waterBody = "/mussels/water-body"
+    case codes = "/mussels/codes"
 }
 
 /**
@@ -32,6 +34,14 @@ struct APIURL {
     
     static let watercraftRiskAssessment: String = {
         return remoteURL + EndPoints.watercraftAssessment.rawValue
+    }()
+    
+    static let waterBody: String = {
+        return remoteURL + EndPoints.waterBody.rawValue
+    }()
+    
+    static let codes: String = {
+        return remoteURL + EndPoints.codes.rawValue
     }()
 }
 
