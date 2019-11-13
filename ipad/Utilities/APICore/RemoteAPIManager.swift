@@ -30,7 +30,9 @@ class RemoteAPIManager {
             InfoLog("[COMPLETE - \(url)]")
             if let data: Data =  response.result.value {
                 InfoLog("[SUCCESS]")
-                InfoLog("[VALUE] : \n \(data.string)")
+                if (data.count < 512) {
+                     InfoLog("[VALUE] : \n \(data.string)")
+                }
                 
                 // Check Status
                 let statusCode: Int = response.response?.statusCode ?? 500
