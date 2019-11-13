@@ -56,9 +56,9 @@ class SyncView: ModalView, Theme {
         styleDividerGrey(view: dividerView)
         styleHollowButton(button: hollowButton)
         styleFillButton(button: fillButton)
-        styleSyncInProgress()
+//        styleSyncInProgress()
 //        styleSyncError()
-//        styleSyncSuccess()
+        styleSyncSuccess()
     }
     
     private func clearIcon() {
