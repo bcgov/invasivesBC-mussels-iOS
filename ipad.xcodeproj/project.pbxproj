@@ -109,6 +109,9 @@
 		5C82D404237B31C200B065BA /* WatercraftRiskAssessmentAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C82D403237B31C200B065BA /* WatercraftRiskAssessmentAPI.swift */; };
 		5C82D406237B326A00B065BA /* WatercraftRiskAssessment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C82D405237B326A00B065BA /* WatercraftRiskAssessment.swift */; };
 		9FB225820DBE019B5CE1031C /* Pods_ipadTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CED730649CF3E43FB1AD51F6 /* Pods_ipadTests.framework */; };
+		A7AE5275237CC3660044DBB7 /* unapproved-cross.json in Resources */ = {isa = PBXBuildFile; fileRef = A7AE5272237CC3660044DBB7 /* unapproved-cross.json */; };
+		A7AE5276237CC3660044DBB7 /* check-mark-success.json in Resources */ = {isa = PBXBuildFile; fileRef = A7AE5273237CC3660044DBB7 /* check-mark-success.json */; };
+		A7AE5277237CC3660044DBB7 /* sync-circle.json in Resources */ = {isa = PBXBuildFile; fileRef = A7AE5274237CC3660044DBB7 /* sync-circle.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -235,6 +238,9 @@
 		987374CFF5F2318652AA2FCC /* Pods-ipadTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ipadTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ipadTests/Pods-ipadTests.release.xcconfig"; sourceTree = "<group>"; };
 		99C48CD83AAD3AAA2CD083BF /* Pods-ipadTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ipadTests.release.xcconfig"; path = "Target Support Files/Pods-ipadTests/Pods-ipadTests.release.xcconfig"; sourceTree = "<group>"; };
 		A41A1378A874E8BDB895F235 /* Pods-ipad.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ipad.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ipad/Pods-ipad.debug.xcconfig"; sourceTree = "<group>"; };
+		A7AE5272237CC3660044DBB7 /* unapproved-cross.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "unapproved-cross.json"; sourceTree = "<group>"; };
+		A7AE5273237CC3660044DBB7 /* check-mark-success.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "check-mark-success.json"; sourceTree = "<group>"; };
+		A7AE5274237CC3660044DBB7 /* sync-circle.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "sync-circle.json"; sourceTree = "<group>"; };
 		AA4120B80D7F18DFB2852BCA /* Pods-ipad.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ipad.release.xcconfig"; path = "Pods/Target Support Files/Pods-ipad/Pods-ipad.release.xcconfig"; sourceTree = "<group>"; };
 		BF19B164AC2CB08CEE35035D /* Pods-ipadTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ipadTests.debug.xcconfig"; path = "Target Support Files/Pods-ipadTests/Pods-ipadTests.debug.xcconfig"; sourceTree = "<group>"; };
 		CED730649CF3E43FB1AD51F6 /* Pods_ipadTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ipadTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -427,6 +433,7 @@
 		29BAC4FC23676C2300A620F4 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				A7AE5271237CC3660044DBB7 /* LottieAnimations */,
 				5C82D40023762B7400B065BA /* APICore */,
 				5C82D3E62374BC9F00B065BA /* GenericCore */,
 				29E4BBF4237221D40079475F /* Form Helper */,
@@ -742,6 +749,16 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		A7AE5271237CC3660044DBB7 /* LottieAnimations */ = {
+			isa = PBXGroup;
+			children = (
+				A7AE5272237CC3660044DBB7 /* unapproved-cross.json */,
+				A7AE5273237CC3660044DBB7 /* check-mark-success.json */,
+				A7AE5274237CC3660044DBB7 /* sync-circle.json */,
+			);
+			path = LottieAnimations;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -833,6 +850,7 @@
 				29F29F93236B6A22004F12E7 /* SwitcherView.xib in Resources */,
 				5C82D3D32374A0D400B065BA /* .gitignore in Resources */,
 				5C82D3D72374AECC00B065BA /* HighRiskModalView.xib in Resources */,
+				A7AE5275237CC3660044DBB7 /* unapproved-cross.json in Resources */,
 				29A97434236CDD8F006C668F /* DateInputCollectionViewCell.xib in Resources */,
 				294EF30B2370841B00EEB3B6 /* SyncView.xib in Resources */,
 				29514BDD2368AEE400DC89C4 /* Options.storyboard in Resources */,
@@ -842,6 +860,7 @@
 				29A9742E236CB59F006C668F /* SwitchInputCollectionViewCell.xib in Resources */,
 				2907E4B92368D25800946B3F /* InputModal.xib in Resources */,
 				29E4BBF3237218610079475F /* DestinationWaterBodyCollectionViewCell.xib in Resources */,
+				A7AE5276237CC3660044DBB7 /* check-mark-success.json in Resources */,
 				29F29FA2236B8670004F12E7 /* DropdownCollectionViewCell.xib in Resources */,
 				29DB0117237206D30046E605 /* HeaderCollectionViewCell.xib in Resources */,
 				29E4BBEF237218500079475F /* PreviousWaterBodyCollectionViewCell.xib in Resources */,
@@ -849,6 +868,7 @@
 				29F29F99236B6B9C004F12E7 /* SwitcherCollectionViewCell.xib in Resources */,
 				29DB010A2370EFD60046E605 /* TextAreaInputCollectionViewCell.xib in Resources */,
 				29F4EC572370B1F8001D5CFA /* BasicCollectionViewCell.xib in Resources */,
+				A7AE5277237CC3660044DBB7 /* sync-circle.json in Resources */,
 				29CEC92323676425003B21B9 /* Assets.xcassets in Resources */,
 				29CEC92123676424003B21B9 /* Main.storyboard in Resources */,
 				29514BED2368CAAA00DC89C4 /* Dropdown.storyboard in Resources */,
