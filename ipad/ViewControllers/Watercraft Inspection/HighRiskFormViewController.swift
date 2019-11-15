@@ -25,20 +25,25 @@ class HighRiskFormViewController: BaseViewController {
     ]
     
     // MARK: Variables
-    private var model: HighRiskAssessmentModel? = nil
+    public var model: HighRiskAssessmentModel? = nil
     private var isEditable: Bool = true
+    private var showFullForm: Bool = false
     private var formResult: [String: Any?] = [String: Any]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setNavigationBar(hidden: false, style: UIBarStyle.black)
         setupCollectionView()
-        self.model = HighRiskAssessmentModel()
         style()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        if let model = self.model, model.cleanDrainDryAfterInspection == true {
+            self.showFullForm = true
+        } else {
+            self.showFullForm = false
+        }
         addListeners()
     }
     
@@ -61,22 +66,26 @@ class HighRiskFormViewController: BaseViewController {
         guard let item: InputItem = notification.object as? InputItem else {return}
         formResult[item.key] = item.value.get(type: item.type)
         // Set value in Realm object
+        
         if let m = model {
             // TODO: needs cleanup for nil case
             m.set(value: item.value.get(type: item.type), for: item.key)
             
         }
+        
+        if item.key == "cleanDrainDryAfterInspection" {
+            // If is NOT passport holder, Show full form
+            let fieldValue = item.value.get(type: item.type) as? Bool ?? nil
+            if fieldValue == false {
+                self.showFullForm = true
+            } else {
+                self.showFullForm = false
+            }
+            self.collectionView.reloadData()
+        }
         print(model?.toDictionary())
     }
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
-     }
-     */
+    
     private func style() {
         self.styleNavBar()
     }
@@ -145,7 +154,11 @@ extension HighRiskFormViewController: UICollectionViewDataSource, UICollectionVi
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return HighRiskFormSection.allCases.count
+        if self.showFullForm {
+            return HighRiskFormSection.allCases.count
+        } else {
+            return 2
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

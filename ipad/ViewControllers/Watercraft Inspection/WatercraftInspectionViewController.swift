@@ -69,6 +69,22 @@ class WatercraftInspectionViewController: BaseViewController {
         NotificationCenter.default.removeObserver(self)
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.collectionView.reloadData()
+    }
+    
+    
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destination = segue.destination as? HighRiskFormViewController {
+            destination.model = HighRiskAssessmentModel()
+        }
+       
+     }
+    
     private func addListeners() {
         NotificationCenter.default.addObserver(self, selector: #selector(self.inputItemValueChanged(notification:)), name: .InputItemValueChanged, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.shouldResizeInputGroup(notification:)), name: .ShouldResizeInputGroup, object: nil)
@@ -128,7 +144,7 @@ class WatercraftInspectionViewController: BaseViewController {
                     }
                 }
             } else {
-                // All other keys, store directly
+                 // All other keys, store directly
                 // TODO: needs cleanup for nil case
                 m.set(value: item.value.get(type: item.type), for: item.key)
             }

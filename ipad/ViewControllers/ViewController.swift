@@ -20,16 +20,16 @@ class ViewController: UIViewController {
     }
     
     private func presentNext() {
-        performSegue(withIdentifier: "showHomePage", sender: nil)
-        return;
-//        if (!Auth.isAuthenticated()) {
-//            performSegue(withIdentifier: "performLogin", sender: nil)
-//            return
-//        } else {
-//            print(Auth.getAccessToken())
-//            performSegue(withIdentifier: "showHomePage", sender: nil)
-//            return
-//        }
+//        performSegue(withIdentifier: "showHomePage", sender: nil)
+//        return;
+        if (!Auth.isAuthenticated()) {
+            performSegue(withIdentifier: "performLogin", sender: nil)
+            return
+        } else {
+            Auth.getUserFirstName()
+            performSegue(withIdentifier: "showHomePage", sender: nil)
+            return
+        }
     }
 }
 

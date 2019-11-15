@@ -332,7 +332,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="gUM-D8-l98">
-                                <rect key="frame" x="42" y="0.0" width="684" height="1024"/>
+                                <rect key="frame" x="8" y="0.0" width="752" height="1024"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="i7t-2b-K4s">
                                     <size key="itemSize" width="50" height="50"/>
@@ -346,9 +346,9 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="zPU-Zd-6z0" firstAttribute="bottom" secondItem="gUM-D8-l98" secondAttribute="bottom" id="Lbn-Fg-Qe9"/>
-                            <constraint firstItem="zPU-Zd-6z0" firstAttribute="trailing" secondItem="gUM-D8-l98" secondAttribute="trailing" constant="42" id="P4v-Tu-1gi"/>
+                            <constraint firstItem="zPU-Zd-6z0" firstAttribute="trailing" secondItem="gUM-D8-l98" secondAttribute="trailing" constant="8" id="P4v-Tu-1gi"/>
                             <constraint firstItem="gUM-D8-l98" firstAttribute="top" secondItem="zPU-Zd-6z0" secondAttribute="top" id="X3D-yt-XOp"/>
-                            <constraint firstItem="gUM-D8-l98" firstAttribute="leading" secondItem="zPU-Zd-6z0" secondAttribute="leading" constant="42" id="oEn-EB-H3A"/>
+                            <constraint firstItem="gUM-D8-l98" firstAttribute="leading" secondItem="zPU-Zd-6z0" secondAttribute="leading" constant="8" id="oEn-EB-H3A"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="zPU-Zd-6z0"/>
                     </view>
@@ -371,7 +371,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ziD-f4-f9Y">
-                                <rect key="frame" x="42" y="0.0" width="684" height="1024"/>
+                                <rect key="frame" x="8" y="0.0" width="752" height="1024"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="OoW-6g-UKw">
                                     <size key="itemSize" width="50" height="50"/>
@@ -385,9 +385,9 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="ziD-f4-f9Y" firstAttribute="top" secondItem="WjB-rK-fFc" secondAttribute="top" id="C07-6a-F7n"/>
-                            <constraint firstItem="ziD-f4-f9Y" firstAttribute="leading" secondItem="WjB-rK-fFc" secondAttribute="leading" constant="42" id="H3c-bj-VWJ"/>
+                            <constraint firstItem="ziD-f4-f9Y" firstAttribute="leading" secondItem="WjB-rK-fFc" secondAttribute="leading" constant="8" id="H3c-bj-VWJ"/>
                             <constraint firstItem="WjB-rK-fFc" firstAttribute="bottom" secondItem="ziD-f4-f9Y" secondAttribute="bottom" id="Kzz-fX-UVK"/>
-                            <constraint firstItem="WjB-rK-fFc" firstAttribute="trailing" secondItem="ziD-f4-f9Y" secondAttribute="trailing" constant="42" id="PBm-WF-CDo"/>
+                            <constraint firstItem="WjB-rK-fFc" firstAttribute="trailing" secondItem="ziD-f4-f9Y" secondAttribute="trailing" constant="8" id="PBm-WF-CDo"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="WjB-rK-fFc"/>
                     </view>

@@ -105,6 +105,9 @@
 		29F4EC512370B007001D5CFA /* WatercraftInspectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F4EC502370B007001D5CFA /* WatercraftInspectionViewController.swift */; };
 		29F4EC562370B1F8001D5CFA /* BasicCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F4EC542370B1F8001D5CFA /* BasicCollectionViewCell.swift */; };
 		29F4EC572370B1F8001D5CFA /* BasicCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29F4EC552370B1F8001D5CFA /* BasicCollectionViewCell.xib */; };
+		29FFEBBE237F1EAA00574E3F /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29FFEBBD237F1EAA00574E3F /* Settings.swift */; };
+		29FFEBC1237F1F6F00574E3F /* SettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29FFEBC0237F1F6F00574E3F /* SettingsModel.swift */; };
+		29FFEBC4237F23B800574E3F /* JWTDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29FFEBC3237F23B800574E3F /* JWTDecoder.swift */; };
 		5C82D3D32374A0D400B065BA /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 5C82D3D22374A0D400B065BA /* .gitignore */; };
 		5C82D3D72374AECC00B065BA /* HighRiskModalView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C82D3D52374AECC00B065BA /* HighRiskModalView.xib */; };
 		5C82D3D82374AECC00B065BA /* HighRiskModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C82D3D62374AECC00B065BA /* HighRiskModalView.swift */; };
@@ -224,6 +227,9 @@
 		29F4EC502370B007001D5CFA /* WatercraftInspectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatercraftInspectionViewController.swift; sourceTree = "<group>"; };
 		29F4EC542370B1F8001D5CFA /* BasicCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicCollectionViewCell.swift; sourceTree = "<group>"; };
 		29F4EC552370B1F8001D5CFA /* BasicCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BasicCollectionViewCell.xib; sourceTree = "<group>"; };
+		29FFEBBD237F1EAA00574E3F /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		29FFEBC0237F1F6F00574E3F /* SettingsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsModel.swift; sourceTree = "<group>"; };
+		29FFEBC3237F23B800574E3F /* JWTDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JWTDecoder.swift; sourceTree = "<group>"; };
 		5C82D3D22374A0D400B065BA /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		5C82D3D52374AECC00B065BA /* HighRiskModalView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HighRiskModalView.xib; sourceTree = "<group>"; };
 		5C82D3D62374AECC00B065BA /* HighRiskModalView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HighRiskModalView.swift; sourceTree = "<group>"; };
@@ -488,6 +494,8 @@
 		29BAC4FC23676C2300A620F4 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				29FFEBC2237F23A800574E3F /* JWT Decoder */,
+				29FFEBBC237F1E9100574E3F /* Settings */,
 				2950510B2374DFAB000FBD6E /* Extensions */,
 				29E4BBF4237221D40079475F /* Form Helper */,
 				294EF31723708A1700EEB3B6 /* API */,
@@ -754,6 +762,31 @@
 			path = "TextArea Input";
 			sourceTree = "<group>";
 		};
+		29FFEBBC237F1E9100574E3F /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				29FFEBBF237F1F5100574E3F /* Model */,
+				29FFEBBD237F1EAA00574E3F /* Settings.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		29FFEBBF237F1F5100574E3F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				29FFEBC0237F1F6F00574E3F /* SettingsModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		29FFEBC2237F23A800574E3F /* JWT Decoder */ = {
+			isa = PBXGroup;
+			children = (
+				29FFEBC3237F23B800574E3F /* JWTDecoder.swift */,
+			);
+			path = "JWT Decoder";
+			sourceTree = "<group>";
+		};
 		5C82D3D42374AECC00B065BA /* High Risk Modal */ = {
 			isa = PBXGroup;
 			children = (
@@ -977,6 +1010,7 @@
 				29E4BBF2237218610079475F /* DestinationWaterBodyCollectionViewCell.swift in Sources */,
 				29514BEB2368C45F00DC89C4 /* DropdownViewController.swift in Sources */,
 				2907E4B12368CD6700946B3F /* Dropdown.swift in Sources */,
+				29FFEBBE237F1EAA00574E3F /* Settings.swift in Sources */,
 				29BAC5192367B34000A620F4 /* Fonts.swift in Sources */,
 				29DB0112237204A90046E605 /* JourneyDetailsModel.swift in Sources */,
 				5C82D3D82374AECC00B065BA /* HighRiskModalView.swift in Sources */,
@@ -1028,11 +1062,13 @@
 				2958874D237B58D600224FFA /* HighRiskFormFieldHeaders.swift in Sources */,
 				294EF31923708A2100EEB3B6 /* API.swift in Sources */,
 				2907E4BB2368FEA500946B3F /* FormEntryViewController.swift in Sources */,
+				29FFEBC1237F1F6F00574E3F /* SettingsModel.swift in Sources */,
 				296237D62374B6B400032BB5 /* RadioSwitchInputCollectionViewCell.swift in Sources */,
 				29A9743B2370042E006C668F /* Storage.swift in Sources */,
 				29F29F98236B6B9C004F12E7 /* SwitcherCollectionViewCell.swift in Sources */,
 				294EF3162370888600EEB3B6 /* Banner.swift in Sources */,
 				29CEC93C23676691003B21B9 /* KeycloakConstants.swift in Sources */,
+				29FFEBC4237F23B800574E3F /* JWTDecoder.swift in Sources */,
 				29CEC91C23676424003B21B9 /* SceneDelegate.swift in Sources */,
 				2958874A237B583C00224FFA /* HighRiskFormHelper.swift in Sources */,
 				29588748237B52F000224FFA /* HighRiskAssessmentModel.swift in Sources */,
