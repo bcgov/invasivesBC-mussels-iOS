@@ -18,7 +18,6 @@
 		294EF3122370885100EEB3B6 /* BannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294EF3112370885100EEB3B6 /* BannerView.swift */; };
 		294EF3142370885B00EEB3B6 /* BannerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 294EF3132370885B00EEB3B6 /* BannerView.xib */; };
 		294EF3162370888600EEB3B6 /* Banner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294EF3152370888600EEB3B6 /* Banner.swift */; };
-		294EF31923708A2100EEB3B6 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294EF31823708A2100EEB3B6 /* API.swift */; };
 		29514BD62368AD6F00DC89C4 /* OptionsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29514BD42368AD6F00DC89C4 /* OptionsTableViewCell.swift */; };
 		29514BD72368AD6F00DC89C4 /* OptionsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29514BD52368AD6F00DC89C4 /* OptionsTableViewCell.xib */; };
 		29514BD92368ADB100DC89C4 /* OptionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29514BD82368ADB100DC89C4 /* OptionType.swift */; };
@@ -87,10 +86,32 @@
 		29F4EC512370B007001D5CFA /* WatercraftInspectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F4EC502370B007001D5CFA /* WatercraftInspectionViewController.swift */; };
 		29F4EC562370B1F8001D5CFA /* BasicCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F4EC542370B1F8001D5CFA /* BasicCollectionViewCell.swift */; };
 		29F4EC572370B1F8001D5CFA /* BasicCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29F4EC552370B1F8001D5CFA /* BasicCollectionViewCell.xib */; };
+		5C0F6979237B635800F96CA5 /* WaterBodyAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0F6978237B635800F96CA5 /* WaterBodyAPI.swift */; };
+		5C0F697B237B63F500F96CA5 /* MusselAppAPITest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0F697A237B63F500F96CA5 /* MusselAppAPITest.swift */; };
+		5C0F697D237B683200F96CA5 /* CodesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0F697C237B683200F96CA5 /* CodesAPI.swift */; };
+		5C0F6980237C6DDA00F96CA5 /* APIChain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0F697E237B6F7800F96CA5 /* APIChain.swift */; };
 		5C82D3D32374A0D400B065BA /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 5C82D3D22374A0D400B065BA /* .gitignore */; };
 		5C82D3D72374AECC00B065BA /* HighRiskModalView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C82D3D52374AECC00B065BA /* HighRiskModalView.xib */; };
 		5C82D3D82374AECC00B065BA /* HighRiskModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C82D3D62374AECC00B065BA /* HighRiskModalView.swift */; };
+		5C82D3DD2374B9D700B065BA /* AppRemoteAPIConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C82D3DA2374B9D600B065BA /* AppRemoteAPIConst.swift */; };
+		5C82D3DE2374B9D700B065BA /* RemoteAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C82D3DB2374B9D700B065BA /* RemoteAPI.swift */; };
+		5C82D3DF2374B9D700B065BA /* RemoteAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C82D3DC2374B9D700B065BA /* RemoteAPIManager.swift */; };
+		5C82D3E82374BCDB00B065BA /* GenericConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C82D3E72374BCDB00B065BA /* GenericConst.swift */; };
+		5C82D3EA2374BCFA00B065BA /* FoundationExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C82D3E92374BCFA00B065BA /* FoundationExtension.swift */; };
+		5C82D3EC2374BD1300B065BA /* Promise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C82D3EB2374BD1300B065BA /* Promise.swift */; };
+		5C82D3EE2374BD2900B065BA /* ApplicationLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C82D3ED2374BD2800B065BA /* ApplicationLogger.swift */; };
+		5C82D3F02374BECD00B065BA /* ApplicationErrorConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C82D3EF2374BECD00B065BA /* ApplicationErrorConst.swift */; };
+		5C82D3F52374D09000B065BA /* UtilityObjC.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C82D3F32374D09000B065BA /* UtilityObjC.m */; };
+		5C82D3F72375E56400B065BA /* RemoteAPITest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C82D3F62375E56400B065BA /* RemoteAPITest.swift */; };
+		5C82D3F92376036700B065BA /* WorkflowAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C82D3F82376036700B065BA /* WorkflowAPI.swift */; };
+		5C82D3FB2376051600B065BA /* WorkflowAPITest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C82D3FA2376051600B065BA /* WorkflowAPITest.swift */; };
+		5C82D3FF23761B1400B065BA /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C82D3FE23761B1400B065BA /* API.swift */; };
+		5C82D404237B31C200B065BA /* WatercraftRiskAssessmentAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C82D403237B31C200B065BA /* WatercraftRiskAssessmentAPI.swift */; };
+		5C82D406237B326A00B065BA /* WatercraftRiskAssessment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C82D405237B326A00B065BA /* WatercraftRiskAssessment.swift */; };
 		9FB225820DBE019B5CE1031C /* Pods_ipadTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CED730649CF3E43FB1AD51F6 /* Pods_ipadTests.framework */; };
+		A7AE5275237CC3660044DBB7 /* unapproved-cross.json in Resources */ = {isa = PBXBuildFile; fileRef = A7AE5272237CC3660044DBB7 /* unapproved-cross.json */; };
+		A7AE5276237CC3660044DBB7 /* check-mark-success.json in Resources */ = {isa = PBXBuildFile; fileRef = A7AE5273237CC3660044DBB7 /* check-mark-success.json */; };
+		A7AE5277237CC3660044DBB7 /* sync-circle.json in Resources */ = {isa = PBXBuildFile; fileRef = A7AE5274237CC3660044DBB7 /* sync-circle.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -115,7 +136,6 @@
 		294EF3112370885100EEB3B6 /* BannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerView.swift; sourceTree = "<group>"; };
 		294EF3132370885B00EEB3B6 /* BannerView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BannerView.xib; sourceTree = "<group>"; };
 		294EF3152370888600EEB3B6 /* Banner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Banner.swift; sourceTree = "<group>"; };
-		294EF31823708A2100EEB3B6 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		29514BD42368AD6F00DC89C4 /* OptionsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsTableViewCell.swift; sourceTree = "<group>"; };
 		29514BD52368AD6F00DC89C4 /* OptionsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OptionsTableViewCell.xib; sourceTree = "<group>"; };
 		29514BD82368ADB100DC89C4 /* OptionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionType.swift; sourceTree = "<group>"; };
@@ -148,7 +168,7 @@
 		29BAC5182367B34000A620F4 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 		29BAC51B2367B5B500A620F4 /* RealmRequests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmRequests.swift; sourceTree = "<group>"; };
 		29BAC51D2367B6FA00A620F4 /* BaseRealmObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseRealmObject.swift; sourceTree = "<group>"; };
-		29CEC91623676424003B21B9 /* Boilerplate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Boilerplate.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		29CEC91623676424003B21B9 /* InvasivesBC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InvasivesBC.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		29CEC91923676424003B21B9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		29CEC91B23676424003B21B9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		29CEC91D23676424003B21B9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -188,15 +208,39 @@
 		29F4EC502370B007001D5CFA /* WatercraftInspectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatercraftInspectionViewController.swift; sourceTree = "<group>"; };
 		29F4EC542370B1F8001D5CFA /* BasicCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicCollectionViewCell.swift; sourceTree = "<group>"; };
 		29F4EC552370B1F8001D5CFA /* BasicCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BasicCollectionViewCell.xib; sourceTree = "<group>"; };
+		5C0F6978237B635800F96CA5 /* WaterBodyAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterBodyAPI.swift; sourceTree = "<group>"; };
+		5C0F697A237B63F500F96CA5 /* MusselAppAPITest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusselAppAPITest.swift; sourceTree = "<group>"; };
+		5C0F697C237B683200F96CA5 /* CodesAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodesAPI.swift; sourceTree = "<group>"; };
+		5C0F697E237B6F7800F96CA5 /* APIChain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIChain.swift; sourceTree = "<group>"; };
 		5C82D3D22374A0D400B065BA /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		5C82D3D52374AECC00B065BA /* HighRiskModalView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HighRiskModalView.xib; sourceTree = "<group>"; };
 		5C82D3D62374AECC00B065BA /* HighRiskModalView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HighRiskModalView.swift; sourceTree = "<group>"; };
+		5C82D3DA2374B9D600B065BA /* AppRemoteAPIConst.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppRemoteAPIConst.swift; sourceTree = "<group>"; };
+		5C82D3DB2374B9D700B065BA /* RemoteAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteAPI.swift; sourceTree = "<group>"; };
+		5C82D3DC2374B9D700B065BA /* RemoteAPIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteAPIManager.swift; sourceTree = "<group>"; };
+		5C82D3E72374BCDB00B065BA /* GenericConst.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenericConst.swift; sourceTree = "<group>"; };
+		5C82D3E92374BCFA00B065BA /* FoundationExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoundationExtension.swift; sourceTree = "<group>"; };
+		5C82D3EB2374BD1300B065BA /* Promise.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Promise.swift; sourceTree = "<group>"; };
+		5C82D3ED2374BD2800B065BA /* ApplicationLogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationLogger.swift; sourceTree = "<group>"; };
+		5C82D3EF2374BECD00B065BA /* ApplicationErrorConst.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationErrorConst.swift; sourceTree = "<group>"; };
+		5C82D3F22374D08F00B065BA /* ipad-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ipad-Bridging-Header.h"; sourceTree = "<group>"; };
+		5C82D3F32374D09000B065BA /* UtilityObjC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UtilityObjC.m; sourceTree = "<group>"; };
+		5C82D3F42374D09000B065BA /* UtilityObjC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UtilityObjC.h; sourceTree = "<group>"; };
+		5C82D3F62375E56400B065BA /* RemoteAPITest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteAPITest.swift; sourceTree = "<group>"; };
+		5C82D3F82376036700B065BA /* WorkflowAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkflowAPI.swift; sourceTree = "<group>"; };
+		5C82D3FA2376051600B065BA /* WorkflowAPITest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkflowAPITest.swift; sourceTree = "<group>"; };
+		5C82D3FE23761B1400B065BA /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		5C82D403237B31C200B065BA /* WatercraftRiskAssessmentAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatercraftRiskAssessmentAPI.swift; sourceTree = "<group>"; };
+		5C82D405237B326A00B065BA /* WatercraftRiskAssessment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatercraftRiskAssessment.swift; sourceTree = "<group>"; };
 		5E19532C9F39231DE6E43099 /* Pods_ipad.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ipad.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		654A566D8395B17BDF172F9F /* Pods-ipad.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ipad.release.xcconfig"; path = "Target Support Files/Pods-ipad/Pods-ipad.release.xcconfig"; sourceTree = "<group>"; };
 		763C8716EF742F6764FFE7D7 /* Pods-ipad.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ipad.debug.xcconfig"; path = "Target Support Files/Pods-ipad/Pods-ipad.debug.xcconfig"; sourceTree = "<group>"; };
 		987374CFF5F2318652AA2FCC /* Pods-ipadTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ipadTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ipadTests/Pods-ipadTests.release.xcconfig"; sourceTree = "<group>"; };
 		99C48CD83AAD3AAA2CD083BF /* Pods-ipadTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ipadTests.release.xcconfig"; path = "Target Support Files/Pods-ipadTests/Pods-ipadTests.release.xcconfig"; sourceTree = "<group>"; };
 		A41A1378A874E8BDB895F235 /* Pods-ipad.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ipad.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ipad/Pods-ipad.debug.xcconfig"; sourceTree = "<group>"; };
+		A7AE5272237CC3660044DBB7 /* unapproved-cross.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "unapproved-cross.json"; sourceTree = "<group>"; };
+		A7AE5273237CC3660044DBB7 /* check-mark-success.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "check-mark-success.json"; sourceTree = "<group>"; };
+		A7AE5274237CC3660044DBB7 /* sync-circle.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "sync-circle.json"; sourceTree = "<group>"; };
 		AA4120B80D7F18DFB2852BCA /* Pods-ipad.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ipad.release.xcconfig"; path = "Pods/Target Support Files/Pods-ipad/Pods-ipad.release.xcconfig"; sourceTree = "<group>"; };
 		BF19B164AC2CB08CEE35035D /* Pods-ipadTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ipadTests.debug.xcconfig"; path = "Target Support Files/Pods-ipadTests/Pods-ipadTests.debug.xcconfig"; sourceTree = "<group>"; };
 		CED730649CF3E43FB1AD51F6 /* Pods_ipadTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ipadTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -286,7 +330,12 @@
 		294EF31723708A1700EEB3B6 /* API */ = {
 			isa = PBXGroup;
 			children = (
-				294EF31823708A2100EEB3B6 /* API.swift */,
+				5C82D3F82376036700B065BA /* WorkflowAPI.swift */,
+				5C0F697E237B6F7800F96CA5 /* APIChain.swift */,
+				5C82D3FE23761B1400B065BA /* API.swift */,
+				5C82D403237B31C200B065BA /* WatercraftRiskAssessmentAPI.swift */,
+				5C0F6978237B635800F96CA5 /* WaterBodyAPI.swift */,
+				5C0F697C237B683200F96CA5 /* CodesAPI.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -384,6 +433,9 @@
 		29BAC4FC23676C2300A620F4 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				A7AE5271237CC3660044DBB7 /* LottieAnimations */,
+				5C82D40023762B7400B065BA /* APICore */,
+				5C82D3E62374BC9F00B065BA /* GenericCore */,
 				29E4BBF4237221D40079475F /* Form Helper */,
 				294EF31723708A1700EEB3B6 /* API */,
 				29BAC50723676FD000A620F4 /* UI */,
@@ -470,7 +522,7 @@
 		29CEC91723676424003B21B9 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				29CEC91623676424003B21B9 /* Boilerplate.app */,
+				29CEC91623676424003B21B9 /* InvasivesBC.app */,
 				29CEC92C23676425003B21B9 /* ipadTests.xctest */,
 			);
 			name = Products;
@@ -499,6 +551,10 @@
 			children = (
 				29CEC93023676425003B21B9 /* ipadTests.swift */,
 				29CEC93223676425003B21B9 /* Info.plist */,
+				5C82D3F62375E56400B065BA /* RemoteAPITest.swift */,
+				5C82D3FA2376051600B065BA /* WorkflowAPITest.swift */,
+				5C82D405237B326A00B065BA /* WatercraftRiskAssessment.swift */,
+				5C0F697A237B63F500F96CA5 /* MusselAppAPITest.swift */,
 			);
 			path = ipadTests;
 			sourceTree = "<group>";
@@ -645,6 +701,39 @@
 			path = "High Risk Modal";
 			sourceTree = "<group>";
 		};
+		5C82D3E62374BC9F00B065BA /* GenericCore */ = {
+			isa = PBXGroup;
+			children = (
+				5C82D3F12374D07400B065BA /* ObjC */,
+				5C82D3EF2374BECD00B065BA /* ApplicationErrorConst.swift */,
+				5C82D3ED2374BD2800B065BA /* ApplicationLogger.swift */,
+				5C82D3EB2374BD1300B065BA /* Promise.swift */,
+				5C82D3E72374BCDB00B065BA /* GenericConst.swift */,
+				5C82D3E92374BCFA00B065BA /* FoundationExtension.swift */,
+			);
+			path = GenericCore;
+			sourceTree = "<group>";
+		};
+		5C82D3F12374D07400B065BA /* ObjC */ = {
+			isa = PBXGroup;
+			children = (
+				5C82D3F42374D09000B065BA /* UtilityObjC.h */,
+				5C82D3F32374D09000B065BA /* UtilityObjC.m */,
+				5C82D3F22374D08F00B065BA /* ipad-Bridging-Header.h */,
+			);
+			path = ObjC;
+			sourceTree = "<group>";
+		};
+		5C82D40023762B7400B065BA /* APICore */ = {
+			isa = PBXGroup;
+			children = (
+				5C82D3DA2374B9D600B065BA /* AppRemoteAPIConst.swift */,
+				5C82D3DB2374B9D700B065BA /* RemoteAPI.swift */,
+				5C82D3DC2374B9D700B065BA /* RemoteAPIManager.swift */,
+			);
+			path = APICore;
+			sourceTree = "<group>";
+		};
 		718555F643FB0D413A8C0B7B /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -658,6 +747,16 @@
 				987374CFF5F2318652AA2FCC /* Pods-ipadTests.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		A7AE5271237CC3660044DBB7 /* LottieAnimations */ = {
+			isa = PBXGroup;
+			children = (
+				A7AE5272237CC3660044DBB7 /* unapproved-cross.json */,
+				A7AE5273237CC3660044DBB7 /* check-mark-success.json */,
+				A7AE5274237CC3660044DBB7 /* sync-circle.json */,
+			);
+			path = LottieAnimations;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -679,7 +778,7 @@
 			);
 			name = ipad;
 			productName = ipad;
-			productReference = 29CEC91623676424003B21B9 /* Boilerplate.app */;
+			productReference = 29CEC91623676424003B21B9 /* InvasivesBC.app */;
 			productType = "com.apple.product-type.application";
 		};
 		29CEC92B23676425003B21B9 /* ipadTests */ = {
@@ -713,6 +812,7 @@
 				TargetAttributes = {
 					29CEC91523676424003B21B9 = {
 						CreatedOnToolsVersion = 11.1;
+						LastSwiftMigration = 1110;
 					};
 					29CEC92B23676425003B21B9 = {
 						CreatedOnToolsVersion = 11.1;
@@ -750,6 +850,7 @@
 				29F29F93236B6A22004F12E7 /* SwitcherView.xib in Resources */,
 				5C82D3D32374A0D400B065BA /* .gitignore in Resources */,
 				5C82D3D72374AECC00B065BA /* HighRiskModalView.xib in Resources */,
+				A7AE5275237CC3660044DBB7 /* unapproved-cross.json in Resources */,
 				29A97434236CDD8F006C668F /* DateInputCollectionViewCell.xib in Resources */,
 				294EF30B2370841B00EEB3B6 /* SyncView.xib in Resources */,
 				29514BDD2368AEE400DC89C4 /* Options.storyboard in Resources */,
@@ -759,6 +860,7 @@
 				29A9742E236CB59F006C668F /* SwitchInputCollectionViewCell.xib in Resources */,
 				2907E4B92368D25800946B3F /* InputModal.xib in Resources */,
 				29E4BBF3237218610079475F /* DestinationWaterBodyCollectionViewCell.xib in Resources */,
+				A7AE5276237CC3660044DBB7 /* check-mark-success.json in Resources */,
 				29F29FA2236B8670004F12E7 /* DropdownCollectionViewCell.xib in Resources */,
 				29DB0117237206D30046E605 /* HeaderCollectionViewCell.xib in Resources */,
 				29E4BBEF237218500079475F /* PreviousWaterBodyCollectionViewCell.xib in Resources */,
@@ -766,6 +868,7 @@
 				29F29F99236B6B9C004F12E7 /* SwitcherCollectionViewCell.xib in Resources */,
 				29DB010A2370EFD60046E605 /* TextAreaInputCollectionViewCell.xib in Resources */,
 				29F4EC572370B1F8001D5CFA /* BasicCollectionViewCell.xib in Resources */,
+				A7AE5277237CC3660044DBB7 /* sync-circle.json in Resources */,
 				29CEC92323676425003B21B9 /* Assets.xcassets in Resources */,
 				29CEC92123676424003B21B9 /* Main.storyboard in Resources */,
 				29514BED2368CAAA00DC89C4 /* Dropdown.storyboard in Resources */,
@@ -851,24 +954,32 @@
 			buildActionMask = 2147483647;
 			files = (
 				29E4BBE82372120F0079475F /* DividerCollectionViewCell.swift in Sources */,
+				5C82D3E82374BCDB00B065BA /* GenericConst.swift in Sources */,
 				29E4BBF2237218610079475F /* DestinationWaterBodyCollectionViewCell.swift in Sources */,
+				5C82D3EC2374BD1300B065BA /* Promise.swift in Sources */,
+				5C0F6980237C6DDA00F96CA5 /* APIChain.swift in Sources */,
 				29514BEB2368C45F00DC89C4 /* DropdownViewController.swift in Sources */,
 				2907E4B12368CD6700946B3F /* Dropdown.swift in Sources */,
 				29BAC5192367B34000A620F4 /* Fonts.swift in Sources */,
+				5C82D404237B31C200B065BA /* WatercraftRiskAssessmentAPI.swift in Sources */,
 				29DB0112237204A90046E605 /* JourneyDetailsModel.swift in Sources */,
 				5C82D3D82374AECC00B065BA /* HighRiskModalView.swift in Sources */,
 				29BAC5102367984000A620F4 /* GradiantView.swift in Sources */,
 				29514BE32368B5AF00DC89C4 /* Notifications.swift in Sources */,
 				29F29FA6236BB541004F12E7 /* BaseInputCell.swift in Sources */,
+				5C82D3DD2374B9D700B065BA /* AppRemoteAPIConst.swift in Sources */,
 				29F29FA1236B8670004F12E7 /* DropdownCollectionViewCell.swift in Sources */,
 				29514BD92368ADB100DC89C4 /* OptionType.swift in Sources */,
 				29BAC5122367A21300A620F4 /* StringConstants.swift in Sources */,
 				294EF30F2370845700EEB3B6 /* SyncView.swift in Sources */,
+				5C82D3F02374BECD00B065BA /* ApplicationErrorConst.swift in Sources */,
 				29F4EC562370B1F8001D5CFA /* BasicCollectionViewCell.swift in Sources */,
 				29DB011B237207BF0046E605 /* FormButtonCollectionViewCell.swift in Sources */,
 				29514BD62368AD6F00DC89C4 /* OptionsTableViewCell.swift in Sources */,
 				294EF3122370885100EEB3B6 /* BannerView.swift in Sources */,
 				29514BDF2368AFC100DC89C4 /* BaseViewController.swift in Sources */,
+				5C0F697D237B683200F96CA5 /* CodesAPI.swift in Sources */,
+				5C82D3FF23761B1400B065BA /* API.swift in Sources */,
 				29514BF02368CB5D00DC89C4 /* DropdownTableViewCell.swift in Sources */,
 				29BAC51E2367B6FA00A620F4 /* BaseRealmObject.swift in Sources */,
 				29BAC50623676EA400A620F4 /* Alert.swift in Sources */,
@@ -877,6 +988,7 @@
 				29A97436236FD5FC006C668F /* InputGroup.swift in Sources */,
 				2907E4B72368D24900946B3F /* InputModal.swift in Sources */,
 				29DB01092370EFD60046E605 /* TextAreaInputCollectionViewCell.swift in Sources */,
+				5C82D3EA2374BCFA00B065BA /* FoundationExtension.swift in Sources */,
 				29CEC91E23676424003B21B9 /* ViewController.swift in Sources */,
 				29A9742D236CB59F006C668F /* SwitchInputCollectionViewCell.swift in Sources */,
 				29F29F9D236B7750004F12E7 /* Switcher.swift in Sources */,
@@ -886,25 +998,30 @@
 				29BAC50C23677EDC00A620F4 /* LoginViewController.swift in Sources */,
 				29E4BBEE237218500079475F /* PreviousWaterBodyCollectionViewCell.swift in Sources */,
 				29F29FAB236CA948004F12E7 /* TextInputCollectionViewCell.swift in Sources */,
+				5C82D3DF2374B9D700B065BA /* RemoteAPIManager.swift in Sources */,
 				29BAC50E236790C900A620F4 /* HomeViewController.swift in Sources */,
 				29514BE62368B70900DC89C4 /* Options.swift in Sources */,
 				29F29FA4236B9114004F12E7 /* InputItem.swift in Sources */,
 				29E4BBF6237221EB0079475F /* FormHelper.swift in Sources */,
 				29514BE12368B4BE00DC89C4 /* SettingsConstants.swift in Sources */,
 				29DB0116237206D30046E605 /* HeaderCollectionViewCell.swift in Sources */,
+				5C82D3EE2374BD2900B065BA /* ApplicationLogger.swift in Sources */,
 				29514BDB2368AED600DC89C4 /* OptionsViewController.swift in Sources */,
 				29F4EC512370B007001D5CFA /* WatercraftInspectionViewController.swift in Sources */,
 				29BAC5172367B12300A620F4 /* Colors.swift in Sources */,
-				294EF31923708A2100EEB3B6 /* API.swift in Sources */,
 				2907E4BB2368FEA500946B3F /* FormEntryViewController.swift in Sources */,
 				29A9743B2370042E006C668F /* Storage.swift in Sources */,
 				29F29F98236B6B9C004F12E7 /* SwitcherCollectionViewCell.swift in Sources */,
 				294EF3162370888600EEB3B6 /* Banner.swift in Sources */,
 				29CEC93C23676691003B21B9 /* KeycloakConstants.swift in Sources */,
 				29CEC91C23676424003B21B9 /* SceneDelegate.swift in Sources */,
+				5C0F6979237B635800F96CA5 /* WaterBodyAPI.swift in Sources */,
+				5C82D3F52374D09000B065BA /* UtilityObjC.m in Sources */,
 				29BAC50923676FDC00A620F4 /* Theme.swift in Sources */,
 				29BAC5152367AD7D00A620F4 /* AutoSync.swift in Sources */,
 				2907E4B42368CE3600946B3F /* PopoverSize.swift in Sources */,
+				5C82D3DE2374B9D700B065BA /* RemoteAPI.swift in Sources */,
+				5C82D3F92376036700B065BA /* WorkflowAPI.swift in Sources */,
 				29BAC51C2367B5B500A620F4 /* RealmRequests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -913,7 +1030,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5C82D3F72375E56400B065BA /* RemoteAPITest.swift in Sources */,
+				5C82D3FB2376051600B065BA /* WorkflowAPITest.swift in Sources */,
 				29CEC93123676425003B21B9 /* ipadTests.swift in Sources */,
+				5C0F697B237B63F500F96CA5 /* MusselAppAPITest.swift in Sources */,
+				5C82D406237B326A00B065BA /* WatercraftRiskAssessment.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1066,15 +1187,18 @@
 			baseConfigurationReference = 763C8716EF742F6764FFE7D7 /* Pods-ipad.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = YJY3GTSU5J;
+				DEVELOPMENT_TEAM = L796QSLV3E;
 				INFOPLIST_FILE = ipad/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = shayegh.boilerplate;
-				PRODUCT_NAME = Boilerplate;
+				PRODUCT_BUNDLE_IDENTIFIER = ca.bc.gov.InvasivesBC;
+				PRODUCT_NAME = InvasivesBC;
+				SWIFT_OBJC_BRIDGING_HEADER = "ipad/Utilities/GenericCore/ObjC/ipad-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 2;
 			};
@@ -1085,15 +1209,17 @@
 			baseConfigurationReference = 654A566D8395B17BDF172F9F /* Pods-ipad.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = YJY3GTSU5J;
+				DEVELOPMENT_TEAM = L796QSLV3E;
 				INFOPLIST_FILE = ipad/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = shayegh.boilerplate;
-				PRODUCT_NAME = Boilerplate;
+				PRODUCT_BUNDLE_IDENTIFIER = ca.bc.gov.InvasivesBC;
+				PRODUCT_NAME = InvasivesBC;
+				SWIFT_OBJC_BRIDGING_HEADER = "ipad/Utilities/GenericCore/ObjC/ipad-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 2;
 			};
@@ -1106,7 +1232,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = YJY3GTSU5J;
+				DEVELOPMENT_TEAM = 224RNFGRZM;
 				INFOPLIST_FILE = ipadTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1118,7 +1244,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ipad.app/ipad";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/InvasivesBC.app/InvasivesBC";
 			};
 			name = Debug;
 		};
@@ -1129,7 +1255,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = YJY3GTSU5J;
+				DEVELOPMENT_TEAM = 224RNFGRZM;
 				INFOPLIST_FILE = ipadTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1141,7 +1267,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ipad.app/ipad";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/InvasivesBC.app/InvasivesBC";
 			};
 			name = Release;
 		};
