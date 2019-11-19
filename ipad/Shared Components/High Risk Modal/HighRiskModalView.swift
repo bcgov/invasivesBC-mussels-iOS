@@ -19,10 +19,11 @@ class HighRiskModalView: ModalView, Theme {
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var confirmButton: UIButton!
     
-    var completion: (() -> Void)?
+    var onSubmit: (() -> Void)?
+    var onCancel: (() -> Void)?
     
     @IBAction func confirmAction(_ sender: UIButton) {
-        guard let onClick = self.completion else {
+        guard let onClick = self.onSubmit else {
             return
         }
         self.remove()
@@ -31,12 +32,16 @@ class HighRiskModalView: ModalView, Theme {
     }
     
     @IBAction func backAction(_ sender: UIButton) {
+        guard let onClick = self.onCancel else {
+            return
+        }
         self.remove()
+        return onClick()
     }
     
-    
-    public func initialize(onSubmit: @escaping () -> Void) {
-        self.completion = onSubmit
+    public func initialize(onSubmit: @escaping () -> Void, onCancel:  @escaping () -> Void) {
+        self.onSubmit = onSubmit
+        self.onCancel = onCancel
         setFixed(width: 550, height: 285)
         present()
         style()

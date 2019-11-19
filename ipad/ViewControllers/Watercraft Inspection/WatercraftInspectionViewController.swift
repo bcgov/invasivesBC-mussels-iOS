@@ -17,11 +17,14 @@ private enum JourneyDetailsSectionRow {
     case Divider
 }
 
-private enum FromSection: Int, CaseIterable {
-    case BasicInformation = 0
+public enum WatercraftFromSection: Int, CaseIterable {
+    case PassportInfo = 0
+    case BasicInformation
     case WatercraftDetails
     case JourneyDetails
     case InspectionDetails
+    case HighRiskAssessmentFields
+    case Divider
     case GeneralComments
 }
 
@@ -37,10 +40,12 @@ class WatercraftInspectionViewController: BaseViewController {
         "HeaderCollectionViewCell",
         "DividerCollectionViewCell",
         "DestinationWaterBodyCollectionViewCell",
-        "PreviousWaterBodyCollectionViewCell"
+        "PreviousWaterBodyCollectionViewCell",
     ]
     
     // MARK: Variables
+    private var model: WatercradftInspectionModel? = nil
+    private var showFullInspection: Bool = false
     private var isEditable: Bool = true
     private var journeyDetails: JourneyDetailsModel = JourneyDetailsModel()
     private var formResult: [String: Any?] = [String: Any]()
@@ -50,22 +55,39 @@ class WatercraftInspectionViewController: BaseViewController {
         super.viewDidLoad()
         setNavigationBar(hidden: false, style: UIBarStyle.black)
         setupCollectionView()
-        addListeners()
+        self.model = WatercradftInspectionModel()
         style()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        addListeners()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.collectionView.reloadData()
+    }
+    
+    
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destination = segue.destination as? HighRiskFormViewController {
+            destination.model = HighRiskAssessmentModel()
+        }
+       
+     }
+    
     private func addListeners() {
-           NotificationCenter.default.addObserver(self, selector: #selector(self.inputItemValueChanged(notification:)), name: .InputItemValueChanged, object: nil)
-    }
-    
-    @objc func inputItemValueChanged(notification: Notification) {
-        guard let item: InputItem = notification.object as? InputItem else {return}
-        formResult[item.key] = item.value.get(type: item.type)
-        print(formResult)
-    }
-    
-    // Navigation bar right button action
-    @objc func action(sender: UIBarButtonItem) {
+        NotificationCenter.default.addObserver(self, selector: #selector(self.inputItemValueChanged(notification:)), name: .InputItemValueChanged, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.shouldResizeInputGroup(notification:)), name: .ShouldResizeInputGroup, object: nil)
     }
     
     private func refreshJourneyDetails(index: Int) {
@@ -90,9 +112,74 @@ class WatercraftInspectionViewController: BaseViewController {
         self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: type, target: self, action: #selector(self.action(sender:)))
     }
     
+    // Navigation bar right button action
+    @objc func action(sender: UIBarButtonItem) {
+    }
+    
+    // MARK: Notification functions
+    @objc func shouldResizeInputGroup(notification: Notification) {
+        self.collectionView.collectionViewLayout.invalidateLayout()
+    }
+    
+    @objc func inputItemValueChanged(notification: Notification) {
+        guard var item: InputItem = notification.object as? InputItem else {return}
+        formResult[item.key] = item.value.get(type: item.type)
+        // Set value in Realm object
+        if let m = model {
+            // Keys that need a pop up/ additional actions
+            if (item.key == "highriskAIS" || item.key == "adultDreissenidFound" ) {
+                let value = item.value.get(type: item.type) as? Bool
+                if value == true {
+                    let highRiskModal: HighRiskModalView = HighRiskModalView.fromNib()
+                    highRiskModal.initialize(onSubmit: {
+                        // Confirmed
+                        m.set(value: true, for: item.key)
+                        // Show high risk form
+                        self.performSegue(withIdentifier: "showHighRiskForm", sender: self)
+                    }) {
+                        // Cancelled
+                        m.set(value: false, for: item.key)
+                        item.value.set(value: false, type: item.type)
+                        NotificationCenter.default.post(name: .InputFieldShouldUpdate, object: item)
+                    }
+                }
+            } else {
+                 // All other keys, store directly
+                // TODO: needs cleanup for nil case
+                m.set(value: item.value.get(type: item.type), for: item.key)
+            }
+            
+        }
+        // Handle Keys that alter form
+        if item.key == "isPassportHolder" {
+            // If is NOT passport holder, Show full form
+            let fieldValue = item.value.get(type: item.type) as? Bool ?? nil
+            if fieldValue == false {
+                self.showFullInspection = true
+            } else {
+                self.showFullInspection = false
+            }
+            self.collectionView.reloadData()
+        }
+        if item.key == "launchedOutsideBC" {
+            // If IS passport holder, && launched outside BC, Show full form
+            let fieldValue = item.value.get(type: item.type) as? Bool ?? nil
+            let isPassportHolder = formResult["isPassportHolder"] as? Bool ?? nil
+            if (fieldValue == true && isPassportHolder == true) {
+                self.showFullInspection = true
+            } else {
+                self.showFullInspection = false
+            }
+            
+            self.collectionView.reloadData()
+        }
+        
+        print(model?.toDictionary())
+    }
+    
 }
 
-//UICollectionViewDelegateFlowLayout
+// UICollectionViewDelegateFlowLayout
 extension WatercraftInspectionViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     private func setupCollectionView() {
         for cell in collectionCells {
@@ -133,7 +220,7 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        guard let sectionType = FromSection(rawValue: Int(section)) else {return 0}
+        guard let sectionType = WatercraftFromSection(rawValue: Int(section)) else {return 0}
         
         if sectionType == .JourneyDetails {
             return journeyDetails.previousWaterBodies.count + journeyDetails.destinationWaterBodies.count + 4
@@ -143,60 +230,81 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return FromSection.allCases.count
+        if showFullInspection {
+            return WatercraftFromSection.allCases.count
+        } else {
+            return 1
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let sectionType = FromSection(rawValue: Int(indexPath.section)) else {
+        guard let sectionType = WatercraftFromSection(rawValue: Int(indexPath.section)), let model = self.model else {
             return UICollectionViewCell()
         }
         switch sectionType {
+        case .PassportInfo:
+            let cell = getBasicCell(indexPath: indexPath)
+            cell.setup(title: "Passport Information", input: model.getInputputFields(for: sectionType, editable: isEditable), delegate: self)
+            return cell
         case .BasicInformation:
             let cell = getBasicCell(indexPath: indexPath)
-            cell.setup(title: "Basic Information", input: FormHelper.watercraftInspectionBasciInfoInputs(isEditable: isEditable), delegate: self)
+            cell.setup(title: "Basic Information", input: model.getInputputFields(for: sectionType, editable: isEditable), delegate: self)
             return cell
         case .WatercraftDetails:
             let cell = getBasicCell(indexPath: indexPath)
-            cell.setup(title: "Watercraft Details", input: FormHelper.watercraftInspectionWatercraftDetailsInputs(isEditable: isEditable), delegate: self)
+            cell.setup(title: "Watercraft Details", input: model.getInputputFields(for: sectionType, editable: isEditable), delegate: self)
             return cell
         case .JourneyDetails:
             return getJourneyDetailsCell(for: indexPath)
         case .InspectionDetails:
             let cell = getBasicCell(indexPath: indexPath)
-            cell.setup(title: "Inspection Details", input: FormHelper.watercraftInspectionInspectionDetailsInputs(isEditable: isEditable), delegate: self)
+            cell.setup(title: "Inspection Details", input: model.getInputputFields(for: sectionType, editable: isEditable), delegate: self, showDivider: false)
+            return cell
+        case .HighRiskAssessmentFields:
+            let cell = getBasicCell(indexPath: indexPath)
+            cell.setup(title: "High Risk Assessment Fields", input: model.getInputputFields(for: sectionType, editable: isEditable), delegate: self, boxed: true, showDivider: false)
             return cell
         case .GeneralComments:
             let cell = getBasicCell(indexPath: indexPath)
-            cell.setup(title: "Comments", input: FormHelper.watercraftInspectionCommentSectionInputs(isEditable: isEditable), delegate: self)
+            cell.setup(title: "Comments", input: model.getInputputFields(for: sectionType, editable: isEditable), delegate: self)
             return cell
+        case .Divider:
+            return getDividerCell(indexPath: indexPath)
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        guard let sectionType = FromSection(rawValue: Int(indexPath.section)) else {
+        guard let sectionType = WatercraftFromSection(rawValue: Int(indexPath.section)), let model = self.model else {
             return CGSize(width: 0, height: 0)
         }
         switch sectionType {
+        case .PassportInfo:
+            let estimatedContentHeight = InputGroupView.estimateContentHeight(for: model.getInputputFields(for: sectionType))
+            return CGSize(width: self.collectionView.frame.width, height: estimatedContentHeight + 80)
         case .BasicInformation:
-            let estimatedContentHeight = InputGroupView.estimateContentHeight(for: FormHelper.watercraftInspectionBasciInfoInputs())
+            let estimatedContentHeight = InputGroupView.estimateContentHeight(for: model.getInputputFields(for: sectionType))
             return CGSize(width: self.collectionView.frame.width, height: estimatedContentHeight + 80)
         case .WatercraftDetails:
-            let estimatedContentHeight = InputGroupView.estimateContentHeight(for: FormHelper.watercraftInspectionWatercraftDetailsInputs())
+            let estimatedContentHeight = InputGroupView.estimateContentHeight(for: model.getInputputFields(for: sectionType))
             return CGSize(width: self.collectionView.frame.width, height: estimatedContentHeight + 80)
         case .JourneyDetails:
             return estimateJourneyDetailsCellHeight(for: indexPath)
         case .InspectionDetails:
-            let estimatedContentHeight = InputGroupView.estimateContentHeight(for: FormHelper.watercraftInspectionInspectionDetailsInputs())
+            let estimatedContentHeight = InputGroupView.estimateContentHeight(for: model.getInputputFields(for: sectionType))
             return CGSize(width: self.collectionView.frame.width, height: estimatedContentHeight + 80)
+        case .HighRiskAssessmentFields:
+            let estimatedContentHeight = InputGroupView.estimateContentHeight(for: model.getInputputFields(for: sectionType))
+            return CGSize(width: self.collectionView.bounds.width - 16, height: estimatedContentHeight + 80)
         case .GeneralComments:
-            let estimatedContentHeight = InputGroupView.estimateContentHeight(for: FormHelper.watercraftInspectionCommentSectionInputs())
+            let estimatedContentHeight = InputGroupView.estimateContentHeight(for: model.getInputputFields(for: sectionType))
             return CGSize(width: self.collectionView.frame.width, height: estimatedContentHeight + 80)
+        case .Divider:
+            return CGSize(width: self.collectionView.frame.width, height: 30)
         }
     }
     
     private func getJourneyDetailsCell(for indexPath: IndexPath) -> UICollectionViewCell {
         switch getJourneyDetailsCellType(for: indexPath) {
-            
         case .Header:
             let cell = getHeaderCell(indexPath: indexPath)
             cell.setup(with: "Journey Details")

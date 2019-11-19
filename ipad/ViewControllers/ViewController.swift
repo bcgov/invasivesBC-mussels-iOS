@@ -26,6 +26,7 @@ class ViewController: UIViewController {
             performSegue(withIdentifier: "performLogin", sender: nil)
             return
         } else {
+            Auth.getUserFirstName()
             performSegue(withIdentifier: "showHomePage", sender: nil)
             return
         }

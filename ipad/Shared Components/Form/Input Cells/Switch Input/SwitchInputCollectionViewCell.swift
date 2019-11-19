@@ -24,9 +24,15 @@ class SwitchInputCollectionViewCell: BaseInputCell<SwitchInput> {
         self.emitChange()
     }
     
+    
     // MARK: Setup
     override func initialize(with model: SwitchInput) {
         self.headerLabel.text = model.header
+        self.switchView.isOn = model.value.get(type: model.type) as? Bool ?? false
+    }
+    
+    override func updateValue(value: InputValue) {
+        guard let model = self.model else {return}
         self.switchView.isOn = model.value.get(type: model.type) as? Bool ?? false
     }
     

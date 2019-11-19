@@ -46,6 +46,18 @@ class Auth {
         return authServices.isAuthenticated()
     }
     
+    public static func getUserFirstName() -> String {
+           guard let token = getAccessToken() else {return ""}
+           let decoded = JWTDecoder.decode(jwtToken: token)
+        return decoded["given_name"] as? String ?? ""
+    }
+    
+    public static func getUserLastName() -> String {
+           guard let token = getAccessToken() else {return ""}
+           let decoded = JWTDecoder.decode(jwtToken: token)
+           return decoded["family_name"] as? String ?? ""
+    }
+    
     public static func refreshCredentials(completion: @escaping(_ success: Bool) -> Void) {
         authServices.refreshCredientials(completion: { (credentials: Credentials?, error: Error?) in
             if let error = error as? AuthenticationError, case .expired = error {

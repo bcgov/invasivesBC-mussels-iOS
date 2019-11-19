@@ -14,19 +14,10 @@ class Storage {
     public static let shared = Storage()
     private init() {}
     
-    public func getSyncableItems() -> [Object] {
-        do {
-            let realm = try Realm()
-            let objs = realm.objects(BaseRealmObject.self).filter("syncable == true").map { $0 }
-            return Array(objs)
-        } catch _ {}
-        return [Object]()
-    }
-    
     public func getItemsToSync() -> [Object] {
         do {
             let realm = try Realm()
-            let objs = realm.objects(BaseRealmObject.self).filter("shouldSync == true").map { $0 }
+            let objs = realm.objects(WatercradftInspectionModel.self).filter("shouldSync == true").map { $0 }
             return Array(objs)
         } catch _ {}
         return [Object]()

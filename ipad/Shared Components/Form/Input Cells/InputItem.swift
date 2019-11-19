@@ -17,6 +17,8 @@ enum InputItemType {
     case Date
     case Switch
     case TextArea
+    case RadioSwitch
+    case ViewField
 }
 
 enum InputItemWidthSize {
@@ -50,6 +52,10 @@ struct InputValue {
             return self.boolean
         case .TextArea:
             return self.string
+        case .RadioSwitch:
+            return self.boolean
+        case .ViewField:
+            return self.string
         }
     }
     
@@ -69,7 +75,75 @@ struct InputValue {
             self.boolean = value as? Bool
         case .TextArea:
             self.string = value as? String
+        case .RadioSwitch:
+            self.boolean = value as? Bool
+        case .ViewField:
+            self.string = value as? String
         }
+    }
+}
+
+struct InputDependency {
+    public var item: InputItem
+    private var _value: InputValue
+    private var notNull: Bool = false
+    
+    
+    /// Set the Input item and value to watch for. If not value is specified,
+    /// it will watch for any value existing ( != ni l)
+    /// - Parameter item: Input item to watch for.
+    /// - Parameter value: Input item value to watch for.
+    public init(to item: InputItem, equalTo value: Any? = nil) {
+        self.item = item
+        self._value = InputValue()
+        self._value.set(value: value, type: item.type)
+        if value == nil {
+            self.notNull = true
+        }
+    }
+    
+    public func isSatisfied() -> Bool {
+        if self.notNull {
+            return item.value.get(type: item.type) != nil
+        }
+        switch item.type {
+        case .Dropdown:
+            return item.value.get(type: item.type) as? String == _value.get(type: item.type) as? String
+        case .Text:
+            return item.value.get(type: item.type) as? String == _value.get(type: item.type) as? String
+        case .Int:
+            return item.value.get(type: item.type) as? Int == _value.get(type: item.type) as? Int
+        case .Double:
+            return item.value.get(type: item.type) as? Double == _value.get(type: item.type) as? Double
+        case .Date:
+            return item.value.get(type: item.type) as? Date == _value.get(type: item.type) as? Date
+        case .Switch:
+            return item.value.get(type: item.type) as? Bool == _value.get(type: item.type) as? Bool
+        case .TextArea:
+            return item.value.get(type: item.type) as? String == _value.get(type: item.type) as? String
+        case .RadioSwitch:
+            return item.value.get(type: item.type) as? Bool == _value.get(type: item.type) as? Bool
+        case .ViewField:
+            return item.value.get(type: item.type) as? String == _value.get(type: item.type) as? String
+        }
+    }
+}
+
+enum ComputedFieldRule {
+    case Multiply
+    case Add
+}
+
+struct FieldComputation {
+    var rule: ComputedFieldRule
+    var dependees: [InputDependency]
+    
+    public init(fields: [InputItem], rule: ComputedFieldRule) {
+        self.dependees = []
+        for field in fields {
+            self.dependees.append(InputDependency(to: field))
+        }
+        self.rule = rule
     }
 }
 
@@ -81,15 +155,44 @@ protocol InputItem {
     var value: InputValue { get set }
     var header: String { get set }
     var editable: Bool { get set }
+    var dependency: InputDependency? { get set }
 }
 
 protocol StringInputItem: InputItem {
     var value: String? {get set}
 }
 
-class DropdownInput: InputItem {
+class ViewField: InputItem {
+    var type: InputItemType = .ViewField
+    var width: InputItemWidthSize
+    var height: CGFloat = 70
+    var key: String = ""
     var value: InputValue
+    var header: String = ""
+    var editable: Bool = false
+    var dependency: InputDependency?
+    var computation: FieldComputation?
     
+    init(header: String, computation: FieldComputation? = nil, width: InputItemWidthSize? = .Full) {
+        self.header = header
+        self.computation = computation ?? nil
+        self.width = width ?? .Full
+        self.value = InputValue()
+        self.value.set(value: "", type: type)
+    }
+    
+    func getValue() -> String? {
+        return self.value.get(type: self.type) as? String ?? nil
+    }
+    
+    func setValue(value: String?) {
+        self.value.set(value: value, type: self.type)
+    }
+}
+
+class DropdownInput: InputItem {
+    var dependency: InputDependency?
+    var value: InputValue
     var type: InputItemType = .Dropdown
     var width: InputItemWidthSize
     var height: CGFloat = 70
@@ -113,12 +216,13 @@ class DropdownInput: InputItem {
         return self.value.get(type: self.type) as? String ?? nil
     }
     
-    func setValue(value: String) {
+    func setValue(value: String?) {
         self.value.set(value: value, type: self.type)
     }
 }
 
 class TextInput: InputItem {
+    var dependency: InputDependency?
     var type: InputItemType = .Text
     var width: InputItemWidthSize
     var height: CGFloat = 70
@@ -140,13 +244,13 @@ class TextInput: InputItem {
         return self.value.get(type: self.type) as? String ?? nil
     }
     
-    func setValue(value: String) {
+    func setValue(value: String?) {
         self.value.set(value: value, type: self.type)
     }
 }
 
-
 class SwitchInput: InputItem {
+    var dependency: InputDependency?
     var type: InputItemType = .Switch
     var width: InputItemWidthSize
     var height: CGFloat = 70
@@ -168,12 +272,13 @@ class SwitchInput: InputItem {
         return self.value.get(type: self.type) as? Bool ?? nil
     }
     
-    func setValue(value: Bool) {
+    func setValue(value: Bool?) {
         self.value.set(value: value, type: self.type)
     }
 }
 
 class DateInput: InputItem {
+    var dependency: InputDependency?
     var type: InputItemType = .Date
     var width: InputItemWidthSize
     var height: CGFloat = 70
@@ -195,12 +300,13 @@ class DateInput: InputItem {
         return self.value.get(type: self.type) as? Date ?? nil
     }
     
-    func setValue(value: Date) {
+    func setValue(value: Date?) {
         self.value.set(value: value, type: self.type)
     }
 }
 
 class TextAreaInput: InputItem {
+    var dependency: InputDependency?
     var type: InputItemType = .TextArea
     var width: InputItemWidthSize
     var height: CGFloat = 200
@@ -222,12 +328,13 @@ class TextAreaInput: InputItem {
         return self.value.get(type: self.type) as? String ?? nil
     }
     
-    func setValue(value: String) {
+    func setValue(value: String?) {
         self.value.set(value: value, type: self.type)
     }
 }
 
 class IntegerInput: InputItem {
+    var dependency: InputDependency?
     var type: InputItemType = .Int
     var width: InputItemWidthSize
     var height: CGFloat = 70
@@ -249,13 +356,14 @@ class IntegerInput: InputItem {
         return self.value.get(type: self.type) as? Int ?? nil
     }
     
-    func setValue(value: Int) {
+    func setValue(value: Int?) {
         self.value.set(value: value, type: self.type)
     }
 }
 
 class DoubleInput: InputItem {
-    var type: InputItemType = .Int
+    var dependency: InputDependency?
+    var type: InputItemType = .Double
     var width: InputItemWidthSize
     var height: CGFloat = 70
     var key: String
@@ -276,7 +384,35 @@ class DoubleInput: InputItem {
         return self.value.get(type: self.type) as? Double ?? nil
     }
     
-    func setValue(value: Double) {
+    func setValue(value: Double?) {
+        self.value.set(value: value, type: self.type)
+    }
+}
+
+class RadioSwitchInput: InputItem {
+    var dependency: InputDependency?
+    var type: InputItemType = .RadioSwitch
+    var width: InputItemWidthSize
+    var height: CGFloat = 70
+    var key: String
+    var value: InputValue
+    var header: String
+    var editable: Bool
+    
+    init(key: String, header: String, editable: Bool, value: Bool? = nil, width: InputItemWidthSize? = .Full) {
+        self.value = InputValue()
+        self.value.set(value: value, type: type)
+        self.key = key
+        self.header = header
+        self.editable = editable
+        self.width = width ?? .Full
+    }
+    
+    func getValue() -> Bool? {
+        return self.value.get(type: self.type) as? Bool ?? nil
+    }
+    
+    func setValue(value: Bool?) {
         self.value.set(value: value, type: self.type)
     }
 }

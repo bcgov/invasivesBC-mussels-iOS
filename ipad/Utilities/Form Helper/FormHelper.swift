@@ -8,6 +8,13 @@
 
 import Foundation
 
+struct FormField {
+    var type: InputItemType
+    var key: String
+    var header: String
+    var width: InputItemWidthSize
+}
+
 class FormHelper {
     
     public static func getDummyOptions() -> [DropdownModel]{
@@ -17,6 +24,12 @@ class FormHelper {
         options.append(DropdownModel(display: "Something more here"))
         options.append(DropdownModel(display: "Another thing"))
         return options
+    }
+    
+    public static func passportFields(isEditable: Bool? = true) -> [InputItem] {
+        var sectionItems: [InputItem] = []
+        
+        return sectionItems
     }
     
     public static func watercraftInspectionBasciInfoInputs(isEditable: Bool? = true) -> [InputItem] {
@@ -58,6 +71,7 @@ class FormHelper {
         let adultDreissenidFound =  SwitchInput(key: "adultDreissenidFound", header: "Were adult dreissenid mussels found?", editable: isEditable ?? true, width: .Third)
         let highRiskForDreissenid =  SwitchInput(key: "highRiskForDreissenid", header: "Is the wartercraft/equipment high risk for dreissenid or other AIS? *", editable: isEditable ?? true, width: .Third)
         let passportIssued =  SwitchInput(key: "passportIssued", header: "Was a Passport issued?", editable: isEditable ?? true, width: .Third)
+//        passportIssued.dependency = InputDependency(to: aquaticPlantsFound, equalTo: true)
         
         sectionItems.append(aquaticPlantsFound)
         sectionItems.append(marineMusslesFound)

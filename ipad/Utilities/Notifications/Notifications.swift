@@ -10,4 +10,6 @@ import Foundation
 extension Notification.Name {
     static let screenOrientationChanged = Notification.Name("screenOrientationChanged")
     static let InputItemValueChanged = Notification.Name("inputItemValueChanged")
+    static let ShouldResizeInputGroup = Notification.Name("ShouldResizeInputGroup")
+    static let InputFieldShouldUpdate = Notification.Name("InputFieldShouldUpdate")
 }

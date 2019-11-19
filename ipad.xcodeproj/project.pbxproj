@@ -13,11 +13,21 @@
 		2907E4B72368D24900946B3F /* InputModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2907E4B62368D24900946B3F /* InputModal.swift */; };
 		2907E4B92368D25800946B3F /* InputModal.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2907E4B82368D25800946B3F /* InputModal.xib */; };
 		2907E4BB2368FEA500946B3F /* FormEntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2907E4BA2368FEA500946B3F /* FormEntryViewController.swift */; };
+		2944AF9B2379B243007517DC /* ViewFieldCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2944AF992379B243007517DC /* ViewFieldCollectionViewCell.swift */; };
+		2944AF9C2379B243007517DC /* ViewFieldCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2944AF9A2379B243007517DC /* ViewFieldCollectionViewCell.xib */; };
+		294D9A882379C62F00BD4928 /* WatercraftInspectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294D9A872379C62F00BD4928 /* WatercraftInspectionModel.swift */; };
+		294D9A8C237B1E7400BD4928 /* WatercraftInspectionFieldHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294D9A8B237B1E7400BD4928 /* WatercraftInspectionFieldHeaders.swift */; };
+		294D9A8F237B1EA300BD4928 /* WatercraftInspectionFormHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294D9A8E237B1EA300BD4928 /* WatercraftInspectionFormHelper.swift */; };
 		294EF30B2370841B00EEB3B6 /* SyncView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 294EF30A2370841B00EEB3B6 /* SyncView.xib */; };
 		294EF30F2370845700EEB3B6 /* SyncView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294EF30E2370845700EEB3B6 /* SyncView.swift */; };
 		294EF3122370885100EEB3B6 /* BannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294EF3112370885100EEB3B6 /* BannerView.swift */; };
 		294EF3142370885B00EEB3B6 /* BannerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 294EF3132370885B00EEB3B6 /* BannerView.xib */; };
 		294EF3162370888600EEB3B6 /* Banner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294EF3152370888600EEB3B6 /* Banner.swift */; };
+		295051092374D764000FBD6E /* DoubleInputCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 295051072374D764000FBD6E /* DoubleInputCollectionViewCell.swift */; };
+		2950510A2374D764000FBD6E /* DoubleInputCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 295051082374D764000FBD6E /* DoubleInputCollectionViewCell.xib */; };
+		2950510D2374DFF7000FBD6E /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2950510C2374DFF7000FBD6E /* StringExtension.swift */; };
+		295051102374F54A000FBD6E /* IntegerInputCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2950510E2374F54A000FBD6E /* IntegerInputCollectionViewCell.swift */; };
+		295051112374F54A000FBD6E /* IntegerInputCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2950510F2374F54A000FBD6E /* IntegerInputCollectionViewCell.xib */; };
 		29514BD62368AD6F00DC89C4 /* OptionsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29514BD42368AD6F00DC89C4 /* OptionsTableViewCell.swift */; };
 		29514BD72368AD6F00DC89C4 /* OptionsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29514BD52368AD6F00DC89C4 /* OptionsTableViewCell.xib */; };
 		29514BD92368ADB100DC89C4 /* OptionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29514BD82368ADB100DC89C4 /* OptionType.swift */; };
@@ -32,6 +42,12 @@
 		29514BED2368CAAA00DC89C4 /* Dropdown.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 29514BEC2368CAAA00DC89C4 /* Dropdown.storyboard */; };
 		29514BF02368CB5D00DC89C4 /* DropdownTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29514BEE2368CB5D00DC89C4 /* DropdownTableViewCell.swift */; };
 		29514BF12368CB5D00DC89C4 /* DropdownTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29514BEF2368CB5D00DC89C4 /* DropdownTableViewCell.xib */; };
+		29588745237B50CC00224FFA /* HighRiskFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29588744237B50CC00224FFA /* HighRiskFormViewController.swift */; };
+		29588748237B52F000224FFA /* HighRiskAssessmentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29588747237B52F000224FFA /* HighRiskAssessmentModel.swift */; };
+		2958874A237B583C00224FFA /* HighRiskFormHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29588749237B583C00224FFA /* HighRiskFormHelper.swift */; };
+		2958874D237B58D600224FFA /* HighRiskFormFieldHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2958874C237B58D600224FFA /* HighRiskFormFieldHeaders.swift */; };
+		296237D62374B6B400032BB5 /* RadioSwitchInputCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 296237D42374B6B400032BB5 /* RadioSwitchInputCollectionViewCell.swift */; };
+		296237D72374B6B400032BB5 /* RadioSwitchInputCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 296237D52374B6B400032BB5 /* RadioSwitchInputCollectionViewCell.xib */; };
 		29A9742D236CB59F006C668F /* SwitchInputCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A9742B236CB59F006C668F /* SwitchInputCollectionViewCell.swift */; };
 		29A9742E236CB59F006C668F /* SwitchInputCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29A9742C236CB59F006C668F /* SwitchInputCollectionViewCell.xib */; };
 		29A97433236CDD8F006C668F /* DateInputCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A97431236CDD8F006C668F /* DateInputCollectionViewCell.swift */; };
@@ -50,6 +66,8 @@
 		29BAC5192367B34000A620F4 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29BAC5182367B34000A620F4 /* Fonts.swift */; };
 		29BAC51C2367B5B500A620F4 /* RealmRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29BAC51B2367B5B500A620F4 /* RealmRequests.swift */; };
 		29BAC51E2367B6FA00A620F4 /* BaseRealmObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29BAC51D2367B6FA00A620F4 /* BaseRealmObject.swift */; };
+		29CE5E1C2375E48000C54F96 /* ConditionalInputCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29CE5E1A2375E48000C54F96 /* ConditionalInputCollectionViewCell.swift */; };
+		29CE5E1D2375E48000C54F96 /* ConditionalInputCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29CE5E1B2375E48000C54F96 /* ConditionalInputCollectionViewCell.xib */; };
 		29CEC91A23676424003B21B9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29CEC91923676424003B21B9 /* AppDelegate.swift */; };
 		29CEC91C23676424003B21B9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29CEC91B23676424003B21B9 /* SceneDelegate.swift */; };
 		29CEC91E23676424003B21B9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29CEC91D23676424003B21B9 /* ViewController.swift */; };
@@ -86,6 +104,9 @@
 		29F4EC512370B007001D5CFA /* WatercraftInspectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F4EC502370B007001D5CFA /* WatercraftInspectionViewController.swift */; };
 		29F4EC562370B1F8001D5CFA /* BasicCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F4EC542370B1F8001D5CFA /* BasicCollectionViewCell.swift */; };
 		29F4EC572370B1F8001D5CFA /* BasicCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29F4EC552370B1F8001D5CFA /* BasicCollectionViewCell.xib */; };
+		29FFEBBE237F1EAA00574E3F /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29FFEBBD237F1EAA00574E3F /* Settings.swift */; };
+		29FFEBC1237F1F6F00574E3F /* SettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29FFEBC0237F1F6F00574E3F /* SettingsModel.swift */; };
+		29FFEBC4237F23B800574E3F /* JWTDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29FFEBC3237F23B800574E3F /* JWTDecoder.swift */; };
 		5C0F6979237B635800F96CA5 /* WaterBodyAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0F6978237B635800F96CA5 /* WaterBodyAPI.swift */; };
 		5C0F697B237B63F500F96CA5 /* MusselAppAPITest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0F697A237B63F500F96CA5 /* MusselAppAPITest.swift */; };
 		5C0F697D237B683200F96CA5 /* CodesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0F697C237B683200F96CA5 /* CodesAPI.swift */; };
@@ -131,11 +152,22 @@
 		2907E4B62368D24900946B3F /* InputModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputModal.swift; sourceTree = "<group>"; };
 		2907E4B82368D25800946B3F /* InputModal.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InputModal.xib; sourceTree = "<group>"; };
 		2907E4BA2368FEA500946B3F /* FormEntryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormEntryViewController.swift; sourceTree = "<group>"; };
+		2944AF992379B243007517DC /* ViewFieldCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewFieldCollectionViewCell.swift; sourceTree = "<group>"; };
+		2944AF9A2379B243007517DC /* ViewFieldCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ViewFieldCollectionViewCell.xib; sourceTree = "<group>"; };
+		294D9A872379C62F00BD4928 /* WatercraftInspectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatercraftInspectionModel.swift; sourceTree = "<group>"; };
+		294D9A8B237B1E7400BD4928 /* WatercraftInspectionFieldHeaders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatercraftInspectionFieldHeaders.swift; sourceTree = "<group>"; };
+		294D9A8E237B1EA300BD4928 /* WatercraftInspectionFormHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatercraftInspectionFormHelper.swift; sourceTree = "<group>"; };
 		294EF30A2370841B00EEB3B6 /* SyncView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SyncView.xib; sourceTree = "<group>"; };
 		294EF30E2370845700EEB3B6 /* SyncView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncView.swift; sourceTree = "<group>"; };
 		294EF3112370885100EEB3B6 /* BannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerView.swift; sourceTree = "<group>"; };
 		294EF3132370885B00EEB3B6 /* BannerView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BannerView.xib; sourceTree = "<group>"; };
 		294EF3152370888600EEB3B6 /* Banner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Banner.swift; sourceTree = "<group>"; };
+		294EF31823708A2100EEB3B6 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		295051072374D764000FBD6E /* DoubleInputCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleInputCollectionViewCell.swift; sourceTree = "<group>"; };
+		295051082374D764000FBD6E /* DoubleInputCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DoubleInputCollectionViewCell.xib; sourceTree = "<group>"; };
+		2950510C2374DFF7000FBD6E /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
+		2950510E2374F54A000FBD6E /* IntegerInputCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntegerInputCollectionViewCell.swift; sourceTree = "<group>"; };
+		2950510F2374F54A000FBD6E /* IntegerInputCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IntegerInputCollectionViewCell.xib; sourceTree = "<group>"; };
 		29514BD42368AD6F00DC89C4 /* OptionsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsTableViewCell.swift; sourceTree = "<group>"; };
 		29514BD52368AD6F00DC89C4 /* OptionsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OptionsTableViewCell.xib; sourceTree = "<group>"; };
 		29514BD82368ADB100DC89C4 /* OptionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionType.swift; sourceTree = "<group>"; };
@@ -150,6 +182,12 @@
 		29514BEC2368CAAA00DC89C4 /* Dropdown.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Dropdown.storyboard; sourceTree = "<group>"; };
 		29514BEE2368CB5D00DC89C4 /* DropdownTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropdownTableViewCell.swift; sourceTree = "<group>"; };
 		29514BEF2368CB5D00DC89C4 /* DropdownTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DropdownTableViewCell.xib; sourceTree = "<group>"; };
+		29588744237B50CC00224FFA /* HighRiskFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighRiskFormViewController.swift; sourceTree = "<group>"; };
+		29588747237B52F000224FFA /* HighRiskAssessmentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighRiskAssessmentModel.swift; sourceTree = "<group>"; };
+		29588749237B583C00224FFA /* HighRiskFormHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighRiskFormHelper.swift; sourceTree = "<group>"; };
+		2958874C237B58D600224FFA /* HighRiskFormFieldHeaders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighRiskFormFieldHeaders.swift; sourceTree = "<group>"; };
+		296237D42374B6B400032BB5 /* RadioSwitchInputCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioSwitchInputCollectionViewCell.swift; sourceTree = "<group>"; };
+		296237D52374B6B400032BB5 /* RadioSwitchInputCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RadioSwitchInputCollectionViewCell.xib; sourceTree = "<group>"; };
 		29A9742B236CB59F006C668F /* SwitchInputCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchInputCollectionViewCell.swift; sourceTree = "<group>"; };
 		29A9742C236CB59F006C668F /* SwitchInputCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SwitchInputCollectionViewCell.xib; sourceTree = "<group>"; };
 		29A97431236CDD8F006C668F /* DateInputCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateInputCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -168,6 +206,8 @@
 		29BAC5182367B34000A620F4 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 		29BAC51B2367B5B500A620F4 /* RealmRequests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmRequests.swift; sourceTree = "<group>"; };
 		29BAC51D2367B6FA00A620F4 /* BaseRealmObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseRealmObject.swift; sourceTree = "<group>"; };
+		29CE5E1A2375E48000C54F96 /* ConditionalInputCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConditionalInputCollectionViewCell.swift; sourceTree = "<group>"; };
+		29CE5E1B2375E48000C54F96 /* ConditionalInputCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConditionalInputCollectionViewCell.xib; sourceTree = "<group>"; };
 		29CEC91623676424003B21B9 /* InvasivesBC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InvasivesBC.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		29CEC91923676424003B21B9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		29CEC91B23676424003B21B9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -208,6 +248,9 @@
 		29F4EC502370B007001D5CFA /* WatercraftInspectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatercraftInspectionViewController.swift; sourceTree = "<group>"; };
 		29F4EC542370B1F8001D5CFA /* BasicCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicCollectionViewCell.swift; sourceTree = "<group>"; };
 		29F4EC552370B1F8001D5CFA /* BasicCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BasicCollectionViewCell.xib; sourceTree = "<group>"; };
+		29FFEBBD237F1EAA00574E3F /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		29FFEBC0237F1F6F00574E3F /* SettingsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsModel.swift; sourceTree = "<group>"; };
+		29FFEBC3237F23B800574E3F /* JWTDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JWTDecoder.swift; sourceTree = "<group>"; };
 		5C0F6978237B635800F96CA5 /* WaterBodyAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterBodyAPI.swift; sourceTree = "<group>"; };
 		5C0F697A237B63F500F96CA5 /* MusselAppAPITest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusselAppAPITest.swift; sourceTree = "<group>"; };
 		5C0F697C237B683200F96CA5 /* CodesAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodesAPI.swift; sourceTree = "<group>"; };
@@ -280,7 +323,11 @@
 			children = (
 				29F29FA3236B9114004F12E7 /* InputItem.swift */,
 				29F29FA5236BB541004F12E7 /* BaseInputCell.swift */,
-				2975C3762374A29700751E89 /* Number */,
+				2944AF982379B22E007517DC /* View Field */,
+				29CE5E192375E44A00C54F96 /* Conditional Input */,
+				296237D32374B69800032BB5 /* Radio Switch Input */,
+				296237D22374B69100032BB5 /* Double Input */,
+				296237D12374B68000032BB5 /* Integer Input */,
 				29F4EC592370DB72001D5CFA /* TextArea Input */,
 				29A9742F236CBEBA006C668F /* Date Input */,
 				29A9742A236CB588006C668F /* Switch Input */,
@@ -294,7 +341,6 @@
 			isa = PBXGroup;
 			children = (
 				2907E4B32368CE3600946B3F /* PopoverSize.swift */,
-				29DB0111237204A90046E605 /* JourneyDetailsModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -306,6 +352,43 @@
 				2907E4B82368D25800946B3F /* InputModal.xib */,
 			);
 			path = "Input Modal";
+			sourceTree = "<group>";
+		};
+		2944AF982379B22E007517DC /* View Field */ = {
+			isa = PBXGroup;
+			children = (
+				2944AF992379B243007517DC /* ViewFieldCollectionViewCell.swift */,
+				2944AF9A2379B243007517DC /* ViewFieldCollectionViewCell.xib */,
+			);
+			path = "View Field";
+			sourceTree = "<group>";
+		};
+		294D9A89237B1D8100BD4928 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				294D9A872379C62F00BD4928 /* WatercraftInspectionModel.swift */,
+				29DB0111237204A90046E605 /* JourneyDetailsModel.swift */,
+				29588747237B52F000224FFA /* HighRiskAssessmentModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		294D9A8A237B1D9100BD4928 /* Contants */ = {
+			isa = PBXGroup;
+			children = (
+				294D9A8B237B1E7400BD4928 /* WatercraftInspectionFieldHeaders.swift */,
+				2958874C237B58D600224FFA /* HighRiskFormFieldHeaders.swift */,
+			);
+			path = Contants;
+			sourceTree = "<group>";
+		};
+		294D9A8D237B1E8900BD4928 /* Fields Generator */ = {
+			isa = PBXGroup;
+			children = (
+				294D9A8E237B1EA300BD4928 /* WatercraftInspectionFormHelper.swift */,
+				29588749237B583C00224FFA /* HighRiskFormHelper.swift */,
+			);
+			path = "Fields Generator";
 			sourceTree = "<group>";
 		};
 		294EF309237083F600EEB3B6 /* Sync view */ = {
@@ -338,6 +421,14 @@
 				5C0F697C237B683200F96CA5 /* CodesAPI.swift */,
 			);
 			path = API;
+			sourceTree = "<group>";
+		};
+		2950510B2374DFAB000FBD6E /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				2950510C2374DFF7000FBD6E /* StringExtension.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		29514BD22368ACF700DC89C4 /* Shared Components */ = {
@@ -387,11 +478,39 @@
 			path = Dropdown;
 			sourceTree = "<group>";
 		};
-		2975C3762374A29700751E89 /* Number */ = {
+		296237D12374B68000032BB5 /* Integer Input */ = {
 			isa = PBXGroup;
 			children = (
+				2950510E2374F54A000FBD6E /* IntegerInputCollectionViewCell.swift */,
+				2950510F2374F54A000FBD6E /* IntegerInputCollectionViewCell.xib */,
 			);
-			path = Number;
+			path = "Integer Input";
+			sourceTree = "<group>";
+		};
+		296237D22374B69100032BB5 /* Double Input */ = {
+			isa = PBXGroup;
+			children = (
+				295051072374D764000FBD6E /* DoubleInputCollectionViewCell.swift */,
+				295051082374D764000FBD6E /* DoubleInputCollectionViewCell.xib */,
+			);
+			path = "Double Input";
+			sourceTree = "<group>";
+		};
+		296237D32374B69800032BB5 /* Radio Switch Input */ = {
+			isa = PBXGroup;
+			children = (
+				296237D42374B6B400032BB5 /* RadioSwitchInputCollectionViewCell.swift */,
+				296237D52374B6B400032BB5 /* RadioSwitchInputCollectionViewCell.xib */,
+			);
+			path = "Radio Switch Input";
+			sourceTree = "<group>";
+		};
+		2991968E2384656A00634F81 /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				294EF31823708A2100EEB3B6 /* API.swift */,
+			);
+			name = "Recovered References";
 			sourceTree = "<group>";
 		};
 		29A9742A236CB588006C668F /* Switch Input */ = {
@@ -433,6 +552,9 @@
 		29BAC4FC23676C2300A620F4 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				29FFEBC2237F23A800574E3F /* JWT Decoder */,
+				29FFEBBC237F1E9100574E3F /* Settings */,
+				2950510B2374DFAB000FBD6E /* Extensions */,
 				A7AE5271237CC3660044DBB7 /* LottieAnimations */,
 				5C82D40023762B7400B065BA /* APICore */,
 				5C82D3E62374BC9F00B065BA /* GenericCore */,
@@ -507,6 +629,15 @@
 			path = Realm;
 			sourceTree = "<group>";
 		};
+		29CE5E192375E44A00C54F96 /* Conditional Input */ = {
+			isa = PBXGroup;
+			children = (
+				29CE5E1A2375E48000C54F96 /* ConditionalInputCollectionViewCell.swift */,
+				29CE5E1B2375E48000C54F96 /* ConditionalInputCollectionViewCell.xib */,
+			);
+			path = "Conditional Input";
+			sourceTree = "<group>";
+		};
 		29CEC90D23676424003B21B9 = {
 			isa = PBXGroup;
 			children = (
@@ -516,6 +647,7 @@
 				29CEC91723676424003B21B9 /* Products */,
 				718555F643FB0D413A8C0B7B /* Pods */,
 				18111C9AFB5C438A79708A93 /* Frameworks */,
+				2991968E2384656A00634F81 /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -569,13 +701,13 @@
 			path = Constants;
 			sourceTree = "<group>";
 		};
-		29DB010B2371EE2F0046E605 /* Basic */ = {
+		29DB010B2371EE2F0046E605 /* Basic (header + Input group) */ = {
 			isa = PBXGroup;
 			children = (
 				29F4EC542370B1F8001D5CFA /* BasicCollectionViewCell.swift */,
 				29F4EC552370B1F8001D5CFA /* BasicCollectionViewCell.xib */,
 			);
-			path = Basic;
+			path = "Basic (header + Input group)";
 			sourceTree = "<group>";
 		};
 		29DB0113237206B90046E605 /* Header */ = {
@@ -664,8 +796,12 @@
 		29F4EC522370B142001D5CFA /* Watercraft Inspection */ = {
 			isa = PBXGroup;
 			children = (
+				294D9A8D237B1E8900BD4928 /* Fields Generator */,
+				294D9A8A237B1D9100BD4928 /* Contants */,
+				294D9A89237B1D8100BD4928 /* Model */,
 				29F4EC532370B1BB001D5CFA /* Cells */,
 				29F4EC502370B007001D5CFA /* WatercraftInspectionViewController.swift */,
+				29588744237B50CC00224FFA /* HighRiskFormViewController.swift */,
 			);
 			path = "Watercraft Inspection";
 			sourceTree = "<group>";
@@ -673,7 +809,7 @@
 		29F4EC532370B1BB001D5CFA /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				29DB010B2371EE2F0046E605 /* Basic */,
+				29DB010B2371EE2F0046E605 /* Basic (header + Input group) */,
 				29E4BBE5237211F10079475F /* Divider */,
 				29DB0118237207AD0046E605 /* Button */,
 				29DB0113237206B90046E605 /* Header */,
@@ -690,6 +826,31 @@
 				29DB01082370EFD60046E605 /* TextAreaInputCollectionViewCell.xib */,
 			);
 			path = "TextArea Input";
+			sourceTree = "<group>";
+		};
+		29FFEBBC237F1E9100574E3F /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				29FFEBBF237F1F5100574E3F /* Model */,
+				29FFEBBD237F1EAA00574E3F /* Settings.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		29FFEBBF237F1F5100574E3F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				29FFEBC0237F1F6F00574E3F /* SettingsModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		29FFEBC2237F23A800574E3F /* JWT Decoder */ = {
+			isa = PBXGroup;
+			children = (
+				29FFEBC3237F23B800574E3F /* JWTDecoder.swift */,
+			);
+			path = "JWT Decoder";
 			sourceTree = "<group>";
 		};
 		5C82D3D42374AECC00B065BA /* High Risk Modal */ = {
@@ -850,16 +1011,19 @@
 				29F29F93236B6A22004F12E7 /* SwitcherView.xib in Resources */,
 				5C82D3D32374A0D400B065BA /* .gitignore in Resources */,
 				5C82D3D72374AECC00B065BA /* HighRiskModalView.xib in Resources */,
+				2944AF9C2379B243007517DC /* ViewFieldCollectionViewCell.xib in Resources */,
 				A7AE5275237CC3660044DBB7 /* unapproved-cross.json in Resources */,
 				29A97434236CDD8F006C668F /* DateInputCollectionViewCell.xib in Resources */,
 				294EF30B2370841B00EEB3B6 /* SyncView.xib in Resources */,
 				29514BDD2368AEE400DC89C4 /* Options.storyboard in Resources */,
 				29F29FAC236CA948004F12E7 /* TextInputCollectionViewCell.xib in Resources */,
 				29CEC92623676425003B21B9 /* LaunchScreen.storyboard in Resources */,
+				2950510A2374D764000FBD6E /* DoubleInputCollectionViewCell.xib in Resources */,
 				29E4BBE92372120F0079475F /* DividerCollectionViewCell.xib in Resources */,
 				29A9742E236CB59F006C668F /* SwitchInputCollectionViewCell.xib in Resources */,
 				2907E4B92368D25800946B3F /* InputModal.xib in Resources */,
 				29E4BBF3237218610079475F /* DestinationWaterBodyCollectionViewCell.xib in Resources */,
+				295051112374F54A000FBD6E /* IntegerInputCollectionViewCell.xib in Resources */,
 				A7AE5276237CC3660044DBB7 /* check-mark-success.json in Resources */,
 				29F29FA2236B8670004F12E7 /* DropdownCollectionViewCell.xib in Resources */,
 				29DB0117237206D30046E605 /* HeaderCollectionViewCell.xib in Resources */,
@@ -870,8 +1034,10 @@
 				29F4EC572370B1F8001D5CFA /* BasicCollectionViewCell.xib in Resources */,
 				A7AE5277237CC3660044DBB7 /* sync-circle.json in Resources */,
 				29CEC92323676425003B21B9 /* Assets.xcassets in Resources */,
+				296237D72374B6B400032BB5 /* RadioSwitchInputCollectionViewCell.xib in Resources */,
 				29CEC92123676424003B21B9 /* Main.storyboard in Resources */,
 				29514BED2368CAAA00DC89C4 /* Dropdown.storyboard in Resources */,
+				29CE5E1D2375E48000C54F96 /* ConditionalInputCollectionViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -960,13 +1126,16 @@
 				5C0F6980237C6DDA00F96CA5 /* APIChain.swift in Sources */,
 				29514BEB2368C45F00DC89C4 /* DropdownViewController.swift in Sources */,
 				2907E4B12368CD6700946B3F /* Dropdown.swift in Sources */,
+				29FFEBBE237F1EAA00574E3F /* Settings.swift in Sources */,
 				29BAC5192367B34000A620F4 /* Fonts.swift in Sources */,
 				5C82D404237B31C200B065BA /* WatercraftRiskAssessmentAPI.swift in Sources */,
 				29DB0112237204A90046E605 /* JourneyDetailsModel.swift in Sources */,
 				5C82D3D82374AECC00B065BA /* HighRiskModalView.swift in Sources */,
 				29BAC5102367984000A620F4 /* GradiantView.swift in Sources */,
 				29514BE32368B5AF00DC89C4 /* Notifications.swift in Sources */,
+				294D9A8F237B1EA300BD4928 /* WatercraftInspectionFormHelper.swift in Sources */,
 				29F29FA6236BB541004F12E7 /* BaseInputCell.swift in Sources */,
+				295051092374D764000FBD6E /* DoubleInputCollectionViewCell.swift in Sources */,
 				5C82D3DD2374B9D700B065BA /* AppRemoteAPIConst.swift in Sources */,
 				29F29FA1236B8670004F12E7 /* DropdownCollectionViewCell.swift in Sources */,
 				29514BD92368ADB100DC89C4 /* OptionType.swift in Sources */,
@@ -974,6 +1143,7 @@
 				294EF30F2370845700EEB3B6 /* SyncView.swift in Sources */,
 				5C82D3F02374BECD00B065BA /* ApplicationErrorConst.swift in Sources */,
 				29F4EC562370B1F8001D5CFA /* BasicCollectionViewCell.swift in Sources */,
+				294D9A8C237B1E7400BD4928 /* WatercraftInspectionFieldHeaders.swift in Sources */,
 				29DB011B237207BF0046E605 /* FormButtonCollectionViewCell.swift in Sources */,
 				29514BD62368AD6F00DC89C4 /* OptionsTableViewCell.swift in Sources */,
 				294EF3122370885100EEB3B6 /* BannerView.swift in Sources */,
@@ -984,6 +1154,7 @@
 				29BAC51E2367B6FA00A620F4 /* BaseRealmObject.swift in Sources */,
 				29BAC50623676EA400A620F4 /* Alert.swift in Sources */,
 				29A97433236CDD8F006C668F /* DateInputCollectionViewCell.swift in Sources */,
+				295051102374F54A000FBD6E /* IntegerInputCollectionViewCell.swift in Sources */,
 				29BAC4FE23676C3000A620F4 /* Auth.swift in Sources */,
 				29A97436236FD5FC006C668F /* InputGroup.swift in Sources */,
 				2907E4B72368D24900946B3F /* InputModal.swift in Sources */,
@@ -998,6 +1169,7 @@
 				29BAC50C23677EDC00A620F4 /* LoginViewController.swift in Sources */,
 				29E4BBEE237218500079475F /* PreviousWaterBodyCollectionViewCell.swift in Sources */,
 				29F29FAB236CA948004F12E7 /* TextInputCollectionViewCell.swift in Sources */,
+				29588745237B50CC00224FFA /* HighRiskFormViewController.swift in Sources */,
 				5C82D3DF2374B9D700B065BA /* RemoteAPIManager.swift in Sources */,
 				29BAC50E236790C900A620F4 /* HomeViewController.swift in Sources */,
 				29514BE62368B70900DC89C4 /* Options.swift in Sources */,
@@ -1007,14 +1179,26 @@
 				29DB0116237206D30046E605 /* HeaderCollectionViewCell.swift in Sources */,
 				5C82D3EE2374BD2900B065BA /* ApplicationLogger.swift in Sources */,
 				29514BDB2368AED600DC89C4 /* OptionsViewController.swift in Sources */,
+				29CE5E1C2375E48000C54F96 /* ConditionalInputCollectionViewCell.swift in Sources */,
+				2944AF9B2379B243007517DC /* ViewFieldCollectionViewCell.swift in Sources */,
 				29F4EC512370B007001D5CFA /* WatercraftInspectionViewController.swift in Sources */,
 				29BAC5172367B12300A620F4 /* Colors.swift in Sources */,
+				2958874D237B58D600224FFA /* HighRiskFormFieldHeaders.swift in Sources */,
 				2907E4BB2368FEA500946B3F /* FormEntryViewController.swift in Sources */,
+				29FFEBC1237F1F6F00574E3F /* SettingsModel.swift in Sources */,
+				296237D62374B6B400032BB5 /* RadioSwitchInputCollectionViewCell.swift in Sources */,
 				29A9743B2370042E006C668F /* Storage.swift in Sources */,
 				29F29F98236B6B9C004F12E7 /* SwitcherCollectionViewCell.swift in Sources */,
 				294EF3162370888600EEB3B6 /* Banner.swift in Sources */,
 				29CEC93C23676691003B21B9 /* KeycloakConstants.swift in Sources */,
+				29FFEBC4237F23B800574E3F /* JWTDecoder.swift in Sources */,
 				29CEC91C23676424003B21B9 /* SceneDelegate.swift in Sources */,
+				2958874A237B583C00224FFA /* HighRiskFormHelper.swift in Sources */,
+				29588748237B52F000224FFA /* HighRiskAssessmentModel.swift in Sources */,
+				29BAC50923676FDC00A620F4 /* Theme.swift in Sources */,
+				29BAC5152367AD7D00A620F4 /* AutoSync.swift in Sources */,
+				2907E4B42368CE3600946B3F /* PopoverSize.swift in Sources */,
+				294D9A882379C62F00BD4928 /* WatercraftInspectionModel.swift in Sources */,
 				5C0F6979237B635800F96CA5 /* WaterBodyAPI.swift in Sources */,
 				5C82D3F52374D09000B065BA /* UtilityObjC.m in Sources */,
 				29BAC50923676FDC00A620F4 /* Theme.swift in Sources */,
@@ -1023,6 +1207,7 @@
 				5C82D3DE2374B9D700B065BA /* RemoteAPI.swift in Sources */,
 				5C82D3F92376036700B065BA /* WorkflowAPI.swift in Sources */,
 				29BAC51C2367B5B500A620F4 /* RealmRequests.swift in Sources */,
+				2950510D2374DFF7000FBD6E /* StringExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
