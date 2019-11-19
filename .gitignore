@@ -1,6 +1,7 @@
 # Created by https://www.gitignore.io/api/xcode,swift
 
 # Ignore user workspace data
+ipad.xcodeproj/project.pbxproj
 ipad.xcworkspace/xcuserdata/
 ipad.xcworkspace/xcshareddata/
 Pods/
