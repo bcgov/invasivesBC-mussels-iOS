@@ -17,6 +17,7 @@ public enum HighRiskFormSection: Int, CaseIterable {
 
 class HighRiskFormViewController: BaseViewController {
     
+    // MARK: Outlets
     @IBOutlet weak var collectionView: UICollectionView!
     
     // MARK: Constants
@@ -30,9 +31,9 @@ class HighRiskFormViewController: BaseViewController {
     private var showFullForm: Bool = false
     private var formResult: [String: Any?] = [String: Any]()
     
+    // MARK: Class Functions
     override func viewDidLoad() {
         super.viewDidLoad()
-        setNavigationBar(hidden: false, style: UIBarStyle.black)
         setupCollectionView()
         style()
     }
@@ -87,6 +88,7 @@ class HighRiskFormViewController: BaseViewController {
     }
     
     private func style() {
+        setNavigationBar(hidden: false, style: UIBarStyle.black)
         self.styleNavBar()
     }
     

@@ -48,6 +48,7 @@
 		2958874D237B58D600224FFA /* HighRiskFormFieldHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2958874C237B58D600224FFA /* HighRiskFormFieldHeaders.swift */; };
 		296237D62374B6B400032BB5 /* RadioSwitchInputCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 296237D42374B6B400032BB5 /* RadioSwitchInputCollectionViewCell.swift */; };
 		296237D72374B6B400032BB5 /* RadioSwitchInputCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 296237D52374B6B400032BB5 /* RadioSwitchInputCollectionViewCell.xib */; };
+		2991969023846AE000634F81 /* ShiftViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2991968F23846AE000634F81 /* ShiftViewController.swift */; };
 		29A9742D236CB59F006C668F /* SwitchInputCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A9742B236CB59F006C668F /* SwitchInputCollectionViewCell.swift */; };
 		29A9742E236CB59F006C668F /* SwitchInputCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29A9742C236CB59F006C668F /* SwitchInputCollectionViewCell.xib */; };
 		29A97433236CDD8F006C668F /* DateInputCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A97431236CDD8F006C668F /* DateInputCollectionViewCell.swift */; };
@@ -188,6 +189,7 @@
 		2958874C237B58D600224FFA /* HighRiskFormFieldHeaders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighRiskFormFieldHeaders.swift; sourceTree = "<group>"; };
 		296237D42374B6B400032BB5 /* RadioSwitchInputCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioSwitchInputCollectionViewCell.swift; sourceTree = "<group>"; };
 		296237D52374B6B400032BB5 /* RadioSwitchInputCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RadioSwitchInputCollectionViewCell.xib; sourceTree = "<group>"; };
+		2991968F23846AE000634F81 /* ShiftViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShiftViewController.swift; sourceTree = "<group>"; };
 		29A9742B236CB59F006C668F /* SwitchInputCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchInputCollectionViewCell.swift; sourceTree = "<group>"; };
 		29A9742C236CB59F006C668F /* SwitchInputCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SwitchInputCollectionViewCell.xib; sourceTree = "<group>"; };
 		29A97431236CDD8F006C668F /* DateInputCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateInputCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -802,6 +804,7 @@
 				29F4EC532370B1BB001D5CFA /* Cells */,
 				29F4EC502370B007001D5CFA /* WatercraftInspectionViewController.swift */,
 				29588744237B50CC00224FFA /* HighRiskFormViewController.swift */,
+				2991968F23846AE000634F81 /* ShiftViewController.swift */,
 			);
 			path = "Watercraft Inspection";
 			sourceTree = "<group>";
@@ -1158,6 +1161,7 @@
 				29BAC4FE23676C3000A620F4 /* Auth.swift in Sources */,
 				29A97436236FD5FC006C668F /* InputGroup.swift in Sources */,
 				2907E4B72368D24900946B3F /* InputModal.swift in Sources */,
+				2991969023846AE000634F81 /* ShiftViewController.swift in Sources */,
 				29DB01092370EFD60046E605 /* TextAreaInputCollectionViewCell.swift in Sources */,
 				5C82D3EA2374BCFA00B065BA /* FoundationExtension.swift in Sources */,
 				29CEC91E23676424003B21B9 /* ViewController.swift in Sources */,

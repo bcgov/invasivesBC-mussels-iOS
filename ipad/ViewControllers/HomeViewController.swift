@@ -77,7 +77,8 @@ class HomeViewController: BaseViewController {
     
     @IBAction func addEntryClicked(_ sender: Any) {
 //        self.performSegue(withIdentifier: "showFormEntry", sender: self)
-        self.performSegue(withIdentifier: "showWatercraftInspectionForm", sender: self)
+        self.performSegue(withIdentifier: "showShiftOverview", sender: self)
+//        self.performSegue(withIdentifier: "showWatercraftInspectionForm", sender: self)
     }
     
     // MARK: Functions

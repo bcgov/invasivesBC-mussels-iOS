@@ -53,7 +53,6 @@ class WatercraftInspectionViewController: BaseViewController {
     // MARK: Class Functions
     override func viewDidLoad() {
         super.viewDidLoad()
-        setNavigationBar(hidden: false, style: UIBarStyle.black)
         setupCollectionView()
         self.model = WatercradftInspectionModel()
         style()
@@ -75,15 +74,14 @@ class WatercraftInspectionViewController: BaseViewController {
     }
     
     
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    // MARK: - Navigation
+    
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destination = segue.destination as? HighRiskFormViewController {
             destination.model = HighRiskAssessmentModel()
         }
-       
-     }
+    }
     
     private func addListeners() {
         NotificationCenter.default.addObserver(self, selector: #selector(self.inputItemValueChanged(notification:)), name: .InputItemValueChanged, object: nil)
@@ -94,7 +92,9 @@ class WatercraftInspectionViewController: BaseViewController {
         
     }
     
+    // MARK: Style
     private func style() {
+        setNavigationBar(hidden: false, style: UIBarStyle.black)
         self.styleNavBar()
     }
     
@@ -112,6 +112,7 @@ class WatercraftInspectionViewController: BaseViewController {
         self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: type, target: self, action: #selector(self.action(sender:)))
     }
     
+    // MARK: Navigation
     // Navigation bar right button action
     @objc func action(sender: UIBarButtonItem) {
     }
@@ -121,6 +122,7 @@ class WatercraftInspectionViewController: BaseViewController {
         self.collectionView.collectionViewLayout.invalidateLayout()
     }
     
+    // MARK: Input Item Changed
     @objc func inputItemValueChanged(notification: Notification) {
         guard var item: InputItem = notification.object as? InputItem else {return}
         formResult[item.key] = item.value.get(type: item.type)
@@ -144,7 +146,7 @@ class WatercraftInspectionViewController: BaseViewController {
                     }
                 }
             } else {
-                 // All other keys, store directly
+                // All other keys, store directly
                 // TODO: needs cleanup for nil case
                 m.set(value: item.value.get(type: item.type), for: item.key)
             }
@@ -179,7 +181,7 @@ class WatercraftInspectionViewController: BaseViewController {
     
 }
 
-// UICollectionViewDelegateFlowLayout
+// MARK: CollectionView
 extension WatercraftInspectionViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     private func setupCollectionView() {
         for cell in collectionCells {
