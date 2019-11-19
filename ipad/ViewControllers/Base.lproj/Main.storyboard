@@ -191,6 +191,20 @@
                                             <action selector="userButtonAction:" destination="JwX-i7-BNh" eventType="touchUpInside" id="fjD-Vy-E6O"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jtj-bV-8r4">
+                                        <rect key="frame" x="576" y="41" width="120" height="46"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="120" id="Qeo-xa-8qE"/>
+                                            <constraint firstAttribute="height" constant="36" id="uBx-aT-V4k"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <state key="normal" title="Button">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="syncButtonAction:" destination="JwX-i7-BNh" eventType="touchUpInside" id="MB5-N8-Jci"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -200,9 +214,11 @@
                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="4eR-8r-kOm" secondAttribute="trailing" constant="20" symbolic="YES" id="Oef-AI-2p2"/>
                                     <constraint firstItem="qs0-Z8-kOT" firstAttribute="centerY" secondItem="oEL-Ux-yq2" secondAttribute="centerY" id="WS8-wD-RKe"/>
                                     <constraint firstItem="4eR-8r-kOm" firstAttribute="leading" secondItem="G3o-nN-cQJ" secondAttribute="leading" id="WUt-O9-MSF"/>
+                                    <constraint firstItem="qs0-Z8-kOT" firstAttribute="leading" secondItem="Jtj-bV-8r4" secondAttribute="trailing" constant="11" id="gtv-dz-DXp"/>
                                     <constraint firstItem="C0H-M0-0am" firstAttribute="top" secondItem="oEL-Ux-yq2" secondAttribute="top" constant="30" id="lyq-gL-cOy"/>
                                     <constraint firstItem="qs0-Z8-kOT" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="C0H-M0-0am" secondAttribute="trailing" constant="8" symbolic="YES" id="vtd-FV-Fsn"/>
                                     <constraint firstItem="C0H-M0-0am" firstAttribute="leading" secondItem="oEL-Ux-yq2" secondAttribute="leading" constant="15" id="w3p-S8-ysA"/>
+                                    <constraint firstItem="Jtj-bV-8r4" firstAttribute="centerY" secondItem="qs0-Z8-kOT" secondAttribute="centerY" id="yqK-ze-QFb"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5QE-6C-c2i">
@@ -257,6 +273,7 @@
                         <outlet property="reachabilityIndicator" destination="G3o-nN-cQJ" id="iNX-NX-Rou"/>
                         <outlet property="reachabilityLabel" destination="BhB-gb-4tS" id="63R-G4-qzp"/>
                         <outlet property="switcherHolder" destination="Mee-2o-RFj" id="JvT-Yr-KK6"/>
+                        <outlet property="syncButton" destination="Jtj-bV-8r4" id="o7S-k6-SQf"/>
                         <outlet property="userButton" destination="qs0-Z8-kOT" id="xoK-6C-NR5"/>
                         <segue destination="fxD-jA-8IB" kind="show" identifier="showFormEntry" id="Iqn-O2-aSN"/>
                         <segue destination="wRQ-S5-s9o" kind="show" identifier="showWatercraftInspectionForm" id="4OX-36-Cn0"/>
