@@ -37,16 +37,20 @@ class TableViewModel {
     // Headers and sizes
     var columnSizes: [String: CGFloat]
     
+    // Relative sizes (percentage)
+    var relativeSizes: [String: CGFloat]
+    
     // Sorted headers
     var headers: [String]
     
     // Displayed headers
     var displayedHeaders: [String]
     
-    init(rows: [TableViewRowModel], columnSizes: [String: CGFloat], headers: [String], displayedHeaders: [String]) {
+    init(rows: [TableViewRowModel], columnSizes: [String: CGFloat], headers: [String], displayedHeaders: [String], relativeSizes: [String: CGFloat]) {
         self.rows = rows
         self.columnSizes = columnSizes
         self.headers = headers
         self.displayedHeaders = displayedHeaders
+        self.relativeSizes = relativeSizes
     }
 }

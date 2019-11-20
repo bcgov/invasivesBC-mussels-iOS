@@ -42,6 +42,10 @@ class InputGroupView: UIView {
         container.layoutIfNeeded()
     }
     
+    deinit {
+      NotificationCenter.default.removeObserver(self)
+    }
+    
     private func setDisplayableItems() {
         displayableInputItems = []
         dependencyKeys = []

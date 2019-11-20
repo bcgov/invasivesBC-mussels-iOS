@@ -87,14 +87,37 @@ class Table {
         for header in headers {
             columnSizes[header] = findMaxLengthForColumn(header: header, in: rows)
         }
+        let relativeSizing = computeRelativeSizing(for: columnSizes)
         
-        let tableModel: TableViewModel = TableViewModel(rows: rows, columnSizes: columnSizes, headers: headers, displayedHeaders: displayedHeaders)
+        // 4) Create Model
+        let tableModel: TableViewModel = TableViewModel(
+            rows: rows,
+            columnSizes: columnSizes,
+            headers: headers,
+            displayedHeaders: displayedHeaders,
+            relativeSizes: relativeSizing
+        )
+        
+        // 5) Create tableview
         let tableView: TableView = TableView.fromNib()
         tableView.initialize(with: tableModel, in: container)
-        
     }
     
     // MARK: Sizing
+    private func computeRelativeSizing(for columnSizes: [String: CGFloat]) -> [String: CGFloat] {
+        var percentSizes: [String: CGFloat] = [String: CGFloat]()
+        var totalRequiredWidth: CGFloat = 0
+        for (_, width) in columnSizes {
+            totalRequiredWidth += width
+        }
+        
+        for (key, width) in columnSizes {
+            percentSizes[key] = (width / totalRequiredWidth) * 100
+        }
+        
+        return percentSizes
+    }
+    
     private func widthFor(column header: String) -> CGFloat {
         return header.width(withConstrainedHeight: Table.headerLabelHeight, font: Table.headerFont)
     }
