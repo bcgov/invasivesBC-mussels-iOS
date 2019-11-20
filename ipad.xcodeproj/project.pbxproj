@@ -15,6 +15,11 @@
 		2907E4BB2368FEA500946B3F /* FormEntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2907E4BA2368FEA500946B3F /* FormEntryViewController.swift */; };
 		2944AF9B2379B243007517DC /* ViewFieldCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2944AF992379B243007517DC /* ViewFieldCollectionViewCell.swift */; };
 		2944AF9C2379B243007517DC /* ViewFieldCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2944AF9A2379B243007517DC /* ViewFieldCollectionViewCell.xib */; };
+		294D8F6123847C9A0094090D /* TableRowTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294D8F5F23847C9A0094090D /* TableRowTableViewCell.swift */; };
+		294D8F6223847C9A0094090D /* TableRowTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 294D8F6023847C9A0094090D /* TableRowTableViewCell.xib */; };
+		294D8F652385C7310094090D /* Table.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294D8F642385C7310094090D /* Table.swift */; };
+		294D8F672385D11C0094090D /* TableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294D8F662385D11C0094090D /* TableViewModel.swift */; };
+		294D8F692385D1F10094090D /* TestTableViewObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294D8F682385D1F10094090D /* TestTableViewObject.swift */; };
 		294D9A882379C62F00BD4928 /* WatercraftInspectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294D9A872379C62F00BD4928 /* WatercraftInspectionModel.swift */; };
 		294D9A8C237B1E7400BD4928 /* WatercraftInspectionFieldHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294D9A8B237B1E7400BD4928 /* WatercraftInspectionFieldHeaders.swift */; };
 		294D9A8F237B1EA300BD4928 /* WatercraftInspectionFormHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294D9A8E237B1EA300BD4928 /* WatercraftInspectionFormHelper.swift */; };
@@ -49,6 +54,8 @@
 		296237D62374B6B400032BB5 /* RadioSwitchInputCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 296237D42374B6B400032BB5 /* RadioSwitchInputCollectionViewCell.swift */; };
 		296237D72374B6B400032BB5 /* RadioSwitchInputCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 296237D52374B6B400032BB5 /* RadioSwitchInputCollectionViewCell.xib */; };
 		2991969023846AE000634F81 /* ShiftViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2991968F23846AE000634F81 /* ShiftViewController.swift */; };
+		299196932384725600634F81 /* TableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 299196922384725600634F81 /* TableView.xib */; };
+		299196952384726600634F81 /* TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299196942384726600634F81 /* TableView.swift */; };
 		29A9742D236CB59F006C668F /* SwitchInputCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A9742B236CB59F006C668F /* SwitchInputCollectionViewCell.swift */; };
 		29A9742E236CB59F006C668F /* SwitchInputCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29A9742C236CB59F006C668F /* SwitchInputCollectionViewCell.xib */; };
 		29A97433236CDD8F006C668F /* DateInputCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A97431236CDD8F006C668F /* DateInputCollectionViewCell.swift */; };
@@ -155,6 +162,11 @@
 		2907E4BA2368FEA500946B3F /* FormEntryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormEntryViewController.swift; sourceTree = "<group>"; };
 		2944AF992379B243007517DC /* ViewFieldCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewFieldCollectionViewCell.swift; sourceTree = "<group>"; };
 		2944AF9A2379B243007517DC /* ViewFieldCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ViewFieldCollectionViewCell.xib; sourceTree = "<group>"; };
+		294D8F5F23847C9A0094090D /* TableRowTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableRowTableViewCell.swift; sourceTree = "<group>"; };
+		294D8F6023847C9A0094090D /* TableRowTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TableRowTableViewCell.xib; sourceTree = "<group>"; };
+		294D8F642385C7310094090D /* Table.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Table.swift; sourceTree = "<group>"; };
+		294D8F662385D11C0094090D /* TableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewModel.swift; sourceTree = "<group>"; };
+		294D8F682385D1F10094090D /* TestTableViewObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestTableViewObject.swift; sourceTree = "<group>"; };
 		294D9A872379C62F00BD4928 /* WatercraftInspectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatercraftInspectionModel.swift; sourceTree = "<group>"; };
 		294D9A8B237B1E7400BD4928 /* WatercraftInspectionFieldHeaders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatercraftInspectionFieldHeaders.swift; sourceTree = "<group>"; };
 		294D9A8E237B1EA300BD4928 /* WatercraftInspectionFormHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatercraftInspectionFormHelper.swift; sourceTree = "<group>"; };
@@ -190,6 +202,8 @@
 		296237D42374B6B400032BB5 /* RadioSwitchInputCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioSwitchInputCollectionViewCell.swift; sourceTree = "<group>"; };
 		296237D52374B6B400032BB5 /* RadioSwitchInputCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RadioSwitchInputCollectionViewCell.xib; sourceTree = "<group>"; };
 		2991968F23846AE000634F81 /* ShiftViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShiftViewController.swift; sourceTree = "<group>"; };
+		299196922384725600634F81 /* TableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TableView.xib; sourceTree = "<group>"; };
+		299196942384726600634F81 /* TableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableView.swift; sourceTree = "<group>"; };
 		29A9742B236CB59F006C668F /* SwitchInputCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchInputCollectionViewCell.swift; sourceTree = "<group>"; };
 		29A9742C236CB59F006C668F /* SwitchInputCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SwitchInputCollectionViewCell.xib; sourceTree = "<group>"; };
 		29A97431236CDD8F006C668F /* DateInputCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateInputCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -365,6 +379,15 @@
 			path = "View Field";
 			sourceTree = "<group>";
 		};
+		294D8F5A23847BB30094090D /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				294D8F5F23847C9A0094090D /* TableRowTableViewCell.swift */,
+				294D8F6023847C9A0094090D /* TableRowTableViewCell.xib */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
 		294D9A89237B1D8100BD4928 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -436,6 +459,7 @@
 		29514BD22368ACF700DC89C4 /* Shared Components */ = {
 			isa = PBXGroup;
 			children = (
+				299196912384723400634F81 /* Table */,
 				29A97437236FD615006C668F /* Form */,
 				5C82D3D42374AECC00B065BA /* High Risk Modal */,
 				29F29F91236B6A0D004F12E7 /* Switcher */,
@@ -513,6 +537,19 @@
 				294EF31823708A2100EEB3B6 /* API.swift */,
 			);
 			name = "Recovered References";
+			sourceTree = "<group>";
+		};
+		299196912384723400634F81 /* Table */ = {
+			isa = PBXGroup;
+			children = (
+				294D8F5A23847BB30094090D /* Cells */,
+				299196922384725600634F81 /* TableView.xib */,
+				299196942384726600634F81 /* TableView.swift */,
+				294D8F642385C7310094090D /* Table.swift */,
+				294D8F662385D11C0094090D /* TableViewModel.swift */,
+				294D8F682385D1F10094090D /* TestTableViewObject.swift */,
+			);
+			path = Table;
 			sourceTree = "<group>";
 		};
 		29A9742A236CB588006C668F /* Switch Input */ = {
@@ -1023,10 +1060,12 @@
 				29CEC92623676425003B21B9 /* LaunchScreen.storyboard in Resources */,
 				2950510A2374D764000FBD6E /* DoubleInputCollectionViewCell.xib in Resources */,
 				29E4BBE92372120F0079475F /* DividerCollectionViewCell.xib in Resources */,
+				299196932384725600634F81 /* TableView.xib in Resources */,
 				29A9742E236CB59F006C668F /* SwitchInputCollectionViewCell.xib in Resources */,
 				2907E4B92368D25800946B3F /* InputModal.xib in Resources */,
 				29E4BBF3237218610079475F /* DestinationWaterBodyCollectionViewCell.xib in Resources */,
 				295051112374F54A000FBD6E /* IntegerInputCollectionViewCell.xib in Resources */,
+				294D8F6223847C9A0094090D /* TableRowTableViewCell.xib in Resources */,
 				A7AE5276237CC3660044DBB7 /* check-mark-success.json in Resources */,
 				29F29FA2236B8670004F12E7 /* DropdownCollectionViewCell.xib in Resources */,
 				29DB0117237206D30046E605 /* HeaderCollectionViewCell.xib in Resources */,
@@ -1125,9 +1164,11 @@
 				29E4BBE82372120F0079475F /* DividerCollectionViewCell.swift in Sources */,
 				5C82D3E82374BCDB00B065BA /* GenericConst.swift in Sources */,
 				29E4BBF2237218610079475F /* DestinationWaterBodyCollectionViewCell.swift in Sources */,
+				294D8F692385D1F10094090D /* TestTableViewObject.swift in Sources */,
 				5C82D3EC2374BD1300B065BA /* Promise.swift in Sources */,
 				5C0F6980237C6DDA00F96CA5 /* APIChain.swift in Sources */,
 				29514BEB2368C45F00DC89C4 /* DropdownViewController.swift in Sources */,
+				299196952384726600634F81 /* TableView.swift in Sources */,
 				2907E4B12368CD6700946B3F /* Dropdown.swift in Sources */,
 				29FFEBBE237F1EAA00574E3F /* Settings.swift in Sources */,
 				29BAC5192367B34000A620F4 /* Fonts.swift in Sources */,
@@ -1171,6 +1212,7 @@
 				29514BE92368C41900DC89C4 /* DropdownModel.swift in Sources */,
 				29F29F90236B6A03004F12E7 /* SwitcherView.swift in Sources */,
 				29BAC50C23677EDC00A620F4 /* LoginViewController.swift in Sources */,
+				294D8F672385D11C0094090D /* TableViewModel.swift in Sources */,
 				29E4BBEE237218500079475F /* PreviousWaterBodyCollectionViewCell.swift in Sources */,
 				29F29FAB236CA948004F12E7 /* TextInputCollectionViewCell.swift in Sources */,
 				29588745237B50CC00224FFA /* HighRiskFormViewController.swift in Sources */,
@@ -1187,6 +1229,7 @@
 				2944AF9B2379B243007517DC /* ViewFieldCollectionViewCell.swift in Sources */,
 				29F4EC512370B007001D5CFA /* WatercraftInspectionViewController.swift in Sources */,
 				29BAC5172367B12300A620F4 /* Colors.swift in Sources */,
+				294D8F652385C7310094090D /* Table.swift in Sources */,
 				2958874D237B58D600224FFA /* HighRiskFormFieldHeaders.swift in Sources */,
 				2907E4BB2368FEA500946B3F /* FormEntryViewController.swift in Sources */,
 				29FFEBC1237F1F6F00574E3F /* SettingsModel.swift in Sources */,
@@ -1197,6 +1240,7 @@
 				29CEC93C23676691003B21B9 /* KeycloakConstants.swift in Sources */,
 				29FFEBC4237F23B800574E3F /* JWTDecoder.swift in Sources */,
 				29CEC91C23676424003B21B9 /* SceneDelegate.swift in Sources */,
+				294D8F6123847C9A0094090D /* TableRowTableViewCell.swift in Sources */,
 				2958874A237B583C00224FFA /* HighRiskFormHelper.swift in Sources */,
 				29588748237B52F000224FFA /* HighRiskAssessmentModel.swift in Sources */,
 				29BAC50923676FDC00A620F4 /* Theme.swift in Sources */,
@@ -1205,9 +1249,6 @@
 				294D9A882379C62F00BD4928 /* WatercraftInspectionModel.swift in Sources */,
 				5C0F6979237B635800F96CA5 /* WaterBodyAPI.swift in Sources */,
 				5C82D3F52374D09000B065BA /* UtilityObjC.m in Sources */,
-				29BAC50923676FDC00A620F4 /* Theme.swift in Sources */,
-				29BAC5152367AD7D00A620F4 /* AutoSync.swift in Sources */,
-				2907E4B42368CE3600946B3F /* PopoverSize.swift in Sources */,
 				5C82D3DE2374B9D700B065BA /* RemoteAPI.swift in Sources */,
 				5C82D3F92376036700B065BA /* WorkflowAPI.swift in Sources */,
 				29BAC51C2367B5B500A620F4 /* RealmRequests.swift in Sources */,

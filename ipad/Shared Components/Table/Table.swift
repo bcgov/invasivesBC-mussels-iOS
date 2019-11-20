@@ -1,0 +1,162 @@
+//
+//  Table.swift
+//  ipad
+//
+//  Created by Amir Shayegh on 2019-11-20.
+//  Copyright © 2019 Amir Shayegh. All rights reserved.
+//
+
+import Foundation
+import UIKit
+
+enum TableViewColumnType {
+    case Normal
+    case Button
+    case Counter
+    case WithIcon
+}
+
+struct TableViewColumnConfig {
+    var type: TableViewColumnType
+    var key: String
+    var header: String
+    var buttonName: String
+    
+    init(key: String, header: String, type: TableViewColumnType, buttonName: String? = "") {
+        self.key = key
+        self.header = header
+        self.type = type
+        self.buttonName = buttonName ?? ""
+    }
+}
+
+class Table {
+    
+    // MARK: Constants
+    static let headerLabelHeight: CGFloat = 20.0
+    static let headerFont = Fonts.getPrimaryBold(size: 17)
+    
+    static let rowHeight: CGFloat = 20.0
+    static let fieldFont = Fonts.getPrimary(size: 14)
+    
+    static let indicatorSize: CGFloat = 16.0
+    
+    static let buttonPadding: CGFloat = 16.0
+    
+    
+    /// Initialization
+    /// Create an array of TableViewColumnConfig to specify
+    /// - Parameter keys: Array of keys to be displayed & how they should be displayed
+    /// - Parameter objects: PropertyReflectable Objects to display in rows
+    /// - Parameter container: Container to place table in
+    public func show(columns: [TableViewColumnConfig], in objects: [PropertyReflectable], container: UIView) {
+        // 1) Create models for Rows
+        var rows: [TableViewRowModel] = []
+        for object in objects {
+            var rowFields: [TableViewFieldModel] = []
+            var counter = 0
+            for column in columns {
+                counter += 1
+                switch column.type {
+                case .Normal:
+                    if let value = object[column.key] {
+                        rowFields.append(TableViewFieldModel(header: column.header, value: "\(value)"))
+                    }
+                case .Button:
+                    rowFields.append(TableViewFieldModel(header: column.header, value: column.buttonName, isButton: true))
+                case .Counter:
+                    rowFields.append(TableViewFieldModel(header: column.header, value: "\(counter)"))
+                case .WithIcon:
+                    if let value = object[column.key] {
+                        rowFields.append(TableViewFieldModel(header: column.header, value: "\(value)", iconColor: .red))
+                    }
+                }
+            }
+            rows.append(TableViewRowModel(fields: rowFields))
+        }
+        // 2) Create Headers
+        let headers: [String] = rows[0].fields.map { $0.header }
+        
+        // 3) Create Column sizing
+        var columnSizes: [String: CGFloat] = [String: CGFloat]()
+        for header in headers {
+            columnSizes[header] = findMaxLengthForColumn(header: header, in: rows)
+        }
+        
+        let tableModel: TableViewModel = TableViewModel(rows: rows, columns: columnSizes, headers: headers)
+        let tableView: TableView = TableView.fromNib()
+        tableView.initialize(with: tableModel, in: container)
+        
+    }
+    
+    // MARK: Sizing
+    private func widthFor(column header: String) -> CGFloat {
+        return header.width(withConstrainedHeight: Table.headerLabelHeight, font: Table.headerFont)
+    }
+    
+    private func widthFor(field value: String) -> CGFloat {
+        return value.width(withConstrainedHeight: Table.rowHeight, font: Table.fieldFont)
+    }
+    
+    private func maxButtonWidth(for header: String, in rows: [TableViewRowModel]) -> CGFloat {
+        var maxLength: CGFloat = 0
+        for row in rows {
+            for field in row.fields where field.isButton && field.header == header {
+                let estimatedWidth = field.value.width(withConstrainedHeight: Table.rowHeight, font: Table.fieldFont)
+                if estimatedWidth > maxLength {
+                    maxLength = estimatedWidth
+                }
+            }
+        }
+        return maxLength + Table.buttonPadding
+    }
+    
+    private func findMaxLengthForColumn(header: String, in rows: [TableViewRowModel]) -> CGFloat {
+        var max: CGFloat = 0
+        for row in rows {
+            for field in row.fields where field.header == header {
+                if field.isButton {
+                    // TODO: Improve this, cant loop every time.. cache max button width
+                    return maxButtonWidth(for: header, in: rows)
+                }
+                let width = widthFor(field: field.value)
+                if width > max {
+                    max = width
+                }
+            }
+        }
+        return max
+    }
+    
+    
+    // MARK: Test
+    public func showTest(container: UIView) {
+        var columns: [TableViewColumnConfig] = []
+        var objects: [TestTableViewObject] = []
+        
+        // Create Test Object
+        let testObject1 = TestTableViewObject()
+        testObject1.remoteId = 1001
+        testObject1.timeAdded = "10:30pm"
+        testObject1.status = "Pending"
+        testObject1.riskLevel = "high"
+        objects.append(testObject1)
+        
+        // Create Test 2
+        let testObject2 = TestTableViewObject()
+        testObject2.remoteId = 1002
+        testObject2.timeAdded = "10:30pm"
+        testObject2.status = "Draft"
+        testObject2.riskLevel = "low"
+        objects.append(testObject2)
+        
+        // Create Column Config
+        columns.append(TableViewColumnConfig(key: "", header: "#", type: .Counter))
+        columns.append(TableViewColumnConfig(key: "remoteId", header: "ID", type: .Normal))
+        columns.append(TableViewColumnConfig(key: "riskLevel", header: "Risk Level", type: .Normal))
+        columns.append(TableViewColumnConfig(key: "timeAdded", header: "Time Added", type: .Normal))
+        columns.append(TableViewColumnConfig(key: "status", header: "Status", type: .WithIcon))
+        columns.append(TableViewColumnConfig(key: "", header: "Actions", type: .Button, buttonName: "View"))
+        show(columns: columns, in: objects, container: container)
+    }
+}

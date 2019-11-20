@@ -11,6 +11,14 @@ import UIKit
 class ShiftViewController: BaseViewController {
     // MARK: Outlets
     
+    @IBOutlet weak var containerView: UIView!
+    @IBOutlet weak var dividerView: UIView!
+    @IBOutlet weak var addInspectionButton: UIButton!
+    @IBOutlet weak var titleLabel: NSLayoutConstraint!
+    @IBOutlet weak var shiftNumberLabel: UILabel!
+    @IBOutlet weak var locationLabel: UILabel!
+    @IBOutlet weak var statusLabel: UILabel!
+    @IBOutlet weak var tempContainer: UIView!
     // MARK: Constants
     private let collectionCells = [
         "BasicCollectionViewCell",
@@ -22,10 +30,22 @@ class ShiftViewController: BaseViewController {
         style()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setupTestTable()
+    }
+    
+    // TEMP
+    func setupTestTable() {
+        let table = Table()
+        table.showTest(container: tempContainer)
+    }
+    
     // MARK: Style
     private func style() {
         setNavigationBar(hidden: false, style: UIBarStyle.black)
         self.styleNavBar()
+        styleCard(layer: containerView.layer)
     }
     
     private func styleNavBar() {
@@ -38,30 +58,30 @@ class ShiftViewController: BaseViewController {
     }
 }
 
-extension ShiftViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
-    private func setupCollectionView() {
-        for cell in collectionCells {
-            register(cell: cell)
-        }
-        collectionView.delegate = self
-        collectionView.dataSource = self
-    }
-    
-    func register(cell name: String) {
-        guard let collectionView = self.collectionView else {return}
-        let nib = UINib(nibName: name, bundle: nil)
-        collectionView.register(nib, forCellWithReuseIdentifier: name)
-    }
-    
-    func getBasicCell(indexPath: IndexPath) -> BasicCollectionViewCell {
-        return collectionView!.dequeueReusableCell(withReuseIdentifier: "BasicCollectionViewCell", for: indexPath as IndexPath) as! BasicCollectionViewCell
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        <#code#>
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        <#code#>
-    }
-}
+//extension ShiftViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+//    private func setupCollectionView() {
+//        for cell in collectionCells {
+//            register(cell: cell)
+//        }
+//        collectionView.delegate = self
+//        collectionView.dataSource = self
+//    }
+//    
+//    func register(cell name: String) {
+//        guard let collectionView = self.collectionView else {return}
+//        let nib = UINib(nibName: name, bundle: nil)
+//        collectionView.register(nib, forCellWithReuseIdentifier: name)
+//    }
+//    
+//    func getBasicCell(indexPath: IndexPath) -> BasicCollectionViewCell {
+//        return collectionView!.dequeueReusableCell(withReuseIdentifier: "BasicCollectionViewCell", for: indexPath as IndexPath) as! BasicCollectionViewCell
+//    }
+//    
+//    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+//        <#code#>
+//    }
+//    
+//    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+//        <#code#>
+//    }
+//}
