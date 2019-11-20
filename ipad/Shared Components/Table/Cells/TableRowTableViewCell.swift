@@ -40,7 +40,7 @@ class TableRowTableViewCell: UITableViewCell, Theme {
         stackView.axis  = NSLayoutConstraint.Axis.horizontal
         stackView.distribution  = UIStackView.Distribution.fillProportionally
         stackView.alignment = UIStackView.Alignment.leading
-        stackView.spacing   = 16.0
+        stackView.spacing   = Table.rowItemSpacing
         
         guard let last = model.fields.last else {return}
         for item in model.fields {
@@ -63,10 +63,11 @@ class TableRowTableViewCell: UITableViewCell, Theme {
                 
             } else if let iconColor = item.iconColor {
                 let valueStack = UIStackView()
+                let itemSpacing = Table.rowItemSpacing / 2
                 valueStack.axis  = NSLayoutConstraint.Axis.horizontal
                 valueStack.distribution  = UIStackView.Distribution.fillProportionally
                 valueStack.alignment = UIStackView.Alignment.center
-                valueStack.spacing   = 8.0
+                valueStack.spacing   = itemSpacing
                 
                 let indicatorView = UIView()
                 indicatorView.heightAnchor.constraint(equalToConstant: Table.indicatorSize).isActive = true
@@ -77,7 +78,7 @@ class TableRowTableViewCell: UITableViewCell, Theme {
                 let label = UILabel()
                 label.heightAnchor.constraint(equalToConstant: Table.rowHeight).isActive = true
                 let headerWidth = headerView.frame.width
-                label.widthAnchor.constraint(greaterThanOrEqualToConstant: headerWidth - (Table.indicatorSize + 8)).isActive = true
+                label.widthAnchor.constraint(greaterThanOrEqualToConstant: headerWidth - (Table.indicatorSize + itemSpacing)).isActive = true
                 label.text = item.value
                 label.font = Table.fieldFont
                 label.textAlignment = .left

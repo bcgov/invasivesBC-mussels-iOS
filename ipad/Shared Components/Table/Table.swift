@@ -45,6 +45,8 @@ class Table {
     
     static let buttonPadding: CGFloat = 16.0
     
+    static let rowItemSpacing: CGFloat = 16.0
+    
     
     /// Initialization
     /// Create an array of TableViewColumnConfig to specify
