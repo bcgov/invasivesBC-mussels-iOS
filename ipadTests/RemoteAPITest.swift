@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import Boilerplate
+@testable import InvasivesBC
 
 let ApiURL: String = "https://dev-invasivesbc.pathfinder.gov.bc.ca/api/data"
 class TestAPI: RemoteAPI<Data> {

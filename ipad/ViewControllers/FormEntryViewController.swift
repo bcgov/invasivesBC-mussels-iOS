@@ -33,7 +33,6 @@ class FormEntryViewController: BaseViewController {
     @IBAction func testAction(_ sender: UIButton) {
         let syncModal: SyncView = SyncView.fromNib()
         syncModal.initialize()
-
 //        Banner.show(message: "hello!!!")
 //        for item in self.inputItems {
 //            print(item.value.get(type: item.type) ?? "Not Set")
@@ -79,6 +78,20 @@ class FormEntryViewController: BaseViewController {
         let switch3 =  SwitchInput(key: "switch3", header: "Switch 3", editable: true, width: .Forth)
         let switch4 =  SwitchInput(key: "switch4", header: "Switch 4", editable: true, width: .Forth)
         
+        // Radio Switch
+        let rs1 = RadioSwitchInput(key: "radioSwirch1", header: "Switch Radio", editable: true, width: .Forth)
+        
+        // Double Input
+        let dbi1 = DoubleInput(key: "doubleInput1", header: "Double", editable: true, width: .Third)
+        
+        // Integer Input
+        let inti1 = IntegerInput(key: "intInput1", header: "Integer", editable: true, width: .Third)
+        inti1.dependency = InputDependency(to: rs1, equalTo: true)
+        
+        // View field with computation
+        let compute1 = FieldComputation(fields: [dbi1, inti1], rule: .Add)
+        let view1 = ViewField(header: "view 1", computation: compute1, width: .Forth)
+        
         self.inputItems.append(drodownItem1)
         self.inputItems.append(drodownItem2)
         self.inputItems.append(drodownItem3)
@@ -99,6 +112,12 @@ class FormEntryViewController: BaseViewController {
         self.inputItems.append(switch2)
         self.inputItems.append(switch3)
         self.inputItems.append(switch4)
+        
+        self.inputItems.append(rs1)
+        self.inputItems.append(dbi1)
+        self.inputItems.append(inti1)
+        
+        self.inputItems.append(view1)
     }
     
 }

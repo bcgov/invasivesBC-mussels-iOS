@@ -16,26 +16,25 @@ class InputGroupView: UIView {
         "DropdownCollectionViewCell",
         "SwitchInputCollectionViewCell",
         "DateInputCollectionViewCell",
-        "TextAreaInputCollectionViewCell"
+        "TextAreaInputCollectionViewCell",
+        "RadioSwitchInputCollectionViewCell",
+        "DoubleInputCollectionViewCell",
+        "IntegerInputCollectionViewCell",
+        "ViewFieldCollectionViewCell"
     ]
     
     // MARK: Variables
     private weak var collectionView: UICollectionView? = nil
     private var inputDelegate: InputDelegate? = nil
     private var inputItems: [InputItem] = []
-    
-    /*
-     // Only override draw() if you perform custom drawing.
-     // An empty implementation adversely affects performance during animation.
-     override func draw(_ rect: CGRect) {
-     // Drawing code
-     }
-     */
+    private var displayableInputItems: [InputItem] = []
+    private var dependencyKeys: [String] = []
     
     public func initialize(with Items: [InputItem], delegate: InputDelegate, in container: UIView) {
         container.addSubview(self)
         self.addConstraints(for: container)
         self.inputItems = Items
+        self.setDisplayableItems()
         self.inputDelegate = delegate
         self.createCollectionView()
         self.setupCollectionView()
@@ -43,8 +42,39 @@ class InputGroupView: UIView {
         container.layoutIfNeeded()
     }
     
+    private func setDisplayableItems() {
+        displayableInputItems = []
+        dependencyKeys = []
+        for item in inputItems {
+            if let dependency = item.dependency {
+                self.dependencyKeys.append(dependency.item.key)
+                if(!dependency.isSatisfied()) {
+                    continue
+                } else {
+                    self.displayableInputItems.append(item)
+                }
+            } else {
+                self.displayableInputItems.append(item)
+            }
+        }
+    }
+    
     private func addListeners() {
         NotificationCenter.default.addObserver(self, selector: #selector(self.screenOrientationChanged(notification:)), name: .screenOrientationChanged, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.inputItemValueChanged(notification:)), name: .InputItemValueChanged, object: nil)
+    }
+    
+    @objc func inputItemValueChanged(notification: Notification) {
+        guard let item: InputItem = notification.object as? InputItem else {return}
+        if dependencyKeys.contains(item.key) {
+            self.setDisplayableItems()
+            self.collectionView?.performBatchUpdates({
+                 let indexSet = IndexSet(integersIn: 0...0)
+                self.collectionView?.reloadSections(indexSet)
+            }, completion: { (done) in
+                NotificationCenter.default.post(name: .ShouldResizeInputGroup, object: self)
+            })
+        }
     }
     
     @objc func screenOrientationChanged(notification: Notification) {
@@ -52,7 +82,6 @@ class InputGroupView: UIView {
             return
         }
         flowLayout.invalidateLayout()
-        
     }
     
     private func addConstraints(for view: UIView) {
@@ -90,6 +119,7 @@ class InputGroupView: UIView {
         var widthCounter: CGFloat = 0
         var tempMaxRowItemHeight: CGFloat = 0
         for (index, item) in items.enumerated()  {
+        
             var itemWidth: CGFloat = 0
             // Get Width in terms of screen %
             switch item.width {
@@ -108,6 +138,12 @@ class InputGroupView: UIView {
                 rowHeights.append(tempMaxRowItemHeight + assumedCellSpacing)
                 tempMaxRowItemHeight = 0
                 widthCounter = 0
+            }
+            
+            // TODO: handle height for items with dependency where dependency is not satisfied
+            // Its buggy for rows with .Forth width items
+            if let dependency = item.dependency, !dependency.isSatisfied() {
+                continue
             }
             
             // If current item's height is greater than the max item height for row
@@ -168,12 +204,28 @@ extension InputGroupView: UICollectionViewDataSource, UICollectionViewDelegate, 
         return collectionView!.dequeueReusableCell(withReuseIdentifier: "TextAreaInputCollectionViewCell", for: indexPath as IndexPath) as! TextAreaInputCollectionViewCell
     }
     
+    func getRadioSwitchInputCell(indexPath: IndexPath) -> RadioSwitchInputCollectionViewCell {
+        return collectionView!.dequeueReusableCell(withReuseIdentifier: "RadioSwitchInputCollectionViewCell", for: indexPath as IndexPath) as! RadioSwitchInputCollectionViewCell
+    }
+    
+    func getDoubleInputCell(indexPath: IndexPath) -> DoubleInputCollectionViewCell {
+        return collectionView!.dequeueReusableCell(withReuseIdentifier: "DoubleInputCollectionViewCell", for: indexPath as IndexPath) as! DoubleInputCollectionViewCell
+    }
+    
+    func getIntInputCell(indexPath: IndexPath) -> IntegerInputCollectionViewCell {
+        return collectionView!.dequeueReusableCell(withReuseIdentifier: "IntegerInputCollectionViewCell", for: indexPath as IndexPath) as! IntegerInputCollectionViewCell
+    }
+    
+    func getViewFieldCell(indexPath: IndexPath) -> ViewFieldCollectionViewCell {
+        return collectionView!.dequeueReusableCell(withReuseIdentifier: "ViewFieldCollectionViewCell", for: indexPath as IndexPath) as! ViewFieldCollectionViewCell
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return inputItems.count
+        return displayableInputItems.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let item = inputItems[indexPath.row]
+        let item = displayableInputItems[indexPath.row]
         switch item.type {
         case .Dropdown:
             let cell = getDropdownCell(indexPath: indexPath)
@@ -184,12 +236,12 @@ extension InputGroupView: UICollectionViewDataSource, UICollectionViewDelegate, 
             cell.setup(with: item as! TextInput, delegate: inputDelegate!)
             return cell
         case .Int:
-            let cell = getTextInputCell(indexPath: indexPath)
-            cell.setup(with: item as! TextInput, delegate: inputDelegate!)
+            let cell = getIntInputCell(indexPath: indexPath)
+            cell.setup(with: item as! IntegerInput, delegate: inputDelegate!)
             return cell
         case .Double:
-            let cell = getTextInputCell(indexPath: indexPath)
-            cell.setup(with: item as! TextInput, delegate: inputDelegate!)
+            let cell = getDoubleInputCell(indexPath: indexPath)
+            cell.setup(with: item as! DoubleInput, delegate: inputDelegate!)
             return cell
         case .Date:
             let cell = getDateInputCell(indexPath: indexPath)
@@ -203,6 +255,14 @@ extension InputGroupView: UICollectionViewDataSource, UICollectionViewDelegate, 
             let cell = getTextAreaInputCell(indexPath: indexPath)
             cell.setup(with: item as! TextAreaInput, delegate: inputDelegate!)
             return cell
+        case .RadioSwitch:
+            let cell = getRadioSwitchInputCell(indexPath: indexPath)
+            cell.setup(with: item as! RadioSwitchInput, delegate: inputDelegate!)
+            return cell
+        case .ViewField:
+            let cell = getViewFieldCell(indexPath: indexPath)
+            cell.setup(with: item as! ViewField, delegate: inputDelegate!)
+            return cell
         }
     }
     
@@ -214,7 +274,7 @@ extension InputGroupView: UICollectionViewDataSource, UICollectionViewDelegate, 
             cellSpacing = layoutUnwrapped.minimumInteritemSpacing
         }
         
-        let item = inputItems[indexPath.row]
+        let item = displayableInputItems[indexPath.row]
         let containerWidth = collectionView.frame.width
         var multiplier: CGFloat = 1
         switch item.width {

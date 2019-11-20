@@ -21,15 +21,16 @@
                         <rect key="frame" x="20" y="44" width="404" height="61"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0tv-zA-dNt">
-                                <rect key="frame" x="2" y="2" width="372" height="57"/>
+                                <rect key="frame" x="2" y="2" width="377" height="57"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pXc-9X-5fc">
-                                <rect key="frame" x="379" y="15.5" width="20" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pXc-9X-5fc">
+                                <rect key="frame" x="394" y="23" width="5" height="15"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="20" id="9Ud-1L-Wdh"/>
+                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="5" id="9Ud-1L-Wdh"/>
+                                    <constraint firstAttribute="width" secondItem="pXc-9X-5fc" secondAttribute="height" multiplier="1:3" id="no2-i3-Ywz"/>
                                 </constraints>
-                                <state key="normal" title="O"/>
+                                <state key="normal" title="O" image="dots"/>
                                 <connections>
                                     <action selector="optionsAction:" destination="gTV-IL-0wX" eventType="touchUpInside" id="2ce-DW-eiY"/>
                                 </connections>
@@ -39,9 +40,11 @@
                         <constraints>
                             <constraint firstItem="pXc-9X-5fc" firstAttribute="centerY" secondItem="UYu-5U-bkA" secondAttribute="centerY" id="6Wr-Kv-nKa"/>
                             <constraint firstItem="0tv-zA-dNt" firstAttribute="leading" secondItem="UYu-5U-bkA" secondAttribute="leading" constant="2" id="AOj-Vc-ubW"/>
-                            <constraint firstItem="pXc-9X-5fc" firstAttribute="leading" secondItem="0tv-zA-dNt" secondAttribute="trailing" constant="5" id="Eab-Gm-jfH"/>
+                            <constraint firstItem="pXc-9X-5fc" firstAttribute="leading" secondItem="0tv-zA-dNt" secondAttribute="trailing" constant="15" id="Eab-Gm-jfH"/>
+                            <constraint firstItem="pXc-9X-5fc" firstAttribute="top" relation="greaterThanOrEqual" secondItem="UYu-5U-bkA" secondAttribute="top" constant="20" id="OAH-4I-FhI"/>
                             <constraint firstAttribute="trailing" secondItem="pXc-9X-5fc" secondAttribute="trailing" constant="5" id="W7c-Lf-OcQ"/>
                             <constraint firstItem="0tv-zA-dNt" firstAttribute="top" secondItem="UYu-5U-bkA" secondAttribute="top" constant="2" id="ZZh-bR-Zbn"/>
+                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="pXc-9X-5fc" secondAttribute="bottom" constant="20" id="eOm-Hl-p2H"/>
                             <constraint firstAttribute="bottom" secondItem="0tv-zA-dNt" secondAttribute="bottom" constant="2" id="qdL-tg-Gbt"/>
                         </constraints>
                     </view>
@@ -62,4 +65,7 @@
             <point key="canvasLocation" x="408.69565217391306" y="171.09375"/>
         </collectionViewCell>
     </objects>
+    <resources>
+        <image name="dots" width="500" height="1333"/>
+    </resources>
 </document>

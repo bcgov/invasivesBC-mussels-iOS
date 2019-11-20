@@ -27,17 +27,28 @@ pool:
   vmImage: 'macos-latest'
 
 variables:
-  ProfileFileName: 'Invasive_Species.mobileprovision'
-  ProfileUUID: 'c7e46a9d-5cd2-4508-94ac-924300256c25'
-  CertificateFileName: 'itunes-store.p12'
-  WorkspacePath: '**/ipad.xcworkspace'
-  SchemaName: 'ipad'
-  ExportOptionsFileName: 'options.plist'
-  ExportMethod: 'app-store'
+- group: CertsAndKeys
+- name: 'ProfileFileName'
+  value: 'Invasive_Species.mobileprovision'
+- name: 'ProfileUUID'
+  value: 'c7e46a9d-5cd2-4508-94ac-924300256c25'
+- name: 'CertificateFileName'
+  value: 'itunes-store.p12'
+- name: 'WorkspacePath'
+  value: '**/ipad.xcworkspace'
+- name: 'SchemaName'
+  value: 'ipad'
+- name: 'ExportOptionsFileName'
+  value: 'options.plist'
+- name: 'ExportMethod'
+  value: 'app-store'
   # Variables below are used for ITC uploads
-  BundleID: 'ca.bc.gov.InvasivesBC'
-  AppStoreServiceConnectionName: 'BCDevX'
-  ITCTeamID: 908186
+- name: 'BundleID'
+  value: 'ca.bc.gov.InvasivesBC'
+- name: 'AppStoreServiceConnectionName'
+  value: 'BCDevX'
+- name: 'ITCTeamID'
+  value: 908186
 
 steps:
 - task: InstallAppleCertificate@2
