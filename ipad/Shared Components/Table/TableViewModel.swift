@@ -35,14 +35,18 @@ class TableViewModel {
     var rows: [TableViewRowModel]
     
     // Headers and sizes
-    var columns: [String: CGFloat]
+    var columnSizes: [String: CGFloat]
     
     // Sorted headers
     var headers: [String]
     
-    init(rows: [TableViewRowModel], columns: [String: CGFloat], headers: [String]) {
+    // Displayed headers
+    var displayedHeaders: [String]
+    
+    init(rows: [TableViewRowModel], columnSizes: [String: CGFloat], headers: [String], displayedHeaders: [String]) {
         self.rows = rows
-        self.columns = columns
+        self.columnSizes = columnSizes
         self.headers = headers
+        self.displayedHeaders = displayedHeaders
     }
 }

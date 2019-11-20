@@ -21,12 +21,14 @@ struct TableViewColumnConfig {
     var key: String
     var header: String
     var buttonName: String
+    var showHeader: Bool
     
-    init(key: String, header: String, type: TableViewColumnType, buttonName: String? = "") {
+    init(key: String, header: String, type: TableViewColumnType, buttonName: String? = "", showHeader: Bool? = true) {
         self.key = key
         self.header = header
         self.type = type
         self.buttonName = buttonName ?? ""
+        self.showHeader = showHeader ?? true
     }
 }
 
@@ -36,7 +38,7 @@ class Table {
     static let headerLabelHeight: CGFloat = 20.0
     static let headerFont = Fonts.getPrimaryBold(size: 17)
     
-    static let rowHeight: CGFloat = 20.0
+    static let rowHeight: CGFloat = 30.0
     static let fieldFont = Fonts.getPrimary(size: 14)
     
     static let indicatorSize: CGFloat = 16.0
@@ -51,12 +53,12 @@ class Table {
     /// - Parameter container: Container to place table in
     public func show(columns: [TableViewColumnConfig], in objects: [PropertyReflectable], container: UIView) {
         // 1) Create models for Rows
+        var counter = 0
         var rows: [TableViewRowModel] = []
         for object in objects {
+            counter += 1
             var rowFields: [TableViewFieldModel] = []
-            var counter = 0
             for column in columns {
-                counter += 1
                 switch column.type {
                 case .Normal:
                     if let value = object[column.key] {
@@ -76,6 +78,7 @@ class Table {
         }
         // 2) Create Headers
         let headers: [String] = rows[0].fields.map { $0.header }
+        let displayedHeaders: [String] = columns.map{ $0.showHeader ? $0.header : ""}
         
         // 3) Create Column sizing
         var columnSizes: [String: CGFloat] = [String: CGFloat]()
@@ -83,7 +86,7 @@ class Table {
             columnSizes[header] = findMaxLengthForColumn(header: header, in: rows)
         }
         
-        let tableModel: TableViewModel = TableViewModel(rows: rows, columns: columnSizes, headers: headers)
+        let tableModel: TableViewModel = TableViewModel(rows: rows, columnSizes: columnSizes, headers: headers, displayedHeaders: displayedHeaders)
         let tableView: TableView = TableView.fromNib()
         tableView.initialize(with: tableModel, in: container)
         
@@ -111,6 +114,10 @@ class Table {
         return maxLength + Table.buttonPadding
     }
     
+    
+    /// Find the width required to display tongest value in column
+    /// - Parameter header: Column header
+    /// - Parameter rows: All Rows
     private func findMaxLengthForColumn(header: String, in rows: [TableViewRowModel]) -> CGFloat {
         var max: CGFloat = 0
         for row in rows {
@@ -151,12 +158,14 @@ class Table {
         objects.append(testObject2)
         
         // Create Column Config
-        columns.append(TableViewColumnConfig(key: "", header: "#", type: .Counter))
+        columns.append(TableViewColumnConfig(key: "", header: "#", type: .Counter, showHeader: false))
         columns.append(TableViewColumnConfig(key: "remoteId", header: "ID", type: .Normal))
         columns.append(TableViewColumnConfig(key: "riskLevel", header: "Risk Level", type: .Normal))
         columns.append(TableViewColumnConfig(key: "timeAdded", header: "Time Added", type: .Normal))
         columns.append(TableViewColumnConfig(key: "status", header: "Status", type: .WithIcon))
-        columns.append(TableViewColumnConfig(key: "", header: "Actions", type: .Button, buttonName: "View"))
+        columns.append(TableViewColumnConfig(key: "", header: "Actions", type: .Button, buttonName: "View", showHeader: false))
+        
+        // Create table
         show(columns: columns, in: objects, container: container)
     }
 }

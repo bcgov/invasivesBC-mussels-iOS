@@ -56,13 +56,16 @@ class TableView: UIView {
        
         // Add Labels
         tableHeaders = [String: UIView]()
+        var last = model.headers.last
         for header in model.headers {
             let label = UILabel()
-            label.heightAnchor.constraint(equalToConstant: Table.headerLabelHeight).isActive = true
-            label.widthAnchor.constraint(greaterThanOrEqualToConstant: model.columns[header] ?? 5).isActive = true
-            label.text = header
+            label.text = model.displayedHeaders.contains(header) ? header : " "
             label.font = Table.headerFont
             label.textAlignment = .left
+            label.heightAnchor.constraint(equalToConstant: Table.headerLabelHeight).isActive = true
+            
+            label.widthAnchor.constraint(greaterThanOrEqualToConstant: model.columnSizes[header] ?? 5).isActive = true
+            
             stackView.addArrangedSubview(label)
             
             // Store reference to header (so cell content can be constrained to it)
