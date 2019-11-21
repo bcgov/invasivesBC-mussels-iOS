@@ -30,8 +30,8 @@ class ShiftViewController: BaseViewController {
         style()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
         setupTestTable()
     }
     

@@ -22,11 +22,6 @@ class TableRowTableViewCell: UITableViewCell, Theme {
     // MARK: Class function
     override func awakeFromNib() {
         super.awakeFromNib()
-        addListeners()
-    }
-    
-    deinit {
-        NotificationCenter.default.removeObserver(self)
     }
     
     // MARK: Setup
@@ -128,13 +123,5 @@ class TableRowTableViewCell: UITableViewCell, Theme {
         stackView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
         stackView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
         stackView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
-    }
-    
-    private func addListeners() {
-        NotificationCenter.default.addObserver(self, selector: #selector(self.screenOrientationChanged(notification:)), name: .screenOrientationChanged, object: nil)
-    }
-    
-    @objc func screenOrientationChanged(notification: Notification) {
-        //        self.createStackView()
     }
 }

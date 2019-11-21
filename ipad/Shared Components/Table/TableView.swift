@@ -24,14 +24,13 @@ class TableView: UIView {
     private weak var stackView: UIStackView?
     private var tableHeaders: [String: UIView] = [String: UIView]()
     
-    
     // MARK: Setup
     public func initialize(with model: TableViewModel, in container: UIView) {
         container.addSubview(self)
         self.addConstraints(for: container)
         self.model = model
-        container.layoutIfNeeded()
         addHeaders() // Add headers also set up table
+        container.layoutIfNeeded()
         self.backgroundColor = Colors.primary
     }
     
