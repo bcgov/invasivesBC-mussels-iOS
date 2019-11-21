@@ -53,8 +53,7 @@ class TableRowTableViewCell: UITableViewCell, Theme {
             if item.isButton == true {
                 let button = UIButton()
                 stackView.addArrangedSubview(button)
-                button.heightAnchor.constraint(equalToConstant: Table.rowHeight).isActive = true
-                button.widthAnchor.constraint(equalTo: stackView.widthAnchor, multiplier: columnPercentWidth / 100).isActive = true
+                button.heightAnchor.constraint(equalToConstant: Table.rowHeight - 2).isActive = true
                 
                 if isLast {
                     button.widthAnchor.constraint(greaterThanOrEqualTo: stackView.widthAnchor, multiplier: columnPercentWidth / 100).isActive = true

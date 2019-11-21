@@ -161,7 +161,7 @@ class Table {
     }
     
     // MARK: Test
-    public func showTest(container: UIView) {
+    public func test(in container: UIView) {
         var columns: [TableViewColumnConfig] = []
         var objects: [TestTableViewObject] = []
         

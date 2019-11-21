@@ -38,7 +38,7 @@ class ShiftViewController: BaseViewController {
     // TEMP
     func setupTestTable() {
         let table = Table()
-        table.showTest(container: tempContainer)
+        table.test(in: tempContainer)
     }
     
     // MARK: Style
