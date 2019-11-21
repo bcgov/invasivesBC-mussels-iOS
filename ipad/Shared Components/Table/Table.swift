@@ -45,11 +45,11 @@ class Table {
     
     static let buttonPadding: CGFloat = 16.0
     
-    static let rowItemSpacing: CGFloat = 16.0
+    static let rowItemSpacing: CGFloat = 0
     
     
     /// Initialization
-    /// Create an array of TableViewColumnConfig to specify
+    /// Create an array of TableViewColumnConfig to specify which variables from the objects shuld be displayed
     /// - Parameter keys: Array of keys to be displayed & how they should be displayed
     /// - Parameter objects: PropertyReflectable Objects to display in rows
     /// - Parameter container: Container to place table in
@@ -109,6 +109,7 @@ class Table {
         var totalRequiredWidth: CGFloat = 0
         for (_, width) in columnSizes {
             totalRequiredWidth += width
+            totalRequiredWidth += Table.rowItemSpacing
         }
         
         for (key, width) in columnSizes {
@@ -139,12 +140,11 @@ class Table {
         return maxLength + Table.buttonPadding
     }
     
-    
     /// Find the width required to display tongest value in column
     /// - Parameter header: Column header
     /// - Parameter rows: All Rows
     private func findMaxLengthForColumn(header: String, in rows: [TableViewRowModel]) -> CGFloat {
-        var max: CGFloat = 0
+        var max: CGFloat = widthFor(column: header)
         for row in rows {
             for field in row.fields where field.header == header {
                 if field.isButton {
@@ -159,7 +159,6 @@ class Table {
         }
         return max
     }
-    
     
     // MARK: Test
     public func showTest(container: UIView) {

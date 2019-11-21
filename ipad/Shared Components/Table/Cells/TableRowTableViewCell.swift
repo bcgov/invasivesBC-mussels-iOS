@@ -17,6 +17,7 @@ class TableRowTableViewCell: UITableViewCell, Theme {
     private weak var stackView: UIStackView?
     private var model: TableViewRowModel? = nil
     private var tableHeaders: [String: UIView] = [String: UIView]()
+    private var columnSizes: [String: CGFloat] = [String: CGFloat]()
     
     // MARK: Class function
     override func awakeFromNib() {
@@ -25,16 +26,16 @@ class TableRowTableViewCell: UITableViewCell, Theme {
     }
     
     deinit {
-      NotificationCenter.default.removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
     }
     
     // MARK: Setup
-    public func setup(model: TableViewRowModel, tableHeaders: [String: UIView]) {
+    public func setup(model: TableViewRowModel, tableHeaders: [String: UIView], columnSizes: [String: CGFloat]) {
         self.model = model
         self.tableHeaders = tableHeaders
+        self.columnSizes = columnSizes
         createStackView()
     }
-    
     
     // MARK: StackView
     private func createStackView() {
@@ -49,67 +50,69 @@ class TableRowTableViewCell: UITableViewCell, Theme {
         
         guard let last = model.fields.last else {return}
         for item in model.fields {
-            guard let headerView = tableHeaders[item.header] else {
+            guard let columnPercentWidth = columnSizes[item.header] else {
                 continue
             }
+            let isLast = item.header == last.header
             if item.isButton == true {
                 let button = UIButton()
-                
+                stackView.addArrangedSubview(button)
                 button.heightAnchor.constraint(equalToConstant: Table.rowHeight).isActive = true
-                if item.header == last.header {
-                    button.widthAnchor.constraint(greaterThanOrEqualToConstant: headerView.frame.width).isActive = true
+                button.widthAnchor.constraint(equalTo: stackView.widthAnchor, multiplier: columnPercentWidth / 100).isActive = true
+                
+                if isLast {
+                    button.widthAnchor.constraint(greaterThanOrEqualTo: stackView.widthAnchor, multiplier: columnPercentWidth / 100).isActive = true
                 } else {
-                    button.widthAnchor.constraint(equalToConstant: headerView.frame.width).isActive = true
+                    button.widthAnchor.constraint(equalTo: stackView.widthAnchor, multiplier: columnPercentWidth / 100).isActive = true
                 }
                 
                 button.setTitle(item.value, for: .normal)
                 styleHollowButton(button: button)
-                stackView.addArrangedSubview(button)
-                
             } else if let iconColor = item.iconColor {
                 let valueStack = UIStackView()
-                let itemSpacing = Table.rowItemSpacing / 2
+                let itemSpacing = Table.indicatorSize / 2
                 valueStack.axis  = NSLayoutConstraint.Axis.horizontal
                 valueStack.distribution  = UIStackView.Distribution.fillProportionally
                 valueStack.alignment = UIStackView.Alignment.center
                 valueStack.spacing   = itemSpacing
                 
                 let indicatorView = UIView()
+                valueStack.addArrangedSubview(indicatorView)
                 indicatorView.heightAnchor.constraint(equalToConstant: Table.indicatorSize).isActive = true
                 indicatorView.widthAnchor.constraint(equalToConstant: Table.indicatorSize).isActive = true
                 indicatorView.backgroundColor = iconColor
-                valueStack.addArrangedSubview(indicatorView)
                 
                 let label = UILabel()
+                valueStack.addArrangedSubview(label)
                 label.heightAnchor.constraint(equalToConstant: Table.rowHeight).isActive = true
-                let headerWidth = headerView.frame.width
-                label.widthAnchor.constraint(greaterThanOrEqualToConstant: headerWidth - (Table.indicatorSize + itemSpacing)).isActive = true
+                label.widthAnchor.constraint(greaterThanOrEqualToConstant: 1).isActive = true
                 label.text = item.value
                 label.font = Table.fieldFont
                 label.textAlignment = .left
-                valueStack.addArrangedSubview(label)
-                
-                if item.header == last.header {
-                    valueStack.widthAnchor.constraint(greaterThanOrEqualToConstant: headerView.frame.width).isActive = true
-                } else {
-                    valueStack.widthAnchor.constraint(equalToConstant: headerView.frame.width).isActive = true
-                }
                 
                 stackView.addArrangedSubview(valueStack)
+                
+                if isLast {
+                    valueStack.widthAnchor.constraint(greaterThanOrEqualTo: stackView.widthAnchor, multiplier: columnPercentWidth / 100).isActive = true
+                } else {
+                    valueStack.widthAnchor.constraint(equalTo: stackView.widthAnchor, multiplier: columnPercentWidth / 100).isActive = true
+                }
+                
                 makeCircle(view: indicatorView)
             } else {
                 let label = UILabel()
                 label.heightAnchor.constraint(equalToConstant: Table.rowHeight).isActive = true
-                if item.header == last.header {
-                    label.widthAnchor.constraint(greaterThanOrEqualToConstant: headerView.frame.width).isActive = true
+                stackView.addArrangedSubview(label)
+                
+                if isLast {
+                    label.widthAnchor.constraint(greaterThanOrEqualTo: stackView.widthAnchor, multiplier: columnPercentWidth / 100).isActive = true
                 } else {
-                    label.widthAnchor.constraint(equalToConstant: headerView.frame.width).isActive = true
+                    label.widthAnchor.constraint(equalTo: stackView.widthAnchor, multiplier: columnPercentWidth / 100).isActive = true
                 }
                 
                 label.text = item.value
                 label.font = Table.fieldFont
                 label.textAlignment = .left
-                stackView.addArrangedSubview(label)
             }
         }
         
@@ -132,6 +135,6 @@ class TableRowTableViewCell: UITableViewCell, Theme {
     }
     
     @objc func screenOrientationChanged(notification: Notification) {
-        self.createStackView()
+        //        self.createStackView()
     }
 }

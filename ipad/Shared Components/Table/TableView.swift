@@ -46,44 +46,45 @@ class TableView: UIView {
     // MARK: Headers
     private func addHeaders() {
         guard let model = self.model else {return}
+        self.stackView?.removeFromSuperview()
         
         // Create StackView
         let stackView   = UIStackView()
+        // Add Subview
+        self.headerContainerView.addSubview(stackView)
+        // Assign local variable
+        self.stackView = stackView
+        // StackView options
         stackView.axis  = NSLayoutConstraint.Axis.horizontal
         stackView.distribution  = UIStackView.Distribution.fillProportionally
         stackView.alignment = UIStackView.Alignment.leading
-        stackView.spacing   = 16.0
+        stackView.spacing   = Table.rowItemSpacing
        
-        // Add Labels
-        tableHeaders = [String: UIView]()
-        var last = model.headers.last
-        for header in model.headers {
-            let label = UILabel()
-            label.text = model.displayedHeaders.contains(header) ? header : " "
-            label.font = Table.headerFont
-            label.textAlignment = .left
-            label.heightAnchor.constraint(equalToConstant: Table.headerLabelHeight).isActive = true
-            
-            label.widthAnchor.constraint(greaterThanOrEqualToConstant: model.columnSizes[header] ?? 5).isActive = true
-            
-            stackView.addArrangedSubview(label)
-            
-            // Store reference to header (so cell content can be constrained to it)
-            tableHeaders[header] = label
-        }
-        
         stackView.translatesAutoresizingMaskIntoConstraints = false
-        
-        // Assign local variable
-        self.stackView = stackView
-        // Add Subview
-        self.headerContainerView.addSubview(stackView)
         
         // Add Constraints
         stackView.leadingAnchor.constraint(equalTo: self.headerContainerView.leadingAnchor).isActive = true
         stackView.trailingAnchor.constraint(equalTo: self.headerContainerView.trailingAnchor).isActive = true
         stackView.topAnchor.constraint(equalTo: self.headerContainerView.topAnchor).isActive = true
         stackView.bottomAnchor.constraint(equalTo: self.headerContainerView.bottomAnchor).isActive = true
+        
+        // Add Labels
+        tableHeaders = [String: UIView]()
+        for header in model.headers {
+            guard let columnPercentWidth: CGFloat = model.relativeSizes[header] else {
+                continue
+            }
+            let label = UILabel()
+            stackView.addArrangedSubview(label)
+            label.text = model.displayedHeaders.contains(header) ? header : " "
+            label.font = Table.headerFont
+            label.textAlignment = .left
+            
+            label.heightAnchor.constraint(equalToConstant: Table.headerLabelHeight).isActive = true
+            label.widthAnchor.constraint(equalTo: stackView.widthAnchor, multiplier: columnPercentWidth / 100).isActive = true
+            tableHeaders[header] = label
+        }
+        
         
         // Setup table
         self.setUpTable()
@@ -124,7 +125,7 @@ extension TableView: UITableViewDelegate, UITableViewDataSource {
             return UITableViewCell()
         }
         let cell = getRowCell(indexPath: indexPath)
-        cell.setup(model: model.rows[indexPath.row], tableHeaders: tableHeaders)
+        cell.setup(model: model.rows[indexPath.row], tableHeaders: tableHeaders, columnSizes: model.relativeSizes)
         return cell
     }
     
