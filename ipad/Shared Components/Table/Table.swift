@@ -39,7 +39,7 @@ class Table {
     static let headerFont = Fonts.getPrimaryBold(size: 17)
     
     static let rowHeight: CGFloat = 30.0
-    static let fieldFont = Fonts.getPrimary(size: 14)
+    static let fieldFont = Fonts.getPrimary(size: 17)
     
     static let indicatorSize: CGFloat = 16.0
     

@@ -18,6 +18,7 @@ class TableRowTableViewCell: UITableViewCell, Theme {
     private var model: TableViewRowModel? = nil
     private var tableHeaders: [String: UIView] = [String: UIView]()
     private var columnSizes: [String: CGFloat] = [String: CGFloat]()
+    private var circles: [UIView] = []
     
     // MARK: Class function
     override func awakeFromNib() {
@@ -73,6 +74,7 @@ class TableRowTableViewCell: UITableViewCell, Theme {
                 
                 let indicatorView = UIView()
                 valueStack.addArrangedSubview(indicatorView)
+                indicatorView.translatesAutoresizingMaskIntoConstraints = false
                 indicatorView.heightAnchor.constraint(equalToConstant: Table.indicatorSize).isActive = true
                 indicatorView.widthAnchor.constraint(equalToConstant: Table.indicatorSize).isActive = true
                 indicatorView.backgroundColor = iconColor
@@ -93,7 +95,8 @@ class TableRowTableViewCell: UITableViewCell, Theme {
                     valueStack.widthAnchor.constraint(equalTo: stackView.widthAnchor, multiplier: columnPercentWidth / 100).isActive = true
                 }
                 
-                makeCircle(view: indicatorView)
+                // Circles need to be created at the end after self.layoutIfNeeded()
+                circles.append(indicatorView)
             } else {
                 let label = UILabel()
                 label.heightAnchor.constraint(equalToConstant: Table.rowHeight).isActive = true
@@ -123,5 +126,10 @@ class TableRowTableViewCell: UITableViewCell, Theme {
         stackView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
         stackView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
         stackView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+        
+        self.layoutIfNeeded()
+        for circle in self.circles {
+            self.makeCircle(view: circle)
+        }
     }
 }
