@@ -430,83 +430,24 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eum-mK-YOZ">
                                 <rect key="frame" x="21" y="21" width="726" height="982"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Shift Overview" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RQ9-jH-4RQ">
-                                        <rect key="frame" x="20" y="21" width="111.5" height="20.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mHf-O0-UXL">
-                                        <rect key="frame" x="507" y="10" width="199" height="42"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="42" id="KUm-Ex-cqv"/>
-                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="199" id="SrR-XY-UQV"/>
-                                        </constraints>
-                                        <state key="normal" title="Add Inspection"/>
-                                    </button>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QMV-Gv-WTS">
-                                        <rect key="frame" x="20" y="60" width="686" height="2"/>
-                                        <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="2" id="con-m1-xL4"/>
-                                        </constraints>
-                                    </view>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="abp-KC-EOx">
-                                        <rect key="frame" x="20" y="87" width="335" height="64"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="#####- MM DD YYY" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r8F-RB-UiJ">
-                                                <rect key="frame" x="0.0" y="22" width="158" height="20.5"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kYJ-tv-z0J">
-                                                <rect key="frame" x="174" y="22" width="65.5" height="20.5"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="s6d-IQ-EGT">
-                                                <rect key="frame" x="255.5" y="25" width="14" height="14"/>
-                                                <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" secondItem="s6d-IQ-EGT" secondAttribute="height" id="1YN-JC-tOP"/>
-                                                    <constraint firstAttribute="width" constant="14" id="DOU-7B-ijA"/>
-                                                </constraints>
-                                            </view>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Status" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m6a-Gc-MB7">
-                                                <rect key="frame" x="285.5" y="22" width="49.5" height="20.5"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="64" id="0Nk-7N-yn0"/>
-                                        </constraints>
-                                    </stackView>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="33f-Qv-a8Q">
-                                        <rect key="frame" x="20" y="171" width="686" height="811"/>
+                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="fXV-nF-rRC">
+                                        <rect key="frame" x="0.0" y="0.0" width="726" height="982"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                    </view>
+                                        <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="sEh-NI-eB6">
+                                            <size key="itemSize" width="50" height="50"/>
+                                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        </collectionViewFlowLayout>
+                                        <cells/>
+                                    </collectionView>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="33f-Qv-a8Q" secondAttribute="bottom" id="4lI-zb-Mu5"/>
-                                    <constraint firstAttribute="trailing" secondItem="mHf-O0-UXL" secondAttribute="trailing" constant="20" id="7IW-vI-Sxk"/>
-                                    <constraint firstItem="abp-KC-EOx" firstAttribute="top" secondItem="QMV-Gv-WTS" secondAttribute="bottom" constant="25" id="8f8-um-q6L"/>
-                                    <constraint firstItem="RQ9-jH-4RQ" firstAttribute="centerY" secondItem="mHf-O0-UXL" secondAttribute="centerY" id="HYX-BP-t3W"/>
-                                    <constraint firstItem="33f-Qv-a8Q" firstAttribute="top" secondItem="abp-KC-EOx" secondAttribute="bottom" constant="20" id="JjV-Af-fmd"/>
-                                    <constraint firstAttribute="trailing" secondItem="QMV-Gv-WTS" secondAttribute="trailing" constant="20" id="R28-Pr-utg"/>
-                                    <constraint firstItem="QMV-Gv-WTS" firstAttribute="top" secondItem="mHf-O0-UXL" secondAttribute="bottom" constant="8" id="VQH-DK-IWE"/>
-                                    <constraint firstItem="33f-Qv-a8Q" firstAttribute="leading" secondItem="QMV-Gv-WTS" secondAttribute="leading" id="W4I-PR-5pb"/>
-                                    <constraint firstItem="abp-KC-EOx" firstAttribute="leading" secondItem="eum-mK-YOZ" secondAttribute="leading" constant="20" id="XcV-PD-oXN"/>
-                                    <constraint firstItem="RQ9-jH-4RQ" firstAttribute="leading" secondItem="eum-mK-YOZ" secondAttribute="leading" constant="20" symbolic="YES" id="YYG-eX-U4W"/>
-                                    <constraint firstItem="33f-Qv-a8Q" firstAttribute="trailing" secondItem="QMV-Gv-WTS" secondAttribute="trailing" id="fJN-pI-g30"/>
-                                    <constraint firstItem="QMV-Gv-WTS" firstAttribute="leading" secondItem="eum-mK-YOZ" secondAttribute="leading" constant="20" id="fg6-IE-65b"/>
-                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="abp-KC-EOx" secondAttribute="trailing" constant="200" id="syB-Po-gdo"/>
-                                    <constraint firstItem="mHf-O0-UXL" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="RQ9-jH-4RQ" secondAttribute="trailing" constant="20" id="v8W-VH-1AB"/>
-                                    <constraint firstItem="mHf-O0-UXL" firstAttribute="top" secondItem="eum-mK-YOZ" secondAttribute="top" constant="10" id="yOw-Nv-hol"/>
+                                    <constraint firstAttribute="bottom" secondItem="fXV-nF-rRC" secondAttribute="bottom" id="BG8-Xd-6vZ"/>
+                                    <constraint firstItem="fXV-nF-rRC" firstAttribute="leading" secondItem="eum-mK-YOZ" secondAttribute="leading" id="FvC-6d-OJX"/>
+                                    <constraint firstAttribute="trailing" secondItem="fXV-nF-rRC" secondAttribute="trailing" id="UM1-SE-f2o"/>
+                                    <constraint firstItem="fXV-nF-rRC" firstAttribute="top" secondItem="eum-mK-YOZ" secondAttribute="top" id="gQo-Ti-huu"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -521,14 +462,8 @@
                     </view>
                     <navigationItem key="navigationItem" id="g8X-tQ-Wwi"/>
                     <connections>
-                        <outlet property="addInspectionButton" destination="mHf-O0-UXL" id="5Ug-o2-ztI"/>
+                        <outlet property="collectionView" destination="fXV-nF-rRC" id="eKs-Ii-pK8"/>
                         <outlet property="containerView" destination="eum-mK-YOZ" id="NjN-DI-3Xr"/>
-                        <outlet property="dividerView" destination="QMV-Gv-WTS" id="qdi-pW-aZi"/>
-                        <outlet property="locationLabel" destination="kYJ-tv-z0J" id="udN-2Z-OYF"/>
-                        <outlet property="shiftNumberLabel" destination="r8F-RB-UiJ" id="uJz-bz-NnA"/>
-                        <outlet property="statusLabel" destination="m6a-Gc-MB7" id="Gu6-gJ-JXp"/>
-                        <outlet property="tempContainer" destination="33f-Qv-a8Q" id="fG3-wi-Fvg"/>
-                        <outlet property="titleLabel" destination="HYX-BP-t3W" id="Z2T-E4-DwZ"/>
                         <segue destination="wRQ-S5-s9o" kind="show" identifier="showWatercraftInspectionForm" id="0hg-be-P9B"/>
                     </connections>
                 </viewController>

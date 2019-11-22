@@ -79,7 +79,7 @@ class Table {
             rows.append(TableViewRowModel(fields: rowFields))
         }
         // 2) Create Headers
-        let headers: [String] = rows[0].fields.map { $0.header }
+        let headers: [String] = rows.count > 0 ? rows[0].fields.map { $0.header } : []
         let displayedHeaders: [String] = columns.map{ $0.showHeader ? $0.header : ""}
         
         // 3) Create Column sizing

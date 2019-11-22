@@ -75,6 +75,22 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
     // Form Objects (Cached - Not stored)
     private var inputItems : [WatercraftFromSection: [InputItem]] = [WatercraftFromSection: [InputItem]]()
     
+    var status: String {
+        if shouldSync {
+            return "pending"
+        } else {
+            return "completed"
+        }
+    }
+    
+    var riskLevel: String {
+        if highriskAIS {
+            return "High"
+        } else {
+            return "Low"
+        }
+    }
+    
     func toDictionary() -> [String : Any] {
         return [
             "isPassportHolder": isPassportHolder,

@@ -91,6 +91,16 @@
 		29DB0117237206D30046E605 /* HeaderCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29DB0115237206D30046E605 /* HeaderCollectionViewCell.xib */; };
 		29DB011B237207BF0046E605 /* FormButtonCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29DB0119237207BF0046E605 /* FormButtonCollectionViewCell.swift */; };
 		29DB011C237207BF0046E605 /* FormButtonCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29DB011A237207BF0046E605 /* FormButtonCollectionViewCell.xib */; };
+		29DB4E3E23870B7B00B13646 /* ShifOverviewHeaderCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29DB4E3C23870B7B00B13646 /* ShifOverviewHeaderCollectionViewCell.swift */; };
+		29DB4E3F23870B7B00B13646 /* ShifOverviewHeaderCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29DB4E3D23870B7B00B13646 /* ShifOverviewHeaderCollectionViewCell.xib */; };
+		29DB4E4123870F2B00B13646 /* ShiftModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29DB4E4023870F2B00B13646 /* ShiftModel.swift */; };
+		29DB4E462387113900B13646 /* BaseShiftOverviewCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29DB4E442387113900B13646 /* BaseShiftOverviewCollectionViewCell.swift */; };
+		29DB4E472387113900B13646 /* BaseShiftOverviewCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29DB4E452387113900B13646 /* BaseShiftOverviewCollectionViewCell.xib */; };
+		29DB4E4A2387126A00B13646 /* StatusColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29DB4E492387126A00B13646 /* StatusColor.swift */; };
+		29DB4E4E2387131000B13646 /* InspectionsTableCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29DB4E4C2387131000B13646 /* InspectionsTableCollectionViewCell.swift */; };
+		29DB4E4F2387131000B13646 /* InspectionsTableCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29DB4E4D2387131000B13646 /* InspectionsTableCollectionViewCell.xib */; };
+		29DB4E59238715A300B13646 /* ShiftInformationHeaderCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29DB4E57238715A300B13646 /* ShiftInformationHeaderCollectionViewCell.swift */; };
+		29DB4E5A238715A300B13646 /* ShiftInformationHeaderCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29DB4E58238715A300B13646 /* ShiftInformationHeaderCollectionViewCell.xib */; };
 		29E4BBE82372120F0079475F /* DividerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E4BBE62372120F0079475F /* DividerCollectionViewCell.swift */; };
 		29E4BBE92372120F0079475F /* DividerCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29E4BBE72372120F0079475F /* DividerCollectionViewCell.xib */; };
 		29E4BBEE237218500079475F /* PreviousWaterBodyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E4BBEC237218500079475F /* PreviousWaterBodyCollectionViewCell.swift */; };
@@ -243,6 +253,16 @@
 		29DB0115237206D30046E605 /* HeaderCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HeaderCollectionViewCell.xib; sourceTree = "<group>"; };
 		29DB0119237207BF0046E605 /* FormButtonCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormButtonCollectionViewCell.swift; sourceTree = "<group>"; };
 		29DB011A237207BF0046E605 /* FormButtonCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FormButtonCollectionViewCell.xib; sourceTree = "<group>"; };
+		29DB4E3C23870B7B00B13646 /* ShifOverviewHeaderCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShifOverviewHeaderCollectionViewCell.swift; sourceTree = "<group>"; };
+		29DB4E3D23870B7B00B13646 /* ShifOverviewHeaderCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ShifOverviewHeaderCollectionViewCell.xib; sourceTree = "<group>"; };
+		29DB4E4023870F2B00B13646 /* ShiftModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShiftModel.swift; sourceTree = "<group>"; };
+		29DB4E442387113900B13646 /* BaseShiftOverviewCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseShiftOverviewCollectionViewCell.swift; sourceTree = "<group>"; };
+		29DB4E452387113900B13646 /* BaseShiftOverviewCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BaseShiftOverviewCollectionViewCell.xib; sourceTree = "<group>"; };
+		29DB4E492387126A00B13646 /* StatusColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusColor.swift; sourceTree = "<group>"; };
+		29DB4E4C2387131000B13646 /* InspectionsTableCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InspectionsTableCollectionViewCell.swift; sourceTree = "<group>"; };
+		29DB4E4D2387131000B13646 /* InspectionsTableCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InspectionsTableCollectionViewCell.xib; sourceTree = "<group>"; };
+		29DB4E57238715A300B13646 /* ShiftInformationHeaderCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShiftInformationHeaderCollectionViewCell.swift; sourceTree = "<group>"; };
+		29DB4E58238715A300B13646 /* ShiftInformationHeaderCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ShiftInformationHeaderCollectionViewCell.xib; sourceTree = "<group>"; };
 		29E4BBE62372120F0079475F /* DividerCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DividerCollectionViewCell.swift; sourceTree = "<group>"; };
 		29E4BBE72372120F0079475F /* DividerCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DividerCollectionViewCell.xib; sourceTree = "<group>"; };
 		29E4BBEC237218500079475F /* PreviousWaterBodyCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviousWaterBodyCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -394,6 +414,7 @@
 				294D9A872379C62F00BD4928 /* WatercraftInspectionModel.swift */,
 				29DB0111237204A90046E605 /* JourneyDetailsModel.swift */,
 				29588747237B52F000224FFA /* HighRiskAssessmentModel.swift */,
+				29DB4E4023870F2B00B13646 /* ShiftModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -591,6 +612,7 @@
 		29BAC4FC23676C2300A620F4 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				29DB4E482387125800B13646 /* Status Color */,
 				29FFEBC2237F23A800574E3F /* JWT Decoder */,
 				29FFEBBC237F1E9100574E3F /* Settings */,
 				2950510B2374DFAB000FBD6E /* Extensions */,
@@ -767,6 +789,81 @@
 			path = Button;
 			sourceTree = "<group>";
 		};
+		29DB4E3923870B0000B13646 /* Shift Overview cells */ = {
+			isa = PBXGroup;
+			children = (
+				29DB4E422387111700B13646 /* Base */,
+				29DB4E432387112000B13646 /* Header */,
+				29DB4E4B238712ED00B13646 /* Inspections */,
+				29DB4E502387153400B13646 /* Shift Information */,
+			);
+			path = "Shift Overview cells";
+			sourceTree = "<group>";
+		};
+		29DB4E3A23870B1F00B13646 /* Shared cells */ = {
+			isa = PBXGroup;
+			children = (
+				29DB010B2371EE2F0046E605 /* Basic (header + Input group) */,
+				29E4BBE5237211F10079475F /* Divider */,
+				29DB0118237207AD0046E605 /* Button */,
+				29DB0113237206B90046E605 /* Header */,
+			);
+			path = "Shared cells";
+			sourceTree = "<group>";
+		};
+		29DB4E3B23870B3000B13646 /* Inspection form cells */ = {
+			isa = PBXGroup;
+			children = (
+				29E4BBEB237217F40079475F /* Destination Water Body */,
+				29E4BBEA237217E60079475F /* Previous Water Body */,
+			);
+			path = "Inspection form cells";
+			sourceTree = "<group>";
+		};
+		29DB4E422387111700B13646 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				29DB4E442387113900B13646 /* BaseShiftOverviewCollectionViewCell.swift */,
+				29DB4E452387113900B13646 /* BaseShiftOverviewCollectionViewCell.xib */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		29DB4E432387112000B13646 /* Header */ = {
+			isa = PBXGroup;
+			children = (
+				29DB4E3C23870B7B00B13646 /* ShifOverviewHeaderCollectionViewCell.swift */,
+				29DB4E3D23870B7B00B13646 /* ShifOverviewHeaderCollectionViewCell.xib */,
+			);
+			path = Header;
+			sourceTree = "<group>";
+		};
+		29DB4E482387125800B13646 /* Status Color */ = {
+			isa = PBXGroup;
+			children = (
+				29DB4E492387126A00B13646 /* StatusColor.swift */,
+			);
+			path = "Status Color";
+			sourceTree = "<group>";
+		};
+		29DB4E4B238712ED00B13646 /* Inspections */ = {
+			isa = PBXGroup;
+			children = (
+				29DB4E4C2387131000B13646 /* InspectionsTableCollectionViewCell.swift */,
+				29DB4E4D2387131000B13646 /* InspectionsTableCollectionViewCell.xib */,
+			);
+			path = Inspections;
+			sourceTree = "<group>";
+		};
+		29DB4E502387153400B13646 /* Shift Information */ = {
+			isa = PBXGroup;
+			children = (
+				29DB4E57238715A300B13646 /* ShiftInformationHeaderCollectionViewCell.swift */,
+				29DB4E58238715A300B13646 /* ShiftInformationHeaderCollectionViewCell.xib */,
+			);
+			path = "Shift Information";
+			sourceTree = "<group>";
+		};
 		29E4BBE5237211F10079475F /* Divider */ = {
 			isa = PBXGroup;
 			children = (
@@ -849,12 +946,9 @@
 		29F4EC532370B1BB001D5CFA /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				29DB010B2371EE2F0046E605 /* Basic (header + Input group) */,
-				29E4BBE5237211F10079475F /* Divider */,
-				29DB0118237207AD0046E605 /* Button */,
-				29DB0113237206B90046E605 /* Header */,
-				29E4BBEB237217F40079475F /* Destination Water Body */,
-				29E4BBEA237217E60079475F /* Previous Water Body */,
+				29DB4E3A23870B1F00B13646 /* Shared cells */,
+				29DB4E3B23870B3000B13646 /* Inspection form cells */,
+				29DB4E3923870B0000B13646 /* Shift Overview cells */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -1058,17 +1152,21 @@
 				29514BDD2368AEE400DC89C4 /* Options.storyboard in Resources */,
 				29F29FAC236CA948004F12E7 /* TextInputCollectionViewCell.xib in Resources */,
 				29CEC92623676425003B21B9 /* LaunchScreen.storyboard in Resources */,
+				29DB4E4F2387131000B13646 /* InspectionsTableCollectionViewCell.xib in Resources */,
 				2950510A2374D764000FBD6E /* DoubleInputCollectionViewCell.xib in Resources */,
 				29E4BBE92372120F0079475F /* DividerCollectionViewCell.xib in Resources */,
 				299196932384725600634F81 /* TableView.xib in Resources */,
 				29A9742E236CB59F006C668F /* SwitchInputCollectionViewCell.xib in Resources */,
+				29DB4E5A238715A300B13646 /* ShiftInformationHeaderCollectionViewCell.xib in Resources */,
 				2907E4B92368D25800946B3F /* InputModal.xib in Resources */,
+				29DB4E3F23870B7B00B13646 /* ShifOverviewHeaderCollectionViewCell.xib in Resources */,
 				29E4BBF3237218610079475F /* DestinationWaterBodyCollectionViewCell.xib in Resources */,
 				295051112374F54A000FBD6E /* IntegerInputCollectionViewCell.xib in Resources */,
 				294D8F6223847C9A0094090D /* TableRowTableViewCell.xib in Resources */,
 				A7AE5276237CC3660044DBB7 /* check-mark-success.json in Resources */,
 				29F29FA2236B8670004F12E7 /* DropdownCollectionViewCell.xib in Resources */,
 				29DB0117237206D30046E605 /* HeaderCollectionViewCell.xib in Resources */,
+				29DB4E472387113900B13646 /* BaseShiftOverviewCollectionViewCell.xib in Resources */,
 				29E4BBEF237218500079475F /* PreviousWaterBodyCollectionViewCell.xib in Resources */,
 				29DB011C237207BF0046E605 /* FormButtonCollectionViewCell.xib in Resources */,
 				29F29F99236B6B9C004F12E7 /* SwitcherCollectionViewCell.xib in Resources */,
@@ -1167,10 +1265,12 @@
 				294D8F692385D1F10094090D /* TestTableViewObject.swift in Sources */,
 				5C82D3EC2374BD1300B065BA /* Promise.swift in Sources */,
 				5C0F6980237C6DDA00F96CA5 /* APIChain.swift in Sources */,
+				29DB4E4123870F2B00B13646 /* ShiftModel.swift in Sources */,
 				29514BEB2368C45F00DC89C4 /* DropdownViewController.swift in Sources */,
 				299196952384726600634F81 /* TableView.swift in Sources */,
 				2907E4B12368CD6700946B3F /* Dropdown.swift in Sources */,
 				29FFEBBE237F1EAA00574E3F /* Settings.swift in Sources */,
+				29DB4E59238715A300B13646 /* ShiftInformationHeaderCollectionViewCell.swift in Sources */,
 				29BAC5192367B34000A620F4 /* Fonts.swift in Sources */,
 				5C82D404237B31C200B065BA /* WatercraftRiskAssessmentAPI.swift in Sources */,
 				29DB0112237204A90046E605 /* JourneyDetailsModel.swift in Sources */,
@@ -1206,7 +1306,9 @@
 				29DB01092370EFD60046E605 /* TextAreaInputCollectionViewCell.swift in Sources */,
 				5C82D3EA2374BCFA00B065BA /* FoundationExtension.swift in Sources */,
 				29CEC91E23676424003B21B9 /* ViewController.swift in Sources */,
+				29DB4E4E2387131000B13646 /* InspectionsTableCollectionViewCell.swift in Sources */,
 				29A9742D236CB59F006C668F /* SwitchInputCollectionViewCell.swift in Sources */,
+				29DB4E4A2387126A00B13646 /* StatusColor.swift in Sources */,
 				29F29F9D236B7750004F12E7 /* Switcher.swift in Sources */,
 				29CEC91A23676424003B21B9 /* AppDelegate.swift in Sources */,
 				29514BE92368C41900DC89C4 /* DropdownModel.swift in Sources */,
@@ -1216,6 +1318,8 @@
 				29E4BBEE237218500079475F /* PreviousWaterBodyCollectionViewCell.swift in Sources */,
 				29F29FAB236CA948004F12E7 /* TextInputCollectionViewCell.swift in Sources */,
 				29588745237B50CC00224FFA /* HighRiskFormViewController.swift in Sources */,
+				29DB4E3E23870B7B00B13646 /* ShifOverviewHeaderCollectionViewCell.swift in Sources */,
+				29DB4E462387113900B13646 /* BaseShiftOverviewCollectionViewCell.swift in Sources */,
 				5C82D3DF2374B9D700B065BA /* RemoteAPIManager.swift in Sources */,
 				29BAC50E236790C900A620F4 /* HomeViewController.swift in Sources */,
 				29514BE62368B70900DC89C4 /* Options.swift in Sources */,

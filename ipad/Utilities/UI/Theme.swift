@@ -80,6 +80,7 @@ extension Theme {
     
     // Form Section title
     public func styleSectionTitle(label: UILabel) {
+        label.textColor = Colors.primary
         label.font = Fonts.getPrimaryBold(size: 22)
     }
     
