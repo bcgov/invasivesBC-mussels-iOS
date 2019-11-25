@@ -20,7 +20,7 @@ class TimeInputCollectionViewCell:  BaseInputCell<TimeInput>, UITextFieldDelegat
     // MARK: Setup
     override func initialize(with model: TimeInput) {
         self.headerLabel.text = model.header
-        textFieldText()
+        setTextFieldText()
         let gesture = UITapGestureRecognizer(target: self, action:  #selector(self.onClick))
         self.textField.addGestureRecognizer(gesture)
         style()
@@ -29,17 +29,17 @@ class TimeInputCollectionViewCell:  BaseInputCell<TimeInput>, UITextFieldDelegat
     @objc func onClick(sender : UITapGestureRecognizer) {
         guard let model = self.model, let delegate = self.inputDelegate else {return}
         if model.editable {
-            delegate.showDatepickerDelegate(on: textField, initialDate: model.value.get(type: .Date) as? Date ?? nil, minDate: nil, maxDate: nil) { (selectedDate) in
-                model.value.set(value: selectedDate, type: .Date)
-                self.textFieldText()
+            delegate.showTimePickerDelegate(on: textField, initialTime: nil) { (selectedTime) in
+                model.setValue(value: selectedTime)
+                self.setTextFieldText()
                 self.emitChange()
             }
         }
     }
     
-    private func textFieldText() {
-        if let model = self.model, let value: Date = model.value.get(type: model.type) as? Date  {
-            self.textField.text = value.string()
+    private func setTextFieldText() {
+        if let model = self.model, let value: Time = model.getValue()  {
+            self.textField.text = value.toString()
         }
     }
     

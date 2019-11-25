@@ -77,8 +77,14 @@ class HomeViewController: BaseViewController {
     }
     
     @IBAction func addEntryClicked(_ sender: Any) {
+        let shiftModal: NewShiftModal = NewShiftModal.fromNib()
+        shiftModal.initialize(delegate: self, onStart: {
+            self.performSegue(withIdentifier: "showShiftOverview", sender: self)
+        }) {
+            print("cancelled")
+        }
         //        self.performSegue(withIdentifier: "showFormEntry", sender: self)
-        self.performSegue(withIdentifier: "showShiftOverview", sender: self)
+        
         //        self.performSegue(withIdentifier: "showWatercraftInspectionForm", sender: self)
     }
     

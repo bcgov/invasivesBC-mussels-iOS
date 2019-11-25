@@ -14,14 +14,14 @@
             <rect key="frame" x="0.0" y="0.0" width="623" height="468"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vzp-oA-WFA">
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="clipboard" translatesAutoresizingMaskIntoConstraints="NO" id="vzp-oA-WFA">
                     <rect key="frame" x="24" y="24" width="24" height="24"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="vzp-oA-WFA" secondAttribute="height" multiplier="1:1" id="cys-LY-n5T"/>
                         <constraint firstAttribute="width" constant="24" id="tnu-js-gKB"/>
                     </constraints>
                 </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9OM-e8-gLA">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Start New Shift" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9OM-e8-gLA">
                     <rect key="frame" x="73" y="26" width="525" height="20.5"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
@@ -97,4 +97,7 @@
             <point key="canvasLocation" x="292.02898550724638" y="6.6964285714285712"/>
         </view>
     </objects>
+    <resources>
+        <image name="clipboard" width="24" height="24"/>
+    </resources>
 </document>

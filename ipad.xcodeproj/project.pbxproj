@@ -13,6 +13,7 @@
 		2907E4B72368D24900946B3F /* InputModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2907E4B62368D24900946B3F /* InputModal.swift */; };
 		2907E4B92368D25800946B3F /* InputModal.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2907E4B82368D25800946B3F /* InputModal.xib */; };
 		2907E4BB2368FEA500946B3F /* FormEntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2907E4BA2368FEA500946B3F /* FormEntryViewController.swift */; };
+		2933DD5B238C78350068E9DF /* TimePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2933DD5A238C78350068E9DF /* TimePicker.swift */; };
 		2944AF9B2379B243007517DC /* ViewFieldCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2944AF992379B243007517DC /* ViewFieldCollectionViewCell.swift */; };
 		2944AF9C2379B243007517DC /* ViewFieldCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2944AF9A2379B243007517DC /* ViewFieldCollectionViewCell.xib */; };
 		294D8F6123847C9A0094090D /* TableRowTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294D8F5F23847C9A0094090D /* TableRowTableViewCell.swift */; };
@@ -62,6 +63,8 @@
 		296DEC23238C56A30035E7FA /* ShiftFormHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 296DEC22238C56A30035E7FA /* ShiftFormHelper.swift */; };
 		296DEC27238C61A80035E7FA /* IntegerStepperInputCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 296DEC25238C61A80035E7FA /* IntegerStepperInputCollectionViewCell.swift */; };
 		296DEC28238C61A80035E7FA /* IntegerStepperInputCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 296DEC26238C61A80035E7FA /* IntegerStepperInputCollectionViewCell.xib */; };
+		296DEC2B238C73AF0035E7FA /* TimePicker.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 296DEC2A238C73AF0035E7FA /* TimePicker.storyboard */; };
+		296DEC2D238C73BD0035E7FA /* TimePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 296DEC2C238C73BD0035E7FA /* TimePickerViewController.swift */; };
 		2991969023846AE000634F81 /* ShiftViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2991968F23846AE000634F81 /* ShiftViewController.swift */; };
 		299196932384725600634F81 /* TableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 299196922384725600634F81 /* TableView.xib */; };
 		299196952384726600634F81 /* TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299196942384726600634F81 /* TableView.swift */; };
@@ -179,6 +182,7 @@
 		2907E4B62368D24900946B3F /* InputModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputModal.swift; sourceTree = "<group>"; };
 		2907E4B82368D25800946B3F /* InputModal.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InputModal.xib; sourceTree = "<group>"; };
 		2907E4BA2368FEA500946B3F /* FormEntryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormEntryViewController.swift; sourceTree = "<group>"; };
+		2933DD5A238C78350068E9DF /* TimePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimePicker.swift; sourceTree = "<group>"; };
 		2944AF992379B243007517DC /* ViewFieldCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewFieldCollectionViewCell.swift; sourceTree = "<group>"; };
 		2944AF9A2379B243007517DC /* ViewFieldCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ViewFieldCollectionViewCell.xib; sourceTree = "<group>"; };
 		294D8F5F23847C9A0094090D /* TableRowTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableRowTableViewCell.swift; sourceTree = "<group>"; };
@@ -229,6 +233,8 @@
 		296DEC22238C56A30035E7FA /* ShiftFormHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShiftFormHelper.swift; sourceTree = "<group>"; };
 		296DEC25238C61A80035E7FA /* IntegerStepperInputCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntegerStepperInputCollectionViewCell.swift; sourceTree = "<group>"; };
 		296DEC26238C61A80035E7FA /* IntegerStepperInputCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IntegerStepperInputCollectionViewCell.xib; sourceTree = "<group>"; };
+		296DEC2A238C73AF0035E7FA /* TimePicker.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TimePicker.storyboard; sourceTree = "<group>"; };
+		296DEC2C238C73BD0035E7FA /* TimePickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimePickerViewController.swift; sourceTree = "<group>"; };
 		2991968F23846AE000634F81 /* ShiftViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShiftViewController.swift; sourceTree = "<group>"; };
 		299196922384725600634F81 /* TableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TableView.xib; sourceTree = "<group>"; };
 		299196942384726600634F81 /* TableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableView.swift; sourceTree = "<group>"; };
@@ -502,9 +508,9 @@
 		29514BD22368ACF700DC89C4 /* Shared Components */ = {
 			isa = PBXGroup;
 			children = (
-				296DEC1D238C536A0035E7FA /* New Shift Modal */,
 				299196912384723400634F81 /* Table */,
 				29A97437236FD615006C668F /* Form */,
+				296DEC1D238C536A0035E7FA /* New Shift Modal */,
 				5C82D3D42374AECC00B065BA /* High Risk Modal */,
 				29F29F91236B6A0D004F12E7 /* Switcher */,
 				2907E4B52368D21D00946B3F /* Input Modal */,
@@ -587,6 +593,7 @@
 		296DEC17238C51650035E7FA /* Time Input */ = {
 			isa = PBXGroup;
 			children = (
+				296DEC29238C73910035E7FA /* Time Picker */,
 				296DEC18238C51810035E7FA /* TimeInputCollectionViewCell.swift */,
 				296DEC19238C51810035E7FA /* TimeInputCollectionViewCell.xib */,
 			);
@@ -609,6 +616,16 @@
 				296DEC26238C61A80035E7FA /* IntegerStepperInputCollectionViewCell.xib */,
 			);
 			path = "Integer Stepper";
+			sourceTree = "<group>";
+		};
+		296DEC29238C73910035E7FA /* Time Picker */ = {
+			isa = PBXGroup;
+			children = (
+				296DEC2C238C73BD0035E7FA /* TimePickerViewController.swift */,
+				296DEC2A238C73AF0035E7FA /* TimePicker.storyboard */,
+				2933DD5A238C78350068E9DF /* TimePicker.swift */,
+			);
+			path = "Time Picker";
 			sourceTree = "<group>";
 		};
 		2991968E2384656A00634F81 /* Recovered References */ = {
@@ -1231,6 +1248,7 @@
 				29DB0117237206D30046E605 /* HeaderCollectionViewCell.xib in Resources */,
 				29DB4E472387113900B13646 /* BaseShiftOverviewCollectionViewCell.xib in Resources */,
 				29E4BBEF237218500079475F /* PreviousWaterBodyCollectionViewCell.xib in Resources */,
+				296DEC2B238C73AF0035E7FA /* TimePicker.storyboard in Resources */,
 				29DB011C237207BF0046E605 /* FormButtonCollectionViewCell.xib in Resources */,
 				29F29F99236B6B9C004F12E7 /* SwitcherCollectionViewCell.xib in Resources */,
 				29DB010A2370EFD60046E605 /* TextAreaInputCollectionViewCell.xib in Resources */,
@@ -1331,6 +1349,7 @@
 				29DB4E4123870F2B00B13646 /* ShiftModel.swift in Sources */,
 				29514BEB2368C45F00DC89C4 /* DropdownViewController.swift in Sources */,
 				299196952384726600634F81 /* TableView.swift in Sources */,
+				2933DD5B238C78350068E9DF /* TimePicker.swift in Sources */,
 				2907E4B12368CD6700946B3F /* Dropdown.swift in Sources */,
 				29FFEBBE237F1EAA00574E3F /* Settings.swift in Sources */,
 				29DB4E59238715A300B13646 /* ShiftInformationHeaderCollectionViewCell.swift in Sources */,
@@ -1399,6 +1418,7 @@
 				2944AF9B2379B243007517DC /* ViewFieldCollectionViewCell.swift in Sources */,
 				29F4EC512370B007001D5CFA /* WatercraftInspectionViewController.swift in Sources */,
 				296DEC15238C4CA70035E7FA /* RadioBooleanCollectionViewCell.swift in Sources */,
+				296DEC2D238C73BD0035E7FA /* TimePickerViewController.swift in Sources */,
 				29BAC5172367B12300A620F4 /* Colors.swift in Sources */,
 				294D8F652385C7310094090D /* Table.swift in Sources */,
 				2958874D237B58D600224FFA /* HighRiskFormFieldHeaders.swift in Sources */,

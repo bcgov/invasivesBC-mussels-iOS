@@ -38,7 +38,7 @@ struct InputValue {
     var int: Int?
     var double: Double?
     var itemId: String?
-    var time: TimeInterval?
+    var time: String?
     
     func get(type: InputItemType) -> Any? {
         switch type {
@@ -92,7 +92,7 @@ struct InputValue {
         case .RadioBoolean:
             self.boolean = value as? Bool
         case .Time:
-            self.time = value as? TimeInterval
+            self.time = value as? String
         case .Stepper:
             self.int = value as? Int
         }
@@ -346,12 +346,14 @@ class TimeInput: InputItem {
         self.width = width ?? .Full
     }
     
-    func getValue() -> Date? {
-        return self.value.get(type: self.type) as? Date ?? nil
+    func getValue() -> Time? {
+        let stringValue: String = self.value.get(type: self.type) as? String ?? ""
+        if stringValue == "" {return nil}
+        return Time(string: stringValue)
     }
     
-    func setValue(value: Date?) {
-        self.value.set(value: value, type: self.type)
+    func setValue(value: Time?) {
+        self.value.set(value: value?.toString(), type: self.type)
     }
 }
 

@@ -12,6 +12,7 @@ import DatePicker
 protocol InputDelegate: class {
     func showDropdownDelegate(items: [DropdownModel], on view: UIView, callback: @escaping (_ selection: DropdownModel?) -> Void)
     func showDatepickerDelegate(on view: UIView, initialDate: Date?, minDate: Date?, maxDate: Date?, callback: @escaping (_ date: Date?) -> Void)
+    func showTimePickerDelegate(on view: UIView, initialTime: Time?, completion: @escaping (_ time: Time?) -> Void)
     func showOptionsDelegate(options: [OptionType], on button: UIButton, completion: @escaping (_ option: OptionType) -> Void)
 }
 
@@ -113,6 +114,15 @@ class BaseViewController: UIViewController, Theme, InputDelegate {
         showPopOver(on: view, popOverVC: dropdownViewController, height: popoverSize.height, width: popoverSize.width)
     }
     
+    // MARK: Timepicker
+    func showTimePicker(on view: UIView, initialTime: Time?, completion: @escaping (_ time: Time?) -> Void) {
+        let timePicker = TimePicker()
+        
+        let pickerVC = timePicker.setup(beginWith: initialTime, onChange: completion)
+        
+        showPopOver(on: view, popOverVC: pickerVC, height: 200, width: 230)
+    }
+    
     // MARK: Datepicker Popover
     func showDatepicker(on view: UIView, initialDate: Date?, minDate: Date?, maxDate: Date?, completion: @escaping (Date?) -> Void) {
         let datepicker = DatePicker()
@@ -129,6 +139,10 @@ class BaseViewController: UIViewController, Theme, InputDelegate {
     }
     
     // MARK: Delegates
+    func showTimePickerDelegate(on view: UIView, initialTime: Time?, completion: @escaping (_ time: Time?) -> Void) {
+        showTimePicker(on: view, initialTime: initialTime, completion: completion)
+    }
+    
     func showDropdownDelegate(items: [DropdownModel], on view: UIView, callback:  @escaping (_ selection: DropdownModel?) -> Void) {
         showDropdown(items: items, on: view, completion: callback)
     }
