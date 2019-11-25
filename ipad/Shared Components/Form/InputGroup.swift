@@ -208,7 +208,7 @@ extension InputGroupView: UICollectionViewDataSource, UICollectionViewDelegate, 
     }
     
     func getTimeInputCell(indexPath: IndexPath) ->  TimeInputCollectionViewCell {
-        return collectionView!.dequeueReusableCell(withReuseIdentifier: " TimeInputCollectionViewCell", for: indexPath as IndexPath) as! TimeInputCollectionViewCell
+        return collectionView!.dequeueReusableCell(withReuseIdentifier: "TimeInputCollectionViewCell", for: indexPath as IndexPath) as! TimeInputCollectionViewCell
     }
     
     func getTextAreaInputCell(indexPath: IndexPath) -> TextAreaInputCollectionViewCell {
@@ -236,7 +236,7 @@ extension InputGroupView: UICollectionViewDataSource, UICollectionViewDelegate, 
     }
     
     func getRadioBooleanCell(indexPath: IndexPath) ->  RadioBooleanCollectionViewCell {
-        return collectionView!.dequeueReusableCell(withReuseIdentifier: " RadioBooleanCollectionViewCell", for: indexPath as IndexPath) as! RadioBooleanCollectionViewCell
+        return collectionView!.dequeueReusableCell(withReuseIdentifier: "RadioBooleanCollectionViewCell", for: indexPath as IndexPath) as! RadioBooleanCollectionViewCell
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

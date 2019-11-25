@@ -36,5 +36,6 @@ class ShiftInformationHeaderCollectionViewCell: UICollectionViewCell, Theme {
     func style() {
         styleSectionTitle(label: titleLabel)
         self.hideButton.setTitleColor(Colors.Status.DarkGray, for: .normal)
+        styleDivider(view: divider)
     }
 }

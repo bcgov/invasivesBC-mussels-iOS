@@ -38,12 +38,11 @@ class ShiftViewController: BaseViewController {
     // MARK: Varialbes
     var model: ShiftModel?
     var showShiftInfo: Bool = true
+    private var isEditable: Bool = true
     
     // MARK: Outlets
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var collectionView: UICollectionView!
-    
-    
     
     // MARK: Class Functions
     override func viewDidLoad() {
@@ -179,9 +178,13 @@ extension ShiftViewController: UICollectionViewDataSource, UICollectionViewDeleg
             return cell
         case .StartShift:
             let cell = getBasicCell(indexPath: indexPath)
+            let items = model.getShiftStartFields(forModal: false, editable: isEditable)
+            cell.setup(title: "Shift Start", input: items, delegate: self, padding: 20)
             return cell
         case .EndShift:
             let cell = getBasicCell(indexPath: indexPath)
+            let items = model.getShiftEndFields(editable: isEditable)
+            cell.setup(title: "Shift End", input: items, delegate: self, padding: 20)
             return cell
         }
     }
@@ -218,9 +221,11 @@ extension ShiftViewController: UICollectionViewDataSource, UICollectionViewDeleg
         case .Header:
             return CGSize(width: fullWdtih, height: 35)
         case .StartShift:
-            return CGSize(width: 0, height: 0)
+            let estimatedContentHeight = InputGroupView.estimateContentHeight(for: ShiftFormHelper.getShiftStartFields())
+            return CGSize(width: fullWdtih, height: estimatedContentHeight)
         case .EndShift:
-            return CGSize(width: 0, height: 0)
+             let estimatedContentHeight = InputGroupView.estimateContentHeight(for: ShiftFormHelper.getShiftEndFields())
+            return CGSize(width: fullWdtih, height: estimatedContentHeight)
         }
     }
 }

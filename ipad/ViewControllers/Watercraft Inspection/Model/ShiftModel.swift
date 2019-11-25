@@ -61,7 +61,7 @@ class ShiftModel: Object, BaseRealmObject {
     
     // MARK: UI Helpers
     func getShiftStartFields(forModal: Bool, editable: Bool) -> [InputItem] {
-        return ShiftFormHelper.getShiftModalFields(for: self, editable: editable, modalSize: forModal)
+        return ShiftFormHelper.getShiftStartFields(for: self, editable: editable, modalSize: forModal)
     }
     
     func getShiftEndFields(editable: Bool) -> [InputItem] {

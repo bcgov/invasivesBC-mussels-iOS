@@ -439,7 +439,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eum-mK-YOZ">
                                 <rect key="frame" x="21" y="21" width="726" height="982"/>
                                 <subviews>
-                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="fXV-nF-rRC">
+                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="fXV-nF-rRC">
                                         <rect key="frame" x="0.0" y="0.0" width="726" height="982"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="sEh-NI-eB6">
@@ -486,6 +486,6 @@
         <image name="launch" width="1024" height="768"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="4OX-36-Cn0"/>
+        <segue reference="0hg-be-P9B"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -18,7 +18,7 @@ class ShiftFormHelper {
         return options
     }
     
-    static func getShiftModalFields(for object: ShiftModel? = nil, editable: Bool? = true, modalSize: Bool? = false) -> [InputItem] {
+    static func getShiftStartFields(for object: ShiftModel? = nil, editable: Bool? = true, modalSize: Bool? = false) -> [InputItem] {
         let isModalSize = modalSize ?? false
         var sectionItems: [InputItem] = []
         
@@ -64,7 +64,7 @@ class ShiftFormHelper {
             header: ShiftFormHeaders.ShiftStart.cloudy,
             editable: editable ?? true,
             value: object?.cloudy,
-            width: .Forth
+            width: .Third
         )
         sectionItems.append(cloudy)
         
@@ -73,7 +73,7 @@ class ShiftFormHelper {
             header: ShiftFormHeaders.ShiftStart.raining,
             editable: editable ?? true,
             value: object?.raining,
-            width: .Forth
+            width: .Third
         )
         sectionItems.append(raining)
         
@@ -82,7 +82,7 @@ class ShiftFormHelper {
             header: ShiftFormHeaders.ShiftStart.snowing,
             editable: editable ?? true,
             value: object?.snowing,
-            width: .Forth
+            width: .Third
         )
         sectionItems.append(snowing)
         
@@ -91,7 +91,7 @@ class ShiftFormHelper {
             header: ShiftFormHeaders.ShiftStart.foggy,
             editable: editable ?? true,
             value: object?.foggy,
-            width: .Forth
+            width: .Third
         )
         sectionItems.append(foggy)
         
@@ -100,7 +100,7 @@ class ShiftFormHelper {
             header: ShiftFormHeaders.ShiftStart.windy,
             editable: editable ?? true,
             value: object?.windy,
-            width: .Forth
+            width: .Third
         )
         sectionItems.append(windy)
         

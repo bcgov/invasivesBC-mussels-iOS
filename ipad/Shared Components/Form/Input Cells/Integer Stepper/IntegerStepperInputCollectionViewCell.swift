@@ -51,6 +51,7 @@ class IntegerStepperInputCollectionViewCell: BaseInputCell<IntegerStepperInput>,
         stepper.minimumValue = 0
         stepper.maximumValue = 10000
         setValue(int: current)
+        style()
     }
     
     func setValue(int: Int) {

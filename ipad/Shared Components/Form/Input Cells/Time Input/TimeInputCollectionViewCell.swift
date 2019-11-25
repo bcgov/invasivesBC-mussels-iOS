@@ -23,6 +23,7 @@ class TimeInputCollectionViewCell:  BaseInputCell<TimeInput>, UITextFieldDelegat
         textFieldText()
         let gesture = UITapGestureRecognizer(target: self, action:  #selector(self.onClick))
         self.textField.addGestureRecognizer(gesture)
+        style()
     }
     
     @objc func onClick(sender : UITapGestureRecognizer) {
