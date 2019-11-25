@@ -167,5 +167,15 @@ class ShiftFormHelper {
         return sectionItems
     }
     
+    func getTableColumns() -> [TableViewColumnConfig] {
+        // Create Column Config
+        var columns: [TableViewColumnConfig] = []
+        columns.append(TableViewColumnConfig(key: "remoteId", header: "Shift ID", type: .Normal))
+        columns.append(TableViewColumnConfig(key: "riskLevel", header: "Shift Date", type: .Normal))
+        columns.append(TableViewColumnConfig(key: "timeAdded", header: "Station Location", type: .Normal))
+        columns.append(TableViewColumnConfig(key: "status", header: "Status", type: .WithIcon))
+        columns.append(TableViewColumnConfig(key: "", header: "Actions", type: .Button, buttonName: "View", showHeader: false))
+        return columns
+    }
     
 }

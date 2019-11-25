@@ -297,7 +297,7 @@ class WatercraftInspectionFormHelper {
     
     static func getGeneralCommentsFields(for object: WatercradftInspectionModel? = nil, editable: Bool? = true) -> [InputItem] {
         var sectionItems: [InputItem] = []
-         let generalComments = TextAreaInput(
+        let generalComments = TextAreaInput(
             key: "generalComments",
             header: "General Comments",
             editable: editable ?? true,
@@ -306,5 +306,17 @@ class WatercraftInspectionFormHelper {
         )
         sectionItems.append(generalComments)
         return sectionItems
+    }
+    
+    static func getTableColumns() -> [TableViewColumnConfig] {
+        // Create Column Config
+        var columns: [TableViewColumnConfig] = []
+        columns.append(TableViewColumnConfig(key: "", header: "#", type: .Counter, showHeader: false))
+        columns.append(TableViewColumnConfig(key: "remoteId", header: "ID", type: .Normal))
+        columns.append(TableViewColumnConfig(key: "riskLevel", header: "Risk Level", type: .Normal))
+        columns.append(TableViewColumnConfig(key: "timeAdded", header: "Time Added", type: .Normal))
+        columns.append(TableViewColumnConfig(key: "status", header: "Status", type: .WithIcon))
+        columns.append(TableViewColumnConfig(key: "", header: "Actions", type: .Button, buttonName: "View", showHeader: false))
+        return columns
     }
 }
