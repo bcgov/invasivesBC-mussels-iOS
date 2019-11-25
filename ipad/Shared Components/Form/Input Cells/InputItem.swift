@@ -337,7 +337,7 @@ class TimeInput: InputItem {
     var header: String
     var editable: Bool
     
-    init(key: String, header: String, editable: Bool, value: TimeInterval? = nil, width: InputItemWidthSize? = .Full) {
+    init(key: String, header: String, editable: Bool, value: String? = nil, width: InputItemWidthSize? = .Full) {
         self.value = InputValue()
         self.value.set(value: value, type: type)
         self.key = key

@@ -25,8 +25,8 @@ class ShiftModel: Object, BaseRealmObject {
     @objc dynamic var remoteId: Int = -1
     @objc dynamic var shouldSync: Bool = false
     
-    @objc dynamic var startTime: TimeInterval = 0
-    @objc dynamic var endTime: TimeInterval = 0
+    @objc dynamic var startTime: String = ""
+    @objc dynamic var endTime: String = ""
     @objc dynamic var boatsInspected: Bool = false
     @objc dynamic var motorizedBlowBys: Int = 0
     @objc dynamic var nonMotorizedBlowBys: Int = 0

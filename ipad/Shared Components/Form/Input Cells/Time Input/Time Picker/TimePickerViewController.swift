@@ -20,14 +20,20 @@ public struct Time {
     }
     
     init(string: String) {
-        var timeArray = string.components(separatedBy: ":")
+        let timeArray = string.components(separatedBy: ":")
         self.hour = Int(timeArray[0]) ?? 0
         self.minute = Int(timeArray[1]) ?? 0
         self.seconds = 0
     }
     
     func toString() -> String {
-        return "\(hour):\(minute)"
+        var displayMinute: String = ""
+        if minute < 10 {
+            displayMinute = "0\(minute)"
+        } else {
+            displayMinute = "\(minute)"
+        }
+        return "\(hour):\(displayMinute)"
     }
 }
 

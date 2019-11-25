@@ -26,7 +26,7 @@ class ShiftFormHelper {
             key: "startTime",
             header: ShiftFormHeaders.ShiftStart.startTime,
             editable: editable ?? true,
-            value: object?.startTime ?? nil,
+            value: object?.startTime ?? "",
             width: isModalSize ? .Half : .Third
         )
         sectionItems.append(startTime)
@@ -123,7 +123,7 @@ class ShiftFormHelper {
             key: "endTime",
             header: ShiftFormHeaders.ShiftEnd.endTime,
             editable: editable ?? true,
-            value: object?.endTime ?? nil,
+            value: object?.endTime ?? "",
             width: .Forth
         )
         sectionItems.append(endTime)
