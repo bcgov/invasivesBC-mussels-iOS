@@ -22,4 +22,13 @@ class Storage {
         } catch _ {}
         return [Object]()
     }
+    
+    public func getShifts() -> [ShiftModel] {
+        do {
+            let realm = try Realm()
+            let objs = realm.objects(ShiftModel.self)
+            return Array(objs)
+        } catch _ {}
+        return [ShiftModel]()
+    }
 }

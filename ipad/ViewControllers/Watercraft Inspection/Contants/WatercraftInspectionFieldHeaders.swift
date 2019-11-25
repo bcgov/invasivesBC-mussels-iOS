@@ -7,6 +7,32 @@
 //
 
 import Foundation
+
+struct ShiftFormHeaders {
+    struct ShiftStart {
+        static let startTime = "Shift Start Time"
+        static let k9OnShift = "k9 On Shift"
+        static let station = "Station"
+        static let weatherConditions = "Weather Conditions"
+        static let sunny = "Sunny"
+        static let cloudy = "Cloudy"
+        static let raining = "Raining"
+        static let snowing = "Snowing"
+        static let foggy = "Foggy"
+        static let windy = "Windy"
+        static let comments = "Additional Commnets"
+    }
+    
+    struct ShiftEnd {
+        static let endTime = "Shift End Time"
+        static let boatsInspected = "Boats Inspected During Shift?"
+        static let motorizedBlowBys = "Motorized blow-bys"
+        static let nonMotorizedBlowBys = "Non Motorized blow-Bys"
+        static let comments = "Additional COmments"
+    }
+}
+
+
 struct WatercraftFieldHeaderConstants {
     struct Passport {
         static let isPassportHolder = "Is this a Passport Holder?"

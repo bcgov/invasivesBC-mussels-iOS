@@ -10,7 +10,7 @@ import UIKit
 import Reachability
 
 class HomeViewController: BaseViewController {
-
+    
     // MARK: Outlets
     @IBOutlet weak var navigationBar: UIView!
     @IBOutlet weak var appTitle: UILabel!
@@ -21,9 +21,10 @@ class HomeViewController: BaseViewController {
     @IBOutlet weak var syncButton: UIButton!
     @IBOutlet weak var addEntryButton: UIButton!
     @IBOutlet weak var switcherHolder: UIView!
+    @IBOutlet weak var tableContainer: UIView!
     
     // MARK: Constants
-    let switcherItems: [String] = ["All", "Drafts", "Pending Sync", "Submitted"]
+    let switcherItems: [String] = ["All", "Pending Sync", "Submitted"]
     let reachability =  try! Reachability()
     
     // MARK: Variables
@@ -48,7 +49,7 @@ class HomeViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setNavigationBar(hidden: true, style: UIBarStyle.black)
-        initirialize()
+        initialize()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -76,16 +77,17 @@ class HomeViewController: BaseViewController {
     }
     
     @IBAction func addEntryClicked(_ sender: Any) {
-//        self.performSegue(withIdentifier: "showFormEntry", sender: self)
+        //        self.performSegue(withIdentifier: "showFormEntry", sender: self)
         self.performSegue(withIdentifier: "showShiftOverview", sender: self)
-//        self.performSegue(withIdentifier: "showWatercraftInspectionForm", sender: self)
+        //        self.performSegue(withIdentifier: "showWatercraftInspectionForm", sender: self)
     }
     
     // MARK: Functions
-    private func initirialize() {
+    private func initialize() {
         beginReachabilityNotification()
         style()
         setupSwitcher()
+        createTable()
     }
     
     private func setupSwitcher() {
@@ -93,6 +95,27 @@ class HomeViewController: BaseViewController {
             // TODO: handle filter
             // Alert.show(title: "Selected", message: selection)
         }
+    }
+    
+    // MARK: Table
+    func createTable() {
+        let shifts = Storage.shared.getShifts()
+        
+        let table = Table()
+        
+        table.test(in: tableContainer)
+        return
+        
+        // Create Column Config
+        var columns: [TableViewColumnConfig] = []
+        columns.append(TableViewColumnConfig(key: "remoteId", header: "Shift ID", type: .Normal))
+        columns.append(TableViewColumnConfig(key: "riskLevel", header: "Shift Date", type: .Normal))
+        columns.append(TableViewColumnConfig(key: "timeAdded", header: "Station Location", type: .Normal))
+        columns.append(TableViewColumnConfig(key: "status", header: "Status", type: .WithIcon))
+        columns.append(TableViewColumnConfig(key: "", header: "Actions", type: .Button, buttonName: "View", showHeader: false))
+        let tableView = table.show(columns: columns, in: shifts, container: tableContainer)
+        tableView.layoutIfNeeded()
+        self.view.layoutIfNeeded()
     }
     
     // MARK: Style
@@ -145,7 +168,7 @@ class HomeViewController: BaseViewController {
     private func whenOnline() {
         
     }
-     
+    
     // When device goes offline
     private func whenOffline() {
         
@@ -172,7 +195,7 @@ class HomeViewController: BaseViewController {
         case .none:
             online = false
         case .unavailable:
-           online = false
+            online = false
         }
     }
     
@@ -181,5 +204,5 @@ class HomeViewController: BaseViewController {
         reachability.stopNotifier()
         NotificationCenter.default.removeObserver(self, name: .reachabilityChanged, object: reachability)
     }
-   
+    
 }

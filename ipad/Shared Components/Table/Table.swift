@@ -53,7 +53,7 @@ class Table {
     /// - Parameter keys: Array of keys to be displayed & how they should be displayed
     /// - Parameter objects: PropertyReflectable Objects to display in rows
     /// - Parameter container: Container to place table in
-    public func show(columns: [TableViewColumnConfig], in objects: [PropertyReflectable], container: UIView) {
+    public func show(columns: [TableViewColumnConfig], in objects: [PropertyReflectable], container: UIView) -> UIView {
         // 1) Create models for Rows
         var counter = 0
         var rows: [TableViewRowModel] = []
@@ -101,6 +101,7 @@ class Table {
         // 5) Create tableview
         let tableView: TableView = TableView.fromNib()
         tableView.initialize(with: tableModel, in: container)
+        return tableView
     }
     
     // MARK: Sizing

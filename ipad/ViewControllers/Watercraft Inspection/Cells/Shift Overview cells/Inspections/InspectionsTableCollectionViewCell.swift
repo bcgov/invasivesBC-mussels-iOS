@@ -25,6 +25,9 @@ class InspectionsTableCollectionViewCell: BaseShiftOverviewCollectionViewCell {
         
         let table = Table()
         
+        table.test(in: tableContainer)
+        return
+        
         // Convert list to array
         let inspections: [WatercradftInspectionModel] = model.inspections.map{ $0 }
         
@@ -39,7 +42,9 @@ class InspectionsTableCollectionViewCell: BaseShiftOverviewCollectionViewCell {
         columns.append(TableViewColumnConfig(key: "timeAdded", header: "Time Added", type: .Normal))
         columns.append(TableViewColumnConfig(key: "status", header: "Status", type: .WithIcon))
         columns.append(TableViewColumnConfig(key: "", header: "Actions", type: .Button, buttonName: "View", showHeader: false))
-        table.show(columns: columns, in: inspections, container: tableContainer)
+        let tableView = table.show(columns: columns, in: inspections, container: tableContainer)
+        tableView.layoutIfNeeded()
+        self.layoutIfNeeded()
     }
     
     static func getTableHeight(for model: ShiftModel) -> CGFloat {
