@@ -8,28 +8,14 @@
 
 import Foundation
 import UIKit
+import Realm
+import RealmSwift
 
 enum TableViewColumnType {
     case Normal
     case Button
     case Counter
     case WithIcon
-}
-
-struct TableViewColumnConfig {
-    var type: TableViewColumnType
-    var key: String
-    var header: String
-    var buttonName: String
-    var showHeader: Bool
-    
-    init(key: String, header: String, type: TableViewColumnType, buttonName: String? = "", showHeader: Bool? = true) {
-        self.key = key
-        self.header = header
-        self.type = type
-        self.buttonName = buttonName ?? ""
-        self.showHeader = showHeader ?? true
-    }
 }
 
 class Table {
@@ -53,7 +39,8 @@ class Table {
     /// - Parameter keys: Array of keys to be displayed & how they should be displayed
     /// - Parameter objects: PropertyReflectable Objects to display in rows
     /// - Parameter container: Container to place table in
-    public func show(columns: [TableViewColumnConfig], in objects: [PropertyReflectable], container: UIView) -> UIView {
+    public func
+        show(columns: [TableViewColumnConfig], in objects: [Object], container: UIView) -> UIView {
         // 1) Create models for Rows
         var counter = 0
         var rows: [TableViewRowModel] = []
@@ -64,7 +51,7 @@ class Table {
                 switch column.type {
                 case .Normal:
                     if let value = object[column.key] {
-                        rowFields.append(TableViewFieldModel(header: column.header, value: "\(value)"))
+                        rowFields.append(TableViewFieldModel(header: column.header, value: "\(value) "))
                     }
                 case .Button:
                     rowFields.append(TableViewFieldModel(header: column.header, value: column.buttonName, isButton: true))
@@ -72,14 +59,14 @@ class Table {
                     rowFields.append(TableViewFieldModel(header: column.header, value: "\(counter)"))
                 case .WithIcon:
                     if let value = object[column.key] {
-                        rowFields.append(TableViewFieldModel(header: column.header, value: "\(value)", iconColor: .red))
+                        rowFields.append(TableViewFieldModel(header: column.header, value: "\(value) ", iconColor: colorFor(status: "\(value)")))
                     }
                 }
             }
-            rows.append(TableViewRowModel(fields: rowFields))
+            rows.append(TableViewRowModel(fields: rowFields, object: object))
         }
         // 2) Create Headers
-        let headers: [String] = rows.count > 0 ? rows[0].fields.map { $0.header } : []
+        let headers: [String] = columns.map{ $0.header}
         let displayedHeaders: [String] = columns.map{ $0.showHeader ? $0.header : ""}
         
         // 3) Create Column sizing
@@ -100,8 +87,20 @@ class Table {
         
         // 5) Create tableview
         let tableView: TableView = TableView.fromNib()
+        tableView.frame = CGRect(x: 0, y: 0, width: container.frame.width, height: container.frame.height)
         tableView.initialize(with: tableModel, in: container)
         return tableView
+    }
+    
+    private func colorFor(status: String) -> UIColor {
+        switch status.lowercased() {
+        case "pending sync":
+            return Colors.Status.Yellow
+        case "completed":
+            return Colors.Status.Green
+        default:
+            return Colors.Status.DarkGray
+        }
     }
     
     // MARK: Sizing

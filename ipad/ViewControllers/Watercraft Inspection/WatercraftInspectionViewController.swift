@@ -334,7 +334,7 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
         case .AddPreviousWaterBody:
             let cell = getButtonCell(indexPath: indexPath)
             cell.setup(with: "Add Prveious Water Body") {
-                self.journeyDetails.previousWaterBodies.append(FormHelper.watercraftInspectionPreviousWaterBodyInputs(index: self.journeyDetails.previousWaterBodies.count, isEditable: self.isEditable))
+                self.journeyDetails.previousWaterBodies.append(WatercraftInspectionFormHelper.watercraftInspectionPreviousWaterBodyInputs(index: self.journeyDetails.previousWaterBodies.count, isEditable: self.isEditable))
                 self.collectionView.performBatchUpdates({
                     self.collectionView.reloadSections(IndexSet(integer: indexPath.section))
                 }, completion: nil)
@@ -343,7 +343,7 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
         case .AddDestinationWaterBody:
             let cell = getButtonCell(indexPath: indexPath)
             cell.setup(with: "Add Destination Water Body") {
-                self.journeyDetails.destinationWaterBodies.append(FormHelper.watercraftInspectionDestinationWaterBodyInputs(index: self.journeyDetails.destinationWaterBodies.count, isEditable: self.isEditable))
+                self.journeyDetails.destinationWaterBodies.append(WatercraftInspectionFormHelper.watercraftInspectionDestinationWaterBodyInputs(index: self.journeyDetails.destinationWaterBodies.count, isEditable: self.isEditable))
                 self.collectionView.performBatchUpdates({
                     self.collectionView.reloadSections(IndexSet(integer: indexPath.section))
                 }, completion: nil)
@@ -361,10 +361,10 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
         case .Header:
             return CGSize(width: width, height: 40)
         case .PreviousWaterBody:
-            let estimatedContentHeight = InputGroupView.estimateContentHeight(for: FormHelper.watercraftInspectionPreviousWaterBodyInputs(index: 0))
+            let estimatedContentHeight = InputGroupView.estimateContentHeight(for: WatercraftInspectionFormHelper.watercraftInspectionPreviousWaterBodyInputs(index: 0))
             return CGSize(width: width, height: estimatedContentHeight + 20)
         case .DestinationWaterBody:
-            let estimatedContentHeight = InputGroupView.estimateContentHeight(for: FormHelper.watercraftInspectionDestinationWaterBodyInputs(index: 0))
+            let estimatedContentHeight = InputGroupView.estimateContentHeight(for: WatercraftInspectionFormHelper.watercraftInspectionDestinationWaterBodyInputs(index: 0))
             return CGSize(width: width, height: estimatedContentHeight + 20)
         case .AddPreviousWaterBody:
             return CGSize(width: width, height: 50)

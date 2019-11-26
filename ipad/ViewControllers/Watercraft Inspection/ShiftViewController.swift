@@ -48,12 +48,34 @@ class ShiftViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         style()
+        addListeners()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        print(self)
+        NotificationCenter.default.removeObserver(self)
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        createTestModel()
+        //        createTestModel()
         setupCollectionView()
+    }
+    
+    private func addListeners() {
+        NotificationCenter.default.addObserver(self, selector: #selector(self.inputItemValueChanged(notification:)), name: .InputItemValueChanged, object: nil)
+    }
+    
+    // MARK: Input Item Changed
+    @objc func inputItemValueChanged(notification: Notification) {
+        guard let item: InputItem = notification.object as? InputItem else {return}
+//        formResult[item.key] = item.value.get(type: item.type)
+        // Set value in Realm object
+        if let m = model {
+            m.set(value: item.value.get(type: item.type), for: item.key)
+        }
+        
+        print(model?.toDictionary())
     }
     
     // MARK: Style
@@ -118,9 +140,11 @@ extension ShiftViewController: UICollectionViewDataSource, UICollectionViewDeleg
     func getShiftOverViewCell(indexPath: IndexPath) -> ShifOverviewHeaderCollectionViewCell {
         return collectionView!.dequeueReusableCell(withReuseIdentifier: "ShifOverviewHeaderCollectionViewCell", for: indexPath as IndexPath) as! ShifOverviewHeaderCollectionViewCell
     }
+    
     func getInspectionsTableCell(indexPath: IndexPath) -> InspectionsTableCollectionViewCell {
         return collectionView!.dequeueReusableCell(withReuseIdentifier: "InspectionsTableCollectionViewCell", for: indexPath as IndexPath) as! InspectionsTableCollectionViewCell
     }
+    
     func getShiftInformationHeaderCell(indexPath: IndexPath) -> ShiftInformationHeaderCollectionViewCell {
         return collectionView!.dequeueReusableCell(withReuseIdentifier: "ShiftInformationHeaderCollectionViewCell", for: indexPath as IndexPath) as! ShiftInformationHeaderCollectionViewCell
     }
@@ -149,7 +173,6 @@ extension ShiftViewController: UICollectionViewDataSource, UICollectionViewDeleg
             return getShiftInformationSectionRow(indexPath: indexPath)
         }
     }
-    
     
     func getShiftOverviewSectionRow(indexPath: IndexPath) -> UICollectionViewCell {
         guard let rowType = ShiftOverviewSectionRow(rawValue: Int(indexPath.row)), let model = self.model else {return UICollectionViewCell() }
@@ -199,18 +222,17 @@ extension ShiftViewController: UICollectionViewDataSource, UICollectionViewDeleg
         case .Information:
             return getSizeForShiftInfo(row: ShiftInformationSectionRow(rawValue: Int(indexPath.row)))
         }
-        
     }
     
     fileprivate func getSizeForShiftOverView(row: ShiftOverviewSectionRow?) -> CGSize {
         guard let row = row, let model = self.model else {return CGSize(width: 0, height: 0)}
-        let fullWdtih = self.collectionView.frame.width
+        let fullWidth = self.collectionView.frame.width
         switch row {
         case .Header:
-            return CGSize(width: fullWdtih, height: 62)
+            return CGSize(width: fullWidth, height: 62)
         case .Inspections:
-            let height = InspectionsTableCollectionViewCell.getTableHeight(for: model)
-            return CGSize(width: fullWdtih, height: height)
+            let height = InspectionsTableCollectionViewCell.getContentHeight(for: model)
+            return CGSize(width: fullWidth, height: height)
         }
     }
     
@@ -224,7 +246,7 @@ extension ShiftViewController: UICollectionViewDataSource, UICollectionViewDeleg
             let estimatedContentHeight = InputGroupView.estimateContentHeight(for: ShiftFormHelper.getShiftStartFields())
             return CGSize(width: fullWdtih, height: estimatedContentHeight)
         case .EndShift:
-             let estimatedContentHeight = InputGroupView.estimateContentHeight(for: ShiftFormHelper.getShiftEndFields())
+            let estimatedContentHeight = InputGroupView.estimateContentHeight(for: ShiftFormHelper.getShiftEndFields())
             return CGSize(width: fullWdtih, height: estimatedContentHeight)
         }
     }

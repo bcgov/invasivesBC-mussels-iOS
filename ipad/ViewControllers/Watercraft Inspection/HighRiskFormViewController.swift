@@ -71,7 +71,6 @@ class HighRiskFormViewController: BaseViewController {
         if let m = model {
             // TODO: needs cleanup for nil case
             m.set(value: item.value.get(type: item.type), for: item.key)
-            
         }
         
         if item.key == "cleanDrainDryAfterInspection" {

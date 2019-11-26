@@ -8,6 +8,16 @@
 
 import UIKit
 
+struct TableClickActionModel {
+    var object: Any
+    var buttonName: String
+    
+    init(object: Any, buttonName: String) {
+        self.object = object
+        self.buttonName = buttonName
+    }
+}
+
 class TableRowTableViewCell: UITableViewCell, Theme {
     
     // MARK: Constants
@@ -31,6 +41,13 @@ class TableRowTableViewCell: UITableViewCell, Theme {
         self.tableHeaders = tableHeaders
         self.columnSizes = columnSizes
         createStackView()
+    }
+    
+    // Button click
+    @objc func didButtonClick(_ sender: UIButton) {
+        guard let model = self.model, let title = sender.title(for: .normal) else {return}
+        print(model.object)
+        NotificationCenter.default.post(name: .TableButtonClicked, object: TableClickActionModel(object: model.object, buttonName: title))
     }
     
     // MARK: StackView
@@ -60,6 +77,8 @@ class TableRowTableViewCell: UITableViewCell, Theme {
                 } else {
                     button.widthAnchor.constraint(equalTo: stackView.widthAnchor, multiplier: columnPercentWidth / 100).isActive = true
                 }
+                
+                button.addTarget(self, action: #selector(didButtonClick), for: .touchUpInside)
                 
                 button.setTitle(item.value, for: .normal)
                 styleHollowButton(button: button)

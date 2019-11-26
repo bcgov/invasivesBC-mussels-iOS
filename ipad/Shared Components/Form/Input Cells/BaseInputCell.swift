@@ -30,6 +30,10 @@ class BaseInputCell<Model: InputItem>: UICollectionViewCell,Theme {
         return autoLayoutAttributes
     }
     
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     func beginListener() {
         NotificationCenter.default.addObserver(self, selector: #selector(self.InputFieldshouldUpdate(notification:)), name: .InputFieldShouldUpdate, object: nil)
     }

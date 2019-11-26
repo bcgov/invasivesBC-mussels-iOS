@@ -9,6 +9,22 @@
 import Foundation
 import UIKit
 
+struct TableViewColumnConfig {
+    var type: TableViewColumnType
+    var key: String
+    var header: String
+    var buttonName: String
+    var showHeader: Bool
+    
+    init(key: String, header: String, type: TableViewColumnType, buttonName: String? = "", showHeader: Bool? = true) {
+        self.key = key
+        self.header = header
+        self.type = type
+        self.buttonName = buttonName ?? ""
+        self.showHeader = showHeader ?? true
+    }
+}
+
 struct TableViewFieldModel {
     var header: String
     var value: String
@@ -24,9 +40,11 @@ struct TableViewFieldModel {
 }
 
 struct TableViewRowModel {
+    var object: Any
     var fields: [TableViewFieldModel] = []
     
-    init(fields: [TableViewFieldModel]) {
+    init(fields: [TableViewFieldModel], object: Any) {
+        self.object = object
         self.fields = fields
     }
 }

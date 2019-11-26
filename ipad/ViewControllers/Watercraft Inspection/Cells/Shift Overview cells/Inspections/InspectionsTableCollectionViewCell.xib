@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -11,55 +11,58 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="InspectionsTableCollectionViewCell" customModule="InvasivesBC" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="216"/>
+            <rect key="frame" x="0.0" y="0.0" width="355" height="94"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="375" height="216"/>
+                <rect key="frame" x="0.0" y="0.0" width="355" height="94"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Inspections" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f37-hA-2EK">
-                        <rect key="frame" x="20" y="8" width="88.5" height="99"/>
+                        <rect key="frame" x="20" y="8" width="88.5" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="xrr-3b-BcA"/>
+                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9zw-gq-R7h">
-                        <rect key="frame" x="20" y="115" width="335" height="1"/>
+                        <rect key="frame" x="20" y="36" width="315" height="2"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="1" id="dgT-lp-0pf"/>
+                            <constraint firstAttribute="height" constant="2" id="J6J-NX-rGk"/>
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EtQ-vg-oRn">
-                        <rect key="frame" x="20" y="116" width="335" height="100"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <rect key="frame" x="20" y="46" width="315" height="40"/>
+                        <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="100" id="ldG-d2-ANg"/>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" priority="750" id="ofz-Sq-M7a"/>
                         </constraints>
                     </view>
                 </subviews>
             </view>
             <constraints>
-                <constraint firstItem="EtQ-vg-oRn" firstAttribute="leading" secondItem="9zw-gq-R7h" secondAttribute="leading" id="7w3-vP-gGH"/>
-                <constraint firstItem="EtQ-vg-oRn" firstAttribute="top" secondItem="9zw-gq-R7h" secondAttribute="bottom" id="D3e-jm-Lqt"/>
+                <constraint firstAttribute="bottom" secondItem="EtQ-vg-oRn" secondAttribute="bottom" constant="8" id="1v6-gx-xGi"/>
+                <constraint firstItem="EtQ-vg-oRn" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="20" id="4nl-8d-lIh"/>
+                <constraint firstItem="f37-hA-2EK" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="20" id="7pP-io-iaT"/>
+                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="f37-hA-2EK" secondAttribute="trailing" constant="20" id="BQT-ky-OEK"/>
                 <constraint firstAttribute="trailing" secondItem="9zw-gq-R7h" secondAttribute="trailing" constant="20" id="GgL-Yz-Ozs"/>
-                <constraint firstItem="EtQ-vg-oRn" firstAttribute="trailing" secondItem="9zw-gq-R7h" secondAttribute="trailing" id="Tzy-bq-QGW"/>
+                <constraint firstAttribute="trailing" secondItem="EtQ-vg-oRn" secondAttribute="trailing" constant="20" id="QnD-kR-mIW"/>
                 <constraint firstItem="f37-hA-2EK" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="8" id="WCe-TQ-KXj"/>
-                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="f37-hA-2EK" secondAttribute="trailing" constant="20" id="Y0b-BR-h4e"/>
-                <constraint firstAttribute="bottom" secondItem="EtQ-vg-oRn" secondAttribute="bottom" id="Ybp-l5-3wn"/>
                 <constraint firstItem="9zw-gq-R7h" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="20" id="hP5-6T-aLu"/>
-                <constraint firstItem="f37-hA-2EK" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="20" id="iO6-Zc-0rJ"/>
                 <constraint firstItem="9zw-gq-R7h" firstAttribute="top" secondItem="f37-hA-2EK" secondAttribute="bottom" constant="8" id="jym-pW-eWm"/>
+                <constraint firstItem="EtQ-vg-oRn" firstAttribute="top" secondItem="9zw-gq-R7h" secondAttribute="bottom" constant="8" id="qem-pF-51P"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
-            <size key="customSize" width="375" height="216"/>
+            <size key="customSize" width="355" height="94"/>
             <connections>
                 <outlet property="divider" destination="9zw-gq-R7h" id="lWa-UI-QQF"/>
                 <outlet property="tableContainer" destination="EtQ-vg-oRn" id="KT1-Ea-4xY"/>
-                <outlet property="tableHeightConstraint" destination="ldG-d2-ANg" id="2Sg-Z0-l5v"/>
+                <outlet property="tableHeightConstraint" destination="ofz-Sq-M7a" id="Fhr-IT-ueu"/>
                 <outlet property="titleLabel" destination="f37-hA-2EK" id="a59-Lm-HXb"/>
             </connections>
-            <point key="canvasLocation" x="376.08695652173918" y="197.54464285714286"/>
+            <point key="canvasLocation" x="361.59420289855075" y="198.88392857142856"/>
         </collectionViewCell>
     </objects>
 </document>

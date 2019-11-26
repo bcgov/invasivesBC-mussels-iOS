@@ -12,4 +12,5 @@ extension Notification.Name {
     static let InputItemValueChanged = Notification.Name("inputItemValueChanged")
     static let ShouldResizeInputGroup = Notification.Name("ShouldResizeInputGroup")
     static let InputFieldShouldUpdate = Notification.Name("InputFieldShouldUpdate")
+    static let TableButtonClicked = Notification.Name("tableButtonClicked")
 }

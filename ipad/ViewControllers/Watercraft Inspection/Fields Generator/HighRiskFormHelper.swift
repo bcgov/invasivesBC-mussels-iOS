@@ -54,17 +54,17 @@ class HighRiskFormHelper {
         )
         sectionItems.append(standingWaterPresent)
         
-        let standingWaterLocation = DropdownInput(
+        let standingWaterLocation = TextInput(
             key: "standingWaterLocation",
             header: HighRiskFormFieldHeaders.InspectionOutcomes.standingWaterLocation,
             editable: editable ?? true,
             value: object?.standingWaterLocation ?? "",
-            width: .Full,
-            dropdownItems: getDummyOptions()
+            width: .Full
         )
         standingWaterLocation.dependency = InputDependency(to: standingWaterPresent, equalTo: true)
         sectionItems.append(standingWaterLocation)
         
+       
         let adultDreissenidMusselsFound = SwitchInput(
             key: "adultDreissenidMusselsFound",
             header: HighRiskFormFieldHeaders.InspectionOutcomes.adultDreissenidMusselsFound,
@@ -74,13 +74,12 @@ class HighRiskFormHelper {
         )
         sectionItems.append(adultDreissenidMusselsFound)
         
-        let adultDreissenidMusselsLocation = DropdownInput(
+        let adultDreissenidMusselsLocation = TextInput(
             key: "adultDreissenidMusselsLocation",
             header: HighRiskFormFieldHeaders.InspectionOutcomes.adultDreissenidMusselsLocation,
             editable: editable ?? true,
             value: object?.adultDreissenidMusselsLocation ?? "",
-            width: .Full,
-            dropdownItems: getDummyOptions()
+            width: .Full
         )
         adultDreissenidMusselsLocation.dependency = InputDependency(to: adultDreissenidMusselsFound, equalTo: true)
         sectionItems.append(adultDreissenidMusselsLocation)
@@ -148,7 +147,7 @@ class HighRiskFormHelper {
             editable: editable ?? true,
             value: object?.otherInspectionFindings ?? "",
             width: .Half,
-            dropdownItems: getDummyOptions()
+            dropdownItems: getDummyOptions() //TODO: otherObservations
         )
         sectionItems.append(otherInspectionFindings)
         

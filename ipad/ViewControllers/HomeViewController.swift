@@ -28,6 +28,7 @@ class HomeViewController: BaseViewController {
     let reachability =  try! Reachability()
     
     // MARK: Variables
+    var shiftModel: ShiftModel? = nil
     
     // MARK: Computed variables
     var online: Bool = false {
@@ -78,14 +79,26 @@ class HomeViewController: BaseViewController {
     
     @IBAction func addEntryClicked(_ sender: Any) {
         let shiftModal: NewShiftModal = NewShiftModal.fromNib()
-        shiftModal.initialize(delegate: self, onStart: {
+        shiftModal.initialize(delegate: self, onStart: { (model) in
+            self.shiftModel = model
+            model.save()
             self.performSegue(withIdentifier: "showShiftOverview", sender: self)
         }) {
             print("cancelled")
         }
+        
         //        self.performSegue(withIdentifier: "showFormEntry", sender: self)
         
         //        self.performSegue(withIdentifier: "showWatercraftInspectionForm", sender: self)
+    }
+    
+    
+    
+    // MARK: - Navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let shiftOverviewVC = segue.destination as? ShiftViewController, let shiftModel = self.shiftModel {
+            shiftOverviewVC.model = shiftModel
+        }
     }
     
     // MARK: Functions
@@ -109,19 +122,32 @@ class HomeViewController: BaseViewController {
         
         let table = Table()
         
-        table.test(in: tableContainer)
-        return
-        
         // Create Column Config
         var columns: [TableViewColumnConfig] = []
         columns.append(TableViewColumnConfig(key: "remoteId", header: "Shift ID", type: .Normal))
-        columns.append(TableViewColumnConfig(key: "riskLevel", header: "Shift Date", type: .Normal))
-        columns.append(TableViewColumnConfig(key: "timeAdded", header: "Station Location", type: .Normal))
+        columns.append(TableViewColumnConfig(key: "formattedDate", header: "Shift Date", type: .Normal))
+        columns.append(TableViewColumnConfig(key: "location", header: "Station Location", type: .Normal))
         columns.append(TableViewColumnConfig(key: "status", header: "Status", type: .WithIcon))
         columns.append(TableViewColumnConfig(key: "", header: "Actions", type: .Button, buttonName: "View", showHeader: false))
         let tableView = table.show(columns: columns, in: shifts, container: tableContainer)
         tableView.layoutIfNeeded()
         self.view.layoutIfNeeded()
+        beginListener()
+    }
+    
+    // Listener for Table button action
+    func beginListener() {
+        NotificationCenter.default.removeObserver(self, name: .TableButtonClicked, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.tableButtonClicked(notification:)), name: .TableButtonClicked, object: nil)
+    }
+    
+    //
+    @objc func tableButtonClicked(notification: Notification) {
+        guard let actionModel = notification.object as? TableClickActionModel, let shiftModel = actionModel.object as? ShiftModel else {return}
+        if actionModel.buttonName.lowercased() == "view" {
+            self.shiftModel = shiftModel
+            self.performSegue(withIdentifier: "showShiftOverview", sender: self)
+        }
     }
     
     // MARK: Style

@@ -21,7 +21,7 @@ class ShifOverviewHeaderCollectionViewCell: BaseShiftOverviewCollectionViewCell 
     
     override func autofill() {
         guard let model = self.model else {return}
-        self.numberAndDateLabel.text = "\(model.remoteId) - \(String(describing: model.date?.string()))"
+        self.numberAndDateLabel.text = "\(model.remoteId) - \(model.formattedDate)"
         self.locationLabel.text = model.location
         self.statusLabel.text = model.status
         self.statusIndicator.backgroundColor = StatusColor.color(for: model.status)

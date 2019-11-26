@@ -19,14 +19,27 @@ class InspectionsTableCollectionViewCell: BaseShiftOverviewCollectionViewCell {
     @IBOutlet weak var tableContainer: UIView!
     @IBOutlet weak var tableHeightConstraint: NSLayoutConstraint!
     
+    // MARK: Class functions
+    override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
+        let autoLayoutAttributes = super.preferredLayoutAttributesFitting(layoutAttributes)
+
+        // Specify you want _full width_
+        let targetSize = CGSize(width: layoutAttributes.frame.width, height: 0)
+
+        // Calculate the size (height) using Auto Layout
+        let autoLayoutSize = contentView.systemLayoutSizeFitting(targetSize, withHorizontalFittingPriority: UILayoutPriority.required, verticalFittingPriority: UILayoutPriority.defaultLow)
+        let autoLayoutFrame = CGRect(origin: autoLayoutAttributes.frame.origin, size: autoLayoutSize)
+
+        // Assign the new size to the layout attributes
+        autoLayoutAttributes.frame = autoLayoutFrame
+        return autoLayoutAttributes
+    }
+    
     // MARK: Setup
     override func autofill() {
         guard let model = self.model else {return}
         
         let table = Table()
-        
-        table.test(in: tableContainer)
-        return
         
         // Convert list to array
         let inspections: [WatercradftInspectionModel] = model.inspections.map{ $0 }
@@ -45,6 +58,14 @@ class InspectionsTableCollectionViewCell: BaseShiftOverviewCollectionViewCell {
         let tableView = table.show(columns: columns, in: inspections, container: tableContainer)
         tableView.layoutIfNeeded()
         self.layoutIfNeeded()
+    }
+    
+    static func getContentHeight(for model: ShiftModel) -> CGFloat {
+        let titleHeight: CGFloat = 25
+        let dividerHeight: CGFloat = 2
+        let paddings: CGFloat = 8 * 4
+        let totalVertialTitleSize = titleHeight + dividerHeight + paddings
+        return getTableHeight(for: model) + totalVertialTitleSize
     }
     
     static func getTableHeight(for model: ShiftModel) -> CGFloat {

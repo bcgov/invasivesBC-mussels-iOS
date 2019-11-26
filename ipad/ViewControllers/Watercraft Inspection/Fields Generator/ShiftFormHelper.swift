@@ -46,7 +46,7 @@ class ShiftFormHelper {
             editable: editable ?? true,
             value: object?.station,
             width: isModalSize ? .Full : .Third,
-            dropdownItems: getDummyOptions()
+            dropdownItems: getDummyOptions() // TODO: stations
         )
         sectionItems.append(station)
         

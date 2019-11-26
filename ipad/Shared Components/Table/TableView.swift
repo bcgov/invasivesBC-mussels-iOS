@@ -14,6 +14,8 @@ class TableView: UIView {
     @IBOutlet weak var headerContainerView: UIView!
     @IBOutlet weak var tableView: UITableView!
     
+    weak var container: UIView?
+    
     // MARK: Constants
     private let tableCells = [
         "TableRowTableViewCell",
@@ -24,14 +26,21 @@ class TableView: UIView {
     private weak var stackView: UIStackView?
     private var tableHeaders: [String: UIView] = [String: UIView]()
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        if let container = self.container {
+            addConstraints(for: container)
+        }
+    }
+    
     // MARK: Setup
     public func initialize(with model: TableViewModel, in container: UIView) {
+        self.removeFromSuperview()
+        self.container = container
         container.addSubview(self)
-        self.addConstraints(for: container)
         self.model = model
-        addHeaders() // Add headers also set up table
+        addHeaders() // Add headers also sets up table
         container.layoutIfNeeded()
-        self.backgroundColor = Colors.primary
     }
     
     private func addConstraints(for view: UIView) {

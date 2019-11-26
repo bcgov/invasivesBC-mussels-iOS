@@ -30,6 +30,11 @@ class BaseViewController: UIViewController, Theme, InputDelegate {
         super.viewDidAppear(animated)
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     // MARK: Event handlers
     func whenLandscape() {}
     func whenPortrait() {}
@@ -154,7 +159,6 @@ class BaseViewController: UIViewController, Theme, InputDelegate {
     func showOptionsDelegate(options: [OptionType], on button: UIButton, completion: @escaping (OptionType) -> Void) {
         showOptions(options: options, on: button, completion: completion)
     }
-    
     
     // MARK: Animations
     public func animateIt() {
