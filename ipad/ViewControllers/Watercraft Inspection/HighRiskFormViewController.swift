@@ -27,7 +27,7 @@ class HighRiskFormViewController: BaseViewController {
     
     // MARK: Variables
     public var model: HighRiskAssessmentModel? = nil
-    private var isEditable: Bool = true
+    public var isEditable: Bool = true
     private var showFullForm: Bool = true
     private var formResult: [String: Any?] = [String: Any]()
     

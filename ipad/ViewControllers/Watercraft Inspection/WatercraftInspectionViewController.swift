@@ -73,8 +73,9 @@ class WatercraftInspectionViewController: BaseViewController {
         self.collectionView.reloadData()
     }
     
-    func initialize(model: WatercradftInspectionModel) {
+    func initialize(model: WatercradftInspectionModel, editable: Bool) {
         self.model = model
+        self.isEditable = editable
         if !model.isPassportHolder || model.launchedOutsideBC {
             self.showFullInspection = true
         }
@@ -86,6 +87,7 @@ class WatercraftInspectionViewController: BaseViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destination = segue.destination as? HighRiskFormViewController, let model = self.model {
             destination.model = model.addHighRiskAssessment()
+            destination.isEditable = self.isEditable
         }
     }
     

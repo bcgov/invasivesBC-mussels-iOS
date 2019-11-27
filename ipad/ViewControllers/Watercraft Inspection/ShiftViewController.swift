@@ -38,7 +38,7 @@ class ShiftViewController: BaseViewController {
     // MARK: Varialbes
     var model: ShiftModel?
     var showShiftInfo: Bool = true
-    private var isEditable: Bool = false
+    private var isEditable: Bool = true
     private var inspection: WatercradftInspectionModel?
     
     // MARK: Outlets
