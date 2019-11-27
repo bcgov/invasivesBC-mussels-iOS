@@ -20,15 +20,23 @@ class ViewController: UIViewController {
     }
     
     private func presentNext() {
-//        performSegue(withIdentifier: "showHomePage", sender: nil)
-//        return;
         if (!Auth.isAuthenticated()) {
             performSegue(withIdentifier: "performLogin", sender: nil)
             return
         } else {
             Auth.getUserFirstName()
-            performSegue(withIdentifier: "showHomePage", sender: nil)
-            return
+            if AutoSync.shared.shouldPerformInitialSync() {
+                AutoSync.shared.performInitialSync { (success) in
+                    if success {
+                        self.performSegue(withIdentifier: "showHomePage", sender: nil)
+                    } else {
+                        Alert.show(title: "Can't continue", message: "On your first login, we need to download some information.\nMake sure you have a stable connection")
+                        Auth.logout()
+                    }
+                }
+            } else {
+                self.performSegue(withIdentifier: "showHomePage", sender: nil)
+            }
         }
     }
 }

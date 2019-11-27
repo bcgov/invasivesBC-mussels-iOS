@@ -13,8 +13,17 @@
 		2907E4B72368D24900946B3F /* InputModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2907E4B62368D24900946B3F /* InputModal.swift */; };
 		2907E4B92368D25800946B3F /* InputModal.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2907E4B82368D25800946B3F /* InputModal.xib */; };
 		2907E4BB2368FEA500946B3F /* FormEntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2907E4BA2368FEA500946B3F /* FormEntryViewController.swift */; };
+		2933DD5B238C78350068E9DF /* TimePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2933DD5A238C78350068E9DF /* TimePicker.swift */; };
+		2933DD5E238DC2150068E9DF /* CodeTables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2933DD5D238DC2150068E9DF /* CodeTables.swift */; };
+		2933DD61238DC5120068E9DF /* CodeTableModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2933DD60238DC5120068E9DF /* CodeTableModel.swift */; };
+		2933DD64238DE3310068E9DF /* DropdownHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2933DD63238DE3310068E9DF /* DropdownHelper.swift */; };
 		2944AF9B2379B243007517DC /* ViewFieldCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2944AF992379B243007517DC /* ViewFieldCollectionViewCell.swift */; };
 		2944AF9C2379B243007517DC /* ViewFieldCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2944AF9A2379B243007517DC /* ViewFieldCollectionViewCell.xib */; };
+		294D8F6123847C9A0094090D /* TableRowTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294D8F5F23847C9A0094090D /* TableRowTableViewCell.swift */; };
+		294D8F6223847C9A0094090D /* TableRowTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 294D8F6023847C9A0094090D /* TableRowTableViewCell.xib */; };
+		294D8F652385C7310094090D /* Table.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294D8F642385C7310094090D /* Table.swift */; };
+		294D8F672385D11C0094090D /* TableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294D8F662385D11C0094090D /* TableViewModel.swift */; };
+		294D8F692385D1F10094090D /* TestTableViewObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294D8F682385D1F10094090D /* TestTableViewObject.swift */; };
 		294D9A882379C62F00BD4928 /* WatercraftInspectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294D9A872379C62F00BD4928 /* WatercraftInspectionModel.swift */; };
 		294D9A8C237B1E7400BD4928 /* WatercraftInspectionFieldHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294D9A8B237B1E7400BD4928 /* WatercraftInspectionFieldHeaders.swift */; };
 		294D9A8F237B1EA300BD4928 /* WatercraftInspectionFormHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294D9A8E237B1EA300BD4928 /* WatercraftInspectionFormHelper.swift */; };
@@ -48,6 +57,20 @@
 		2958874D237B58D600224FFA /* HighRiskFormFieldHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2958874C237B58D600224FFA /* HighRiskFormFieldHeaders.swift */; };
 		296237D62374B6B400032BB5 /* RadioSwitchInputCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 296237D42374B6B400032BB5 /* RadioSwitchInputCollectionViewCell.swift */; };
 		296237D72374B6B400032BB5 /* RadioSwitchInputCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 296237D52374B6B400032BB5 /* RadioSwitchInputCollectionViewCell.xib */; };
+		296DEC15238C4CA70035E7FA /* RadioBooleanCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 296DEC13238C4CA70035E7FA /* RadioBooleanCollectionViewCell.swift */; };
+		296DEC16238C4CA70035E7FA /* RadioBooleanCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 296DEC14238C4CA70035E7FA /* RadioBooleanCollectionViewCell.xib */; };
+		296DEC1A238C51810035E7FA /* TimeInputCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 296DEC18238C51810035E7FA /* TimeInputCollectionViewCell.swift */; };
+		296DEC1B238C51810035E7FA /* TimeInputCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 296DEC19238C51810035E7FA /* TimeInputCollectionViewCell.xib */; };
+		296DEC1F238C53820035E7FA /* NewShiftModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 296DEC1E238C53820035E7FA /* NewShiftModal.swift */; };
+		296DEC21238C53930035E7FA /* NewShiftModal.xib in Resources */ = {isa = PBXBuildFile; fileRef = 296DEC20238C53930035E7FA /* NewShiftModal.xib */; };
+		296DEC23238C56A30035E7FA /* ShiftFormHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 296DEC22238C56A30035E7FA /* ShiftFormHelper.swift */; };
+		296DEC27238C61A80035E7FA /* IntegerStepperInputCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 296DEC25238C61A80035E7FA /* IntegerStepperInputCollectionViewCell.swift */; };
+		296DEC28238C61A80035E7FA /* IntegerStepperInputCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 296DEC26238C61A80035E7FA /* IntegerStepperInputCollectionViewCell.xib */; };
+		296DEC2B238C73AF0035E7FA /* TimePicker.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 296DEC2A238C73AF0035E7FA /* TimePicker.storyboard */; };
+		296DEC2D238C73BD0035E7FA /* TimePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 296DEC2C238C73BD0035E7FA /* TimePickerViewController.swift */; };
+		2991969023846AE000634F81 /* ShiftViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2991968F23846AE000634F81 /* ShiftViewController.swift */; };
+		299196932384725600634F81 /* TableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 299196922384725600634F81 /* TableView.xib */; };
+		299196952384726600634F81 /* TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299196942384726600634F81 /* TableView.swift */; };
 		29A9742D236CB59F006C668F /* SwitchInputCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A9742B236CB59F006C668F /* SwitchInputCollectionViewCell.swift */; };
 		29A9742E236CB59F006C668F /* SwitchInputCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29A9742C236CB59F006C668F /* SwitchInputCollectionViewCell.xib */; };
 		29A97433236CDD8F006C668F /* DateInputCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A97431236CDD8F006C668F /* DateInputCollectionViewCell.swift */; };
@@ -83,13 +106,22 @@
 		29DB0117237206D30046E605 /* HeaderCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29DB0115237206D30046E605 /* HeaderCollectionViewCell.xib */; };
 		29DB011B237207BF0046E605 /* FormButtonCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29DB0119237207BF0046E605 /* FormButtonCollectionViewCell.swift */; };
 		29DB011C237207BF0046E605 /* FormButtonCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29DB011A237207BF0046E605 /* FormButtonCollectionViewCell.xib */; };
+		29DB4E3E23870B7B00B13646 /* ShifOverviewHeaderCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29DB4E3C23870B7B00B13646 /* ShifOverviewHeaderCollectionViewCell.swift */; };
+		29DB4E3F23870B7B00B13646 /* ShifOverviewHeaderCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29DB4E3D23870B7B00B13646 /* ShifOverviewHeaderCollectionViewCell.xib */; };
+		29DB4E4123870F2B00B13646 /* ShiftModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29DB4E4023870F2B00B13646 /* ShiftModel.swift */; };
+		29DB4E462387113900B13646 /* BaseShiftOverviewCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29DB4E442387113900B13646 /* BaseShiftOverviewCollectionViewCell.swift */; };
+		29DB4E472387113900B13646 /* BaseShiftOverviewCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29DB4E452387113900B13646 /* BaseShiftOverviewCollectionViewCell.xib */; };
+		29DB4E4A2387126A00B13646 /* StatusColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29DB4E492387126A00B13646 /* StatusColor.swift */; };
+		29DB4E4E2387131000B13646 /* InspectionsTableCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29DB4E4C2387131000B13646 /* InspectionsTableCollectionViewCell.swift */; };
+		29DB4E4F2387131000B13646 /* InspectionsTableCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29DB4E4D2387131000B13646 /* InspectionsTableCollectionViewCell.xib */; };
+		29DB4E59238715A300B13646 /* ShiftInformationHeaderCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29DB4E57238715A300B13646 /* ShiftInformationHeaderCollectionViewCell.swift */; };
+		29DB4E5A238715A300B13646 /* ShiftInformationHeaderCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29DB4E58238715A300B13646 /* ShiftInformationHeaderCollectionViewCell.xib */; };
 		29E4BBE82372120F0079475F /* DividerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E4BBE62372120F0079475F /* DividerCollectionViewCell.swift */; };
 		29E4BBE92372120F0079475F /* DividerCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29E4BBE72372120F0079475F /* DividerCollectionViewCell.xib */; };
 		29E4BBEE237218500079475F /* PreviousWaterBodyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E4BBEC237218500079475F /* PreviousWaterBodyCollectionViewCell.swift */; };
 		29E4BBEF237218500079475F /* PreviousWaterBodyCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29E4BBED237218500079475F /* PreviousWaterBodyCollectionViewCell.xib */; };
 		29E4BBF2237218610079475F /* DestinationWaterBodyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E4BBF0237218610079475F /* DestinationWaterBodyCollectionViewCell.swift */; };
 		29E4BBF3237218610079475F /* DestinationWaterBodyCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29E4BBF1237218610079475F /* DestinationWaterBodyCollectionViewCell.xib */; };
-		29E4BBF6237221EB0079475F /* FormHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E4BBF5237221EB0079475F /* FormHelper.swift */; };
 		29F29F90236B6A03004F12E7 /* SwitcherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F29F8F236B6A03004F12E7 /* SwitcherView.swift */; };
 		29F29F93236B6A22004F12E7 /* SwitcherView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29F29F92236B6A22004F12E7 /* SwitcherView.xib */; };
 		29F29F98236B6B9C004F12E7 /* SwitcherCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F29F96236B6B9C004F12E7 /* SwitcherCollectionViewCell.swift */; };
@@ -152,8 +184,17 @@
 		2907E4B62368D24900946B3F /* InputModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputModal.swift; sourceTree = "<group>"; };
 		2907E4B82368D25800946B3F /* InputModal.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InputModal.xib; sourceTree = "<group>"; };
 		2907E4BA2368FEA500946B3F /* FormEntryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormEntryViewController.swift; sourceTree = "<group>"; };
+		2933DD5A238C78350068E9DF /* TimePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimePicker.swift; sourceTree = "<group>"; };
+		2933DD5D238DC2150068E9DF /* CodeTables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeTables.swift; sourceTree = "<group>"; };
+		2933DD60238DC5120068E9DF /* CodeTableModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeTableModel.swift; sourceTree = "<group>"; };
+		2933DD63238DE3310068E9DF /* DropdownHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropdownHelper.swift; sourceTree = "<group>"; };
 		2944AF992379B243007517DC /* ViewFieldCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewFieldCollectionViewCell.swift; sourceTree = "<group>"; };
 		2944AF9A2379B243007517DC /* ViewFieldCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ViewFieldCollectionViewCell.xib; sourceTree = "<group>"; };
+		294D8F5F23847C9A0094090D /* TableRowTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableRowTableViewCell.swift; sourceTree = "<group>"; };
+		294D8F6023847C9A0094090D /* TableRowTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TableRowTableViewCell.xib; sourceTree = "<group>"; };
+		294D8F642385C7310094090D /* Table.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Table.swift; sourceTree = "<group>"; };
+		294D8F662385D11C0094090D /* TableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewModel.swift; sourceTree = "<group>"; };
+		294D8F682385D1F10094090D /* TestTableViewObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestTableViewObject.swift; sourceTree = "<group>"; };
 		294D9A872379C62F00BD4928 /* WatercraftInspectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatercraftInspectionModel.swift; sourceTree = "<group>"; };
 		294D9A8B237B1E7400BD4928 /* WatercraftInspectionFieldHeaders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatercraftInspectionFieldHeaders.swift; sourceTree = "<group>"; };
 		294D9A8E237B1EA300BD4928 /* WatercraftInspectionFormHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatercraftInspectionFormHelper.swift; sourceTree = "<group>"; };
@@ -188,6 +229,20 @@
 		2958874C237B58D600224FFA /* HighRiskFormFieldHeaders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighRiskFormFieldHeaders.swift; sourceTree = "<group>"; };
 		296237D42374B6B400032BB5 /* RadioSwitchInputCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioSwitchInputCollectionViewCell.swift; sourceTree = "<group>"; };
 		296237D52374B6B400032BB5 /* RadioSwitchInputCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RadioSwitchInputCollectionViewCell.xib; sourceTree = "<group>"; };
+		296DEC13238C4CA70035E7FA /* RadioBooleanCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioBooleanCollectionViewCell.swift; sourceTree = "<group>"; };
+		296DEC14238C4CA70035E7FA /* RadioBooleanCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RadioBooleanCollectionViewCell.xib; sourceTree = "<group>"; };
+		296DEC18238C51810035E7FA /* TimeInputCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeInputCollectionViewCell.swift; sourceTree = "<group>"; };
+		296DEC19238C51810035E7FA /* TimeInputCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TimeInputCollectionViewCell.xib; sourceTree = "<group>"; };
+		296DEC1E238C53820035E7FA /* NewShiftModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewShiftModal.swift; sourceTree = "<group>"; };
+		296DEC20238C53930035E7FA /* NewShiftModal.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewShiftModal.xib; sourceTree = "<group>"; };
+		296DEC22238C56A30035E7FA /* ShiftFormHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShiftFormHelper.swift; sourceTree = "<group>"; };
+		296DEC25238C61A80035E7FA /* IntegerStepperInputCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntegerStepperInputCollectionViewCell.swift; sourceTree = "<group>"; };
+		296DEC26238C61A80035E7FA /* IntegerStepperInputCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IntegerStepperInputCollectionViewCell.xib; sourceTree = "<group>"; };
+		296DEC2A238C73AF0035E7FA /* TimePicker.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TimePicker.storyboard; sourceTree = "<group>"; };
+		296DEC2C238C73BD0035E7FA /* TimePickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimePickerViewController.swift; sourceTree = "<group>"; };
+		2991968F23846AE000634F81 /* ShiftViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShiftViewController.swift; sourceTree = "<group>"; };
+		299196922384725600634F81 /* TableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TableView.xib; sourceTree = "<group>"; };
+		299196942384726600634F81 /* TableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableView.swift; sourceTree = "<group>"; };
 		29A9742B236CB59F006C668F /* SwitchInputCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchInputCollectionViewCell.swift; sourceTree = "<group>"; };
 		29A9742C236CB59F006C668F /* SwitchInputCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SwitchInputCollectionViewCell.xib; sourceTree = "<group>"; };
 		29A97431236CDD8F006C668F /* DateInputCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateInputCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -227,13 +282,22 @@
 		29DB0115237206D30046E605 /* HeaderCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HeaderCollectionViewCell.xib; sourceTree = "<group>"; };
 		29DB0119237207BF0046E605 /* FormButtonCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormButtonCollectionViewCell.swift; sourceTree = "<group>"; };
 		29DB011A237207BF0046E605 /* FormButtonCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FormButtonCollectionViewCell.xib; sourceTree = "<group>"; };
+		29DB4E3C23870B7B00B13646 /* ShifOverviewHeaderCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShifOverviewHeaderCollectionViewCell.swift; sourceTree = "<group>"; };
+		29DB4E3D23870B7B00B13646 /* ShifOverviewHeaderCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ShifOverviewHeaderCollectionViewCell.xib; sourceTree = "<group>"; };
+		29DB4E4023870F2B00B13646 /* ShiftModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShiftModel.swift; sourceTree = "<group>"; };
+		29DB4E442387113900B13646 /* BaseShiftOverviewCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseShiftOverviewCollectionViewCell.swift; sourceTree = "<group>"; };
+		29DB4E452387113900B13646 /* BaseShiftOverviewCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BaseShiftOverviewCollectionViewCell.xib; sourceTree = "<group>"; };
+		29DB4E492387126A00B13646 /* StatusColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusColor.swift; sourceTree = "<group>"; };
+		29DB4E4C2387131000B13646 /* InspectionsTableCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InspectionsTableCollectionViewCell.swift; sourceTree = "<group>"; };
+		29DB4E4D2387131000B13646 /* InspectionsTableCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InspectionsTableCollectionViewCell.xib; sourceTree = "<group>"; };
+		29DB4E57238715A300B13646 /* ShiftInformationHeaderCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShiftInformationHeaderCollectionViewCell.swift; sourceTree = "<group>"; };
+		29DB4E58238715A300B13646 /* ShiftInformationHeaderCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ShiftInformationHeaderCollectionViewCell.xib; sourceTree = "<group>"; };
 		29E4BBE62372120F0079475F /* DividerCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DividerCollectionViewCell.swift; sourceTree = "<group>"; };
 		29E4BBE72372120F0079475F /* DividerCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DividerCollectionViewCell.xib; sourceTree = "<group>"; };
 		29E4BBEC237218500079475F /* PreviousWaterBodyCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviousWaterBodyCollectionViewCell.swift; sourceTree = "<group>"; };
 		29E4BBED237218500079475F /* PreviousWaterBodyCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PreviousWaterBodyCollectionViewCell.xib; sourceTree = "<group>"; };
 		29E4BBF0237218610079475F /* DestinationWaterBodyCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestinationWaterBodyCollectionViewCell.swift; sourceTree = "<group>"; };
 		29E4BBF1237218610079475F /* DestinationWaterBodyCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DestinationWaterBodyCollectionViewCell.xib; sourceTree = "<group>"; };
-		29E4BBF5237221EB0079475F /* FormHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormHelper.swift; sourceTree = "<group>"; };
 		29F29F8F236B6A03004F12E7 /* SwitcherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitcherView.swift; sourceTree = "<group>"; };
 		29F29F92236B6A22004F12E7 /* SwitcherView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SwitcherView.xib; sourceTree = "<group>"; };
 		29F29F96236B6B9C004F12E7 /* SwitcherCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitcherCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -323,13 +387,16 @@
 			children = (
 				29F29FA3236B9114004F12E7 /* InputItem.swift */,
 				29F29FA5236BB541004F12E7 /* BaseInputCell.swift */,
+				296DEC24238C618B0035E7FA /* Integer Stepper */,
 				2944AF982379B22E007517DC /* View Field */,
+				296DEC12238C4C8A0035E7FA /* Radio Boolean */,
 				29CE5E192375E44A00C54F96 /* Conditional Input */,
 				296237D32374B69800032BB5 /* Radio Switch Input */,
 				296237D22374B69100032BB5 /* Double Input */,
 				296237D12374B68000032BB5 /* Integer Input */,
 				29F4EC592370DB72001D5CFA /* TextArea Input */,
 				29A9742F236CBEBA006C668F /* Date Input */,
+				296DEC17238C51650035E7FA /* Time Input */,
 				29A9742A236CB588006C668F /* Switch Input */,
 				29F29FA8236CA925004F12E7 /* Text Input */,
 				29F29F9E236B8655004F12E7 /* Dropdown */,
@@ -354,6 +421,31 @@
 			path = "Input Modal";
 			sourceTree = "<group>";
 		};
+		2933DD5C238DC2060068E9DF /* Code Tables */ = {
+			isa = PBXGroup;
+			children = (
+				2933DD5F238DC4EE0068E9DF /* Models */,
+				2933DD5D238DC2150068E9DF /* CodeTables.swift */,
+			);
+			path = "Code Tables";
+			sourceTree = "<group>";
+		};
+		2933DD5F238DC4EE0068E9DF /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				2933DD60238DC5120068E9DF /* CodeTableModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		2933DD62238DE3220068E9DF /* Dropdown Helper */ = {
+			isa = PBXGroup;
+			children = (
+				2933DD63238DE3310068E9DF /* DropdownHelper.swift */,
+			);
+			path = "Dropdown Helper";
+			sourceTree = "<group>";
+		};
 		2944AF982379B22E007517DC /* View Field */ = {
 			isa = PBXGroup;
 			children = (
@@ -363,12 +455,22 @@
 			path = "View Field";
 			sourceTree = "<group>";
 		};
+		294D8F5A23847BB30094090D /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				294D8F5F23847C9A0094090D /* TableRowTableViewCell.swift */,
+				294D8F6023847C9A0094090D /* TableRowTableViewCell.xib */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
 		294D9A89237B1D8100BD4928 /* Model */ = {
 			isa = PBXGroup;
 			children = (
 				294D9A872379C62F00BD4928 /* WatercraftInspectionModel.swift */,
 				29DB0111237204A90046E605 /* JourneyDetailsModel.swift */,
 				29588747237B52F000224FFA /* HighRiskAssessmentModel.swift */,
+				29DB4E4023870F2B00B13646 /* ShiftModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -387,6 +489,7 @@
 			children = (
 				294D9A8E237B1EA300BD4928 /* WatercraftInspectionFormHelper.swift */,
 				29588749237B583C00224FFA /* HighRiskFormHelper.swift */,
+				296DEC22238C56A30035E7FA /* ShiftFormHelper.swift */,
 			);
 			path = "Fields Generator";
 			sourceTree = "<group>";
@@ -413,6 +516,7 @@
 		294EF31723708A1700EEB3B6 /* API */ = {
 			isa = PBXGroup;
 			children = (
+				2933DD5C238DC2060068E9DF /* Code Tables */,
 				5C82D3F82376036700B065BA /* WorkflowAPI.swift */,
 				5C0F697E237B6F7800F96CA5 /* APIChain.swift */,
 				5C82D3FE23761B1400B065BA /* API.swift */,
@@ -434,7 +538,9 @@
 		29514BD22368ACF700DC89C4 /* Shared Components */ = {
 			isa = PBXGroup;
 			children = (
+				299196912384723400634F81 /* Table */,
 				29A97437236FD615006C668F /* Form */,
+				296DEC1D238C536A0035E7FA /* New Shift Modal */,
 				5C82D3D42374AECC00B065BA /* High Risk Modal */,
 				29F29F91236B6A0D004F12E7 /* Switcher */,
 				2907E4B52368D21D00946B3F /* Input Modal */,
@@ -505,12 +611,72 @@
 			path = "Radio Switch Input";
 			sourceTree = "<group>";
 		};
+		296DEC12238C4C8A0035E7FA /* Radio Boolean */ = {
+			isa = PBXGroup;
+			children = (
+				296DEC13238C4CA70035E7FA /* RadioBooleanCollectionViewCell.swift */,
+				296DEC14238C4CA70035E7FA /* RadioBooleanCollectionViewCell.xib */,
+			);
+			path = "Radio Boolean";
+			sourceTree = "<group>";
+		};
+		296DEC17238C51650035E7FA /* Time Input */ = {
+			isa = PBXGroup;
+			children = (
+				296DEC29238C73910035E7FA /* Time Picker */,
+				296DEC18238C51810035E7FA /* TimeInputCollectionViewCell.swift */,
+				296DEC19238C51810035E7FA /* TimeInputCollectionViewCell.xib */,
+			);
+			path = "Time Input";
+			sourceTree = "<group>";
+		};
+		296DEC1D238C536A0035E7FA /* New Shift Modal */ = {
+			isa = PBXGroup;
+			children = (
+				296DEC1E238C53820035E7FA /* NewShiftModal.swift */,
+				296DEC20238C53930035E7FA /* NewShiftModal.xib */,
+			);
+			path = "New Shift Modal";
+			sourceTree = "<group>";
+		};
+		296DEC24238C618B0035E7FA /* Integer Stepper */ = {
+			isa = PBXGroup;
+			children = (
+				296DEC25238C61A80035E7FA /* IntegerStepperInputCollectionViewCell.swift */,
+				296DEC26238C61A80035E7FA /* IntegerStepperInputCollectionViewCell.xib */,
+			);
+			path = "Integer Stepper";
+			sourceTree = "<group>";
+		};
+		296DEC29238C73910035E7FA /* Time Picker */ = {
+			isa = PBXGroup;
+			children = (
+				296DEC2C238C73BD0035E7FA /* TimePickerViewController.swift */,
+				296DEC2A238C73AF0035E7FA /* TimePicker.storyboard */,
+				2933DD5A238C78350068E9DF /* TimePicker.swift */,
+			);
+			path = "Time Picker";
+			sourceTree = "<group>";
+		};
 		2991968E2384656A00634F81 /* Recovered References */ = {
 			isa = PBXGroup;
 			children = (
 				294EF31823708A2100EEB3B6 /* API.swift */,
 			);
 			name = "Recovered References";
+			sourceTree = "<group>";
+		};
+		299196912384723400634F81 /* Table */ = {
+			isa = PBXGroup;
+			children = (
+				294D8F5A23847BB30094090D /* Cells */,
+				299196922384725600634F81 /* TableView.xib */,
+				299196942384726600634F81 /* TableView.swift */,
+				294D8F642385C7310094090D /* Table.swift */,
+				294D8F662385D11C0094090D /* TableViewModel.swift */,
+				294D8F682385D1F10094090D /* TestTableViewObject.swift */,
+			);
+			path = Table;
 			sourceTree = "<group>";
 		};
 		29A9742A236CB588006C668F /* Switch Input */ = {
@@ -552,13 +718,14 @@
 		29BAC4FC23676C2300A620F4 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				2933DD62238DE3220068E9DF /* Dropdown Helper */,
+				29DB4E482387125800B13646 /* Status Color */,
 				29FFEBC2237F23A800574E3F /* JWT Decoder */,
 				29FFEBBC237F1E9100574E3F /* Settings */,
 				2950510B2374DFAB000FBD6E /* Extensions */,
 				A7AE5271237CC3660044DBB7 /* LottieAnimations */,
 				5C82D40023762B7400B065BA /* APICore */,
 				5C82D3E62374BC9F00B065BA /* GenericCore */,
-				29E4BBF4237221D40079475F /* Form Helper */,
 				294EF31723708A1700EEB3B6 /* API */,
 				29BAC50723676FD000A620F4 /* UI */,
 				29BAC50323676E8F00A620F4 /* Alert */,
@@ -728,6 +895,81 @@
 			path = Button;
 			sourceTree = "<group>";
 		};
+		29DB4E3923870B0000B13646 /* Shift Overview cells */ = {
+			isa = PBXGroup;
+			children = (
+				29DB4E422387111700B13646 /* Base */,
+				29DB4E432387112000B13646 /* Header */,
+				29DB4E4B238712ED00B13646 /* Inspections */,
+				29DB4E502387153400B13646 /* Shift Information */,
+			);
+			path = "Shift Overview cells";
+			sourceTree = "<group>";
+		};
+		29DB4E3A23870B1F00B13646 /* Shared cells */ = {
+			isa = PBXGroup;
+			children = (
+				29DB010B2371EE2F0046E605 /* Basic (header + Input group) */,
+				29E4BBE5237211F10079475F /* Divider */,
+				29DB0118237207AD0046E605 /* Button */,
+				29DB0113237206B90046E605 /* Header */,
+			);
+			path = "Shared cells";
+			sourceTree = "<group>";
+		};
+		29DB4E3B23870B3000B13646 /* Inspection form cells */ = {
+			isa = PBXGroup;
+			children = (
+				29E4BBEB237217F40079475F /* Destination Water Body */,
+				29E4BBEA237217E60079475F /* Previous Water Body */,
+			);
+			path = "Inspection form cells";
+			sourceTree = "<group>";
+		};
+		29DB4E422387111700B13646 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				29DB4E442387113900B13646 /* BaseShiftOverviewCollectionViewCell.swift */,
+				29DB4E452387113900B13646 /* BaseShiftOverviewCollectionViewCell.xib */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		29DB4E432387112000B13646 /* Header */ = {
+			isa = PBXGroup;
+			children = (
+				29DB4E3C23870B7B00B13646 /* ShifOverviewHeaderCollectionViewCell.swift */,
+				29DB4E3D23870B7B00B13646 /* ShifOverviewHeaderCollectionViewCell.xib */,
+			);
+			path = Header;
+			sourceTree = "<group>";
+		};
+		29DB4E482387125800B13646 /* Status Color */ = {
+			isa = PBXGroup;
+			children = (
+				29DB4E492387126A00B13646 /* StatusColor.swift */,
+			);
+			path = "Status Color";
+			sourceTree = "<group>";
+		};
+		29DB4E4B238712ED00B13646 /* Inspections */ = {
+			isa = PBXGroup;
+			children = (
+				29DB4E4C2387131000B13646 /* InspectionsTableCollectionViewCell.swift */,
+				29DB4E4D2387131000B13646 /* InspectionsTableCollectionViewCell.xib */,
+			);
+			path = Inspections;
+			sourceTree = "<group>";
+		};
+		29DB4E502387153400B13646 /* Shift Information */ = {
+			isa = PBXGroup;
+			children = (
+				29DB4E57238715A300B13646 /* ShiftInformationHeaderCollectionViewCell.swift */,
+				29DB4E58238715A300B13646 /* ShiftInformationHeaderCollectionViewCell.xib */,
+			);
+			path = "Shift Information";
+			sourceTree = "<group>";
+		};
 		29E4BBE5237211F10079475F /* Divider */ = {
 			isa = PBXGroup;
 			children = (
@@ -753,14 +995,6 @@
 				29E4BBF1237218610079475F /* DestinationWaterBodyCollectionViewCell.xib */,
 			);
 			path = "Destination Water Body";
-			sourceTree = "<group>";
-		};
-		29E4BBF4237221D40079475F /* Form Helper */ = {
-			isa = PBXGroup;
-			children = (
-				29E4BBF5237221EB0079475F /* FormHelper.swift */,
-			);
-			path = "Form Helper";
 			sourceTree = "<group>";
 		};
 		29F29F91236B6A0D004F12E7 /* Switcher */ = {
@@ -802,6 +1036,7 @@
 				29F4EC532370B1BB001D5CFA /* Cells */,
 				29F4EC502370B007001D5CFA /* WatercraftInspectionViewController.swift */,
 				29588744237B50CC00224FFA /* HighRiskFormViewController.swift */,
+				2991968F23846AE000634F81 /* ShiftViewController.swift */,
 			);
 			path = "Watercraft Inspection";
 			sourceTree = "<group>";
@@ -809,12 +1044,9 @@
 		29F4EC532370B1BB001D5CFA /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				29DB010B2371EE2F0046E605 /* Basic (header + Input group) */,
-				29E4BBE5237211F10079475F /* Divider */,
-				29DB0118237207AD0046E605 /* Button */,
-				29DB0113237206B90046E605 /* Header */,
-				29E4BBEB237217F40079475F /* Destination Water Body */,
-				29E4BBEA237217E60079475F /* Previous Water Body */,
+				29DB4E3A23870B1F00B13646 /* Shared cells */,
+				29DB4E3B23870B3000B13646 /* Inspection form cells */,
+				29DB4E3923870B0000B13646 /* Shift Overview cells */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -1018,16 +1250,27 @@
 				29514BDD2368AEE400DC89C4 /* Options.storyboard in Resources */,
 				29F29FAC236CA948004F12E7 /* TextInputCollectionViewCell.xib in Resources */,
 				29CEC92623676425003B21B9 /* LaunchScreen.storyboard in Resources */,
+				296DEC16238C4CA70035E7FA /* RadioBooleanCollectionViewCell.xib in Resources */,
+				29DB4E4F2387131000B13646 /* InspectionsTableCollectionViewCell.xib in Resources */,
 				2950510A2374D764000FBD6E /* DoubleInputCollectionViewCell.xib in Resources */,
 				29E4BBE92372120F0079475F /* DividerCollectionViewCell.xib in Resources */,
+				296DEC21238C53930035E7FA /* NewShiftModal.xib in Resources */,
+				299196932384725600634F81 /* TableView.xib in Resources */,
+				296DEC28238C61A80035E7FA /* IntegerStepperInputCollectionViewCell.xib in Resources */,
+				296DEC1B238C51810035E7FA /* TimeInputCollectionViewCell.xib in Resources */,
 				29A9742E236CB59F006C668F /* SwitchInputCollectionViewCell.xib in Resources */,
+				29DB4E5A238715A300B13646 /* ShiftInformationHeaderCollectionViewCell.xib in Resources */,
 				2907E4B92368D25800946B3F /* InputModal.xib in Resources */,
+				29DB4E3F23870B7B00B13646 /* ShifOverviewHeaderCollectionViewCell.xib in Resources */,
 				29E4BBF3237218610079475F /* DestinationWaterBodyCollectionViewCell.xib in Resources */,
 				295051112374F54A000FBD6E /* IntegerInputCollectionViewCell.xib in Resources */,
+				294D8F6223847C9A0094090D /* TableRowTableViewCell.xib in Resources */,
 				A7AE5276237CC3660044DBB7 /* check-mark-success.json in Resources */,
 				29F29FA2236B8670004F12E7 /* DropdownCollectionViewCell.xib in Resources */,
 				29DB0117237206D30046E605 /* HeaderCollectionViewCell.xib in Resources */,
+				29DB4E472387113900B13646 /* BaseShiftOverviewCollectionViewCell.xib in Resources */,
 				29E4BBEF237218500079475F /* PreviousWaterBodyCollectionViewCell.xib in Resources */,
+				296DEC2B238C73AF0035E7FA /* TimePicker.storyboard in Resources */,
 				29DB011C237207BF0046E605 /* FormButtonCollectionViewCell.xib in Resources */,
 				29F29F99236B6B9C004F12E7 /* SwitcherCollectionViewCell.xib in Resources */,
 				29DB010A2370EFD60046E605 /* TextAreaInputCollectionViewCell.xib in Resources */,
@@ -1122,11 +1365,17 @@
 				29E4BBE82372120F0079475F /* DividerCollectionViewCell.swift in Sources */,
 				5C82D3E82374BCDB00B065BA /* GenericConst.swift in Sources */,
 				29E4BBF2237218610079475F /* DestinationWaterBodyCollectionViewCell.swift in Sources */,
+				294D8F692385D1F10094090D /* TestTableViewObject.swift in Sources */,
 				5C82D3EC2374BD1300B065BA /* Promise.swift in Sources */,
 				5C0F6980237C6DDA00F96CA5 /* APIChain.swift in Sources */,
+				29DB4E4123870F2B00B13646 /* ShiftModel.swift in Sources */,
 				29514BEB2368C45F00DC89C4 /* DropdownViewController.swift in Sources */,
+				299196952384726600634F81 /* TableView.swift in Sources */,
+				2933DD5B238C78350068E9DF /* TimePicker.swift in Sources */,
 				2907E4B12368CD6700946B3F /* Dropdown.swift in Sources */,
 				29FFEBBE237F1EAA00574E3F /* Settings.swift in Sources */,
+				29DB4E59238715A300B13646 /* ShiftInformationHeaderCollectionViewCell.swift in Sources */,
+				296DEC27238C61A80035E7FA /* IntegerStepperInputCollectionViewCell.swift in Sources */,
 				29BAC5192367B34000A620F4 /* Fonts.swift in Sources */,
 				5C82D404237B31C200B065BA /* WatercraftRiskAssessmentAPI.swift in Sources */,
 				29DB0112237204A90046E605 /* JourneyDetailsModel.swift in Sources */,
@@ -1147,6 +1396,7 @@
 				29DB011B237207BF0046E605 /* FormButtonCollectionViewCell.swift in Sources */,
 				29514BD62368AD6F00DC89C4 /* OptionsTableViewCell.swift in Sources */,
 				294EF3122370885100EEB3B6 /* BannerView.swift in Sources */,
+				296DEC1F238C53820035E7FA /* NewShiftModal.swift in Sources */,
 				29514BDF2368AFC100DC89C4 /* BaseViewController.swift in Sources */,
 				5C0F697D237B683200F96CA5 /* CodesAPI.swift in Sources */,
 				5C82D3FF23761B1400B065BA /* API.swift in Sources */,
@@ -1158,33 +1408,45 @@
 				29BAC4FE23676C3000A620F4 /* Auth.swift in Sources */,
 				29A97436236FD5FC006C668F /* InputGroup.swift in Sources */,
 				2907E4B72368D24900946B3F /* InputModal.swift in Sources */,
+				2991969023846AE000634F81 /* ShiftViewController.swift in Sources */,
 				29DB01092370EFD60046E605 /* TextAreaInputCollectionViewCell.swift in Sources */,
 				5C82D3EA2374BCFA00B065BA /* FoundationExtension.swift in Sources */,
 				29CEC91E23676424003B21B9 /* ViewController.swift in Sources */,
+				29DB4E4E2387131000B13646 /* InspectionsTableCollectionViewCell.swift in Sources */,
 				29A9742D236CB59F006C668F /* SwitchInputCollectionViewCell.swift in Sources */,
+				29DB4E4A2387126A00B13646 /* StatusColor.swift in Sources */,
+				2933DD64238DE3310068E9DF /* DropdownHelper.swift in Sources */,
 				29F29F9D236B7750004F12E7 /* Switcher.swift in Sources */,
 				29CEC91A23676424003B21B9 /* AppDelegate.swift in Sources */,
 				29514BE92368C41900DC89C4 /* DropdownModel.swift in Sources */,
 				29F29F90236B6A03004F12E7 /* SwitcherView.swift in Sources */,
 				29BAC50C23677EDC00A620F4 /* LoginViewController.swift in Sources */,
+				294D8F672385D11C0094090D /* TableViewModel.swift in Sources */,
 				29E4BBEE237218500079475F /* PreviousWaterBodyCollectionViewCell.swift in Sources */,
 				29F29FAB236CA948004F12E7 /* TextInputCollectionViewCell.swift in Sources */,
+				2933DD5E238DC2150068E9DF /* CodeTables.swift in Sources */,
 				29588745237B50CC00224FFA /* HighRiskFormViewController.swift in Sources */,
+				29DB4E3E23870B7B00B13646 /* ShifOverviewHeaderCollectionViewCell.swift in Sources */,
+				29DB4E462387113900B13646 /* BaseShiftOverviewCollectionViewCell.swift in Sources */,
 				5C82D3DF2374B9D700B065BA /* RemoteAPIManager.swift in Sources */,
 				29BAC50E236790C900A620F4 /* HomeViewController.swift in Sources */,
 				29514BE62368B70900DC89C4 /* Options.swift in Sources */,
 				29F29FA4236B9114004F12E7 /* InputItem.swift in Sources */,
-				29E4BBF6237221EB0079475F /* FormHelper.swift in Sources */,
 				29514BE12368B4BE00DC89C4 /* SettingsConstants.swift in Sources */,
+				296DEC23238C56A30035E7FA /* ShiftFormHelper.swift in Sources */,
 				29DB0116237206D30046E605 /* HeaderCollectionViewCell.swift in Sources */,
 				5C82D3EE2374BD2900B065BA /* ApplicationLogger.swift in Sources */,
 				29514BDB2368AED600DC89C4 /* OptionsViewController.swift in Sources */,
 				29CE5E1C2375E48000C54F96 /* ConditionalInputCollectionViewCell.swift in Sources */,
 				2944AF9B2379B243007517DC /* ViewFieldCollectionViewCell.swift in Sources */,
 				29F4EC512370B007001D5CFA /* WatercraftInspectionViewController.swift in Sources */,
+				296DEC15238C4CA70035E7FA /* RadioBooleanCollectionViewCell.swift in Sources */,
+				296DEC2D238C73BD0035E7FA /* TimePickerViewController.swift in Sources */,
 				29BAC5172367B12300A620F4 /* Colors.swift in Sources */,
+				294D8F652385C7310094090D /* Table.swift in Sources */,
 				2958874D237B58D600224FFA /* HighRiskFormFieldHeaders.swift in Sources */,
 				2907E4BB2368FEA500946B3F /* FormEntryViewController.swift in Sources */,
+				296DEC1A238C51810035E7FA /* TimeInputCollectionViewCell.swift in Sources */,
 				29FFEBC1237F1F6F00574E3F /* SettingsModel.swift in Sources */,
 				296237D62374B6B400032BB5 /* RadioSwitchInputCollectionViewCell.swift in Sources */,
 				29A9743B2370042E006C668F /* Storage.swift in Sources */,
@@ -1193,17 +1455,16 @@
 				29CEC93C23676691003B21B9 /* KeycloakConstants.swift in Sources */,
 				29FFEBC4237F23B800574E3F /* JWTDecoder.swift in Sources */,
 				29CEC91C23676424003B21B9 /* SceneDelegate.swift in Sources */,
+				294D8F6123847C9A0094090D /* TableRowTableViewCell.swift in Sources */,
 				2958874A237B583C00224FFA /* HighRiskFormHelper.swift in Sources */,
 				29588748237B52F000224FFA /* HighRiskAssessmentModel.swift in Sources */,
 				29BAC50923676FDC00A620F4 /* Theme.swift in Sources */,
 				29BAC5152367AD7D00A620F4 /* AutoSync.swift in Sources */,
 				2907E4B42368CE3600946B3F /* PopoverSize.swift in Sources */,
 				294D9A882379C62F00BD4928 /* WatercraftInspectionModel.swift in Sources */,
+				2933DD61238DC5120068E9DF /* CodeTableModel.swift in Sources */,
 				5C0F6979237B635800F96CA5 /* WaterBodyAPI.swift in Sources */,
 				5C82D3F52374D09000B065BA /* UtilityObjC.m in Sources */,
-				29BAC50923676FDC00A620F4 /* Theme.swift in Sources */,
-				29BAC5152367AD7D00A620F4 /* AutoSync.swift in Sources */,
-				2907E4B42368CE3600946B3F /* PopoverSize.swift in Sources */,
 				5C82D3DE2374B9D700B065BA /* RemoteAPI.swift in Sources */,
 				5C82D3F92376036700B065BA /* WorkflowAPI.swift in Sources */,
 				29BAC51C2367B5B500A620F4 /* RealmRequests.swift in Sources */,
@@ -1374,6 +1635,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = L796QSLV3E;
 				INFOPLIST_FILE = ipad/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1396,6 +1658,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = L796QSLV3E;
 				INFOPLIST_FILE = ipad/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (

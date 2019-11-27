@@ -17,6 +17,7 @@ public enum HighRiskFormSection: Int, CaseIterable {
 
 class HighRiskFormViewController: BaseViewController {
     
+    // MARK: Outlets
     @IBOutlet weak var collectionView: UICollectionView!
     
     // MARK: Constants
@@ -26,13 +27,13 @@ class HighRiskFormViewController: BaseViewController {
     
     // MARK: Variables
     public var model: HighRiskAssessmentModel? = nil
-    private var isEditable: Bool = true
-    private var showFullForm: Bool = false
+    public var isEditable: Bool = true
+    private var showFullForm: Bool = true
     private var formResult: [String: Any?] = [String: Any]()
     
+    // MARK: Class Functions
     override func viewDidLoad() {
         super.viewDidLoad()
-        setNavigationBar(hidden: false, style: UIBarStyle.black)
         setupCollectionView()
         style()
     }
@@ -53,6 +54,8 @@ class HighRiskFormViewController: BaseViewController {
     }
     
     private func addListeners() {
+        NotificationCenter.default.removeObserver(self, name: .InputItemValueChanged, object: nil)
+        NotificationCenter.default.removeObserver(self, name: .ShouldResizeInputGroup, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.inputItemValueChanged(notification:)), name: .InputItemValueChanged, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.shouldResizeInputGroup(notification:)), name: .ShouldResizeInputGroup, object: nil)
     }
@@ -70,7 +73,6 @@ class HighRiskFormViewController: BaseViewController {
         if let m = model {
             // TODO: needs cleanup for nil case
             m.set(value: item.value.get(type: item.type), for: item.key)
-            
         }
         
         if item.key == "cleanDrainDryAfterInspection" {
@@ -87,6 +89,7 @@ class HighRiskFormViewController: BaseViewController {
     }
     
     private func style() {
+        setNavigationBar(hidden: false, style: UIBarStyle.black)
         self.styleNavBar()
     }
     
@@ -106,6 +109,7 @@ class HighRiskFormViewController: BaseViewController {
     
     // Navigation bar right button action
     @objc func action(sender: UIBarButtonItem) {
+        self.navigationController?.popViewController(animated: true)
     }
 }
 

@@ -19,6 +19,9 @@ enum InputItemType {
     case TextArea
     case RadioSwitch
     case ViewField
+    case RadioBoolean
+    case Time
+    case Stepper
 }
 
 enum InputItemWidthSize {
@@ -35,6 +38,7 @@ struct InputValue {
     var int: Int?
     var double: Double?
     var itemId: String?
+    var time: String?
     
     func get(type: InputItemType) -> Any? {
         switch type {
@@ -56,6 +60,12 @@ struct InputValue {
             return self.boolean
         case .ViewField:
             return self.string
+        case .RadioBoolean:
+            return self.boolean
+        case .Time:
+            return self.time
+        case .Stepper:
+            return self.int
         }
     }
     
@@ -79,6 +89,12 @@ struct InputValue {
             self.boolean = value as? Bool
         case .ViewField:
             self.string = value as? String
+        case .RadioBoolean:
+            self.boolean = value as? Bool
+        case .Time:
+            self.time = value as? String
+        case .Stepper:
+            self.int = value as? Int
         }
     }
 }
@@ -125,6 +141,12 @@ struct InputDependency {
             return item.value.get(type: item.type) as? Bool == _value.get(type: item.type) as? Bool
         case .ViewField:
             return item.value.get(type: item.type) as? String == _value.get(type: item.type) as? String
+        case .RadioBoolean:
+            return item.value.get(type: item.type) as? Bool == _value.get(type: item.type) as? Bool
+        case .Time:
+            return item.value.get(type: item.type) as? TimeInterval == _value.get(type: item.type) as? TimeInterval
+        case .Stepper:
+            return item.value.get(type: item.type) as? Int == _value.get(type: item.type) as? Int
         }
     }
 }
@@ -305,6 +327,36 @@ class DateInput: InputItem {
     }
 }
 
+class TimeInput: InputItem {
+    var dependency: InputDependency?
+    var type: InputItemType = .Time
+    var width: InputItemWidthSize
+    var height: CGFloat = 70
+    var key: String
+    var value: InputValue
+    var header: String
+    var editable: Bool
+    
+    init(key: String, header: String, editable: Bool, value: String? = nil, width: InputItemWidthSize? = .Full) {
+        self.value = InputValue()
+        self.value.set(value: value, type: type)
+        self.key = key
+        self.header = header
+        self.editable = editable
+        self.width = width ?? .Full
+    }
+    
+    func getValue() -> Time? {
+        let stringValue: String = self.value.get(type: self.type) as? String ?? ""
+        if stringValue == "" {return nil}
+        return Time(string: stringValue)
+    }
+    
+    func setValue(value: Time?) {
+        self.value.set(value: value?.toString(), type: self.type)
+    }
+}
+
 class TextAreaInput: InputItem {
     var dependency: InputDependency?
     var type: InputItemType = .TextArea
@@ -361,6 +413,34 @@ class IntegerInput: InputItem {
     }
 }
 
+class IntegerStepperInput: InputItem {
+    var dependency: InputDependency?
+    var type: InputItemType = .Stepper
+    var width: InputItemWidthSize
+    var height: CGFloat = 70
+    var key: String
+    var value: InputValue
+    var header: String
+    var editable: Bool
+    
+    init(key: String, header: String, editable: Bool, value: Int? = nil, width: InputItemWidthSize? = .Full) {
+        self.value = InputValue()
+        self.value.set(value: value, type: type)
+        self.key = key
+        self.header = header
+        self.editable = editable
+        self.width = width ?? .Full
+    }
+    
+    func getValue() -> Int? {
+        return self.value.get(type: self.type) as? Int ?? nil
+    }
+    
+    func setValue(value: Int?) {
+        self.value.set(value: value, type: self.type)
+    }
+}
+
 class DoubleInput: InputItem {
     var dependency: InputDependency?
     var type: InputItemType = .Double
@@ -392,6 +472,34 @@ class DoubleInput: InputItem {
 class RadioSwitchInput: InputItem {
     var dependency: InputDependency?
     var type: InputItemType = .RadioSwitch
+    var width: InputItemWidthSize
+    var height: CGFloat = 70
+    var key: String
+    var value: InputValue
+    var header: String
+    var editable: Bool
+    
+    init(key: String, header: String, editable: Bool, value: Bool? = nil, width: InputItemWidthSize? = .Full) {
+        self.value = InputValue()
+        self.value.set(value: value, type: type)
+        self.key = key
+        self.header = header
+        self.editable = editable
+        self.width = width ?? .Full
+    }
+    
+    func getValue() -> Bool? {
+        return self.value.get(type: self.type) as? Bool ?? nil
+    }
+    
+    func setValue(value: Bool?) {
+        self.value.set(value: value, type: self.type)
+    }
+}
+
+class RadioBoolean: InputItem {
+    var dependency: InputDependency?
+    var type: InputItemType = .RadioBoolean
     var width: InputItemWidthSize
     var height: CGFloat = 70
     var key: String

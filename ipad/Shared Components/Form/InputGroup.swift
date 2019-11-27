@@ -20,7 +20,10 @@ class InputGroupView: UIView {
         "RadioSwitchInputCollectionViewCell",
         "DoubleInputCollectionViewCell",
         "IntegerInputCollectionViewCell",
-        "ViewFieldCollectionViewCell"
+        "ViewFieldCollectionViewCell",
+        "RadioBooleanCollectionViewCell",
+        "TimeInputCollectionViewCell",
+        "IntegerStepperInputCollectionViewCell"
     ]
     
     // MARK: Variables
@@ -40,6 +43,10 @@ class InputGroupView: UIView {
         self.setupCollectionView()
         addListeners()
         container.layoutIfNeeded()
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
     
     private func setDisplayableItems() {
@@ -69,7 +76,7 @@ class InputGroupView: UIView {
         if dependencyKeys.contains(item.key) {
             self.setDisplayableItems()
             self.collectionView?.performBatchUpdates({
-                 let indexSet = IndexSet(integersIn: 0...0)
+                let indexSet = IndexSet(integersIn: 0...0)
                 self.collectionView?.reloadSections(indexSet)
             }, completion: { (done) in
                 NotificationCenter.default.post(name: .ShouldResizeInputGroup, object: self)
@@ -119,7 +126,7 @@ class InputGroupView: UIView {
         var widthCounter: CGFloat = 0
         var tempMaxRowItemHeight: CGFloat = 0
         for (index, item) in items.enumerated()  {
-        
+            
             var itemWidth: CGFloat = 0
             // Get Width in terms of screen %
             switch item.width {
@@ -200,6 +207,10 @@ extension InputGroupView: UICollectionViewDataSource, UICollectionViewDelegate, 
         return collectionView!.dequeueReusableCell(withReuseIdentifier: "DateInputCollectionViewCell", for: indexPath as IndexPath) as! DateInputCollectionViewCell
     }
     
+    func getTimeInputCell(indexPath: IndexPath) ->  TimeInputCollectionViewCell {
+        return collectionView!.dequeueReusableCell(withReuseIdentifier: "TimeInputCollectionViewCell", for: indexPath as IndexPath) as! TimeInputCollectionViewCell
+    }
+    
     func getTextAreaInputCell(indexPath: IndexPath) -> TextAreaInputCollectionViewCell {
         return collectionView!.dequeueReusableCell(withReuseIdentifier: "TextAreaInputCollectionViewCell", for: indexPath as IndexPath) as! TextAreaInputCollectionViewCell
     }
@@ -216,8 +227,16 @@ extension InputGroupView: UICollectionViewDataSource, UICollectionViewDelegate, 
         return collectionView!.dequeueReusableCell(withReuseIdentifier: "IntegerInputCollectionViewCell", for: indexPath as IndexPath) as! IntegerInputCollectionViewCell
     }
     
+    func getIntStepperInputCell(indexPath: IndexPath) -> IntegerStepperInputCollectionViewCell {
+        return collectionView!.dequeueReusableCell(withReuseIdentifier: "IntegerStepperInputCollectionViewCell", for: indexPath as IndexPath) as! IntegerStepperInputCollectionViewCell
+    }
+    
     func getViewFieldCell(indexPath: IndexPath) -> ViewFieldCollectionViewCell {
         return collectionView!.dequeueReusableCell(withReuseIdentifier: "ViewFieldCollectionViewCell", for: indexPath as IndexPath) as! ViewFieldCollectionViewCell
+    }
+    
+    func getRadioBooleanCell(indexPath: IndexPath) ->  RadioBooleanCollectionViewCell {
+        return collectionView!.dequeueReusableCell(withReuseIdentifier: "RadioBooleanCollectionViewCell", for: indexPath as IndexPath) as! RadioBooleanCollectionViewCell
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -262,6 +281,18 @@ extension InputGroupView: UICollectionViewDataSource, UICollectionViewDelegate, 
         case .ViewField:
             let cell = getViewFieldCell(indexPath: indexPath)
             cell.setup(with: item as! ViewField, delegate: inputDelegate!)
+            return cell
+        case .RadioBoolean:
+            let cell = getRadioBooleanCell(indexPath: indexPath)
+            cell.setup(with: item as! RadioBoolean, delegate: inputDelegate!)
+            return cell
+        case .Time:
+            let cell = getTimeInputCell(indexPath: indexPath)
+            cell.setup(with: item as! TimeInput, delegate: inputDelegate!)
+            return cell
+        case .Stepper:
+            let cell = getIntStepperInputCell(indexPath: indexPath)
+            cell.setup(with: item as! IntegerStepperInput, delegate: inputDelegate!)
             return cell
         }
     }

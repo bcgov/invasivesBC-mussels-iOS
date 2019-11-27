@@ -11,17 +11,6 @@ import Foundation
 import Realm
 import RealmSwift
 
-protocol PropertyReflectable { }
-
-extension PropertyReflectable {
-    subscript(key: String) -> Any? {
-        let m = Mirror(reflecting: self)
-        return m.children.first { $0.label == key }?.value
-    }
-}
-
-extension WatercradftInspectionModel : PropertyReflectable {}
-
 class WatercradftInspectionModel: Object, BaseRealmObject {
     @objc dynamic var localId: String = {
         return UUID().uuidString
@@ -31,13 +20,27 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
         return "localId"
     }
     
-    @objc dynamic var remoteId: Int = -1
+    @objc dynamic var remoteId: Int = -1 {
+        didSet {
+            if remoteId > 0 {
+                set(value: "Completed", for: "status")
+            }
+        }
+    }
     
-    @objc dynamic var shouldSync: Bool = false
+    @objc dynamic var shouldSync: Bool = false {
+        didSet {
+            if shouldSync == true {
+                set(value: "Pending Sync", for: "status")
+            } else {
+                set(value: "Draft", for: "status")
+            }
+        }
+    }
     
     // PASSPORT INFO
     @objc dynamic var isPassportHolder: Bool = false
-    @objc dynamic var inspectionTime: Double = 0
+    @objc dynamic var inspectionTime: String = ""
     @objc dynamic var passportNumber: String = ""
     @objc dynamic var launchedOutsideBC : Bool = false
     @objc dynamic var k9Inspection: Bool = false
@@ -65,15 +68,29 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
     @objc dynamic var failedToStop: Bool = false
     @objc dynamic var ticketIssued: Bool = false
     // High Risk Assesment fields
-    @objc dynamic var highriskAIS: Bool = false
+    @objc dynamic var highriskAIS: Bool = false {
+        didSet {
+            if highriskAIS == true {
+                set(value: "High", for: "riskLevel")
+            } else {
+                set(value: "Low", for: "riskLevel")
+            }
+        }
+    }
     @objc dynamic var adultDreissenidFound: Bool = false
     // General comments
     @objc dynamic var generalComments: String = ""
     // Journey
     private var journeyDetails: List<JourneyDetailsModel> = List<JourneyDetailsModel>()
+    // High Risk Assessments
+    private var highRiskAssessments: List<HighRiskAssessmentModel> = List<HighRiskAssessmentModel>()
     
     // Form Objects (Cached - Not stored)
     private var inputItems : [WatercraftFromSection: [InputItem]] = [WatercraftFromSection: [InputItem]]()
+    
+    @objc dynamic var status: String = "Pending Sync"
+    
+    @objc dynamic var riskLevel: String = "low"
     
     func toDictionary() -> [String : Any] {
         return [
@@ -113,10 +130,37 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
     }
     
     func set(value: Any, for key: String) {
-        if self[key] != nil {
-            self[key] = value
-        } else {
+        if self[key] == nil {
             print("\(key) is nil")
+            return
+        }
+        do {
+            let realm = try Realm()
+            try realm.write {
+                self[key] = value
+            }
+        } catch let error as NSError {
+            print("** REALM ERROR")
+            print(error)
+        }
+    }
+    
+    func addHighRiskAssessment() -> HighRiskAssessmentModel? {
+        if let existing = self.highRiskAssessments.first {
+            return existing
+        }
+        let assessment = HighRiskAssessmentModel()
+        assessment.shouldSync = false
+        do {
+            let realm = try Realm()
+            try realm.write {
+                self.highRiskAssessments.append(assessment)
+            }
+            return assessment
+        } catch let error as NSError {
+            print("** REALM ERROR")
+            print(error)
+            return nil
         }
     }
     

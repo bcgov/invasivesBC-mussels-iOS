@@ -24,7 +24,17 @@ class LoginViewController: BaseViewController {
         Auth.refreshEnviormentConstants(withIdpHint: "idir")
         Auth.authenticate { (success) in
             if (success) {
-                 self.dismiss(animated: true, completion: nil)
+                if AutoSync.shared.shouldPerformInitialSync() {
+                    AutoSync.shared.performInitialSync { (success) in
+                        if success {
+                            self.dismiss(animated: true, completion: nil)
+                        } else {
+                            Auth.logout()
+                        }
+                    }
+                } else {
+                    self.dismiss(animated: true, completion: nil)
+                }
             }
         }
     }

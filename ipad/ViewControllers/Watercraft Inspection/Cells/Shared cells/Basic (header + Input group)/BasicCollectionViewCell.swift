@@ -9,10 +9,12 @@
 import UIKit
 
 class BasicCollectionViewCell: UICollectionViewCell, Theme {
-
+    
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var container: UIView!
     @IBOutlet weak var divider: UIView!
+    @IBOutlet weak var leadingMargin: NSLayoutConstraint!
+    @IBOutlet weak var trailingMargin: NSLayoutConstraint!
     
     weak var inputGroup: UIView?
     
@@ -24,7 +26,11 @@ class BasicCollectionViewCell: UICollectionViewCell, Theme {
         style()
     }
     
-    public func setup(title: String, input items: [InputItem], delegate: InputDelegate, boxed: Bool? = false, showDivider: Bool? = true) {
+    public func setup(title: String, input items: [InputItem], delegate: InputDelegate, boxed: Bool? = false, showDivider: Bool? = true, padding: CGFloat? = 0) {
+        if let extraPadding = padding {
+            self.leadingMargin.constant = extraPadding
+            self.trailingMargin.constant = extraPadding
+        }
         self.inputGroup?.removeFromSuperview()
         self.titleLabel.text = title
         let inputGroup: InputGroupView = InputGroupView()
@@ -33,6 +39,7 @@ class BasicCollectionViewCell: UICollectionViewCell, Theme {
         
         self.showBox = boxed ?? false
         self.showDivider = showDivider ?? true
+        
         style()
     }
     
@@ -60,5 +67,5 @@ class BasicCollectionViewCell: UICollectionViewCell, Theme {
             divider.alpha = 0
         }
     }
-
+    
 }
