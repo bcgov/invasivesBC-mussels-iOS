@@ -29,6 +29,9 @@ class ShifOverviewHeaderCollectionViewCell: BaseShiftOverviewCollectionViewCell 
     
     // MARK: Outlet Actions
     @IBAction func addInspectionClicked(_ sender: UIButton) {
+        if let callback = self.completion {
+            return callback()
+        }
     }
     
     // MARK: Style

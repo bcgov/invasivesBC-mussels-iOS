@@ -57,6 +57,8 @@ class SyncView: ModalView, Theme {
         styleHollowButton(button: hollowButton)
         styleFillButton(button: fillButton)
         styleSyncInProgress()
+        self.hollowButton.alpha = 0
+        self.fillButton.alpha = 0
 //        styleSyncError()
 //        styleSyncSuccess()
     }

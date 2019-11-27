@@ -29,7 +29,7 @@ class WatercraftInspectionFormHelper {
         )
         items.append(isPassportHolder)
         
-        let inspectionTime = DoubleInput(
+        let inspectionTime = TimeInput(
             key: "inspectionTime",
             header: WatercraftFieldHeaderConstants.Passport.inspectionTime,
             editable: editable ?? true,
@@ -40,7 +40,7 @@ class WatercraftInspectionFormHelper {
         items.append(inspectionTime)
         
         let passportNumber = TextInput(
-            key: "PassportNumber",
+            key: "passportNumber",
             header: WatercraftFieldHeaderConstants.Passport.passportNumber,
             editable: editable ?? true,
             value: object?.passportNumber ?? nil,

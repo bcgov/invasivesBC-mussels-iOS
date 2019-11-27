@@ -28,7 +28,7 @@ class HighRiskFormViewController: BaseViewController {
     // MARK: Variables
     public var model: HighRiskAssessmentModel? = nil
     private var isEditable: Bool = true
-    private var showFullForm: Bool = false
+    private var showFullForm: Bool = true
     private var formResult: [String: Any?] = [String: Any]()
     
     // MARK: Class Functions
@@ -54,6 +54,8 @@ class HighRiskFormViewController: BaseViewController {
     }
     
     private func addListeners() {
+        NotificationCenter.default.removeObserver(self, name: .InputItemValueChanged, object: nil)
+        NotificationCenter.default.removeObserver(self, name: .ShouldResizeInputGroup, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.inputItemValueChanged(notification:)), name: .InputItemValueChanged, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.shouldResizeInputGroup(notification:)), name: .ShouldResizeInputGroup, object: nil)
     }
@@ -107,6 +109,7 @@ class HighRiskFormViewController: BaseViewController {
     
     // Navigation bar right button action
     @objc func action(sender: UIBarButtonItem) {
+        self.navigationController?.popViewController(animated: true)
     }
 }
 

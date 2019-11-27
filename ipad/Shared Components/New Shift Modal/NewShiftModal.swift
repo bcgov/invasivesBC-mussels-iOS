@@ -28,7 +28,6 @@ class NewShiftModal: ModalView, Theme {
     
     @IBAction func cancelAction(_ sender: UIButton) {
         guard let onClick = self.onCancel else {return}
-        
         self.remove()
         return onClick()
     }
@@ -37,6 +36,7 @@ class NewShiftModal: ModalView, Theme {
         guard let model = self.model, let onClick = self.onStart else {return}
         model.shouldSync = true
         model.date = Date()
+        model.shouldSync = false
         self.remove()
         return onClick(model)
     }

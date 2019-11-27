@@ -11,8 +11,6 @@ import Foundation
 import Realm
 import RealmSwift
 
-extension HighRiskAssessmentModel : PropertyReflectable {}
-
 class HighRiskAssessmentModel: Object, BaseRealmObject {
     
     @objc dynamic var localId: String = {
@@ -75,10 +73,18 @@ class HighRiskAssessmentModel: Object, BaseRealmObject {
     }
     
     func set(value: Any, for key: String) {
-        if self[key] != nil {
-            self[key] = value
-        } else {
+        if self[key] == nil {
             print("\(key) is nil")
+            return
+        }
+        do {
+            let realm = try Realm()
+            try realm.write {
+                self[key] = value
+            }
+        } catch let error as NSError {
+            print("** REALM ERROR")
+            print(error)
         }
     }
     

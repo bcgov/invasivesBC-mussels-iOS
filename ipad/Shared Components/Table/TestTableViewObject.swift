@@ -10,8 +10,6 @@ import Foundation
 import Realm
 import RealmSwift
 
-extension TestTableViewObject : PropertyReflectable {}
-
 class TestTableViewObject: Object, BaseRealmObject {
     @objc dynamic var localId: String = {
         return UUID().uuidString

@@ -29,7 +29,7 @@ class CodeTables {
     var promise: Promise<RemoteResponse>?
     
     public func fetchCodes(completion: @escaping(_ success: Bool) -> Void) {
-        fetchAndStoreCodes { (codes) in
+        self.fetchAndStoreCodes { (codes) in
             if codes.count > 0 {
                 self.fetchAndStoreWaterBodies { (waterBodies) in
                     return completion(waterBodies.count > 0)
@@ -58,20 +58,22 @@ class CodeTables {
                 return completion([])
             }
             Storage.shared.deleteCodeTables()
-            var codeTables: [CodeTableModel] = []
-            for (type, items) in data {
-                guard let items = items as? [String] else {
-                    continue
+            DispatchQueue.global(qos: .background).async {
+                var codeTables: [CodeTableModel] = []
+                for (type, items) in data {
+                    guard let items = items as? [String] else {
+                        continue
+                    }
+                    let model = CodeTableModel()
+                    model.type = type
+                    for item in items {
+                        model.items.append(item)
+                    }
+                    RealmRequests.saveObject(object: model)
+                    codeTables.append(model)
                 }
-                let model = CodeTableModel()
-                model.type = type
-                for item in items {
-                    model.items.append(item)
-                }
-                RealmRequests.saveObject(object: model)
-                codeTables.append(model)
+                return completion(codeTables)
             }
-            return completion(codeTables)
         })
     }
     
@@ -99,19 +101,21 @@ class CodeTables {
                 return completion([])
             }
             Storage.shared.deteleWaterBodyTables()
-            var waterbodies: [WaterBodyTableModel] = []
-            for item in data {
-                let model = WaterBodyTableModel()
-                model.name = item["name"] as? String ?? ""
-                model.water_body_id = item["water_body_id"] as? Int ?? 0
-                model.latitude = item["latitude"] as? Double ?? 0
-                model.longitude = item["longitude"] as? Double ?? 0
-                model.abbrev = item["abbrev"] as? String ?? ""
-                model.closest = item["closest"] as? String ?? ""
-                RealmRequests.saveObject(object: model)
-                waterbodies.append(model)
+            DispatchQueue.global(qos: .background).async {
+                var waterbodies: [WaterBodyTableModel] = []
+                for item in data {
+                    let model = WaterBodyTableModel()
+                    model.name = item["name"] as? String ?? ""
+                    model.water_body_id = item["water_body_id"] as? Int ?? 0
+                    model.latitude = item["latitude"] as? Double ?? 0
+                    model.longitude = item["longitude"] as? Double ?? 0
+                    model.abbrev = item["abbrev"] as? String ?? ""
+                    model.closest = item["closest"] as? String ?? ""
+                    RealmRequests.saveObject(object: model)
+                    waterbodies.append(model)
+                }
+                return completion(waterbodies)
             }
-            return completion(waterbodies)
         })
     }
     

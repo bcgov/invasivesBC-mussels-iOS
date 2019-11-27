@@ -18,7 +18,7 @@
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Inspections" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f37-hA-2EK">
-                        <rect key="frame" x="20" y="8" width="88.5" height="20"/>
+                        <rect key="frame" x="20" y="8" width="88.5" height="60"/>
                         <constraints>
                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="xrr-3b-BcA"/>
                         </constraints>
@@ -27,17 +27,17 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9zw-gq-R7h">
-                        <rect key="frame" x="20" y="36" width="315" height="2"/>
+                        <rect key="frame" x="20" y="76" width="315" height="2"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="2" id="J6J-NX-rGk"/>
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EtQ-vg-oRn">
-                        <rect key="frame" x="20" y="46" width="315" height="40"/>
+                        <rect key="frame" x="20" y="86" width="315" height="0.0"/>
                         <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstAttribute="height" relation="greaterThanOrEqual" priority="750" id="ofz-Sq-M7a"/>
+                            <constraint firstAttribute="height" id="ofz-Sq-M7a"/>
                         </constraints>
                     </view>
                 </subviews>

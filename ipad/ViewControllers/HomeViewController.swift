@@ -78,21 +78,21 @@ class HomeViewController: BaseViewController {
     }
     
     @IBAction func addEntryClicked(_ sender: Any) {
-        let shiftModal: NewShiftModal = NewShiftModal.fromNib()
-        shiftModal.initialize(delegate: self, onStart: { (model) in
-            self.shiftModel = model
-            model.save()
+        let existingShift = Storage.shared.getShifts(by: Date().stringShort())
+        if let existing = existingShift.first {
+            self.shiftModel = existing
             self.performSegue(withIdentifier: "showShiftOverview", sender: self)
-        }) {
-            print("cancelled")
+        } else {
+            let shiftModal: NewShiftModal = NewShiftModal.fromNib()
+            shiftModal.initialize(delegate: self, onStart: { (model) in
+                self.shiftModel = model
+                model.save()
+                self.performSegue(withIdentifier: "showShiftOverview", sender: self)
+            }) {
+                print("cancelled")
+            }
         }
-        
-        //        self.performSegue(withIdentifier: "showFormEntry", sender: self)
-        
-        //        self.performSegue(withIdentifier: "showWatercraftInspectionForm", sender: self)
     }
-    
-    
     
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -141,7 +141,7 @@ class HomeViewController: BaseViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(self.tableButtonClicked(notification:)), name: .TableButtonClicked, object: nil)
     }
     
-    //
+    // Table Button clicked
     @objc func tableButtonClicked(notification: Notification) {
         guard let actionModel = notification.object as? TableClickActionModel, let shiftModel = actionModel.object as? ShiftModel else {return}
         if actionModel.buttonName.lowercased() == "view" {

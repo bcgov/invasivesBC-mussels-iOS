@@ -98,6 +98,8 @@ class Table {
             return Colors.Status.Yellow
         case "completed":
             return Colors.Status.Green
+        case "draft":
+            return Colors.Status.DarkGray
         default:
             return Colors.Status.DarkGray
         }

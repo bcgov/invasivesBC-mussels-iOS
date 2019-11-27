@@ -27,7 +27,7 @@ class InspectionsTableCollectionViewCell: BaseShiftOverviewCollectionViewCell {
         let targetSize = CGSize(width: layoutAttributes.frame.width, height: 0)
 
         // Calculate the size (height) using Auto Layout
-        let autoLayoutSize = contentView.systemLayoutSizeFitting(targetSize, withHorizontalFittingPriority: UILayoutPriority.required, verticalFittingPriority: UILayoutPriority.defaultLow)
+        let autoLayoutSize = contentView.systemLayoutSizeFitting(targetSize, withHorizontalFittingPriority: UILayoutPriority.required, verticalFittingPriority: UILayoutPriority.defaultHigh)
         let autoLayoutFrame = CGRect(origin: autoLayoutAttributes.frame.origin, size: autoLayoutSize)
 
         // Assign the new size to the layout attributes
@@ -52,7 +52,7 @@ class InspectionsTableCollectionViewCell: BaseShiftOverviewCollectionViewCell {
         columns.append(TableViewColumnConfig(key: "", header: "#", type: .Counter, showHeader: false))
         columns.append(TableViewColumnConfig(key: "remoteId", header: "ID", type: .Normal))
         columns.append(TableViewColumnConfig(key: "riskLevel", header: "Risk Level", type: .Normal))
-        columns.append(TableViewColumnConfig(key: "timeAdded", header: "Time Added", type: .Normal))
+        columns.append(TableViewColumnConfig(key: "inspectionTime", header: "Time Added", type: .Normal))
         columns.append(TableViewColumnConfig(key: "status", header: "Status", type: .WithIcon))
         columns.append(TableViewColumnConfig(key: "", header: "Actions", type: .Button, buttonName: "View", showHeader: false))
         let tableView = table.show(columns: columns, in: inspections, container: tableContainer)
@@ -70,6 +70,7 @@ class InspectionsTableCollectionViewCell: BaseShiftOverviewCollectionViewCell {
     
     static func getTableHeight(for model: ShiftModel) -> CGFloat {
         // Convert list to array
+        
         let inspections: [WatercradftInspectionModel] = model.inspections.map{ $0 }
         let numberOfRows = inspections.count
         
@@ -80,10 +81,13 @@ class InspectionsTableCollectionViewCell: BaseShiftOverviewCollectionViewCell {
             return headerHeight
         }
         
+        // TODO: FIX IT
+        let extraDEBUG: CGFloat = 10
+        
         if CGFloat(numberOfRows) > maxVisibleRows {
-            return ( maxVisibleRows * rowHeight) + headerHeight
+            return ( maxVisibleRows * (rowHeight + extraDEBUG)) + headerHeight + extraDEBUG
         } else {
-            return ( CGFloat(numberOfRows) * rowHeight) + headerHeight
+            return ( CGFloat(numberOfRows) * (rowHeight + extraDEBUG)) + headerHeight + extraDEBUG
         }
     }
     

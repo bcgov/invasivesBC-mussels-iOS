@@ -12,9 +12,16 @@ class BaseShiftOverviewCollectionViewCell: UICollectionViewCell, Theme {
     
     // MARK: Variables
     var model: ShiftModel?
+    // MARK: Variables
+    var completion: (()-> Void)?
+    
     // MARK: Setup
-    func setup(object: ShiftModel) {
+    func setup(object: ShiftModel, callback: (()-> Void)? = nil) {
+        
         self.model = object
+        if callback != nil {
+            self.completion = callback!
+        }
         autofill()
         style()
     }

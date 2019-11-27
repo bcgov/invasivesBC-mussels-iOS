@@ -19,8 +19,11 @@ class Storage {
             let realm = try Realm()
             let objs = realm.objects(WatercradftInspectionModel.self).filter("shouldSync == true").map { $0 }
             return Array(objs)
-        } catch _ {}
-        return [Object]()
+        } catch let error as NSError {
+            print("** REALM ERROR")
+            print(error)
+            return []
+        }
     }
     
     public func getShifts() -> [ShiftModel] {
@@ -28,17 +31,40 @@ class Storage {
             let realm = try Realm()
             let objs = realm.objects(ShiftModel.self)
             return Array(objs)
-        } catch _ {}
-        return [ShiftModel]()
+        } catch let error as NSError {
+            print("** REALM ERROR")
+            print(error)
+            return []
+        }
     }
     
-    public func getCodeTable(type: CodeTableType)  -> [CodeTableModel] {
+    public func getShifts(by shortDate: String) -> [ShiftModel] {
         do {
             let realm = try Realm()
-            let objs = realm.objects(CodeTableModel.self).filter("type == \(type)").map { $0 }
+            let objs = realm.objects(ShiftModel.self).filter("formattedDate ==  %@", shortDate).map { $0 }
             return Array(objs)
-        } catch _ {}
-        return [CodeTableModel]()
+        } catch let error as NSError {
+            print("** REALM ERROR")
+            print(error)
+            return []
+        }
+    }
+    
+    public func getCodeTable(type: CodeTableType) -> [String] {
+        do {
+            let realm = try Realm()
+            let objs = realm.objects(CodeTableModel.self).filter("type ==  %@", "\(type)").map { $0 }
+            let found = Array(objs)
+            if let first = found.first {
+                return Array(first.items)
+            } else {
+                return []
+            }
+        } catch let error as NSError {
+            print("** REALM ERROR")
+            print(error)
+            return []
+        }
     }
     
     public func getCodeTables() -> [CodeTableModel] {
@@ -46,8 +72,11 @@ class Storage {
             let realm = try Realm()
             let objs = realm.objects(CodeTableModel.self)
             return Array(objs)
-        } catch _ {}
-        return [CodeTableModel]()
+        } catch let error as NSError {
+            print("** REALM ERROR")
+            print(error)
+            return []
+        }
     }
     
     public func deleteCodeTables() {
@@ -62,8 +91,11 @@ class Storage {
             let realm = try Realm()
             let objs = realm.objects(WaterBodyTableModel.self)
             return Array(objs)
-        } catch _ {}
-        return [WaterBodyTableModel]()
+        } catch let error as NSError {
+            print("** REALM ERROR")
+            print(error)
+            return []
+        }
     }
     
     public func deteleWaterBodyTables() {

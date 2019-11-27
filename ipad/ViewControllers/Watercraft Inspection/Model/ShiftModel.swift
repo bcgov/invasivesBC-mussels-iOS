@@ -10,7 +10,7 @@ import Foundation
 import Realm
 import RealmSwift
 
-extension ShiftModel: PropertyReflectable {}
+//extension ShiftModel: PropertyReflectable {}
 
 class ShiftModel: Object, BaseRealmObject {
     
@@ -22,13 +22,20 @@ class ShiftModel: Object, BaseRealmObject {
         return "localId"
     }
     
-    @objc dynamic var remoteId: Int = -1
+    @objc dynamic var remoteId: Int = -1 {
+        didSet {
+            if remoteId > 0 {
+                set(value: "Completed", for: "status")
+            }
+        }
+    }
+    
     @objc dynamic var shouldSync: Bool = false {
         didSet {
             if shouldSync == true {
                 set(value: "Pending Sync", for: "status")
             } else {
-                set(value: "Completed", for: "status")
+                set(value: "Draft", for: "status")
             }
         }
     }
@@ -63,8 +70,9 @@ class ShiftModel: Object, BaseRealmObject {
     
     var inspections: List<WatercradftInspectionModel> = List<WatercradftInspectionModel>()
     
-    // TODO:
+    
     @objc dynamic var status: String = "Pending Sync"
+    // used for quary purposes (and displaying)
     @objc dynamic var formattedDate: String = ""
     
     func toDictionary() -> [String : Any] {
@@ -104,6 +112,22 @@ class ShiftModel: Object, BaseRealmObject {
         } catch let error as NSError {
             print("** REALM ERROR")
             print(error)
+        }
+    }
+    
+    func addInspection() -> WatercradftInspectionModel? {
+        let inspection = WatercradftInspectionModel()
+        inspection.shouldSync = false
+        do {
+            let realm = try Realm()
+            try realm.write {
+                self.inspections.append(inspection)
+            }
+            return inspection
+        } catch let error as NSError {
+            print("** REALM ERROR")
+            print(error)
+            return nil
         }
     }
     

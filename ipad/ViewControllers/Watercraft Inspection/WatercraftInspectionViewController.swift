@@ -44,7 +44,8 @@ class WatercraftInspectionViewController: BaseViewController {
     ]
     
     // MARK: Variables
-    private var model: WatercradftInspectionModel? = nil
+    var shiftModel: ShiftModel?
+    var model: WatercradftInspectionModel? = nil
     private var showFullInspection: Bool = false
     private var isEditable: Bool = true
     private var journeyDetails: JourneyDetailsModel = JourneyDetailsModel()
@@ -54,7 +55,6 @@ class WatercraftInspectionViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupCollectionView()
-        self.model = WatercradftInspectionModel()
         style()
     }
     
@@ -73,17 +73,25 @@ class WatercraftInspectionViewController: BaseViewController {
         self.collectionView.reloadData()
     }
     
+    func initialize(model: WatercradftInspectionModel) {
+        self.model = model
+        if !model.isPassportHolder || model.launchedOutsideBC {
+            self.showFullInspection = true
+        }
+    }
     
     // MARK: - Navigation
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let destination = segue.destination as? HighRiskFormViewController {
-            destination.model = HighRiskAssessmentModel()
+        if let destination = segue.destination as? HighRiskFormViewController, let model = self.model {
+            destination.model = model.addHighRiskAssessment()
         }
     }
     
     private func addListeners() {
+        NotificationCenter.default.removeObserver(self, name: .InputItemValueChanged, object: nil)
+        NotificationCenter.default.removeObserver(self, name: .ShouldResizeInputGroup, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.inputItemValueChanged(notification:)), name: .InputItemValueChanged, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.shouldResizeInputGroup(notification:)), name: .ShouldResizeInputGroup, object: nil)
     }
@@ -115,6 +123,7 @@ class WatercraftInspectionViewController: BaseViewController {
     // MARK: Navigation
     // Navigation bar right button action
     @objc func action(sender: UIBarButtonItem) {
+        self.navigationController?.popViewController(animated: true)
     }
     
     // MARK: Notification functions

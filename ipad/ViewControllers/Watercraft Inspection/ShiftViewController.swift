@@ -39,6 +39,7 @@ class ShiftViewController: BaseViewController {
     var model: ShiftModel?
     var showShiftInfo: Bool = true
     private var isEditable: Bool = true
+    private var inspection: WatercradftInspectionModel?
     
     // MARK: Outlets
     @IBOutlet weak var containerView: UIView!
@@ -48,7 +49,6 @@ class ShiftViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         style()
-        addListeners()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -56,26 +56,44 @@ class ShiftViewController: BaseViewController {
         NotificationCenter.default.removeObserver(self)
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        //        createTestModel()
+    override func viewWillAppear(_ animated: Bool) {
         setupCollectionView()
+        self.collectionView.reloadData()
+        addListeners()
     }
     
     private func addListeners() {
+        NotificationCenter.default.removeObserver(self, name: .TableButtonClicked, object: nil)
+        NotificationCenter.default.removeObserver(self, name: .InputItemValueChanged, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.tableButtonClicked(notification:)), name: .TableButtonClicked, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.inputItemValueChanged(notification:)), name: .InputItemValueChanged, object: nil)
+    }
+    
+    // Table Button clicked
+    @objc func tableButtonClicked(notification: Notification) {
+        guard let actionModel = notification.object as? TableClickActionModel, let inspectionModel = actionModel.object as? WatercradftInspectionModel else {return}
+        nagivateToInspection(object: inspectionModel, editable: isEditable)
+    }
+    
+    func nagivateToInspection(object: WatercradftInspectionModel?, editable: Bool) {
+        self.inspection = object
+        self.performSegue(withIdentifier: "showWatercraftInspectionForm", sender: self)
     }
     
     // MARK: Input Item Changed
     @objc func inputItemValueChanged(notification: Notification) {
         guard let item: InputItem = notification.object as? InputItem else {return}
-//        formResult[item.key] = item.value.get(type: item.type)
         // Set value in Realm object
         if let m = model {
-            m.set(value: item.value.get(type: item.type), for: item.key)
+            m.set(value: item.value.get(type: item.type) as Any, for: item.key)
         }
-        
-        print(model?.toDictionary())
+    }
+    
+    // MARK: - Navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let inspectionVC = segue.destination as? WatercraftInspectionViewController, let inspectionModel = self.inspection {
+            inspectionVC.initialize(model: inspectionModel)
+        }
     }
     
     // MARK: Style
@@ -92,6 +110,24 @@ class ShiftViewController: BaseViewController {
         navigation.navigationBar.tintColor = .white
         navigation.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
         setGradiantBackground(navigationBar: navigation.navigationBar)
+        let logoutBarButtonItem = UIBarButtonItem(title: "Submit", style: .done, target: self, action: #selector(self.completeAction(sender:)))
+        self.navigationItem.rightBarButtonItem = logoutBarButtonItem
+    }
+    
+    // Navigation bar right button action
+    @objc func completeAction(sender: UIBarButtonItem) {
+        guard let model = self.model else { return }
+        // if can submit
+        if canSubmit() {
+            model.set(value: true, for: "shouldSync")
+            self.navigationController?.popViewController(animated: true)
+        }
+    }
+    
+    // MARK: Validation
+    func canSubmit() -> Bool {
+        guard let model = self.model else { return false}
+        return model.startTime != "" && model.endTime != ""
     }
     
     func createTestModel() {
@@ -102,13 +138,13 @@ class ShiftViewController: BaseViewController {
         // Create dummy inspections
         let inspection1 = WatercradftInspectionModel()
         inspection1.remoteId = 65100
-        inspection1.inspectionTime = 16.00
+        inspection1.inspectionTime = "16.00"
         inspection1.shouldSync = true
         
         // Create dummy inspections
         let inspection2 = WatercradftInspectionModel()
         inspection2.remoteId = 65102
-        inspection2.inspectionTime = 8.00
+        inspection2.inspectionTime = "8.00"
         inspection2.shouldSync = false
         
         model.inspections.append(inspection1)
@@ -179,7 +215,9 @@ extension ShiftViewController: UICollectionViewDataSource, UICollectionViewDeleg
         switch rowType {
         case .Header:
             let cell = getShiftOverViewCell(indexPath: indexPath)
-            cell.setup(object: model)
+            cell.setup(object: model, callback: {
+                self.nagivateToInspection(object: model.addInspection(), editable: self.isEditable)
+            })
             return cell
         case .Inspections:
             let cell = getInspectionsTableCell(indexPath: indexPath)

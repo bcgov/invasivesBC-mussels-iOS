@@ -147,7 +147,7 @@ class HighRiskFormHelper {
             editable: editable ?? true,
             value: object?.otherInspectionFindings ?? "",
             width: .Half,
-            dropdownItems: getDummyOptions() //TODO: otherObservations
+            dropdownItems: DropdownHelper.shared.getDropdown(for: .otherObservations)
         )
         sectionItems.append(otherInspectionFindings)
         
