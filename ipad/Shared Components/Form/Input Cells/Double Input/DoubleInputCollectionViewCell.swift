@@ -24,7 +24,7 @@ class DoubleInputCollectionViewCell: BaseInputCell<DoubleInput>, UITextFieldDele
         if let stringValue = textField.text, let number = Double(stringValue) {
             model.setValue(value: number)
         } else {
-            model.setValue(value: nil)
+            model.setValue(value: 0)
         }
         self.emitChange()
     }

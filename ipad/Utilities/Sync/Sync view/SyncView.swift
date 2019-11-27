@@ -56,8 +56,10 @@ class SyncView: ModalView, Theme {
         styleDividerGrey(view: dividerView)
         styleHollowButton(button: hollowButton)
         styleFillButton(button: fillButton)
-//        styleSyncInProgress()
-        styleSyncError()
+        styleSyncInProgress()
+        self.hollowButton.alpha = 0
+        self.fillButton.alpha = 0
+//        styleSyncError()
 //        styleSyncSuccess()
     }
     

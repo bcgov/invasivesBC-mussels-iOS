@@ -10,7 +10,7 @@ import UIKit
 import Reachability
 
 class HomeViewController: BaseViewController {
-
+    
     // MARK: Outlets
     @IBOutlet weak var navigationBar: UIView!
     @IBOutlet weak var appTitle: UILabel!
@@ -21,12 +21,15 @@ class HomeViewController: BaseViewController {
     @IBOutlet weak var syncButton: UIButton!
     @IBOutlet weak var addEntryButton: UIButton!
     @IBOutlet weak var switcherHolder: UIView!
+    @IBOutlet weak var tableContainer: UIView!
     
     // MARK: Constants
-    let switcherItems: [String] = ["All", "Drafts", "Pending Sync", "Submitted"]
+    let switcherItems: [String] = ["All", "Pending Sync", "Submitted"]
     let reachability =  try! Reachability()
     
     // MARK: Variables
+    var shiftModel: ShiftModel? = nil
+    var canEditShift: Bool = false
     
     // MARK: Computed variables
     var online: Bool = false {
@@ -48,7 +51,7 @@ class HomeViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setNavigationBar(hidden: true, style: UIBarStyle.black)
-        initirialize()
+        initialize()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -76,21 +79,96 @@ class HomeViewController: BaseViewController {
     }
     
     @IBAction func addEntryClicked(_ sender: Any) {
-//        self.performSegue(withIdentifier: "showFormEntry", sender: self)
-        self.performSegue(withIdentifier: "showWatercraftInspectionForm", sender: self)
+        if let existing = getActiveShift() {
+            self.navigateToShiftOverview(object: existing, editable: true)
+        } else {
+            let shiftModal: NewShiftModal = NewShiftModal.fromNib()
+            shiftModal.initialize(delegate: self, onStart: { (model) in
+                model.save()
+                self.navigateToShiftOverview(object: model, editable: true)
+            }) {
+                print("cancelled")
+            }
+        }
+    }
+    
+    func getActiveShift() -> ShiftModel? {
+        let existingShifts = Storage.shared.getShifts(by: Date().stringShort())
+        for shift in existingShifts where shift.shouldSync == false && shift.remoteId < 0 {
+            return shift
+        }
+        return nil
+    }
+    
+    // MARK: - Navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let shiftOverviewVC = segue.destination as? ShiftViewController, let shiftModel = self.shiftModel {
+            shiftOverviewVC.model = shiftModel
+            shiftOverviewVC.isEditable = canEditShift
+        }
+    }
+    
+    private func navigateToShiftOverview(object: ShiftModel, editable: Bool) {
+        self.shiftModel = object
+        self.canEditShift = editable
+        self.performSegue(withIdentifier: "showShiftOverview", sender: self)
     }
     
     // MARK: Functions
-    private func initirialize() {
+    private func initialize() {
+        let shifts = Storage.shared.getShifts()
         beginReachabilityNotification()
         style()
         setupSwitcher()
+        createTable(with: shifts)
     }
     
     private func setupSwitcher() {
         _ = Switcher.show(items: switcherItems, in: switcherHolder, initial: switcherItems.first) { (selection) in
-            // TODO: handle filter
-            // Alert.show(title: "Selected", message: selection)
+            let shifts = Storage.shared.getShifts()
+            if selection.lowercased() == "all" {
+                self.createTable(with: shifts)
+                return
+            }
+            var fileter: [ShiftModel] = []
+            for shift in shifts where shift.status.lowercased() == selection.lowercased() {
+                fileter.append(shift)
+            }
+            self.createTable(with: fileter)
+        }
+    }
+    
+    // MARK: Table
+    func createTable(with shifts: [ShiftModel]) {
+        for view in self.tableContainer.subviews {
+            view.removeFromSuperview()
+        }
+        let table = Table()
+        
+        // Create Column Config
+        var columns: [TableViewColumnConfig] = []
+        columns.append(TableViewColumnConfig(key: "remoteId", header: "Shift ID", type: .Normal))
+        columns.append(TableViewColumnConfig(key: "formattedDate", header: "Shift Date", type: .Normal))
+        columns.append(TableViewColumnConfig(key: "location", header: "Station Location", type: .Normal))
+        columns.append(TableViewColumnConfig(key: "status", header: "Status", type: .WithIcon))
+        columns.append(TableViewColumnConfig(key: "", header: "Actions", type: .Button, buttonName: "View", showHeader: false))
+        let tableView = table.show(columns: columns, in: shifts, container: tableContainer)
+        tableView.layoutIfNeeded()
+        self.view.layoutIfNeeded()
+        beginListener()
+    }
+    
+    // Listener for Table button action
+    func beginListener() {
+        NotificationCenter.default.removeObserver(self, name: .TableButtonClicked, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.tableButtonClicked(notification:)), name: .TableButtonClicked, object: nil)
+    }
+    
+    // Table Button clicked
+    @objc func tableButtonClicked(notification: Notification) {
+        guard let actionModel = notification.object as? TableClickActionModel, let shiftModel = actionModel.object as? ShiftModel else {return}
+        if actionModel.buttonName.lowercased() == "view" {
+            self.navigateToShiftOverview(object: shiftModel, editable: shiftModel.localId == getActiveShift()?.localId)
         }
     }
     
@@ -144,7 +222,7 @@ class HomeViewController: BaseViewController {
     private func whenOnline() {
         
     }
-     
+    
     // When device goes offline
     private func whenOffline() {
         
@@ -171,7 +249,7 @@ class HomeViewController: BaseViewController {
         case .none:
             online = false
         case .unavailable:
-           online = false
+            online = false
         }
     }
     
@@ -180,5 +258,5 @@ class HomeViewController: BaseViewController {
         reachability.stopNotifier()
         NotificationCenter.default.removeObserver(self, name: .reachabilityChanged, object: reachability)
     }
-   
+    
 }

@@ -29,7 +29,7 @@ class WatercraftInspectionFormHelper {
         )
         items.append(isPassportHolder)
         
-        let inspectionTime = DoubleInput(
+        let inspectionTime = TimeInput(
             key: "inspectionTime",
             header: WatercraftFieldHeaderConstants.Passport.inspectionTime,
             editable: editable ?? true,
@@ -40,7 +40,7 @@ class WatercraftInspectionFormHelper {
         items.append(inspectionTime)
         
         let passportNumber = TextInput(
-            key: "PassportNumber",
+            key: "passportNumber",
             header: WatercraftFieldHeaderConstants.Passport.passportNumber,
             editable: editable ?? true,
             value: object?.passportNumber ?? nil,
@@ -104,13 +104,12 @@ class WatercraftInspectionFormHelper {
     
     static func getBasicInfoFields(for object: WatercradftInspectionModel? = nil, editable: Bool? = true) -> [InputItem] {
         var sectionItems: [InputItem] = []
-        let province = DropdownInput(
+        let province = TextInput(
             key: "province",
             header: WatercraftFieldHeaderConstants.BasicInfo.province,
             editable: editable ?? true,
             value: object?.province ?? "",
-            width: .Full,
-            dropdownItems: getDummyOptions()
+            width: .Full
         )
         sectionItems.append(province)
         
@@ -297,7 +296,7 @@ class WatercraftInspectionFormHelper {
     
     static func getGeneralCommentsFields(for object: WatercradftInspectionModel? = nil, editable: Bool? = true) -> [InputItem] {
         var sectionItems: [InputItem] = []
-         let generalComments = TextAreaInput(
+        let generalComments = TextAreaInput(
             key: "generalComments",
             header: "General Comments",
             editable: editable ?? true,
@@ -306,5 +305,88 @@ class WatercraftInspectionFormHelper {
         )
         sectionItems.append(generalComments)
         return sectionItems
+    }
+    
+    public static func watercraftInspectionPreviousWaterBodyInputs(index: Int, isEditable: Bool? = true) -> [InputItem] {
+        var sectionItems: [InputItem] = []
+        let previousWaterBody = DropdownInput(
+            key: "previousWaterBody-\(index)",
+            header: "Previous WaterBody",
+            editable: isEditable ?? true,
+            width: .Forth,
+            dropdownItems: getDummyOptions()
+        )
+        
+        let nearestCity = DropdownInput(
+            key: "previousWaterBody-nearestCity-\(index)",
+            header: "Nearest City",
+            editable: isEditable ?? true,
+            width: .Forth,
+            dropdownItems: getDummyOptions()
+        )
+        
+        let province = DropdownInput(
+            key: "previousWaterBody-province-\(index)",
+            header: "Province / State",
+            editable: isEditable ?? true,
+            width: .Forth,
+            dropdownItems: getDummyOptions()
+        )
+        
+        let numberOfDaysOut = TextInput(
+            key: "previousWaterBody-numberOfDaysOut-\(index)",
+            header: "Number of days out of waterbody?",
+            editable: isEditable ?? true, width: .Forth
+        )
+        
+        sectionItems.append(previousWaterBody)
+        sectionItems.append(nearestCity)
+        sectionItems.append(province)
+        sectionItems.append(numberOfDaysOut)
+        return sectionItems
+    }
+    
+    public static func watercraftInspectionDestinationWaterBodyInputs(index: Int, isEditable: Bool? = true) -> [InputItem] {
+        var sectionItems: [InputItem] = []
+        let destinationWaterBody = DropdownInput(
+            key: "destinationWaterBody-\(index)",
+            header: "Destination WaterBody",
+            editable: isEditable ?? true,
+            width: .Third,
+            dropdownItems: getDummyOptions()
+        )
+        
+        let nearestCity = DropdownInput(
+            key: "destinationWaterBody-NearestCity-\(index)",
+            header: "Nearest City",
+            editable: isEditable ?? true,
+            width: .Third,
+            dropdownItems: getDummyOptions()
+        )
+        
+        let province = DropdownInput(
+            key: "destinationWaterBody-province-\(index)",
+            header: "Province / State",
+            editable: isEditable ?? true,
+            width: .Third,
+            dropdownItems: getDummyOptions()
+        )
+        
+        sectionItems.append(destinationWaterBody)
+        sectionItems.append(nearestCity)
+        sectionItems.append(province)
+        return sectionItems
+    }
+    
+    static func getTableColumns() -> [TableViewColumnConfig] {
+        // Create Column Config
+        var columns: [TableViewColumnConfig] = []
+        columns.append(TableViewColumnConfig(key: "", header: "#", type: .Counter, showHeader: false))
+        columns.append(TableViewColumnConfig(key: "remoteId", header: "ID", type: .Normal))
+        columns.append(TableViewColumnConfig(key: "riskLevel", header: "Risk Level", type: .Normal))
+        columns.append(TableViewColumnConfig(key: "timeAdded", header: "Time Added", type: .Normal))
+        columns.append(TableViewColumnConfig(key: "status", header: "Status", type: .WithIcon))
+        columns.append(TableViewColumnConfig(key: "", header: "Actions", type: .Button, buttonName: "View", showHeader: false))
+        return columns
     }
 }

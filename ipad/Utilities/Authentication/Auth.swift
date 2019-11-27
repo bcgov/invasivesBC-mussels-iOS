@@ -104,6 +104,7 @@ class Auth {
     }
     
     public static func logout() {
+        Storage.shared.deleteCodeTables()
         authServices.logout()
     }
     

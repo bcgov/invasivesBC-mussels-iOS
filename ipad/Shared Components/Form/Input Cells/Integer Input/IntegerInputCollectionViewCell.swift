@@ -24,7 +24,7 @@ class IntegerInputCollectionViewCell: BaseInputCell<IntegerInput>, UITextFieldDe
         if let stringValue = textField.text, let number = Int(stringValue) {
             model.setValue(value: number)
         } else {
-            model.setValue(value: nil)
+            model.setValue(value: 0)
         }
         self.emitChange()
     }

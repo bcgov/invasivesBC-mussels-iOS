@@ -37,7 +37,10 @@ class AutoSync {
                     if reachability.connection == .unavailable {
                         return
                     }
-                } catch _ {return}
+                } catch let error as NSError {
+                    print("** Reachability ERROR")
+                    print(error)
+                }
                 self.autoSynchronizeIfPossible()
             }
         } catch _ {
@@ -118,7 +121,100 @@ class AutoSync {
         }
     }
     
+    // MARK: Initial Sync
+    public func performInitialSync(completion: @escaping(_ success: Bool) -> Void) {
+        
+        // Criteria passes
+        if !shouldPerformInitialSync() {
+            return completion(false)
+        }
+        
+        // Block autosync from being executed.
+        self.isSynchronizing = true
+        
+        // Add the autosync view
+        let syncView: SyncView = UIView.fromNib()
+        syncView.initialize()
+        syncView.showSyncInProgressAnimation()
+        
+        var hadErrors: Bool = false
+        // move to a background thread
+        DispatchQueue.global(qos: .background).async {
+            
+            let dispatchGroup = DispatchGroup()
+            
+            // Fetch code tables
+            dispatchGroup.enter()
+            CodeTables.shared.fetchCodes { (success) in
+                if !success {
+                    hadErrors = true
+                    Banner.show(message: "Could not fetch code tables")
+                }
+                dispatchGroup.leave()
+            }
+            
+//            dispatchGroup.enter()
+//            // Make another api call
+//            dispatchGroup.leave()
+            
+            
+            // End
+            dispatchGroup.notify(queue: .main) {
+                print("Initial Sync Executed.")
+                
+                // remove the view
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+//                    if hadErrors {
+//                        syncView.showSyncFailedAnimation()
+//                    } else {
+//                        syncView.showSyncCompletedAnimation()
+//                    }
+                    syncView.remove()
+                    // free autosync
+                    self.isSynchronizing = false
+                    return completion(!hadErrors)
+                }
+            }
+        }
+        
+    }
+    
     // MARK: Criteria
+    public func shouldPerformInitialSync() -> Bool {
+        // Is Online
+        do {
+            let reachability = try Reachability()
+            if reachability.connection == .unavailable {
+                return false
+            }
+        } catch let error as NSError {
+            print("** Reachability ERROR")
+            print(error)
+            return false
+        }
+        
+        // Code tables dont exist
+        if Storage.shared.getCodeTables().count > 0 {
+            return false
+        }
+        
+        // Is Authenticated
+        if !Auth.isAuthenticated() {
+            Alert.show(title: "Authentication Required", message: "You need to authenticate to perform the initial sync.\n Would you like to authenticate now and synchronize?\n\nIf you select no, You will not be able to create records.\n", yes: {
+                Auth.authenticate(completion: { (success) in
+                    if success {
+                        self.autoSynchronizeIfPossible()
+                    }
+                })
+            }) {
+                self.isEnabled = false
+            }
+            return false
+        }
+        
+        return true
+    }
+    
     public func shouldSync() -> Bool {
         
         if Storage.shared.getItemsToSync().count < 1 {

@@ -44,7 +44,8 @@ class WatercraftInspectionViewController: BaseViewController {
     ]
     
     // MARK: Variables
-    private var model: WatercradftInspectionModel? = nil
+    var shiftModel: ShiftModel?
+    var model: WatercradftInspectionModel? = nil
     private var showFullInspection: Bool = false
     private var isEditable: Bool = true
     private var journeyDetails: JourneyDetailsModel = JourneyDetailsModel()
@@ -53,9 +54,7 @@ class WatercraftInspectionViewController: BaseViewController {
     // MARK: Class Functions
     override func viewDidLoad() {
         super.viewDidLoad()
-        setNavigationBar(hidden: false, style: UIBarStyle.black)
         setupCollectionView()
-        self.model = WatercradftInspectionModel()
         style()
     }
     
@@ -74,18 +73,27 @@ class WatercraftInspectionViewController: BaseViewController {
         self.collectionView.reloadData()
     }
     
-    
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let destination = segue.destination as? HighRiskFormViewController {
-            destination.model = HighRiskAssessmentModel()
+    func initialize(model: WatercradftInspectionModel, editable: Bool) {
+        self.model = model
+        self.isEditable = editable
+        if !model.isPassportHolder || model.launchedOutsideBC {
+            self.showFullInspection = true
         }
-       
-     }
+    }
+    
+    // MARK: - Navigation
+    
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destination = segue.destination as? HighRiskFormViewController, let model = self.model {
+            destination.model = model.addHighRiskAssessment()
+            destination.isEditable = self.isEditable
+        }
+    }
     
     private func addListeners() {
+        NotificationCenter.default.removeObserver(self, name: .InputItemValueChanged, object: nil)
+        NotificationCenter.default.removeObserver(self, name: .ShouldResizeInputGroup, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.inputItemValueChanged(notification:)), name: .InputItemValueChanged, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.shouldResizeInputGroup(notification:)), name: .ShouldResizeInputGroup, object: nil)
     }
@@ -94,7 +102,9 @@ class WatercraftInspectionViewController: BaseViewController {
         
     }
     
+    // MARK: Style
     private func style() {
+        setNavigationBar(hidden: false, style: UIBarStyle.black)
         self.styleNavBar()
     }
     
@@ -112,8 +122,10 @@ class WatercraftInspectionViewController: BaseViewController {
         self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: type, target: self, action: #selector(self.action(sender:)))
     }
     
+    // MARK: Navigation
     // Navigation bar right button action
     @objc func action(sender: UIBarButtonItem) {
+        self.navigationController?.popViewController(animated: true)
     }
     
     // MARK: Notification functions
@@ -121,6 +133,7 @@ class WatercraftInspectionViewController: BaseViewController {
         self.collectionView.collectionViewLayout.invalidateLayout()
     }
     
+    // MARK: Input Item Changed
     @objc func inputItemValueChanged(notification: Notification) {
         guard var item: InputItem = notification.object as? InputItem else {return}
         formResult[item.key] = item.value.get(type: item.type)
@@ -144,7 +157,7 @@ class WatercraftInspectionViewController: BaseViewController {
                     }
                 }
             } else {
-                 // All other keys, store directly
+                // All other keys, store directly
                 // TODO: needs cleanup for nil case
                 m.set(value: item.value.get(type: item.type), for: item.key)
             }
@@ -179,7 +192,7 @@ class WatercraftInspectionViewController: BaseViewController {
     
 }
 
-// UICollectionViewDelegateFlowLayout
+// MARK: CollectionView
 extension WatercraftInspectionViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     private func setupCollectionView() {
         for cell in collectionCells {
@@ -332,7 +345,7 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
         case .AddPreviousWaterBody:
             let cell = getButtonCell(indexPath: indexPath)
             cell.setup(with: "Add Prveious Water Body") {
-                self.journeyDetails.previousWaterBodies.append(FormHelper.watercraftInspectionPreviousWaterBodyInputs(index: self.journeyDetails.previousWaterBodies.count, isEditable: self.isEditable))
+                self.journeyDetails.previousWaterBodies.append(WatercraftInspectionFormHelper.watercraftInspectionPreviousWaterBodyInputs(index: self.journeyDetails.previousWaterBodies.count, isEditable: self.isEditable))
                 self.collectionView.performBatchUpdates({
                     self.collectionView.reloadSections(IndexSet(integer: indexPath.section))
                 }, completion: nil)
@@ -341,7 +354,7 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
         case .AddDestinationWaterBody:
             let cell = getButtonCell(indexPath: indexPath)
             cell.setup(with: "Add Destination Water Body") {
-                self.journeyDetails.destinationWaterBodies.append(FormHelper.watercraftInspectionDestinationWaterBodyInputs(index: self.journeyDetails.destinationWaterBodies.count, isEditable: self.isEditable))
+                self.journeyDetails.destinationWaterBodies.append(WatercraftInspectionFormHelper.watercraftInspectionDestinationWaterBodyInputs(index: self.journeyDetails.destinationWaterBodies.count, isEditable: self.isEditable))
                 self.collectionView.performBatchUpdates({
                     self.collectionView.reloadSections(IndexSet(integer: indexPath.section))
                 }, completion: nil)
@@ -359,10 +372,10 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
         case .Header:
             return CGSize(width: width, height: 40)
         case .PreviousWaterBody:
-            let estimatedContentHeight = InputGroupView.estimateContentHeight(for: FormHelper.watercraftInspectionPreviousWaterBodyInputs(index: 0))
+            let estimatedContentHeight = InputGroupView.estimateContentHeight(for: WatercraftInspectionFormHelper.watercraftInspectionPreviousWaterBodyInputs(index: 0))
             return CGSize(width: width, height: estimatedContentHeight + 20)
         case .DestinationWaterBody:
-            let estimatedContentHeight = InputGroupView.estimateContentHeight(for: FormHelper.watercraftInspectionDestinationWaterBodyInputs(index: 0))
+            let estimatedContentHeight = InputGroupView.estimateContentHeight(for: WatercraftInspectionFormHelper.watercraftInspectionDestinationWaterBodyInputs(index: 0))
             return CGSize(width: width, height: estimatedContentHeight + 20)
         case .AddPreviousWaterBody:
             return CGSize(width: width, height: 50)

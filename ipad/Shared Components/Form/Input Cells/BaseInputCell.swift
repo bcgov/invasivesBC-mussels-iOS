@@ -30,6 +30,10 @@ class BaseInputCell<Model: InputItem>: UICollectionViewCell,Theme {
         return autoLayoutAttributes
     }
     
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     func beginListener() {
         NotificationCenter.default.addObserver(self, selector: #selector(self.InputFieldshouldUpdate(notification:)), name: .InputFieldShouldUpdate, object: nil)
     }
@@ -45,6 +49,9 @@ class BaseInputCell<Model: InputItem>: UICollectionViewCell,Theme {
     func setup(with model: Model, delegate: InputDelegate) {
         self.model = model
         self.inputDelegate = delegate
+        if !model.editable {
+            self.isUserInteractionEnabled = false
+        }
         initialize(with: model)
         beginListener()
     }
