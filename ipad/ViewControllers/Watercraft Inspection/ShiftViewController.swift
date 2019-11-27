@@ -38,7 +38,7 @@ class ShiftViewController: BaseViewController {
     // MARK: Varialbes
     var model: ShiftModel?
     var showShiftInfo: Bool = true
-    private var isEditable: Bool = true
+    var isEditable: Bool = true
     private var inspection: WatercradftInspectionModel?
     
     // MARK: Outlets
@@ -92,7 +92,7 @@ class ShiftViewController: BaseViewController {
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let inspectionVC = segue.destination as? WatercraftInspectionViewController, let inspectionModel = self.inspection {
-            inspectionVC.initialize(model: inspectionModel)
+            inspectionVC.initialize(model: inspectionModel, editable: self.isEditable)
         }
     }
     
@@ -120,7 +120,7 @@ class ShiftViewController: BaseViewController {
         // if can submit
         if canSubmit() {
             Alert.show(title: "Are you sure?", message: "This shift and the inspections will be uploaded when possible", yes: {
-                model.set(value: true, for: "shouldSync")
+                model.setShouldSync(to: true)
                 self.navigationController?.popViewController(animated: true)
             }) {}
             

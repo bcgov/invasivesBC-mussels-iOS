@@ -30,15 +30,7 @@ class ShiftModel: Object, BaseRealmObject {
         }
     }
     
-    @objc dynamic var shouldSync: Bool = false {
-        didSet {
-            if shouldSync == true {
-                set(value: "Pending Sync", for: "status")
-            } else {
-                set(value: "Draft", for: "status")
-            }
-        }
-    }
+    @objc dynamic var shouldSync: Bool = false
     
     @objc dynamic var startTime: String = ""
     @objc dynamic var endTime: String = ""
@@ -54,13 +46,7 @@ class ShiftModel: Object, BaseRealmObject {
     @objc dynamic var foggy: Bool = false
     @objc dynamic var windy: Bool = false
     
-    @objc dynamic var date: Date? {
-        didSet {
-            if let unwrappedDate = date {
-                set(value: unwrappedDate.stringShort(), for: "formattedDate")
-            }
-        }
-    }
+    @objc dynamic var date: Date?
     ///
     @objc dynamic var station: String = " "
     @objc dynamic var location: String = " "
@@ -128,6 +114,39 @@ class ShiftModel: Object, BaseRealmObject {
             print("** REALM ERROR")
             print(error)
             return nil
+        }
+    }
+    
+    func setShouldSync(to should: Bool) {
+        
+        do {
+            let realm = try Realm()
+            try realm.write {
+                self.shouldSync = should
+            }
+        } catch let error as NSError {
+            print("** REALM ERROR")
+            print(error)
+        }
+        if shouldSync == true {
+            set(value: "Pending Sync", for: "status")
+        } else {
+            set(value: "Draft", for: "status")
+        }
+    }
+    
+    func setDate(to newDate: Date) {
+        do {
+            let realm = try Realm()
+            try realm.write {
+                self.date = newDate
+            }
+        } catch let error as NSError {
+            print("** REALM ERROR")
+            print(error)
+        }
+        if let unwrappedDate = date {
+            set(value: unwrappedDate.stringShort(), for: "formattedDate")
         }
     }
     

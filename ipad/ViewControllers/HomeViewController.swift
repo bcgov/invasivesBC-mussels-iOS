@@ -29,6 +29,7 @@ class HomeViewController: BaseViewController {
     
     // MARK: Variables
     var shiftModel: ShiftModel? = nil
+    var canEditShift: Bool = false
     
     // MARK: Computed variables
     var online: Bool = false {
@@ -78,48 +79,70 @@ class HomeViewController: BaseViewController {
     }
     
     @IBAction func addEntryClicked(_ sender: Any) {
-        let existingShift = Storage.shared.getShifts(by: Date().stringShort())
-        if let existing = existingShift.first {
-            self.shiftModel = existing
-            self.performSegue(withIdentifier: "showShiftOverview", sender: self)
+        if let existing = getActiveShift() {
+            self.navigateToShiftOverview(object: existing, editable: true)
         } else {
             let shiftModal: NewShiftModal = NewShiftModal.fromNib()
             shiftModal.initialize(delegate: self, onStart: { (model) in
-                self.shiftModel = model
                 model.save()
-                self.performSegue(withIdentifier: "showShiftOverview", sender: self)
+                self.navigateToShiftOverview(object: model, editable: true)
             }) {
                 print("cancelled")
             }
         }
     }
     
+    func getActiveShift() -> ShiftModel? {
+        let existingShifts = Storage.shared.getShifts(by: Date().stringShort())
+        for shift in existingShifts where shift.shouldSync == false && shift.remoteId < 0 {
+            return shift
+        }
+        return nil
+    }
+    
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let shiftOverviewVC = segue.destination as? ShiftViewController, let shiftModel = self.shiftModel {
             shiftOverviewVC.model = shiftModel
+            shiftOverviewVC.isEditable = canEditShift
         }
+    }
+    
+    private func navigateToShiftOverview(object: ShiftModel, editable: Bool) {
+        self.shiftModel = object
+        self.canEditShift = editable
+        self.performSegue(withIdentifier: "showShiftOverview", sender: self)
     }
     
     // MARK: Functions
     private func initialize() {
+        let shifts = Storage.shared.getShifts()
         beginReachabilityNotification()
         style()
         setupSwitcher()
-        createTable()
+        createTable(with: shifts)
     }
     
     private func setupSwitcher() {
         _ = Switcher.show(items: switcherItems, in: switcherHolder, initial: switcherItems.first) { (selection) in
-            // TODO: handle filter
-            // Alert.show(title: "Selected", message: selection)
+            let shifts = Storage.shared.getShifts()
+            if selection.lowercased() == "all" {
+                self.createTable(with: shifts)
+                return
+            }
+            var fileter: [ShiftModel] = []
+            for shift in shifts where shift.status.lowercased() == selection.lowercased() {
+                fileter.append(shift)
+            }
+            self.createTable(with: fileter)
         }
     }
     
     // MARK: Table
-    func createTable() {
-        let shifts = Storage.shared.getShifts()
-        
+    func createTable(with shifts: [ShiftModel]) {
+        for view in self.tableContainer.subviews {
+            view.removeFromSuperview()
+        }
         let table = Table()
         
         // Create Column Config
@@ -145,8 +168,7 @@ class HomeViewController: BaseViewController {
     @objc func tableButtonClicked(notification: Notification) {
         guard let actionModel = notification.object as? TableClickActionModel, let shiftModel = actionModel.object as? ShiftModel else {return}
         if actionModel.buttonName.lowercased() == "view" {
-            self.shiftModel = shiftModel
-            self.performSegue(withIdentifier: "showShiftOverview", sender: self)
+            self.navigateToShiftOverview(object: shiftModel, editable: shiftModel.formattedDate == Date().stringShort())
         }
     }
     
