@@ -34,9 +34,8 @@ class NewShiftModal: ModalView, Theme {
     
     @IBAction func startNowAction(_ sender: UIButton) {
         guard let model = self.model, let onClick = self.onStart else {return}
-        model.shouldSync = true
-        model.date = Date()
-        model.shouldSync = false
+        model.setDate(to: Date())
+        model.setShouldSync(to: false)
         self.remove()
         return onClick(model)
     }

@@ -57,7 +57,7 @@ class ShiftModel: Object, BaseRealmObject {
     var inspections: List<WatercradftInspectionModel> = List<WatercradftInspectionModel>()
     
     
-    @objc dynamic var status: String = "Pending Sync"
+    @objc dynamic var status: String = "Draft"
     // used for quary purposes (and displaying)
     @objc dynamic var formattedDate: String = ""
     

@@ -221,7 +221,9 @@ extension ShiftViewController: UICollectionViewDataSource, UICollectionViewDeleg
         case .Header:
             let cell = getShiftOverViewCell(indexPath: indexPath)
             cell.setup(object: model, callback: {
-                self.nagivateToInspection(object: model.addInspection(), editable: self.isEditable)
+                if self.isEditable {
+                    self.nagivateToInspection(object: model.addInspection(), editable: self.isEditable)
+                }
             })
             return cell
         case .Inspections:

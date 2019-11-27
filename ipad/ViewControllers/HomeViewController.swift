@@ -168,7 +168,7 @@ class HomeViewController: BaseViewController {
     @objc func tableButtonClicked(notification: Notification) {
         guard let actionModel = notification.object as? TableClickActionModel, let shiftModel = actionModel.object as? ShiftModel else {return}
         if actionModel.buttonName.lowercased() == "view" {
-            self.navigateToShiftOverview(object: shiftModel, editable: shiftModel.formattedDate == Date().stringShort())
+            self.navigateToShiftOverview(object: shiftModel, editable: shiftModel.localId == getActiveShift()?.localId)
         }
     }
     
