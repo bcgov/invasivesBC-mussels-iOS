@@ -14,7 +14,6 @@ class IntegerStepperInputCollectionViewCell: BaseInputCell<IntegerStepperInput>,
     @IBOutlet weak var textField: UITextField!
     @IBOutlet weak var stepper: UIStepper!
     
-    
     @IBAction func stepperAction(_ sender: UIStepper) {
         guard let model = self.model else {return}
         let newValue = Int(sender.value)

@@ -38,7 +38,7 @@ class ShiftViewController: BaseViewController {
     // MARK: Varialbes
     var model: ShiftModel?
     var showShiftInfo: Bool = true
-    private var isEditable: Bool = true
+    private var isEditable: Bool = false
     private var inspection: WatercradftInspectionModel?
     
     // MARK: Outlets
@@ -119,8 +119,13 @@ class ShiftViewController: BaseViewController {
         guard let model = self.model else { return }
         // if can submit
         if canSubmit() {
-            model.set(value: true, for: "shouldSync")
-            self.navigationController?.popViewController(animated: true)
+            Alert.show(title: "Are you sure?", message: "This shift and the inspections will be uploaded when possible", yes: {
+                model.set(value: true, for: "shouldSync")
+                self.navigationController?.popViewController(animated: true)
+            }) {}
+            
+        } else {
+            Alert.show(title: "Incomplete", message: "Please make sure you add shift start and end times")
         }
     }
     

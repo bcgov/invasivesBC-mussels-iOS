@@ -49,6 +49,9 @@ class BaseInputCell<Model: InputItem>: UICollectionViewCell,Theme {
     func setup(with model: Model, delegate: InputDelegate) {
         self.model = model
         self.inputDelegate = delegate
+        if !model.editable {
+            self.isUserInteractionEnabled = false
+        }
         initialize(with: model)
         beginListener()
     }
