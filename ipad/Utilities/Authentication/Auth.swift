@@ -41,34 +41,40 @@ class Auth {
             signIn(completion: completion)
         }
     }
-
+    
     public static func isAuthenticated() -> Bool {
         return authServices.isAuthenticated()
     }
     
     public static func getUserFirstName() -> String {
-           guard let token = getAccessToken() else {return ""}
-           let decoded = JWTDecoder.decode(jwtToken: token)
+        guard let token = getAccessToken() else {return ""}
+        let decoded = JWTDecoder.decode(jwtToken: token)
         return decoded["given_name"] as? String ?? ""
     }
     
     public static func getUserLastName() -> String {
-           guard let token = getAccessToken() else {return ""}
-           let decoded = JWTDecoder.decode(jwtToken: token)
-           return decoded["family_name"] as? String ?? ""
+        guard let token = getAccessToken() else {return ""}
+        let decoded = JWTDecoder.decode(jwtToken: token)
+        return decoded["family_name"] as? String ?? ""
+    }
+    
+    public static func getUserID() -> String {
+        guard let token = getAccessToken() else {return ""}
+        let decoded = JWTDecoder.decode(jwtToken: token)
+        return decoded["preferred_username"] as? String ?? ""
     }
     
     public static func refreshCredentials(completion: @escaping(_ success: Bool) -> Void) {
         authServices.refreshCredientials(completion: { (credentials: Credentials?, error: Error?) in
             if let error = error as? AuthenticationError, case .expired = error {
                 let vc = authServices.viewController() { (credentials, error) in
-
+                    
                     if let _ = credentials, error == nil {
-                       return completion(true)
+                        return completion(true)
                     } else {
                         let title = "Authentication"
                         let message = "Authentication didn't work. Please try again."
-
+                        
                         Alert.show(title: title, message: message)
                         return completion(false)
                     }
@@ -79,14 +85,14 @@ class Auth {
                 }
                 presenter.present(vc, animated: true, completion: nil)
             } else {
-               return completion(true)
+                return completion(true)
             }
         })
     }
-
+    
     public static func signIn(completion: @escaping(_ success: Bool) -> Void) {
         let vc = authServices.viewController() { (credentials, error) in
-
+            
             if let _ = credentials, error == nil {
                 return completion(true)
             } else {
@@ -104,7 +110,6 @@ class Auth {
     }
     
     public static func logout() {
-        Storage.shared.deleteCodeTables()
         authServices.logout()
     }
     

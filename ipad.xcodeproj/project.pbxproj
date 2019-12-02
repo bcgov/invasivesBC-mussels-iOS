@@ -17,6 +17,7 @@
 		2933DD5E238DC2150068E9DF /* CodeTables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2933DD5D238DC2150068E9DF /* CodeTables.swift */; };
 		2933DD61238DC5120068E9DF /* CodeTableModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2933DD60238DC5120068E9DF /* CodeTableModel.swift */; };
 		2933DD64238DE3310068E9DF /* DropdownHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2933DD63238DE3310068E9DF /* DropdownHelper.swift */; };
+		2933DD67238ED4470068E9DF /* ShiftService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2933DD66238ED4470068E9DF /* ShiftService.swift */; };
 		2944AF9B2379B243007517DC /* ViewFieldCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2944AF992379B243007517DC /* ViewFieldCollectionViewCell.swift */; };
 		2944AF9C2379B243007517DC /* ViewFieldCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2944AF9A2379B243007517DC /* ViewFieldCollectionViewCell.xib */; };
 		294D8F6123847C9A0094090D /* TableRowTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294D8F5F23847C9A0094090D /* TableRowTableViewCell.swift */; };
@@ -68,6 +69,7 @@
 		296DEC28238C61A80035E7FA /* IntegerStepperInputCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 296DEC26238C61A80035E7FA /* IntegerStepperInputCollectionViewCell.xib */; };
 		296DEC2B238C73AF0035E7FA /* TimePicker.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 296DEC2A238C73AF0035E7FA /* TimePicker.storyboard */; };
 		296DEC2D238C73BD0035E7FA /* TimePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 296DEC2C238C73BD0035E7FA /* TimePickerViewController.swift */; };
+		298BF7C12394C0270072AA28 /* waterBodies.txt in Resources */ = {isa = PBXBuildFile; fileRef = 298BF7C02394C0270072AA28 /* waterBodies.txt */; };
 		2991969023846AE000634F81 /* ShiftViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2991968F23846AE000634F81 /* ShiftViewController.swift */; };
 		299196932384725600634F81 /* TableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 299196922384725600634F81 /* TableView.xib */; };
 		299196952384726600634F81 /* TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299196942384726600634F81 /* TableView.swift */; };
@@ -188,6 +190,7 @@
 		2933DD5D238DC2150068E9DF /* CodeTables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeTables.swift; sourceTree = "<group>"; };
 		2933DD60238DC5120068E9DF /* CodeTableModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeTableModel.swift; sourceTree = "<group>"; };
 		2933DD63238DE3310068E9DF /* DropdownHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropdownHelper.swift; sourceTree = "<group>"; };
+		2933DD66238ED4470068E9DF /* ShiftService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShiftService.swift; sourceTree = "<group>"; };
 		2944AF992379B243007517DC /* ViewFieldCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewFieldCollectionViewCell.swift; sourceTree = "<group>"; };
 		2944AF9A2379B243007517DC /* ViewFieldCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ViewFieldCollectionViewCell.xib; sourceTree = "<group>"; };
 		294D8F5F23847C9A0094090D /* TableRowTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableRowTableViewCell.swift; sourceTree = "<group>"; };
@@ -240,6 +243,7 @@
 		296DEC26238C61A80035E7FA /* IntegerStepperInputCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IntegerStepperInputCollectionViewCell.xib; sourceTree = "<group>"; };
 		296DEC2A238C73AF0035E7FA /* TimePicker.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TimePicker.storyboard; sourceTree = "<group>"; };
 		296DEC2C238C73BD0035E7FA /* TimePickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimePickerViewController.swift; sourceTree = "<group>"; };
+		298BF7C02394C0270072AA28 /* waterBodies.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = waterBodies.txt; sourceTree = "<group>"; };
 		2991968F23846AE000634F81 /* ShiftViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShiftViewController.swift; sourceTree = "<group>"; };
 		299196922384725600634F81 /* TableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TableView.xib; sourceTree = "<group>"; };
 		299196942384726600634F81 /* TableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableView.swift; sourceTree = "<group>"; };
@@ -424,6 +428,7 @@
 		2933DD5C238DC2060068E9DF /* Code Tables */ = {
 			isa = PBXGroup;
 			children = (
+				298BF7C02394C0270072AA28 /* waterBodies.txt */,
 				2933DD5F238DC4EE0068E9DF /* Models */,
 				2933DD5D238DC2150068E9DF /* CodeTables.swift */,
 			);
@@ -444,6 +449,14 @@
 				2933DD63238DE3310068E9DF /* DropdownHelper.swift */,
 			);
 			path = "Dropdown Helper";
+			sourceTree = "<group>";
+		};
+		2933DD65238ED4220068E9DF /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+				2933DD66238ED4470068E9DF /* ShiftService.swift */,
+			);
+			path = "New Group";
 			sourceTree = "<group>";
 		};
 		2944AF982379B22E007517DC /* View Field */ = {
@@ -516,6 +529,7 @@
 		294EF31723708A1700EEB3B6 /* API */ = {
 			isa = PBXGroup;
 			children = (
+				2933DD65238ED4220068E9DF /* New Group */,
 				2933DD5C238DC2060068E9DF /* Code Tables */,
 				5C82D3F82376036700B065BA /* WorkflowAPI.swift */,
 				5C0F697E237B6F7800F96CA5 /* APIChain.swift */,
@@ -1266,6 +1280,7 @@
 				295051112374F54A000FBD6E /* IntegerInputCollectionViewCell.xib in Resources */,
 				294D8F6223847C9A0094090D /* TableRowTableViewCell.xib in Resources */,
 				A7AE5276237CC3660044DBB7 /* check-mark-success.json in Resources */,
+				298BF7C12394C0270072AA28 /* waterBodies.txt in Resources */,
 				29F29FA2236B8670004F12E7 /* DropdownCollectionViewCell.xib in Resources */,
 				29DB0117237206D30046E605 /* HeaderCollectionViewCell.xib in Resources */,
 				29DB4E472387113900B13646 /* BaseShiftOverviewCollectionViewCell.xib in Resources */,
@@ -1426,6 +1441,7 @@
 				29F29FAB236CA948004F12E7 /* TextInputCollectionViewCell.swift in Sources */,
 				2933DD5E238DC2150068E9DF /* CodeTables.swift in Sources */,
 				29588745237B50CC00224FFA /* HighRiskFormViewController.swift in Sources */,
+				2933DD67238ED4470068E9DF /* ShiftService.swift in Sources */,
 				29DB4E3E23870B7B00B13646 /* ShifOverviewHeaderCollectionViewCell.swift in Sources */,
 				29DB4E462387113900B13646 /* BaseShiftOverviewCollectionViewCell.swift in Sources */,
 				5C82D3DF2374B9D700B065BA /* RemoteAPIManager.swift in Sources */,
@@ -1635,7 +1651,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = L796QSLV3E;
 				INFOPLIST_FILE = ipad/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1658,7 +1674,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = L796QSLV3E;
 				INFOPLIST_FILE = ipad/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (

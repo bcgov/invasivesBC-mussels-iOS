@@ -28,7 +28,7 @@ class HighRiskFormViewController: BaseViewController {
     // MARK: Variables
     public var model: HighRiskAssessmentModel? = nil
     public var isEditable: Bool = true
-    private var showFullForm: Bool = true
+    var showFullForm: Bool = true
     private var formResult: [String: Any?] = [String: Any]()
     
     // MARK: Class Functions
@@ -51,6 +51,12 @@ class HighRiskFormViewController: BaseViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillAppear(animated)
         NotificationCenter.default.removeObserver(self)
+    }
+    
+    func initialize(with model: HighRiskAssessmentModel, isEditable: Bool) {
+        self.model = model
+        self.showFullForm = model.cleanDrainDryAfterInspection == false
+        self.isEditable = isEditable
     }
     
     private func addListeners() {

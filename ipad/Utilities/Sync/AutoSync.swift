@@ -28,20 +28,16 @@ class AutoSync {
     public func beginListener() {
         
         print("Listening to database changes in AutoSync.")
+        if isOnline() {
+            self.autoSynchronizeIfPossible()
+        }
         do {
             let realm = try Realm()
             self.realmNotificationToken = realm.observe { notification, realm in
                 print("Change observed in AutoSync...")
-                do {
-                    let reachability = try Reachability()
-                    if reachability.connection == .unavailable {
-                        return
-                    }
-                } catch let error as NSError {
-                    print("** Reachability ERROR")
-                    print(error)
+                if self.isOnline() {
+                    self.autoSynchronizeIfPossible()
                 }
-                self.autoSynchronizeIfPossible()
             }
         } catch _ {
             print("Error with db change listener")
@@ -49,11 +45,25 @@ class AutoSync {
     }
     
     public func endListener() {
-           if let token = self.realmNotificationToken {
-               token.invalidate()
-               print("Stopped listening to database changes in AutoSync.")
-           }
-       }
+        if let token = self.realmNotificationToken {
+            token.invalidate()
+            print("Stopped listening to database changes in AutoSync.")
+        }
+    }
+    
+    private func isOnline() -> Bool {
+        do {
+            let reachability = try Reachability()
+            if reachability.connection == .unavailable {
+                return false
+            }
+        } catch let error as NSError {
+            print("** Reachability ERROR")
+            print(error)
+            return false
+        }
+        return true
+    }
     
     private func autoSynchronizeIfPossible() {
         print("Checking if we can autosync...")
@@ -72,7 +82,7 @@ class AutoSync {
         // Perform sync if needed
         self.sync()
     }
-   
+    
     
     // MARK: sync Action
     public func sync() {
@@ -80,7 +90,7 @@ class AutoSync {
             return
         }
         
-         print("Executing Autosync...")
+        print("Executing Autosync...")
         
         // Block autosync from being re-executed.
         self.isSynchronizing = true
@@ -91,28 +101,36 @@ class AutoSync {
         
         // move to a background thread
         DispatchQueue.global(qos: .background).async {
-            
-            
             let dispatchGroup = DispatchGroup()
-            
-            let itemsToSync = Storage.shared.getItemsToSync()
-            if itemsToSync.count > 0 {
+            var hadErros = false
+            let itemsToSync = Storage.shared.itemsToSync()
+            for item in itemsToSync {
+                let itemId = item.localId
                 dispatchGroup.enter()
-                // Upload / sync etc
-                dispatchGroup.leave()
+                ShiftService.shared.submit(shift: item) { (success) in
+                    if success, let refetchedShift = Storage.shared.shift(withLocalId: itemId) {
+                        refetchedShift.setShouldSync(to: false)
+                        refetchedShift.setStatus(to: "Completed")
+                    } else {
+                        hadErros = true
+                        Banner.show(message: "Could not sync items")
+                    }
+                    dispatchGroup.leave()
+                }
             }
             
-            dispatchGroup.enter()
+            // dispatchGroup.enter()
             // Make another api call
-            dispatchGroup.leave()
-            
+            // dispatchGroup.leave()
             
             // End
             dispatchGroup.notify(queue: .main) {
                 print("Autosync Executed.")
-                
+                print("AutoSync Success: \(!hadErros)")
                 // remove the view
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                    Banner.show(message: "Sync Executed")
+                    NotificationCenter.default.post(name: .syncExecuted, object: nil)
                     syncView.remove()
                     // free autosync
                     self.isSynchronizing = false
@@ -136,6 +154,7 @@ class AutoSync {
         let syncView: SyncView = UIView.fromNib()
         syncView.initialize()
         syncView.showSyncInProgressAnimation()
+        syncView.set(title: "Performing Initial Sync")
         
         var hadErrors: Bool = false
         // move to a background thread
@@ -145,33 +164,32 @@ class AutoSync {
             
             // Fetch code tables
             dispatchGroup.enter()
-            CodeTables.shared.fetchCodes { (success) in
+            CodeTables.shared.fetchCodes(completion: { (success) in
                 if !success {
                     hadErrors = true
                     Banner.show(message: "Could not fetch code tables")
                 }
                 dispatchGroup.leave()
+            }) { (statusUpdate) in
+                syncView.set(status: statusUpdate)
             }
-            
-//            dispatchGroup.enter()
-//            // Make another api call
-//            dispatchGroup.leave()
-            
             
             // End
             dispatchGroup.notify(queue: .main) {
                 print("Initial Sync Executed.")
-                
+                if !hadErrors {
+                    syncView.set(status: "Completed")
+                    syncView.showSyncCompletedAnimation()
+                } else {
+                    syncView.set(status: "Failed")
+                    syncView.showSyncFailedAnimation()
+                }
                 // remove the view
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-//                    if hadErrors {
-//                        syncView.showSyncFailedAnimation()
-//                    } else {
-//                        syncView.showSyncCompletedAnimation()
-//                    }
                     syncView.remove()
                     // free autosync
                     self.isSynchronizing = false
+                    print(Auth.getUserID())
                     return completion(!hadErrors)
                 }
             }
@@ -194,7 +212,7 @@ class AutoSync {
         }
         
         // Code tables dont exist
-        if Storage.shared.getCodeTables().count > 0 {
+        if Storage.shared.codeTables().count > 0 {
             return false
         }
         
@@ -216,8 +234,7 @@ class AutoSync {
     }
     
     public func shouldSync() -> Bool {
-        
-        if Storage.shared.getItemsToSync().count < 1 {
+        if Storage.shared.itemsToSync().count < 1 {
             return false
         }
         

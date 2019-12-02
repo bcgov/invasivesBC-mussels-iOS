@@ -74,8 +74,11 @@ class HomeViewController: BaseViewController {
     }
     
     @IBAction func syncButtonAction(_ sender: Any) {
-        let syncView: SyncView = SyncView.fromNib()
-        syncView.initialize()
+        if !AutoSync.shared.shouldSync() {
+            Alert.show(title: "Nothing to sync", message: "There is nothing to sync")
+        } else {
+            AutoSync.shared.sync()
+        }
     }
     
     @IBAction func addEntryClicked(_ sender: Any) {
@@ -84,7 +87,7 @@ class HomeViewController: BaseViewController {
         } else {
             let shiftModal: NewShiftModal = NewShiftModal.fromNib()
             shiftModal.initialize(delegate: self, onStart: { (model) in
-                model.save()
+                Storage.shared.save(shift: model)
                 self.navigateToShiftOverview(object: model, editable: true)
             }) {
                 print("cancelled")
@@ -93,7 +96,7 @@ class HomeViewController: BaseViewController {
     }
     
     func getActiveShift() -> ShiftModel? {
-        let existingShifts = Storage.shared.getShifts(by: Date().stringShort())
+        let existingShifts = Storage.shared.shifts(by: Date().stringShort())
         for shift in existingShifts where shift.shouldSync == false && shift.remoteId < 0 {
             return shift
         }
@@ -116,7 +119,7 @@ class HomeViewController: BaseViewController {
     
     // MARK: Functions
     private func initialize() {
-        let shifts = Storage.shared.getShifts()
+        let shifts = Storage.shared.shifts()
         beginReachabilityNotification()
         style()
         setupSwitcher()
@@ -124,8 +127,11 @@ class HomeViewController: BaseViewController {
     }
     
     private func setupSwitcher() {
+        for subview in switcherHolder.subviews {
+            subview.removeFromSuperview()
+        }
         _ = Switcher.show(items: switcherItems, in: switcherHolder, initial: switcherItems.first) { (selection) in
-            let shifts = Storage.shared.getShifts()
+            let shifts = Storage.shared.shifts()
             if selection.lowercased() == "all" {
                 self.createTable(with: shifts)
                 return
@@ -149,7 +155,7 @@ class HomeViewController: BaseViewController {
         var columns: [TableViewColumnConfig] = []
         columns.append(TableViewColumnConfig(key: "remoteId", header: "Shift ID", type: .Normal))
         columns.append(TableViewColumnConfig(key: "formattedDate", header: "Shift Date", type: .Normal))
-        columns.append(TableViewColumnConfig(key: "location", header: "Station Location", type: .Normal))
+        columns.append(TableViewColumnConfig(key: "station", header: "Station Location", type: .Normal))
         columns.append(TableViewColumnConfig(key: "status", header: "Status", type: .WithIcon))
         columns.append(TableViewColumnConfig(key: "", header: "Actions", type: .Button, buttonName: "View", showHeader: false))
         let tableView = table.show(columns: columns, in: shifts, container: tableContainer)
@@ -162,6 +168,9 @@ class HomeViewController: BaseViewController {
     func beginListener() {
         NotificationCenter.default.removeObserver(self, name: .TableButtonClicked, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.tableButtonClicked(notification:)), name: .TableButtonClicked, object: nil)
+        NotificationCenter.default.removeObserver(self, name: .syncExecuted, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.syncExecuted(notification:)), name: .syncExecuted, object: nil)
+        
     }
     
     // Table Button clicked
@@ -170,6 +179,10 @@ class HomeViewController: BaseViewController {
         if actionModel.buttonName.lowercased() == "view" {
             self.navigateToShiftOverview(object: shiftModel, editable: shiftModel.localId == getActiveShift()?.localId)
         }
+    }
+    
+    @objc func syncExecuted(notification: Notification) {
+        self.initialize()
     }
     
     // MARK: Style

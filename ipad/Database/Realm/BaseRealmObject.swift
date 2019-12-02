@@ -13,6 +13,7 @@ import RealmSwift
 
 protocol BaseRealmObject {
     var localId: String { get set }
+    var userId: String { get set }
     var remoteId: Int { get set }
     var shouldSync: Bool { get set }
 

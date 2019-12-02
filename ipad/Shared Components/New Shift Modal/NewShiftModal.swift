@@ -67,7 +67,6 @@ class NewShiftModal: ModalView, Theme {
         if let m = model {
             m.set(value: item.value.get(type: item.type) as Any, for: item.key)
         }
-        
         print(model?.toDictionary())
     }
     

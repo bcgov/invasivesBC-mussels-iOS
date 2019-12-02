@@ -14,7 +14,7 @@ class DropdownHelper {
     private init() {}
     
     public func getDropdown(for type: CodeTableType) -> [DropdownModel] {
-        let items = Storage.shared.getCodeTable(type: type)
+        let items = Storage.shared.codeTable(type: type)
         var options: [DropdownModel] = []
         for item in items {
             options.append(DropdownModel(display: item))

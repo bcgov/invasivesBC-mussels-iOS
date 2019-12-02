@@ -42,4 +42,15 @@ class WaterBodyTableModel: Object {
     @objc dynamic var longitude: Double = 0
     @objc dynamic var abbrev: String = ""
     @objc dynamic var closest: String = ""
+    
+    func toDictionary() -> [String : Any] {
+        return [
+            "name": name,
+            "water_body_id": water_body_id,
+            "latitude": latitude,
+            "longitude": longitude,
+            "abbrev": abbrev,
+            "closest": closest
+        ]
+    }
 }

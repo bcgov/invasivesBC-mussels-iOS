@@ -28,11 +28,15 @@ class CodeTables {
     
     var promise: Promise<RemoteResponse>?
     
-    public func fetchCodes(completion: @escaping(_ success: Bool) -> Void) {
+    public func fetchCodes(completion: @escaping(_ success: Bool) -> Void, status: @escaping(_ newStatus: String) -> Void) {
+        status("Fetching code tables")
         self.fetchAndStoreCodes { (codes) in
             if codes.count > 0 {
-                self.fetchAndStoreWaterBodies { (waterBodies) in
+                status("Loading Waterbodies")
+                self.fetchAndStoreWaterBodies(completion: { (waterBodies) in
                     return completion(waterBodies.count > 0)
+                }) { (statusUpdate) in
+                   status("Storing Waterbodies: \(statusUpdate)")
                 }
             } else {
                 return completion(false)
@@ -77,8 +81,9 @@ class CodeTables {
         })
     }
     
-    private func fetchAndStoreWaterBodies(completion: @escaping (_ objects: [WaterBodyTableModel]) -> Void) {
-        
+    private func fetchAndStoreWaterBodies(completion: @escaping (_ objects: [WaterBodyTableModel]) -> Void, status: @escaping(_ newStatus: String) -> Void) {
+        Storage.shared.saveWaterBodiesFromJSON(status: status)
+        return completion(Storage.shared.waterBodyTables())
         do {
             let reacahbility = try Reachability()
             if (reacahbility.connection == .unavailable) {
