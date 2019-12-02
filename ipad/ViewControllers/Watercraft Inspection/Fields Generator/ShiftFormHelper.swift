@@ -55,7 +55,7 @@ class ShiftFormHelper {
             header: ShiftFormHeaders.ShiftStart.sunny,
             editable: editable ?? true,
             value: object?.sunny,
-            width: .Forth
+            width: .Third 
         )
         sectionItems.append(sunny)
         

@@ -85,10 +85,13 @@ class WatercraftInspectionViewController: BaseViewController {
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let destination = segue.destination as? HighRiskFormViewController, let model = self.model {
-            destination.model = model.addHighRiskAssessment()
-            destination.isEditable = self.isEditable
+        if let destination = segue.destination as? HighRiskFormViewController, let model = self.model, let assessment = model.addHighRiskAssessment() {
+            destination.initialize(with: assessment, isEditable: isEditable)
         }
+    }
+    
+    func showHighRiskForm() {
+        self.performSegue(withIdentifier: "showHighRiskForm", sender: self)
     }
     
     private func addListeners() {
@@ -148,7 +151,7 @@ class WatercraftInspectionViewController: BaseViewController {
                         // Confirmed
                         m.set(value: true, for: item.key)
                         // Show high risk form
-                        self.performSegue(withIdentifier: "showHighRiskForm", sender: self)
+                        self.showHighRiskForm()
                     }) {
                         // Cancelled
                         m.set(value: false, for: item.key)
@@ -159,7 +162,7 @@ class WatercraftInspectionViewController: BaseViewController {
             } else {
                 // All other keys, store directly
                 // TODO: needs cleanup for nil case
-                m.set(value: item.value.get(type: item.type), for: item.key)
+                m.set(value: item.value.get(type: item.type) as Any, for: item.key)
             }
             
         }
@@ -186,8 +189,6 @@ class WatercraftInspectionViewController: BaseViewController {
             
             self.collectionView.reloadData()
         }
-        
-        print(model?.toDictionary())
     }
     
 }

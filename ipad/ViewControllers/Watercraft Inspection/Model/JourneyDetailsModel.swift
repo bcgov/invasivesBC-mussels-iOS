@@ -12,6 +12,7 @@ import Realm
 import RealmSwift
 
 class JourneyDetailsModel: Object, BaseRealmObject {
+    @objc dynamic var userId: String = ""
     @objc dynamic var localId: String = {
         return UUID().uuidString
     }()
