@@ -12,6 +12,7 @@ import Realm
 import RealmSwift
 
 class WatercradftInspectionModel: Object, BaseRealmObject {
+    @objc dynamic var userId: String = ""
     @objc dynamic var localId: String = {
         return UUID().uuidString
     }()
@@ -63,10 +64,12 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
     @objc dynamic var previousInspection: Bool = false
     @objc dynamic var previousInspectionSource: String = ""
     @objc dynamic var previousInspectionDays: Int = 0
+    
     // Inspection Details
     @objc dynamic var marineMusslesFound: Bool = false
     @objc dynamic var failedToStop: Bool = false
     @objc dynamic var ticketIssued: Bool = false
+    
     // High Risk Assesment fields
     @objc dynamic var highriskAIS: Bool = false {
         didSet {
@@ -78,10 +81,13 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
         }
     }
     @objc dynamic var adultDreissenidFound: Bool = false
+    
     // General comments
     @objc dynamic var generalComments: String = ""
+    
     // Journey
     private var journeyDetails: List<JourneyDetailsModel> = List<JourneyDetailsModel>()
+    
     // High Risk Assessments
     private var highRiskAssessments: List<HighRiskAssessmentModel> = List<HighRiskAssessmentModel>()
     
@@ -93,39 +99,62 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
     @objc dynamic var riskLevel: String = "low"
     
     func toDictionary() -> [String : Any] {
+        return toDictionary(shift: -1)
+    }
+    
+    func toDictionary(shift id: Int) -> [String : Any] {
+        // TODO: REMOVE THIS FROM API - its only here because api requires it
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        let tempDateToDelete = dateFormatter.string(from: Date())
+        ///
+        
+        // Create dictionary for high-risk assessment
+        var highRiskAssessmentForm: [String: Any] = [String: Any] ()
+        if let highRiskAssessment = self.highRiskAssessments.first {
+            highRiskAssessmentForm = highRiskAssessment.toDictionary()
+        }
         return [
-            "isPassportHolder": isPassportHolder,
-            "inspectionTime": inspectionTime,
-            "passportNumber": passportNumber,
-            "launchedOutsideBC": launchedOutsideBC,
-            "k9Inspection": k9Inspection,
-            "decontaminationPerformed": decontaminationPerformed,
-            "marineSpeciesFound": marineSpeciesFound,
-            "aquaticPlantsFound": aquaticPlantsFound,
+            "lowRiskAssessmentForm": [:], // TODO: Remove from API
+            "additionalInfo": [:], // TODO: Remove from API
+            "timestamp": tempDateToDelete, // TODO: Remove from API
             
-            "province": province,
-            "nonMotorized": province,
-            "simple": simple,
-            "complex": complex,
-            "veryComplex": veryComplex,
-            
-            "numberOfPeopleInParty": numberOfPeopleInParty,
-            "commerciallyHauled": commerciallyHauled,
-            "highRiskArea": highRiskArea,
-            "previousAISKnowlede": previousAISKnowlede,
-            "previousAISKnowledeSource": previousAISKnowledeSource,
-            "previousInspection": previousInspection,
-            "previousInspectionSource": previousInspectionSource,
-            "previousInspectionDays": previousInspectionDays,
-            
-            "marineMusslesFound": marineMusslesFound,
-            "failedToStop": marineMusslesFound,
-            "ticketIssued": marineMusslesFound,
-            
-            "highriskAIS": highriskAIS,
-            "adultDreissenidFound": adultDreissenidFound,
-            
-            "generalComments": generalComments
+            "workflow": id,
+            "highRiskAssessmentForm": highRiskAssessmentForm,
+            "fullObservationForm": [
+                "isPassportHolder": isPassportHolder,
+                "inspectionTime": inspectionTime,
+                "passportNumber": passportNumber,
+                "launchedOutsideBC": launchedOutsideBC,
+                "k9Inspection": k9Inspection,
+                "decontaminationPerformed": decontaminationPerformed,
+                "marineSpeciesFound": marineSpeciesFound,
+                "aquaticPlantsFound": aquaticPlantsFound,
+                
+                "province": province,
+                "nonMotorized": province,
+                "simple": simple,
+                "complex": complex,
+                "veryComplex": veryComplex,
+                
+                "numberOfPeopleInParty": numberOfPeopleInParty,
+                "commerciallyHauled": commerciallyHauled,
+                "highRiskArea": highRiskArea,
+                "previousAISKnowlede": previousAISKnowlede,
+                "previousAISKnowledeSource": previousAISKnowledeSource,
+                "previousInspection": previousInspection,
+                "previousInspectionSource": previousInspectionSource,
+                "previousInspectionDays": previousInspectionDays,
+                
+                "marineMusslesFound": marineMusslesFound,
+                "failedToStop": marineMusslesFound,
+                "ticketIssued": marineMusslesFound,
+                
+                "highriskAIS": highriskAIS,
+                "adultDreissenidFound": adultDreissenidFound,
+                
+                "generalComments": generalComments
+            ]
         ]
     }
     
@@ -145,12 +174,25 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
         }
     }
     
+    func setRemote(id: Int) {
+        do {
+            let realm = try Realm()
+            try realm.write {
+                self.remoteId = id
+            }
+        } catch let error as NSError {
+            print("** REALM ERROR")
+            print(error)
+        }
+    }
+    
     func addHighRiskAssessment() -> HighRiskAssessmentModel? {
         if let existing = self.highRiskAssessments.first {
             return existing
         }
         let assessment = HighRiskAssessmentModel()
         assessment.shouldSync = false
+        assessment.userId = self.userId
         do {
             let realm = try Realm()
             try realm.write {

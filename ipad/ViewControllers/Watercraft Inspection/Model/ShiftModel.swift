@@ -13,7 +13,7 @@ import RealmSwift
 //extension ShiftModel: PropertyReflectable {}
 
 class ShiftModel: Object, BaseRealmObject {
-    
+    @objc dynamic var userId: String = ""
     @objc dynamic var localId: String = {
         return UUID().uuidString
     }()
@@ -22,13 +22,7 @@ class ShiftModel: Object, BaseRealmObject {
         return "localId"
     }
     
-    @objc dynamic var remoteId: Int = -1 {
-        didSet {
-            if remoteId > 0 {
-                set(value: "Completed", for: "status")
-            }
-        }
-    }
+    @objc dynamic var remoteId: Int = -1
     
     @objc dynamic var shouldSync: Bool = false
     
@@ -62,22 +56,31 @@ class ShiftModel: Object, BaseRealmObject {
     @objc dynamic var formattedDate: String = ""
     
     func toDictionary() -> [String : Any] {
+        guard let date = date else {return [String : Any]()}
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        let formattedDateFull = dateFormatter.string(from: date)
         return [
-            "startTime": startTime,
-            "endTime": endTime,
-            "boatsInspected": boatsInspected,
-            "motorizedBlowBys": motorizedBlowBys,
-            "nonMotorizedBlowBys": nonMotorizedBlowBys,
-            "k9OnShif": k9OnShif,
-            "sunny": sunny,
-            "cloudy": cloudy,
-            "raining": raining,
-            "snowing": snowing,
-            "foggy": foggy,
-            "windy": windy,
-            "station": station,
-            "shitStartComments": shitStartComments,
-            "shitEndComments": shitEndComments,
+            "date" : formattedDateFull,
+            "startOfDayForm": [:], // TODO: Remove from api
+            "endOfDayForm": [:], // TODO: remove from api
+            "info": [
+                "startTime": startTime,
+                "endTime": endTime,
+                "boatsInspected": boatsInspected,
+                "motorizedBlowBys": motorizedBlowBys,
+                "nonMotorizedBlowBys": nonMotorizedBlowBys,
+                "k9OnShif": k9OnShif,
+                "sunny": sunny,
+                "cloudy": cloudy,
+                "raining": raining,
+                "snowing": snowing,
+                "foggy": foggy,
+                "windy": windy,
+                "station": station,
+                "shitStartComments": shitStartComments,
+                "shitEndComments": shitEndComments,
+            ]
         ]
     }
     
@@ -104,6 +107,7 @@ class ShiftModel: Object, BaseRealmObject {
     func addInspection() -> WatercradftInspectionModel? {
         let inspection = WatercradftInspectionModel()
         inspection.shouldSync = false
+        inspection.userId = self.userId
         do {
             let realm = try Realm()
             try realm.write {
@@ -118,20 +122,27 @@ class ShiftModel: Object, BaseRealmObject {
     }
     
     func setShouldSync(to should: Bool) {
-        
         do {
             let realm = try Realm()
             try realm.write {
                 self.shouldSync = should
+                self.status = should ? "Pending Sync" : "Draft"
             }
         } catch let error as NSError {
             print("** REALM ERROR")
             print(error)
         }
-        if shouldSync == true {
-            set(value: "Pending Sync", for: "status")
-        } else {
-            set(value: "Draft", for: "status")
+    }
+    
+    func setStatus(to newStatus: String) {
+        do {
+            let realm = try Realm()
+            try realm.write {
+                self.status = newStatus
+            }
+        } catch let error as NSError {
+            print("** REALM ERROR")
+            print(error)
         }
     }
     
@@ -148,6 +159,19 @@ class ShiftModel: Object, BaseRealmObject {
         if let unwrappedDate = date {
             set(value: unwrappedDate.stringShort(), for: "formattedDate")
         }
+    }
+    
+    func setRemote(id: Int) {
+        do {
+            let realm = try Realm()
+            try realm.write {
+                self.remoteId = id
+            }
+        } catch let error as NSError {
+            print("** REALM ERROR")
+            print(error)
+        }
+        
     }
     
     // MARK: UI Helpers

@@ -11,6 +11,8 @@ import Realm
 import RealmSwift
 
 class TestTableViewObject: Object, BaseRealmObject {
+    @objc dynamic var userId: String = ""
+    
     @objc dynamic var localId: String = {
         return UUID().uuidString
     }()

@@ -12,7 +12,7 @@ import Realm
 import RealmSwift
 
 class HighRiskAssessmentModel: Object, BaseRealmObject {
-    
+    @objc dynamic var userId: String = ""
     @objc dynamic var localId: String = {
         return UUID().uuidString
     }()

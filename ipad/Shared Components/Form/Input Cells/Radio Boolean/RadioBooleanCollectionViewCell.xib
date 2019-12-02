@@ -18,7 +18,7 @@
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a9T-jQ-XA5">
-                        <rect key="frame" x="33" y="0.0" width="318" height="75"/>
+                        <rect key="frame" x="33" y="0.0" width="42" height="75"/>
                         <constraints>
                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="25" id="lwR-Q5-Ajy"/>
                         </constraints>
@@ -52,7 +52,7 @@
                 <constraint firstAttribute="bottom" secondItem="a9T-jQ-XA5" secondAttribute="bottom" id="G4E-GP-euC"/>
                 <constraint firstItem="a9T-jQ-XA5" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="hPq-xd-z2X"/>
                 <constraint firstItem="Ybx-3L-Wgk" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="qXs-gE-vug"/>
-                <constraint firstAttribute="trailing" secondItem="a9T-jQ-XA5" secondAttribute="trailing" id="rHN-fw-dXY"/>
+                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="a9T-jQ-XA5" secondAttribute="trailing" id="rHN-fw-dXY"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <size key="customSize" width="351" height="75"/>

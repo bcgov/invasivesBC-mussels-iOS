@@ -22,7 +22,7 @@ class SyncView: ModalView, Theme {
     @IBOutlet weak var hollowButton: UIButton!
     @IBOutlet weak var fillButton: UIButton!
     @IBOutlet weak var dividerView: UIView!
-
+    
     enum SyncState {
         case inprogress
         case complete
@@ -49,6 +49,19 @@ class SyncView: ModalView, Theme {
         }
     }
     
+    public func set(title string: String) {
+        DispatchQueue.main.async {
+            self.titleLabel.text = string
+        }
+    }
+    
+    public func set(status string: String) {
+        DispatchQueue.main.async {
+            self.statusLabel.text = string
+        }
+        
+    }
+    
     private func style() {
         styleCard(layer: self.layer)
         styleSectionTitle(label: titleLabel)
@@ -59,8 +72,6 @@ class SyncView: ModalView, Theme {
         styleSyncInProgress()
         self.hollowButton.alpha = 0
         self.fillButton.alpha = 0
-//        styleSyncError()
-//        styleSyncSuccess()
     }
     
     private func clearIcon() {
@@ -131,7 +142,7 @@ class SyncView: ModalView, Theme {
         animationView.contentMode = .scaleAspectFit
         animationView.loopMode = .loop
         statusIconView.addSubview(animationView)
-
+        
         animationView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             animationView.widthAnchor.constraint(equalToConstant: statusIconView.frame.width),
@@ -139,7 +150,7 @@ class SyncView: ModalView, Theme {
             animationView.centerXAnchor.constraint(equalTo: statusIconView.centerXAnchor),
             animationView.centerYAnchor.constraint(equalTo: statusIconView.centerYAnchor),
         ])
-
+        
         animationView.play()
     }
     
@@ -152,7 +163,7 @@ class SyncView: ModalView, Theme {
         animationView.contentMode = .scaleAspectFit
         animationView.loopMode = .playOnce
         statusIconView.addSubview(animationView)
-
+        
         animationView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             animationView.widthAnchor.constraint(equalToConstant: statusIconView.frame.width),
@@ -160,7 +171,7 @@ class SyncView: ModalView, Theme {
             animationView.centerXAnchor.constraint(equalTo: statusIconView.centerXAnchor),
             animationView.centerYAnchor.constraint(equalTo: statusIconView.centerYAnchor),
         ])
-
+        
         animationView.play()
     }
     
@@ -173,7 +184,7 @@ class SyncView: ModalView, Theme {
         animationView.contentMode = .scaleAspectFit
         animationView.loopMode = .playOnce
         statusIconView.addSubview(animationView)
-
+        
         animationView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             animationView.widthAnchor.constraint(equalToConstant: statusIconView.frame.width),
@@ -181,8 +192,8 @@ class SyncView: ModalView, Theme {
             animationView.centerXAnchor.constraint(equalTo: statusIconView.centerXAnchor),
             animationView.centerYAnchor.constraint(equalTo: statusIconView.centerYAnchor),
         ])
-
+        
         animationView.play()
     }
-
+    
 }
