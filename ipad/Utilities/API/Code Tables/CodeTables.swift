@@ -16,6 +16,9 @@ public enum CodeTableType {
     case otherObservations
     case stations
     case watercraftList
+    case waterBodies
+    case cities
+    case provinces
 }
 
 class CodeTables {
@@ -31,15 +34,39 @@ class CodeTables {
     public func fetchCodes(completion: @escaping(_ success: Bool) -> Void, status: @escaping(_ newStatus: String) -> Void) {
         status("Fetching code tables")
         self.fetchAndStoreCodes { (codes) in
-            if codes.count > 0 {
-                status("Loading Waterbodies")
-                self.fetchAndStoreWaterBodies(completion: { (waterBodies) in
-                    return completion(waterBodies.count > 0)
-                }) { (statusUpdate) in
-                   status("Storing Waterbodies: \(statusUpdate)")
+            if codes.count < 0 { return completion(false) }
+            status("Loading Waterbodies")
+            self.fetchAndStoreWaterBodies(completion: { (waterBodies) in
+                if waterBodies.count < 0 { return completion(false) }
+                status("Wrapping up")
+                let provinces = waterBodies.map{$0.abbrev}.uniques.sorted{$0.lowercased() < $1.lowercased()}
+                let cities = waterBodies.map{$0.closest}.uniques.sorted{$0.lowercased() < $1.lowercased()}
+                let waters = waterBodies.map{$0.name}.uniques.sorted{$0.lowercased() < $1.lowercased()}
+                
+                let provincesTable = CodeTableModel()
+                provincesTable.type = "provinces"
+                for province in provinces {
+                    provincesTable.items.append(province)
                 }
-            } else {
-                return completion(false)
+                RealmRequests.saveObject(object: provincesTable)
+                
+                let citiesTable = CodeTableModel()
+                citiesTable.type = "cities"
+                for city in cities {
+                    citiesTable.items.append(city)
+                }
+                RealmRequests.saveObject(object: citiesTable)
+                
+                let watersTable = CodeTableModel()
+                watersTable.type = "waterBodies"
+                for city in waters {
+                    watersTable.items.append(city)
+                }
+                RealmRequests.saveObject(object: watersTable)
+                
+                return completion(true)
+            }) { (statusUpdate) in
+               status("Storing Waterbodies: \(statusUpdate)")
             }
         }
     }
@@ -83,7 +110,7 @@ class CodeTables {
     
     private func fetchAndStoreWaterBodies(completion: @escaping (_ objects: [WaterBodyTableModel]) -> Void, status: @escaping(_ newStatus: String) -> Void) {
         Storage.shared.saveWaterBodiesFromJSON(status: status)
-        return completion(Storage.shared.waterBodyTables())
+        return completion(Storage.shared.fullWaterBodyTables())
         do {
             let reacahbility = try Reachability()
             if (reacahbility.connection == .unavailable) {
@@ -105,7 +132,7 @@ class CodeTables {
                 print("FAIL: No first item")
                 return completion([])
             }
-            Storage.shared.deteleWaterBodyTables()
+            Storage.shared.deteleFullWaterBodyTables()
             DispatchQueue.global(qos: .background).async {
                 var waterbodies: [WaterBodyTableModel] = []
                 for item in data {

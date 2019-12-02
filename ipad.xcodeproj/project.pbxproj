@@ -72,6 +72,8 @@
 		298BF7C12394C0270072AA28 /* waterBodies.txt in Resources */ = {isa = PBXBuildFile; fileRef = 298BF7C02394C0270072AA28 /* waterBodies.txt */; };
 		298BF7C523958A220072AA28 /* SpacerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 298BF7C323958A220072AA28 /* SpacerCollectionViewCell.swift */; };
 		298BF7C623958A220072AA28 /* SpacerCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 298BF7C423958A220072AA28 /* SpacerCollectionViewCell.xib */; };
+		298BF7C8239590730072AA28 /* WaterBodyTableModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 298BF7C7239590730072AA28 /* WaterBodyTableModel.swift */; };
+		298BF7CA239592950072AA28 /* ArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 298BF7C9239592950072AA28 /* ArrayExtension.swift */; };
 		2991969023846AE000634F81 /* ShiftViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2991968F23846AE000634F81 /* ShiftViewController.swift */; };
 		299196932384725600634F81 /* TableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 299196922384725600634F81 /* TableView.xib */; };
 		299196952384726600634F81 /* TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299196942384726600634F81 /* TableView.swift */; };
@@ -248,6 +250,8 @@
 		298BF7C02394C0270072AA28 /* waterBodies.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = waterBodies.txt; sourceTree = "<group>"; };
 		298BF7C323958A220072AA28 /* SpacerCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpacerCollectionViewCell.swift; sourceTree = "<group>"; };
 		298BF7C423958A220072AA28 /* SpacerCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SpacerCollectionViewCell.xib; sourceTree = "<group>"; };
+		298BF7C7239590730072AA28 /* WaterBodyTableModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterBodyTableModel.swift; sourceTree = "<group>"; };
+		298BF7C9239592950072AA28 /* ArrayExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtension.swift; sourceTree = "<group>"; };
 		2991968F23846AE000634F81 /* ShiftViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShiftViewController.swift; sourceTree = "<group>"; };
 		299196922384725600634F81 /* TableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TableView.xib; sourceTree = "<group>"; };
 		299196942384726600634F81 /* TableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableView.swift; sourceTree = "<group>"; };
@@ -444,6 +448,7 @@
 			isa = PBXGroup;
 			children = (
 				2933DD60238DC5120068E9DF /* CodeTableModel.swift */,
+				298BF7C7239590730072AA28 /* WaterBodyTableModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -550,6 +555,7 @@
 			isa = PBXGroup;
 			children = (
 				2950510C2374DFF7000FBD6E /* StringExtension.swift */,
+				298BF7C9239592950072AA28 /* ArrayExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1396,6 +1402,7 @@
 				5C82D3E82374BCDB00B065BA /* GenericConst.swift in Sources */,
 				29E4BBF2237218610079475F /* DestinationWaterBodyCollectionViewCell.swift in Sources */,
 				294D8F692385D1F10094090D /* TestTableViewObject.swift in Sources */,
+				298BF7C8239590730072AA28 /* WaterBodyTableModel.swift in Sources */,
 				5C82D3EC2374BD1300B065BA /* Promise.swift in Sources */,
 				5C0F6980237C6DDA00F96CA5 /* APIChain.swift in Sources */,
 				29DB4E4123870F2B00B13646 /* ShiftModel.swift in Sources */,
@@ -1421,6 +1428,7 @@
 				29514BD92368ADB100DC89C4 /* OptionType.swift in Sources */,
 				29BAC5122367A21300A620F4 /* StringConstants.swift in Sources */,
 				294EF30F2370845700EEB3B6 /* SyncView.swift in Sources */,
+				298BF7CA239592950072AA28 /* ArrayExtension.swift in Sources */,
 				5C82D3F02374BECD00B065BA /* ApplicationErrorConst.swift in Sources */,
 				29F4EC562370B1F8001D5CFA /* BasicCollectionViewCell.swift in Sources */,
 				294D9A8C237B1E7400BD4928 /* WatercraftInspectionFieldHeaders.swift in Sources */,

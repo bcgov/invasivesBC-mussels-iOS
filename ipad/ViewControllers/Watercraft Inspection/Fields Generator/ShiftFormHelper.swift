@@ -9,14 +9,6 @@
 import Foundation
 
 class ShiftFormHelper {
-    private static func getDummyOptions() -> [DropdownModel]{
-        var options: [DropdownModel] = []
-        options.append(DropdownModel(display: "Something here"))
-        options.append(DropdownModel(display: "Something else here"))
-        options.append(DropdownModel(display: "Something more here"))
-        options.append(DropdownModel(display: "Another thing"))
-        return options
-    }
     
     static func getShiftStartFields(for object: ShiftModel? = nil, editable: Bool? = true, modalSize: Bool? = false) -> [InputItem] {
         let isModalSize = modalSize ?? false
@@ -27,7 +19,7 @@ class ShiftFormHelper {
             header: ShiftFormHeaders.ShiftStart.startTime,
             editable: editable ?? true,
             value: object?.startTime ?? "",
-            width: isModalSize ? .Half : .Third
+            width: .Half
         )
         sectionItems.append(startTime)
         
@@ -36,7 +28,7 @@ class ShiftFormHelper {
             header: ShiftFormHeaders.ShiftStart.station,
             editable: editable ?? true,
             value: object?.station,
-            width: isModalSize ? .Full : .Third,
+            width: .Half,
             dropdownItems: DropdownHelper.shared.getDropdown(for: .stations)
         )
         sectionItems.append(station)

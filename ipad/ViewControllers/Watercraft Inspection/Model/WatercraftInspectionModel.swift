@@ -57,7 +57,7 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
     @objc dynamic var veryComplex: Int = 0
     // Watercraft Details
     @objc dynamic var numberOfPeopleInParty: Int = 0
-    @objc dynamic var commerciallyHauled: Int = 0
+    @objc dynamic var commerciallyHauled: Bool = false
     @objc dynamic var highRiskArea: Bool = false
     @objc dynamic var previousAISKnowlede: Bool = false
     @objc dynamic var previousAISKnowledeSource: String = ""
@@ -87,6 +87,8 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
     
     // Journey
     private var journeyDetails: List<JourneyDetailsModel> = List<JourneyDetailsModel>()
+    @objc dynamic var previousWaterBodies: [[String: Any]] =  [[String: Any]]()
+    @objc dynamic var destinationWaterBodies: [[String: Any]] =  [[String: Any]]()
     
     // High Risk Assessments
     private var highRiskAssessments: List<HighRiskAssessmentModel> = List<HighRiskAssessmentModel>()
@@ -203,6 +205,78 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
             print("** REALM ERROR")
             print(error)
             return nil
+        }
+    }
+    
+    /*
+     Edit journey details arrays Based on input item key
+     Input item key would be something like
+        previousWaterBody-waterbody-0
+        Journey detail type - field key - index of journey detail type
+     */
+    func editJourney(inputItemKey: String, value: Any) {
+        if inputItemKey.contains("previousWaterBody") {
+            // Previous Water Body
+            let splitKey = inputItemKey.split(separator: "-")
+            guard let index = Int(splitKey[2]) else {return}
+            let key = String(splitKey[1])
+            if self.previousWaterBodies.count - 1 >= index {
+              // Index Exists
+               do {
+                   let realm = try Realm()
+                   try realm.write {
+                        self.previousWaterBodies[index][key] = value
+                   }
+                   
+               } catch let error as NSError {
+                   print("** REALM ERROR")
+                   print(error)
+               }
+            } else {
+                // Index Doesnt exist
+                do {
+                    let realm = try Realm()
+                    try realm.write {
+                         self.previousWaterBodies.append([key : value])
+                    }
+                    
+                } catch let error as NSError {
+                    print("** REALM ERROR")
+                    print(error)
+                }
+            }
+        } else if inputItemKey.contains("destinationWaterBody") {
+            // Destination Water Body
+            let splitKey = inputItemKey.split(separator: "-")
+            guard let index = Int(splitKey[2]) else {return}
+            let key = String(splitKey[1])
+            if self.destinationWaterBodies.count - 1 >= index {
+                // Index Exists
+                do {
+                    let realm = try Realm()
+                    try realm.write {
+                         self.destinationWaterBodies[index][key] = value
+                    }
+                    
+                } catch let error as NSError {
+                    print("** REALM ERROR")
+                    print(error)
+                }
+            } else {
+                // Index Doesnt exist
+                do {
+                    let realm = try Realm()
+                    try realm.write {
+                        self.destinationWaterBodies.append([key : value])
+                    }
+                    
+                } catch let error as NSError {
+                    print("** REALM ERROR")
+                    print(error)
+                }
+            }
+        } else {
+            return
         }
     }
     

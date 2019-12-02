@@ -25,8 +25,8 @@ class JourneyDetailsModel: Object, BaseRealmObject {
     
     var shouldSync: Bool = false
     
-    var previousWaterBodies: [[InputItem]] = []
-    var destinationWaterBodies: [[InputItem]] = []
+    var previousWaterBodiesInputs: [[InputItem]] = []
+    var destinationWaterBodiesInputs: [[InputItem]] = []
     
     func toDictionary() -> [String : Any] {
         return [String : Any]()

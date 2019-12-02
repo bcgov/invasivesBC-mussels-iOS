@@ -8,14 +8,6 @@
 
 import Foundation
 class HighRiskFormHelper {
-    private static func getDummyOptions() -> [DropdownModel]{
-        var options: [DropdownModel] = []
-        options.append(DropdownModel(display: "Something here"))
-        options.append(DropdownModel(display: "Something else here"))
-        options.append(DropdownModel(display: "Something more here"))
-        options.append(DropdownModel(display: "Another thing"))
-        return options
-    }
     
     static func getBasicInfoFields(for object: HighRiskAssessmentModel? = nil, editable: Bool? = true) -> [InputItem] {
         var sectionItems: [InputItem] = []

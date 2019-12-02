@@ -113,7 +113,7 @@ class Storage {
         }
     }
     
-    public func waterBodyTables() -> [WaterBodyTableModel] {
+    public func fullWaterBodyTables() -> [WaterBodyTableModel] {
         do {
             let realm = try Realm()
             let objs = realm.objects(WaterBodyTableModel.self)
@@ -125,18 +125,18 @@ class Storage {
         }
     }
     
-    public func deteleWaterBodyTables() {
-        let all = waterBodyTables()
+    public func deteleFullWaterBodyTables() {
+        let all = fullWaterBodyTables()
         for each in all {
             RealmRequests.deleteObject(each)
         }
     }
     
+    // TODO: Incomplete
     public func storeWaterBodyTableFromJSONIfNeeded() {
-        guard self.waterBodyTables().count < 1 else {
+        guard self.fullWaterBodyTables().count < 1 else {
             return
         }
-        
     }
     
     public func saveWaterBodiesToJSON() {
@@ -144,12 +144,13 @@ class Storage {
         getJSONFile()
     }
     
+    // TODO: Remove
     private func saveToJSONFile() {
         // Get the url of Persons.json in document directory
         guard let documentDirectoryUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return }
         let fileUrl = documentDirectoryUrl.appendingPathComponent("waterBodies.txt")
         
-        let objects = waterBodyTables()
+        let objects = fullWaterBodyTables()
         let dictionaries: [[String: Any]] = objects.map{ $0.toDictionary()}
         
         // Transform array into data and save it into file
@@ -171,7 +172,7 @@ class Storage {
             if let jsonResult = jsonResult as? [[String: Any]] {
                 print(jsonResult.count)
                 print("Read")
-                Storage.shared.deteleWaterBodyTables()
+                Storage.shared.deteleFullWaterBodyTables()
                 var counter = 1
                 for item in jsonResult {
                     status("\((counter * 100 ) / jsonResult.count)%")
@@ -195,6 +196,7 @@ class Storage {
         }
     }
     
+    // TODO: Remove
     private func getJSONFile() {
         guard let documentDirectoryUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return }
         let fileUrl = documentDirectoryUrl.appendingPathComponent("waterBodies.txt")
