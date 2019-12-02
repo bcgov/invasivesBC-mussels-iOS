@@ -299,12 +299,14 @@ class WatercraftInspectionFormHelper {
         return sectionItems
     }
     
-    public static func watercraftInspectionPreviousWaterBodyInputs(index: Int, isEditable: Bool? = true) -> [InputItem] {
+    public static func watercraftInspectionPreviousWaterBodyInputs(for object: WatercradftInspectionModel? = nil, index: Int, isEditable: Bool? = true) -> [InputItem] {
+        let item = object?.previousWaterBodies[index] ?? nil
         var sectionItems: [InputItem] = []
         let previousWaterBody = DropdownInput(
             key: "previousWaterBody-waterbody-\(index)",
             header: "Previous WaterBody",
             editable: isEditable ?? true,
+            value: item?["waterbody"] as? String ?? "",
             width: .Forth,
             dropdownItems: DropdownHelper.shared.getDropdown(for: .waterBodies)
         )
@@ -313,6 +315,7 @@ class WatercraftInspectionFormHelper {
             key: "previousWaterBody-nearestCity-\(index)",
             header: "Nearest City",
             editable: isEditable ?? true,
+            value: item?["nearestCity"] as? String ?? "",
             width: .Forth,
             dropdownItems: DropdownHelper.shared.getDropdown(for: .cities)
         )
@@ -321,14 +324,17 @@ class WatercraftInspectionFormHelper {
             key: "previousWaterBody-province-\(index)",
             header: "Province / State",
             editable: isEditable ?? true,
+            value: item?["province"] as? String ?? "",
             width: .Forth,
             dropdownItems: DropdownHelper.shared.getDropdown(for: .provinces)
         )
         
-        let numberOfDaysOut = TextInput(
+        let numberOfDaysOut = IntegerInput(
             key: "previousWaterBody-numberOfDaysOut-\(index)",
             header: "Number of days out of waterbody?",
-            editable: isEditable ?? true, width: .Forth
+            editable: isEditable ?? true,
+            value: item?["numberOfDaysOut"] as? Int,
+            width: .Forth
         )
         
         sectionItems.append(previousWaterBody)
@@ -338,12 +344,14 @@ class WatercraftInspectionFormHelper {
         return sectionItems
     }
     
-    public static func watercraftInspectionDestinationWaterBodyInputs(index: Int, isEditable: Bool? = true) -> [InputItem] {
+    public static func watercraftInspectionDestinationWaterBodyInputs(for object: WatercradftInspectionModel? = nil, index: Int, isEditable: Bool? = true) -> [InputItem] {
+        let item = object?.destinationWaterBodies[index] ?? nil
         var sectionItems: [InputItem] = []
         let destinationWaterBody = DropdownInput(
             key: "destinationWaterBody-waterbody-\(index)",
             header: "Destination WaterBody",
             editable: isEditable ?? true,
+            value: item?["waterbody"] as? String ?? "",
             width: .Third,
             dropdownItems: DropdownHelper.shared.getDropdown(for: .waterBodies)
         )
@@ -352,6 +360,7 @@ class WatercraftInspectionFormHelper {
             key: "destinationWaterBody-nearestCity-\(index)",
             header: "Nearest City",
             editable: isEditable ?? true,
+            value: item?["nearestCity"] as? String ?? "",
             width: .Third,
             dropdownItems: DropdownHelper.shared.getDropdown(for: .cities)
         )
@@ -360,6 +369,7 @@ class WatercraftInspectionFormHelper {
             key: "destinationWaterBody-province-\(index)",
             header: "Province / State",
             editable: isEditable ?? true,
+            value: item?["province"] as? String ?? "",
             width: .Third,
             dropdownItems: DropdownHelper.shared.getDropdown(for: .provinces)
         )

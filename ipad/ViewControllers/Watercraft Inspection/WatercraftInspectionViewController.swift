@@ -48,7 +48,6 @@ class WatercraftInspectionViewController: BaseViewController {
     var model: WatercradftInspectionModel? = nil
     private var showFullInspection: Bool = false
     private var isEditable: Bool = true
-    private var journeyDetails: JourneyDetailsModel = JourneyDetailsModel()
     private var formResult: [String: Any?] = [String: Any]()
     
     // MARK: Class Functions
@@ -239,10 +238,10 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        guard let sectionType = WatercraftFromSection(rawValue: Int(section)) else {return 0}
+        guard let sectionType = WatercraftFromSection(rawValue: Int(section)), let model = self.model else {return 0}
         
         if sectionType == .JourneyDetails {
-            return journeyDetails.previousWaterBodiesInputs.count + journeyDetails.destinationWaterBodiesInputs.count + 4
+            return model.previousWaterBodies.count + model.destinationWaterBodies.count + 4
         } else {
             return 1
         }
@@ -323,6 +322,7 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
     }
     
     private func getJourneyDetailsCell(for indexPath: IndexPath) -> UICollectionViewCell {
+        guard let model = self.model else {return UICollectionViewCell()}
         switch getJourneyDetailsCellType(for: indexPath) {
         case .Header:
             let cell = getHeaderCell(indexPath: indexPath)
@@ -331,8 +331,10 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
         case .PreviousWaterBody:
             let cell = getPreviousWaterBodyCell(indexPath: indexPath)
             let itemsIndex: Int = indexPath.row - 1
-            cell.setup(with: journeyDetails.previousWaterBodiesInputs[itemsIndex], delegate: self, onDelete: {
-                self.journeyDetails.previousWaterBodiesInputs.remove(at: itemsIndex)
+            let previousWaterBody = model.previousWaterBodies[itemsIndex]
+            let inputItems = WatercraftInspectionFormHelper.watercraftInspectionPreviousWaterBodyInputs(for: model, index: itemsIndex, isEditable: self.isEditable)
+            cell.setup(with: inputItems, delegate: self, onDelete: {
+                model.removePreviousWaterBody(at: itemsIndex)
                 self.collectionView.performBatchUpdates({
                     self.collectionView.reloadSections(IndexSet(integer: indexPath.section))
                 }, completion: nil)
@@ -340,9 +342,11 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
             return cell
         case .DestinationWaterBody:
             let cell = getDestinationWaterBodyCell(indexPath: indexPath)
-            let itemsIndex: Int = indexPath.row - (journeyDetails.previousWaterBodiesInputs.count + 2)
-            cell.setup(with: journeyDetails.destinationWaterBodiesInputs[itemsIndex], delegate: self, onDelete: {
-                self.journeyDetails.destinationWaterBodiesInputs.remove(at: itemsIndex)
+            let itemsIndex: Int = indexPath.row - (model.previousWaterBodies.count + 2)
+            let destinationWaterBody = model.destinationWaterBodies[itemsIndex]
+            let inputItems = WatercraftInspectionFormHelper.watercraftInspectionDestinationWaterBodyInputs(for: model, index: itemsIndex, isEditable: self.isEditable)
+            cell.setup(with: inputItems, delegate: self, onDelete: {
+                model.removeDestinationWaterBody(at: itemsIndex)
                 self.collectionView.performBatchUpdates({
                     self.collectionView.reloadSections(IndexSet(integer: indexPath.section))
                 }, completion: nil)
@@ -351,7 +355,7 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
         case .AddPreviousWaterBody:
             let cell = getButtonCell(indexPath: indexPath)
             cell.setup(with: "Add Prveious Water Body") {
-                self.journeyDetails.previousWaterBodiesInputs.append(WatercraftInspectionFormHelper.watercraftInspectionPreviousWaterBodyInputs(index: self.journeyDetails.previousWaterBodiesInputs.count, isEditable: self.isEditable))
+                model.addPreviousWaterBody()
                 self.collectionView.performBatchUpdates({
                     self.collectionView.reloadSections(IndexSet(integer: indexPath.section))
                 }, completion: nil)
@@ -360,7 +364,7 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
         case .AddDestinationWaterBody:
             let cell = getButtonCell(indexPath: indexPath)
             cell.setup(with: "Add Destination Water Body") {
-                self.journeyDetails.destinationWaterBodiesInputs.append(WatercraftInspectionFormHelper.watercraftInspectionDestinationWaterBodyInputs(index: self.journeyDetails.destinationWaterBodiesInputs.count, isEditable: self.isEditable))
+                model.addDestinationWaterBody()
                 self.collectionView.performBatchUpdates({
                     self.collectionView.reloadSections(IndexSet(integer: indexPath.section))
                 }, completion: nil)
@@ -393,23 +397,24 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
     }
     
     private func getJourneyDetailsCellType(for indexPath: IndexPath) -> JourneyDetailsSectionRow {
+        guard let model = self.model else {return .Divider}
         if indexPath.row == 0 {
             return .Header
         }
         
-        if indexPath.row == journeyDetails.previousWaterBodiesInputs.count + 1 {
+        if indexPath.row == model.previousWaterBodies.count + 1 {
             return .AddPreviousWaterBody
         }
         
-        if indexPath.row == journeyDetails.previousWaterBodiesInputs.count + journeyDetails.destinationWaterBodiesInputs.count + 2 {
+        if indexPath.row == model.previousWaterBodies.count + model.destinationWaterBodies.count + 2 {
             return .AddDestinationWaterBody
         }
         
-        if indexPath.row <= journeyDetails.previousWaterBodiesInputs.count {
+        if indexPath.row <= model.previousWaterBodies.count {
             return .PreviousWaterBody
         }
         
-        if indexPath.row <= (journeyDetails.previousWaterBodiesInputs.count + journeyDetails.destinationWaterBodiesInputs.count + 1) {
+        if indexPath.row <= (model.previousWaterBodies.count + model.destinationWaterBodies.count + 1) {
             return .DestinationWaterBody
         }
         

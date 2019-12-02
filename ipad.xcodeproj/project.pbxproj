@@ -107,7 +107,6 @@
 		29CEC93C23676691003B21B9 /* KeycloakConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29CEC93B23676691003B21B9 /* KeycloakConstants.swift */; };
 		29DB01092370EFD60046E605 /* TextAreaInputCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29DB01072370EFD60046E605 /* TextAreaInputCollectionViewCell.swift */; };
 		29DB010A2370EFD60046E605 /* TextAreaInputCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29DB01082370EFD60046E605 /* TextAreaInputCollectionViewCell.xib */; };
-		29DB0112237204A90046E605 /* JourneyDetailsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29DB0111237204A90046E605 /* JourneyDetailsModel.swift */; };
 		29DB0116237206D30046E605 /* HeaderCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29DB0114237206D30046E605 /* HeaderCollectionViewCell.swift */; };
 		29DB0117237206D30046E605 /* HeaderCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29DB0115237206D30046E605 /* HeaderCollectionViewCell.xib */; };
 		29DB011B237207BF0046E605 /* FormButtonCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29DB0119237207BF0046E605 /* FormButtonCollectionViewCell.swift */; };
@@ -289,7 +288,6 @@
 		29CEC93B23676691003B21B9 /* KeycloakConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeycloakConstants.swift; sourceTree = "<group>"; };
 		29DB01072370EFD60046E605 /* TextAreaInputCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextAreaInputCollectionViewCell.swift; sourceTree = "<group>"; };
 		29DB01082370EFD60046E605 /* TextAreaInputCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextAreaInputCollectionViewCell.xib; sourceTree = "<group>"; };
-		29DB0111237204A90046E605 /* JourneyDetailsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyDetailsModel.swift; sourceTree = "<group>"; };
 		29DB0114237206D30046E605 /* HeaderCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderCollectionViewCell.swift; sourceTree = "<group>"; };
 		29DB0115237206D30046E605 /* HeaderCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HeaderCollectionViewCell.xib; sourceTree = "<group>"; };
 		29DB0119237207BF0046E605 /* FormButtonCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormButtonCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -491,7 +489,6 @@
 			isa = PBXGroup;
 			children = (
 				294D9A872379C62F00BD4928 /* WatercraftInspectionModel.swift */,
-				29DB0111237204A90046E605 /* JourneyDetailsModel.swift */,
 				29588747237B52F000224FFA /* HighRiskAssessmentModel.swift */,
 				29DB4E4023870F2B00B13646 /* ShiftModel.swift */,
 			);
@@ -1415,7 +1412,6 @@
 				296DEC27238C61A80035E7FA /* IntegerStepperInputCollectionViewCell.swift in Sources */,
 				29BAC5192367B34000A620F4 /* Fonts.swift in Sources */,
 				5C82D404237B31C200B065BA /* WatercraftRiskAssessmentAPI.swift in Sources */,
-				29DB0112237204A90046E605 /* JourneyDetailsModel.swift in Sources */,
 				5C82D3D82374AECC00B065BA /* HighRiskModalView.swift in Sources */,
 				29BAC5102367984000A620F4 /* GradiantView.swift in Sources */,
 				29514BE32368B5AF00DC89C4 /* Notifications.swift in Sources */,

@@ -86,9 +86,9 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
     @objc dynamic var generalComments: String = ""
     
     // Journey
-    private var journeyDetails: List<JourneyDetailsModel> = List<JourneyDetailsModel>()
-    @objc dynamic var previousWaterBodies: [[String: Any]] =  [[String: Any]]()
-    @objc dynamic var destinationWaterBodies: [[String: Any]] =  [[String: Any]]()
+    var previousWaterBodies: [[String: Any]] =  [[String: Any]]()
+    var destinationWaterBodies: [[String: Any]] =  [[String: Any]]()
+    
     
     // High Risk Assessments
     private var highRiskAssessments: List<HighRiskAssessmentModel> = List<HighRiskAssessmentModel>()
@@ -211,8 +211,8 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
     /*
      Edit journey details arrays Based on input item key
      Input item key would be something like
-        previousWaterBody-waterbody-0
-        Journey detail type - field key - index of journey detail type
+     previousWaterBody-waterbody-0
+     Journey detail type - field key - index of journey detail type
      */
     func editJourney(inputItemKey: String, value: Any) {
         if inputItemKey.contains("previousWaterBody") {
@@ -221,23 +221,23 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
             guard let index = Int(splitKey[2]) else {return}
             let key = String(splitKey[1])
             if self.previousWaterBodies.count - 1 >= index {
-              // Index Exists
-               do {
-                   let realm = try Realm()
-                   try realm.write {
+                // Index Exists
+                do {
+                    let realm = try Realm()
+                    try realm.write {
                         self.previousWaterBodies[index][key] = value
-                   }
-                   
-               } catch let error as NSError {
-                   print("** REALM ERROR")
-                   print(error)
-               }
+                    }
+                    
+                } catch let error as NSError {
+                    print("** REALM ERROR")
+                    print(error)
+                }
             } else {
                 // Index Doesnt exist
                 do {
                     let realm = try Realm()
                     try realm.write {
-                         self.previousWaterBodies.append([key : value])
+                        self.previousWaterBodies.append([key : value])
                     }
                     
                 } catch let error as NSError {
@@ -255,7 +255,7 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
                 do {
                     let realm = try Realm()
                     try realm.write {
-                         self.destinationWaterBodies[index][key] = value
+                        self.destinationWaterBodies[index][key] = value
                     }
                     
                 } catch let error as NSError {
@@ -277,6 +277,73 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
             }
         } else {
             return
+        }
+    }
+    
+    func removePreviousWaterBody(at index: Int) {
+        if index > self.previousWaterBodies.count - 1 {
+            return
+        }
+        do {
+            let realm = try Realm()
+            try realm.write {
+                self.previousWaterBodies.remove(at: index)
+            }
+            
+        } catch let error as NSError {
+            print("** REALM ERROR")
+            print(error)
+        }
+    }
+    
+    func removeDestinationWaterBody(at index: Int) {
+        if index > self.destinationWaterBodies.count - 1 {
+            return
+        }
+        do {
+            let realm = try Realm()
+            try realm.write {
+                self.destinationWaterBodies.remove(at: index)
+            }
+            
+        } catch let error as NSError {
+            print("** REALM ERROR")
+            print(error)
+        }
+    }
+    
+    func addDestinationWaterBody() {
+        do {
+            let realm = try Realm()
+            try realm.write {
+                self.destinationWaterBodies.append([
+                    "waterbody" : "",
+                    "nearestCity" : "",
+                    "province" : ""
+                ])
+            }
+            
+        } catch let error as NSError {
+            print("** REALM ERROR")
+            print(error)
+        }
+    }
+    
+    func addPreviousWaterBody() {
+        do {
+            let realm = try Realm()
+            try realm.write {
+                self.previousWaterBodies.append([
+                    "waterbody" : "",
+                    "nearestCity" : "",
+                    "province" : "",
+                    "numberOfDaysOut" : 0
+                ])
+            }
+            
+        } catch let error as NSError {
+            print("** REALM ERROR")
+            print(error)
         }
     }
     
