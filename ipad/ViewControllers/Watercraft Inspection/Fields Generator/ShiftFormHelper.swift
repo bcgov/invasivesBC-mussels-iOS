@@ -31,15 +31,6 @@ class ShiftFormHelper {
         )
         sectionItems.append(startTime)
         
-        let k9OnShift = SwitchInput(
-            key: "k9OnShif",
-            header: ShiftFormHeaders.ShiftStart.k9OnShift,
-            editable: editable ?? true,
-            value: object?.k9OnShif,
-            width: isModalSize ? .Half : .Third
-        )
-        sectionItems.append(k9OnShift)
-        
         let station = DropdownInput(
             key: "station",
             header: ShiftFormHeaders.ShiftStart.station,
@@ -124,16 +115,25 @@ class ShiftFormHelper {
             header: ShiftFormHeaders.ShiftEnd.endTime,
             editable: editable ?? true,
             value: object?.endTime ?? "",
-            width: .Forth
+            width: .Third
         )
         sectionItems.append(endTime)
+        
+        let k9OnShift = SwitchInput(
+            key: "k9OnShif",
+            header: ShiftFormHeaders.ShiftStart.k9OnShift,
+            editable: editable ?? true,
+            value: object?.k9OnShif,
+            width: .Third
+        )
+        sectionItems.append(k9OnShift)
         
         let boatsInspected = SwitchInput(
             key: "boatsInspected",
             header: ShiftFormHeaders.ShiftEnd.boatsInspected,
             editable: editable ?? true,
             value: object?.boatsInspected,
-            width: .Forth
+            width: .Third
         )
         sectionItems.append(boatsInspected)
         
@@ -142,7 +142,7 @@ class ShiftFormHelper {
             header: ShiftFormHeaders.ShiftEnd.motorizedBlowBys,
             editable: editable ?? true,
             value: object?.motorizedBlowBys,
-            width: .Forth
+            width: .Third
         )
         sectionItems.append(motorizedBlowBys)
         
@@ -151,9 +151,12 @@ class ShiftFormHelper {
             header: ShiftFormHeaders.ShiftEnd.nonMotorizedBlowBys,
             editable: editable ?? true,
             value: object?.nonMotorizedBlowBys,
-            width: .Forth
+            width: .Third
         )
         sectionItems.append(nonMotorizedBlowBys)
+        
+        let spacer = InputSpacer()
+        sectionItems.append(spacer)
         
         let shitEndComments = TextAreaInput(
             key: "shitEndComments",

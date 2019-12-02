@@ -70,6 +70,8 @@
 		296DEC2B238C73AF0035E7FA /* TimePicker.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 296DEC2A238C73AF0035E7FA /* TimePicker.storyboard */; };
 		296DEC2D238C73BD0035E7FA /* TimePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 296DEC2C238C73BD0035E7FA /* TimePickerViewController.swift */; };
 		298BF7C12394C0270072AA28 /* waterBodies.txt in Resources */ = {isa = PBXBuildFile; fileRef = 298BF7C02394C0270072AA28 /* waterBodies.txt */; };
+		298BF7C523958A220072AA28 /* SpacerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 298BF7C323958A220072AA28 /* SpacerCollectionViewCell.swift */; };
+		298BF7C623958A220072AA28 /* SpacerCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 298BF7C423958A220072AA28 /* SpacerCollectionViewCell.xib */; };
 		2991969023846AE000634F81 /* ShiftViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2991968F23846AE000634F81 /* ShiftViewController.swift */; };
 		299196932384725600634F81 /* TableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 299196922384725600634F81 /* TableView.xib */; };
 		299196952384726600634F81 /* TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299196942384726600634F81 /* TableView.swift */; };
@@ -244,6 +246,8 @@
 		296DEC2A238C73AF0035E7FA /* TimePicker.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TimePicker.storyboard; sourceTree = "<group>"; };
 		296DEC2C238C73BD0035E7FA /* TimePickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimePickerViewController.swift; sourceTree = "<group>"; };
 		298BF7C02394C0270072AA28 /* waterBodies.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = waterBodies.txt; sourceTree = "<group>"; };
+		298BF7C323958A220072AA28 /* SpacerCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpacerCollectionViewCell.swift; sourceTree = "<group>"; };
+		298BF7C423958A220072AA28 /* SpacerCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SpacerCollectionViewCell.xib; sourceTree = "<group>"; };
 		2991968F23846AE000634F81 /* ShiftViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShiftViewController.swift; sourceTree = "<group>"; };
 		299196922384725600634F81 /* TableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TableView.xib; sourceTree = "<group>"; };
 		299196942384726600634F81 /* TableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableView.swift; sourceTree = "<group>"; };
@@ -403,6 +407,7 @@
 				296DEC17238C51650035E7FA /* Time Input */,
 				29A9742A236CB588006C668F /* Switch Input */,
 				29F29FA8236CA925004F12E7 /* Text Input */,
+				298BF7C223958A060072AA28 /* Spacer */,
 				29F29F9E236B8655004F12E7 /* Dropdown */,
 			);
 			path = "Input Cells";
@@ -670,6 +675,15 @@
 				2933DD5A238C78350068E9DF /* TimePicker.swift */,
 			);
 			path = "Time Picker";
+			sourceTree = "<group>";
+		};
+		298BF7C223958A060072AA28 /* Spacer */ = {
+			isa = PBXGroup;
+			children = (
+				298BF7C323958A220072AA28 /* SpacerCollectionViewCell.swift */,
+				298BF7C423958A220072AA28 /* SpacerCollectionViewCell.xib */,
+			);
+			path = Spacer;
 			sourceTree = "<group>";
 		};
 		2991968E2384656A00634F81 /* Recovered References */ = {
@@ -1273,6 +1287,7 @@
 				296DEC28238C61A80035E7FA /* IntegerStepperInputCollectionViewCell.xib in Resources */,
 				296DEC1B238C51810035E7FA /* TimeInputCollectionViewCell.xib in Resources */,
 				29A9742E236CB59F006C668F /* SwitchInputCollectionViewCell.xib in Resources */,
+				298BF7C623958A220072AA28 /* SpacerCollectionViewCell.xib in Resources */,
 				29DB4E5A238715A300B13646 /* ShiftInformationHeaderCollectionViewCell.xib in Resources */,
 				2907E4B92368D25800946B3F /* InputModal.xib in Resources */,
 				29DB4E3F23870B7B00B13646 /* ShifOverviewHeaderCollectionViewCell.xib in Resources */,
@@ -1398,6 +1413,7 @@
 				29BAC5102367984000A620F4 /* GradiantView.swift in Sources */,
 				29514BE32368B5AF00DC89C4 /* Notifications.swift in Sources */,
 				294D9A8F237B1EA300BD4928 /* WatercraftInspectionFormHelper.swift in Sources */,
+				298BF7C523958A220072AA28 /* SpacerCollectionViewCell.swift in Sources */,
 				29F29FA6236BB541004F12E7 /* BaseInputCell.swift in Sources */,
 				295051092374D764000FBD6E /* DoubleInputCollectionViewCell.swift in Sources */,
 				5C82D3DD2374B9D700B065BA /* AppRemoteAPIConst.swift in Sources */,
