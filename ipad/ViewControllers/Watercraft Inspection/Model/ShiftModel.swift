@@ -10,8 +10,6 @@ import Foundation
 import Realm
 import RealmSwift
 
-//extension ShiftModel: PropertyReflectable {}
-
 class ShiftModel: Object, BaseRealmObject {
     @objc dynamic var userId: String = ""
     @objc dynamic var localId: String = {

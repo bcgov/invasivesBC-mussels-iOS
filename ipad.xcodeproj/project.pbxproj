@@ -74,6 +74,8 @@
 		298BF7C623958A220072AA28 /* SpacerCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 298BF7C423958A220072AA28 /* SpacerCollectionViewCell.xib */; };
 		298BF7C8239590730072AA28 /* WaterBodyTableModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 298BF7C7239590730072AA28 /* WaterBodyTableModel.swift */; };
 		298BF7CA239592950072AA28 /* ArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 298BF7C9239592950072AA28 /* ArrayExtension.swift */; };
+		298BF7CC2395D45C0072AA28 /* PreviousWaterBodyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 298BF7CB2395D45C0072AA28 /* PreviousWaterBodyModel.swift */; };
+		298BF7CE2395D57E0072AA28 /* DestinationWaterBodyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 298BF7CD2395D57E0072AA28 /* DestinationWaterBodyModel.swift */; };
 		2991969023846AE000634F81 /* ShiftViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2991968F23846AE000634F81 /* ShiftViewController.swift */; };
 		299196932384725600634F81 /* TableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 299196922384725600634F81 /* TableView.xib */; };
 		299196952384726600634F81 /* TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299196942384726600634F81 /* TableView.swift */; };
@@ -251,6 +253,8 @@
 		298BF7C423958A220072AA28 /* SpacerCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SpacerCollectionViewCell.xib; sourceTree = "<group>"; };
 		298BF7C7239590730072AA28 /* WaterBodyTableModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterBodyTableModel.swift; sourceTree = "<group>"; };
 		298BF7C9239592950072AA28 /* ArrayExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtension.swift; sourceTree = "<group>"; };
+		298BF7CB2395D45C0072AA28 /* PreviousWaterBodyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviousWaterBodyModel.swift; sourceTree = "<group>"; };
+		298BF7CD2395D57E0072AA28 /* DestinationWaterBodyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestinationWaterBodyModel.swift; sourceTree = "<group>"; };
 		2991968F23846AE000634F81 /* ShiftViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShiftViewController.swift; sourceTree = "<group>"; };
 		299196922384725600634F81 /* TableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TableView.xib; sourceTree = "<group>"; };
 		299196942384726600634F81 /* TableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableView.swift; sourceTree = "<group>"; };
@@ -491,6 +495,8 @@
 				294D9A872379C62F00BD4928 /* WatercraftInspectionModel.swift */,
 				29588747237B52F000224FFA /* HighRiskAssessmentModel.swift */,
 				29DB4E4023870F2B00B13646 /* ShiftModel.swift */,
+				298BF7CB2395D45C0072AA28 /* PreviousWaterBodyModel.swift */,
+				298BF7CD2395D57E0072AA28 /* DestinationWaterBodyModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1409,6 +1415,7 @@
 				2907E4B12368CD6700946B3F /* Dropdown.swift in Sources */,
 				29FFEBBE237F1EAA00574E3F /* Settings.swift in Sources */,
 				29DB4E59238715A300B13646 /* ShiftInformationHeaderCollectionViewCell.swift in Sources */,
+				298BF7CE2395D57E0072AA28 /* DestinationWaterBodyModel.swift in Sources */,
 				296DEC27238C61A80035E7FA /* IntegerStepperInputCollectionViewCell.swift in Sources */,
 				29BAC5192367B34000A620F4 /* Fonts.swift in Sources */,
 				5C82D404237B31C200B065BA /* WatercraftRiskAssessmentAPI.swift in Sources */,
@@ -1501,6 +1508,7 @@
 				2933DD61238DC5120068E9DF /* CodeTableModel.swift in Sources */,
 				5C0F6979237B635800F96CA5 /* WaterBodyAPI.swift in Sources */,
 				5C82D3F52374D09000B065BA /* UtilityObjC.m in Sources */,
+				298BF7CC2395D45C0072AA28 /* PreviousWaterBodyModel.swift in Sources */,
 				5C82D3DE2374B9D700B065BA /* RemoteAPI.swift in Sources */,
 				5C82D3F92376036700B065BA /* WorkflowAPI.swift in Sources */,
 				29BAC51C2367B5B500A620F4 /* RealmRequests.swift in Sources */,

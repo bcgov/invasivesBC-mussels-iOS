@@ -86,9 +86,8 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
     @objc dynamic var generalComments: String = ""
     
     // Journey
-    var previousWaterBodies: [[String: Any]] =  [[String: Any]]()
-    var destinationWaterBodies: [[String: Any]] =  [[String: Any]]()
-    
+    var previousWaterBodies: List<PreviousWaterbodyModel> = List<PreviousWaterbodyModel>()
+    var destinationWaterBodies: List<DestinationWaterbodyModel> = List<DestinationWaterbodyModel>()
     
     // High Risk Assessments
     private var highRiskAssessments: List<HighRiskAssessmentModel> = List<HighRiskAssessmentModel>()
@@ -222,28 +221,7 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
             let key = String(splitKey[1])
             if self.previousWaterBodies.count - 1 >= index {
                 // Index Exists
-                do {
-                    let realm = try Realm()
-                    try realm.write {
-                        self.previousWaterBodies[index][key] = value
-                    }
-                    
-                } catch let error as NSError {
-                    print("** REALM ERROR")
-                    print(error)
-                }
-            } else {
-                // Index Doesnt exist
-                do {
-                    let realm = try Realm()
-                    try realm.write {
-                        self.previousWaterBodies.append([key : value])
-                    }
-                    
-                } catch let error as NSError {
-                    print("** REALM ERROR")
-                    print(error)
-                }
+                self.previousWaterBodies[index].set(value: value, for: key)
             }
         } else if inputItemKey.contains("destinationWaterBody") {
             // Destination Water Body
@@ -251,32 +229,8 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
             guard let index = Int(splitKey[2]) else {return}
             let key = String(splitKey[1])
             if self.destinationWaterBodies.count - 1 >= index {
-                // Index Exists
-                do {
-                    let realm = try Realm()
-                    try realm.write {
-                        self.destinationWaterBodies[index][key] = value
-                    }
-                    
-                } catch let error as NSError {
-                    print("** REALM ERROR")
-                    print(error)
-                }
-            } else {
-                // Index Doesnt exist
-                do {
-                    let realm = try Realm()
-                    try realm.write {
-                        self.destinationWaterBodies.append([key : value])
-                    }
-                    
-                } catch let error as NSError {
-                    print("** REALM ERROR")
-                    print(error)
-                }
+                self.destinationWaterBodies[index].set(value: value, for: key)
             }
-        } else {
-            return
         }
     }
     
@@ -316,11 +270,7 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
         do {
             let realm = try Realm()
             try realm.write {
-                self.destinationWaterBodies.append([
-                    "waterbody" : "",
-                    "nearestCity" : "",
-                    "province" : ""
-                ])
+                self.destinationWaterBodies.append(DestinationWaterbodyModel())
             }
             
         } catch let error as NSError {
@@ -333,12 +283,7 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
         do {
             let realm = try Realm()
             try realm.write {
-                self.previousWaterBodies.append([
-                    "waterbody" : "",
-                    "nearestCity" : "",
-                    "province" : "",
-                    "numberOfDaysOut" : 0
-                ])
+                self.previousWaterBodies.append(PreviousWaterbodyModel())
             }
             
         } catch let error as NSError {

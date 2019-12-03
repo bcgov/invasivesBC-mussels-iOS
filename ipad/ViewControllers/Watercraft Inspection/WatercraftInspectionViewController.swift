@@ -159,7 +159,7 @@ class WatercraftInspectionViewController: BaseViewController {
             }
         } else if item.key.contains("previousWaterBody") || item.key.contains("destinationWaterBody") {
             // Watercraft Journey
-            model.editJourney(inputItemKey: item.key, value: item.value)
+            model.editJourney(inputItemKey: item.key, value: item.value.get(type: item.type))
         } else {
             // All other keys, store directly
             // TODO: needs cleanup for nil case
