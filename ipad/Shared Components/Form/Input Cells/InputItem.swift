@@ -22,6 +22,7 @@ enum InputItemType {
     case RadioBoolean
     case Time
     case Stepper
+    case Spacer
 }
 
 enum InputItemWidthSize {
@@ -29,6 +30,7 @@ enum InputItemWidthSize {
     case Half
     case Third
     case Forth
+    case Fill
 }
 
 struct InputValue {
@@ -66,6 +68,8 @@ struct InputValue {
             return self.time
         case .Stepper:
             return self.int
+        case .Spacer:
+            return nil
         }
     }
     
@@ -95,6 +99,8 @@ struct InputValue {
             self.time = value as? String
         case .Stepper:
             self.int = value as? Int
+        case .Spacer:
+            break
         }
     }
 }
@@ -147,6 +153,8 @@ struct InputDependency {
             return item.value.get(type: item.type) as? TimeInterval == _value.get(type: item.type) as? TimeInterval
         case .Stepper:
             return item.value.get(type: item.type) as? Int == _value.get(type: item.type) as? Int
+        case .Spacer:
+            return false
         }
     }
 }
@@ -522,5 +530,24 @@ class RadioBoolean: InputItem {
     
     func setValue(value: Bool?) {
         self.value.set(value: value, type: self.type)
+    }
+}
+
+class InputSpacer: InputItem {
+    var dependency: InputDependency?
+    var type: InputItemType = .Spacer
+    var width: InputItemWidthSize
+    var height: CGFloat = 70
+    var key: String
+    var value: InputValue
+    var header: String
+    var editable: Bool
+    
+    init(width: InputItemWidthSize? = .Fill, height: CGFloat? = 70) {
+        self.key = UUID().uuidString
+        self.value = InputValue()
+        self.header = ""
+        self.editable = false
+        self.width = width ?? .Fill
     }
 }

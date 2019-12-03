@@ -8,15 +8,7 @@
 
 import Foundation
 class WatercraftInspectionFormHelper {
-    private static func getDummyOptions() -> [DropdownModel]{
-        var options: [DropdownModel] = []
-        options.append(DropdownModel(display: "Something here"))
-        options.append(DropdownModel(display: "Something else here"))
-        options.append(DropdownModel(display: "Something more here"))
-        options.append(DropdownModel(display: "Another thing"))
-        return options
-    }
-    
+
     static func getPassportFields(for object: WatercradftInspectionModel? = nil, editable: Bool? = true) -> [InputItem] {
         var items: [InputItem] = []
         
@@ -163,11 +155,11 @@ class WatercraftInspectionFormHelper {
         )
         sectionItems.append(numberOfPeopleInParty)
         
-        let commerciallyHauled = IntegerInput(
+        let commerciallyHauled = SwitchInput(
             key: "commerciallyHauled",
             header: WatercraftFieldHeaderConstants.WatercraftDetails.commerciallyHauled,
             editable: editable ?? true,
-            value: object?.commerciallyHauled ?? 0,
+            value: object?.commerciallyHauled ?? false,
             width: .Third
         )
         sectionItems.append(commerciallyHauled)
@@ -307,36 +299,42 @@ class WatercraftInspectionFormHelper {
         return sectionItems
     }
     
-    public static func watercraftInspectionPreviousWaterBodyInputs(index: Int, isEditable: Bool? = true) -> [InputItem] {
+    public static func watercraftInspectionPreviousWaterBodyInputs(for object: WatercradftInspectionModel? = nil, index: Int, isEditable: Bool? = true) -> [InputItem] {
+        let item = object?.previousWaterBodies[index] ?? nil
         var sectionItems: [InputItem] = []
         let previousWaterBody = DropdownInput(
-            key: "previousWaterBody-\(index)",
+            key: "previousWaterBody-waterbody-\(index)",
             header: "Previous WaterBody",
             editable: isEditable ?? true,
+            value: item?["waterbody"] as? String ?? "",
             width: .Forth,
-            dropdownItems: getDummyOptions()
+            dropdownItems: DropdownHelper.shared.getDropdown(for: .waterBodies)
         )
         
         let nearestCity = DropdownInput(
             key: "previousWaterBody-nearestCity-\(index)",
             header: "Nearest City",
             editable: isEditable ?? true,
+            value: item?["nearestCity"] as? String ?? "",
             width: .Forth,
-            dropdownItems: getDummyOptions()
+            dropdownItems: DropdownHelper.shared.getDropdown(for: .cities)
         )
         
         let province = DropdownInput(
             key: "previousWaterBody-province-\(index)",
             header: "Province / State",
             editable: isEditable ?? true,
+            value: item?["province"] as? String ?? "",
             width: .Forth,
-            dropdownItems: getDummyOptions()
+            dropdownItems: DropdownHelper.shared.getDropdown(for: .provinces)
         )
         
-        let numberOfDaysOut = TextInput(
+        let numberOfDaysOut = IntegerInput(
             key: "previousWaterBody-numberOfDaysOut-\(index)",
             header: "Number of days out of waterbody?",
-            editable: isEditable ?? true, width: .Forth
+            editable: isEditable ?? true,
+            value: item?["numberOfDaysOut"] as? Int,
+            width: .Forth
         )
         
         sectionItems.append(previousWaterBody)
@@ -346,30 +344,34 @@ class WatercraftInspectionFormHelper {
         return sectionItems
     }
     
-    public static func watercraftInspectionDestinationWaterBodyInputs(index: Int, isEditable: Bool? = true) -> [InputItem] {
+    public static func watercraftInspectionDestinationWaterBodyInputs(for object: WatercradftInspectionModel? = nil, index: Int, isEditable: Bool? = true) -> [InputItem] {
+        let item = object?.destinationWaterBodies[index] ?? nil
         var sectionItems: [InputItem] = []
         let destinationWaterBody = DropdownInput(
-            key: "destinationWaterBody-\(index)",
+            key: "destinationWaterBody-waterbody-\(index)",
             header: "Destination WaterBody",
             editable: isEditable ?? true,
+            value: item?["waterbody"] as? String ?? "",
             width: .Third,
-            dropdownItems: getDummyOptions()
+            dropdownItems: DropdownHelper.shared.getDropdown(for: .waterBodies)
         )
         
         let nearestCity = DropdownInput(
-            key: "destinationWaterBody-NearestCity-\(index)",
+            key: "destinationWaterBody-nearestCity-\(index)",
             header: "Nearest City",
             editable: isEditable ?? true,
+            value: item?["nearestCity"] as? String ?? "",
             width: .Third,
-            dropdownItems: getDummyOptions()
+            dropdownItems: DropdownHelper.shared.getDropdown(for: .cities)
         )
         
         let province = DropdownInput(
             key: "destinationWaterBody-province-\(index)",
             header: "Province / State",
             editable: isEditable ?? true,
+            value: item?["province"] as? String ?? "",
             width: .Third,
-            dropdownItems: getDummyOptions()
+            dropdownItems: DropdownHelper.shared.getDropdown(for: .provinces)
         )
         
         sectionItems.append(destinationWaterBody)

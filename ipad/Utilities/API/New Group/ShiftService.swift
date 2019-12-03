@@ -24,29 +24,29 @@ class ShiftService {
         let shiftLocalId = shift.localId
         // Post call
         post(shift: shift) { (shiftId) in
-            // Fetch shift object - For realm thrad issues
+            // Fetch shift object - For realm thread issues
             guard let rempteId = shiftId, let refetchedShift = Storage.shared.shift(withLocalId: shiftLocalId) else {
                 return then(false)
             }
             refetchedShift.setRemote(id: rempteId)
-            //            let dispatchGroup = DispatchGroup()
-            //            var hadFailes = false
-            //            for inspection in refetchedShift.inspections {
-            //                let inspectionLocalId = inspection.localId
-            //                dispatchGroup.enter()
-            //                self.post(inspection: inspection, shift: rempteId) { (inspectId) in
-            //                    if let inspectionId = inspectId, let referchedInspection = Storage.shared.inspection(withLocalId: inspectionLocalId) {
-            //                        print(inspectionId)
-            //                    } else {
-            //                        hadFailes = true
-            //                    }
-            //                    dispatchGroup.leave()
-            //                }
-            //            }
-            //            dispatchGroup.notify(queue: .main) {
-            //                print("Shift Shibmission Executed.")
-            //                return then(!hadFailes)
-            //            }
+//                        let dispatchGroup = DispatchGroup()
+//                        var hadFailes = false
+//                        for inspection in refetchedShift.inspections {
+//                            let inspectionLocalId = inspection.localId
+//                            dispatchGroup.enter()
+//                            self.post(inspection: inspection, shift: rempteId) { (inspectId) in
+//                                if let inspectionId = inspectId, let referchedInspection = Storage.shared.inspection(withLocalId: inspectionLocalId) {
+//                                    print(inspectionId)
+//                                } else {
+//                                    hadFailes = true
+//                                }
+//                                dispatchGroup.leave()
+//                            }
+//                        }
+//                        dispatchGroup.notify(queue: .main) {
+//                            print("Shift Shibmission Executed.")
+//                            return then(!hadFailes)
+//                        }
             
             self.submit(inspections: Array(refetchedShift.inspections), shiftId: rempteId) { (success) in
                 return then(success)

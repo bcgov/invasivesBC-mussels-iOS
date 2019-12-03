@@ -149,7 +149,7 @@ class AutoSync {
         
         // Block autosync from being executed.
         self.isSynchronizing = true
-        
+        self.endListener()
         // Add the autosync view
         let syncView: SyncView = UIView.fromNib()
         syncView.initialize()
@@ -189,7 +189,7 @@ class AutoSync {
                     syncView.remove()
                     // free autosync
                     self.isSynchronizing = false
-                    print(Auth.getUserID())
+                    self.beginListener()
                     return completion(!hadErrors)
                 }
             }

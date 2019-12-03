@@ -41,7 +41,11 @@ class IntegerInputCollectionViewCell: BaseInputCell<IntegerInput>, UITextFieldDe
     override func initialize(with model: IntegerInput) {
         self.textField.keyboardType = .decimalPad
         self.headerLabel.text = model.header
-        self.textField.text = model.value.get(type: model.type) as? String ?? ""
+        if let current = model.value.get(type: model.type) as? Int {
+            self.textField.text = "\(current)"
+        } else {
+            self.textField.text = ""
+        }
         textField.delegate = self
     }
     

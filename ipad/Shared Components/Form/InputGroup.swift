@@ -23,7 +23,8 @@ class InputGroupView: UIView {
         "ViewFieldCollectionViewCell",
         "RadioBooleanCollectionViewCell",
         "TimeInputCollectionViewCell",
-        "IntegerStepperInputCollectionViewCell"
+        "IntegerStepperInputCollectionViewCell",
+        "SpacerCollectionViewCell"
     ]
     
     // MARK: Variables
@@ -138,6 +139,8 @@ class InputGroupView: UIView {
                 itemWidth = 33
             case .Forth:
                 itemWidth = 25
+            case .Fill:
+                itemWidth = 100 - widthCounter
             }
             // If the new row witdh + current row width exceeds 100, item will be in the next row
             if (widthCounter + itemWidth) > 100 {
@@ -239,6 +242,10 @@ extension InputGroupView: UICollectionViewDataSource, UICollectionViewDelegate, 
         return collectionView!.dequeueReusableCell(withReuseIdentifier: "RadioBooleanCollectionViewCell", for: indexPath as IndexPath) as! RadioBooleanCollectionViewCell
     }
     
+    func getSpacerCell(indexPath: IndexPath) ->  SpacerCollectionViewCell {
+        return collectionView!.dequeueReusableCell(withReuseIdentifier: "SpacerCollectionViewCell", for: indexPath as IndexPath) as! SpacerCollectionViewCell
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return displayableInputItems.count
     }
@@ -294,6 +301,9 @@ extension InputGroupView: UICollectionViewDataSource, UICollectionViewDelegate, 
             let cell = getIntStepperInputCell(indexPath: indexPath)
             cell.setup(with: item as! IntegerStepperInput, delegate: inputDelegate!)
             return cell
+        case .Spacer:
+            let cell = getSpacerCell(indexPath: indexPath)
+            return cell
         }
     }
     
@@ -305,12 +315,18 @@ extension InputGroupView: UICollectionViewDataSource, UICollectionViewDelegate, 
             cellSpacing = layoutUnwrapped.minimumInteritemSpacing
         }
         
+        var previousItemWidth: InputItemWidthSize? = nil
+        
+        if indexPath.row >= 1 {
+            let previous = displayableInputItems[indexPath.row - 1]
+            previousItemWidth = previous.width
+        }
+        
         let item = displayableInputItems[indexPath.row]
         let containerWidth = collectionView.frame.width
         var multiplier: CGFloat = 1
         switch item.width {
         case .Full:
-            //            multiplier = 1
             return CGSize(width: containerWidth, height: item.height)
         case .Half:
             multiplier = 2
@@ -318,6 +334,23 @@ extension InputGroupView: UICollectionViewDataSource, UICollectionViewDelegate, 
             multiplier = 3
         case .Forth:
             multiplier = 4
+        case .Fill:
+            if let previousWidth = previousItemWidth {
+                switch previousWidth {
+                case .Full:
+                    return CGSize(width: containerWidth, height: item.height)
+                case .Half:
+                    multiplier = 2
+                case .Third:
+                    multiplier = 3
+                case .Forth:
+                    multiplier = 4
+                case .Fill:
+                    return CGSize(width: containerWidth, height: item.height)
+                }
+            } else {
+                return CGSize(width: containerWidth, height: item.height)
+            }
         }
         
         return CGSize(width: (containerWidth - (multiplier * cellSpacing)) / multiplier, height: item.height)

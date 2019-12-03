@@ -48,7 +48,6 @@ class WatercraftInspectionViewController: BaseViewController {
     var model: WatercradftInspectionModel? = nil
     private var showFullInspection: Bool = false
     private var isEditable: Bool = true
-    private var journeyDetails: JourneyDetailsModel = JourneyDetailsModel()
     private var formResult: [String: Any?] = [String: Any]()
     
     // MARK: Class Functions
@@ -138,34 +137,35 @@ class WatercraftInspectionViewController: BaseViewController {
     
     // MARK: Input Item Changed
     @objc func inputItemValueChanged(notification: Notification) {
-        guard var item: InputItem = notification.object as? InputItem else {return}
+        guard var item: InputItem = notification.object as? InputItem, let model = self.model else {return}
         formResult[item.key] = item.value.get(type: item.type)
         // Set value in Realm object
-        if let m = model {
-            // Keys that need a pop up/ additional actions
-            if (item.key == "highriskAIS" || item.key == "adultDreissenidFound" ) {
-                let value = item.value.get(type: item.type) as? Bool
-                if value == true {
-                    let highRiskModal: HighRiskModalView = HighRiskModalView.fromNib()
-                    highRiskModal.initialize(onSubmit: {
-                        // Confirmed
-                        m.set(value: true, for: item.key)
-                        // Show high risk form
-                        self.showHighRiskForm()
-                    }) {
-                        // Cancelled
-                        m.set(value: false, for: item.key)
-                        item.value.set(value: false, type: item.type)
-                        NotificationCenter.default.post(name: .InputFieldShouldUpdate, object: item)
-                    }
+        // Keys that need a pop up/ additional actions
+        if (item.key == "highriskAIS" || item.key == "adultDreissenidFound" ) {
+            let value = item.value.get(type: item.type) as? Bool
+            if value == true {
+                let highRiskModal: HighRiskModalView = HighRiskModalView.fromNib()
+                highRiskModal.initialize(onSubmit: {
+                    // Confirmed
+                    model.set(value: true, for: item.key)
+                    // Show high risk form
+                    self.showHighRiskForm()
+                }) {
+                    // Cancelled
+                    model.set(value: false, for: item.key)
+                    item.value.set(value: false, type: item.type)
+                    NotificationCenter.default.post(name: .InputFieldShouldUpdate, object: item)
                 }
-            } else {
-                // All other keys, store directly
-                // TODO: needs cleanup for nil case
-                m.set(value: item.value.get(type: item.type) as Any, for: item.key)
             }
-            
+        } else if item.key.contains("previousWaterBody") || item.key.contains("destinationWaterBody") {
+            // Watercraft Journey
+            model.editJourney(inputItemKey: item.key, value: item.value.get(type: item.type))
+        } else {
+            // All other keys, store directly
+            // TODO: needs cleanup for nil case
+            model.set(value: item.value.get(type: item.type) as Any, for: item.key)
         }
+        // TODO: CLEANUP
         // Handle Keys that alter form
         if item.key == "isPassportHolder" {
             // If is NOT passport holder, Show full form
@@ -173,7 +173,11 @@ class WatercraftInspectionViewController: BaseViewController {
             if fieldValue == false {
                 self.showFullInspection = true
             } else {
-                self.showFullInspection = false
+                if model.launchedOutsideBC {
+                    self.showFullInspection = true
+                } else {
+                    self.showFullInspection = false
+                }
             }
             self.collectionView.reloadData()
         }
@@ -234,10 +238,10 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        guard let sectionType = WatercraftFromSection(rawValue: Int(section)) else {return 0}
+        guard let sectionType = WatercraftFromSection(rawValue: Int(section)), let model = self.model else {return 0}
         
         if sectionType == .JourneyDetails {
-            return journeyDetails.previousWaterBodies.count + journeyDetails.destinationWaterBodies.count + 4
+            return model.previousWaterBodies.count + model.destinationWaterBodies.count + 4
         } else {
             return 1
         }
@@ -318,6 +322,7 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
     }
     
     private func getJourneyDetailsCell(for indexPath: IndexPath) -> UICollectionViewCell {
+        guard let model = self.model else {return UICollectionViewCell()}
         switch getJourneyDetailsCellType(for: indexPath) {
         case .Header:
             let cell = getHeaderCell(indexPath: indexPath)
@@ -326,8 +331,10 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
         case .PreviousWaterBody:
             let cell = getPreviousWaterBodyCell(indexPath: indexPath)
             let itemsIndex: Int = indexPath.row - 1
-            cell.setup(with: journeyDetails.previousWaterBodies[itemsIndex], delegate: self, onDelete: {
-                self.journeyDetails.previousWaterBodies.remove(at: itemsIndex)
+            let previousWaterBody = model.previousWaterBodies[itemsIndex]
+            let inputItems = WatercraftInspectionFormHelper.watercraftInspectionPreviousWaterBodyInputs(for: model, index: itemsIndex, isEditable: self.isEditable)
+            cell.setup(with: inputItems, delegate: self, onDelete: {
+                model.removePreviousWaterBody(at: itemsIndex)
                 self.collectionView.performBatchUpdates({
                     self.collectionView.reloadSections(IndexSet(integer: indexPath.section))
                 }, completion: nil)
@@ -335,9 +342,11 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
             return cell
         case .DestinationWaterBody:
             let cell = getDestinationWaterBodyCell(indexPath: indexPath)
-            let itemsIndex: Int = indexPath.row - (journeyDetails.previousWaterBodies.count + 2)
-            cell.setup(with: journeyDetails.destinationWaterBodies[itemsIndex], delegate: self, onDelete: {
-                self.journeyDetails.destinationWaterBodies.remove(at: itemsIndex)
+            let itemsIndex: Int = indexPath.row - (model.previousWaterBodies.count + 2)
+            let destinationWaterBody = model.destinationWaterBodies[itemsIndex]
+            let inputItems = WatercraftInspectionFormHelper.watercraftInspectionDestinationWaterBodyInputs(for: model, index: itemsIndex, isEditable: self.isEditable)
+            cell.setup(with: inputItems, delegate: self, onDelete: {
+                model.removeDestinationWaterBody(at: itemsIndex)
                 self.collectionView.performBatchUpdates({
                     self.collectionView.reloadSections(IndexSet(integer: indexPath.section))
                 }, completion: nil)
@@ -346,7 +355,7 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
         case .AddPreviousWaterBody:
             let cell = getButtonCell(indexPath: indexPath)
             cell.setup(with: "Add Prveious Water Body") {
-                self.journeyDetails.previousWaterBodies.append(WatercraftInspectionFormHelper.watercraftInspectionPreviousWaterBodyInputs(index: self.journeyDetails.previousWaterBodies.count, isEditable: self.isEditable))
+                model.addPreviousWaterBody()
                 self.collectionView.performBatchUpdates({
                     self.collectionView.reloadSections(IndexSet(integer: indexPath.section))
                 }, completion: nil)
@@ -355,7 +364,7 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
         case .AddDestinationWaterBody:
             let cell = getButtonCell(indexPath: indexPath)
             cell.setup(with: "Add Destination Water Body") {
-                self.journeyDetails.destinationWaterBodies.append(WatercraftInspectionFormHelper.watercraftInspectionDestinationWaterBodyInputs(index: self.journeyDetails.destinationWaterBodies.count, isEditable: self.isEditable))
+                model.addDestinationWaterBody()
                 self.collectionView.performBatchUpdates({
                     self.collectionView.reloadSections(IndexSet(integer: indexPath.section))
                 }, completion: nil)
@@ -388,23 +397,24 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
     }
     
     private func getJourneyDetailsCellType(for indexPath: IndexPath) -> JourneyDetailsSectionRow {
+        guard let model = self.model else {return .Divider}
         if indexPath.row == 0 {
             return .Header
         }
         
-        if indexPath.row == journeyDetails.previousWaterBodies.count + 1 {
+        if indexPath.row == model.previousWaterBodies.count + 1 {
             return .AddPreviousWaterBody
         }
         
-        if indexPath.row == journeyDetails.previousWaterBodies.count + journeyDetails.destinationWaterBodies.count + 2 {
+        if indexPath.row == model.previousWaterBodies.count + model.destinationWaterBodies.count + 2 {
             return .AddDestinationWaterBody
         }
         
-        if indexPath.row <= journeyDetails.previousWaterBodies.count {
+        if indexPath.row <= model.previousWaterBodies.count {
             return .PreviousWaterBody
         }
         
-        if indexPath.row <= (journeyDetails.previousWaterBodies.count + journeyDetails.destinationWaterBodies.count + 1) {
+        if indexPath.row <= (model.previousWaterBodies.count + model.destinationWaterBodies.count + 1) {
             return .DestinationWaterBody
         }
         
