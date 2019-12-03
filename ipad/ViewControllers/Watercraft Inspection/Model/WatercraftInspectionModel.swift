@@ -57,7 +57,7 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
     @objc dynamic var veryComplex: Int = 0
     // Watercraft Details
     @objc dynamic var numberOfPeopleInParty: Int = 0
-    @objc dynamic var commerciallyHauled: Int = 0
+    @objc dynamic var commerciallyHauled: Bool = false
     @objc dynamic var highRiskArea: Bool = false
     @objc dynamic var previousAISKnowlede: Bool = false
     @objc dynamic var previousAISKnowledeSource: String = ""
@@ -86,7 +86,8 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
     @objc dynamic var generalComments: String = ""
     
     // Journey
-    private var journeyDetails: List<JourneyDetailsModel> = List<JourneyDetailsModel>()
+    var previousWaterBodies: List<PreviousWaterbodyModel> = List<PreviousWaterbodyModel>()
+    var destinationWaterBodies: List<DestinationWaterbodyModel> = List<DestinationWaterbodyModel>()
     
     // High Risk Assessments
     private var highRiskAssessments: List<HighRiskAssessmentModel> = List<HighRiskAssessmentModel>()
@@ -203,6 +204,91 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
             print("** REALM ERROR")
             print(error)
             return nil
+        }
+    }
+    
+    /*
+     Edit journey details arrays Based on input item key
+     Input item key would be something like
+     previousWaterBody-waterbody-0
+     Journey detail type - field key - index of journey detail type
+     */
+    func editJourney(inputItemKey: String, value: Any) {
+        if inputItemKey.contains("previousWaterBody") {
+            // Previous Water Body
+            let splitKey = inputItemKey.split(separator: "-")
+            guard let index = Int(splitKey[2]) else {return}
+            let key = String(splitKey[1])
+            if self.previousWaterBodies.count - 1 >= index {
+                // Index Exists
+                self.previousWaterBodies[index].set(value: value, for: key)
+            }
+        } else if inputItemKey.contains("destinationWaterBody") {
+            // Destination Water Body
+            let splitKey = inputItemKey.split(separator: "-")
+            guard let index = Int(splitKey[2]) else {return}
+            let key = String(splitKey[1])
+            if self.destinationWaterBodies.count - 1 >= index {
+                self.destinationWaterBodies[index].set(value: value, for: key)
+            }
+        }
+    }
+    
+    func removePreviousWaterBody(at index: Int) {
+        if index > self.previousWaterBodies.count - 1 {
+            return
+        }
+        do {
+            let realm = try Realm()
+            try realm.write {
+                self.previousWaterBodies.remove(at: index)
+            }
+            
+        } catch let error as NSError {
+            print("** REALM ERROR")
+            print(error)
+        }
+    }
+    
+    func removeDestinationWaterBody(at index: Int) {
+        if index > self.destinationWaterBodies.count - 1 {
+            return
+        }
+        do {
+            let realm = try Realm()
+            try realm.write {
+                self.destinationWaterBodies.remove(at: index)
+            }
+            
+        } catch let error as NSError {
+            print("** REALM ERROR")
+            print(error)
+        }
+    }
+    
+    func addDestinationWaterBody() {
+        do {
+            let realm = try Realm()
+            try realm.write {
+                self.destinationWaterBodies.append(DestinationWaterbodyModel())
+            }
+            
+        } catch let error as NSError {
+            print("** REALM ERROR")
+            print(error)
+        }
+    }
+    
+    func addPreviousWaterBody() {
+        do {
+            let realm = try Realm()
+            try realm.write {
+                self.previousWaterBodies.append(PreviousWaterbodyModel())
+            }
+            
+        } catch let error as NSError {
+            print("** REALM ERROR")
+            print(error)
         }
     }
     
