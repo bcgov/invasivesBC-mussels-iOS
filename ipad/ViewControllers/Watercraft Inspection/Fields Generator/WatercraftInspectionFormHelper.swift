@@ -8,7 +8,7 @@
 
 import Foundation
 class WatercraftInspectionFormHelper {
-
+    
     static func getPassportFields(for object: WatercradftInspectionModel? = nil, editable: Bool? = true) -> [InputItem] {
         var items: [InputItem] = []
         
@@ -96,16 +96,17 @@ class WatercraftInspectionFormHelper {
     
     static func getBasicInfoFields(for object: WatercradftInspectionModel? = nil, editable: Bool? = true) -> [InputItem] {
         var sectionItems: [InputItem] = []
-        let province = TextInput(
+        let province = DropdownInput(
             key: "province",
             header: WatercraftFieldHeaderConstants.BasicInfo.province,
             editable: editable ?? true,
             value: object?.province ?? "",
-            width: .Full
+            width: .Full,
+            dropdownItems: DropdownHelper.shared.getDropdown(for: .provinces)
         )
         sectionItems.append(province)
         
-        let nonMotorized = IntegerInput(
+        let nonMotorized = IntegerStepperInput(
             key: "nonMotorized",
             header: WatercraftFieldHeaderConstants.BasicInfo.nonMotorized,
             editable: editable ?? true,
@@ -114,7 +115,7 @@ class WatercraftInspectionFormHelper {
         )
         sectionItems.append(nonMotorized)
         
-        let simple = IntegerInput(
+        let simple = IntegerStepperInput(
             key: "simple",
             header: WatercraftFieldHeaderConstants.BasicInfo.simple,
             editable: editable ?? true,
@@ -123,7 +124,7 @@ class WatercraftInspectionFormHelper {
         )
         sectionItems.append(simple)
         
-        let complex = IntegerInput(
+        let complex = IntegerStepperInput(
             key: "complex",
             header: WatercraftFieldHeaderConstants.BasicInfo.complex,
             editable: editable ?? true,
@@ -132,7 +133,7 @@ class WatercraftInspectionFormHelper {
         )
         sectionItems.append(complex)
         
-        let veryComplex = IntegerInput(
+        let veryComplex = IntegerStepperInput(
             key: "veryComplex",
             header: WatercraftFieldHeaderConstants.BasicInfo.veryComplex,
             editable: editable ?? true,
@@ -187,10 +188,15 @@ class WatercraftInspectionFormHelper {
             header: WatercraftFieldHeaderConstants.WatercraftDetails.previousAISKnowledeSource,
             editable: editable ?? true,
             value: object?.previousAISKnowledeSource ?? nil,
-            width: .Full
+            width: .Half
         )
         previousAISKnowledeSource.dependency = InputDependency(to: previousAISKnowlede, equalTo: true)
         sectionItems.append(previousAISKnowledeSource)
+        
+        let spacer1 = InputSpacer()
+        spacer1.dependency = InputDependency(to: previousAISKnowlede, equalTo: true)
+        sectionItems.append(spacer1)
+        /// ---------------------------
         
         let previousInspection = SwitchInput(
             key: "previousInspection",

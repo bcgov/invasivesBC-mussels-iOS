@@ -28,26 +28,7 @@ class ShiftService {
             guard let rempteId = shiftId, let refetchedShift = Storage.shared.shift(withLocalId: shiftLocalId) else {
                 return then(false)
             }
-            refetchedShift.setRemote(id: rempteId)
-//                        let dispatchGroup = DispatchGroup()
-//                        var hadFailes = false
-//                        for inspection in refetchedShift.inspections {
-//                            let inspectionLocalId = inspection.localId
-//                            dispatchGroup.enter()
-//                            self.post(inspection: inspection, shift: rempteId) { (inspectId) in
-//                                if let inspectionId = inspectId, let referchedInspection = Storage.shared.inspection(withLocalId: inspectionLocalId) {
-//                                    print(inspectionId)
-//                                } else {
-//                                    hadFailes = true
-//                                }
-//                                dispatchGroup.leave()
-//                            }
-//                        }
-//                        dispatchGroup.notify(queue: .main) {
-//                            print("Shift Shibmission Executed.")
-//                            return then(!hadFailes)
-//                        }
-            
+            refetchedShift.set(remoteId: rempteId)
             self.submit(inspections: Array(refetchedShift.inspections), shiftId: rempteId) { (success) in
                 return then(success)
             }
@@ -130,7 +111,7 @@ class ShiftService {
                 let shiftRemoteid = data["watercraft_risk_assessment_id"] as? Int,
                 let refetchedInspection = Storage.shared.inspection(withLocalId: inspectionLocalId)
             {
-                refetchedInspection.setRemote(id: shiftRemoteid)
+                refetchedInspection.set(remoteId: shiftRemoteid)
                 self.submit(inspections: remainingInspections, shiftId: shiftId, then: then)
             } else {
                 return then(false)

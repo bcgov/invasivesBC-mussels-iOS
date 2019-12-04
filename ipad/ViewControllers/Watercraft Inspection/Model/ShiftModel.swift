@@ -10,6 +10,12 @@ import Foundation
 import Realm
 import RealmSwift
 
+enum SyncableItemStatus {
+    case Draft
+    case PendingSync
+    case Completed
+}
+
 class ShiftModel: Object, BaseRealmObject {
     @objc dynamic var userId: String = ""
     @objc dynamic var localId: String = {
@@ -48,11 +54,126 @@ class ShiftModel: Object, BaseRealmObject {
     
     var inspections: List<WatercradftInspectionModel> = List<WatercradftInspectionModel>()
     
-    
     @objc dynamic var status: String = "Draft"
     // used for quary purposes (and displaying)
     @objc dynamic var formattedDate: String = ""
     
+    // MARK: Save Object
+    func save() {
+        RealmRequests.saveObject(object: self)
+    }
+    
+    // MARK: Add Inspection object
+    func addInspection() -> WatercradftInspectionModel? {
+        let inspection = WatercradftInspectionModel()
+        inspection.shouldSync = false
+        inspection.userId = self.userId
+        do {
+            let realm = try Realm()
+            try realm.write {
+                self.inspections.append(inspection)
+            }
+            return inspection
+        } catch let error as NSError {
+            print("** REALM ERROR")
+            print(error)
+            return nil
+        }
+    }
+    
+    // MARK: Setters
+    func set(value: Any, for key: String) {
+        if self[key] == nil {
+            print("\(key) is nil")
+            return
+        }
+        do {
+            let realm = try Realm()
+            try realm.write {
+                self[key] = value
+            }
+        } catch let error as NSError {
+            print("** REALM ERROR")
+            print(error)
+        }
+    }
+    
+    func set(shouldSync should: Bool) {
+        do {
+            let realm = try Realm()
+            try realm.write {
+                self.shouldSync = should
+                self.status = should ? "Pending Sync" : "Draft"
+            }
+        } catch let error as NSError {
+            print("** REALM ERROR")
+            print(error)
+        }
+    }
+    
+    func set(status statusEnum: SyncableItemStatus) {
+        var newStatus = "\(statusEnum)"
+        switch statusEnum {
+        case .Draft:
+            newStatus = "Draft"
+        case .PendingSync:
+            newStatus = "Pending Sync"
+        case .Completed:
+            newStatus = "Completed"
+        }
+        do {
+            let realm = try Realm()
+            try realm.write {
+                self.status = newStatus
+            }
+        } catch let error as NSError {
+            print("** REALM ERROR")
+            print(error)
+        }
+    }
+    
+    func set(date newDate: Date) {
+        do {
+            let realm = try Realm()
+            try realm.write {
+                self.date = newDate
+            }
+        } catch let error as NSError {
+            print("** REALM ERROR")
+            print(error)
+        }
+        if let unwrappedDate = date {
+            set(value: unwrappedDate.stringShort(), for: "formattedDate")
+        }
+    }
+    
+    func set(remoteId: Int) {
+        do {
+            let realm = try Realm()
+            try realm.write {
+                self.remoteId = remoteId
+            }
+        } catch let error as NSError {
+            print("** REALM ERROR")
+            print(error)
+        }
+    }
+    
+    // MARK: Getters
+    func getStatus() -> SyncableItemStatus {
+        switch self.status.lowercased() {
+        case "draft":
+            return .Draft
+        case "pending sync":
+            return .PendingSync
+        case "completed":
+            return .Completed
+        default:
+            return .Draft
+        }
+    }
+    
+    // MARK: To Dictionary
     func toDictionary() -> [String : Any] {
         guard let date = date else {return [String : Any]()}
         let dateFormatter = DateFormatter()
@@ -80,96 +201,6 @@ class ShiftModel: Object, BaseRealmObject {
                 "shitEndComments": shitEndComments,
             ]
         ]
-    }
-    
-    func save() {
-        RealmRequests.saveObject(object: self)
-    }
-    
-    func set(value: Any, for key: String) {
-        if self[key] == nil {
-            print("\(key) is nil")
-            return
-        }
-        do {
-            let realm = try Realm()
-            try realm.write {
-                self[key] = value
-            }
-        } catch let error as NSError {
-            print("** REALM ERROR")
-            print(error)
-        }
-    }
-    
-    func addInspection() -> WatercradftInspectionModel? {
-        let inspection = WatercradftInspectionModel()
-        inspection.shouldSync = false
-        inspection.userId = self.userId
-        do {
-            let realm = try Realm()
-            try realm.write {
-                self.inspections.append(inspection)
-            }
-            return inspection
-        } catch let error as NSError {
-            print("** REALM ERROR")
-            print(error)
-            return nil
-        }
-    }
-    
-    func setShouldSync(to should: Bool) {
-        do {
-            let realm = try Realm()
-            try realm.write {
-                self.shouldSync = should
-                self.status = should ? "Pending Sync" : "Draft"
-            }
-        } catch let error as NSError {
-            print("** REALM ERROR")
-            print(error)
-        }
-    }
-    
-    func setStatus(to newStatus: String) {
-        do {
-            let realm = try Realm()
-            try realm.write {
-                self.status = newStatus
-            }
-        } catch let error as NSError {
-            print("** REALM ERROR")
-            print(error)
-        }
-    }
-    
-    func setDate(to newDate: Date) {
-        do {
-            let realm = try Realm()
-            try realm.write {
-                self.date = newDate
-            }
-        } catch let error as NSError {
-            print("** REALM ERROR")
-            print(error)
-        }
-        if let unwrappedDate = date {
-            set(value: unwrappedDate.stringShort(), for: "formattedDate")
-        }
-    }
-    
-    func setRemote(id: Int) {
-        do {
-            let realm = try Realm()
-            try realm.write {
-                self.remoteId = id
-            }
-        } catch let error as NSError {
-            print("** REALM ERROR")
-            print(error)
-        }
-        
     }
     
     // MARK: UI Helpers

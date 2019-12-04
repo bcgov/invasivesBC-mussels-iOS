@@ -1071,9 +1071,9 @@
 				294D9A8A237B1D9100BD4928 /* Contants */,
 				294D9A89237B1D8100BD4928 /* Model */,
 				29F4EC532370B1BB001D5CFA /* Cells */,
+				2991968F23846AE000634F81 /* ShiftViewController.swift */,
 				29F4EC502370B007001D5CFA /* WatercraftInspectionViewController.swift */,
 				29588744237B50CC00224FFA /* HighRiskFormViewController.swift */,
-				2991968F23846AE000634F81 /* ShiftViewController.swift */,
 			);
 			path = "Watercraft Inspection";
 			sourceTree = "<group>";

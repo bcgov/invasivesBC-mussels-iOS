@@ -109,8 +109,12 @@ class AutoSync {
                 dispatchGroup.enter()
                 ShiftService.shared.submit(shift: item) { (success) in
                     if success, let refetchedShift = Storage.shared.shift(withLocalId: itemId) {
-                        refetchedShift.setShouldSync(to: false)
-                        refetchedShift.setStatus(to: "Completed")
+                        refetchedShift.set(shouldSync: false)
+                        refetchedShift.set(status: .Completed)
+                        for inspection in refetchedShift.inspections {
+                            inspection.set(shouldSync: false)
+                            inspection.set(status: .Completed)
+                        }
                     } else {
                         hadErros = true
                         Banner.show(message: "Could not sync items")
