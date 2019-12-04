@@ -52,7 +52,7 @@
             <connections>
                 <outlet property="container" destination="brl-30-ocF" id="mzs-d8-Cfk"/>
                 <outlet property="divider" destination="GA1-Gd-uQy" id="IHn-G1-mU4"/>
-                <outlet property="leadingMargin" destination="1Aa-QV-tz6" id="ooM-K3-qFt"/>
+                <outlet property="leadingMargin" destination="1Aa-QV-tz6" id="Ua1-bR-TR4"/>
                 <outlet property="titleLabel" destination="bw2-kK-axj" id="rsH-Je-rQM"/>
                 <outlet property="trailingMargin" destination="8ff-Yw-O4T" id="Ktj-eR-sur"/>
             </connections>

@@ -21,23 +21,9 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
         return "localId"
     }
     
-    @objc dynamic var remoteId: Int = -1 {
-        didSet {
-            if remoteId > 0 {
-                set(value: "Completed", for: "status")
-            }
-        }
-    }
+    @objc dynamic var remoteId: Int = -1
     
-    @objc dynamic var shouldSync: Bool = false {
-        didSet {
-            if shouldSync == true {
-                set(value: "Pending Sync", for: "status")
-            } else {
-                set(value: "Draft", for: "status")
-            }
-        }
-    }
+    @objc dynamic var shouldSync: Bool = false
     
     // PASSPORT INFO
     @objc dynamic var isPassportHolder: Bool = false
@@ -92,13 +78,108 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
     // High Risk Assessments
     private var highRiskAssessments: List<HighRiskAssessmentModel> = List<HighRiskAssessmentModel>()
     
-    // Form Objects (Cached - Not stored)
-    private var inputItems : [WatercraftFromSection: [InputItem]] = [WatercraftFromSection: [InputItem]]()
-    
-    @objc dynamic var status: String = "Pending Sync"
+    @objc dynamic var status: String = "Draft"
     
     @objc dynamic var riskLevel: String = "low"
     
+    // MARK: Setters
+    func set(value: Any, for key: String) {
+        if self[key] == nil {
+            print("\(key) is nil")
+            return
+        }
+        do {
+            let realm = try Realm()
+            try realm.write {
+                self[key] = value
+            }
+        } catch let error as NSError {
+            print("** REALM ERROR")
+            print(error)
+        }
+    }
+    
+    func set(remoteId: Int) {
+        do {
+            let realm = try Realm()
+            try realm.write {
+                self.remoteId = remoteId
+            }
+        } catch let error as NSError {
+            print("** REALM ERROR")
+            print(error)
+        }
+    }
+    
+    func set(shouldSync should: Bool) {
+        do {
+            let realm = try Realm()
+            try realm.write {
+                self.shouldSync = should
+                self.status = should ? "Pending Sync" : "Draft"
+            }
+        } catch let error as NSError {
+            print("** REALM ERROR")
+            print(error)
+        }
+    }
+    
+    func set(status statusEnum: SyncableItemStatus) {
+        var newStatus = "\(statusEnum)"
+        switch statusEnum {
+        case .Draft:
+            newStatus = "Draft"
+        case .PendingSync:
+            newStatus = "Pending Sync"
+        case .Completed:
+            newStatus = "Completed"
+        }
+        do {
+            let realm = try Realm()
+            try realm.write {
+                self.status = newStatus
+            }
+        } catch let error as NSError {
+            print("** REALM ERROR")
+            print(error)
+        }
+    }
+    
+    func addHighRiskAssessment() -> HighRiskAssessmentModel? {
+        if let existing = self.highRiskAssessments.first {
+            return existing
+        }
+        let assessment = HighRiskAssessmentModel()
+        assessment.shouldSync = false
+        assessment.userId = self.userId
+        do {
+            let realm = try Realm()
+            try realm.write {
+                self.highRiskAssessments.append(assessment)
+            }
+            return assessment
+        } catch let error as NSError {
+            print("** REALM ERROR")
+            print(error)
+            return nil
+        }
+    }
+    
+    // MARK: Getters
+    func getStatus() -> SyncableItemStatus {
+        switch self.status.lowercased() {
+        case "draft":
+            return .Draft
+        case "pending sync":
+            return .PendingSync
+        case "completed":
+            return .Completed
+        default:
+            return .Draft
+        }
+    }
+    
+    // MARK: To dictionary
     func toDictionary() -> [String : Any] {
         return toDictionary(shift: -1)
     }
@@ -159,53 +240,7 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
         ]
     }
     
-    func set(value: Any, for key: String) {
-        if self[key] == nil {
-            print("\(key) is nil")
-            return
-        }
-        do {
-            let realm = try Realm()
-            try realm.write {
-                self[key] = value
-            }
-        } catch let error as NSError {
-            print("** REALM ERROR")
-            print(error)
-        }
-    }
-    
-    func setRemote(id: Int) {
-        do {
-            let realm = try Realm()
-            try realm.write {
-                self.remoteId = id
-            }
-        } catch let error as NSError {
-            print("** REALM ERROR")
-            print(error)
-        }
-    }
-    
-    func addHighRiskAssessment() -> HighRiskAssessmentModel? {
-        if let existing = self.highRiskAssessments.first {
-            return existing
-        }
-        let assessment = HighRiskAssessmentModel()
-        assessment.shouldSync = false
-        assessment.userId = self.userId
-        do {
-            let realm = try Realm()
-            try realm.write {
-                self.highRiskAssessments.append(assessment)
-            }
-            return assessment
-        } catch let error as NSError {
-            print("** REALM ERROR")
-            print(error)
-            return nil
-        }
-    }
+    // MARK: Journey details
     
     /*
      Edit journey details arrays Based on input item key
@@ -292,35 +327,25 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
         }
     }
     
+    // MARK: UI Helpers
     func getInputputFields(for section: WatercraftFromSection, editable: Bool? = nil) -> [InputItem] {
-        if let items = inputItems[section] {
-            return items
-        } else {
-            switch section {
-            case .PassportInfo:
-                inputItems[section] = WatercraftInspectionFormHelper.getPassportFields(for: self, editable: editable)
-                return inputItems[section] ?? []
-            case .BasicInformation:
-                inputItems[section] = WatercraftInspectionFormHelper.getBasicInfoFields(for: self, editable: editable)
-                return inputItems[section] ?? []
-            case .WatercraftDetails:
-                inputItems[section] = WatercraftInspectionFormHelper.getWatercraftDetailsFields(for: self, editable: editable)
-                return inputItems[section] ?? []
-            case .JourneyDetails:
-                inputItems[section] = WatercraftInspectionFormHelper.getPassportFields(for: self, editable: editable)
-                return inputItems[section] ?? []
-            case .InspectionDetails:
-                inputItems[section] = WatercraftInspectionFormHelper.getInspectionDetailsFields(for: self, editable: editable)
-                return inputItems[section] ?? []
-            case .GeneralComments:
-                inputItems[section] = WatercraftInspectionFormHelper.getGeneralCommentsFields(for: self, editable: editable)
-                return inputItems[section] ?? []
-            case .HighRiskAssessmentFields:
-                inputItems[section] = WatercraftInspectionFormHelper.getHighriskAssessmentFieldsFields(for: self, editable: editable)
-                return inputItems[section] ?? []
-            case .Divider:
-                return []
-            }
+        switch section {
+        case .PassportInfo:
+            return WatercraftInspectionFormHelper.getPassportFields(for: self, editable: editable)
+        case .BasicInformation:
+            return WatercraftInspectionFormHelper.getBasicInfoFields(for: self, editable: editable)
+        case .WatercraftDetails:
+            return WatercraftInspectionFormHelper.getWatercraftDetailsFields(for: self, editable: editable)
+        case .JourneyDetails:
+            return WatercraftInspectionFormHelper.getPassportFields(for: self, editable: editable)
+        case .InspectionDetails:
+            return WatercraftInspectionFormHelper.getInspectionDetailsFields(for: self, editable: editable)
+        case .GeneralComments:
+            return WatercraftInspectionFormHelper.getGeneralCommentsFields(for: self, editable: editable)
+        case .HighRiskAssessmentFields:
+            return WatercraftInspectionFormHelper.getHighriskAssessmentFieldsFields(for: self, editable: editable)
+        case .Divider:
+            return []
         }
     }
 }

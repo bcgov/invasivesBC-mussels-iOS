@@ -26,9 +26,19 @@ class RadioSwitchInputCollectionViewCell: BaseInputCell<RadioSwitchInput> {
     // MARK: Setup
     override func initialize(with model: RadioSwitchInput) {
         self.fieldHeader.text = model.header
-        set(to: model.getValue())
-        addGestureRecognizers()
         style()
+        if let initialValue = model.getValue() {
+            switch initialValue {
+            case true:
+                self.yesImageView.alpha = 1
+                self.noImageView.alpha = 0
+            case false:
+                self.yesImageView.alpha = 0
+                self.noImageView.alpha = 1
+            }
+            self.layoutIfNeeded()
+        }
+        addGestureRecognizers()
     }
     
     private func addGestureRecognizers() {

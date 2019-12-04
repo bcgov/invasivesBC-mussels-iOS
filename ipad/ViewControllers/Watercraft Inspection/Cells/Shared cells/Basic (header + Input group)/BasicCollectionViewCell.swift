@@ -20,6 +20,8 @@ class BasicCollectionViewCell: UICollectionViewCell, Theme {
     
     var showBox = false
     var showDivider = true
+    var extraPadding: CGFloat = 0
+    var boxPadding: CGFloat = 8
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -27,20 +29,18 @@ class BasicCollectionViewCell: UICollectionViewCell, Theme {
     }
     
     public func setup(title: String, input items: [InputItem], delegate: InputDelegate, boxed: Bool? = false, showDivider: Bool? = true, padding: CGFloat? = 0) {
-        if let extraPadding = padding {
-            self.leadingMargin.constant = extraPadding
-            self.trailingMargin.constant = extraPadding
-        }
         self.inputGroup?.removeFromSuperview()
+        
+        self.extraPadding = padding ?? 0
+        self.showBox = boxed ?? false
+        self.showDivider = showDivider ?? true
+        style()
+        
         self.titleLabel.text = title
+        
         let inputGroup: InputGroupView = InputGroupView()
         self.inputGroup = inputGroup
         inputGroup.initialize(with: items, delegate: delegate, in: container)
-        
-        self.showBox = boxed ?? false
-        self.showDivider = showDivider ?? true
-        
-        style()
     }
     
     private func style() {
@@ -54,7 +54,11 @@ class BasicCollectionViewCell: UICollectionViewCell, Theme {
             self.layer.cornerRadius = 3
             self.layer.borderWidth = 1
             self.layer.borderColor = UIColor(red:0.8, green:0.81, blue:0.82, alpha:1).cgColor
+            self.leadingMargin.constant = boxPadding + extraPadding
+            self.trailingMargin.constant = boxPadding + extraPadding
         } else {
+            self.leadingMargin.constant = extraPadding
+            self.trailingMargin.constant = extraPadding
             self.layer.borderWidth = 0
         }
     }

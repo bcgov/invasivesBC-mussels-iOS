@@ -18,9 +18,13 @@ class FormButtonCollectionViewCell: UICollectionViewCell, Theme {
         return onClick()
     }
     
-    func setup(with title: String, onClick: @escaping ()-> Void) {
+    func setup(with title: String, isEnabled: Bool, onClick: @escaping ()-> Void) {
         self.button.setTitle(title, for: .normal)
         self.completion = onClick
+        if !isEnabled {
+            self.button.isEnabled = false
+            self.alpha = 0
+        }
         style()
     }
     

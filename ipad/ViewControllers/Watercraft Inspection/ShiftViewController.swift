@@ -69,6 +69,31 @@ class ShiftViewController: BaseViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(self.inputItemValueChanged(notification:)), name: .InputItemValueChanged, object: nil)
     }
     
+    func setup(model: ShiftModel) {
+        self.model = model
+        self.isEditable = model.getStatus() == .Draft
+        self.styleNavBar()
+    }
+    
+    // Navigation bar right button action
+    @objc func completeAction(sender: UIBarButtonItem) {
+        guard let model = self.model else { return }
+        self.dismissKeyboard()
+        // if can submit
+        if canSubmit() {
+            Alert.show(title: "Are you sure?", message: "This shift and the inspections will be uploaded when possible", yes: {
+                model.set(shouldSync: true)
+                for inspection in model.inspections {
+                    inspection.set(shouldSync: true)
+                }
+                self.navigationController?.popViewController(animated: true)
+            }) {}
+            
+        } else {
+            Alert.show(title: "Incomplete", message: validationMessage())
+        }
+    }
+    
     // Table Button clicked
     @objc func tableButtonClicked(notification: Notification) {
         guard let actionModel = notification.object as? TableClickActionModel, let inspectionModel = actionModel.object as? WatercradftInspectionModel else {return}
@@ -92,15 +117,15 @@ class ShiftViewController: BaseViewController {
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let inspectionVC = segue.destination as? WatercraftInspectionViewController, let inspectionModel = self.inspection {
-            inspectionVC.initialize(model: inspectionModel, editable: self.isEditable)
+            inspectionVC.setup(model: inspectionModel)
         }
     }
     
     // MARK: Style
     private func style() {
         setNavigationBar(hidden: false, style: UIBarStyle.black)
-        self.styleNavBar()
         styleCard(layer: containerView.layer)
+        styleNavBar()
     }
     
     private func styleNavBar() {
@@ -110,29 +135,38 @@ class ShiftViewController: BaseViewController {
         navigation.navigationBar.tintColor = .white
         navigation.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
         setGradiantBackground(navigationBar: navigation.navigationBar)
-        let logoutBarButtonItem = UIBarButtonItem(title: "Submit", style: .done, target: self, action: #selector(self.completeAction(sender:)))
-        self.navigationItem.rightBarButtonItem = logoutBarButtonItem
-    }
-    
-    // Navigation bar right button action
-    @objc func completeAction(sender: UIBarButtonItem) {
-        guard let model = self.model else { return }
-        // if can submit
-        if canSubmit() {
-            Alert.show(title: "Are you sure?", message: "This shift and the inspections will be uploaded when possible", yes: {
-                model.setShouldSync(to: true)
-                self.navigationController?.popViewController(animated: true)
-            }) {}
-            
-        } else {
-            Alert.show(title: "Incomplete", message: "Please make sure you add shift start and end times")
+        if let model = self.model, model.getStatus() == .Draft {
+            let logoutBarButtonItem = UIBarButtonItem(title: "Submit", style: .done, target: self, action: #selector(self.completeAction(sender:)))
+            self.navigationItem.rightBarButtonItem = logoutBarButtonItem
         }
     }
     
     // MARK: Validation
     func canSubmit() -> Bool {
-        guard let model = self.model else { return false}
-        return model.startTime != "" && model.endTime != ""
+        return validationMessage() == ""
+    }
+    
+    func validationMessage() -> String {
+        var message: String = ""
+        guard let model = self.model else { return message }
+        var counter = 1
+        if model.startTime == "" {
+            message = "\(message)\n\(counter)- Missing Shift Start time."
+            counter += 1
+        }
+        if model.endTime == "" {
+            message = "\(message)\n\(counter)- Missing Shift End time."
+            counter += 1
+        }
+        if model.inspections.count > 0 && model.boatsInspected == false {
+            message = "\(message)\n\(counter)- You indicated that no boats were inspected, but inspections exist."
+            counter += 1
+        }
+        if model.inspections.count < 1 && model.boatsInspected == true {
+            message = "\(message)\n\(counter)- You indicated that boats were inspected but inspections are missing."
+            counter += 1
+        }
+        return message
     }
     
     func createTestModel() {

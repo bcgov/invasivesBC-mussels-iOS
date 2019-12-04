@@ -28,7 +28,7 @@ class HighRiskFormViewController: BaseViewController {
     // MARK: Variables
     public var model: HighRiskAssessmentModel? = nil
     public var isEditable: Bool = true
-    var showFullForm: Bool = true
+    var showFullForm: Bool = false
     private var formResult: [String: Any?] = [String: Any]()
     
     // MARK: Class Functions
@@ -40,11 +40,6 @@ class HighRiskFormViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if let model = self.model, model.cleanDrainDryAfterInspection == true {
-            self.showFullForm = true
-        } else {
-            self.showFullForm = false
-        }
         addListeners()
     }
     
@@ -53,10 +48,11 @@ class HighRiskFormViewController: BaseViewController {
         NotificationCenter.default.removeObserver(self)
     }
     
-    func initialize(with model: HighRiskAssessmentModel, isEditable: Bool) {
+    func setup(with model: HighRiskAssessmentModel, editable: Bool) {
         self.model = model
         self.showFullForm = model.cleanDrainDryAfterInspection == false
-        self.isEditable = isEditable
+        self.isEditable = editable
+        self.styleNavBar()
     }
     
     private func addListeners() {
@@ -78,7 +74,7 @@ class HighRiskFormViewController: BaseViewController {
         
         if let m = model {
             // TODO: needs cleanup for nil case
-            m.set(value: item.value.get(type: item.type), for: item.key)
+            m.set(value: item.value.get(type: item.type) as Any, for: item.key)
         }
         
         if item.key == "cleanDrainDryAfterInspection" {
@@ -91,7 +87,6 @@ class HighRiskFormViewController: BaseViewController {
             }
             self.collectionView.reloadData()
         }
-        print(model?.toDictionary())
     }
     
     private func style() {
@@ -106,7 +101,10 @@ class HighRiskFormViewController: BaseViewController {
         navigation.navigationBar.tintColor = .white
         navigation.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
         setGradiantBackground(navigationBar: navigation.navigationBar)
-        setRightNavButtonTo(type: .save)
+        if let _ = self.model, isEditable == true {
+            setRightNavButtonTo(type: .save)
+        }
+        
     }
     
     private func setRightNavButtonTo(type: UIBarButtonItem.SystemItem) {
@@ -115,6 +113,7 @@ class HighRiskFormViewController: BaseViewController {
     
     // Navigation bar right button action
     @objc func action(sender: UIBarButtonItem) {
+        self.dismissKeyboard()
         self.navigationController?.popViewController(animated: true)
     }
 }
@@ -164,7 +163,7 @@ extension HighRiskFormViewController: UICollectionViewDataSource, UICollectionVi
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        if self.showFullForm {
+        if self.showFullForm == true {
             return HighRiskFormSection.allCases.count
         } else {
             return 2
@@ -175,8 +174,9 @@ extension HighRiskFormViewController: UICollectionViewDataSource, UICollectionVi
         guard let sectionType = HighRiskFormSection(rawValue: Int(indexPath.section)), let model = self.model else {
             return UICollectionViewCell()
         }
+        let sectionTitle = "\(sectionType)".convertFromCamelCase()
         let cell = getBasicCell(indexPath: indexPath)
-        cell.setup(title: "Passport Information", input: model.getInputputFields(for: sectionType, editable: isEditable), delegate: self)
+        cell.setup(title: sectionTitle, input: model.getInputputFields(for: sectionType, editable: isEditable), delegate: self)
         return cell
         
     }

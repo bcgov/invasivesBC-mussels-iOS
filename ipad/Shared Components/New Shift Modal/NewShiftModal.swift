@@ -34,8 +34,8 @@ class NewShiftModal: ModalView, Theme {
     
     @IBAction func startNowAction(_ sender: UIButton) {
         guard let model = self.model, let onClick = self.onStart else {return}
-        model.setDate(to: Date())
-        model.setShouldSync(to: false)
+        model.set(date: Date())
+        model.set(shouldSync: false)
         self.remove()
         return onClick(model)
     }
@@ -67,7 +67,6 @@ class NewShiftModal: ModalView, Theme {
         if let m = model {
             m.set(value: item.value.get(type: item.type) as Any, for: item.key)
         }
-        print(model?.toDictionary())
     }
     
     func generateInput(delegate: InputDelegate) {
