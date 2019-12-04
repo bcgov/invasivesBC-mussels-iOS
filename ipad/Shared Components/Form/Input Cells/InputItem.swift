@@ -549,5 +549,6 @@ class InputSpacer: InputItem {
         self.header = ""
         self.editable = false
         self.width = width ?? .Fill
+        
     }
 }

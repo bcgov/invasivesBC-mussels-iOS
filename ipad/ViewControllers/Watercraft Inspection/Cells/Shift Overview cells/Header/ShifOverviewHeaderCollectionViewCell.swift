@@ -25,6 +25,10 @@ class ShifOverviewHeaderCollectionViewCell: BaseShiftOverviewCollectionViewCell 
         self.locationLabel.text = model.location
         self.statusLabel.text = model.status
         self.statusIndicator.backgroundColor = StatusColor.color(for: model.status)
+        if model.getStatus() != .Draft {
+            addInspectionButton.alpha = 0
+            addInspectionButton.isEnabled = false
+        }
     }
     
     // MARK: Outlet Actions
@@ -46,8 +50,20 @@ class ShifOverviewHeaderCollectionViewCell: BaseShiftOverviewCollectionViewCell 
         // Status
         numberAndDateLabel.font = Fonts.getPrimary(size: 17)
         locationLabel.font = Fonts.getPrimary(size: 17)
-        locationLabel.textColor = Colors.Status.LightGray
+        locationLabel.textColor = Colors.Status.DarkGray
         statusLabel.font = Fonts.getPrimary(size: 17)
+        statusIndicator.backgroundColor = colorFor(status: model?.getStatus() ?? .Draft)
         makeCircle(view: statusIndicator)
+    }
+    
+    private func colorFor(status: SyncableItemStatus) -> UIColor {
+        switch status {
+        case .PendingSync:
+            return Colors.Status.Yellow
+        case .Completed:
+            return Colors.Status.Green
+        case .Draft:
+            return Colors.Status.DarkGray
+        }
     }
 }

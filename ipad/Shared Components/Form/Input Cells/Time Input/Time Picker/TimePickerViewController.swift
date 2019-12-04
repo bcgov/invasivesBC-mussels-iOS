@@ -39,25 +39,49 @@ public struct Time {
 
 public class TimePickerViewController: UIViewController {
     
-    var onChange: ((_ time: Time)-> Void)?
+    private var onChange: ((_ time: Time)-> Void)?
+    private var initialTime: Time?
     
     @IBOutlet weak var pickerView: UIDatePicker!
     
+    public override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        setInitialTime()
+    }
     
-    func setup(initial: Time?, onChange: @escaping(_ time: Time?) -> Void) {
-        if initial != nil {
-            print("TIME PICKER DOES NOT SUPPORT INITIAL TIME BEING SET")
-        }
+    public func setup(initial: Time?, onChange: @escaping(_ time: Time?) -> Void) {
+        self.initialTime = initial
         self.onChange = onChange
+    }
+    
+    private func setInitialTime() {
+        guard let picker = pickerView else {return}
+        let timeFormatter = DateFormatter()
+        timeFormatter.dateFormat =  "HH:mm"
+        var startDateTime: Date? = nil
+        if let initialTime = self.initialTime {
+            startDateTime = timeFormatter.date(from: "\(initialTime.hour):\(initialTime.minute)")
+        } else {
+            startDateTime = picker.date
+        }
+        
+        if let formattedDateTime = startDateTime, let onChange = self.onChange {
+            picker.date = formattedDateTime
+            onChange(getTime(from: formattedDateTime))
+        }
+    }
+    
+    private func getTime(from date: Date) -> Time {
+        let calendar = Calendar.current
+        let hour = calendar.component(.hour, from: date)
+        let minutes = calendar.component(.minute, from: date)
+        let seconds = calendar.component(.second, from: date)
+        return Time(hour: hour, minute: minutes, seconds: seconds)
     }
     
     @IBAction func onTimeChange(_ sender: UIDatePicker) {
         guard let callback = onChange else {return}
-        let calendar = Calendar.current
-        let hour = calendar.component(.hour, from: sender.date)
-        let minutes = calendar.component(.minute, from: sender.date)
-        let seconds = calendar.component(.second, from: sender.date)
-        return callback(Time(hour: hour, minute: minutes, seconds: seconds))
+        return callback(getTime(from: sender.date))
     }
     
 }

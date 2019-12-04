@@ -29,7 +29,6 @@ class HomeViewController: BaseViewController {
     
     // MARK: Variables
     var shiftModel: ShiftModel? = nil
-    var canEditShift: Bool = false
     
     // MARK: Computed variables
     var online: Bool = false {
@@ -106,14 +105,12 @@ class HomeViewController: BaseViewController {
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let shiftOverviewVC = segue.destination as? ShiftViewController, let shiftModel = self.shiftModel {
-            shiftOverviewVC.model = shiftModel
-            shiftOverviewVC.isEditable = canEditShift
+            shiftOverviewVC.setup(model: shiftModel)
         }
     }
     
     private func navigateToShiftOverview(object: ShiftModel, editable: Bool) {
         self.shiftModel = object
-        self.canEditShift = editable
         self.performSegue(withIdentifier: "showShiftOverview", sender: self)
     }
     

@@ -29,7 +29,7 @@ class TimeInputCollectionViewCell:  BaseInputCell<TimeInput>, UITextFieldDelegat
     @objc func onClick(sender : UITapGestureRecognizer) {
         guard let model = self.model, let delegate = self.inputDelegate else {return}
         if model.editable {
-            delegate.showTimePickerDelegate(on: textField, initialTime: nil) { (selectedTime) in
+            delegate.showTimePickerDelegate(on: textField, initialTime: model.getValue()) { (selectedTime) in
                 model.setValue(value: selectedTime)
                 self.setTextFieldText()
                 self.emitChange()

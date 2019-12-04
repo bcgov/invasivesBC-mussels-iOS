@@ -22,7 +22,8 @@ class RadioBooleanCollectionViewCell: BaseInputCell<RadioBoolean>  {
     // MARK: Setup
     override func initialize(with model: RadioBoolean) {
         self.headerLabel.text = model.header
-        set(to: model.getValue())
+        self.radioIcon.alpha = model.getValue() ?? false ? 1 : 0
+        self.layoutIfNeeded()
         addGestureRecognizers()
         style()
     }
@@ -45,6 +46,7 @@ class RadioBooleanCollectionViewCell: BaseInputCell<RadioBoolean>  {
         
         UIView.animate(withDuration: SettingsConstants.shortAnimationDuration) {
             self.radioIcon.alpha = on ?? false ? 1 : 0
+            self.layoutIfNeeded()
         }
     }
     

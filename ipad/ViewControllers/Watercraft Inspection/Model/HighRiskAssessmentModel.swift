@@ -49,9 +49,24 @@ class HighRiskAssessmentModel: Object, BaseRealmObject {
     // General Comments
     @objc dynamic var generalComments: String = ""
     
-    // Form Objects (Cached - Not stored)
-    private var inputItems : [HighRiskFormSection: [InputItem]] = [HighRiskFormSection: [InputItem]]()
+    // MARK: Setters
+    func set(value: Any, for key: String) {
+        if self[key] == nil {
+            print("\(key) is nil")
+            return
+        }
+        do {
+            let realm = try Realm()
+            try realm.write {
+                self[key] = value
+            }
+        } catch let error as NSError {
+            print("** REALM ERROR")
+            print(error)
+        }
+    }
     
+    // MARK: To Dictionary
     func toDictionary() -> [String : Any] {
         return [
             "watercraftRegistration": watercraftRegistration,
@@ -72,40 +87,17 @@ class HighRiskAssessmentModel: Object, BaseRealmObject {
         ]
     }
     
-    func set(value: Any, for key: String) {
-        if self[key] == nil {
-            print("\(key) is nil")
-            return
-        }
-        do {
-            let realm = try Realm()
-            try realm.write {
-                self[key] = value
-            }
-        } catch let error as NSError {
-            print("** REALM ERROR")
-            print(error)
-        }
-    }
-    
+    // MARK: UI Helpers
     func getInputputFields(for section: HighRiskFormSection, editable: Bool? = nil) -> [InputItem] {
-        if let items = inputItems[section] {
-            return items
-        } else {
-            switch section {
-            case .BasicInformation:
-                inputItems[section] = HighRiskFormHelper.getBasicInfoFields(for: self, editable: editable)
-                return inputItems[section] ?? []
-            case .Inspection:
-                inputItems[section] = HighRiskFormHelper.getInspectionFields(for: self, editable: editable)
-                return inputItems[section] ?? []
-            case .InspectionOutcomes:
-                inputItems[section] = HighRiskFormHelper.getInspectionOutcomesFields(for: self, editable: editable)
-                return inputItems[section] ?? []
-            case .GeneralComments:
-                inputItems[section] = HighRiskFormHelper.getGeneralCommentsFields(for: self, editable: editable)
-                return inputItems[section] ?? []
-            }
+        switch section {
+        case .BasicInformation:
+            return HighRiskFormHelper.getBasicInfoFields(for: self, editable: editable)
+        case .Inspection:
+            return HighRiskFormHelper.getInspectionFields(for: self, editable: editable)
+        case .InspectionOutcomes:
+            return HighRiskFormHelper.getInspectionOutcomesFields(for: self, editable: editable)
+        case .GeneralComments:
+            return HighRiskFormHelper.getGeneralCommentsFields(for: self, editable: editable)
         }
     }
 }

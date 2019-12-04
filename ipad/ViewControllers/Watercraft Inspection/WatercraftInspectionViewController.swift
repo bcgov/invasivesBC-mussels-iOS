@@ -72,9 +72,10 @@ class WatercraftInspectionViewController: BaseViewController {
         self.collectionView.reloadData()
     }
     
-    func initialize(model: WatercradftInspectionModel, editable: Bool) {
+    func setup(model: WatercradftInspectionModel) {
         self.model = model
-        self.isEditable = editable
+        self.isEditable = model.getStatus() == .Draft
+        self.styleNavBar()
         if !model.isPassportHolder || model.launchedOutsideBC {
             self.showFullInspection = true
         }
@@ -85,7 +86,7 @@ class WatercraftInspectionViewController: BaseViewController {
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destination = segue.destination as? HighRiskFormViewController, let model = self.model, let assessment = model.addHighRiskAssessment() {
-            destination.initialize(with: assessment, isEditable: isEditable)
+            destination.setup(with: assessment, editable: self.isEditable)
         }
     }
     
@@ -117,7 +118,9 @@ class WatercraftInspectionViewController: BaseViewController {
         navigation.navigationBar.tintColor = .white
         navigation.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
         setGradiantBackground(navigationBar: navigation.navigationBar)
-        setRightNavButtonTo(type: .save)
+        if let model = self.model, model.getStatus() == .Draft {
+            setRightNavButtonTo(type: .save)
+        }
     }
     
     private func setRightNavButtonTo(type: UIBarButtonItem.SystemItem) {
@@ -127,6 +130,7 @@ class WatercraftInspectionViewController: BaseViewController {
     // MARK: Navigation
     // Navigation bar right button action
     @objc func action(sender: UIBarButtonItem) {
+        self.dismissKeyboard()
         self.navigationController?.popViewController(animated: true)
     }
     
@@ -159,7 +163,7 @@ class WatercraftInspectionViewController: BaseViewController {
             }
         } else if item.key.contains("previousWaterBody") || item.key.contains("destinationWaterBody") {
             // Watercraft Journey
-            model.editJourney(inputItemKey: item.key, value: item.value.get(type: item.type))
+            model.editJourney(inputItemKey: item.key, value: item.value.get(type: item.type) as Any)
         } else {
             // All other keys, store directly
             // TODO: needs cleanup for nil case
@@ -331,7 +335,7 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
         case .PreviousWaterBody:
             let cell = getPreviousWaterBodyCell(indexPath: indexPath)
             let itemsIndex: Int = indexPath.row - 1
-            let previousWaterBody = model.previousWaterBodies[itemsIndex]
+//            let previousWaterBody = model.previousWaterBodies[itemsIndex]
             let inputItems = WatercraftInspectionFormHelper.watercraftInspectionPreviousWaterBodyInputs(for: model, index: itemsIndex, isEditable: self.isEditable)
             cell.setup(with: inputItems, delegate: self, onDelete: {
                 model.removePreviousWaterBody(at: itemsIndex)
@@ -343,7 +347,7 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
         case .DestinationWaterBody:
             let cell = getDestinationWaterBodyCell(indexPath: indexPath)
             let itemsIndex: Int = indexPath.row - (model.previousWaterBodies.count + 2)
-            let destinationWaterBody = model.destinationWaterBodies[itemsIndex]
+//            let destinationWaterBody = model.destinationWaterBodies[itemsIndex]
             let inputItems = WatercraftInspectionFormHelper.watercraftInspectionDestinationWaterBodyInputs(for: model, index: itemsIndex, isEditable: self.isEditable)
             cell.setup(with: inputItems, delegate: self, onDelete: {
                 model.removeDestinationWaterBody(at: itemsIndex)
@@ -354,7 +358,7 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
             return cell
         case .AddPreviousWaterBody:
             let cell = getButtonCell(indexPath: indexPath)
-            cell.setup(with: "Add Prveious Water Body") {
+            cell.setup(with: "Add Prveious Water Body", isEnabled: isEditable) {
                 model.addPreviousWaterBody()
                 self.collectionView.performBatchUpdates({
                     self.collectionView.reloadSections(IndexSet(integer: indexPath.section))
@@ -363,7 +367,7 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
             return cell
         case .AddDestinationWaterBody:
             let cell = getButtonCell(indexPath: indexPath)
-            cell.setup(with: "Add Destination Water Body") {
+            cell.setup(with: "Add Destination Water Body", isEnabled: isEditable) {
                 model.addDestinationWaterBody()
                 self.collectionView.performBatchUpdates({
                     self.collectionView.reloadSections(IndexSet(integer: indexPath.section))

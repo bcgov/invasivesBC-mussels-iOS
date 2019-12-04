@@ -51,12 +51,16 @@ class HighRiskFormHelper {
             header: HighRiskFormFieldHeaders.InspectionOutcomes.standingWaterLocation,
             editable: editable ?? true,
             value: object?.standingWaterLocation ?? "",
-            width: .Full
+            width: .Half
         )
         standingWaterLocation.dependency = InputDependency(to: standingWaterPresent, equalTo: true)
         sectionItems.append(standingWaterLocation)
         
-       
+        let spacer1 = InputSpacer()
+        spacer1.dependency = InputDependency(to: standingWaterPresent, equalTo: true)
+        sectionItems.append(spacer1)
+        /// ---------------------------
+        
         let adultDreissenidMusselsFound = SwitchInput(
             key: "adultDreissenidMusselsFound",
             header: HighRiskFormFieldHeaders.InspectionOutcomes.adultDreissenidMusselsFound,
@@ -71,10 +75,14 @@ class HighRiskFormHelper {
             header: HighRiskFormFieldHeaders.InspectionOutcomes.adultDreissenidMusselsLocation,
             editable: editable ?? true,
             value: object?.adultDreissenidMusselsLocation ?? "",
-            width: .Full
+            width: .Half
         )
         adultDreissenidMusselsLocation.dependency = InputDependency(to: adultDreissenidMusselsFound, equalTo: true)
         sectionItems.append(adultDreissenidMusselsLocation)
+        let spacer2 = InputSpacer()
+        spacer2.dependency = InputDependency(to: adultDreissenidMusselsFound, equalTo: true)
+        sectionItems.append(spacer2)
+        /// ---------------------------
         
         let decontaminationPerformed = SwitchInput(
             key: "adultDreissenidMusselsFound",
@@ -90,10 +98,14 @@ class HighRiskFormHelper {
             header: HighRiskFormFieldHeaders.InspectionOutcomes.decontaminationReference,
             editable: editable ?? true,
             value: object?.decontaminationReference ?? 0,
-            width: .Full
+            width: .Half
         )
         decontaminationReference.dependency = InputDependency(to: decontaminationPerformed, equalTo: true)
         sectionItems.append(decontaminationReference)
+        let spacer3 = InputSpacer()
+        spacer3.dependency = InputDependency(to: decontaminationPerformed, equalTo: true)
+        sectionItems.append(spacer3)
+        /// ---------------------------
         
         let decontaminationOrderIssued = SwitchInput(
             key: "decontaminationOrderIssued",
@@ -109,10 +121,14 @@ class HighRiskFormHelper {
             header: HighRiskFormFieldHeaders.InspectionOutcomes.decontaminationOrderNumber,
             editable: editable ?? true,
             value: object?.decontaminationOrderNumber ?? 0,
-            width: .Full
+            width: .Half
         )
         decontaminationOrderNumber.dependency = InputDependency(to: decontaminationOrderIssued, equalTo: true)
         sectionItems.append(decontaminationOrderNumber)
+        let spacer4 = InputSpacer()
+        spacer4.dependency = InputDependency(to: decontaminationOrderIssued, equalTo: true)
+        sectionItems.append(spacer4)
+        /// ---------------------------
         
         let sealIssued = SwitchInput(
             key: "sealIssued",
@@ -132,6 +148,10 @@ class HighRiskFormHelper {
         )
         sealNumber.dependency = InputDependency(to: sealIssued, equalTo: true)
         sectionItems.append(sealNumber)
+        let spacer5 = InputSpacer()
+        spacer5.dependency = InputDependency(to: sealIssued, equalTo: true)
+        sectionItems.append(spacer5)
+        /// ---------------------------
         
         let otherInspectionFindings = DropdownInput(
             key: "otherInspectionFindings",
