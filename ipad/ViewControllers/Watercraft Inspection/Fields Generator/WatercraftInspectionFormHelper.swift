@@ -347,9 +347,9 @@ class WatercraftInspectionFormHelper {
             width: .Forth
         )
         
+        sectionItems.append(province)
         sectionItems.append(previousWaterBody)
         sectionItems.append(nearestCity)
-        sectionItems.append(province)
         sectionItems.append(numberOfDaysOut)
         return sectionItems
     }
@@ -385,9 +385,9 @@ class WatercraftInspectionFormHelper {
             dropdownItems: DropdownHelper.shared.getDropdown(for: .cities)
         )
         
+        sectionItems.append(province)
         sectionItems.append(destinationWaterBody)
         sectionItems.append(nearestCity)
-        sectionItems.append(province)
         return sectionItems
     }
     
