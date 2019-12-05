@@ -33,7 +33,7 @@ class CodeTables {
     
     public func fetchCodes(completion: @escaping(_ success: Bool) -> Void, status: @escaping(_ newStatus: String) -> Void) {
         status("Fetching code tables")
-        self.fetchAndStoreCodes { (codes) in
+        self.fetchAndStoreCodes(completion: { (codes) in
             if codes.count < 0 { return completion(false) }
             status("Loading Waterbodies")
             self.fetchAndStoreWaterBodies(completion: { (waterBodies) in
@@ -66,12 +66,12 @@ class CodeTables {
                 
                 return completion(true)
             }) { (statusUpdate) in
-               status("Storing Waterbodies: \(statusUpdate)")
+               status(statusUpdate)
             }
-        }
+        }, status: status)
     }
     
-    private func fetchAndStoreCodes(completion: @escaping (_ objects: [CodeTableModel]) -> Void) {
+    private func fetchAndStoreCodes(completion: @escaping (_ objects: [CodeTableModel]) -> Void, status: @escaping(_ newStatus: String) -> Void) {
         do {
             let reacahbility = try Reachability()
             if (reacahbility.connection == .unavailable) {
@@ -81,20 +81,24 @@ class CodeTables {
             print("** Reachability ERROR")
             print(error)
         }
-        
+        status("Fetching Code Tables")
         self.promise = codesAPI.get()
         self.promise?.then({ (resp, _) in
+            status("Storing Code Tables")
             guard let data: [String: Any] = resp as? [String: Any] else {
                 print("FAIL: Wrong resp")
+                 status("Could not fetch Code Tables")
                 return completion([])
             }
             Storage.shared.deleteCodeTables()
             DispatchQueue.global(qos: .background).async {
                 var codeTables: [CodeTableModel] = []
+                var counter = 0
                 for (type, items) in data {
                     guard let items = items as? [String] else {
                         continue
                     }
+                    status("Storing Code Tables:\t\((counter * 100 ) / items.count)%")
                     let model = CodeTableModel()
                     model.type = type
                     for item in items {
@@ -102,6 +106,7 @@ class CodeTables {
                     }
                     RealmRequests.saveObject(object: model)
                     codeTables.append(model)
+                    counter += 1
                 }
                 return completion(codeTables)
             }
@@ -122,6 +127,7 @@ class CodeTables {
             return completion([])
         }
         
+        status("Fetching Waterbodies")
         self.promise = waterBodyAPI.get()
         self.promise?.then({ (resp, _) in
             guard let data: [[String : Any]] = resp as? [[String: Any]] else {
@@ -132,11 +138,15 @@ class CodeTables {
                 print("FAIL: No first item")
                 return completion([])
             }
+            status("Storing Waterbodies")
             Storage.shared.deteleFullWaterBodyTables()
             DispatchQueue.global(qos: .background).async {
                 var waterbodies: [WaterBodyTableModel] = []
+                var counter = 1
                 for item in data {
                     let model = WaterBodyTableModel()
+                    status("Storing Waterbodies:\t\((counter * 100 ) / data.count)%")
+                    counter += 1
                     model.name = item["name"] as? String ?? ""
                     model.water_body_id = item["water_body_id"] as? Int ?? 0
                     model.latitude = item["latitude"] as? Double ?? 0

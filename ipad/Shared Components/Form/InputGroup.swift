@@ -30,7 +30,7 @@ class InputGroupView: UIView {
     // MARK: Variables
     private weak var collectionView: UICollectionView? = nil
     private var inputDelegate: InputDelegate? = nil
-    private var inputItems: [InputItem] = []
+    public var inputItems: [InputItem] = []
     private var displayableInputItems: [InputItem] = []
     private var dependencyKeys: [String] = []
     
