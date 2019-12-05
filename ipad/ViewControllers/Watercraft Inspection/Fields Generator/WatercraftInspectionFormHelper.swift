@@ -357,6 +357,16 @@ class WatercraftInspectionFormHelper {
     public static func watercraftInspectionDestinationWaterBodyInputs(for object: WatercradftInspectionModel? = nil, index: Int, isEditable: Bool? = true) -> [InputItem] {
         let item = object?.destinationWaterBodies[index] ?? nil
         var sectionItems: [InputItem] = []
+        
+        let province = DropdownInput(
+            key: "destinationWaterBody-province-\(index)",
+            header: "Province / State",
+            editable: isEditable ?? true,
+            value: item?["province"] as? String ?? "",
+            width: .Third,
+            dropdownItems: DropdownHelper.shared.getDropdown(for: .provinces)
+        )
+       
         let destinationWaterBody = DropdownInput(
             key: "destinationWaterBody-waterbody-\(index)",
             header: "Destination WaterBody",
@@ -373,15 +383,6 @@ class WatercraftInspectionFormHelper {
             value: item?["nearestCity"] as? String ?? "",
             width: .Third,
             dropdownItems: DropdownHelper.shared.getDropdown(for: .cities)
-        )
-        
-        let province = DropdownInput(
-            key: "destinationWaterBody-province-\(index)",
-            header: "Province / State",
-            editable: isEditable ?? true,
-            value: item?["province"] as? String ?? "",
-            width: .Third,
-            dropdownItems: DropdownHelper.shared.getDropdown(for: .provinces)
         )
         
         sectionItems.append(destinationWaterBody)

@@ -359,7 +359,7 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
             return cell
         case .AddPreviousWaterBody:
             let cell = getButtonCell(indexPath: indexPath)
-            cell.setup(with: "Add Previouss Water Body", isEnabled: isEditable) {
+            cell.setup(with: "Add Previous Water Body", isEnabled: isEditable) {
                 model.addPreviousWaterBody()
                 self.collectionView.performBatchUpdates({
                     self.collectionView.reloadSections(IndexSet(integer: indexPath.section))
