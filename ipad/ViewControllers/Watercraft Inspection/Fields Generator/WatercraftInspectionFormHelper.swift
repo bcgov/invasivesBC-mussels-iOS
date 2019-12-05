@@ -101,17 +101,19 @@ class WatercraftInspectionFormHelper {
             header: WatercraftFieldHeaderConstants.BasicInfo.province,
             editable: editable ?? true,
             value: object?.province ?? "",
-            width: .Full,
+            width: .Third,
             dropdownItems: DropdownHelper.shared.getDropdown(for: .provinces)
         )
         sectionItems.append(province)
+        sectionItems.append(InputSpacer(width: .Third))
+        sectionItems.append(InputSpacer(width: .Third))
         
         let nonMotorized = IntegerStepperInput(
             key: "nonMotorized",
             header: WatercraftFieldHeaderConstants.BasicInfo.nonMotorized,
             editable: editable ?? true,
             value: object?.nonMotorized ?? 0,
-            width: .Third
+            width: .Forth
         )
         sectionItems.append(nonMotorized)
         
@@ -120,7 +122,7 @@ class WatercraftInspectionFormHelper {
             header: WatercraftFieldHeaderConstants.BasicInfo.simple,
             editable: editable ?? true,
             value: object?.simple ?? 0,
-            width: .Third
+            width: .Forth
         )
         sectionItems.append(simple)
         
@@ -129,7 +131,7 @@ class WatercraftInspectionFormHelper {
             header: WatercraftFieldHeaderConstants.BasicInfo.complex,
             editable: editable ?? true,
             value: object?.complex ?? 0,
-            width: .Third
+            width: .Forth
         )
         sectionItems.append(complex)
         
@@ -138,7 +140,7 @@ class WatercraftInspectionFormHelper {
             header: WatercraftFieldHeaderConstants.BasicInfo.veryComplex,
             editable: editable ?? true,
             value: object?.veryComplex ?? 0,
-            width: .Third
+            width: .Forth
         )
         sectionItems.append(veryComplex)
         
@@ -147,7 +149,7 @@ class WatercraftInspectionFormHelper {
     
     static func getWatercraftDetailsFields(for object: WatercradftInspectionModel? = nil, editable: Bool? = true) -> [InputItem] {
         var sectionItems: [InputItem] = []
-        let numberOfPeopleInParty = IntegerInput(
+        let numberOfPeopleInParty = IntegerStepperInput(
             key: "numberOfPeopleInParty",
             header: WatercraftFieldHeaderConstants.WatercraftDetails.numberOfPeopleInParty,
             editable: editable ?? true,
@@ -164,15 +166,7 @@ class WatercraftInspectionFormHelper {
             width: .Third
         )
         sectionItems.append(commerciallyHauled)
-        
-        let highRiskArea = SwitchInput(
-            key: "highRiskArea",
-            header: WatercraftFieldHeaderConstants.WatercraftDetails.highRiskArea,
-            editable: editable ?? true,
-            value: object?.highRiskArea ?? nil,
-            width: .Third
-        )
-        sectionItems.append(highRiskArea)
+        sectionItems.append(InputSpacer())
         
         let previousAISKnowlede = SwitchInput(
             key: "previousAISKnowlede",
@@ -277,7 +271,7 @@ class WatercraftInspectionFormHelper {
             header: WatercraftFieldHeaderConstants.HighriskAssessmentFields.highriskAIS,
             editable: editable ?? true,
             value: object?.highriskAIS ?? nil,
-            width: .Half
+            width: .Third
         )
         sectionItems.append(highriskAIS)
         
@@ -286,9 +280,19 @@ class WatercraftInspectionFormHelper {
             header: WatercraftFieldHeaderConstants.HighriskAssessmentFields.adultDreissenidFound,
             editable: editable ?? true,
             value: object?.adultDreissenidFound ?? nil,
-            width: .Half
+            width: .Third
         )
         sectionItems.append(adultDreissenidFound)
+       
+        
+        let highRiskArea = SwitchInput(
+            key: "highRiskArea",
+            header: WatercraftFieldHeaderConstants.WatercraftDetails.highRiskArea,
+            editable: editable ?? true,
+            value: object?.highRiskArea ?? nil,
+            width: .Third
+        )
+        sectionItems.append(highRiskArea)
         return sectionItems
     }
     
