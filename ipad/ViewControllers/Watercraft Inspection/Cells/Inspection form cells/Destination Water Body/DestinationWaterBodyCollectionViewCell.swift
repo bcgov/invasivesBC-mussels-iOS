@@ -8,14 +8,13 @@
 
 import UIKit
 
-class DestinationWaterBodyCollectionViewCell: UICollectionViewCell, Theme {
+class DestinationWaterBodyCollectionViewCell: BaseJourneyCollectionViewCell, Theme {
 
     @IBOutlet weak var cellContainer: UIView!
     @IBOutlet weak var inputGroupContainer: UIView!
     
     var completion: (()-> Void)?
     var delegate: InputDelegate?
-    weak var inputGroup: UIView?
 
     @IBAction func optionsAction(_ sender: UIButton) {
         guard let onDelete = completion, let delegate = delegate else {return}
@@ -34,6 +33,7 @@ class DestinationWaterBodyCollectionViewCell: UICollectionViewCell, Theme {
         completion = onDelete
         self.delegate = delegate
         style()
+        beginFilterListener()
     }
     
     private func style() {

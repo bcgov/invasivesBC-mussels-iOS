@@ -145,7 +145,8 @@ class WatercraftInspectionViewController: BaseViewController {
         formResult[item.key] = item.value.get(type: item.type)
         // Set value in Realm object
         // Keys that need a pop up/ additional actions
-        if (item.key == "highriskAIS" || item.key == "adultDreissenidFound" ) {
+        let highRiskFieldKeys = WatercraftInspectionFormHelper.getHighriskAssessmentFieldsFields().map{ $0.key}
+        if highRiskFieldKeys.contains(item.key) {
             let value = item.value.get(type: item.type) as? Bool
             if value == true {
                 let highRiskModal: HighRiskModalView = HighRiskModalView.fromNib()
@@ -358,7 +359,7 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
             return cell
         case .AddPreviousWaterBody:
             let cell = getButtonCell(indexPath: indexPath)
-            cell.setup(with: "Add Prveious Water Body", isEnabled: isEditable) {
+            cell.setup(with: "Add Previous Water Body", isEnabled: isEditable) {
                 model.addPreviousWaterBody()
                 self.collectionView.performBatchUpdates({
                     self.collectionView.reloadSections(IndexSet(integer: indexPath.section))

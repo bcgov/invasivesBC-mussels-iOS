@@ -26,8 +26,10 @@ class IntegerStepperInputCollectionViewCell: BaseInputCell<IntegerStepperInput>,
         guard let model = self.model else {return}
         if let stringValue = textField.text, let number = Int(stringValue) {
             model.setValue(value: number)
+            stepper.value = Double(number)
         } else {
             model.setValue(value: 0)
+            stepper.value = 0
         }
         self.emitChange()
     }

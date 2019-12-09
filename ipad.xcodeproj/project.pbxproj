@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1E6D9A2E2399BDEE0034FDEF /* BaseJourneyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E6D9A2D2399BDEE0034FDEF /* BaseJourneyCollectionViewCell.swift */; };
 		22692B6074F0478BDEE57B10 /* Pods_ipad.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E19532C9F39231DE6E43099 /* Pods_ipad.framework */; };
 		2907E4B12368CD6700946B3F /* Dropdown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2907E4B02368CD6700946B3F /* Dropdown.swift */; };
 		2907E4B42368CE3600946B3F /* PopoverSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2907E4B32368CE3600946B3F /* PopoverSize.swift */; };
@@ -186,6 +187,7 @@
 
 /* Begin PBXFileReference section */
 		051BF2997C37C073E8713545 /* Pods-ipadTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ipadTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ipadTests/Pods-ipadTests.debug.xcconfig"; sourceTree = "<group>"; };
+		1E6D9A2D2399BDEE0034FDEF /* BaseJourneyCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseJourneyCollectionViewCell.swift; sourceTree = "<group>"; };
 		2907E4B02368CD6700946B3F /* Dropdown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dropdown.swift; sourceTree = "<group>"; };
 		2907E4B32368CE3600946B3F /* PopoverSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopoverSize.swift; sourceTree = "<group>"; };
 		2907E4B62368D24900946B3F /* InputModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputModal.swift; sourceTree = "<group>"; };
@@ -957,6 +959,7 @@
 		29DB4E3B23870B3000B13646 /* Inspection form cells */ = {
 			isa = PBXGroup;
 			children = (
+				1E6D9A2D2399BDEE0034FDEF /* BaseJourneyCollectionViewCell.swift */,
 				29E4BBEB237217F40079475F /* Destination Water Body */,
 				29E4BBEA237217E60079475F /* Previous Water Body */,
 			);
@@ -1473,6 +1476,7 @@
 				29DB4E462387113900B13646 /* BaseShiftOverviewCollectionViewCell.swift in Sources */,
 				5C82D3DF2374B9D700B065BA /* RemoteAPIManager.swift in Sources */,
 				29BAC50E236790C900A620F4 /* HomeViewController.swift in Sources */,
+				1E6D9A2E2399BDEE0034FDEF /* BaseJourneyCollectionViewCell.swift in Sources */,
 				29514BE62368B70900DC89C4 /* Options.swift in Sources */,
 				29F29FA4236B9114004F12E7 /* InputItem.swift in Sources */,
 				29514BE12368B4BE00DC89C4 /* SettingsConstants.swift in Sources */,
