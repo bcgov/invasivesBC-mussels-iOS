@@ -48,7 +48,6 @@ class WatercraftInspectionViewController: BaseViewController {
     var model: WatercradftInspectionModel? = nil
     private var showFullInspection: Bool = false
     private var isEditable: Bool = true
-    private var formResult: [String: Any?] = [String: Any]()
     
     // MARK: Class Functions
     override func viewDidLoad() {
@@ -142,7 +141,6 @@ class WatercraftInspectionViewController: BaseViewController {
     // MARK: Input Item Changed
     @objc func inputItemValueChanged(notification: Notification) {
         guard var item: InputItem = notification.object as? InputItem, let model = self.model else {return}
-        formResult[item.key] = item.value.get(type: item.type)
         // Set value in Realm object
         // Keys that need a pop up/ additional actions
         let highRiskFieldKeys = WatercraftInspectionFormHelper.getHighriskAssessmentFieldsFields().map{ $0.key}
@@ -162,7 +160,10 @@ class WatercraftInspectionViewController: BaseViewController {
                     NotificationCenter.default.post(name: .InputFieldShouldUpdate, object: item)
                 }
             }
-        } else if item.key.contains("previousWaterBody") || item.key.contains("destinationWaterBody") {
+        } else if
+            item.key.lowercased().contains("previousWaterBody".lowercased()) ||
+            item.key.lowercased().contains("destinationWaterBody".lowercased()
+            ) {
             // Watercraft Journey
             model.editJourney(inputItemKey: item.key, value: item.value.get(type: item.type) as Any)
         } else {
@@ -172,7 +173,7 @@ class WatercraftInspectionViewController: BaseViewController {
         }
         // TODO: CLEANUP
         // Handle Keys that alter form
-        if item.key == "isPassportHolder" {
+        if item.key.lowercased() == "isPassportHolder".lowercased() {
             // If is NOT passport holder, Show full form
             let fieldValue = item.value.get(type: item.type) as? Bool ?? nil
             if fieldValue == false {
@@ -186,11 +187,10 @@ class WatercraftInspectionViewController: BaseViewController {
             }
             self.collectionView.reloadData()
         }
-        if item.key == "launchedOutsideBC" {
+        if item.key.lowercased() == "launchedOutsideBC".lowercased() {
             // If IS passport holder, && launched outside BC, Show full form
-            let fieldValue = item.value.get(type: item.type) as? Bool ?? nil
-            let isPassportHolder = formResult["isPassportHolder"] as? Bool ?? nil
-            if (fieldValue == true && isPassportHolder == true) {
+            let launchedOutsideBC = item.value.get(type: item.type) as? Bool ?? nil
+            if (launchedOutsideBC == true && model.isPassportHolder == true) {
                 self.showFullInspection = true
             } else {
                 self.showFullInspection = false
