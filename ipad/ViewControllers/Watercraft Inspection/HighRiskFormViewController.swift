@@ -29,7 +29,6 @@ class HighRiskFormViewController: BaseViewController {
     public var model: HighRiskAssessmentModel? = nil
     public var isEditable: Bool = true
     var showFullForm: Bool = false
-    private var formResult: [String: Any?] = [String: Any]()
     
     // MARK: Class Functions
     override func viewDidLoad() {
@@ -69,7 +68,6 @@ class HighRiskFormViewController: BaseViewController {
     
     @objc func inputItemValueChanged(notification: Notification) {
         guard let item: InputItem = notification.object as? InputItem else {return}
-        formResult[item.key] = item.value.get(type: item.type)
         // Set value in Realm object
         
         if let m = model {
