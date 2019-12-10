@@ -16,7 +16,6 @@ class NewShiftModal: ModalView, Theme {
     var onCancel: (() -> Void)?
     var model: ShiftModel?
     weak var inputGroup: UIView?
-    private var formResult: [String: Any?] = [String: Any]()
     
     // MARK: Outlets
     @IBOutlet weak var iconImage: UIImageView!
@@ -62,7 +61,6 @@ class NewShiftModal: ModalView, Theme {
     // MARK: Input Item Changed
     @objc func inputItemValueChanged(notification: Notification) {
         guard let item: InputItem = notification.object as? InputItem else {return}
-        formResult[item.key] = item.value.get(type: item.type)
         // Set value in Realm object
         if let m = model {
             m.set(value: item.value.get(type: item.type) as Any, for: item.key)
