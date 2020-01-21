@@ -11,7 +11,13 @@ import Foundation
 /**
   * Remote URL
  */
-let remoteURL: String = "https://api-dev-invasivesbc.pathfinder.gov.bc.ca/api"
+let DEV_URL: String = "https://api-dev-invasivesbc.pathfinder.gov.bc.ca/api"
+#if DEBUG
+let remoteURL: String = DEV_URL
+#else
+let remoteURL: String = "https://api-invasivesbc.pathfinder.gov.bc.ca/api"
+#endif
+
 
 /**
   * Diffirent EndPoints
@@ -28,20 +34,21 @@ enum EndPoints: String {
  * API
  */
 struct APIURL {
+    static var baseURL: String = remoteURL
     static let wokrflow: String =  {
-        return remoteURL + EndPoints.workflow.rawValue
+        return Self.baseURL + EndPoints.workflow.rawValue
     }()
     
     static let watercraftRiskAssessment: String = {
-        return remoteURL + EndPoints.watercraftAssessment.rawValue
+        return Self.baseURL + EndPoints.watercraftAssessment.rawValue
     }()
     
     static let waterBody: String = {
-        return remoteURL + EndPoints.waterBody.rawValue
+        return Self.baseURL + EndPoints.waterBody.rawValue
     }()
     
     static let codes: String = {
-        return remoteURL + EndPoints.codes.rawValue
+        return Self.baseURL + EndPoints.codes.rawValue
     }()
 }
 
