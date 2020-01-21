@@ -53,8 +53,6 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
     
     // Inspection Details
     @objc dynamic var marineMusslesFound: Bool = false
-    @objc dynamic var failedToStop: Bool = false
-    @objc dynamic var ticketIssued: Bool = false
     
     // High Risk Assesment fields
     @objc dynamic var highriskAIS: Bool = false {
@@ -229,8 +227,6 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
                 "previousInspectionDays": previousInspectionDays,
                 
                 "marineMusslesFound": marineMusslesFound,
-                "failedToStop": marineMusslesFound,
-                "ticketIssued": marineMusslesFound,
                 
                 "highriskAIS": highriskAIS,
                 "adultDreissenidFound": adultDreissenidFound,

@@ -33,6 +33,9 @@ class ShiftFormHelper {
         )
         sectionItems.append(station)
         
+        let weatherTitle = InputTitle(title: "Weather Conditions")
+        sectionItems.append(weatherTitle)
+        
         let sunny = RadioBoolean(
             key: "sunny",
             header: ShiftFormHeaders.ShiftStart.sunny,

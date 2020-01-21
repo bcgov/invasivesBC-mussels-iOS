@@ -20,7 +20,7 @@ struct ShiftFormHeaders {
         static let snowing = "Snowing"
         static let foggy = "Foggy"
         static let windy = "Windy"
-        static let comments = "Additional Commnets"
+        static let comments = "Additional Comments"
     }
     
     struct ShiftEnd {

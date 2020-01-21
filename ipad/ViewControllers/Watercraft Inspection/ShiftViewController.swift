@@ -136,7 +136,7 @@ class ShiftViewController: BaseViewController {
         navigation.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
         setGradiantBackground(navigationBar: navigation.navigationBar)
         if let model = self.model, model.getStatus() == .Draft {
-            let logoutBarButtonItem = UIBarButtonItem(title: "Submit", style: .done, target: self, action: #selector(self.completeAction(sender:)))
+            let logoutBarButtonItem = UIBarButtonItem(title: "Submit", style: .done, target: self, action: #selector (self.completeAction(sender:)))
             self.navigationItem.rightBarButtonItem = logoutBarButtonItem
         }
     }

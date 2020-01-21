@@ -16,7 +16,7 @@ protocol InputDelegate: class {
     func showOptionsDelegate(options: [OptionType], on button: UIButton, completion: @escaping (_ option: OptionType) -> Void)
 }
 
-class BaseViewController: UIViewController, Theme, InputDelegate {
+class BaseViewController: UIViewController, Theme ,InputDelegate {
     
     // MARK: Constants
     let visibleAlpha: CGFloat = 1
