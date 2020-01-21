@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -31,15 +31,24 @@
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <textInputTraits key="textInputTraits"/>
                     </textField>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.40000000000000002" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="clock" translatesAutoresizingMaskIntoConstraints="NO" id="UZs-K7-j7f">
+                        <rect key="frame" x="488" y="53.5" width="31" height="31"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="UZs-K7-j7f" secondAttribute="height" id="ysR-is-uFU"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
             </view>
             <constraints>
                 <constraint firstItem="jQZ-T7-Mqi" firstAttribute="top" secondItem="tUZ-Et-HkF" secondAttribute="bottom" constant="5" id="PFP-hX-XLm"/>
                 <constraint firstItem="tUZ-Et-HkF" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="TVv-Au-SAZ"/>
                 <constraint firstAttribute="trailing" secondItem="jQZ-T7-Mqi" secondAttribute="trailing" id="VGl-49-bJS"/>
+                <constraint firstItem="UZs-K7-j7f" firstAttribute="centerY" secondItem="jQZ-T7-Mqi" secondAttribute="centerY" id="a9q-hw-hoQ"/>
                 <constraint firstItem="jQZ-T7-Mqi" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="grR-GK-2Ad"/>
                 <constraint firstAttribute="bottom" secondItem="jQZ-T7-Mqi" secondAttribute="bottom" id="hek-47-HsZ"/>
                 <constraint firstAttribute="trailing" secondItem="tUZ-Et-HkF" secondAttribute="trailing" id="if9-h2-NRf"/>
+                <constraint firstAttribute="trailing" secondItem="UZs-K7-j7f" secondAttribute="trailing" constant="16" id="kt5-08-npe"/>
+                <constraint firstItem="UZs-K7-j7f" firstAttribute="width" secondItem="jQZ-T7-Mqi" secondAttribute="height" multiplier="0.4" id="mW0-vo-J2a"/>
                 <constraint firstItem="tUZ-Et-HkF" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="xHU-63-tpy"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
@@ -51,4 +60,7 @@
             <point key="canvasLocation" x="-32.608695652173914" y="210.26785714285714"/>
         </collectionViewCell>
     </objects>
+    <resources>
+        <image name="clock" width="512" height="512"/>
+    </resources>
 </document>

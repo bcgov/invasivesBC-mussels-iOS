@@ -238,6 +238,7 @@ class AutoSync {
     }
     
     public func shouldSync() -> Bool {
+        if !self.isEnabled { return false }
         if Storage.shared.itemsToSync().count < 1 {
             return false
         }

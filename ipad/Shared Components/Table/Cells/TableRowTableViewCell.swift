@@ -84,6 +84,7 @@ class TableRowTableViewCell: UITableViewCell, Theme {
                 styleHollowButton(button: button)
             } else if let iconColor = item.iconColor {
                 let valueStack = UIStackView()
+                
                 let itemSpacing = Table.indicatorSize / 2
                 valueStack.axis  = NSLayoutConstraint.Axis.horizontal
                 valueStack.distribution  = UIStackView.Distribution.fillProportionally
@@ -105,6 +106,7 @@ class TableRowTableViewCell: UITableViewCell, Theme {
                 label.font = Table.fieldFont
                 label.textAlignment = .left
                 
+                valueStack.translatesAutoresizingMaskIntoConstraints = false
                 stackView.addArrangedSubview(valueStack)
                 
                 if isLast {
