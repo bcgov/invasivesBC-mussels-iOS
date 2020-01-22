@@ -8,6 +8,18 @@
 
 import Foundation
 
+extension Array where Element : Equatable {
+    var unique: [Element] {
+        var uniqueValues: [Element] = []
+        forEach { item in
+            if !uniqueValues.contains(item) {
+                uniqueValues += [item]
+            }
+        }
+        return uniqueValues
+    }
+}
+
 class DropdownHelper {
     
     static let shared = DropdownHelper()
@@ -20,7 +32,8 @@ class DropdownHelper {
     
     public func dropdown(from items: [String]) -> [DropdownModel] {
         var options: [DropdownModel] = []
-        for item in items {
+        let set = Array(Set(items)).sorted()
+        for item in set {
             options.append(DropdownModel(display: item))
         }
         return options

@@ -18,6 +18,7 @@ class AutoSync {
     internal static let shared = AutoSync()
     
     private var isEnabled: Bool = true
+    private var isAutoSyncEnabled: Bool = true
     private var realmNotificationToken: NotificationToken?
     private var isSynchronizing: Bool = false
     private var manualSyncRequiredShown = false
@@ -35,7 +36,7 @@ class AutoSync {
             let realm = try Realm()
             self.realmNotificationToken = realm.observe { notification, realm in
                 print("Change observed in AutoSync...")
-                if self.isOnline() {
+                if self.isOnline() && self.isAutoSyncEnabled {
                     self.autoSynchronizeIfPossible()
                 }
             }
@@ -99,6 +100,22 @@ class AutoSync {
         let syncView: SyncView = UIView.fromNib()
         syncView.initialize()
         
+        let itemsToSync = Storage.shared.itemsToSync()
+        ShiftService.shared.submit(shifts: itemsToSync) { (syncSuccess) in
+            if syncSuccess {
+                Banner.show(message: "Sync Executed")
+                NotificationCenter.default.post(name: .syncExecuted, object: nil)
+            } else {
+                Banner.show(message: "Could not sync items")
+                self.isAutoSyncEnabled = false
+            }
+            // Remove SyncView
+            syncView.remove()
+            // Free Autosync
+            self.isSynchronizing = false
+        }
+       
+        /* Non Recursive solution
         // move to a background thread
         DispatchQueue.global(qos: .background).async {
             let dispatchGroup = DispatchGroup()
@@ -122,6 +139,7 @@ class AutoSync {
                     dispatchGroup.leave()
                 }
             }
+ 
             
             // dispatchGroup.enter()
             // Make another api call
@@ -140,7 +158,7 @@ class AutoSync {
                     self.isSynchronizing = false
                 }
             }
-        }
+        }*/
     }
     
     // MARK: Initial Sync

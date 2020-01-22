@@ -54,6 +54,13 @@ class DropdownCollectionViewCell: BaseInputCell<DropdownInput>, UITextFieldDeleg
         }
     }
     
+    override func updateValue(value: InputValue) {
+        guard let model = self.model, let newValue =  value.get(type: .Dropdown) as? String else {return}
+        for item in model.dropdownItems where item.key ==  newValue{
+            self.textField.text = item.key
+        }
+    }
+    
     func setCurrentField(value key: String) {
         guard let model = self.model else {return}
         for item in model.dropdownItems where item.key == key {

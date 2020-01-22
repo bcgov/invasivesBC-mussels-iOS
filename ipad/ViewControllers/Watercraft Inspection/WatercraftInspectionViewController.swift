@@ -96,8 +96,10 @@ class WatercraftInspectionViewController: BaseViewController {
     private func addListeners() {
         NotificationCenter.default.removeObserver(self, name: .InputItemValueChanged, object: nil)
         NotificationCenter.default.removeObserver(self, name: .ShouldResizeInputGroup, object: nil)
+        NotificationCenter.default.removeObserver(self, name: .journeyItemValueChanged, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.inputItemValueChanged(notification:)), name: .InputItemValueChanged, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.shouldResizeInputGroup(notification:)), name: .ShouldResizeInputGroup, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.journeyItemValueChanged(notification:)), name: .journeyItemValueChanged, object: nil)
     }
     
     private func refreshJourneyDetails(index: Int) {
@@ -199,6 +201,12 @@ class WatercraftInspectionViewController: BaseViewController {
             self.collectionView.reloadData()
         }
     }
+    
+    @objc func journeyItemValueChanged(notification: Notification) {
+        guard let item: InputItem = notification.object as? InputItem, let model = self.model else {return}
+        model.editJourney(inputItemKey: item.key, value: item.value.get(type: item.type) as Any)
+    }
+    
     
 }
 

@@ -69,20 +69,21 @@ class HighRiskAssessmentModel: Object, BaseRealmObject {
     // MARK: To Dictionary
     func toDictionary() -> [String : Any] {
         return [
-            "watercraftRegistration": watercraftRegistration,
             "cleanDrainDryAfterInspection": cleanDrainDryAfterInspection,
-            "otherInspectionFindings": otherInspectionFindings,
             "quarantinePeriodIssued": quarantinePeriodIssued,
             "standingWaterPresent": standingWaterPresent,
-            "standingWaterLocation" : standingWaterLocation,
-            "adultDreissenidMusselsFound": adultDreissenidMusselsFound,
-            "adultDreissenidMusselsLocation": adultDreissenidMusselsLocation,
+            "adultDreissenidaeMusselFound": adultDreissenidMusselsLocation,
             "decontaminationPerformed": decontaminationPerformed,
-            "decontaminationReference": decontaminationReference,
             "decontaminationOrderIssued": decontaminationOrderIssued,
-            "decontaminationOrderNumber": decontaminationOrderNumber,
             "sealIssued": sealIssued,
+            "watercraftRegistration": watercraftRegistration,
+            "decontaminationReference": decontaminationReference,
+            "decontaminationOrderNumber": decontaminationOrderNumber,
             "sealNumber": sealNumber,
+            "standingWaterLocation": standingWaterLocation,
+            "adultDreissenidaeMusselDetail": adultDreissenidMusselsFound,
+            ///
+            "otherInspectionFindings": otherInspectionFindings,
             "generalComments": generalComments
         ]
     }

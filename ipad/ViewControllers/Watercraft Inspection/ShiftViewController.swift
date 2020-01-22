@@ -172,7 +172,6 @@ class ShiftViewController: BaseViewController {
     func createTestModel() {
         let model = ShiftModel()
         model.date = Date()
-        model.location = "Victoria, BC"
         
         // Create dummy inspections
         let inspection1 = WatercradftInspectionModel()

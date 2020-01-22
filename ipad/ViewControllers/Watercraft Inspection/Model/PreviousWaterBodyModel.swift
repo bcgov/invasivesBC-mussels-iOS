@@ -35,7 +35,7 @@ class PreviousWaterbodyModel: Object, BaseRealmObject {
             return
         }
         do {
-            let realm = try Realm()
+            let realm = try Realm()  
             try realm.write {
                 self[key] = value
             }
@@ -46,11 +46,13 @@ class PreviousWaterbodyModel: Object, BaseRealmObject {
     }
     
     func toDictionary() -> [String : Any] {
+        guard let waterbodyModel = CodeTables.shared.findWaterbody(name: waterbody, province: province, nearestCity: nearestCity) else {
+            return [String : Any]()
+        }
         return [
-            "waterbody" : waterbody,
-            "nearestCity" : nearestCity,
-            "province" : province,
-            "numberOfDaysOut" : numberOfDaysOut
+            "journeyType": 0,
+            "waterBody": waterbodyModel.water_body_id,
         ]
     }
+    
 }
