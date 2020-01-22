@@ -114,8 +114,8 @@ class CodeTables {
     }
     
     private func fetchAndStoreWaterBodies(completion: @escaping (_ objects: [WaterBodyTableModel]) -> Void, status: @escaping(_ newStatus: String) -> Void) {
-        Storage.shared.saveWaterBodiesFromJSON(status: status)
-        return completion(Storage.shared.fullWaterBodyTables())
+//        Storage.shared.saveWaterBodiesFromJSON(status: status)
+//        return completion(Storage.shared.fullWaterBodyTables())
         do {
             let reacahbility = try Reachability()
             if (reacahbility.connection == .unavailable) {
@@ -159,6 +159,14 @@ class CodeTables {
                 return completion(waterbodies)
             }
         })
+    }
+    
+    func findWaterbody(name: String, province: String, nearestCity: String) -> WaterBodyTableModel? {
+        let allWaterbodies = Storage.shared.fullWaterBodyTables()
+        for element in allWaterbodies where element.name == name && element.abbrev == province && element.closest == nearestCity {
+            return element
+        }
+        return nil
     }
     
 }

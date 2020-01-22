@@ -35,21 +35,104 @@ class BaseJourneyCollectionViewCell: UICollectionViewCell {
             // Find changed key (cleaned, without index and type of journey)
             switch key {
             case waterbodyKey:
-                // Change dropdown items of cities for this group
+                var item1: InputItem? = nil
+                var item2: InputItem? = nil
+                // Change dropdown items of Cities for this group
                 for item in inputgroupView.inputItems where item.key.contains(nearestCityKey) {
                     guard let dropdownItem = item as? DropdownInput, let changedValue = changedInput.value.get(type: changedInput.type) as? String else { return }
                     dropdownItem.dropdownItems = DropdownHelper.shared.dropdown(from: Storage.shared.getCities(nearWaterBody: changedValue))
-                    return
+                    if dropdownItem.dropdownItems.count == 1, let firstItem = dropdownItem.dropdownItems.first {
+                        dropdownItem.setValue(value: firstItem.display)
+                        NotificationCenter.default.post(name: .InputFieldShouldUpdate, object: dropdownItem)
+                        item1 = dropdownItem
+                    }
                 }
+                
+                // Change the dropdown items of Provinces in this group
+                for item in inputgroupView.inputItems where item.key.contains(provinceKey) {
+                    guard let dropdownItem = item as? DropdownInput, let changedValue = changedInput.value.get(type: changedInput.type) as? String else { return }
+                    dropdownItem.dropdownItems = DropdownHelper.shared.dropdown(from: Storage.shared.getProvinces(withWaterBody: changedValue))
+                    if dropdownItem.dropdownItems.count == 1, let firstItem = dropdownItem.dropdownItems.first {
+                        dropdownItem.setValue(value: firstItem.display)
+                        NotificationCenter.default.post(name: .InputFieldShouldUpdate, object: dropdownItem)
+                        item2 = dropdownItem
+                    }
+                }
+                
+                if let itemToUpdate = item1 as? DropdownInput {
+                    NotificationCenter.default.post(name: .journeyItemValueChanged, object: itemToUpdate)
+                }
+                
+                if let itemToUpdate = item2 as? DropdownInput {
+                    NotificationCenter.default.post(name: .journeyItemValueChanged, object: itemToUpdate)
+                }
+                
             case nearestCityKey:
-                return
+                var item1: InputItem? = nil
+                var item2: InputItem? = nil
+                // Change the dropdown items of Water bodies in this group
+                for item in inputgroupView.inputItems where item.key.contains(waterbodyKey) {
+                    guard let dropdownItem = item as? DropdownInput, let changedValue = changedInput.value.get(type: changedInput.type) as? String else { return }
+                    dropdownItem.dropdownItems = DropdownHelper.shared.dropdown(from: Storage.shared.getWaterbodies(nearCity: changedValue))
+                    if dropdownItem.dropdownItems.count == 1, let firstItem = dropdownItem.dropdownItems.first {
+                        dropdownItem.setValue(value: firstItem.display)
+                        NotificationCenter.default.post(name: .InputFieldShouldUpdate, object: dropdownItem)
+                        item1 = dropdownItem
+                    }
+                }
+                
+                // Change the dropdown items of Provinces in this group
+                for item in inputgroupView.inputItems where item.key.contains(provinceKey) {
+                    guard let dropdownItem = item as? DropdownInput, let changedValue = changedInput.value.get(type: changedInput.type) as? String else { return }
+                    dropdownItem.dropdownItems = DropdownHelper.shared.dropdown(from: Storage.shared.getProvinces(withCity: changedValue))
+                    if dropdownItem.dropdownItems.count == 1, let firstItem = dropdownItem.dropdownItems.first {
+                        dropdownItem.setValue(value: firstItem.display)
+                        NotificationCenter.default.post(name: .InputFieldShouldUpdate, object: dropdownItem)
+                        item2 = dropdownItem
+                    }
+                }
+                
+                if let itemToUpdate = item1 as? DropdownInput {
+                    NotificationCenter.default.post(name: .journeyItemValueChanged, object: itemToUpdate)
+                }
+                
+                if let itemToUpdate = item2 as? DropdownInput {
+                    NotificationCenter.default.post(name: .journeyItemValueChanged, object: itemToUpdate)
+                }
+                
             case provinceKey:
-                // Change dropdown of provinces for this group
+                var item1: InputItem? = nil
+                var item2: InputItem? = nil
+                // Change dropdown of waterbodies for this group
                 for item in inputgroupView.inputItems where item.key.contains(waterbodyKey) {
                     guard let dropdownItem = item as? DropdownInput, let changedValue = changedInput.value.get(type: changedInput.type) as? String else { return }
                     dropdownItem.dropdownItems = DropdownHelper.shared.dropdown(from: Storage.shared.getWaterbodies(inProvince: changedValue))
-                    return
+                    if dropdownItem.dropdownItems.count == 1, let firstItem = dropdownItem.dropdownItems.first {
+                        dropdownItem.setValue(value: firstItem.display)
+                        NotificationCenter.default.post(name: .InputFieldShouldUpdate, object: dropdownItem)
+                        item1 = dropdownItem
+                    }
                 }
+                
+                // Change dropdown items of Cities for this group
+                for item in inputgroupView.inputItems where item.key.contains(nearestCityKey) {
+                    guard let dropdownItem = item as? DropdownInput, let changedValue = changedInput.value.get(type: changedInput.type) as? String else { return }
+                    dropdownItem.dropdownItems = DropdownHelper.shared.dropdown(from: Storage.shared.getCities(inProvince: changedValue))
+                    if dropdownItem.dropdownItems.count == 1, let firstItem = dropdownItem.dropdownItems.first {
+                        dropdownItem.setValue(value: firstItem.display)
+                        NotificationCenter.default.post(name: .InputFieldShouldUpdate, object: dropdownItem)
+                        item2 = dropdownItem
+                    }
+                }
+                
+                if let itemToUpdate = item1 as? DropdownInput {
+                    NotificationCenter.default.post(name: .journeyItemValueChanged, object: itemToUpdate)
+                }
+                
+                if let itemToUpdate = item2 as? DropdownInput {
+                    NotificationCenter.default.post(name: .journeyItemValueChanged, object: itemToUpdate)
+                }
+                
             default:
                 return
             }

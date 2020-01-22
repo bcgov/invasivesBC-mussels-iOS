@@ -24,7 +24,8 @@ class InputGroupView: UIView {
         "RadioBooleanCollectionViewCell",
         "TimeInputCollectionViewCell",
         "IntegerStepperInputCollectionViewCell",
-        "SpacerCollectionViewCell"
+        "SpacerCollectionViewCell",
+        "InputTitleCollectionViewCell"
     ]
     
     // MARK: Variables
@@ -246,6 +247,10 @@ extension InputGroupView: UICollectionViewDataSource, UICollectionViewDelegate, 
         return collectionView!.dequeueReusableCell(withReuseIdentifier: "SpacerCollectionViewCell", for: indexPath as IndexPath) as! SpacerCollectionViewCell
     }
     
+    func getTitleCell(indexPath: IndexPath) -> InputTitleCollectionViewCell {
+        return collectionView!.dequeueReusableCell(withReuseIdentifier: "InputTitleCollectionViewCell", for: indexPath as IndexPath) as! InputTitleCollectionViewCell
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return displayableInputItems.count
     }
@@ -303,6 +308,10 @@ extension InputGroupView: UICollectionViewDataSource, UICollectionViewDelegate, 
             return cell
         case .Spacer:
             let cell = getSpacerCell(indexPath: indexPath)
+            return cell
+        case .Title:
+            let cell = getTitleCell(indexPath: indexPath)
+            cell.setup(with: item as! InputTitle, delegate: inputDelegate!)
             return cell
         }
     }

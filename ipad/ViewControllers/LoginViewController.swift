@@ -51,7 +51,7 @@ class LoginViewController: BaseViewController {
     private func style() {
         setAppTitle(label: appTitle, darkBackground: false)
         styleFillButton(button: loginWithIdirButton)
-        styleHollowButton(button: loginWithBCeIDButton)
+        styleFillButton(button: loginWithBCeIDButton)
         styleCard(layer: loginContainer.layer)
     }
     

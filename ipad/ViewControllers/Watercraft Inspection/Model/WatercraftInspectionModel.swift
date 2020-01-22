@@ -25,6 +25,8 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
     
     @objc dynamic var shouldSync: Bool = false
     
+    @objc dynamic var timeStamp: Date = Date()
+    
     // PASSPORT INFO
     @objc dynamic var isPassportHolder: Bool = false
     @objc dynamic var inspectionTime: String = ""
@@ -53,8 +55,6 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
     
     // Inspection Details
     @objc dynamic var marineMusslesFound: Bool = false
-    @objc dynamic var failedToStop: Bool = false
-    @objc dynamic var ticketIssued: Bool = false
     
     // High Risk Assesment fields
     @objc dynamic var highriskAIS: Bool = false {
@@ -185,59 +185,79 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
     }
     
     func toDictionary(shift id: Int) -> [String : Any] {
-        // TODO: REMOVE THIS FROM API - its only here because api requires it
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd"
-        let tempDateToDelete = dateFormatter.string(from: Date())
-        ///
+        dateFormatter.dateFormat = "YYYY-MM-DD"
+        let formattedDateFull = dateFormatter.string(from: self.timeStamp)
         
         // Create dictionary for high-risk assessment
         var highRiskAssessmentForm: [String: Any] = [String: Any] ()
         if let highRiskAssessment = self.highRiskAssessments.first {
             highRiskAssessmentForm = highRiskAssessment.toDictionary()
         }
-        return [
-            "lowRiskAssessmentForm": [:], // TODO: Remove from API
-            "additionalInfo": [:], // TODO: Remove from API
-            "timestamp": tempDateToDelete, // TODO: Remove from API
-            
+        
+        let journeysBody = getJourneyDetailsDictionary()
+
+        var body: [String : Any] = [
             "workflow": id,
-            "highRiskAssessmentForm": highRiskAssessmentForm,
-            "fullObservationForm": [
-                "isPassportHolder": isPassportHolder,
-                "inspectionTime": inspectionTime,
-                "passportNumber": passportNumber,
-                "launchedOutsideBC": launchedOutsideBC,
-                "k9Inspection": k9Inspection,
-                "decontaminationPerformed": decontaminationPerformed,
-                "marineSpeciesFound": marineSpeciesFound,
-                "aquaticPlantsFound": aquaticPlantsFound,
-                
-                "province": province,
-                "nonMotorized": province,
-                "simple": simple,
-                "complex": complex,
-                "veryComplex": veryComplex,
-                
-                "numberOfPeopleInParty": numberOfPeopleInParty,
-                "commerciallyHauled": commerciallyHauled,
-                "highRiskArea": highRiskArea,
-                "previousAISKnowlede": previousAISKnowlede,
-                "previousAISKnowledeSource": previousAISKnowledeSource,
-                "previousInspection": previousInspection,
-                "previousInspectionSource": previousInspectionSource,
-                "previousInspectionDays": previousInspectionDays,
-                
-                "marineMusslesFound": marineMusslesFound,
-                "failedToStop": marineMusslesFound,
-                "ticketIssued": marineMusslesFound,
-                
-                "highriskAIS": highriskAIS,
-                "adultDreissenidFound": adultDreissenidFound,
-                
-                "generalComments": generalComments
-            ]
+            "timestamp": formattedDateFull,
+            "passportHolder": isPassportHolder,
+            "k9Inspection": k9Inspection,
+            "marineSpeciesFound": marineSpeciesFound,
+            "aquaticPlantsFound": aquaticPlantsFound,
+            "previousAISKnowledge": previousAISKnowlede,
+            "previousInspection": previousInspection,
+            "marineMusselFound": marineMusslesFound,
+            "adultDreissenidaeFound": adultDreissenidFound,
+            "nonMotorized": nonMotorized,
+            "simple": simple,
+            "complex": complex,
+            "veryComplex": veryComplex,
+            "previousAISKnowledgeSource": previousAISKnowledeSource.count > 1 ? previousAISKnowledeSource : "None" ,
+            "previousInspectionSource": previousInspectionSource.count > 1 ? previousInspectionSource : "None",
+            "generalComment": generalComments.count > 1 ? generalComments : "None",
+            "launchedOutsideBC": launchedOutsideBC,
+            "decontaminationPerformed": decontaminationPerformed,
+            "commerciallyHauled": commerciallyHauled,
+            "highRiskArea": highRiskArea,
+            "highRiskAIS": highriskAIS,
+            "previousInspectionDays": previousInspectionDays,
+            "passportNumber": passportNumber.count > 1 ? passportNumber : "None",
+            "provinceOfResidence": province.count > 1 ? province : "None",
+            "journeys": []
         ]
+        
+        if highRiskAssessmentForm.count > 0 {
+            body["highRiskAssessment"] = highRiskAssessmentForm
+        }
+        
+        if journeysBody.count > 1 {
+            body["journeys"] = journeysBody
+        }
+        
+        return body
+    }
+    
+    func getJourneyDetailsDictionary() -> [[String: Any]]{
+        var journeys: [[String: Any]] = [[String: Any] ()]
+        journeys.removeAll()
+        
+        for previousJourney in self.previousWaterBodies {
+            let journeyDict = previousJourney.toDictionary()
+            if journeyDict.count > 1 {
+                journeys.append(journeyDict)
+            }
+            
+        }
+        
+        for destinationJourney in self.destinationWaterBodies {
+            let journeyDict = destinationJourney.toDictionary()
+            if journeyDict.count > 1 {
+                journeys.append(journeyDict)
+            }
+        }
+        
+        
+        return journeys
     }
     
     // MARK: Journey details

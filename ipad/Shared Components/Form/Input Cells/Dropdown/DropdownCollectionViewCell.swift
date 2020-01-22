@@ -13,6 +13,7 @@ class DropdownCollectionViewCell: BaseInputCell<DropdownInput>, UITextFieldDeleg
     // MARK: Outlets
     @IBOutlet weak var headerLabel: UILabel!
     @IBOutlet weak var textField: UITextField!
+    @IBOutlet weak var arrowDown: UIImageView!
     
     // MARK: Variables
     
@@ -38,6 +39,7 @@ class DropdownCollectionViewCell: BaseInputCell<DropdownInput>, UITextFieldDeleg
         textField.delegate = self
         let gesture = UITapGestureRecognizer(target: self, action:  #selector(self.onClick))
         self.textField.addGestureRecognizer(gesture)
+        self.arrowDown.isHidden = !model.editable
     }
     
     @objc func onClick(sender : UITapGestureRecognizer) {
@@ -49,6 +51,13 @@ class DropdownCollectionViewCell: BaseInputCell<DropdownInput>, UITextFieldDeleg
                 self.setCurrentField(value: selectedItem.key)
                 self.emitChange()
             }
+        }
+    }
+    
+    override func updateValue(value: InputValue) {
+        guard let model = self.model, let newValue =  value.get(type: .Dropdown) as? String else {return}
+        for item in model.dropdownItems where item.key ==  newValue{
+            self.textField.text = item.key
         }
     }
     

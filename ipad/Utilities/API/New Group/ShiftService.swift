@@ -20,6 +20,31 @@ class ShiftService {
     
     var promise: [String : Promise<RemoteResponse>?] = [String : Promise<RemoteResponse>]()
     
+    public func submit(shifts: [ShiftModel], then: @escaping (_ success: Bool) -> Void) {
+        var remainingShifts = shifts
+        if remainingShifts.count < 1 {
+            return then(true)
+        }
+        
+        guard isOnline(), let shift = remainingShifts.popLast() else {
+            return then(false)
+        }
+        let shiftId = shift.localId
+         submit(shift: shift) { (submittedShift) in
+            if submittedShift, let refetchedShift = Storage.shared.shift(withLocalId: shiftId) {
+                refetchedShift.set(shouldSync: false)
+                refetchedShift.set(status: .Completed)
+                for inspection in refetchedShift.inspections {
+                    inspection.set(shouldSync: false)
+                    inspection.set(status: .Completed)
+                }
+                return self.submit(shifts: remainingShifts, then: then)
+            } else {
+                return then(false)
+            }
+        }
+    }
+    
     public func submit(shift: ShiftModel, then: @escaping (_ success: Bool) -> Void) {
         let shiftLocalId = shift.localId
         // Post call
@@ -102,7 +127,10 @@ class ShiftService {
             return then(false)
         }
         let inspectionLocalId = inspection.localId
-        self.promise[inspection.localId] = inspectionAPI.post(inspection.toDictionary(shift: shiftId))
+        
+        let body = inspection.toDictionary(shift: shiftId)
+        
+        self.promise[inspection.localId] = inspectionAPI.post(body)
         self.promise[inspection.localId]??.then({ (dat, resp) in
             guard let data = dat as? [String : Any] else {
                 return then(false)
