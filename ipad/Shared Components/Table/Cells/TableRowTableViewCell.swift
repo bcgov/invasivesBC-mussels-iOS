@@ -43,7 +43,6 @@ class TableRowTableViewCell: UITableViewCell, Theme {
         DispatchQueue.main.async {
             self.createStackView()
         }
-        
     }
     
     // Button click
@@ -81,7 +80,6 @@ class TableRowTableViewCell: UITableViewCell, Theme {
                 }
                 widthAnchor.priority = UILayoutPriority(rawValue: 750)
                 widthAnchor.isActive = true
-                
                 
                 button.addTarget(self, action: #selector(didButtonClick), for: .touchUpInside)
                 
