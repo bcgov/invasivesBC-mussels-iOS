@@ -50,11 +50,12 @@ class HomeViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setNavigationBar(hidden: true, style: UIBarStyle.black)
-        initialize()
+        style()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        initialize()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -146,6 +147,7 @@ class HomeViewController: BaseViewController {
         for view in self.tableContainer.subviews {
             view.removeFromSuperview()
         }
+        self.view.layoutIfNeeded()
         let table = Table()
         
         // Create Column Config

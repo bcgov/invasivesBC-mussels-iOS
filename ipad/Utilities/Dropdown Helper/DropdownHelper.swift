@@ -38,4 +38,11 @@ class DropdownHelper {
         }
         return options
     }
+    
+    public func dropdownContains(key: String, dropdownItems: [DropdownModel]) -> Bool {
+        for item in dropdownItems where item.key == key {
+            return true
+        }
+        return false
+    }
 }
