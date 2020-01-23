@@ -54,7 +54,7 @@ class InspectionsTableCollectionViewCell: BaseShiftOverviewCollectionViewCell {
         columns.append(TableViewColumnConfig(key: "riskLevel", header: "Risk Level", type: .Normal))
         columns.append(TableViewColumnConfig(key: "inspectionTime", header: "Time Added", type: .Normal))
         columns.append(TableViewColumnConfig(key: "status", header: "Status", type: .WithIcon))
-        columns.append(TableViewColumnConfig(key: "", header: "Actions", type: .Button, buttonName: "View", showHeader: false))
+        columns.append(TableViewColumnConfig(key: "status", header: "Actions", type: .Button, buttonName: "View", showHeader: false))
         let tableView = table.show(columns: columns, in: inspections, container: tableContainer)
         tableView.layoutIfNeeded()
         self.layoutIfNeeded()
