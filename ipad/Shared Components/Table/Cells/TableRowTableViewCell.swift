@@ -40,7 +40,9 @@ class TableRowTableViewCell: UITableViewCell, Theme {
         self.model = model
         self.tableHeaders = tableHeaders
         self.columnSizes = columnSizes
-        createStackView()
+        DispatchQueue.main.async {
+            self.createStackView()
+        }
     }
     
     // Button click
@@ -72,11 +74,12 @@ class TableRowTableViewCell: UITableViewCell, Theme {
                 stackView.addArrangedSubview(button)
                 button.heightAnchor.constraint(equalToConstant: Table.rowHeight - 2).isActive = true
                 
+                var widthAnchor = button.widthAnchor.constraint(equalTo: stackView.widthAnchor, multiplier: columnPercentWidth / 100)
                 if isLast {
-                    button.widthAnchor.constraint(greaterThanOrEqualTo: stackView.widthAnchor, multiplier: columnPercentWidth / 100).isActive = true
-                } else {
-                    button.widthAnchor.constraint(equalTo: stackView.widthAnchor, multiplier: columnPercentWidth / 100).isActive = true
+                    widthAnchor = button.widthAnchor.constraint(greaterThanOrEqualTo: stackView.widthAnchor, multiplier: columnPercentWidth / 100)
                 }
+                widthAnchor.priority = UILayoutPriority(rawValue: 750)
+                widthAnchor.isActive = true
                 
                 button.addTarget(self, action: #selector(didButtonClick), for: .touchUpInside)
                 
@@ -84,6 +87,7 @@ class TableRowTableViewCell: UITableViewCell, Theme {
                 styleHollowButton(button: button)
             } else if let iconColor = item.iconColor {
                 let valueStack = UIStackView()
+                
                 let itemSpacing = Table.indicatorSize / 2
                 valueStack.axis  = NSLayoutConstraint.Axis.horizontal
                 valueStack.distribution  = UIStackView.Distribution.fillProportionally
@@ -105,6 +109,7 @@ class TableRowTableViewCell: UITableViewCell, Theme {
                 label.font = Table.fieldFont
                 label.textAlignment = .left
                 
+                valueStack.translatesAutoresizingMaskIntoConstraints = false
                 stackView.addArrangedSubview(valueStack)
                 
                 if isLast {

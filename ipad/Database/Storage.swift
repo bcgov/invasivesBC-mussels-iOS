@@ -142,12 +142,64 @@ class Storage {
         }
     }
     
+    public func getWaterbodies(nearCity city: String) -> [String] {
+        do {
+            let realm = try Realm()
+            let objs = realm.objects(WaterBodyTableModel.self).filter("closest ==  %@", city).map { $0 }
+            let found = Array(objs)
+            return found.map{ $0.name}
+        } catch let error as NSError {
+            print("** REALM ERROR")
+            print(error)
+            return []
+        }
+    }
+    
     public func getCities(nearWaterBody waterBody: String) -> [String] {
         do {
             let realm = try Realm()
             let objs = realm.objects(WaterBodyTableModel.self).filter("name ==  %@", waterBody).map { $0 }
             let found = Array(objs)
             return found.map{ $0.closest}
+        } catch let error as NSError {
+            print("** REALM ERROR")
+            print(error)
+            return []
+        }
+    }
+    
+    public func getCities(inProvince province: String) -> [String] {
+        do {
+            let realm = try Realm()
+            let objs = realm.objects(WaterBodyTableModel.self).filter("abbrev ==  %@", province).map { $0 }
+            let found = Array(objs)
+            return found.map{ $0.closest}
+        } catch let error as NSError {
+            print("** REALM ERROR")
+            print(error)
+            return []
+        }
+    }
+    
+    public func getProvinces(withWaterBody waterBody: String) -> [String] {
+        do {
+            let realm = try Realm()
+            let objs = realm.objects(WaterBodyTableModel.self).filter("name ==  %@", waterBody).map { $0 }
+            let found = Array(objs)
+            return found.map{ $0.abbrev}
+        } catch let error as NSError {
+            print("** REALM ERROR")
+            print(error)
+            return []
+        }
+    }
+    
+    public func getProvinces(withCity city: String) -> [String] {
+        do {
+            let realm = try Realm()
+            let objs = realm.objects(WaterBodyTableModel.self).filter("closest ==  %@", city).map { $0 }
+            let found = Array(objs)
+            return found.map{ $0.abbrev}
         } catch let error as NSError {
             print("** REALM ERROR")
             print(error)

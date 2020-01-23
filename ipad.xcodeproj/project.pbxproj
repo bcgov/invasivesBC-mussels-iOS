@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1E54FFB523D783940044721F /* InputTitleCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E54FFB323D783940044721F /* InputTitleCollectionViewCell.swift */; };
+		1E54FFB623D783940044721F /* InputTitleCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1E54FFB423D783940044721F /* InputTitleCollectionViewCell.xib */; };
 		1E6D9A2E2399BDEE0034FDEF /* BaseJourneyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E6D9A2D2399BDEE0034FDEF /* BaseJourneyCollectionViewCell.swift */; };
 		1E6D9A3023A2C8310034FDEF /* testShift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E6D9A2F23A2C8310034FDEF /* testShift.swift */; };
 		22692B6074F0478BDEE57B10 /* Pods_ipad.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E19532C9F39231DE6E43099 /* Pods_ipad.framework */; };
@@ -188,6 +190,8 @@
 
 /* Begin PBXFileReference section */
 		051BF2997C37C073E8713545 /* Pods-ipadTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ipadTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ipadTests/Pods-ipadTests.debug.xcconfig"; sourceTree = "<group>"; };
+		1E54FFB323D783940044721F /* InputTitleCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputTitleCollectionViewCell.swift; sourceTree = "<group>"; };
+		1E54FFB423D783940044721F /* InputTitleCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InputTitleCollectionViewCell.xib; sourceTree = "<group>"; };
 		1E6D9A2D2399BDEE0034FDEF /* BaseJourneyCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseJourneyCollectionViewCell.swift; sourceTree = "<group>"; };
 		1E6D9A2F23A2C8310034FDEF /* testShift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testShift.swift; sourceTree = "<group>"; };
 		2907E4B02368CD6700946B3F /* Dropdown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dropdown.swift; sourceTree = "<group>"; };
@@ -400,6 +404,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		1E54FFB223D783740044721F /* Title */ = {
+			isa = PBXGroup;
+			children = (
+				1E54FFB323D783940044721F /* InputTitleCollectionViewCell.swift */,
+				1E54FFB423D783940044721F /* InputTitleCollectionViewCell.xib */,
+			);
+			path = Title;
+			sourceTree = "<group>";
+		};
 		1E5D7D492369F1A400707D08 /* Input Cells */ = {
 			isa = PBXGroup;
 			children = (
@@ -419,6 +432,7 @@
 				29F29FA8236CA925004F12E7 /* Text Input */,
 				298BF7C223958A060072AA28 /* Spacer */,
 				29F29F9E236B8655004F12E7 /* Dropdown */,
+				1E54FFB223D783740044721F /* Title */,
 			);
 			path = "Input Cells";
 			sourceTree = "<group>";
@@ -814,7 +828,7 @@
 				29BAC50B23677EDC00A620F4 /* LoginViewController.swift */,
 				29BAC50D236790C900A620F4 /* HomeViewController.swift */,
 				2907E4BA2368FEA500946B3F /* FormEntryViewController.swift */,
-				29F4EC522370B142001D5CFA /* Watercraft Inspection */,
+				29F4EC522370B142001D5CFA /* Shift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -1070,7 +1084,7 @@
 			path = "Text Input";
 			sourceTree = "<group>";
 		};
-		29F4EC522370B142001D5CFA /* Watercraft Inspection */ = {
+		29F4EC522370B142001D5CFA /* Shift */ = {
 			isa = PBXGroup;
 			children = (
 				294D9A8D237B1E8900BD4928 /* Fields Generator */,
@@ -1081,7 +1095,7 @@
 				29F4EC502370B007001D5CFA /* WatercraftInspectionViewController.swift */,
 				29588744237B50CC00224FFA /* HighRiskFormViewController.swift */,
 			);
-			path = "Watercraft Inspection";
+			path = Shift;
 			sourceTree = "<group>";
 		};
 		29F4EC532370B1BB001D5CFA /* Cells */ = {
@@ -1325,6 +1339,7 @@
 				296237D72374B6B400032BB5 /* RadioSwitchInputCollectionViewCell.xib in Resources */,
 				29CEC92123676424003B21B9 /* Main.storyboard in Resources */,
 				29514BED2368CAAA00DC89C4 /* Dropdown.storyboard in Resources */,
+				1E54FFB623D783940044721F /* InputTitleCollectionViewCell.xib in Resources */,
 				29CE5E1D2375E48000C54F96 /* ConditionalInputCollectionViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1481,6 +1496,7 @@
 				29BAC50E236790C900A620F4 /* HomeViewController.swift in Sources */,
 				1E6D9A2E2399BDEE0034FDEF /* BaseJourneyCollectionViewCell.swift in Sources */,
 				29514BE62368B70900DC89C4 /* Options.swift in Sources */,
+				1E54FFB523D783940044721F /* InputTitleCollectionViewCell.swift in Sources */,
 				29F29FA4236B9114004F12E7 /* InputItem.swift in Sources */,
 				29514BE12368B4BE00DC89C4 /* SettingsConstants.swift in Sources */,
 				296DEC23238C56A30035E7FA /* ShiftFormHelper.swift in Sources */,

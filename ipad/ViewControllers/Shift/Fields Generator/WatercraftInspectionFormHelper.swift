@@ -244,23 +244,6 @@ class WatercraftInspectionFormHelper {
         )
         sectionItems.append(marineMusslesFound)
         
-        let failedToStop = SwitchInput(
-            key: "failedToStop",
-            header: WatercraftFieldHeaderConstants.InspectionDetails.failedToStop,
-            editable: editable ?? true,
-            value: object?.failedToStop ?? nil,
-            width: .Forth
-        )
-        sectionItems.append(failedToStop)
-        
-        let ticketIssued = SwitchInput(
-            key: "ticketIssued",
-            header: WatercraftFieldHeaderConstants.InspectionDetails.ticketIssued,
-            editable: editable ?? true,
-            value: object?.ticketIssued ?? nil,
-            width: .Forth
-        )
-        sectionItems.append(ticketIssued)
         return sectionItems
     }
     

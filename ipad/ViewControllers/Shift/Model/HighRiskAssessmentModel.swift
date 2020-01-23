@@ -69,21 +69,21 @@ class HighRiskAssessmentModel: Object, BaseRealmObject {
     // MARK: To Dictionary
     func toDictionary() -> [String : Any] {
         return [
-            "watercraftRegistration": watercraftRegistration,
             "cleanDrainDryAfterInspection": cleanDrainDryAfterInspection,
-            "otherInspectionFindings": otherInspectionFindings,
             "quarantinePeriodIssued": quarantinePeriodIssued,
             "standingWaterPresent": standingWaterPresent,
-            "standingWaterLocation" : standingWaterLocation,
-            "adultDreissenidMusselsFound": adultDreissenidMusselsFound,
-            "adultDreissenidMusselsLocation": adultDreissenidMusselsLocation,
+            "adultDreissenidaeMusselFound": adultDreissenidMusselsFound,
             "decontaminationPerformed": decontaminationPerformed,
-            "decontaminationReference": decontaminationReference,
             "decontaminationOrderIssued": decontaminationOrderIssued,
-            "decontaminationOrderNumber": decontaminationOrderNumber,
             "sealIssued": sealIssued,
-            "sealNumber": sealNumber,
-            "generalComments": generalComments
+            "watercraftRegistration": watercraftRegistration > 0 ? watercraftRegistration : -1,
+            "decontaminationReference": decontaminationReference > 0 ? decontaminationReference : -1,
+            "decontaminationOrderNumber": decontaminationOrderNumber > 0 ? decontaminationOrderNumber : -1,
+            "sealNumber": sealNumber > 0 ? sealNumber : -1,
+            "standingWaterLocation": standingWaterLocation.count > 1 ? standingWaterLocation : "NA",
+            "adultDreissenidaeMusselDetail": adultDreissenidMusselsLocation.count > 1 ? adultDreissenidMusselsLocation : "NA",
+            "otherInspectionFindings": otherInspectionFindings.count > 1 ? otherInspectionFindings : "NA",
+            "generalComments": generalComments.count > 1 ? generalComments : "NA",
         ]
     }
     

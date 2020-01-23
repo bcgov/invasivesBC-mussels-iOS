@@ -1,5 +1,5 @@
 //
-//  DestinationWaterBodyModel.swift
+//  PreviousWaterBodyModel.swift
 //  ipad
 //
 //  Created by Amir Shayegh on 2019-12-02.
@@ -7,12 +7,10 @@
 //
 
 import Foundation
-
-import Foundation
 import Realm
 import RealmSwift
 
-class DestinationWaterbodyModel: Object, BaseRealmObject {
+class PreviousWaterbodyModel: Object, BaseRealmObject {
     @objc dynamic var userId: String = ""
     @objc dynamic var localId: String = {
         return UUID().uuidString
@@ -37,7 +35,7 @@ class DestinationWaterbodyModel: Object, BaseRealmObject {
             return
         }
         do {
-            let realm = try Realm()
+            let realm = try Realm()  
             try realm.write {
                 self[key] = value
             }
@@ -48,11 +46,13 @@ class DestinationWaterbodyModel: Object, BaseRealmObject {
     }
     
     func toDictionary() -> [String : Any] {
+        guard let waterbodyModel = CodeTables.shared.findWaterbody(name: waterbody, province: province, nearestCity: nearestCity) else {
+            return [String : Any]()
+        }
         return [
-            "waterbody" : waterbody,
-            "nearestCity" : nearestCity,
-            "province" : province,
-            "numberOfDaysOut" : numberOfDaysOut
+            "journeyType": 0,
+            "waterBody": waterbodyModel.water_body_id,
         ]
     }
+    
 }

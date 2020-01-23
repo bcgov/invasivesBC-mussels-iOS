@@ -47,7 +47,7 @@ class ShiftModel: Object, BaseRealmObject {
     @objc dynamic var date: Date?
     ///
     @objc dynamic var station: String = " "
-    @objc dynamic var location: String = " "
+//    @objc dynamic var location: String = " "
     ///
     @objc dynamic var shitStartComments: String = ""
     @objc dynamic var shitEndComments: String = ""
@@ -68,6 +68,8 @@ class ShiftModel: Object, BaseRealmObject {
         let inspection = WatercradftInspectionModel()
         inspection.shouldSync = false
         inspection.userId = self.userId
+        inspection.previousWaterBodies.append(PreviousWaterbodyModel())
+        inspection.timeStamp = Date()
         do {
             let realm = try Realm()
             try realm.write {
@@ -173,33 +175,47 @@ class ShiftModel: Object, BaseRealmObject {
         }
     }
     
+    func formattedDateTime(time: String, date: Date) -> String? {
+        let timeFormatter = DateFormatter()
+        timeFormatter.dateFormat = "YYYY-MM-DD hh:mm:ss"
+        let startDate = date
+        let startTimeSplit = time.components(separatedBy: ":")
+        guard let timeInDate = startDate.setTime(hour: Int(startTimeSplit[0]) ?? 0, min: Int(startTimeSplit[1]) ?? 0, sec: 1) else {
+            return nil
+        }
+        
+        return timeFormatter.string(from: timeInDate)
+    }
+    
     // MARK: To Dictionary
     func toDictionary() -> [String : Any] {
         guard let date = date else {return [String : Any]()}
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd"
+        dateFormatter.dateFormat = "YYYY-MM-DD"
         let formattedDateFull = dateFormatter.string(from: date)
+        
+        guard let startTimeFormatted = formattedDateTime(time: startTime, date: date), let endTimeFormatted = formattedDateTime(time: endTime, date: date) else {
+            return [String : Any]()
+        }
+        
         return [
-            "date" : formattedDateFull,
-            "startOfDayForm": [:], // TODO: Remove from api
-            "endOfDayForm": [:], // TODO: remove from api
-            "info": [
-                "startTime": startTime,
-                "endTime": endTime,
-                "boatsInspected": boatsInspected,
-                "motorizedBlowBys": motorizedBlowBys,
-                "nonMotorizedBlowBys": nonMotorizedBlowBys,
-                "k9OnShif": k9OnShif,
-                "sunny": sunny,
-                "cloudy": cloudy,
-                "raining": raining,
-                "snowing": snowing,
-                "foggy": foggy,
-                "windy": windy,
-                "station": station,
-                "shitStartComments": shitStartComments,
-                "shitEndComments": shitEndComments,
-            ]
+            "date": formattedDateFull,
+            "startTime": startTimeFormatted,
+            "endTime": endTimeFormatted,
+            "station": station,
+            "location": "NA",
+            "shiftStartComment": shitStartComments.count > 1 ? shitStartComments : "None",
+            "shiftEndComment":  shitEndComments.count > 1 ? shitEndComments : "None",
+            "motorizedBlowBys": motorizedBlowBys,
+            "nonMotorizedBlowBys": nonMotorizedBlowBys,
+            "boatsInspected": boatsInspected,
+            "sunny": sunny,
+            "cloudy": sunny,
+            "raining": raining,
+            "snowing": snowing,
+            "foggy": foggy,
+            "windy": windy,
+            "k9OnShift": k9OnShif
         ]
     }
     

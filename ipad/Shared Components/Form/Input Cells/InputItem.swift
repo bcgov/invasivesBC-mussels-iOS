@@ -23,6 +23,7 @@ enum InputItemType {
     case Time
     case Stepper
     case Spacer
+    case Title
 }
 
 enum InputItemWidthSize {
@@ -70,6 +71,8 @@ struct InputValue {
             return self.int
         case .Spacer:
             return nil
+        case .Title:
+            return self.string
         }
     }
     
@@ -101,6 +104,8 @@ struct InputValue {
             self.int = value as? Int
         case .Spacer:
             break
+        case .Title:
+            self.string = value as? String
         }
     }
 }
@@ -155,6 +160,8 @@ struct InputDependency {
             return item.value.get(type: item.type) as? Int == _value.get(type: item.type) as? Int
         case .Spacer:
             return false
+        case .Title:
+            return item.value.get(type: item.type) as? String == _value.get(type: item.type) as? String
         }
     }
 }
@@ -549,6 +556,27 @@ class InputSpacer: InputItem {
         self.header = ""
         self.editable = false
         self.width = width ?? .Fill
+        
+    }
+}
+
+class InputTitle: InputItem {
+    var dependency: InputDependency?
+    var type: InputItemType = .Title
+    var width: InputItemWidthSize
+    var height: CGFloat = 30
+    var key: String
+    var value: InputValue
+    var header: String
+    var editable: Bool
+    
+    init(title: String, width: InputItemWidthSize? = .Full, height: CGFloat? = 30) {
+        self.key = UUID().uuidString
+        self.value = InputValue()
+        self.value.set(value: title, type: type)
+        self.header = ""
+        self.editable = false
+        self.width = width ?? .Full
         
     }
 }
