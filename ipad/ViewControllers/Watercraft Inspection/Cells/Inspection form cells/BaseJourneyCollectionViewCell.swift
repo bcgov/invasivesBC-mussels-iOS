@@ -45,6 +45,13 @@ class BaseJourneyCollectionViewCell: UICollectionViewCell {
                         dropdownItem.setValue(value: firstItem.display)
                         NotificationCenter.default.post(name: .InputFieldShouldUpdate, object: dropdownItem)
                         item1 = dropdownItem
+                    } else if
+                        let currentValue = dropdownItem.getValue(),
+                        !DropdownHelper.shared.dropdownContains(key: currentValue, dropdownItems: dropdownItem.dropdownItems)
+                    {
+                        dropdownItem.setValue(value: "")
+                        NotificationCenter.default.post(name: .InputFieldShouldUpdate, object: dropdownItem)
+                        item1 = dropdownItem
                     }
                 }
                 
@@ -54,6 +61,13 @@ class BaseJourneyCollectionViewCell: UICollectionViewCell {
                     dropdownItem.dropdownItems = DropdownHelper.shared.dropdown(from: Storage.shared.getProvinces(withWaterBody: changedValue))
                     if dropdownItem.dropdownItems.count == 1, let firstItem = dropdownItem.dropdownItems.first {
                         dropdownItem.setValue(value: firstItem.display)
+                        NotificationCenter.default.post(name: .InputFieldShouldUpdate, object: dropdownItem)
+                        item2 = dropdownItem
+                    } else if
+                        let currentValue = dropdownItem.getValue(),
+                        !DropdownHelper.shared.dropdownContains(key: currentValue, dropdownItems: dropdownItem.dropdownItems)
+                    {
+                        dropdownItem.setValue(value: "")
                         NotificationCenter.default.post(name: .InputFieldShouldUpdate, object: dropdownItem)
                         item2 = dropdownItem
                     }
@@ -78,6 +92,13 @@ class BaseJourneyCollectionViewCell: UICollectionViewCell {
                         dropdownItem.setValue(value: firstItem.display)
                         NotificationCenter.default.post(name: .InputFieldShouldUpdate, object: dropdownItem)
                         item1 = dropdownItem
+                    } else if
+                        let currentValue = dropdownItem.getValue(),
+                        !DropdownHelper.shared.dropdownContains(key: currentValue, dropdownItems: dropdownItem.dropdownItems)
+                    {
+                        dropdownItem.setValue(value: "")
+                        NotificationCenter.default.post(name: .InputFieldShouldUpdate, object: dropdownItem)
+                        item1 = dropdownItem
                     }
                 }
                 
@@ -87,6 +108,13 @@ class BaseJourneyCollectionViewCell: UICollectionViewCell {
                     dropdownItem.dropdownItems = DropdownHelper.shared.dropdown(from: Storage.shared.getProvinces(withCity: changedValue))
                     if dropdownItem.dropdownItems.count == 1, let firstItem = dropdownItem.dropdownItems.first {
                         dropdownItem.setValue(value: firstItem.display)
+                        NotificationCenter.default.post(name: .InputFieldShouldUpdate, object: dropdownItem)
+                        item2 = dropdownItem
+                    } else if
+                        let currentValue = dropdownItem.getValue(),
+                        !DropdownHelper.shared.dropdownContains(key: currentValue, dropdownItems: dropdownItem.dropdownItems)
+                    {
+                        dropdownItem.setValue(value: "")
                         NotificationCenter.default.post(name: .InputFieldShouldUpdate, object: dropdownItem)
                         item2 = dropdownItem
                     }
@@ -111,6 +139,13 @@ class BaseJourneyCollectionViewCell: UICollectionViewCell {
                         dropdownItem.setValue(value: firstItem.display)
                         NotificationCenter.default.post(name: .InputFieldShouldUpdate, object: dropdownItem)
                         item1 = dropdownItem
+                    } else if
+                        let currentValue = dropdownItem.getValue(),
+                        !DropdownHelper.shared.dropdownContains(key: currentValue, dropdownItems: dropdownItem.dropdownItems)
+                    {
+                        dropdownItem.setValue(value: "")
+                        NotificationCenter.default.post(name: .InputFieldShouldUpdate, object: dropdownItem)
+                        item1 = dropdownItem
                     }
                 }
                 
@@ -121,6 +156,12 @@ class BaseJourneyCollectionViewCell: UICollectionViewCell {
                     if dropdownItem.dropdownItems.count == 1, let firstItem = dropdownItem.dropdownItems.first {
                         dropdownItem.setValue(value: firstItem.display)
                         NotificationCenter.default.post(name: .InputFieldShouldUpdate, object: dropdownItem)
+                        item2 = dropdownItem
+                    } else if
+                        let currentValue = dropdownItem.getValue(),
+                        !DropdownHelper.shared.dropdownContains(key: currentValue, dropdownItems: dropdownItem.dropdownItems)
+                    {
+                        dropdownItem.setValue(value: "")
                         item2 = dropdownItem
                     }
                 }

@@ -40,7 +40,10 @@ class TableRowTableViewCell: UITableViewCell, Theme {
         self.model = model
         self.tableHeaders = tableHeaders
         self.columnSizes = columnSizes
-        createStackView()
+        DispatchQueue.main.async {
+            self.createStackView()
+        }
+        
     }
     
     // Button click
@@ -72,11 +75,13 @@ class TableRowTableViewCell: UITableViewCell, Theme {
                 stackView.addArrangedSubview(button)
                 button.heightAnchor.constraint(equalToConstant: Table.rowHeight - 2).isActive = true
                 
+                var widthAnchor = button.widthAnchor.constraint(equalTo: stackView.widthAnchor, multiplier: columnPercentWidth / 100)
                 if isLast {
-                    button.widthAnchor.constraint(greaterThanOrEqualTo: stackView.widthAnchor, multiplier: columnPercentWidth / 100).isActive = true
-                } else {
-                    button.widthAnchor.constraint(equalTo: stackView.widthAnchor, multiplier: columnPercentWidth / 100).isActive = true
+                    widthAnchor = button.widthAnchor.constraint(greaterThanOrEqualTo: stackView.widthAnchor, multiplier: columnPercentWidth / 100)
                 }
+                widthAnchor.priority = UILayoutPriority(rawValue: 750)
+                widthAnchor.isActive = true
+                
                 
                 button.addTarget(self, action: #selector(didButtonClick), for: .touchUpInside)
                 
