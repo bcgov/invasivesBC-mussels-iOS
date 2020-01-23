@@ -72,7 +72,7 @@ class HighRiskAssessmentModel: Object, BaseRealmObject {
             "cleanDrainDryAfterInspection": cleanDrainDryAfterInspection,
             "quarantinePeriodIssued": quarantinePeriodIssued,
             "standingWaterPresent": standingWaterPresent,
-            "adultDreissenidaeMusselFound": adultDreissenidMusselsLocation,
+            "adultDreissenidaeMusselFound": adultDreissenidMusselsFound,
             "decontaminationPerformed": decontaminationPerformed,
             "decontaminationOrderIssued": decontaminationOrderIssued,
             "sealIssued": sealIssued,
@@ -81,10 +81,9 @@ class HighRiskAssessmentModel: Object, BaseRealmObject {
             "decontaminationOrderNumber": decontaminationOrderNumber,
             "sealNumber": sealNumber,
             "standingWaterLocation": standingWaterLocation,
-            "adultDreissenidaeMusselDetail": adultDreissenidMusselsFound,
-            ///
-            "otherInspectionFindings": otherInspectionFindings,
-            "generalComments": generalComments
+            "adultDreissenidaeMusselDetail": adultDreissenidMusselsLocation,
+            "otherInspectionFindings": otherInspectionFindings.count > 1 ? otherInspectionFindings : "NA",
+            "generalComments": generalComments.count > 1 ? generalComments : "NA",
         ]
     }
     
