@@ -828,7 +828,7 @@
 				29BAC50B23677EDC00A620F4 /* LoginViewController.swift */,
 				29BAC50D236790C900A620F4 /* HomeViewController.swift */,
 				2907E4BA2368FEA500946B3F /* FormEntryViewController.swift */,
-				29F4EC522370B142001D5CFA /* Watercraft Inspection */,
+				29F4EC522370B142001D5CFA /* Shift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -1084,7 +1084,7 @@
 			path = "Text Input";
 			sourceTree = "<group>";
 		};
-		29F4EC522370B142001D5CFA /* Watercraft Inspection */ = {
+		29F4EC522370B142001D5CFA /* Shift */ = {
 			isa = PBXGroup;
 			children = (
 				294D9A8D237B1E8900BD4928 /* Fields Generator */,
@@ -1095,7 +1095,7 @@
 				29F4EC502370B007001D5CFA /* WatercraftInspectionViewController.swift */,
 				29588744237B50CC00224FFA /* HighRiskFormViewController.swift */,
 			);
-			path = "Watercraft Inspection";
+			path = Shift;
 			sourceTree = "<group>";
 		};
 		29F4EC532370B1BB001D5CFA /* Cells */ = {
