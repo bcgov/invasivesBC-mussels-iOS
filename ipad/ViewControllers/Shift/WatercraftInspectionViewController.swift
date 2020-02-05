@@ -24,6 +24,7 @@ public enum WatercraftFromSection: Int, CaseIterable {
     case JourneyDetails
     case InspectionDetails
     case HighRiskAssessmentFields
+    case HighRiskAssessment
     case Divider
     case GeneralComments
 }
@@ -47,6 +48,8 @@ class WatercraftInspectionViewController: BaseViewController {
     var shiftModel: ShiftModel?
     var model: WatercradftInspectionModel? = nil
     private var showFullInspection: Bool = false
+    private var showHighRiskAssessment: Bool = false
+    private var showFullHighRiskAssessment = false
     private var isEditable: Bool = true
     
     // MARK: Class Functions
@@ -78,6 +81,25 @@ class WatercraftInspectionViewController: BaseViewController {
         if !model.isPassportHolder || model.launchedOutsideBC {
             self.showFullInspection = true
         }
+        
+        self.showHighRiskAssessment = shouldShowHighRiskForm()
+        self.showFullHighRiskAssessment = shouldShowFullHighRiskForm()
+    }
+    
+    func shouldShowHighRiskForm() -> Bool {
+        guard let model = self.model else {return false}
+        let highRiskFieldKeys = WatercraftInspectionFormHelper.getHighriskAssessmentFieldsFields().map{ $0.key}
+        for key in highRiskFieldKeys {
+            if model[key] as? Bool == true {
+               return true
+            }
+        }
+        return false
+    }
+    
+    func shouldShowFullHighRiskForm() -> Bool {
+        guard let model = self.model, let highRisk = model.highRiskAssessments.first else {return false}
+        return !highRisk.cleanDrainDryAfterInspection
     }
     
     // MARK: - Navigation
@@ -89,8 +111,14 @@ class WatercraftInspectionViewController: BaseViewController {
         }
     }
     
-    func showHighRiskForm() {
-        self.performSegue(withIdentifier: "showHighRiskForm", sender: self)
+    func showHighRiskForm(show: Bool) {
+        self.showHighRiskAssessment = show
+        self.collectionView.reloadData()
+    }
+    
+    func showFullHighRiskForm(show: Bool) {
+        showFullHighRiskAssessment = show
+        self.collectionView.reloadData()
     }
     
     private func addListeners() {
@@ -154,20 +182,30 @@ class WatercraftInspectionViewController: BaseViewController {
                     // Confirmed
                     model.set(value: true, for: item.key)
                     // Show high risk form
-                    self.showHighRiskForm()
+                    self.showHighRiskForm(show: true)
                 }) {
                     // Cancelled
                     model.set(value: false, for: item.key)
                     item.value.set(value: false, type: item.type)
                     NotificationCenter.default.post(name: .InputFieldShouldUpdate, object: item)
                 }
+            } else {
+                model.set(value: false, for: item.key)
+                self.showHighRiskForm(show: shouldShowHighRiskForm())
             }
         } else if
             item.key.lowercased().contains("previousWaterBody".lowercased()) ||
-            item.key.lowercased().contains("destinationWaterBody".lowercased()
-            ) {
+                item.key.lowercased().contains("destinationWaterBody".lowercased())
+        {
             // Watercraft Journey
             model.editJourney(inputItemKey: item.key, value: item.value.get(type: item.type) as Any)
+        } else if item.key.lowercased().contains("highRisk-".lowercased()) {
+            // High Risk Assessment
+            model.editHighRiskForm(inputItemKey: item.key, value: item.value.get(type: item.type) as Any)
+            if item.key == "highRisk-cleanDrainDryAfterInspection" {
+                guard let value = item.value.get(type: .RadioBoolean) as? Bool else {return}
+                self.showFullHighRiskForm(show: !value)
+            }
         } else {
             // All other keys, store directly
             // TODO: needs cleanup for nil case
@@ -253,9 +291,17 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         guard let sectionType = WatercraftFromSection(rawValue: Int(section)), let model = self.model else {return 0}
         
-        if sectionType == .JourneyDetails {
+        switch sectionType {
+        case .JourneyDetails:
             return model.previousWaterBodies.count + model.destinationWaterBodies.count + 4
-        } else {
+        case .HighRiskAssessment:
+            if !showHighRiskAssessment { return 0 }
+            if self.showFullHighRiskAssessment == true {
+                return HighRiskFormSection.allCases.count
+            } else {
+                return 2
+            }
+        default:
             return 1
         }
     }
@@ -295,13 +341,36 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
             let cell = getBasicCell(indexPath: indexPath)
             cell.setup(title: "High Risk Assessment Fields", input: model.getInputputFields(for: sectionType, editable: isEditable), delegate: self, boxed: true, showDivider: false)
             return cell
+        case .HighRiskAssessment:
+            return getHighRiskAssessmentCell(indexPath: indexPath)
         case .GeneralComments:
             let cell = getBasicCell(indexPath: indexPath)
             cell.setup(title: "Comments", input: model.getInputputFields(for: sectionType, editable: isEditable), delegate: self)
             return cell
         case .Divider:
             return getDividerCell(indexPath: indexPath)
+            
         }
+    }
+    
+    func getHighRiskAssessmentCell(indexPath: IndexPath) -> UICollectionViewCell {
+        guard let sectionType = HighRiskFormSection(rawValue: Int(indexPath.row)), let model = self.model, let highRiskForm = model.highRiskAssessments.first else {
+            return UICollectionViewCell()
+        }
+        
+        let sectionTitle = "\(sectionType)".convertFromCamelCase()
+        let cell = getBasicCell(indexPath: indexPath)
+        cell.setup(title: sectionTitle, input: highRiskForm.getInputputFields(for: sectionType, editable: isEditable), delegate: self)
+        return cell
+    }
+    
+    func getSizeForHighRiskAssessmentCell(indexPath: IndexPath) -> CGSize {
+        guard let sectionType = HighRiskFormSection(rawValue: Int(indexPath.row)), let model = self.model, let highRiskForm = model.highRiskAssessments.first else {
+            return CGSize()
+        }
+        
+        let estimatedContentHeight = InputGroupView.estimateContentHeight(for: highRiskForm.getInputputFields(for: sectionType))
+        return CGSize(width: self.collectionView.frame.width, height: estimatedContentHeight + 80)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -326,6 +395,8 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
         case .HighRiskAssessmentFields:
             let estimatedContentHeight = InputGroupView.estimateContentHeight(for: model.getInputputFields(for: sectionType))
             return CGSize(width: self.collectionView.bounds.width - 16, height: estimatedContentHeight + 80)
+        case .HighRiskAssessment:
+            return getSizeForHighRiskAssessmentCell(indexPath: indexPath)
         case .GeneralComments:
             let estimatedContentHeight = InputGroupView.estimateContentHeight(for: model.getInputputFields(for: sectionType))
             return CGSize(width: self.collectionView.frame.width, height: estimatedContentHeight + 80)
@@ -344,7 +415,7 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
         case .PreviousWaterBody:
             let cell = getPreviousWaterBodyCell(indexPath: indexPath)
             let itemsIndex: Int = indexPath.row - 1
-//            let previousWaterBody = model.previousWaterBodies[itemsIndex]
+            //            let previousWaterBody = model.previousWaterBodies[itemsIndex]
             let inputItems = WatercraftInspectionFormHelper.watercraftInspectionPreviousWaterBodyInputs(for: model, index: itemsIndex, isEditable: self.isEditable)
             cell.setup(with: inputItems, delegate: self, onDelete: {
                 model.removePreviousWaterBody(at: itemsIndex)
@@ -356,7 +427,7 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
         case .DestinationWaterBody:
             let cell = getDestinationWaterBodyCell(indexPath: indexPath)
             let itemsIndex: Int = indexPath.row - (model.previousWaterBodies.count + 2)
-//            let destinationWaterBody = model.destinationWaterBodies[itemsIndex]
+            //            let destinationWaterBody = model.destinationWaterBodies[itemsIndex]
             let inputItems = WatercraftInspectionFormHelper.watercraftInspectionDestinationWaterBodyInputs(for: model, index: itemsIndex, isEditable: self.isEditable)
             cell.setup(with: inputItems, delegate: self, onDelete: {
                 model.removeDestinationWaterBody(at: itemsIndex)

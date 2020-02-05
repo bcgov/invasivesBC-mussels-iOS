@@ -86,7 +86,7 @@ class CodeTables {
         self.promise?.then({ (resp, _) in
             status("Storing Code Tables")
             guard let data: [String: Any] = resp as? [String: Any] else {
-                print("FAIL: Wrong resp")
+                 print("FAIL: Wrong resp")
                  status("Could not fetch Code Tables")
                 return completion([])
             }

@@ -76,7 +76,7 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
     var destinationWaterBodies: List<DestinationWaterbodyModel> = List<DestinationWaterbodyModel>()
     
     // High Risk Assessments
-    private var highRiskAssessments: List<HighRiskAssessmentModel> = List<HighRiskAssessmentModel>()
+    var highRiskAssessments: List<HighRiskAssessmentModel> = List<HighRiskAssessmentModel>()
     
     @objc dynamic var status: String = "Draft"
     
@@ -289,6 +289,15 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
         }
     }
     
+    func editHighRiskForm(inputItemKey: String, value: Any) {
+        guard let highRiskForm = self.highRiskAssessments.first else {
+            return
+        }
+        let splitKey = inputItemKey.split(separator: "-")
+        let key = String(splitKey[1])
+        highRiskForm.set(value: value, for: key)
+    }
+    
     func removePreviousWaterBody(at index: Int) {
         if index > self.previousWaterBodies.count - 1 {
             return
@@ -365,6 +374,8 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
         case .HighRiskAssessmentFields:
             return WatercraftInspectionFormHelper.getHighriskAssessmentFieldsFields(for: self, editable: editable)
         case .Divider:
+            return []
+        case .HighRiskAssessment:
             return []
         }
     }
