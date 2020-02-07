@@ -82,6 +82,12 @@ class HomeViewController: BaseViewController {
     }
     
     @IBAction func addEntryClicked(_ sender: Any) {
+        
+        let waterBodyPicker: WaterbodyPicker = UIView.fromNib()
+        waterBodyPicker.setup(in: self.view) { (result) in
+            print(result)
+        }
+        return
         if let existing = getActiveShift() {
             self.navigateToShiftOverview(object: existing, editable: true)
         } else {

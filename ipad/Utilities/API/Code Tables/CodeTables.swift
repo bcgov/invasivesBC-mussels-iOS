@@ -31,6 +31,10 @@ class CodeTables {
     
     var promise: Promise<RemoteResponse>?
     
+    deinit {
+        InfoLog("De-init")
+    }
+    
     public func fetchCodes(completion: @escaping(_ success: Bool) -> Void, status: @escaping(_ newStatus: String) -> Void) {
         status("Fetching code tables")
         self.fetchAndStoreCodes(completion: { (codes) in
@@ -39,7 +43,7 @@ class CodeTables {
             self.fetchAndStoreWaterBodies(completion: { (waterBodies) in
                 if waterBodies.count < 0 { return completion(false) }
                 status("Wrapping up")
-                let provinces = waterBodies.map{$0.abbrev}.uniques.sorted{$0.lowercased() < $1.lowercased()}
+                let provinces = waterBodies.map{$0.country}.uniques.sorted{$0.lowercased() < $1.lowercased()}
                 let cities = waterBodies.map{$0.closest}.uniques.sorted{$0.lowercased() < $1.lowercased()}
                 let waters = waterBodies.map{$0.name}.uniques.sorted{$0.lowercased() < $1.lowercased()}
                 
@@ -83,6 +87,7 @@ class CodeTables {
         }
         status("Fetching Code Tables")
         self.promise = codesAPI.get()
+        
         self.promise?.then({ (resp, _) in
             status("Storing Code Tables")
             guard let data: [String: Any] = resp as? [String: Any] else {
@@ -110,6 +115,10 @@ class CodeTables {
                 }
                 return completion(codeTables)
             }
+        })
+        self.promise?.error({ (error, _) in
+            ErrorLog(error)
+            print(error)
         })
     }
     
@@ -151,8 +160,9 @@ class CodeTables {
                     model.water_body_id = item["water_body_id"] as? Int ?? 0
                     model.latitude = item["latitude"] as? Double ?? 0
                     model.longitude = item["longitude"] as? Double ?? 0
-                    model.abbrev = item["abbrev"] as? String ?? ""
+                    model.country = item["country"] as? String ?? ""
                     model.closest = item["closest"] as? String ?? ""
+                    model.province = item["province"] as? String ?? ""
                     RealmRequests.saveObject(object: model)
                     waterbodies.append(model)
                 }
@@ -163,7 +173,7 @@ class CodeTables {
     
     func findWaterbody(name: String, province: String, nearestCity: String) -> WaterBodyTableModel? {
         let allWaterbodies = Storage.shared.fullWaterBodyTables()
-        for element in allWaterbodies where element.name == name && element.abbrev == province && element.closest == nearestCity {
+        for element in allWaterbodies where element.name == name && element.country == province && element.closest == nearestCity {
             return element
         }
         return nil

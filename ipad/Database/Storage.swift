@@ -129,6 +129,15 @@ class Storage {
         }
     }
     
+    public func getWaterBodyDropdowns() -> [DropdownModel] {
+        let waterbodies = fullWaterBodyTables()
+        var dropdowns: [DropdownModel] = []
+        for waterBody in waterbodies {
+            dropdowns.append(DropdownModel(display: "\(waterBody.name), \(waterBody.province), \(waterBody.country) (\(waterBody.closest))"))
+        }
+        return dropdowns
+    }
+    
     public func getWaterbodies(inProvince province: String) -> [String] {
         do {
             let realm = try Realm()
@@ -186,7 +195,7 @@ class Storage {
             let realm = try Realm()
             let objs = realm.objects(WaterBodyTableModel.self).filter("name ==  %@", waterBody).map { $0 }
             let found = Array(objs)
-            return found.map{ $0.abbrev}
+            return found.map{ $0.country}
         } catch let error as NSError {
             print("** REALM ERROR")
             print(error)
@@ -199,7 +208,7 @@ class Storage {
             let realm = try Realm()
             let objs = realm.objects(WaterBodyTableModel.self).filter("closest ==  %@", city).map { $0 }
             let found = Array(objs)
-            return found.map{ $0.abbrev}
+            return found.map{ $0.country}
         } catch let error as NSError {
             print("** REALM ERROR")
             print(error)
@@ -232,9 +241,9 @@ class Storage {
                     model.water_body_id = item["water_body_id"] as? Int ?? 0
                     model.latitude = item["LatDD"] as? Double ?? 0
                     model.longitude = item["LongDD"] as? Double ?? 0
-                    model.abbrev = item["Abbrev"] as? String ?? ""
+                    model.country = item["Abbrev"] as? String ?? ""
                     model.closest = item["Closest"] as? String ?? ""
-                    if model.name == "" || model.abbrev == "" || model.closest == "" {
+                    if model.name == "" || model.country == "" || model.closest == "" {
                         continue
                     } else {
                         RealmRequests.saveObject(object: model)

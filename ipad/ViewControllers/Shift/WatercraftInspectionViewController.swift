@@ -295,7 +295,9 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
         case .JourneyDetails:
             return model.previousWaterBodies.count + model.destinationWaterBodies.count + 4
         case .HighRiskAssessment:
-            if !showHighRiskAssessment { return 0 }
+            if !showHighRiskAssessment {
+                return 0
+            }
             if self.showFullHighRiskAssessment == true {
                 return HighRiskFormSection.allCases.count
             } else {
@@ -349,7 +351,6 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
             return cell
         case .Divider:
             return getDividerCell(indexPath: indexPath)
-            
         }
     }
     

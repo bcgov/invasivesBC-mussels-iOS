@@ -186,7 +186,7 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
     
     func toDictionary(shift id: Int) -> [String : Any] {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "YYYY-MM-DD"
+        dateFormatter.dateFormat = "YYYY-MM-dd"
         let formattedDateFull = dateFormatter.string(from: self.timeStamp)
         
         // Create dictionary for high-risk assessment
