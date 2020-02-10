@@ -84,7 +84,6 @@ class AutoSync {
         self.sync()
     }
     
-    
     // MARK: sync Action
     public func sync() {
         if !shouldSync() {

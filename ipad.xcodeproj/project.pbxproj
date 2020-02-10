@@ -60,6 +60,8 @@
 		29514BED2368CAAA00DC89C4 /* Dropdown.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 29514BEC2368CAAA00DC89C4 /* Dropdown.storyboard */; };
 		29514BF02368CB5D00DC89C4 /* DropdownTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29514BEE2368CB5D00DC89C4 /* DropdownTableViewCell.swift */; };
 		29514BF12368CB5D00DC89C4 /* DropdownTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29514BEF2368CB5D00DC89C4 /* DropdownTableViewCell.xib */; };
+		29547B4A23F0BF4F000173F1 /* SelectedWaterBodyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29547B4823F0BF4F000173F1 /* SelectedWaterBodyCollectionViewCell.swift */; };
+		29547B4B23F0BF4F000173F1 /* SelectedWaterBodyCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29547B4923F0BF4F000173F1 /* SelectedWaterBodyCollectionViewCell.xib */; };
 		29588745237B50CC00224FFA /* HighRiskFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29588744237B50CC00224FFA /* HighRiskFormViewController.swift */; };
 		29588748237B52F000224FFA /* HighRiskAssessmentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29588747237B52F000224FFA /* HighRiskAssessmentModel.swift */; };
 		2958874A237B583C00224FFA /* HighRiskFormHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29588749237B583C00224FFA /* HighRiskFormHelper.swift */; };
@@ -247,6 +249,8 @@
 		29514BEC2368CAAA00DC89C4 /* Dropdown.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Dropdown.storyboard; sourceTree = "<group>"; };
 		29514BEE2368CB5D00DC89C4 /* DropdownTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropdownTableViewCell.swift; sourceTree = "<group>"; };
 		29514BEF2368CB5D00DC89C4 /* DropdownTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DropdownTableViewCell.xib; sourceTree = "<group>"; };
+		29547B4823F0BF4F000173F1 /* SelectedWaterBodyCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedWaterBodyCollectionViewCell.swift; sourceTree = "<group>"; };
+		29547B4923F0BF4F000173F1 /* SelectedWaterBodyCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectedWaterBodyCollectionViewCell.xib; sourceTree = "<group>"; };
 		29588744237B50CC00224FFA /* HighRiskFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighRiskFormViewController.swift; sourceTree = "<group>"; };
 		29588747237B52F000224FFA /* HighRiskAssessmentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighRiskAssessmentModel.swift; sourceTree = "<group>"; };
 		29588749237B583C00224FFA /* HighRiskFormHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighRiskFormHelper.swift; sourceTree = "<group>"; };
@@ -448,6 +452,8 @@
 		1EE5FE5623EC966F00A06407 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				29547B4823F0BF4F000173F1 /* SelectedWaterBodyCollectionViewCell.swift */,
+				29547B4923F0BF4F000173F1 /* SelectedWaterBodyCollectionViewCell.xib */,
 				1EE5FE5723EC968C00A06407 /* WaterbodyTableViewCell.swift */,
 				1EE5FE5823EC968C00A06407 /* WaterbodyTableViewCell.xib */,
 			);
@@ -1325,6 +1331,7 @@
 				294EF3142370885B00EEB3B6 /* BannerView.xib in Resources */,
 				29514BF12368CB5D00DC89C4 /* DropdownTableViewCell.xib in Resources */,
 				29514BD72368AD6F00DC89C4 /* OptionsTableViewCell.xib in Resources */,
+				29547B4B23F0BF4F000173F1 /* SelectedWaterBodyCollectionViewCell.xib in Resources */,
 				1EF7EBF223EC8E3E003886F6 /* WaterbodyPicker.xib in Resources */,
 				29F29F93236B6A22004F12E7 /* SwitcherView.xib in Resources */,
 				5C82D3D32374A0D400B065BA /* .gitignore in Resources */,
@@ -1501,6 +1508,7 @@
 				29BAC4FE23676C3000A620F4 /* Auth.swift in Sources */,
 				29A97436236FD5FC006C668F /* InputGroup.swift in Sources */,
 				2907E4B72368D24900946B3F /* InputModal.swift in Sources */,
+				29547B4A23F0BF4F000173F1 /* SelectedWaterBodyCollectionViewCell.swift in Sources */,
 				2991969023846AE000634F81 /* ShiftViewController.swift in Sources */,
 				29DB01092370EFD60046E605 /* TextAreaInputCollectionViewCell.swift in Sources */,
 				5C82D3EA2374BCFA00B065BA /* FoundationExtension.swift in Sources */,

@@ -14,21 +14,34 @@ class WaterbodyTableViewCell: UITableViewCell {
     @IBOutlet weak var flagImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     
-    var model: DropdownModel?
-
+    private var model: DropdownModel?
+    private var completion: (() -> Void)?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
     
-    func setup(item: DropdownModel, onClick: @escaping()->Void?) {
+    func onSelect() {
+        guard let callback = self.completion  else {return}
+        callback()
+    }
+    
+    func setup(item: DropdownModel, onClick: @escaping()->Void) {
         self.model = item
         self.titleLabel.text = item.display
+        self.completion = onClick
+        let onClickGesture = UITapGestureRecognizer(target: self, action:  #selector (self.selectAction (_:)))
+        self.addGestureRecognizer(onClickGesture)
         setFlag()
+    }
+    
+    @objc func selectAction(_ sender:UITapGestureRecognizer){
+        onSelect()
     }
     
     func setFlag() {

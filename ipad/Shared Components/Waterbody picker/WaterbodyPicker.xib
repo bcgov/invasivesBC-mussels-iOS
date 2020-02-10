@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="ipad9_7" orientation="landscape" layout="fullscreen" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -66,8 +66,21 @@
                         <constraint firstAttribute="trailing" secondItem="Iv6-o1-dGb" secondAttribute="trailing" constant="20" symbolic="YES" id="uXK-y7-yye"/>
                     </constraints>
                 </view>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="Kn1-Cd-94q">
+                    <rect key="frame" x="8" y="160" width="1008" height="60"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="60" id="cjx-4q-XHw"/>
+                    </constraints>
+                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="ESZ-0h-zRM">
+                        <size key="itemSize" width="50" height="50"/>
+                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    </collectionViewFlowLayout>
+                </collectionView>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="2SR-r0-kTi">
-                    <rect key="frame" x="0.0" y="160" width="1024" height="608"/>
+                    <rect key="frame" x="0.0" y="220" width="1024" height="548"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                 </tableView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6g2-0s-2wB">
@@ -141,14 +154,17 @@ Be sure to include the Lake Name, State/Province, Country and City.</string>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="Kn1-Cd-94q" secondAttribute="trailing" constant="8" id="3BG-Mh-Zxg"/>
                 <constraint firstItem="2SR-r0-kTi" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="8tI-Zq-nOY"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="2SR-r0-kTi" secondAttribute="trailing" id="92s-eU-k1Y"/>
                 <constraint firstItem="Qen-Xp-AZo" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="Jtn-Dc-bwi"/>
+                <constraint firstItem="Kn1-Cd-94q" firstAttribute="top" secondItem="Qen-Xp-AZo" secondAttribute="bottom" constant="8" symbolic="YES" id="WDG-Ij-e8Z"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="6g2-0s-2wB" secondAttribute="trailing" constant="64" id="WFE-Fj-3b8"/>
                 <constraint firstItem="Qen-Xp-AZo" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="YTa-xi-AAh"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="2SR-r0-kTi" secondAttribute="bottom" id="and-ep-fhb"/>
-                <constraint firstItem="2SR-r0-kTi" firstAttribute="top" secondItem="Qen-Xp-AZo" secondAttribute="bottom" constant="8" symbolic="YES" id="eG5-7m-goM"/>
                 <constraint firstItem="6g2-0s-2wB" firstAttribute="top" secondItem="Qen-Xp-AZo" secondAttribute="bottom" constant="64" id="flH-ph-Rcj"/>
+                <constraint firstItem="2SR-r0-kTi" firstAttribute="top" secondItem="Kn1-Cd-94q" secondAttribute="bottom" id="jGY-vY-8EF"/>
+                <constraint firstItem="Kn1-Cd-94q" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="8" id="oGa-GQ-VrU"/>
                 <constraint firstItem="Qen-Xp-AZo" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="qi0-TU-WfC"/>
                 <constraint firstItem="6g2-0s-2wB" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="64" id="xqP-DQ-wA4"/>
             </constraints>
@@ -157,6 +173,7 @@ Be sure to include the Lake Name, State/Province, Country and City.</string>
                 <outlet property="addManuallyButton" destination="ytn-e6-680" id="GL0-49-V4x"/>
                 <outlet property="backButton" destination="iOw-hX-3E9" id="4XE-8g-Ahh"/>
                 <outlet property="barContainer" destination="Qen-Xp-AZo" id="G3b-nT-8i8"/>
+                <outlet property="collectionView" destination="Kn1-Cd-94q" id="P76-DU-G2q"/>
                 <outlet property="otherContainer" destination="6g2-0s-2wB" id="A6y-VI-egE"/>
                 <outlet property="searchBar" destination="cVZ-Nc-2R6" id="dn8-OD-NKg"/>
                 <outlet property="selectButton" destination="wKc-aW-KZS" id="SKE-dE-3xB"/>
