@@ -17,6 +17,8 @@ class WaterbodyTableViewCell: UITableViewCell {
     private var model: DropdownModel?
     private var completion: (() -> Void)?
     
+    private var optionSelected: Bool = false
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -28,16 +30,20 @@ class WaterbodyTableViewCell: UITableViewCell {
     
     func onSelect() {
         guard let callback = self.completion  else {return}
+        self.optionSelected = !self.optionSelected
+        self.checkMarkImageView.alpha = optionSelected ? 1 : 0
         callback()
     }
     
-    func setup(item: DropdownModel, onClick: @escaping()->Void) {
+    func setup(item: DropdownModel, optionSelected: Bool, onClick: @escaping()->Void) {
         self.model = item
         self.titleLabel.text = item.display
         self.completion = onClick
         let onClickGesture = UITapGestureRecognizer(target: self, action:  #selector (self.selectAction (_:)))
         self.addGestureRecognizer(onClickGesture)
-        setFlag()
+        self.optionSelected = optionSelected
+        self.checkMarkImageView.alpha = optionSelected ? 1 : 0
+        self.setFlag()
     }
     
     @objc func selectAction(_ sender:UITapGestureRecognizer){

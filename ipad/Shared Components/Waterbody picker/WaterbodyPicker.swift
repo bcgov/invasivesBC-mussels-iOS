@@ -39,6 +39,7 @@ class WaterbodyPicker: UIView, Theme {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var otherContainer: UIView!
     @IBOutlet weak var addManuallyButton: UIButton!
+    @IBOutlet weak var selectionsHeightConstraint: NSLayoutConstraint!
     
     // MARK: Constants
     private let tableCells = [
@@ -52,7 +53,7 @@ class WaterbodyPicker: UIView, Theme {
     // MARK: Variables:
     private var items: [DropdownModel] = []
     private var filteredItems: [DropdownModel] = []
-    private var completion: ((_ result: DropdownModel?) -> Void )?
+    private var completion: ((_ result: [DropdownModel]) -> Void )?
     private var selections: [DropdownModel] = []
     
     deinit {
@@ -60,16 +61,29 @@ class WaterbodyPicker: UIView, Theme {
     }
     
     @IBAction func selectAction(_ sender: UIButton) {
+        returnResult()
+        dismissWithAnimation()
+        
     }
     
     @IBAction func backAction(_ sender: UIButton) {
-        self.removeFromSuperview()
+        dismissWithAnimation()
+    }
+    
+    private func dismissWithAnimation() {
+        UIView.animate(withDuration: 0.3, animations: {
+            self.alpha = 0
+            self.layoutIfNeeded()
+        }) { (done) in
+            self.removeFromSuperview()
+        }
+        
     }
     
     /**
      Displays Wateroicker in Container and returns DropdownModel Result
      */
-    func setup(in containerView: UIView, result: @escaping(DropdownModel?) -> Void) {
+    func setup(in containerView: UIView, result: @escaping([DropdownModel]) -> Void) {
         self.completion = result
         self.loadWaterBodies()
         self.position(in: containerView)
@@ -78,27 +92,46 @@ class WaterbodyPicker: UIView, Theme {
         self.setupCollectionView()
         self.searchBar.delegate = self
         self.tableView.reloadData()
+        self.selectionsHeightConstraint.constant = 0
     }
     
     // Return Results
-    private func returnResult(item: DropdownModel){
+    private func returnResult() {
         guard let callback = self.completion else {return}
-        return callback(item)
+        return callback(selections)
     }
     
     private func selected(item: DropdownModel) {
         if indexOf(selection: item) != nil {
             remove(item: item)
         } else {
-            selections.append(item)
-            self.collectionView.reloadData()
+            add(item: item)
         }
+    }
+    
+    private func add(item: DropdownModel) {
+        if indexOf(selection: item) != nil {return}
+        selections.append(item)
+        self.showOrHideSelectionsIfNeeded()
+        self.collectionView.reloadData()
     }
     
     private func remove(item: DropdownModel) {
         guard let index = indexOf(selection: item) else {return}
         self.selections.remove(at: index)
+        self.showOrHideSelectionsIfNeeded()
         self.collectionView.reloadData()
+    }
+    
+    private func showOrHideSelectionsIfNeeded() {
+        let selectTitle = !selections.isEmpty ? "Select (\(selections.count))" : "Select"
+        self.selectButton.setTitle(selectTitle, for: .normal)
+        self.selectButton.isEnabled = !selections.isEmpty
+        UIView.animate(withDuration: 0.3) {
+            self.selectionsHeightConstraint.constant = !self.selections.isEmpty ? 60 : 0
+            self.collectionView.alpha = !self.selections.isEmpty ? 1 : 0
+            self.layoutIfNeeded()
+        }
     }
     
     private func indexOf(selection: DropdownModel) -> Int? {
@@ -156,10 +189,12 @@ class WaterbodyPicker: UIView, Theme {
         // Animate setting alpha to 1 and adding constraints to equal container's
         UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: CGFloat(0.5), options: .curveEaseInOut, animations: {
             self.translatesAutoresizingMaskIntoConstraints = false
+            
             self.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: 0).isActive = true
             self.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 0).isActive = true
             self.topAnchor.constraint(equalTo: containerView.topAnchor, constant: -20).isActive = true
             self.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: 0).isActive = true
+            
             self.alpha = 1
             self.layoutIfNeeded()
         })
@@ -227,7 +262,7 @@ extension WaterbodyPicker: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = getRowCell(indexPath: indexPath)
-        cell.setup(item: filteredItems[indexPath.row], onClick: {
+        cell.setup(item: filteredItems[indexPath.row], optionSelected: self.indexOf(selection: filteredItems[indexPath.row]) != nil, onClick: {
             self.selected(item: self.filteredItems[indexPath.row])
         })
         
@@ -245,7 +280,6 @@ extension WaterbodyPicker: UICollectionViewDataSource, UICollectionViewDelegate,
         }
         collectionView.delegate = self
         collectionView.dataSource = self
-//        collectionView.layoutd
     }
     
     func register(collection cellName: String) {

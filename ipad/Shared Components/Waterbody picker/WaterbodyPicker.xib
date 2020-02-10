@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="ipad9_7" orientation="landscape" layout="fullscreen" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -17,53 +17,49 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qen-Xp-AZo">
                     <rect key="frame" x="0.0" y="0.0" width="1024" height="152"/>
                     <subviews>
-                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="Iv6-o1-dGb">
-                            <rect key="frame" x="20" y="20" width="984" height="112"/>
-                            <subviews>
-                                <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="B2N-b5-MDu">
-                                    <rect key="frame" x="0.0" y="0.0" width="984" height="56"/>
-                                    <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iOw-hX-3E9">
-                                            <rect key="frame" x="0.0" y="11.5" width="40" height="33"/>
-                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
-                                            <state key="normal" title="Back"/>
-                                            <connections>
-                                                <action selector="backAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="OeW-Tp-SDf"/>
-                                            </connections>
-                                        </button>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select Waterbody and Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4q1-DP-2rs">
-                                            <rect key="frame" x="362" y="18" width="249" height="20.5"/>
-                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wKc-aW-KZS">
-                                            <rect key="frame" x="933" y="11.5" width="51" height="33"/>
-                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
-                                            <state key="normal" title="Select"/>
-                                            <connections>
-                                                <action selector="selectAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="2UP-W0-2PF"/>
-                                            </connections>
-                                        </button>
-                                    </subviews>
-                                </stackView>
-                                <searchBar contentMode="redraw" searchBarStyle="minimal" translatesAutoresizingMaskIntoConstraints="NO" id="cVZ-Nc-2R6">
-                                    <rect key="frame" x="0.0" y="56" width="984" height="56"/>
-                                    <textInputTraits key="textInputTraits"/>
-                                    <scopeButtonTitles>
-                                        <string>Title</string>
-                                        <string>Title</string>
-                                    </scopeButtonTitles>
-                                </searchBar>
-                            </subviews>
-                        </stackView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select Waterbody and Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4q1-DP-2rs">
+                            <rect key="frame" x="387.5" y="32" width="249" height="20.5"/>
+                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iOw-hX-3E9">
+                            <rect key="frame" x="16" y="32" width="40" height="33"/>
+                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                            <state key="normal" title="Back"/>
+                            <connections>
+                                <action selector="backAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="OeW-Tp-SDf"/>
+                            </connections>
+                        </button>
+                        <searchBar contentMode="redraw" searchBarStyle="minimal" translatesAutoresizingMaskIntoConstraints="NO" id="cVZ-Nc-2R6">
+                            <rect key="frame" x="16" y="80" width="992" height="56"/>
+                            <textInputTraits key="textInputTraits"/>
+                            <scopeButtonTitles>
+                                <string>Title</string>
+                                <string>Title</string>
+                            </scopeButtonTitles>
+                        </searchBar>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wKc-aW-KZS">
+                            <rect key="frame" x="957" y="32" width="51" height="33"/>
+                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                            <state key="normal" title="Select"/>
+                            <connections>
+                                <action selector="selectAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="2UP-W0-2PF"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                     <constraints>
-                        <constraint firstItem="Iv6-o1-dGb" firstAttribute="top" secondItem="Qen-Xp-AZo" secondAttribute="top" constant="20" symbolic="YES" id="D8d-0D-Vih"/>
-                        <constraint firstAttribute="bottom" secondItem="Iv6-o1-dGb" secondAttribute="bottom" constant="20" symbolic="YES" id="GnG-r2-SOj"/>
-                        <constraint firstItem="Iv6-o1-dGb" firstAttribute="leading" secondItem="Qen-Xp-AZo" secondAttribute="leading" constant="20" symbolic="YES" id="Xux-Is-vss"/>
-                        <constraint firstAttribute="trailing" secondItem="Iv6-o1-dGb" secondAttribute="trailing" constant="20" symbolic="YES" id="uXK-y7-yye"/>
+                        <constraint firstItem="cVZ-Nc-2R6" firstAttribute="leading" secondItem="Qen-Xp-AZo" secondAttribute="leading" constant="16" id="8ii-gl-TB9"/>
+                        <constraint firstAttribute="trailing" secondItem="cVZ-Nc-2R6" secondAttribute="trailing" constant="16" id="Dpr-zV-qMy"/>
+                        <constraint firstItem="iOw-hX-3E9" firstAttribute="leading" secondItem="Qen-Xp-AZo" secondAttribute="leading" constant="16" id="Hf9-bC-IOq"/>
+                        <constraint firstAttribute="bottom" secondItem="cVZ-Nc-2R6" secondAttribute="bottom" constant="16" id="L2y-7g-yP7"/>
+                        <constraint firstItem="4q1-DP-2rs" firstAttribute="top" secondItem="Qen-Xp-AZo" secondAttribute="top" constant="32" id="Nsa-55-XzG"/>
+                        <constraint firstAttribute="trailing" secondItem="wKc-aW-KZS" secondAttribute="trailing" constant="16" id="Sdz-ff-txo"/>
+                        <constraint firstItem="iOw-hX-3E9" firstAttribute="top" secondItem="Qen-Xp-AZo" secondAttribute="top" constant="32" id="U5N-eh-8e9"/>
+                        <constraint firstAttribute="height" constant="152" id="gcW-VT-1Rb"/>
+                        <constraint firstItem="4q1-DP-2rs" firstAttribute="centerX" secondItem="Qen-Xp-AZo" secondAttribute="centerX" id="nLU-EX-9qj"/>
+                        <constraint firstItem="wKc-aW-KZS" firstAttribute="top" secondItem="Qen-Xp-AZo" secondAttribute="top" constant="32" id="x6z-cs-ASo"/>
                     </constraints>
                 </view>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="Kn1-Cd-94q">
@@ -177,6 +173,7 @@ Be sure to include the Lake Name, State/Province, Country and City.</string>
                 <outlet property="otherContainer" destination="6g2-0s-2wB" id="A6y-VI-egE"/>
                 <outlet property="searchBar" destination="cVZ-Nc-2R6" id="dn8-OD-NKg"/>
                 <outlet property="selectButton" destination="wKc-aW-KZS" id="SKE-dE-3xB"/>
+                <outlet property="selectionsHeightConstraint" destination="cjx-4q-XHw" id="RzX-Uz-fgx"/>
                 <outlet property="tableView" destination="2SR-r0-kTi" id="LEt-2o-alW"/>
                 <outlet property="titleLabel" destination="4q1-DP-2rs" id="1w9-UA-pJ6"/>
             </connections>
