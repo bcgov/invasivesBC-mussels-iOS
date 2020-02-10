@@ -448,7 +448,7 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
                 self.setNavigationBar(hidden: true, style: .black)
                 let waterBodyPicker: WaterbodyPicker = UIView.fromNib()
                 self.viewLayoutMarginsDidChange()
-                waterBodyPicker.setup(in: self.view) { (result) in
+                waterBodyPicker.setup() { (result) in
                     print(result)
                     for waterBody in result {
                         model.addPreviousWaterBody(model: waterBody)
@@ -471,7 +471,7 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
                 self.setNavigationBar(hidden: true, style: .black)
                 let waterBodyPicker: WaterbodyPicker = UIView.fromNib()
                 self.viewLayoutMarginsDidChange()
-                waterBodyPicker.setup(in: self.view) { (result) in
+                waterBodyPicker.setup() { (result) in
                     print(result)
                     for waterBody in result {
                         model.addDestinationWaterBody(model: waterBody)
