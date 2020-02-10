@@ -28,6 +28,16 @@ extension UISearchBar
     }
 }
 
+private enum contraintType {
+    case top
+    case bottom
+    case centerX
+    case centerY
+    case leading
+    case trailing
+    case height
+}
+
 class WaterbodyPicker: UIView, Theme {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
@@ -53,8 +63,9 @@ class WaterbodyPicker: UIView, Theme {
     // MARK: Variables:
     private var items: [DropdownModel] = []
     private var filteredItems: [DropdownModel] = []
-    private var completion: ((_ result: [DropdownModel]) -> Void )?
+    private var completion: ((_ result: [WaterBodyTableModel]) -> Void )?
     private var selections: [DropdownModel] = []
+    private var viewConstraints: [contraintType : NSLayoutConstraint] = [contraintType : NSLayoutConstraint]()
     
     deinit {
         print("de-init waterbodyPicker")
@@ -67,6 +78,8 @@ class WaterbodyPicker: UIView, Theme {
     }
     
     @IBAction func backAction(_ sender: UIButton) {
+        guard let callback = self.completion else {return}
+        callback([])
         dismissWithAnimation()
     }
     
@@ -77,15 +90,19 @@ class WaterbodyPicker: UIView, Theme {
         }) { (done) in
             self.removeFromSuperview()
         }
-        
     }
     
     /**
      Displays Wateroicker in Container and returns DropdownModel Result
      */
-    func setup(in containerView: UIView, result: @escaping([DropdownModel]) -> Void) {
+    func setup(in containerView: UIView, result: @escaping([WaterBodyTableModel]) -> Void) {
         self.completion = result
         self.loadWaterBodies()
+//        containerView.superview?.layoutMarginsDidChange()
+//        containerView.layoutIfNeeded()
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+//
+//        }
         self.position(in: containerView)
         self.style()
         self.setUpTable()
@@ -93,12 +110,19 @@ class WaterbodyPicker: UIView, Theme {
         self.searchBar.delegate = self
         self.tableView.reloadData()
         self.selectionsHeightConstraint.constant = 0
+        self.selectButton.isEnabled = !self.selections.isEmpty
     }
     
     // Return Results
     private func returnResult() {
         guard let callback = self.completion else {return}
-        return callback(selections)
+        var results: [WaterBodyTableModel] = []
+        for selection in selections {
+            if let model = Storage.shared.getWaterbodyModel(from: selection) {
+                results.append(model)
+            }
+        }
+        return callback(results)
     }
     
     private func selected(item: DropdownModel) {
@@ -121,6 +145,7 @@ class WaterbodyPicker: UIView, Theme {
         self.selections.remove(at: index)
         self.showOrHideSelectionsIfNeeded()
         self.collectionView.reloadData()
+        self.tableView.reloadData()
     }
     
     private func showOrHideSelectionsIfNeeded() {
@@ -180,24 +205,47 @@ class WaterbodyPicker: UIView, Theme {
     }
     
     private func position(in containerView: UIView) {
+//        guard let window = UIApplication.shared.keyWindow else {return}
         // Set initial position with 0 alpha and add as subview
         self.frame = CGRect(x: 0, y: containerView.frame.maxY, width: containerView.bounds.width, height: containerView.bounds.height)
         self.center.x = containerView.center.x
         self.alpha = 0
         containerView.addSubview(self)
-        self.layoutIfNeeded()
+        containerView.layoutIfNeeded()
         // Animate setting alpha to 1 and adding constraints to equal container's
+        createConstraints(in: containerView)
+        
+        self.translatesAutoresizingMaskIntoConstraints = false
+        viewConstraints[.leading]?.isActive = true
+        viewConstraints[.trailing]?.isActive = true
+        viewConstraints[.height]?.isActive = true
+        viewConstraints[.centerY]?.constant = containerView.frame.height
+        viewConstraints[.centerY]?.isActive = true
+        containerView.layoutIfNeeded()
         UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: CGFloat(0.5), options: .curveEaseInOut, animations: {
-            self.translatesAutoresizingMaskIntoConstraints = false
-            
-            self.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: 0).isActive = true
-            self.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 0).isActive = true
-            self.topAnchor.constraint(equalTo: containerView.topAnchor, constant: -20).isActive = true
-            self.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: 0).isActive = true
-            
             self.alpha = 1
-            self.layoutIfNeeded()
-        })
+            // 28 is so that it covers the status bar as well
+            self.viewConstraints[.centerY]?.constant = -20
+            containerView.layoutIfNeeded()
+        }) { (done) in
+            UIView.animate(withDuration: 0.1) {
+                self.viewConstraints[.centerY]?.isActive = false
+                self.viewConstraints[.height]?.isActive = false
+                self.viewConstraints[.bottom]?.isActive = true
+                self.viewConstraints[.top]?.isActive = true
+                containerView.layoutIfNeeded()
+            }
+        }
+    }
+    
+    private func createConstraints(in containerView: UIView) {
+        viewConstraints[.trailing] = self.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: 0)
+        viewConstraints[.leading] = self.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 0)
+        viewConstraints[.centerY] = self.centerYAnchor.constraint(equalTo: containerView.centerYAnchor, constant: 0)
+        viewConstraints[.centerX] = self.centerXAnchor.constraint(equalTo: containerView.centerXAnchor, constant: 0)
+        viewConstraints[.height] = self.heightAnchor.constraint(equalTo: containerView.heightAnchor, constant: 0)
+        viewConstraints[.top] = self.topAnchor.constraint(equalTo: containerView.topAnchor, constant: -20)
+        viewConstraints[.bottom] = self.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: 0)
     }
     
     private func style() {

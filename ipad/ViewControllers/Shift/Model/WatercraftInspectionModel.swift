@@ -196,7 +196,7 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
         }
         
         let journeysBody = getJourneyDetailsDictionary()
-
+        
         var body: [String : Any] = [
             "workflow": id,
             "timestamp": formattedDateFull,
@@ -343,11 +343,42 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
         }
     }
     
+    
+    func addDestinationWaterBody(model: WaterBodyTableModel) {
+        let object = DestinationWaterbodyModel()
+        object.set(from: model)
+        do {
+            let realm = try Realm()
+            try realm.write {
+                self.destinationWaterBodies.append(object)
+            }
+            
+        } catch let error as NSError {
+            print("** REALM ERROR")
+            print(error)
+        }
+    }
+    
     func addPreviousWaterBody() {
         do {
             let realm = try Realm()
             try realm.write {
                 self.previousWaterBodies.append(PreviousWaterbodyModel())
+            }
+            
+        } catch let error as NSError {
+            print("** REALM ERROR")
+            print(error)
+        }
+    }
+    
+    func addPreviousWaterBody(model: WaterBodyTableModel) {
+        let object = PreviousWaterbodyModel()
+        object.set(from: model)
+        do {
+            let realm = try Realm()
+            try realm.write {
+                self.previousWaterBodies.append(object)
             }
             
         } catch let error as NSError {

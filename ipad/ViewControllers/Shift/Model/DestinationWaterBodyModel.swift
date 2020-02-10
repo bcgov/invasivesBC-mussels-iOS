@@ -31,6 +31,20 @@ class DestinationWaterbodyModel: Object, BaseRealmObject {
     @objc dynamic var province: String = ""
     @objc dynamic var numberOfDaysOut : Int = 0
     
+    func set(from model: WaterBodyTableModel) {
+        do {
+            let realm = try Realm()
+            try realm.write {
+                self.waterbody = model.name
+                self.nearestCity = model.closest
+                self.province = model.province
+            }
+        } catch let error as NSError {
+            print("** REALM ERROR")
+            print(error)
+        }
+    }
+    
     func set(value: Any, for key: String) {
         if self[key] == nil {
             print("\(key) is nil")

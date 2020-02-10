@@ -42,7 +42,7 @@ class Storage {
     public func save(shift: ShiftModel) {
         do {
             let realm = try Realm()
-             try realm.write {
+            try realm.write {
                 shift.userId = Auth.getUserID()
                 realm.add(shift)
             }
@@ -78,7 +78,7 @@ class Storage {
         }
         return object
     }
-   
+    
     // MARK: Code Tables
     public func codeTable(type: CodeTableType) -> [String] {
         do {
@@ -133,9 +133,23 @@ class Storage {
         let waterbodies = fullWaterBodyTables()
         var dropdowns: [DropdownModel] = []
         for waterBody in waterbodies {
-            dropdowns.append(DropdownModel(display: "\(waterBody.name), \(waterBody.province), \(waterBody.country) (\(waterBody.closest))"))
+            dropdowns.append(DropdownModel(display: "\(waterBody.name), \(waterBody.province), \(waterBody.country) (\(waterBody.closest))", key: "\(waterBody.water_body_id)"))
         }
         return dropdowns
+    }
+    
+    public func getWaterbodyModel(from dropdown: DropdownModel) -> WaterBodyTableModel? {
+        guard let id = Int(dropdown.key) else {return nil}
+        do {
+            let realm = try Realm()
+            let objs = realm.objects(WaterBodyTableModel.self).filter("water_body_id ==  %@", id).map { $0 }
+            let found = Array(objs)
+            return found.first
+        } catch let error as NSError {
+            print("** REALM ERROR")
+            print(error)
+            return nil
+        }
     }
     
     public func getWaterbodies(inProvince province: String) -> [String] {
