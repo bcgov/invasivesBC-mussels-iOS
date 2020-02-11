@@ -138,8 +138,7 @@ class Storage {
         return dropdowns
     }
     
-    public func getWaterbodyModel(from dropdown: DropdownModel) -> WaterBodyTableModel? {
-        guard let id = Int(dropdown.key) else {return nil}
+    public func getWaterbodyModel(withId id: Int) -> WaterBodyTableModel? {
         do {
             let realm = try Realm()
             let objs = realm.objects(WaterBodyTableModel.self).filter("water_body_id ==  %@", id).map { $0 }

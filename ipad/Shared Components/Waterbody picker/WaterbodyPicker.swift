@@ -118,7 +118,7 @@ class WaterbodyPicker: UIView, Theme {
         guard let callback = self.completion else {return}
         var results: [WaterBodyTableModel] = []
         for selection in selections {
-            if let model = Storage.shared.getWaterbodyModel(from: selection) {
+            if let model = Storage.shared.getWaterbodyModel(withId: Int(selection.key) ?? -1) {
                 results.append(model)
             }
         }

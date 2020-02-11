@@ -38,6 +38,7 @@ class DestinationWaterbodyModel: Object, BaseRealmObject {
                 self.waterbody = model.name
                 self.nearestCity = model.closest
                 self.province = model.province
+                self.remoteId = model.water_body_id
             }
         } catch let error as NSError {
             print("** REALM ERROR")

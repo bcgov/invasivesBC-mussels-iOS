@@ -420,9 +420,9 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
         case .PreviousWaterBody:
             let cell = getPreviousWaterBodyCell(indexPath: indexPath)
             let itemsIndex: Int = indexPath.row - 1
-            //            let previousWaterBody = model.previousWaterBodies[itemsIndex]
-            let inputItems = WatercraftInspectionFormHelper.watercraftInspectionPreviousWaterBodyInputs(for: model, index: itemsIndex, isEditable: self.isEditable)
-            cell.setup(with: inputItems, delegate: self, onDelete: {
+            let previousWaterBody = model.previousWaterBodies[itemsIndex]
+//            let inputItems = WatercraftInspectionFormHelper.watercraftInspectionPreviousWaterBodyInputs(for: model, index: itemsIndex, isEditable: self.isEditable)
+            cell.setup(with: previousWaterBody, delegate: self, onDelete: {
                 model.removePreviousWaterBody(at: itemsIndex)
                 self.collectionView.performBatchUpdates({
                     self.collectionView.reloadSections(IndexSet(integer: indexPath.section))
