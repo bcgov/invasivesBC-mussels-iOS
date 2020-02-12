@@ -178,67 +178,44 @@ class AutoSync {
         syncView.set(title: "Performing Initial Sync")
         
         var hadErrors: Bool = false
-        delayWithSeconds(1) {
+        
+        // move to a background thread
+        DispatchQueue.global(qos: .background).async {
+
+            let dispatchGroup = DispatchGroup()
+
+            // Fetch code tables
+            dispatchGroup.enter()
             CodeTables.shared.fetchCodes(completion: { (success) in
-                // Fail
                 if !success {
                     hadErrors = true
                     Banner.show(message: "Could not fetch code tables")
                 }
-                // Success
+                dispatchGroup.leave()
+            }) { (statusUpdate) in
+                syncView.set(status: statusUpdate)
+            }
+
+            // End
+            dispatchGroup.notify(queue: .main) {
                 print("Initial Sync Executed.")
-                syncView.set(status: "Completed")
-                syncView.showSyncCompletedAnimation()
-                self.delayWithSeconds(2) {
+                if !hadErrors {
+                    syncView.set(status: "Completed")
+                    syncView.showSyncCompletedAnimation()
+                } else {
+                    syncView.set(status: "Failed")
+                    syncView.showSyncFailedAnimation()
+                }
+                // remove the view
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                     syncView.remove()
                     // free autosync
                     self.isSynchronizing = false
                     self.beginListener()
                     return completion(!hadErrors)
                 }
-            }) { (statusUpdate) in
-                syncView.set(status: statusUpdate)
             }
         }
-        
-//        // move to a background thread
-//        DispatchQueue.global(qos: .background).async {
-//
-//            let dispatchGroup = DispatchGroup()
-//
-//            // Fetch code tables
-//            dispatchGroup.enter()
-//            CodeTables.shared.fetchCodes(completion: { (success) in
-//                if !success {
-//                    hadErrors = true
-//                    Banner.show(message: "Could not fetch code tables")
-//                }
-//                dispatchGroup.leave()
-//            }) { (statusUpdate) in
-//                syncView.set(status: statusUpdate)
-//            }
-//
-//            // End
-//            dispatchGroup.notify(queue: .main) {
-//                print("Initial Sync Executed.")
-//                if !hadErrors {
-//                    syncView.set(status: "Completed")
-//                    syncView.showSyncCompletedAnimation()
-//                } else {
-//                    syncView.set(status: "Failed")
-//                    syncView.showSyncFailedAnimation()
-//                }
-//                // remove the view
-//                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-//                    syncView.remove()
-//                    // free autosync
-//                    self.isSynchronizing = false
-//                    self.beginListener()
-//                    return completion(!hadErrors)
-//                }
-//            }
-//        }
-        
     }
     
     // MARK: Criteria
@@ -256,7 +233,7 @@ class AutoSync {
         }
         
         // Code tables dont exist
-        if Storage.shared.codeTables().count > 0 {
+        if Storage.shared.codeTables().count > 0 && Storage.shared.fullWaterBodyTables().count > 5000 {
             return false
         }
         
