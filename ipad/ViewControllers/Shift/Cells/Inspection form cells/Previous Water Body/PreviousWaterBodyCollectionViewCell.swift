@@ -10,14 +10,19 @@ import UIKit
 
 class PreviousWaterBodyCollectionViewCell: BaseJourneyCollectionViewCell, Theme {
     
+    @IBOutlet weak var deleteButton: UIButton!
     @IBOutlet weak var cellContainer: UIView!
-    @IBOutlet weak var inputGroupContainer: UIView!
+    @IBOutlet weak var fieldHeader: UILabel!
+    @IBOutlet weak var inputField: UITextField!
+    @IBOutlet weak var daysOutHeader: UILabel!
+    @IBOutlet weak var daysOutField: UITextField!
     
-    var completion: (()-> Void)?
+    var onDelete: (()-> Void)?
     var delegate: InputDelegate?
+    var model: PreviousWaterbodyModel?
     
     @IBAction func optionsAction(_ sender: UIButton) {
-        guard let onDelete = completion, let delegate = delegate else {return}
+        guard let onDelete = onDelete, let delegate = delegate else {return}
         delegate.showOptionsDelegate(options: [.Delete], on: sender) { (selected) in
             if selected == .Delete {
                 return onDelete()
@@ -25,17 +30,37 @@ class PreviousWaterBodyCollectionViewCell: BaseJourneyCollectionViewCell, Theme 
         }
     }
     
-    func setup(with items: [InputItem], delegate: InputDelegate, onDelete: @escaping ()-> Void) {
-        self.inputGroup?.removeFromSuperview()
-        let inputGroup: InputGroupView = InputGroupView()
-        self.inputGroup = inputGroup
-        inputGroup.initialize(with: items, delegate: delegate, in: inputGroupContainer)
-        completion = onDelete
+    func setup(with model: PreviousWaterbodyModel,isEditable: Bool, delegate: InputDelegate, onDelete: @escaping ()-> Void) {
+        self.onDelete = onDelete
         self.delegate = delegate
+        self.model = model
+        if let waterbody = Storage.shared.getWaterbodyModel(withId: model.remoteId) {
+            self.inputField.text = "\(waterbody.name), \(waterbody.province), \(waterbody.country) (\(waterbody.closest))"
+        }
+        self.daysOutField.text = "\(model.numberOfDaysOut)"
         style()
-        beginFilterListener()
+        self.deleteButton.alpha = isEditable ? 1 : 0
+        self.daysOutField.isEnabled = isEditable
+    }
+    
+    @IBAction func daysOutFieldChanged(_ sender: UITextField) {
+        guard let model = self.model, let input = sender.text, let days = Int(input) else {return}
+        model.setNumberOfDays(days: days)
     }
     
     private func style() {
+        deleteButton.tintColor = Colors.primary
+        styleFieldHeader(label: fieldHeader)
+        styleFieldInput(textField: inputField)
+        inputField.isEnabled = false
+        
+        contentView.backgroundColor = UIColor.yellow
+        contentView.layer.cornerRadius = 3
+        contentView.backgroundColor = UIColor.white
+        contentView.layer.borderWidth = 1
+        contentView.layer.borderColor = UIColor(red:0.8, green:0.81, blue:0.82, alpha:1).cgColor
+        
+        styleFieldHeader(label: daysOutHeader)
+        styleFieldInput(textField: daysOutField)
     }
 }

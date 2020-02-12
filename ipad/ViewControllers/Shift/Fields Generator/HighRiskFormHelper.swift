@@ -12,7 +12,7 @@ class HighRiskFormHelper {
     static func getBasicInfoFields(for object: HighRiskAssessmentModel? = nil, editable: Bool? = true) -> [InputItem] {
         var sectionItems: [InputItem] = []
         let watercraftRegistration = IntegerInput(
-            key: "watercraftRegistration",
+            key: "highRisk-watercraftRegistration",
             header: HighRiskFormFieldHeaders.BasicInformation.watercraftRegistration,
             editable: editable ?? true,
             value: object?.watercraftRegistration ?? 0,
@@ -25,7 +25,7 @@ class HighRiskFormHelper {
     static func getInspectionFields(for object: HighRiskAssessmentModel? = nil, editable: Bool? = true) -> [InputItem] {
         var sectionItems: [InputItem] = []
         let cleanDrainDryAfterInspection = RadioSwitchInput(
-            key: "cleanDrainDryAfterInspection",
+            key: "highRisk-cleanDrainDryAfterInspection",
             header: HighRiskFormFieldHeaders.Inspection.cleanDrainDryAfterInspection,
             editable: editable ?? true,
             value: object?.cleanDrainDryAfterInspection ?? nil,
@@ -38,7 +38,7 @@ class HighRiskFormHelper {
     static func getInspectionOutcomesFields(for object: HighRiskAssessmentModel? = nil, editable: Bool? = true) -> [InputItem] {
         var sectionItems: [InputItem] = []
         let standingWaterPresent = SwitchInput(
-            key: "standingWaterPresent",
+            key: "highRisk-standingWaterPresent",
             header: HighRiskFormFieldHeaders.InspectionOutcomes.standingWaterPresent,
             editable: editable ?? true,
             value: object?.standingWaterPresent ?? false,
@@ -47,7 +47,7 @@ class HighRiskFormHelper {
         sectionItems.append(standingWaterPresent)
         
         let standingWaterLocation = TextInput(
-            key: "standingWaterLocation",
+            key: "highRisk-standingWaterLocation",
             header: HighRiskFormFieldHeaders.InspectionOutcomes.standingWaterLocation,
             editable: editable ?? true,
             value: object?.standingWaterLocation ?? "",
@@ -62,7 +62,7 @@ class HighRiskFormHelper {
         /// ---------------------------
         
         let adultDreissenidMusselsFound = SwitchInput(
-            key: "adultDreissenidMusselsFound",
+            key: "highRisk-adultDreissenidMusselsFound",
             header: HighRiskFormFieldHeaders.InspectionOutcomes.adultDreissenidMusselsFound,
             editable: editable ?? true,
             value: object?.adultDreissenidMusselsFound ?? false,
@@ -71,7 +71,7 @@ class HighRiskFormHelper {
         sectionItems.append(adultDreissenidMusselsFound)
         
         let adultDreissenidMusselsLocation = TextInput(
-            key: "adultDreissenidMusselsLocation",
+            key: "highRisk-adultDreissenidMusselsLocation",
             header: HighRiskFormFieldHeaders.InspectionOutcomes.adultDreissenidMusselsLocation,
             editable: editable ?? true,
             value: object?.adultDreissenidMusselsLocation ?? "",
@@ -85,7 +85,7 @@ class HighRiskFormHelper {
         /// ---------------------------
         
         let decontaminationPerformed = SwitchInput(
-            key: "adultDreissenidMusselsFound",
+            key: "highRisk-adultDreissenidMusselsFound",
             header: HighRiskFormFieldHeaders.InspectionOutcomes.decontaminationPerformed,
             editable: editable ?? true,
             value: object?.decontaminationPerformed ?? false,
@@ -94,7 +94,7 @@ class HighRiskFormHelper {
         sectionItems.append(decontaminationPerformed)
         
         let decontaminationReference = IntegerInput(
-            key: "decontaminationReference",
+            key: "highRisk-decontaminationReference",
             header: HighRiskFormFieldHeaders.InspectionOutcomes.decontaminationReference,
             editable: editable ?? true,
             value: object?.decontaminationReference ?? 0,
@@ -108,7 +108,7 @@ class HighRiskFormHelper {
         /// ---------------------------
         
         let decontaminationOrderIssued = SwitchInput(
-            key: "decontaminationOrderIssued",
+            key: "highRisk-decontaminationOrderIssued",
             header: HighRiskFormFieldHeaders.InspectionOutcomes.decontaminationOrderIssued,
             editable: editable ?? true,
             value: object?.decontaminationOrderIssued ?? false,
@@ -117,7 +117,7 @@ class HighRiskFormHelper {
         sectionItems.append(decontaminationOrderIssued)
         
         let decontaminationOrderNumber = IntegerInput(
-            key: "decontaminationOrderNumber",
+            key: "highRisk-decontaminationOrderNumber",
             header: HighRiskFormFieldHeaders.InspectionOutcomes.decontaminationOrderNumber,
             editable: editable ?? true,
             value: object?.decontaminationOrderNumber ?? 0,
@@ -131,7 +131,7 @@ class HighRiskFormHelper {
         /// ---------------------------
         
         let sealIssued = SwitchInput(
-            key: "sealIssued",
+            key: "highRisk-sealIssued",
             header: HighRiskFormFieldHeaders.InspectionOutcomes.sealIssued,
             editable: editable ?? true,
             value: object?.sealIssued ?? false,
@@ -140,7 +140,7 @@ class HighRiskFormHelper {
         sectionItems.append(sealIssued)
         
         let sealNumber = IntegerInput(
-            key: "sealNumber",
+            key: "highRisk-sealNumber",
             header: HighRiskFormFieldHeaders.InspectionOutcomes.sealNumber,
             editable: editable ?? true,
             value: object?.sealNumber ?? 0,
@@ -154,7 +154,7 @@ class HighRiskFormHelper {
         /// ---------------------------
         
         let otherInspectionFindings = DropdownInput(
-            key: "otherInspectionFindings",
+            key: "highRisk-otherInspectionFindings",
             header: HighRiskFormFieldHeaders.InspectionOutcomes.otherInspectionFindings,
             editable: editable ?? true,
             value: object?.otherInspectionFindings ?? "",
@@ -164,7 +164,7 @@ class HighRiskFormHelper {
         sectionItems.append(otherInspectionFindings)
         
         let quarantinePeriodIssued = SwitchInput(
-            key: "quarantinePeriodIssued",
+            key: "highRisk-quarantinePeriodIssued",
             header: HighRiskFormFieldHeaders.InspectionOutcomes.quarantinePeriodIssued,
             editable: editable ?? true,
             value: object?.quarantinePeriodIssued ?? false,
@@ -178,7 +178,7 @@ class HighRiskFormHelper {
     static func getGeneralCommentsFields(for object: HighRiskAssessmentModel? = nil, editable: Bool? = true) -> [InputItem] {
         var sectionItems: [InputItem] = []
         let generalComments = TextAreaInput(
-            key: "generalComments",
+            key: "highRisk-generalComments",
             header: "General Comments",
             editable: editable ?? true,
             value: object?.generalComments ?? "",

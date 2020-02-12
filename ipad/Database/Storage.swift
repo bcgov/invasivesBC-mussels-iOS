@@ -42,7 +42,7 @@ class Storage {
     public func save(shift: ShiftModel) {
         do {
             let realm = try Realm()
-             try realm.write {
+            try realm.write {
                 shift.userId = Auth.getUserID()
                 realm.add(shift)
             }
@@ -78,7 +78,7 @@ class Storage {
         }
         return object
     }
-   
+    
     // MARK: Code Tables
     public func codeTable(type: CodeTableType) -> [String] {
         do {
@@ -126,6 +126,28 @@ class Storage {
             print("** REALM ERROR")
             print(error)
             return []
+        }
+    }
+    
+    public func getWaterBodyDropdowns() -> [DropdownModel] {
+        let waterbodies = fullWaterBodyTables()
+        var dropdowns: [DropdownModel] = []
+        for waterBody in waterbodies {
+            dropdowns.append(DropdownModel(display: "\(waterBody.name), \(waterBody.province), \(waterBody.country) (\(waterBody.closest))", key: "\(waterBody.water_body_id)"))
+        }
+        return dropdowns
+    }
+    
+    public func getWaterbodyModel(withId id: Int) -> WaterBodyTableModel? {
+        do {
+            let realm = try Realm()
+            let objs = realm.objects(WaterBodyTableModel.self).filter("water_body_id ==  %@", id).map { $0 }
+            let found = Array(objs)
+            return found.first
+        } catch let error as NSError {
+            print("** REALM ERROR")
+            print(error)
+            return nil
         }
     }
     
@@ -186,7 +208,7 @@ class Storage {
             let realm = try Realm()
             let objs = realm.objects(WaterBodyTableModel.self).filter("name ==  %@", waterBody).map { $0 }
             let found = Array(objs)
-            return found.map{ $0.abbrev}
+            return found.map{ $0.country}
         } catch let error as NSError {
             print("** REALM ERROR")
             print(error)
@@ -199,7 +221,7 @@ class Storage {
             let realm = try Realm()
             let objs = realm.objects(WaterBodyTableModel.self).filter("closest ==  %@", city).map { $0 }
             let found = Array(objs)
-            return found.map{ $0.abbrev}
+            return found.map{ $0.country}
         } catch let error as NSError {
             print("** REALM ERROR")
             print(error)
@@ -232,9 +254,9 @@ class Storage {
                     model.water_body_id = item["water_body_id"] as? Int ?? 0
                     model.latitude = item["LatDD"] as? Double ?? 0
                     model.longitude = item["LongDD"] as? Double ?? 0
-                    model.abbrev = item["Abbrev"] as? String ?? ""
+                    model.country = item["Abbrev"] as? String ?? ""
                     model.closest = item["Closest"] as? String ?? ""
-                    if model.name == "" || model.abbrev == "" || model.closest == "" {
+                    if model.name == "" || model.country == "" || model.closest == "" {
                         continue
                     } else {
                         RealmRequests.saveObject(object: model)

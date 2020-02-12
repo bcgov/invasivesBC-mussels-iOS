@@ -75,6 +75,7 @@ class ShiftModel: Object, BaseRealmObject {
             try realm.write {
                 self.inspections.append(inspection)
             }
+            inspection.addHighRiskAssessment()
             return inspection
         } catch let error as NSError {
             print("** REALM ERROR")
@@ -177,7 +178,7 @@ class ShiftModel: Object, BaseRealmObject {
     
     func formattedDateTime(time: String, date: Date) -> String? {
         let timeFormatter = DateFormatter()
-        timeFormatter.dateFormat = "YYYY-MM-DD hh:mm:ss"
+        timeFormatter.dateFormat = "YYYY-MM-dd hh:mm:ss"
         let startDate = date
         let startTimeSplit = time.components(separatedBy: ":")
         guard let timeInDate = startDate.setTime(hour: Int(startTimeSplit[0]) ?? 0, min: Int(startTimeSplit[1]) ?? 0, sec: 1) else {
@@ -191,7 +192,7 @@ class ShiftModel: Object, BaseRealmObject {
     func toDictionary() -> [String : Any] {
         guard let date = date else {return [String : Any]()}
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "YYYY-MM-DD"
+        dateFormatter.dateFormat = "YYYY-MM-dd"
         let formattedDateFull = dateFormatter.string(from: date)
         
         guard let startTimeFormatted = formattedDateTime(time: startTime, date: date), let endTimeFormatted = formattedDateTime(time: endTime, date: date) else {

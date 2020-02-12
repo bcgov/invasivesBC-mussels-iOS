@@ -11,6 +11,10 @@
 		1E54FFB623D783940044721F /* InputTitleCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1E54FFB423D783940044721F /* InputTitleCollectionViewCell.xib */; };
 		1E6D9A2E2399BDEE0034FDEF /* BaseJourneyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E6D9A2D2399BDEE0034FDEF /* BaseJourneyCollectionViewCell.swift */; };
 		1E6D9A3023A2C8310034FDEF /* testShift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E6D9A2F23A2C8310034FDEF /* testShift.swift */; };
+		1EE5FE5923EC968C00A06407 /* WaterbodyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE5FE5723EC968C00A06407 /* WaterbodyTableViewCell.swift */; };
+		1EE5FE5A23EC968C00A06407 /* WaterbodyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1EE5FE5823EC968C00A06407 /* WaterbodyTableViewCell.xib */; };
+		1EF7EBEF23EC8E1D003886F6 /* WaterbodyPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF7EBEE23EC8E1D003886F6 /* WaterbodyPicker.swift */; };
+		1EF7EBF223EC8E3E003886F6 /* WaterbodyPicker.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1EF7EBF123EC8E3E003886F6 /* WaterbodyPicker.xib */; };
 		22692B6074F0478BDEE57B10 /* Pods_ipad.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E19532C9F39231DE6E43099 /* Pods_ipad.framework */; };
 		2907E4B12368CD6700946B3F /* Dropdown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2907E4B02368CD6700946B3F /* Dropdown.swift */; };
 		2907E4B42368CE3600946B3F /* PopoverSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2907E4B32368CE3600946B3F /* PopoverSize.swift */; };
@@ -56,6 +60,8 @@
 		29514BED2368CAAA00DC89C4 /* Dropdown.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 29514BEC2368CAAA00DC89C4 /* Dropdown.storyboard */; };
 		29514BF02368CB5D00DC89C4 /* DropdownTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29514BEE2368CB5D00DC89C4 /* DropdownTableViewCell.swift */; };
 		29514BF12368CB5D00DC89C4 /* DropdownTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29514BEF2368CB5D00DC89C4 /* DropdownTableViewCell.xib */; };
+		29547B4A23F0BF4F000173F1 /* SelectedWaterBodyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29547B4823F0BF4F000173F1 /* SelectedWaterBodyCollectionViewCell.swift */; };
+		29547B4B23F0BF4F000173F1 /* SelectedWaterBodyCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29547B4923F0BF4F000173F1 /* SelectedWaterBodyCollectionViewCell.xib */; };
 		29588745237B50CC00224FFA /* HighRiskFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29588744237B50CC00224FFA /* HighRiskFormViewController.swift */; };
 		29588748237B52F000224FFA /* HighRiskAssessmentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29588747237B52F000224FFA /* HighRiskAssessmentModel.swift */; };
 		2958874A237B583C00224FFA /* HighRiskFormHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29588749237B583C00224FFA /* HighRiskFormHelper.swift */; };
@@ -194,6 +200,10 @@
 		1E54FFB423D783940044721F /* InputTitleCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InputTitleCollectionViewCell.xib; sourceTree = "<group>"; };
 		1E6D9A2D2399BDEE0034FDEF /* BaseJourneyCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseJourneyCollectionViewCell.swift; sourceTree = "<group>"; };
 		1E6D9A2F23A2C8310034FDEF /* testShift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testShift.swift; sourceTree = "<group>"; };
+		1EE5FE5723EC968C00A06407 /* WaterbodyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterbodyTableViewCell.swift; sourceTree = "<group>"; };
+		1EE5FE5823EC968C00A06407 /* WaterbodyTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WaterbodyTableViewCell.xib; sourceTree = "<group>"; };
+		1EF7EBEE23EC8E1D003886F6 /* WaterbodyPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterbodyPicker.swift; sourceTree = "<group>"; };
+		1EF7EBF123EC8E3E003886F6 /* WaterbodyPicker.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WaterbodyPicker.xib; sourceTree = "<group>"; };
 		2907E4B02368CD6700946B3F /* Dropdown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dropdown.swift; sourceTree = "<group>"; };
 		2907E4B32368CE3600946B3F /* PopoverSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopoverSize.swift; sourceTree = "<group>"; };
 		2907E4B62368D24900946B3F /* InputModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputModal.swift; sourceTree = "<group>"; };
@@ -239,6 +249,8 @@
 		29514BEC2368CAAA00DC89C4 /* Dropdown.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Dropdown.storyboard; sourceTree = "<group>"; };
 		29514BEE2368CB5D00DC89C4 /* DropdownTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropdownTableViewCell.swift; sourceTree = "<group>"; };
 		29514BEF2368CB5D00DC89C4 /* DropdownTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DropdownTableViewCell.xib; sourceTree = "<group>"; };
+		29547B4823F0BF4F000173F1 /* SelectedWaterBodyCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedWaterBodyCollectionViewCell.swift; sourceTree = "<group>"; };
+		29547B4923F0BF4F000173F1 /* SelectedWaterBodyCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectedWaterBodyCollectionViewCell.xib; sourceTree = "<group>"; };
 		29588744237B50CC00224FFA /* HighRiskFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighRiskFormViewController.swift; sourceTree = "<group>"; };
 		29588747237B52F000224FFA /* HighRiskAssessmentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighRiskAssessmentModel.swift; sourceTree = "<group>"; };
 		29588749237B583C00224FFA /* HighRiskFormHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighRiskFormHelper.swift; sourceTree = "<group>"; };
@@ -437,6 +449,27 @@
 			path = "Input Cells";
 			sourceTree = "<group>";
 		};
+		1EE5FE5623EC966F00A06407 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				29547B4823F0BF4F000173F1 /* SelectedWaterBodyCollectionViewCell.swift */,
+				29547B4923F0BF4F000173F1 /* SelectedWaterBodyCollectionViewCell.xib */,
+				1EE5FE5723EC968C00A06407 /* WaterbodyTableViewCell.swift */,
+				1EE5FE5823EC968C00A06407 /* WaterbodyTableViewCell.xib */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		1EF7EBF023EC8E24003886F6 /* Waterbody picker */ = {
+			isa = PBXGroup;
+			children = (
+				1EE5FE5623EC966F00A06407 /* Cells */,
+				1EF7EBEE23EC8E1D003886F6 /* WaterbodyPicker.swift */,
+				1EF7EBF123EC8E3E003886F6 /* WaterbodyPicker.xib */,
+			);
+			path = "Waterbody picker";
+			sourceTree = "<group>";
+		};
 		2907E4B22368CE2700946B3F /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -584,6 +617,7 @@
 		29514BD22368ACF700DC89C4 /* Shared Components */ = {
 			isa = PBXGroup;
 			children = (
+				1EF7EBF023EC8E24003886F6 /* Waterbody picker */,
 				299196912384723400634F81 /* Table */,
 				29A97437236FD615006C668F /* Form */,
 				296DEC1D238C536A0035E7FA /* New Shift Modal */,
@@ -1297,6 +1331,8 @@
 				294EF3142370885B00EEB3B6 /* BannerView.xib in Resources */,
 				29514BF12368CB5D00DC89C4 /* DropdownTableViewCell.xib in Resources */,
 				29514BD72368AD6F00DC89C4 /* OptionsTableViewCell.xib in Resources */,
+				29547B4B23F0BF4F000173F1 /* SelectedWaterBodyCollectionViewCell.xib in Resources */,
+				1EF7EBF223EC8E3E003886F6 /* WaterbodyPicker.xib in Resources */,
 				29F29F93236B6A22004F12E7 /* SwitcherView.xib in Resources */,
 				5C82D3D32374A0D400B065BA /* .gitignore in Resources */,
 				5C82D3D72374AECC00B065BA /* HighRiskModalView.xib in Resources */,
@@ -1308,6 +1344,7 @@
 				29F29FAC236CA948004F12E7 /* TextInputCollectionViewCell.xib in Resources */,
 				29CEC92623676425003B21B9 /* LaunchScreen.storyboard in Resources */,
 				296DEC16238C4CA70035E7FA /* RadioBooleanCollectionViewCell.xib in Resources */,
+				1EE5FE5A23EC968C00A06407 /* WaterbodyTableViewCell.xib in Resources */,
 				29DB4E4F2387131000B13646 /* InspectionsTableCollectionViewCell.xib in Resources */,
 				2950510A2374D764000FBD6E /* DoubleInputCollectionViewCell.xib in Resources */,
 				29E4BBE92372120F0079475F /* DividerCollectionViewCell.xib in Resources */,
@@ -1471,6 +1508,7 @@
 				29BAC4FE23676C3000A620F4 /* Auth.swift in Sources */,
 				29A97436236FD5FC006C668F /* InputGroup.swift in Sources */,
 				2907E4B72368D24900946B3F /* InputModal.swift in Sources */,
+				29547B4A23F0BF4F000173F1 /* SelectedWaterBodyCollectionViewCell.swift in Sources */,
 				2991969023846AE000634F81 /* ShiftViewController.swift in Sources */,
 				29DB01092370EFD60046E605 /* TextAreaInputCollectionViewCell.swift in Sources */,
 				5C82D3EA2374BCFA00B065BA /* FoundationExtension.swift in Sources */,
@@ -1509,6 +1547,7 @@
 				296DEC15238C4CA70035E7FA /* RadioBooleanCollectionViewCell.swift in Sources */,
 				296DEC2D238C73BD0035E7FA /* TimePickerViewController.swift in Sources */,
 				29BAC5172367B12300A620F4 /* Colors.swift in Sources */,
+				1EE5FE5923EC968C00A06407 /* WaterbodyTableViewCell.swift in Sources */,
 				294D8F652385C7310094090D /* Table.swift in Sources */,
 				2958874D237B58D600224FFA /* HighRiskFormFieldHeaders.swift in Sources */,
 				2907E4BB2368FEA500946B3F /* FormEntryViewController.swift in Sources */,
@@ -1525,6 +1564,7 @@
 				2958874A237B583C00224FFA /* HighRiskFormHelper.swift in Sources */,
 				29588748237B52F000224FFA /* HighRiskAssessmentModel.swift in Sources */,
 				29BAC50923676FDC00A620F4 /* Theme.swift in Sources */,
+				1EF7EBEF23EC8E1D003886F6 /* WaterbodyPicker.swift in Sources */,
 				29BAC5152367AD7D00A620F4 /* AutoSync.swift in Sources */,
 				2907E4B42368CE3600946B3F /* PopoverSize.swift in Sources */,
 				294D9A882379C62F00BD4928 /* WatercraftInspectionModel.swift in Sources */,
