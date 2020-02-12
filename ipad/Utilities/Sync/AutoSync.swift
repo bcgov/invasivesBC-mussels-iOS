@@ -178,43 +178,66 @@ class AutoSync {
         syncView.set(title: "Performing Initial Sync")
         
         var hadErrors: Bool = false
-        // move to a background thread
-        DispatchQueue.global(qos: .background).async {
-            
-            let dispatchGroup = DispatchGroup()
-            
-            // Fetch code tables
-            dispatchGroup.enter()
+        delayWithSeconds(1) {
             CodeTables.shared.fetchCodes(completion: { (success) in
+                // Fail
                 if !success {
                     hadErrors = true
                     Banner.show(message: "Could not fetch code tables")
                 }
-                dispatchGroup.leave()
-            }) { (statusUpdate) in
-                syncView.set(status: statusUpdate)
-            }
-            
-            // End
-            dispatchGroup.notify(queue: .main) {
+                // Success
                 print("Initial Sync Executed.")
-                if !hadErrors {
-                    syncView.set(status: "Completed")
-                    syncView.showSyncCompletedAnimation()
-                } else {
-                    syncView.set(status: "Failed")
-                    syncView.showSyncFailedAnimation()
-                }
-                // remove the view
-                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                syncView.set(status: "Completed")
+                syncView.showSyncCompletedAnimation()
+                self.delayWithSeconds(2) {
                     syncView.remove()
                     // free autosync
                     self.isSynchronizing = false
                     self.beginListener()
                     return completion(!hadErrors)
                 }
+            }) { (statusUpdate) in
+                syncView.set(status: statusUpdate)
             }
         }
+        
+//        // move to a background thread
+//        DispatchQueue.global(qos: .background).async {
+//
+//            let dispatchGroup = DispatchGroup()
+//
+//            // Fetch code tables
+//            dispatchGroup.enter()
+//            CodeTables.shared.fetchCodes(completion: { (success) in
+//                if !success {
+//                    hadErrors = true
+//                    Banner.show(message: "Could not fetch code tables")
+//                }
+//                dispatchGroup.leave()
+//            }) { (statusUpdate) in
+//                syncView.set(status: statusUpdate)
+//            }
+//
+//            // End
+//            dispatchGroup.notify(queue: .main) {
+//                print("Initial Sync Executed.")
+//                if !hadErrors {
+//                    syncView.set(status: "Completed")
+//                    syncView.showSyncCompletedAnimation()
+//                } else {
+//                    syncView.set(status: "Failed")
+//                    syncView.showSyncFailedAnimation()
+//                }
+//                // remove the view
+//                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+//                    syncView.remove()
+//                    // free autosync
+//                    self.isSynchronizing = false
+//                    self.beginListener()
+//                    return completion(!hadErrors)
+//                }
+//            }
+//        }
         
     }
     
@@ -276,5 +299,11 @@ class AutoSync {
         }
         
         return true
+    }
+    
+    func delayWithSeconds(_ seconds: Double, completion: @escaping () -> ()) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + seconds) {
+            completion()
+        }
     }
 }
