@@ -75,7 +75,7 @@ class SyncView: ModalView, Theme {
     }
     
     private func clearIcon() {
-        for subview in statusIconView.subviews {
+        for subview in self.statusIconView.subviews {
             subview.removeFromSuperview()
         }
     }
