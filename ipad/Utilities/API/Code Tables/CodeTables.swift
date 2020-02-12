@@ -10,6 +10,8 @@ import Foundation
 import Realm
 import RealmSwift
 import Reachability
+import Alamofire
+import SwiftyJSON
 
 public enum CodeTableType {
     case observers
@@ -36,48 +38,160 @@ class CodeTables {
     }
     
     public func fetchCodes(completion: @escaping(_ success: Bool) -> Void, status: @escaping(_ newStatus: String) -> Void) {
-        status("Fetching code tables")
-        delayWithSeconds(1) {
-            self.fetchAndStoreCodes(completion: { (codes) in
-                if codes.count < 0 { return completion(false) }
-                status("Loading Waterbodies")
-                self.fetchAndStoreWaterBodies(completion: { (waterBodies) in
-                    if waterBodies.count < 0 { return completion(false) }
-                    status("Wrapping up")
-                    let provinces = waterBodies.map{$0.country}.uniques.sorted{$0.lowercased() < $1.lowercased()}
-                    let cities = waterBodies.map{$0.closest}.uniques.sorted{$0.lowercased() < $1.lowercased()}
-                    let waters = waterBodies.map{$0.name}.uniques.sorted{$0.lowercased() < $1.lowercased()}
-                    
-                    let provincesTable = CodeTableModel()
-                    provincesTable.type = "provinces"
-                    for province in provinces {
-                        provincesTable.items.append(province)
-                    }
-                    RealmRequests.saveObject(object: provincesTable)
-                    
-                    let citiesTable = CodeTableModel()
-                    citiesTable.type = "cities"
-                    for city in cities {
-                        citiesTable.items.append(city)
-                    }
-                    RealmRequests.saveObject(object: citiesTable)
-                    
-                    let watersTable = CodeTableModel()
-                    watersTable.type = "waterBodies"
-                    for city in waters {
-                        watersTable.items.append(city)
-                    }
-                    RealmRequests.saveObject(object: watersTable)
-                    
-                    return completion(true)
-                }) { (statusUpdate) in
-                   status(statusUpdate)
-                }
-            }, status: status)
+        status("Fetching...")
+        let group = DispatchGroup()
+        var hadFails = false
+        group.enter()
+        self.fetchAndStoreCodeTables(completion: { (codeTablesFetched) in
+            if !codeTablesFetched {
+                hadFails = true
+            }
+            group.leave()
+        }, status: status)
+        
+        group.enter()
+        self.fetchAndStoreWaterBodies(completion: { (waterBodiesFetched) in
+            if !waterBodiesFetched {
+                hadFails = true
+            }
+            status("Wrapping up")
+            let waterBodies = Storage.shared.fullWaterBodyTables()
+            let provinces = waterBodies.map{$0.country}.uniques.sorted{$0.lowercased() < $1.lowercased()}
+            let cities = waterBodies.map{$0.closest}.uniques.sorted{$0.lowercased() < $1.lowercased()}
+            let waters = waterBodies.map{$0.name}.uniques.sorted{$0.lowercased() < $1.lowercased()}
+            
+            let provincesTable = CodeTableModel()
+            provincesTable.type = "provinces"
+            for province in provinces {
+                provincesTable.items.append(province)
+            }
+            RealmRequests.saveObject(object: provincesTable)
+            
+            let citiesTable = CodeTableModel()
+            citiesTable.type = "cities"
+            for city in cities {
+                citiesTable.items.append(city)
+            }
+            RealmRequests.saveObject(object: citiesTable)
+            
+            let watersTable = CodeTableModel()
+            watersTable.type = "waterBodies"
+            for city in waters {
+                watersTable.items.append(city)
+            }
+            RealmRequests.saveObject(object: watersTable)
+            
+            group.leave()
+        }, status: status)
+        
+        group.notify(queue: .main) {
+            return completion(!hadFails)
         }
     }
     
-    private func fetchAndStoreCodes(completion: @escaping (_ objects: [CodeTableModel]) -> Void, status: @escaping(_ newStatus: String) -> Void) {
+    public func fetchAndStoreCodeTables(completion: @escaping (_ success: Bool) -> Void, status: @escaping(_ newStatus: String) -> Void) {
+        status("Fetching Code Tables")
+        APIRequest.fetchCodeTables { (response) in
+            // Check for failure
+            guard let result = response else {
+                return completion(false)
+            }
+            status("Removing Existing Code Tables")
+            Storage.shared.deleteCodeTables()
+            status("Processing Code Tables")
+            let codeTables = self.processCodeTableJSON(dict: result)
+            status("Storing Code Tables")
+            DispatchQueue.global(qos: .background).async {
+                let group = DispatchGroup()
+                for codeTable in codeTables {
+                    group.enter()
+                    RealmRequests.saveObject(object: codeTable)
+                    group.leave()
+                }
+                group.notify(queue: .main) {
+                    return completion(true)
+                }
+            }
+        }
+    }
+    
+    private func processCodeTableJSON(dict: [String: Any]) -> [CodeTableModel]{
+        var codeTables: [CodeTableModel] = []
+        
+        for (key, value) in dict {
+            guard let items = value as? [String] else {
+                continue
+            }
+            let model = CodeTableModel()
+            model.type = key
+            for item in items {
+                model.items.append(item)
+            }
+            codeTables.append(model)
+        }
+        return codeTables
+    }
+    
+    private func fetchAndStoreWaterBodies(completion: @escaping (_ success: Bool) -> Void, status: @escaping(_ newStatus: String) -> Void) {
+        status("Fetching Waterbodies")
+        APIRequest.fetchWaterBodies { (response) in
+            guard let result = response else {
+                return completion(false)
+            }
+            status("Removing Old Data")
+            Storage.shared.deteleFullWaterBodyTables()
+            status("Processing Waterbodies")
+            let waterbodies = self.processWaterBodiesJSON(dict: result)
+            DispatchQueue.global(qos: .background).async {
+                var counter = 1
+                let group = DispatchGroup()
+                
+                for waterbody in waterbodies {
+                    group.enter()
+                    status("Storing Waterbodies\n \((counter * 100 ) / waterbodies.count)%")
+                    RealmRequests.saveObject(object: waterbody)
+                    counter += 1
+                    group.leave()
+                }
+                
+                group.notify(queue: .main) {
+                    return completion(true)
+                }
+            }
+        }
+    }
+    
+    private func processWaterBodiesJSON(dict: [[String: Any]]) -> [WaterBodyTableModel]{
+        var waterbodies: [WaterBodyTableModel] = []
+        for item in dict {
+            let model = WaterBodyTableModel()
+            model.name = (item["name"] as? JSON)?.string ?? ""
+            model.water_body_id = (item["water_body_id"] as? JSON)?.int ?? 0
+            model.latitude = (item["latitude"] as? JSON)?.double ?? 0
+            model.longitude = (item["longitude"] as? JSON)?.double ?? 0
+            model.country = (item["country"] as? JSON)?.string ?? ""
+            model.closest = (item["closest"] as? JSON)?.string ?? ""
+            model.province = (item["province"] as? JSON)?.string ?? ""
+            if model.water_body_id > 0 {
+                waterbodies.append(model)
+            }
+        }
+        return waterbodies
+    }
+    
+    
+    func findWaterbody(name: String, province: String, nearestCity: String) -> WaterBodyTableModel? {
+        let allWaterbodies = Storage.shared.fullWaterBodyTables()
+        for element in allWaterbodies where element.name == name && element.country == province && element.closest == nearestCity {
+            return element
+        }
+        return nil
+    }
+}
+
+// MARK: Fetching using Promise
+extension CodeTables {
+    private func OLD_fetchAndStoreCodes(completion: @escaping (_ objects: [CodeTableModel]) -> Void, status: @escaping(_ newStatus: String) -> Void) {
         do {
             let reacahbility = try Reachability()
             if (reacahbility.connection == .unavailable) {
@@ -93,8 +207,8 @@ class CodeTables {
         self.promise?.then({ (resp, _) in
             status("Storing Code Tables")
             guard let data: [String: Any] = resp as? [String: Any] else {
-                 print("FAIL: Wrong resp")
-                 status("Could not fetch Code Tables")
+                print("FAIL: Wrong resp")
+                status("Could not fetch Code Tables")
                 return completion([])
             }
             Storage.shared.deleteCodeTables()
@@ -123,20 +237,10 @@ class CodeTables {
             print(error)
         })
     }
-    
-    private func fetchAndStoreWaterBodies(completion: @escaping (_ objects: [WaterBodyTableModel]) -> Void, status: @escaping(_ newStatus: String) -> Void) {
-//        Storage.shared.saveWaterBodiesFromJSON(status: status)
-//        return completion(Storage.shared.fullWaterBodyTables())
-        do {
-            let reacahbility = try Reachability()
-            if (reacahbility.connection == .unavailable) {
-                return completion([])
-            }
-        } catch  let error as NSError {
-            print("** Reachability ERROR")
-            print(error)
-            return completion([])
-        }
+    private func OLD_fetchAndStoreWaterBodiess(completion: @escaping (_ objects: [WaterBodyTableModel]) -> Void, status: @escaping(_ newStatus: String) -> Void) {
+        //        Storage.shared.saveWaterBodiesFromJSON(status: status)
+        //        return completion(Storage.shared.fullWaterBodyTables())
+        
         
         status("Fetching Waterbodies")
         self.promise = waterBodyAPI.get()
@@ -173,17 +277,4 @@ class CodeTables {
         })
     }
     
-    func findWaterbody(name: String, province: String, nearestCity: String) -> WaterBodyTableModel? {
-        let allWaterbodies = Storage.shared.fullWaterBodyTables()
-        for element in allWaterbodies where element.name == name && element.country == province && element.closest == nearestCity {
-            return element
-        }
-        return nil
-    }
-    
-    func delayWithSeconds(_ seconds: Double, completion: @escaping () -> ()) {
-        DispatchQueue.main.asyncAfter(deadline: .now() + seconds) {
-            completion()
-        }
-    }
 }
