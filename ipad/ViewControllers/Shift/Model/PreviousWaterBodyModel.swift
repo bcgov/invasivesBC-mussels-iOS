@@ -60,6 +60,18 @@ class PreviousWaterbodyModel: Object, BaseRealmObject {
         }
     }
     
+    func setNumberOfDays(days: Int) {
+        do {
+            let realm = try Realm()
+            try realm.write {
+                self.numberOfDaysOut = days
+            }
+        } catch let error as NSError {
+            print("** REALM ERROR")
+            print(error)
+        }
+    }
+    
     func toDictionary() -> [String : Any] {
         guard let waterbodyModel = CodeTables.shared.findWaterbody(name: waterbody, province: province, nearestCity: nearestCity) else {
             return [String : Any]()

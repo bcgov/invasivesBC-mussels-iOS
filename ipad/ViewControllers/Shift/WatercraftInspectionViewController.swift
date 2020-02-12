@@ -422,7 +422,7 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
             let itemsIndex: Int = indexPath.row - 1
             let previousWaterBody = model.previousWaterBodies[itemsIndex]
 //            let inputItems = WatercraftInspectionFormHelper.watercraftInspectionPreviousWaterBodyInputs(for: model, index: itemsIndex, isEditable: self.isEditable)
-            cell.setup(with: previousWaterBody, delegate: self, onDelete: {
+            cell.setup(with: previousWaterBody, isEditable: self.isEditable, delegate: self, onDelete: {
                 model.removePreviousWaterBody(at: itemsIndex)
                 self.collectionView.performBatchUpdates({
                     self.collectionView.reloadSections(IndexSet(integer: indexPath.section))
@@ -432,9 +432,9 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
         case .DestinationWaterBody:
             let cell = getDestinationWaterBodyCell(indexPath: indexPath)
             let itemsIndex: Int = indexPath.row - (model.previousWaterBodies.count + 2)
-            //            let destinationWaterBody = model.destinationWaterBodies[itemsIndex]
-            let inputItems = WatercraftInspectionFormHelper.watercraftInspectionDestinationWaterBodyInputs(for: model, index: itemsIndex, isEditable: self.isEditable)
-            cell.setup(with: inputItems, delegate: self, onDelete: {
+            let destinationWaterBody = model.destinationWaterBodies[itemsIndex]
+//            let inputItems = WatercraftInspectionFormHelper.watercraftInspectionDestinationWaterBodyInputs(for: model, index: itemsIndex, isEditable: self.isEditable)
+            cell.setup(with: destinationWaterBody, isEditable: self.isEditable, delegate: self, onDelete: {
                 model.removeDestinationWaterBody(at: itemsIndex)
                 self.collectionView.performBatchUpdates({
                     self.collectionView.reloadSections(IndexSet(integer: indexPath.section))

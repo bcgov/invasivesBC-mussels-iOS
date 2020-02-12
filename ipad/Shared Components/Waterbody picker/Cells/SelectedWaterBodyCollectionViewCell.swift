@@ -57,6 +57,8 @@ class SelectedWaterBodyCollectionViewCell: UICollectionViewCell, Theme {
     
     @IBAction func buttonAction(_ sender: Any) {
         onSelect()
+        
+        "".convertFromCamelCase()
     }
     
     func style() {
