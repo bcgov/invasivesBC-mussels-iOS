@@ -37,42 +37,44 @@ class CodeTables {
     
     public func fetchCodes(completion: @escaping(_ success: Bool) -> Void, status: @escaping(_ newStatus: String) -> Void) {
         status("Fetching code tables")
-        self.fetchAndStoreCodes(completion: { (codes) in
-            if codes.count < 0 { return completion(false) }
-            status("Loading Waterbodies")
-            self.fetchAndStoreWaterBodies(completion: { (waterBodies) in
-                if waterBodies.count < 0 { return completion(false) }
-                status("Wrapping up")
-                let provinces = waterBodies.map{$0.country}.uniques.sorted{$0.lowercased() < $1.lowercased()}
-                let cities = waterBodies.map{$0.closest}.uniques.sorted{$0.lowercased() < $1.lowercased()}
-                let waters = waterBodies.map{$0.name}.uniques.sorted{$0.lowercased() < $1.lowercased()}
-                
-                let provincesTable = CodeTableModel()
-                provincesTable.type = "provinces"
-                for province in provinces {
-                    provincesTable.items.append(province)
+        delayWithSeconds(1) {
+            self.fetchAndStoreCodes(completion: { (codes) in
+                if codes.count < 0 { return completion(false) }
+                status("Loading Waterbodies")
+                self.fetchAndStoreWaterBodies(completion: { (waterBodies) in
+                    if waterBodies.count < 0 { return completion(false) }
+                    status("Wrapping up")
+                    let provinces = waterBodies.map{$0.country}.uniques.sorted{$0.lowercased() < $1.lowercased()}
+                    let cities = waterBodies.map{$0.closest}.uniques.sorted{$0.lowercased() < $1.lowercased()}
+                    let waters = waterBodies.map{$0.name}.uniques.sorted{$0.lowercased() < $1.lowercased()}
+                    
+                    let provincesTable = CodeTableModel()
+                    provincesTable.type = "provinces"
+                    for province in provinces {
+                        provincesTable.items.append(province)
+                    }
+                    RealmRequests.saveObject(object: provincesTable)
+                    
+                    let citiesTable = CodeTableModel()
+                    citiesTable.type = "cities"
+                    for city in cities {
+                        citiesTable.items.append(city)
+                    }
+                    RealmRequests.saveObject(object: citiesTable)
+                    
+                    let watersTable = CodeTableModel()
+                    watersTable.type = "waterBodies"
+                    for city in waters {
+                        watersTable.items.append(city)
+                    }
+                    RealmRequests.saveObject(object: watersTable)
+                    
+                    return completion(true)
+                }) { (statusUpdate) in
+                   status(statusUpdate)
                 }
-                RealmRequests.saveObject(object: provincesTable)
-                
-                let citiesTable = CodeTableModel()
-                citiesTable.type = "cities"
-                for city in cities {
-                    citiesTable.items.append(city)
-                }
-                RealmRequests.saveObject(object: citiesTable)
-                
-                let watersTable = CodeTableModel()
-                watersTable.type = "waterBodies"
-                for city in waters {
-                    watersTable.items.append(city)
-                }
-                RealmRequests.saveObject(object: watersTable)
-                
-                return completion(true)
-            }) { (statusUpdate) in
-               status(statusUpdate)
-            }
-        }, status: status)
+            }, status: status)
+        }
     }
     
     private func fetchAndStoreCodes(completion: @escaping (_ objects: [CodeTableModel]) -> Void, status: @escaping(_ newStatus: String) -> Void) {
@@ -179,4 +181,9 @@ class CodeTables {
         return nil
     }
     
+    func delayWithSeconds(_ seconds: Double, completion: @escaping () -> ()) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + seconds) {
+            completion()
+        }
+    }
 }
