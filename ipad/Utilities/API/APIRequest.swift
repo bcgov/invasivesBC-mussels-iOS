@@ -79,7 +79,7 @@ class APIRequest {
     }
     
     public static func fetchCodeTables(then: @escaping([String:Any]?)->Void) {
-        guard let url = URL(string: APIURL.codes) else {return}
+        guard let url = URL(string: APIURL.codes) else {return then(nil)}
         self.get(endpoint: url) { (_response) in
             guard let response = _response else {return then(nil)}
             var result: [String:Any] = [String:Any]()
@@ -94,7 +94,7 @@ class APIRequest {
     }
     
     public static func fetchWaterBodies(then: @escaping([[String:Any]]?)->Void) {
-        guard let url = URL(string: APIURL.waterBody) else {return}
+        guard let url = URL(string: APIURL.waterBody) else {return then(nil)}
         self.get(endpoint: url) { (_response) in
             guard let response = _response else {return then(nil)}
             var result: [[String:Any]] = [[String:Any]()]
