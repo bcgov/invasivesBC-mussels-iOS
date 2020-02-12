@@ -8,13 +8,6 @@
 
 import UIKit
 
-public enum HighRiskFormSection: Int, CaseIterable {
-    case BasicInformation = 0
-    case Inspection
-    case InspectionOutcomes
-    case GeneralComments
-}
-
 class HighRiskFormViewController: BaseViewController {
     
     // MARK: Outlets
@@ -76,7 +69,6 @@ class HighRiskFormViewController: BaseViewController {
         }
         
         if item.key == "cleanDrainDryAfterInspection" {
-            // If is NOT passport holder, Show full form
             let fieldValue = item.value.get(type: item.type) as? Bool ?? nil
             if fieldValue == false {
                 self.showFullForm = true

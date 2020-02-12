@@ -11,16 +11,32 @@ import IQKeyboardManagerSwift
 import Realm
 import RealmSwift
 
+class AppLogDataSource: NSObject, LoggerDataSource {
+    var csvLogFileName: String = "app_logger.csv"
+    var logFileName: String = "app_logger.txt"
+    var maxSize: Int = 1024 * 1024 * 1
+    var appNamePrefix: String = "Mussle-Inspect"
+    var timeFormat: String = "dd-MMM-yy HH:mm:ss"
+}
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         migrateRealm()
+        //////
+        // Setup App Name
+        SetAppName("Mussle-Inspect")
+        // Setup Logger
+        LoggerSetDataSource(AppLogDataSource())
+        // Start Logging
+        ApplicationLogger.defalutLogger.start()
+        //////
         // Keyboard settings
         IQKeyboardManager.shared.enable = true
         IQKeyboardManager.shared.shouldResignOnTouchOutside = true
         IQKeyboardManager.shared.enableAutoToolbar = false
-        
+        print("documents = \(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!)")
         // Begin Autosync change listener
         AutoSync.shared.beginListener()
         return true

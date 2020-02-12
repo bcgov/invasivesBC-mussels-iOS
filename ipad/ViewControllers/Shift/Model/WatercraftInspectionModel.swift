@@ -76,7 +76,7 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
     var destinationWaterBodies: List<DestinationWaterbodyModel> = List<DestinationWaterbodyModel>()
     
     // High Risk Assessments
-    private var highRiskAssessments: List<HighRiskAssessmentModel> = List<HighRiskAssessmentModel>()
+    var highRiskAssessments: List<HighRiskAssessmentModel> = List<HighRiskAssessmentModel>()
     
     @objc dynamic var status: String = "Draft"
     
@@ -186,7 +186,7 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
     
     func toDictionary(shift id: Int) -> [String : Any] {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "YYYY-MM-DD"
+        dateFormatter.dateFormat = "YYYY-MM-dd"
         let formattedDateFull = dateFormatter.string(from: self.timeStamp)
         
         // Create dictionary for high-risk assessment
@@ -196,7 +196,7 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
         }
         
         let journeysBody = getJourneyDetailsDictionary()
-
+        
         var body: [String : Any] = [
             "workflow": id,
             "timestamp": formattedDateFull,
@@ -289,6 +289,15 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
         }
     }
     
+    func editHighRiskForm(inputItemKey: String, value: Any) {
+        guard let highRiskForm = self.highRiskAssessments.first else {
+            return
+        }
+        let splitKey = inputItemKey.split(separator: "-")
+        let key = String(splitKey[1])
+        highRiskForm.set(value: value, for: key)
+    }
+    
     func removePreviousWaterBody(at index: Int) {
         if index > self.previousWaterBodies.count - 1 {
             return
@@ -334,11 +343,42 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
         }
     }
     
+    
+    func addDestinationWaterBody(model: WaterBodyTableModel) {
+        let object = DestinationWaterbodyModel()
+        object.set(from: model)
+        do {
+            let realm = try Realm()
+            try realm.write {
+                self.destinationWaterBodies.append(object)
+            }
+            
+        } catch let error as NSError {
+            print("** REALM ERROR")
+            print(error)
+        }
+    }
+    
     func addPreviousWaterBody() {
         do {
             let realm = try Realm()
             try realm.write {
                 self.previousWaterBodies.append(PreviousWaterbodyModel())
+            }
+            
+        } catch let error as NSError {
+            print("** REALM ERROR")
+            print(error)
+        }
+    }
+    
+    func addPreviousWaterBody(model: WaterBodyTableModel) {
+        let object = PreviousWaterbodyModel()
+        object.set(from: model)
+        do {
+            let realm = try Realm()
+            try realm.write {
+                self.previousWaterBodies.append(object)
             }
             
         } catch let error as NSError {
@@ -365,6 +405,8 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
         case .HighRiskAssessmentFields:
             return WatercraftInspectionFormHelper.getHighriskAssessmentFieldsFields(for: self, editable: editable)
         case .Divider:
+            return []
+        case .HighRiskAssessment:
             return []
         }
     }

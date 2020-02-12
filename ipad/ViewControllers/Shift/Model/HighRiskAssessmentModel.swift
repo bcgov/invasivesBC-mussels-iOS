@@ -11,6 +11,14 @@ import Foundation
 import Realm
 import RealmSwift
 
+public enum HighRiskFormSection: Int, CaseIterable {
+    case BasicInformation = 0
+    case Inspection
+    case InspectionOutcomes
+    case GeneralComments
+}
+
+
 class HighRiskAssessmentModel: Object, BaseRealmObject {
     @objc dynamic var userId: String = ""
     @objc dynamic var localId: String = {

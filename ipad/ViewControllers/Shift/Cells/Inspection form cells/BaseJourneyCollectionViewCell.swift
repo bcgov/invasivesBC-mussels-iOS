@@ -25,6 +25,22 @@ class BaseJourneyCollectionViewCell: UICollectionViewCell {
         NotificationCenter.default.addObserver(self, selector: #selector(self.inputItemChanged(notification:)), name: .InputItemValueChanged, object: nil)
     }
     
+    // MARK: Class functions
+     override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
+         let autoLayoutAttributes = super.preferredLayoutAttributesFitting(layoutAttributes)
+
+         // Specify you want _full width_
+         let targetSize = CGSize(width: layoutAttributes.frame.width, height: 0)
+
+         // Calculate the size (height) using Auto Layout
+         let autoLayoutSize = contentView.systemLayoutSizeFitting(targetSize, withHorizontalFittingPriority: UILayoutPriority.required, verticalFittingPriority: UILayoutPriority.defaultLow)
+         let autoLayoutFrame = CGRect(origin: autoLayoutAttributes.frame.origin, size: autoLayoutSize)
+
+         // Assign the new size to the layout attributes
+         autoLayoutAttributes.frame = autoLayoutFrame
+         return autoLayoutAttributes
+     }
+    
     func fieldChanged(key: String, value changedValue: String) {
         guard let inputgroupView = self.inputGroup as? InputGroupView else {return}
         switch key {

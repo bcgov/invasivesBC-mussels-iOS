@@ -24,8 +24,9 @@ class WaterBodyTableModel: Object {
     @objc dynamic var water_body_id: Int = 0
     @objc dynamic var latitude: Double = 0
     @objc dynamic var longitude: Double = 0
-    @objc dynamic var abbrev: String = ""
+    @objc dynamic var country: String = ""
     @objc dynamic var closest: String = ""
+    @objc dynamic var province: String = ""
     
     func toDictionary() -> [String : Any] {
         return [
@@ -33,7 +34,7 @@ class WaterBodyTableModel: Object {
             "water_body_id": water_body_id,
             "latitude": latitude,
             "longitude": longitude,
-            "abbrev": abbrev,
+            "abbrev": country,
             "closest": closest
         ]
     }
