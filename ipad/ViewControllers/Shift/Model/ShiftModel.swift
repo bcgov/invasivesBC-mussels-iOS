@@ -68,7 +68,6 @@ class ShiftModel: Object, BaseRealmObject {
         let inspection = WatercradftInspectionModel()
         inspection.shouldSync = false
         inspection.userId = self.userId
-        inspection.previousWaterBodies.append(PreviousWaterbodyModel())
         inspection.timeStamp = Date()
         do {
             let realm = try Realm()

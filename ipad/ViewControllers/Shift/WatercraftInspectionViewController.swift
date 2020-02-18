@@ -42,6 +42,7 @@ class WatercraftInspectionViewController: BaseViewController {
         "DividerCollectionViewCell",
         "DestinationWaterBodyCollectionViewCell",
         "PreviousWaterBodyCollectionViewCell",
+        "JourneyHeaderCollectionViewCell"
     ]
     
     // MARK: Variables
@@ -266,6 +267,13 @@ class WatercraftInspectionViewController: BaseViewController {
     }
     
     
+    func showPDFMap() {
+        guard let path = Bundle.main.path(forResource: "pdfMap", ofType: "pdf") else {return}
+        let url = URL(fileURLWithPath: path)
+        let pdfView: PDFViewer = UIView.fromNib()
+        pdfView.initialize(name: "Map",file: url)
+    }
+    
 }
 
 // MARK: CollectionView
@@ -290,6 +298,10 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
     
     func getHeaderCell(indexPath: IndexPath) -> HeaderCollectionViewCell {
         return collectionView!.dequeueReusableCell(withReuseIdentifier: "HeaderCollectionViewCell", for: indexPath as IndexPath) as! HeaderCollectionViewCell
+    }
+    
+    func getJourneyHeaderCell(indexPath: IndexPath) -> JourneyHeaderCollectionViewCell {
+        return collectionView!.dequeueReusableCell(withReuseIdentifier: "JourneyHeaderCollectionViewCell", for: indexPath as IndexPath) as! JourneyHeaderCollectionViewCell
     }
     
     func getButtonCell(indexPath: IndexPath) -> FormButtonCollectionViewCell {
@@ -430,8 +442,10 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
         guard let model = self.model else {return UICollectionViewCell()}
         switch getJourneyDetailsCellType(for: indexPath) {
         case .Header:
-            let cell = getHeaderCell(indexPath: indexPath)
-            cell.setup(with: "Journey Details")
+            let cell = getJourneyHeaderCell(indexPath: indexPath)
+            cell.setup {
+                self.showPDFMap()
+            }
             return cell
         case .PreviousWaterBody:
             let cell = getPreviousWaterBodyCell(indexPath: indexPath)
@@ -513,7 +527,7 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
         switch getJourneyDetailsCellType(for: indexPath) {
             
         case .Header:
-            return CGSize(width: width, height: 40)
+            return CGSize(width: width, height: 50)
         case .PreviousWaterBody:
             let estimatedContentHeight = InputGroupView.estimateContentHeight(for: WatercraftInspectionFormHelper.watercraftInspectionPreviousWaterBodyInputs(index: 0))
             return CGSize(width: width, height: estimatedContentHeight + 20)

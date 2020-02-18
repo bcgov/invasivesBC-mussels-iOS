@@ -11,11 +11,11 @@ import Foundation
 /**
   * Remote URL
  */
-let DEV_URL: String = "http://ec523cab.ngrok.io/api" //"https://api-dev-invasivesbc.pathfinder.gov.bc.ca/api" //"http://localhost:7070/api" // "https://api-dev-invasivesbc.pathfinder.gov.bc.ca/api"
+let DEV_URL: String = "https://api-test-invasivesbc.pathfinder.gov.bc.ca/api" //"https://api-dev-invasivesbc.pathfinder.gov.bc.ca/api" //"http://localhost:7070/api" // "https://api-dev-invasivesbc.pathfinder.gov.bc.ca/api"
 #if DEBUG
 let remoteURL: String = DEV_URL
 #else
-let remoteURL: String = "http://ec523cab.ngrok.io/api" //"https://api-dev-invasivesbc.pathfinder.gov.bc.ca/api"  // "http:// localhost:7070/api" // "https://api-invasivesbc.pathfinder.gov.bc.ca/api"
+let remoteURL: String = "https://api-test-invasivesbc.pathfinder.gov.bc.ca/api"  //"https://api-dev-invasivesbc.pathfinder.gov.bc.ca/api"  // "http:// localhost:7070/api" // "https://api-invasivesbc.pathfinder.gov.bc.ca/api"
 #endif
 
 
