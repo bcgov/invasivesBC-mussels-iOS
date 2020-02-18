@@ -9,6 +9,11 @@
 import Foundation
 import UIKit
 
+enum TextInputValidation {
+    case PassportNumber
+    case None
+}
+
 enum InputItemType {
     case Dropdown
     case Text
@@ -267,14 +272,16 @@ class TextInput: InputItem {
     var value: InputValue
     var editable: Bool
     var header: String
+    var validation: TextInputValidation
     
-    init(key: String, header: String, editable: Bool, value: String? = "", width: InputItemWidthSize? = .Full) {
+    init(key: String, header: String, editable: Bool, value: String? = "", validation: TextInputValidation? = .None, width: InputItemWidthSize? = .Full) {
         self.value = InputValue()
         self.value.set(value: value, type: type)
         self.key = key
         self.header = header
         self.editable = editable
         self.width = width ?? .Full
+        self.validation = validation ?? .None
     }
     
     func getValue() -> String? {

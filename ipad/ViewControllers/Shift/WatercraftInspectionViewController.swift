@@ -42,6 +42,7 @@ class WatercraftInspectionViewController: BaseViewController {
         "DividerCollectionViewCell",
         "DestinationWaterBodyCollectionViewCell",
         "PreviousWaterBodyCollectionViewCell",
+        "JourneyHeaderCollectionViewCell"
     ]
     
     // MARK: Variables
@@ -116,6 +117,12 @@ class WatercraftInspectionViewController: BaseViewController {
     }
     
     func showHighRiskForm(show: Bool) {
+        guard let model = self.model else {
+            return
+        }
+        if show && model.highRiskAssessments.isEmpty {
+            model.addHighRiskAssessment()
+        }
         self.showHighRiskAssessment = show
         self.collectionView.reloadData()
     }
@@ -180,7 +187,13 @@ class WatercraftInspectionViewController: BaseViewController {
         let highRiskFieldKeys = WatercraftInspectionFormHelper.getHighriskAssessmentFieldsFields().map{ $0.key}
         if highRiskFieldKeys.contains(item.key) {
             let value = item.value.get(type: item.type) as? Bool
-            if value == true {
+            let alreadyHasHighRiskForm = !model.highRiskAssessments.isEmpty
+            if value == true && alreadyHasHighRiskForm {
+                // set value
+                model.set(value: true, for: item.key)
+                self.showHighRiskForm(show: true)
+            } else if value == true {
+                // Show a dialog for high risk form
                 let highRiskModal: HighRiskModalView = HighRiskModalView.fromNib()
                 highRiskModal.initialize(onSubmit: {
                     // Confirmed
@@ -195,7 +208,11 @@ class WatercraftInspectionViewController: BaseViewController {
                 }
             } else {
                 model.set(value: false, for: item.key)
-                self.showHighRiskForm(show: shouldShowHighRiskForm())
+                let shouldShowHighRisk = shouldShowHighRiskForm()
+                self.showHighRiskForm(show: shouldShowHighRisk)
+                if !shouldShowHighRisk {
+                    model.removeHighRiskAssessment()
+                }
             }
         } else if
             item.key.lowercased().contains("previousWaterBody".lowercased()) ||
@@ -250,6 +267,13 @@ class WatercraftInspectionViewController: BaseViewController {
     }
     
     
+    func showPDFMap() {
+        guard let path = Bundle.main.path(forResource: "pdfMap", ofType: "pdf") else {return}
+        let url = URL(fileURLWithPath: path)
+        let pdfView: PDFViewer = UIView.fromNib()
+        pdfView.initialize(name: "Map",file: url)
+    }
+    
 }
 
 // MARK: CollectionView
@@ -274,6 +298,10 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
     
     func getHeaderCell(indexPath: IndexPath) -> HeaderCollectionViewCell {
         return collectionView!.dequeueReusableCell(withReuseIdentifier: "HeaderCollectionViewCell", for: indexPath as IndexPath) as! HeaderCollectionViewCell
+    }
+    
+    func getJourneyHeaderCell(indexPath: IndexPath) -> JourneyHeaderCollectionViewCell {
+        return collectionView!.dequeueReusableCell(withReuseIdentifier: "JourneyHeaderCollectionViewCell", for: indexPath as IndexPath) as! JourneyHeaderCollectionViewCell
     }
     
     func getButtonCell(indexPath: IndexPath) -> FormButtonCollectionViewCell {
@@ -414,8 +442,10 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
         guard let model = self.model else {return UICollectionViewCell()}
         switch getJourneyDetailsCellType(for: indexPath) {
         case .Header:
-            let cell = getHeaderCell(indexPath: indexPath)
-            cell.setup(with: "Journey Details")
+            let cell = getJourneyHeaderCell(indexPath: indexPath)
+            cell.setup {
+                self.showPDFMap()
+            }
             return cell
         case .PreviousWaterBody:
             let cell = getPreviousWaterBodyCell(indexPath: indexPath)
@@ -497,7 +527,7 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
         switch getJourneyDetailsCellType(for: indexPath) {
             
         case .Header:
-            return CGSize(width: width, height: 40)
+            return CGSize(width: width, height: 50)
         case .PreviousWaterBody:
             let estimatedContentHeight = InputGroupView.estimateContentHeight(for: WatercraftInspectionFormHelper.watercraftInspectionPreviousWaterBodyInputs(index: 0))
             return CGSize(width: width, height: estimatedContentHeight + 20)
