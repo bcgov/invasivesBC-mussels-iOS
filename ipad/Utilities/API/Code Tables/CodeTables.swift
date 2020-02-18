@@ -191,11 +191,11 @@ class CodeTables {
 
 // MARK: Fetching using Promise
 extension CodeTables {
-    private func OLD_fetchAndStoreCodes(completion: @escaping (_ objects: [CodeTableModel]) -> Void, status: @escaping(_ newStatus: String) -> Void) {
+    private func OLD_fetchAndStoreCodes(completion: @escaping (_ success: Bool) -> Void, status: @escaping(_ newStatus: String) -> Void) {
         do {
             let reacahbility = try Reachability()
             if (reacahbility.connection == .unavailable) {
-                return completion([])
+                return completion(false)
             }
         } catch let error as NSError {
             print("** Reachability ERROR")
@@ -209,7 +209,7 @@ extension CodeTables {
             guard let data: [String: Any] = resp as? [String: Any] else {
                 print("FAIL: Wrong resp")
                 status("Could not fetch Code Tables")
-                return completion([])
+                return completion(false)
             }
             Storage.shared.deleteCodeTables()
             DispatchQueue.global(qos: .background).async {
@@ -229,7 +229,7 @@ extension CodeTables {
                     codeTables.append(model)
                     counter += 1
                 }
-                return completion(codeTables)
+                return completion(true)
             }
         })
         self.promise?.error({ (error, _) in

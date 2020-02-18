@@ -56,6 +56,7 @@ class HomeViewController: BaseViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         initialize()
+        print(Auth.getAccessToken())
     }
     
     override func viewWillDisappear(_ animated: Bool) {

@@ -36,6 +36,7 @@ class WatercraftInspectionFormHelper {
             header: WatercraftFieldHeaderConstants.Passport.passportNumber,
             editable: editable ?? true,
             value: object?.passportNumber ?? nil,
+            validation: .PassportNumber,
             width: .Third
         )
         passportNumber.dependency = InputDependency(to: isPassportHolder, equalTo: true)
