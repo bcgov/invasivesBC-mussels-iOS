@@ -15,6 +15,7 @@ class SettingsModelCache {
     var autoSyncEndbaled: Bool = true
     var userFirstName: String = ""
     var userLastName: String = ""
+    var isIdirLogin: Bool = true
     
     init(from model: SettingsModel) {
         self.autoSyncEndbaled = model.autoSyncEndbaled
@@ -38,6 +39,7 @@ class SettingsModel: Object {
     // UX
     @objc dynamic var userFirstName: String = ""
     @objc dynamic var userLastName: String = ""
+    @objc dynamic var isIdirLogin: Bool = true
     
     
     func clone() -> SettingsModel {
@@ -70,6 +72,16 @@ class SettingsModel: Object {
             try realm.write {
                 userFirstName = firstName
                 userLastName = lastName
+            }
+        } catch _ {
+        }
+    }
+    
+    func setLoginType(idir: Bool) {
+        do {
+            let realm = try Realm()
+            try realm.write {
+                isIdirLogin = idir
             }
         } catch _ {
         }

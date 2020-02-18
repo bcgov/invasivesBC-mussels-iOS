@@ -28,8 +28,6 @@ class TextInputCollectionViewCell: BaseInputCell<TextInput>, UITextFieldDelegate
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         guard let model = self.model else {return false}
-        print(range)
-        print(string)
         if string.isEmpty {
             return true
         }

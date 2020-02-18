@@ -165,6 +165,18 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
         }
     }
     
+    func removeHighRiskAssessment() {
+        do {
+            let realm = try Realm()
+            try realm.write {
+                self.highRiskAssessments.removeAll()
+            }
+        } catch let error as NSError {
+            print("** REALM ERROR")
+            print(error)
+        }
+    }
+    
     // MARK: Getters
     func getStatus() -> SyncableItemStatus {
         switch self.status.lowercased() {

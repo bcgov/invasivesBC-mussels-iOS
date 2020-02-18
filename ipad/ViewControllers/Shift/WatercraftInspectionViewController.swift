@@ -116,6 +116,12 @@ class WatercraftInspectionViewController: BaseViewController {
     }
     
     func showHighRiskForm(show: Bool) {
+        guard let model = self.model else {
+            return
+        }
+        if show && model.highRiskAssessments.isEmpty {
+            model.addHighRiskAssessment()
+        }
         self.showHighRiskAssessment = show
         self.collectionView.reloadData()
     }
@@ -180,7 +186,13 @@ class WatercraftInspectionViewController: BaseViewController {
         let highRiskFieldKeys = WatercraftInspectionFormHelper.getHighriskAssessmentFieldsFields().map{ $0.key}
         if highRiskFieldKeys.contains(item.key) {
             let value = item.value.get(type: item.type) as? Bool
-            if value == true {
+            let alreadyHasHighRiskForm = !model.highRiskAssessments.isEmpty
+            if value == true && alreadyHasHighRiskForm {
+                // set value
+                model.set(value: true, for: item.key)
+                self.showHighRiskForm(show: true)
+            } else if value == true {
+                // Show a dialog for high risk form
                 let highRiskModal: HighRiskModalView = HighRiskModalView.fromNib()
                 highRiskModal.initialize(onSubmit: {
                     // Confirmed
@@ -195,7 +207,11 @@ class WatercraftInspectionViewController: BaseViewController {
                 }
             } else {
                 model.set(value: false, for: item.key)
-                self.showHighRiskForm(show: shouldShowHighRiskForm())
+                let shouldShowHighRisk = shouldShowHighRiskForm()
+                self.showHighRiskForm(show: shouldShowHighRisk)
+                if !shouldShowHighRisk {
+                    model.removeHighRiskAssessment()
+                }
             }
         } else if
             item.key.lowercased().contains("previousWaterBody".lowercased()) ||

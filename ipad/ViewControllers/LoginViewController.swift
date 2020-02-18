@@ -22,6 +22,7 @@ class LoginViewController: BaseViewController {
     
     @IBAction func loginWithIdirAction(_ sender: UIButton) {
         Auth.refreshEnviormentConstants(withIdpHint: "idir")
+        Settings.shared.setAuth(type: .Idir)
         Auth.authenticate { (success) in
             if (success) {
                 if AutoSync.shared.shouldPerformInitialSync() {
@@ -41,6 +42,7 @@ class LoginViewController: BaseViewController {
     
     @IBAction func loginWithBCeIDAction(_ sender: UIButton) {
         Auth.refreshEnviormentConstants(withIdpHint: "bceid")
+        Settings.shared.setAuth(type: .BCeID)
         Auth.authenticate { (success) in
             if (success) {
                  self.dismiss(animated: true, completion: nil)

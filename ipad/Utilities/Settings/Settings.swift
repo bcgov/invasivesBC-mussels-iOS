@@ -11,6 +11,11 @@ import Realm
 import RealmSwift
 import Reachability
 
+enum AuthType {
+    case Idir
+    case BCeID
+}
+
 class Settings {
     
     static let shared = Settings()
@@ -56,6 +61,18 @@ class Settings {
             Banner.show(message: "AutoSync is off")
         }
     }
+    
+    // MARK: Auth
+    func setAuth(type: AuthType) {
+        guard let model = getModel() else {return}
+        model.setLoginType(idir: type == .Idir)
+    }
+    
+    func getAuthType() -> AuthType {
+        guard let model = getModel() else {return .Idir}
+        return model.isIdirLogin ? .Idir : .BCeID
+    }
+    
     
     // MARK: Users
     func setUser(firstName: String, lastName: String) {
