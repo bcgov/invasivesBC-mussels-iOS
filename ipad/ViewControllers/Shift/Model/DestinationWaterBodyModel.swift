@@ -63,12 +63,12 @@ class DestinationWaterbodyModel: Object, BaseRealmObject {
     }
     
     func toDictionary() -> [String : Any] {
-        guard let waterbodyModel = CodeTables.shared.findWaterbody(name: waterbody, province: province, nearestCity: nearestCity) else {
+        if self.remoteId < 0 {
             return [String : Any]()
         }
         return [
-            "journeyType": 1,
-            "waterBody": waterbodyModel.water_body_id,
+            "journeyType": 2,
+            "waterBody": remoteId,
         ]
     }
 }

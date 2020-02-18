@@ -9,13 +9,15 @@
 import Foundation
 
 struct HighRiskFormFieldHeaders {
+    
     struct BasicInformation {
         static let watercraftRegistration = "Watercraft registration # (if applicable)"
-       
     }
+    
     struct Inspection {
          static let cleanDrainDryAfterInspection = "Clean, Drain, Dry after inspection"
     }
+    
     struct InspectionOutcomes {
         static let otherInspectionFindings = "Other inspection findings"
         static let quarantinePeriodIssued = "Quarantine period issued?"
@@ -26,7 +28,7 @@ struct HighRiskFormFieldHeaders {
         static let decontaminationPerformed = "Decontamination performed?"
         static let decontaminationReference = "Decontamination reference number"
         static let decontaminationOrderIssued = "Decontamination order issued?"
-        static let decontaminationOrderNumber = "Decontamination order #"
+        static let decontaminationOrderNumber = "Decontamination order number"
         static let sealIssued = "Seal issued?"
         static let sealNumber = "Seal #"
     }

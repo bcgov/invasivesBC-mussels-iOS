@@ -240,6 +240,12 @@ class AutoSync {
         // Is Authenticated
         if !Auth.isAuthenticated() {
             Alert.show(title: "Authentication Required", message: "You need to authenticate to perform the initial sync.\n Would you like to authenticate now and synchronize?\n\nIf you select no, You will not be able to create records.\n", yes: {
+                switch Settings.shared.getAuthType() {
+                case .Idir:
+                    Auth.refreshEnviormentConstants(withIdpHint: "idir")
+                case .BCeID:
+                    Auth.refreshEnviormentConstants(withIdpHint: "bceid")
+                }
                 Auth.authenticate(completion: { (success) in
                     if success {
                         self.autoSynchronizeIfPossible()

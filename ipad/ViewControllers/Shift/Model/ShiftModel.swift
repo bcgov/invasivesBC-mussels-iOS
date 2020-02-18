@@ -75,7 +75,6 @@ class ShiftModel: Object, BaseRealmObject {
             try realm.write {
                 self.inspections.append(inspection)
             }
-            inspection.addHighRiskAssessment()
             return inspection
         } catch let error as NSError {
             print("** REALM ERROR")
