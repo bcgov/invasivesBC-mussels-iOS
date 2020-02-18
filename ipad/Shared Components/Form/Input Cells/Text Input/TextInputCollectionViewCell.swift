@@ -8,6 +8,7 @@
 
 import UIKit
 
+
 class TextInputCollectionViewCell: BaseInputCell<TextInput>, UITextFieldDelegate {
     
     @IBOutlet weak var headerLabel: UILabel!
@@ -23,6 +24,37 @@ class TextInputCollectionViewCell: BaseInputCell<TextInput>, UITextFieldDelegate
         guard let model = self.model else {return}
         model.value.set(value: textField.text ?? "", type: model.type)
         self.emitChange()
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        guard let model = self.model else {return false}
+        print(range)
+        print(string)
+        if string.isEmpty {
+            return true
+        }
+        switch model.validation {
+        case .PassportNumber:
+            if !string.isAlphanumeric {return false}
+            if let text = textField.text,
+               let textRange = Range(range, in: text) {
+               let updatedText = text.replacingCharacters(in: textRange,
+                                                           with: string)
+               return validatePassport(text: updatedText)
+            } else {
+                return false
+            }
+        case .None:
+            return true
+        }
+    }
+    
+    func validatePassport(text string: String) -> Bool {
+        if !string.isAlphanumeric {return false}
+        if !string.substring(toIndex: 2).isLetters { return false }
+        if (string.count > 2 && Int(string.substring(fromIndex: 2)) == nil) { return false}
+        if string.count > 8 {return false}
+        return true
     }
     
     // MARK: Setup
