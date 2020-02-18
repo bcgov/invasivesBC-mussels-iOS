@@ -90,6 +90,11 @@
 		299196932384725600634F81 /* TableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 299196922384725600634F81 /* TableView.xib */; };
 		299196952384726600634F81 /* TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299196942384726600634F81 /* TableView.swift */; };
 		299BF01023F46D45001732CD /* APIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299BF00F23F46D45001732CD /* APIRequest.swift */; };
+		299BF01823FC9045001732CD /* JourneyHeaderCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299BF01623FC9045001732CD /* JourneyHeaderCollectionViewCell.swift */; };
+		299BF01923FC9045001732CD /* JourneyHeaderCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 299BF01723FC9045001732CD /* JourneyHeaderCollectionViewCell.xib */; };
+		299BF01C23FC9D10001732CD /* PDFViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299BF01B23FC9D10001732CD /* PDFViewer.swift */; };
+		299BF01E23FC9D20001732CD /* PDFViewer.xib in Resources */ = {isa = PBXBuildFile; fileRef = 299BF01D23FC9D20001732CD /* PDFViewer.xib */; };
+		299BF02023FCA19A001732CD /* pdfMap.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 299BF01F23FCA19A001732CD /* pdfMap.pdf */; };
 		29A9742D236CB59F006C668F /* SwitchInputCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A9742B236CB59F006C668F /* SwitchInputCollectionViewCell.swift */; };
 		29A9742E236CB59F006C668F /* SwitchInputCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29A9742C236CB59F006C668F /* SwitchInputCollectionViewCell.xib */; };
 		29A97433236CDD8F006C668F /* DateInputCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A97431236CDD8F006C668F /* DateInputCollectionViewCell.swift */; };
@@ -280,6 +285,11 @@
 		299196922384725600634F81 /* TableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TableView.xib; sourceTree = "<group>"; };
 		299196942384726600634F81 /* TableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableView.swift; sourceTree = "<group>"; };
 		299BF00F23F46D45001732CD /* APIRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRequest.swift; sourceTree = "<group>"; };
+		299BF01623FC9045001732CD /* JourneyHeaderCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyHeaderCollectionViewCell.swift; sourceTree = "<group>"; };
+		299BF01723FC9045001732CD /* JourneyHeaderCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JourneyHeaderCollectionViewCell.xib; sourceTree = "<group>"; };
+		299BF01B23FC9D10001732CD /* PDFViewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFViewer.swift; sourceTree = "<group>"; };
+		299BF01D23FC9D20001732CD /* PDFViewer.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PDFViewer.xib; sourceTree = "<group>"; };
+		299BF01F23FCA19A001732CD /* pdfMap.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = pdfMap.pdf; sourceTree = "<group>"; };
 		29A9742B236CB59F006C668F /* SwitchInputCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchInputCollectionViewCell.swift; sourceTree = "<group>"; };
 		29A9742C236CB59F006C668F /* SwitchInputCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SwitchInputCollectionViewCell.xib; sourceTree = "<group>"; };
 		29A97431236CDD8F006C668F /* DateInputCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateInputCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -620,6 +630,7 @@
 		29514BD22368ACF700DC89C4 /* Shared Components */ = {
 			isa = PBXGroup;
 			children = (
+				299BF01A23FC9CE9001732CD /* PDFViewer */,
 				1EF7EBF023EC8E24003886F6 /* Waterbody picker */,
 				299196912384723400634F81 /* Table */,
 				29A97437236FD615006C668F /* Form */,
@@ -771,6 +782,24 @@
 			path = Table;
 			sourceTree = "<group>";
 		};
+		299BF01523FC9023001732CD /* Journey Header */ = {
+			isa = PBXGroup;
+			children = (
+				299BF01623FC9045001732CD /* JourneyHeaderCollectionViewCell.swift */,
+				299BF01723FC9045001732CD /* JourneyHeaderCollectionViewCell.xib */,
+			);
+			path = "Journey Header";
+			sourceTree = "<group>";
+		};
+		299BF01A23FC9CE9001732CD /* PDFViewer */ = {
+			isa = PBXGroup;
+			children = (
+				299BF01B23FC9D10001732CD /* PDFViewer.swift */,
+				299BF01D23FC9D20001732CD /* PDFViewer.xib */,
+			);
+			path = PDFViewer;
+			sourceTree = "<group>";
+		};
 		29A9742A236CB588006C668F /* Switch Input */ = {
 			isa = PBXGroup;
 			children = (
@@ -901,6 +930,7 @@
 			isa = PBXGroup;
 			children = (
 				5C82D3D22374A0D400B065BA /* .gitignore */,
+				299BF01F23FCA19A001732CD /* pdfMap.pdf */,
 				29CEC91823676424003B21B9 /* ipad */,
 				29CEC92F23676425003B21B9 /* ipadTests */,
 				29CEC91723676424003B21B9 /* Products */,
@@ -1014,6 +1044,7 @@
 			isa = PBXGroup;
 			children = (
 				1E6D9A2D2399BDEE0034FDEF /* BaseJourneyCollectionViewCell.swift */,
+				299BF01523FC9023001732CD /* Journey Header */,
 				29E4BBEB237217F40079475F /* Destination Water Body */,
 				29E4BBEA237217E60079475F /* Previous Water Body */,
 			);
@@ -1348,10 +1379,12 @@
 				29CEC92623676425003B21B9 /* LaunchScreen.storyboard in Resources */,
 				296DEC16238C4CA70035E7FA /* RadioBooleanCollectionViewCell.xib in Resources */,
 				1EE5FE5A23EC968C00A06407 /* WaterbodyTableViewCell.xib in Resources */,
+				299BF01923FC9045001732CD /* JourneyHeaderCollectionViewCell.xib in Resources */,
 				29DB4E4F2387131000B13646 /* InspectionsTableCollectionViewCell.xib in Resources */,
 				2950510A2374D764000FBD6E /* DoubleInputCollectionViewCell.xib in Resources */,
 				29E4BBE92372120F0079475F /* DividerCollectionViewCell.xib in Resources */,
 				296DEC21238C53930035E7FA /* NewShiftModal.xib in Resources */,
+				299BF01E23FC9D20001732CD /* PDFViewer.xib in Resources */,
 				299196932384725600634F81 /* TableView.xib in Resources */,
 				296DEC28238C61A80035E7FA /* IntegerStepperInputCollectionViewCell.xib in Resources */,
 				296DEC1B238C51810035E7FA /* TimeInputCollectionViewCell.xib in Resources */,
@@ -1362,6 +1395,7 @@
 				29DB4E3F23870B7B00B13646 /* ShifOverviewHeaderCollectionViewCell.xib in Resources */,
 				29E4BBF3237218610079475F /* DestinationWaterBodyCollectionViewCell.xib in Resources */,
 				295051112374F54A000FBD6E /* IntegerInputCollectionViewCell.xib in Resources */,
+				299BF02023FCA19A001732CD /* pdfMap.pdf in Resources */,
 				294D8F6223847C9A0094090D /* TableRowTableViewCell.xib in Resources */,
 				A7AE5276237CC3660044DBB7 /* check-mark-success.json in Resources */,
 				298BF7C12394C0270072AA28 /* waterBodies.txt in Resources */,
@@ -1500,6 +1534,7 @@
 				29DB011B237207BF0046E605 /* FormButtonCollectionViewCell.swift in Sources */,
 				29514BD62368AD6F00DC89C4 /* OptionsTableViewCell.swift in Sources */,
 				294EF3122370885100EEB3B6 /* BannerView.swift in Sources */,
+				299BF01C23FC9D10001732CD /* PDFViewer.swift in Sources */,
 				296DEC1F238C53820035E7FA /* NewShiftModal.swift in Sources */,
 				29514BDF2368AFC100DC89C4 /* BaseViewController.swift in Sources */,
 				5C0F697D237B683200F96CA5 /* CodesAPI.swift in Sources */,
@@ -1536,6 +1571,7 @@
 				29DB4E462387113900B13646 /* BaseShiftOverviewCollectionViewCell.swift in Sources */,
 				5C82D3DF2374B9D700B065BA /* RemoteAPIManager.swift in Sources */,
 				29BAC50E236790C900A620F4 /* HomeViewController.swift in Sources */,
+				299BF01823FC9045001732CD /* JourneyHeaderCollectionViewCell.swift in Sources */,
 				1E6D9A2E2399BDEE0034FDEF /* BaseJourneyCollectionViewCell.swift in Sources */,
 				29514BE62368B70900DC89C4 /* Options.swift in Sources */,
 				1E54FFB523D783940044721F /* InputTitleCollectionViewCell.swift in Sources */,
