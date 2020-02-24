@@ -55,7 +55,7 @@ class Settings {
         model.setAutoSync(enabled: enabled)
         if enabled {
             AutoSync.shared.beginListener()
-            AutoSync.shared.sync()
+            AutoSync.shared.syncIfPossible()
             Banner.show(message: "AutoSync is on")
         } else {
             Banner.show(message: "AutoSync is off")
@@ -73,8 +73,33 @@ class Settings {
         return model.isIdirLogin ? .Idir : .BCeID
     }
     
+    func isCorrectUser() -> Bool {
+        guard let storedId = getUserAuthId() else {
+            setUserAuthId()
+            return true
+        }
+        return Auth.getUserID() == storedId
+    }
+    
+    public func getUserAuthId() -> String? {
+        guard let model = getModel() else {return nil}
+        return model.authId
+    }
+    
+    public func setUserAuthId() {
+        guard let model = getModel() else {return}
+        model.setAuth(id: Auth.getUserID())
+    }
     
     // MARK: Users
+    func setUserHasAppAccess(hasAccess: Bool) {
+        guard let model = getModel() else {return}
+        model.setUserAccess(hasAccess: hasAccess)
+    }
+    func userHasAppAccess() -> Bool {
+        guard let model = getModel() else {return false}
+        return model.userHasAccess
+    }
     func setUser(firstName: String, lastName: String) {
         guard let model = getModel() else {return}
         model.setUser(firstName: firstName, lastName: lastName)

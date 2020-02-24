@@ -16,7 +16,7 @@ class DestinationWaterBodyCollectionViewCell: BaseJourneyCollectionViewCell, The
     @IBOutlet weak var inputField: UITextField!
     
     var onDelete: (()-> Void)?
-    var delegate: InputDelegate?
+    weak var delegate: InputDelegate?
     
     @IBAction func optionsAction(_ sender: UIButton) {
         guard let onDelete = onDelete, let delegate = delegate else {return}

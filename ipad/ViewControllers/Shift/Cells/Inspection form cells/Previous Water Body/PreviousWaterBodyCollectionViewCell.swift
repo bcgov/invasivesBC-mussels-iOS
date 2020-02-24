@@ -18,7 +18,7 @@ class PreviousWaterBodyCollectionViewCell: BaseJourneyCollectionViewCell, Theme 
     @IBOutlet weak var daysOutField: UITextField!
     
     var onDelete: (()-> Void)?
-    var delegate: InputDelegate?
+    weak var delegate: InputDelegate?
     var model: PreviousWaterbodyModel?
     
     @IBAction func optionsAction(_ sender: UIButton) {

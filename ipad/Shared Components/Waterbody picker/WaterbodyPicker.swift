@@ -98,11 +98,6 @@ class WaterbodyPicker: UIView, Theme {
     func setup(result: @escaping([WaterBodyTableModel]) -> Void) {
         self.completion = result
         self.loadWaterBodies()
-//        containerView.superview?.layoutMarginsDidChange()
-//        containerView.layoutIfNeeded()
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-//
-//        }
         self.position()
         self.style()
         self.setUpTable()

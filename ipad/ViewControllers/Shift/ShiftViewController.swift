@@ -45,6 +45,10 @@ class ShiftViewController: BaseViewController {
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var collectionView: UICollectionView!
     
+    deinit {
+        print("De-init shift")
+    }
+    
     // MARK: Class Functions
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -81,12 +85,13 @@ class ShiftViewController: BaseViewController {
         self.dismissKeyboard()
         // if can submit
         if canSubmit() {
-            Alert.show(title: "Are you sure?", message: "This shift and the inspections will be uploaded when possible", yes: {
+            Alert.show(title: "Are you sure?", message: "This shift and the inspections will be uploaded when possible", yes: {[weak self] in
+                guard let strongSelf = self else { return }
                 model.set(shouldSync: true)
                 for inspection in model.inspections {
                     inspection.set(shouldSync: true)
                 }
-                self.navigationController?.popViewController(animated: true)
+                strongSelf.navigationController?.popViewController(animated: true)
             }) {}
             
         } else {
@@ -253,9 +258,10 @@ extension ShiftViewController: UICollectionViewDataSource, UICollectionViewDeleg
         switch rowType {
         case .Header:
             let cell = getShiftOverViewCell(indexPath: indexPath)
-            cell.setup(object: model, callback: {
-                if self.isEditable {
-                    self.nagivateToInspection(object: model.addInspection(), editable: self.isEditable)
+            cell.setup(object: model, callback: {[weak self] in
+                guard let strongSelf = self else {return}
+                if strongSelf.isEditable {
+                    strongSelf.nagivateToInspection(object: model.addInspection(), editable: strongSelf.isEditable)
                 }
             })
             return cell
@@ -271,10 +277,11 @@ extension ShiftViewController: UICollectionViewDataSource, UICollectionViewDeleg
         switch rowType {
         case .Header:
             let cell = getShiftInformationHeaderCell(indexPath: indexPath)
-            cell.setup(isHidden: showShiftInfo) {
+            cell.setup(isHidden: showShiftInfo) { [weak self] in
+                guard let strongSelf = self else {return}
                 // OnClick
-                self.showShiftInfo = !self.showShiftInfo
-                self.collectionView.reloadSections(IndexSet(integer: ShiftViewSection.Information.rawValue))
+                strongSelf.showShiftInfo = !strongSelf.showShiftInfo
+                strongSelf.collectionView.reloadSections(IndexSet(integer: ShiftViewSection.Information.rawValue))
             }
             return cell
         case .StartShift:

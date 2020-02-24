@@ -13,6 +13,15 @@ import RealmSwift
 import Extended
 import SingleSignOn
 
+enum SyncValidation {
+    case Ready
+    case isOffline
+    case AuthExpired
+    case NothingToSync
+    case NeedsAccess
+    case SyncDisabled
+}
+
 class AutoSync {
     
     internal static let shared = AutoSync()
@@ -23,6 +32,8 @@ class AutoSync {
     private var isSynchronizing: Bool = false
     private var manualSyncRequiredShown = false
     
+    private let syncView: SyncView = UIView.fromNib()
+    
     private init() {}
     
     // MARK: AutoSync Listener
@@ -30,14 +41,15 @@ class AutoSync {
         
         print("Listening to database changes in AutoSync.")
         if isOnline() {
-            self.autoSynchronizeIfPossible()
+            self.syncIfPossible()
         }
         do {
             let realm = try Realm()
-            self.realmNotificationToken = realm.observe { notification, realm in
+            self.realmNotificationToken = realm.observe { [weak self] notification, realm  in
+                guard let strongSelf = self else { return }
                 print("Change observed in AutoSync...")
-                if self.isOnline() && self.isAutoSyncEnabled {
-                    self.autoSynchronizeIfPossible()
+                if strongSelf.isOnline() && strongSelf.isAutoSyncEnabled {
+                    strongSelf.syncIfPossible()
                 }
             }
         } catch _ {
@@ -66,98 +78,54 @@ class AutoSync {
         return true
     }
     
-    private func autoSynchronizeIfPossible() {
+    // MARK: sync
+    public func syncIfPossible() {
+        if self.isEnabled == false {return}
         print("Checking if we can autosync...")
         if self.isSynchronizing {
             print("You're already synchronizing.")
             return
         }
         
-        if !shouldSync() {
-            print("can't sync right now")
-            return
-        }
-        
-        // Add other criteria
-        
-        // Perform sync if needed
-        self.sync()
+        canSync(completion: { (syncValidation) in
+            if syncValidation != .Ready {
+                print("can't sync right now")
+                return
+            } else {
+                // Perform sync if needed
+                self.performSync()
+            }
+        })
     }
     
-    // MARK: sync Action
-    public func sync() {
-        if !shouldSync() {
-            return
-        }
-        
+    private func performSync() {
         print("Executing Autosync...")
         
         // Block autosync from being re-executed.
         self.isSynchronizing = true
         
         // Add the autosync view
-        let syncView: SyncView = UIView.fromNib()
-        syncView.initialize()
+        self.syncView.initialize()
         
         let itemsToSync = Storage.shared.itemsToSync()
-        ShiftService.shared.submit(shifts: itemsToSync) { (syncSuccess) in
+        ShiftService.shared.submit(shifts: itemsToSync) {  [weak self] (syncSuccess) in
+            guard let strongSelf = self else { return }
             if syncSuccess {
                 Banner.show(message: "Sync Executed")
                 NotificationCenter.default.post(name: .syncExecuted, object: nil)
             } else {
                 Banner.show(message: "Could not sync items")
-                self.isAutoSyncEnabled = false
+                strongSelf.isAutoSyncEnabled = false
             }
             // Remove SyncView
-            syncView.remove()
-            // Free Autosync
-            self.isSynchronizing = false
+            // Delay added because the sync could fail faster than the view can finish displaying
+            // with animations. calling remove before its done displaying will cause a crash.
+            strongSelf.delayWithSeconds(1) {
+                strongSelf.syncView.remove()
+                // Free Autosync
+                strongSelf.isSynchronizing = false
+            }
         }
-       
-        /* Non Recursive solution
-        // move to a background thread
-        DispatchQueue.global(qos: .background).async {
-            let dispatchGroup = DispatchGroup()
-            var hadErros = false
-            let itemsToSync = Storage.shared.itemsToSync()
-            for item in itemsToSync {
-                let itemId = item.localId
-                dispatchGroup.enter()
-                ShiftService.shared.submit(shift: item) { (success) in
-                    if success, let refetchedShift = Storage.shared.shift(withLocalId: itemId) {
-                        refetchedShift.set(shouldSync: false)
-                        refetchedShift.set(status: .Completed)
-                        for inspection in refetchedShift.inspections {
-                            inspection.set(shouldSync: false)
-                            inspection.set(status: .Completed)
-                        }
-                    } else {
-                        hadErros = true
-                        Banner.show(message: "Could not sync items")
-                    }
-                    dispatchGroup.leave()
-                }
-            }
- 
-            
-            // dispatchGroup.enter()
-            // Make another api call
-            // dispatchGroup.leave()
-            
-            // End
-            dispatchGroup.notify(queue: .main) {
-                print("Autosync Executed.")
-                print("AutoSync Success: \(!hadErros)")
-                // remove the view
-                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                    Banner.show(message: "Sync Executed")
-                    NotificationCenter.default.post(name: .syncExecuted, object: nil)
-                    syncView.remove()
-                    // free autosync
-                    self.isSynchronizing = false
-                }
-            }
-        }*/
     }
     
     // MARK: Initial Sync
@@ -172,7 +140,6 @@ class AutoSync {
         self.isSynchronizing = true
         self.endListener()
         // Add the autosync view
-        let syncView: SyncView = UIView.fromNib()
         syncView.initialize()
         syncView.showSyncInProgressAnimation()
         syncView.set(title: "Performing Initial Sync")
@@ -192,26 +159,29 @@ class AutoSync {
                     Banner.show(message: "Could not fetch code tables")
                 }
                 dispatchGroup.leave()
-            }) { (statusUpdate) in
-                syncView.set(status: statusUpdate)
+            }) {  [weak self] (statusUpdate) in
+                guard let strongSelf = self else { return }
+                strongSelf.syncView.set(status: statusUpdate)
             }
 
             // End
-            dispatchGroup.notify(queue: .main) {
+            dispatchGroup.notify(queue: .main) { [weak self] in
+                guard let strongSelf = self else { return }
                 print("Initial Sync Executed.")
                 if !hadErrors {
-                    syncView.set(status: "Completed")
-                    syncView.showSyncCompletedAnimation()
+                    strongSelf.syncView.set(status: "Completed")
+                    strongSelf.syncView.showSyncCompletedAnimation()
                 } else {
-                    syncView.set(status: "Failed")
-                    syncView.showSyncFailedAnimation()
+                    strongSelf.syncView.set(status: "Failed")
+                    strongSelf.syncView.showSyncFailedAnimation()
                 }
                 // remove the view
-                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                    syncView.remove()
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
+                    guard let strongSelf = self else { return }
+                    strongSelf.syncView.remove()
                     // free autosync
-                    self.isSynchronizing = false
-                    self.beginListener()
+                    strongSelf.isSynchronizing = false
+                    strongSelf.beginListener()
                     return completion(!hadErrors)
                 }
             }
@@ -239,49 +209,71 @@ class AutoSync {
         
         // Is Authenticated
         if !Auth.isAuthenticated() {
-            Alert.show(title: "Authentication Required", message: "You need to authenticate to perform the initial sync.\n Would you like to authenticate now and synchronize?\n\nIf you select no, You will not be able to create records.\n", yes: {
-                switch Settings.shared.getAuthType() {
-                case .Idir:
-                    Auth.refreshEnviormentConstants(withIdpHint: "idir")
-                case .BCeID:
-                    Auth.refreshEnviormentConstants(withIdpHint: "bceid")
-                }
-                Auth.authenticate(completion: { (success) in
-                    if success {
-                        self.autoSynchronizeIfPossible()
-                    }
-                })
-            }) {
-                self.isEnabled = false
-            }
+            showAuthDialogAndSync()
             return false
         }
         
         return true
     }
     
-    public func shouldSync() -> Bool {
-        if !self.isEnabled { return false }
+    public func hasItemsToSync() -> Bool {
         if Storage.shared.itemsToSync().count < 1 {
             return false
         }
+        return true
+    }
+    
+    public func canSync(completion: @escaping (SyncValidation)->Void) {
+        if !self.isEnabled { return completion(.SyncDisabled) }
         
-        if !Auth.isAuthenticated() {
-            if !manualSyncRequiredShown {
-                Alert.show(title: "Authentication Required", message: "You have items that need to be synced.\n Would you like to authenticate now and synchronize?\n\nIf you select no, Autosync will be turned off until the app is reopened.\n", yes: {
-                    Auth.authenticate(completion: { (success) in
-                        if success {
-                            self.autoSynchronizeIfPossible()
-                        }
-                    })
-                }) {
-                    self.isEnabled = false
-                }
-            }
-            return false
+        if !isOnline() {
+            return completion(.isOffline)
         }
         
-        return true
+        if Storage.shared.itemsToSync().count < 1 {
+            return completion(.NothingToSync)
+        }
+        
+        if !Auth.isAuthenticated() {
+            return completion(.AuthExpired)
+        }
+        
+        AccessService.shared.hasAccess(completion: { (hasAccess) in
+            if !hasAccess {
+                self.disableSync()
+                return completion(.NeedsAccess)
+            } else {
+                return completion(.Ready)
+            }
+        })
+    }
+    
+    func showAuthDialogAndSync() {
+        if Auth.isAuthenticated() { return }
+        Alert.show(title: "Authentication Required", message: "You need to authenticate to perform the initial sync.\n Would you like to authenticate now and synchronize?\n\nIf you select no, You will not be able to create records.\n", yes: { [weak self] in
+            guard let strongSelf = self else { return }
+            switch Settings.shared.getAuthType() {
+            case .Idir:
+                Auth.refreshEnviormentConstants(withIdpHint: "idir")
+            case .BCeID:
+                Auth.refreshEnviormentConstants(withIdpHint: "bceid")
+            }
+            Auth.authenticate(completion: { (success) in
+                if success && Settings.shared.isCorrectUser() {
+                    strongSelf.syncIfPossible()
+                } else if !Settings.shared.isCorrectUser() {
+                    Auth.logout()
+                }
+            })
+        }) {
+            self.disableSync()
+        }
+    }
+    
+    
+    private func disableSync() {
+        self.isEnabled = false
+        self.endListener()
     }
     
     func delayWithSeconds(_ seconds: Double, completion: @escaping () -> ()) {

@@ -53,6 +53,10 @@ class WatercraftInspectionViewController: BaseViewController {
     private var showFullHighRiskAssessment = false
     private var isEditable: Bool = true
     
+    deinit {
+        print("De-init inspection")
+    }
+    
     // MARK: Class Functions
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -269,8 +273,8 @@ class WatercraftInspectionViewController: BaseViewController {
     
     func showPDFMap() {
         guard let path = Bundle.main.path(forResource: "pdfMap", ofType: "pdf") else {return}
+        unowned let pdfView: PDFViewer = UIView.fromNib()
         let url = URL(fileURLWithPath: path)
-        let pdfView: PDFViewer = UIView.fromNib()
         pdfView.initialize(name: "Map",file: url)
     }
     
@@ -443,19 +447,20 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
         switch getJourneyDetailsCellType(for: indexPath) {
         case .Header:
             let cell = getJourneyHeaderCell(indexPath: indexPath)
-            cell.setup {
-                self.showPDFMap()
+            cell.setup { [weak self] in
+                guard let strongSelf = self else {return}
+                strongSelf.showPDFMap()
             }
             return cell
         case .PreviousWaterBody:
             let cell = getPreviousWaterBodyCell(indexPath: indexPath)
             let itemsIndex: Int = indexPath.row - 1
             let previousWaterBody = model.previousWaterBodies[itemsIndex]
-//            let inputItems = WatercraftInspectionFormHelper.watercraftInspectionPreviousWaterBodyInputs(for: model, index: itemsIndex, isEditable: self.isEditable)
-            cell.setup(with: previousWaterBody, isEditable: self.isEditable, delegate: self, onDelete: {
+            cell.setup(with: previousWaterBody, isEditable: self.isEditable, delegate: self, onDelete: { [weak self] in
+                guard let strongSelf = self else {return}
                 model.removePreviousWaterBody(at: itemsIndex)
-                self.collectionView.performBatchUpdates({
-                    self.collectionView.reloadSections(IndexSet(integer: indexPath.section))
+                strongSelf.collectionView.performBatchUpdates({
+                    strongSelf.collectionView.reloadSections(IndexSet(integer: indexPath.section))
                 }, completion: nil)
             })
             return cell
@@ -463,32 +468,31 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
             let cell = getDestinationWaterBodyCell(indexPath: indexPath)
             let itemsIndex: Int = indexPath.row - (model.previousWaterBodies.count + 2)
             let destinationWaterBody = model.destinationWaterBodies[itemsIndex]
-//            let inputItems = WatercraftInspectionFormHelper.watercraftInspectionDestinationWaterBodyInputs(for: model, index: itemsIndex, isEditable: self.isEditable)
-            cell.setup(with: destinationWaterBody, isEditable: self.isEditable, delegate: self, onDelete: {
+            cell.setup(with: destinationWaterBody, isEditable: self.isEditable, delegate: self, onDelete: { [weak self] in
+                guard let strongSelf = self else {return}
                 model.removeDestinationWaterBody(at: itemsIndex)
-                self.collectionView.performBatchUpdates({
-                    self.collectionView.reloadSections(IndexSet(integer: indexPath.section))
+                strongSelf.collectionView.performBatchUpdates({
+                    strongSelf.collectionView.reloadSections(IndexSet(integer: indexPath.section))
                 }, completion: nil)
             })
             return cell
         case .AddPreviousWaterBody:
             let cell = getButtonCell(indexPath: indexPath)
-            cell.setup(with: "Add Previous Water Body", isEnabled: isEditable) {
+            cell.setup(with: "Add Previous Water Body", isEnabled: isEditable) { [weak self] in
+                guard let strongSelf = self else {return}
                 /// ---------waterbody picker------------
-                self.setNavigationBar(hidden: true, style: .black)
+                strongSelf.setNavigationBar(hidden: true, style: .black)
                 let waterBodyPicker: WaterbodyPicker = UIView.fromNib()
-                self.viewLayoutMarginsDidChange()
-                waterBodyPicker.setup() { (result) in
+                strongSelf.viewLayoutMarginsDidChange()
+                waterBodyPicker.setup() { [weak self] (result) in
+                    guard let strongerSelf = self else {return}
                     print(result)
                     for waterBody in result {
                         model.addPreviousWaterBody(model: waterBody)
                     }
-                    self.setNavigationBar(hidden: false, style: .black)
-                    self.viewLayoutMarginsDidChange()
-                    self.collectionView.reloadData()
-                    //                    self.collectionView.performBatchUpdates({
-                    //                        self.collectionView.reloadSections(IndexSet(integer: indexPath.section))
-                    //                    }, completion: nil)
+                    strongerSelf.setNavigationBar(hidden: false, style: .black)
+                    strongerSelf.viewLayoutMarginsDidChange()
+                    strongerSelf.collectionView.reloadData()
                 }
                 /// --------------------------------
                 
@@ -496,25 +500,23 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
             return cell
         case .AddDestinationWaterBody:
             let cell = getButtonCell(indexPath: indexPath)
-            cell.setup(with: "Add Destination Water Body", isEnabled: isEditable) {
+            cell.setup(with: "Add Destination Water Body", isEnabled: isEditable) { [weak self] in
+            guard let strongSelf = self else {return}
                 /// ---------waterbody picker------------
-                self.setNavigationBar(hidden: true, style: .black)
+                strongSelf.setNavigationBar(hidden: true, style: .black)
                 let waterBodyPicker: WaterbodyPicker = UIView.fromNib()
-                self.viewLayoutMarginsDidChange()
-                waterBodyPicker.setup() { (result) in
+                strongSelf.viewLayoutMarginsDidChange()
+                waterBodyPicker.setup() { [weak self] (result) in
+                    guard let strongerSelf = self else {return}
                     print(result)
                     for waterBody in result {
                         model.addDestinationWaterBody(model: waterBody)
                     }
-                    self.setNavigationBar(hidden: false, style: .black)
-                    self.viewLayoutMarginsDidChange()
-                    self.collectionView.reloadData()
-                    //                    self.collectionView.performBatchUpdates({
-                    //                        self.collectionView.reloadSections(IndexSet(integer: indexPath.section))
-                    //                    }, completion: nil)
+                    strongerSelf.setNavigationBar(hidden: false, style: .black)
+                    strongerSelf.viewLayoutMarginsDidChange()
+                    strongerSelf.collectionView.reloadData()
                 }
                 /// --------------------------------
-                
             }
             return cell
         case .Divider:
