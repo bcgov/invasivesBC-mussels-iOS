@@ -35,12 +35,13 @@ class SettingsModel: Object {
     }
     
     @objc dynamic var autoSyncEndbaled: Bool = true
+    @objc dynamic var userHasAccess: Bool = false
     
     // UX
     @objc dynamic var userFirstName: String = ""
     @objc dynamic var userLastName: String = ""
     @objc dynamic var isIdirLogin: Bool = true
-    
+    @objc dynamic var authId: String = ""
     
     func clone() -> SettingsModel {
         let new = SettingsModel()
@@ -82,6 +83,26 @@ class SettingsModel: Object {
             let realm = try Realm()
             try realm.write {
                 isIdirLogin = idir
+            }
+        } catch _ {
+        }
+    }
+    
+    func setAuth(id: String) {
+        do {
+            let realm = try Realm()
+            try realm.write {
+                authId = id
+            }
+        } catch _ {
+        }
+    }
+    
+    func setUserAccess(hasAccess: Bool) {
+        do {
+            let realm = try Realm()
+            try realm.write {
+                userHasAccess = hasAccess
             }
         } catch _ {
         }
