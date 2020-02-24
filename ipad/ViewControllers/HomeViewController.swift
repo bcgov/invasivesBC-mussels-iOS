@@ -56,7 +56,6 @@ class HomeViewController: BaseViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         initialize()
-        print(Auth.getAccessToken())
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -75,11 +74,23 @@ class HomeViewController: BaseViewController {
     }
     
     @IBAction func syncButtonAction(_ sender: Any) {
-        if !AutoSync.shared.shouldSync() {
-            Alert.show(title: "Nothing to sync", message: "There is nothing to sync")
-        } else {
-            AutoSync.shared.sync()
+        AutoSync.shared.canSync { (syncValidation) in
+            switch syncValidation {
+            case .Ready:
+                AutoSync.shared.syncIfPossible()
+            case .isOffline:
+                Alert.show(title: "Can't Synchronize", message: "Device is offline")
+            case .AuthExpired:
+                AutoSync.shared.showAuthDialogAndSync()
+            case .NeedsAccess:
+                Alert.show(title: "Access Deined", message: "You need the required access level to submit.\nAccess request has been created and is awaiting approval")
+            case .NothingToSync:
+                Alert.show(title: "Nothing to sync", message: "There is nothing to sync")
+            case .SyncDisabled:
+                Alert.show(title: "Sync is disabled", message: "Please re-start application")
+            }
         }
+        
     }
     
     @IBAction func addEntryClicked(_ sender: Any) {

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, Theme {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,24 +20,54 @@ class ViewController: UIViewController {
     }
     
     private func presentNext() {
-        if (!Auth.isAuthenticated()) {
-            performSegue(withIdentifier: "performLogin", sender: nil)
+        if (!isAuthenticated()) {
+            showLoginPage()
             return
         } else {
-            Auth.getUserFirstName()
-            if AutoSync.shared.shouldPerformInitialSync() {
-                AutoSync.shared.performInitialSync { (success) in
-                    if success {
-                        self.performSegue(withIdentifier: "showHomePage", sender: nil)
-                    } else {
-                        Alert.show(title: "Can't continue", message: "On your first login, we need to download some information.\nMake sure you have a stable connection")
-                        Auth.logout()
-                    }
+            AccessService.shared.hasAccess { [weak self] (hasAccess) in
+                guard let strongSelf = self else {return}
+                if hasAccess {
+                    strongSelf.showHomePage()
+                } else {
+                    strongSelf.showPendingAccess()
                 }
-            } else {
-                self.performSegue(withIdentifier: "showHomePage", sender: nil)
             }
         }
+    }
+    
+    private func showLoginPage() {
+        performSegue(withIdentifier: "performLogin", sender: nil)
+    }
+    
+    private func showPendingAccess() {
+        let awaitingAccessResponseView: AwaitingAccessResponse = UIView.fromNib()
+        awaitingAccessResponseView.show(in: self.view)
+    }
+    
+    private func showHomePage() {
+        if !AutoSync.shared.shouldPerformInitialSync() {
+            self.performSegue(withIdentifier: "showHomePage", sender: nil)
+            return
+        }
+        AutoSync.shared.performInitialSync { [weak self] (success) in
+            guard let strongSelf = self else {return}
+            if success {
+                strongSelf.performSegue(withIdentifier: "showHomePage", sender: nil)
+            } else {
+                Alert.show(title: "Can't continue", message: "On your first login, we need to download some information.\nMake sure you have a stable connection")
+                Auth.logout()
+            }
+        }
+    }
+    
+    private func isAuthenticated() -> Bool {
+        if !Auth.isLoggedIn() {return false}
+        guard let storedUserId = Settings.shared.getUserAuthId() else {return false}
+        if storedUserId.isEmpty {
+            Auth.logout()
+            return false
+        }
+        return true
     }
 }
 

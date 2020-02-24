@@ -41,6 +41,16 @@ class Auth {
         }
     }
     
+    /**
+    Check if user is Logged in but doesnt check if token has expired
+    */
+    public static func isLoggedIn() -> Bool {
+        return authServices.credentials != nil
+    }
+    
+    /**
+     Check if user is logged in and has a valid token
+     */
     public static func isAuthenticated() -> Bool {
         return authServices.isAuthenticated()
     }
@@ -110,6 +120,10 @@ class Auth {
     
     public static func logout() {
         authServices.logout()
+        guard let viewController = UIApplication.shared.windows.first?.rootViewController as? UIViewController else {
+            return
+        }
+        viewController.dismiss(animated: true, completion: nil)
     }
     
     public static func hasCredentials() -> Bool {

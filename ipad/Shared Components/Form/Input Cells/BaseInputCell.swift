@@ -9,10 +9,10 @@
 import Foundation
 import UIKit
 
-class BaseInputCell<Model: InputItem>: UICollectionViewCell,Theme {
+class BaseInputCell<Model: InputItem>: UICollectionViewCell, Theme {
     // MARK: Variables
     var model: Model?
-    var inputDelegate: InputDelegate?
+    weak var inputDelegate: InputDelegate?
     
     // MARK: Class functions
     override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {

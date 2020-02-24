@@ -11,11 +11,11 @@ import Foundation
 /**
   * Remote URL
  */
-let DEV_URL: String = "https://api-test-invasivesbc.pathfinder.gov.bc.ca/api" //"https://api-dev-invasivesbc.pathfinder.gov.bc.ca/api" //"http://localhost:7070/api" // "https://api-dev-invasivesbc.pathfinder.gov.bc.ca/api"
+let DEV_URL: String = "https://api-dev-invasivesbc.pathfinder.gov.bc.ca/api" //"http://localhost:7070/api" //"https://api-dev-invasivesbc.pathfinder.gov.bc.ca/api" //"http://localhost:7070/api" // "https://api-dev-invasivesbc.pathfinder.gov.bc.ca/api"
 #if DEBUG
 let remoteURL: String = DEV_URL
 #else
-let remoteURL: String = "https://api-test-invasivesbc.pathfinder.gov.bc.ca/api"  //"https://api-dev-invasivesbc.pathfinder.gov.bc.ca/api"  // "http:// localhost:7070/api" // "https://api-invasivesbc.pathfinder.gov.bc.ca/api"
+let remoteURL: String = "https://api-dev-invasivesbc.pathfinder.gov.bc.ca/api" //"http://localhost:7070/api" //"https://api-dev-invasivesbc.pathfinder.gov.bc.ca/api"  // "http:// localhost:7070/api" // "https://api-invasivesbc.pathfinder.gov.bc.ca/api"
 #endif
 
 
@@ -28,6 +28,8 @@ enum EndPoints: String {
     case watercraftAssessment = "/mussels/wra"
     case waterBody = "/mussels/water-body"
     case codes = "/mussels/codes"
+    case accessRequest = "/request-access"
+    case user = "/account/me"
 }
 
 /**
@@ -49,6 +51,14 @@ struct APIURL {
     
     static let codes: String = {
         return Self.baseURL + EndPoints.codes.rawValue
+    }()
+    
+    static let assessRequest: String = {
+        return Self.baseURL + EndPoints.accessRequest.rawValue
+    }()
+    
+    static let user: String = {
+        return Self.baseURL + EndPoints.user.rawValue
     }()
 }
 

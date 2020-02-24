@@ -9,7 +9,7 @@
 import UIKit
 
 class LoginViewController: BaseViewController {
-
+    
     @IBOutlet weak var appTitle: UILabel!
     @IBOutlet weak var loginWithIdirButton: UIButton!
     @IBOutlet weak var loginWithBCeIDButton: UIButton!
@@ -24,19 +24,11 @@ class LoginViewController: BaseViewController {
         Auth.refreshEnviormentConstants(withIdpHint: "idir")
         Settings.shared.setAuth(type: .Idir)
         Auth.authenticate { (success) in
-            if (success) {
-                if AutoSync.shared.shouldPerformInitialSync() {
-                    AutoSync.shared.performInitialSync { (success) in
-                        if success {
-                            self.dismiss(animated: true, completion: nil)
-                        } else {
-                            Auth.logout()
-                        }
-                    }
-                } else {
-                    self.dismiss(animated: true, completion: nil)
-                }
+            if (!success) {
+                Auth.logout()
+                return
             }
+            self.afterLogin()
         }
     }
     
@@ -44,10 +36,28 @@ class LoginViewController: BaseViewController {
         Auth.refreshEnviormentConstants(withIdpHint: "bceid")
         Settings.shared.setAuth(type: .BCeID)
         Auth.authenticate { (success) in
-            if (success) {
-                 self.dismiss(animated: true, completion: nil)
+            if (!success) {
+                Auth.logout()
+                return
             }
+            self.afterLogin()
         }
+    }
+    
+    private func afterLogin() {
+        Settings.shared.setUserAuthId()
+        self.dismiss(animated: true, completion: nil)
+//        if !AutoSync.shared.shouldPerformInitialSync() {
+//            self.dismiss(animated: true, completion: nil)
+//            return
+//        }
+//        AutoSync.shared.performInitialSync { (success) in
+//            if (!success) {
+//                Auth.logout()
+//                return
+//            }
+//            self.dismiss(animated: true, completion: nil)
+//        }
     }
     
     private func style() {
