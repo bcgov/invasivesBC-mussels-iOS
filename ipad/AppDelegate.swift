@@ -39,9 +39,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print("documents = \(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!)")
         // Begin Autosync change listener
         AutoSync.shared.beginListener()
-        AccessService.shared.hasAccess { (hasAccess) in
-            print("Has App Access: \(hasAccess)")
-        }
         return true
     }
     

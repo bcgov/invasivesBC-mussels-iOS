@@ -80,10 +80,13 @@ class HomeViewController: BaseViewController {
                 AutoSync.shared.syncIfPossible()
             case .isOffline:
                 Alert.show(title: "Can't Synchronize", message: "Device is offline")
-            case .AuthExpired:
-                AutoSync.shared.showAuthDialogAndSync()
             case .NeedsAccess:
                 Alert.show(title: "Access Deined", message: "You need the required access level to submit.\nAccess request has been created and is awaiting approval")
+                
+            case .AuthExpired:
+                AutoSync.shared.showAuthDialogAndSync()
+                
+                
             case .NothingToSync:
                 Alert.show(title: "Nothing to sync", message: "There is nothing to sync")
             case .SyncDisabled:

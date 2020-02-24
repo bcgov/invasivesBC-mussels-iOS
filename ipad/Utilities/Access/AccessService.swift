@@ -11,6 +11,7 @@ import Reachability
 
 class AccessService {
     
+    public static let AccessRoleID = 5
     public static let shared = AccessService()
     
     public var hasAppAccess: Bool = false

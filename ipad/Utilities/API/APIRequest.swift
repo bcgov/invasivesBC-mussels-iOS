@@ -75,7 +75,7 @@ class APIRequest {
             }
             
         }
-        debugPrint(req)
+//        debugPrint(req)
     }
     
     static func post(endpoint: URL, params: [String: Any], completion: @escaping (_ response: JSON?) -> Void) {
@@ -108,7 +108,7 @@ class APIRequest {
                 return completion(json)
             }
         }
-        debugPrint(req);
+//        debugPrint(req);
     }
     
     public static func fetchCodeTables(then: @escaping([String:Any]?)->Void) {
@@ -169,7 +169,7 @@ class APIRequest {
     
     public static func checkAccess(then: @escaping(Bool)-> Void) {
         fetchUserRoles { (roles) in
-            for role in roles where role.roleCode == 5 {
+            for role in roles where role.roleCode == AccessService.AccessRoleID {
                 return then(true)
             }
             return then(false)
@@ -190,7 +190,7 @@ class APIRequest {
         checkAccessRequest { (exists) in
             if exists {return then(true)}
             let body: [String : Any] = [
-                "requestedAccessCode": 5,
+                "requestedAccessCode": AccessService.AccessRoleID,
                 "requestNote": "Mobile Access"
             ]
             self.post(endpoint: url, params: body){ (_response) in

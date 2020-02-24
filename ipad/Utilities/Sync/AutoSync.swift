@@ -80,6 +80,7 @@ class AutoSync {
     
     // MARK: sync
     public func syncIfPossible() {
+        if self.isEnabled == false {return}
         print("Checking if we can autosync...")
         if self.isSynchronizing {
             print("You're already synchronizing.")
@@ -239,6 +240,7 @@ class AutoSync {
         
         AccessService.shared.hasAccess(completion: { (hasAccess) in
             if !hasAccess {
+                self.disableSync()
                 return completion(.NeedsAccess)
             } else {
                 return completion(.Ready)
@@ -264,8 +266,14 @@ class AutoSync {
                 }
             })
         }) {
-            self.isEnabled = false
+            self.disableSync()
         }
+    }
+    
+    
+    private func disableSync() {
+        self.isEnabled = false
+        self.endListener()
     }
     
     func delayWithSeconds(_ seconds: Double, completion: @escaping () -> ()) {
