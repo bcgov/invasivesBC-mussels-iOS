@@ -21,6 +21,9 @@ public enum CodeTableType {
     case waterBodies
     case cities
     case provinces
+    case adultMusselsLocation
+    case previousAISKnowledgeSource
+    case previousInspectionSource
 }
 
 class CodeTables {
@@ -119,9 +122,31 @@ class CodeTables {
         var codeTables: [CodeTableModel] = []
         
         for (key, value) in dict {
-            guard let items = value as? [String] else {
+            guard let itemJSON: [JSON] = value as? [JSON] else {
+                ErrorLog("Unexpected code array received")
                 continue
             }
+            let tempCodeItems = itemJSON.map { $0.dictionaryObject }
+            if let codeItems: [[String: Any]] = tempCodeItems as? [[String: Any]] {
+                // Saving CodeObj
+                let model = CodeTableModel()
+                model.type = key
+                let _: [CodeObject] = codeItems.map({ (codeDict: [String : Any]) -> CodeObject in
+                    let codeObj = CodeObject()
+                    // Get id key
+                    let idKey: [String] = codeDict.keys.filter { (k: String) -> Bool in
+                        return k.contains("_id")
+                    }
+                    let id = idKey[0]
+                    codeObj.des = codeDict["description"] as? String ?? "NA"
+                    codeObj.remoteId = codeDict[id] as? Int ?? -1
+                    model.codes.append(codeObj)
+                    return codeObj
+                })
+                codeTables.append(model)
+                continue
+            }
+            let items = itemJSON.map { $0.stringValue }
             let model = CodeTableModel()
             model.type = key
             for item in items {
