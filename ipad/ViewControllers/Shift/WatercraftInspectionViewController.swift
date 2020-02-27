@@ -483,12 +483,21 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
     
     @objc private func previousDryStorageOn(sender: Any?) {
         guard let switchObj: UISwitch = sender as? UISwitch else { return }
-        self.model?.addPreviousWaterBody(dryStorage: switchObj.isOn)
+        if switchObj.isOn {
+            self.model?.addPreviousWaterBody(dryStorage: switchObj.isOn)
+        } else {
+            self.model?.removeDryStorage(isPrevious: true)
+        }
     }
     
     @objc private func nextDryStorageOn(sender: Any?) {
         guard let switchObj: UISwitch = sender as? UISwitch else { return }
-        self.model?.addDestinationWaterBody(dryStorage: switchObj.isOn)
+        if switchObj.isOn {
+            self.model?.addDestinationWaterBody(dryStorage: switchObj.isOn)
+        } else {
+            self.model?.removeDryStorage(isPrevious: false)
+        }
+        
     }
     
     private func getJourneyDetailsCell(for indexPath: IndexPath) -> UICollectionViewCell {
@@ -529,7 +538,7 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
             let cell = getButtonCell(indexPath: indexPath)
             cell.setup(with: "Add Previuos Water Body",
                        isEnabled: isEditable,
-                       config: FormButtonCollectionViewCell.Config(status: false, isPreviousJourney: true,
+                       config: FormButtonCollectionViewCell.Config(status: model.isPreviouslyInDryStorage, isPreviousJourney: true,
                                                                    displaySwitch: true),
                        target: self,
                        selectorButton: #selector(self.addPreviousWaterBody(sender:)),
@@ -558,7 +567,7 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
             let cell = getButtonCell(indexPath: indexPath)
             cell.setup(with: "Add Destination Water Body",
             isEnabled: isEditable,
-            config: FormButtonCollectionViewCell.Config(status: false, isPreviousJourney: false,
+            config: FormButtonCollectionViewCell.Config(status: model.isDestinationInDryStorage, isPreviousJourney: false,
                                                         displaySwitch: true),
             target: self,
             selectorButton: #selector(self.addNextWaterBody(sender:)),

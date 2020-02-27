@@ -310,6 +310,37 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
         highRiskForm.set(value: value, for: key)
     }
     
+    
+    func removeDryStorage(isPrevious: Bool) {
+        // Assign waterbody list
+        let waterBodies: [Any] = isPrevious ? Array(self.previousWaterBodies) : Array(self.destinationWaterBodies)
+        let checkIndex = waterBodies.firstIndex { (item) -> Bool in
+            guard let model: JourneyModel = item as? JourneyModel else {
+                return false
+            }
+            return model.dryStorage == true
+        }
+        guard let index: Int = checkIndex else {
+            return
+        }
+        InfoLog("Remove DryStorage at index = \(index)")
+        do {
+            let realm = try Realm()
+            try realm.write {
+                if isPrevious {
+                    self.previousWaterBodies.remove(at: index)
+                } else {
+                    self.destinationWaterBodies.remove(at: index)
+                }
+            }
+            
+        } catch let error as NSError {
+            print("** REALM ERROR")
+            print(error)
+        }
+        
+    }
+    
     func removePreviousWaterBody(at index: Int) {
         if index > self.previousWaterBodies.count - 1 {
             return
@@ -371,18 +402,30 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
         }
     }
     
+    var isPreviouslyInDryStorage: Bool {
+        let filter = Array(self.previousWaterBodies).filter { $0.dryStorage == true }
+        return filter.count > 0
+    }
+    
+    var isDestinationInDryStorage: Bool {
+        let filter = Array(self.destinationWaterBodies).filter { $0.dryStorage == true }
+        return filter.count > 0
+    }
+    
     func addDestinationWaterBody(dryStorage: Bool) {
-        let object = DestinationWaterbodyModel()
-        object.dryStorage = dryStorage
-        do {
-            let realm = try Realm()
-            try realm.write {
-                self.destinationWaterBodies.append(object)
+        if !self.isDestinationInDryStorage {
+            let object = DestinationWaterbodyModel()
+            object.dryStorage = dryStorage
+            do {
+                let realm = try Realm()
+                try realm.write {
+                    self.destinationWaterBodies.append(object)
+                }
+                
+            } catch let error as NSError {
+                print("** REALM ERROR")
+                print(error)
             }
-            
-        } catch let error as NSError {
-            print("** REALM ERROR")
-            print(error)
         }
     }
     
@@ -415,17 +458,19 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
     }
     
     func addPreviousWaterBody(dryStorage: Bool) {
-        let object = PreviousWaterbodyModel()
-        object.dryStorage = dryStorage
-        do {
-            let realm = try Realm()
-            try realm.write {
-                self.previousWaterBodies.append(object)
+        if !self.isPreviouslyInDryStorage {
+            let object = PreviousWaterbodyModel()
+            object.dryStorage = dryStorage
+            do {
+                let realm = try Realm()
+                try realm.write {
+                    self.previousWaterBodies.append(object)
+                }
+                
+            } catch let error as NSError {
+                print("** REALM ERROR")
+                print(error)
             }
-            
-        } catch let error as NSError {
-            print("** REALM ERROR")
-            print(error)
         }
     }
     
