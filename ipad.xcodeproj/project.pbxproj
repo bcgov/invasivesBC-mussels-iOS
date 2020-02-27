@@ -1060,9 +1060,9 @@
 		29DB4E3A23870B1F00B13646 /* Shared cells */ = {
 			isa = PBXGroup;
 			children = (
+				29DB0118237207AD0046E605 /* Button */,
 				29DB010B2371EE2F0046E605 /* Basic (header + Input group) */,
 				29E4BBE5237211F10079475F /* Divider */,
-				29DB0118237207AD0046E605 /* Button */,
 				29DB0113237206B90046E605 /* Header */,
 			);
 			path = "Shared cells";
@@ -1818,6 +1818,7 @@
 				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = L796QSLV3E;
 				INFOPLIST_FILE = ipad/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1841,6 +1842,7 @@
 				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = L796QSLV3E;
 				INFOPLIST_FILE = ipad/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
