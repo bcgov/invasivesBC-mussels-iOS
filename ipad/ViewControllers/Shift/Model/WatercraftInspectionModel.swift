@@ -371,6 +371,21 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
         }
     }
     
+    func addDestinationWaterBody(dryStorage: Bool) {
+        let object = DestinationWaterbodyModel()
+        object.dryStorage = dryStorage
+        do {
+            let realm = try Realm()
+            try realm.write {
+                self.destinationWaterBodies.append(object)
+            }
+            
+        } catch let error as NSError {
+            print("** REALM ERROR")
+            print(error)
+        }
+    }
+    
     func addPreviousWaterBody() {
         do {
             let realm = try Realm()
@@ -387,6 +402,21 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
     func addPreviousWaterBody(model: WaterBodyTableModel) {
         let object = PreviousWaterbodyModel()
         object.set(from: model)
+        do {
+            let realm = try Realm()
+            try realm.write {
+                self.previousWaterBodies.append(object)
+            }
+            
+        } catch let error as NSError {
+            print("** REALM ERROR")
+            print(error)
+        }
+    }
+    
+    func addPreviousWaterBody(dryStorage: Bool) {
+        let object = PreviousWaterbodyModel()
+        object.dryStorage = dryStorage
         do {
             let realm = try Realm()
             try realm.write {
