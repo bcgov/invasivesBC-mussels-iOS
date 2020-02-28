@@ -242,10 +242,13 @@ class DropdownInput: InputItem {
     var editable: Bool
     
     var dropdownItems: [DropdownModel] = []
+    var codeObjects: [CodeObject]?
+    var selectedCode: CodeObject?
     var header: String
     
-    init(key: String, header: String, editable: Bool, value: String? = "", width: InputItemWidthSize? = .Full, dropdownItems: [DropdownModel]? = []) {
+    init(key: String, header: String, editable: Bool, value: String? = "", width: InputItemWidthSize? = .Full, dropdownItems: [DropdownModel]? = [], codes: [CodeObject]? = nil) {
         self.value = InputValue()
+        self.codeObjects = codes
         self.value.set(value: value ?? "", type: type)
         self.key = key
         self.header = header
@@ -258,8 +261,19 @@ class DropdownInput: InputItem {
         return self.value.get(type: self.type) as? String ?? nil
     }
     
+    func getCode() -> CodeObject? {
+        return self.selectedCode
+    }
+    
     func setValue(value: String?) {
         self.value.set(value: value, type: self.type)
+        // Selecting code based on des
+        if let val = value, let codes = self.codeObjects {
+            let filtered = codes.filter { $0.des == val }
+            if filtered.count > 0 {
+                self.selectedCode = filtered[0]
+            }
+        }
     }
 }
 

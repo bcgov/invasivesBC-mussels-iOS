@@ -178,7 +178,7 @@ class WatercraftInspectionFormHelper {
         )
         sectionItems.append(previousAISKnowlede)
         
-        let previousAISKnowledeSource = TextInput(
+        /*let previousAISKnowledeSource = TextInput(
             key: "previousAISKnowledeSource",
             header: WatercraftFieldHeaderConstants.WatercraftDetails.previousAISKnowledeSource,
             editable: editable ?? true,
@@ -186,11 +186,23 @@ class WatercraftInspectionFormHelper {
             width: .Half
         )
         previousAISKnowledeSource.dependency = InputDependency(to: previousAISKnowlede, equalTo: true)
+        sectionItems.append(previousAISKnowledeSource)*/
+        
+        let previousAISKnowledeSource = DropdownInput(
+            key: "previousAISKnowledeSource",
+            header: WatercraftFieldHeaderConstants.WatercraftDetails.previousAISKnowledeSource,
+            editable: editable ?? true,
+            value: object?.previousAISKnowledeSource ?? nil,
+            width: .Full,
+            dropdownItems: DropdownHelper.shared.getDropDownObject(for: .previousAISKnowledgeSource),
+            codes: DropdownHelper.shared.getDropDownCodes(for: .previousAISKnowledgeSource)
+        )
+        previousAISKnowledeSource.dependency = InputDependency(to: previousAISKnowlede, equalTo: true)
         sectionItems.append(previousAISKnowledeSource)
         
-        let spacer1 = InputSpacer()
+        /*let spacer1 = InputSpacer()
         spacer1.dependency = InputDependency(to: previousAISKnowlede, equalTo: true)
-        sectionItems.append(spacer1)
+        sectionItems.append(spacer1)*/
         /// ---------------------------
         
         let previousInspection = SwitchInput(
@@ -198,7 +210,7 @@ class WatercraftInspectionFormHelper {
             header: WatercraftFieldHeaderConstants.WatercraftDetails.previousInspection,
             editable: editable ?? true,
             value: object?.previousInspection ?? nil,
-            width: .Full
+            width: .Third
         )
         sectionItems.append(previousInspection)
         
