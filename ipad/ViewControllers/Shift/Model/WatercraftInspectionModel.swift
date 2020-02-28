@@ -56,6 +56,10 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
     // Inspection Details
     @objc dynamic var marineMusslesFound: Bool = false
     
+    // Dry Storage
+    @objc dynamic var previousDryStorage: Bool = false
+    @objc dynamic var destinationDryStorage: Bool = false
+    
     // High Risk Assesment fields
     @objc dynamic var highriskAIS: Bool = false {
         didSet {
@@ -235,6 +239,8 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
             "previousInspectionDays": previousInspectionDays,
             "passportNumber": passportNumber.count > 1 ? passportNumber : "None",
             "provinceOfResidence": province.count > 1 ? province : "None",
+            "previousDryStorage": previousDryStorage,
+            "destinationDryStorage": destinationDryStorage,
             "journeys": []
         ]
         
@@ -311,36 +317,6 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
     }
     
     
-    func removeDryStorage(isPrevious: Bool) {
-        // Assign waterbody list
-        let waterBodies: [Any] = isPrevious ? Array(self.previousWaterBodies) : Array(self.destinationWaterBodies)
-        let checkIndex = waterBodies.firstIndex { (item) -> Bool in
-            guard let model: JourneyModel = item as? JourneyModel else {
-                return false
-            }
-            return model.dryStorage == true
-        }
-        guard let index: Int = checkIndex else {
-            return
-        }
-        InfoLog("Remove DryStorage at index = \(index)")
-        do {
-            let realm = try Realm()
-            try realm.write {
-                if isPrevious {
-                    self.previousWaterBodies.remove(at: index)
-                } else {
-                    self.destinationWaterBodies.remove(at: index)
-                }
-            }
-            
-        } catch let error as NSError {
-            print("** REALM ERROR")
-            print(error)
-        }
-        
-    }
-    
     func removePreviousWaterBody(at index: Int) {
         if index > self.previousWaterBodies.count - 1 {
             return
@@ -402,33 +378,6 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
         }
     }
     
-    var isPreviouslyInDryStorage: Bool {
-        let filter = Array(self.previousWaterBodies).filter { $0.dryStorage == true }
-        return filter.count > 0
-    }
-    
-    var isDestinationInDryStorage: Bool {
-        let filter = Array(self.destinationWaterBodies).filter { $0.dryStorage == true }
-        return filter.count > 0
-    }
-    
-    func addDestinationWaterBody(dryStorage: Bool) {
-        if !self.isDestinationInDryStorage {
-            let object = DestinationWaterbodyModel()
-            object.dryStorage = dryStorage
-            do {
-                let realm = try Realm()
-                try realm.write {
-                    self.destinationWaterBodies.append(object)
-                }
-                
-            } catch let error as NSError {
-                print("** REALM ERROR")
-                print(error)
-            }
-        }
-    }
-    
     func addPreviousWaterBody() {
         do {
             let realm = try Realm()
@@ -457,22 +406,33 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
         }
     }
     
-    func addPreviousWaterBody(dryStorage: Bool) {
-        if !self.isPreviouslyInDryStorage {
-            let object = PreviousWaterbodyModel()
-            object.dryStorage = dryStorage
-            do {
-                let realm = try Realm()
-                try realm.write {
-                    self.previousWaterBodies.append(object)
-                }
-                
-            } catch let error as NSError {
-                print("** REALM ERROR")
-                print(error)
+    func set(previous dryStorage: Bool) {
+        do {
+            let realm = try Realm()
+            try realm.write {
+                self.previousDryStorage = dryStorage
             }
+            
+        } catch let error as NSError {
+            print("** REALM ERROR")
+            print(error)
         }
     }
+    
+    func set(destination dryStorage: Bool) {
+        do {
+            let realm = try Realm()
+            try realm.write {
+                self.destinationDryStorage = dryStorage
+            }
+            
+        } catch let error as NSError {
+            print("** REALM ERROR")
+            print(error)
+        }
+    }
+    
+    
     
     // MARK: UI Helpers
     func getInputputFields(for section: WatercraftFromSection, editable: Bool? = nil) -> [InputItem] {

@@ -61,12 +61,11 @@ class DestinationWaterbodyModel: JourneyModel, BaseRealmObject {
     
     func toDictionary() -> [String : Any] {
         if self.remoteId < 0 {
-            return ["dryStorage": self.dryStorage]
+            return [:]
         }
         return [
             "journeyType": 2,
-            "waterBody": remoteId,
-            "dryStorage": false
+            "waterBody": remoteId
         ]
     }
 }

@@ -31,6 +31,10 @@ class FormButtonCollectionViewCell: UICollectionViewCell, Theme {
         return onClick()
     }
     
+    func set(status: Bool) {
+        self.button?.isEnabled = !status
+    }
+    
     func setupConfig(config: Config) {
         self.dryStorageSwitch?.isHidden = !config.displaySwitch
         self.switchLabel?.isHidden = !config.displaySwitch
@@ -39,6 +43,10 @@ class FormButtonCollectionViewCell: UICollectionViewCell, Theme {
             self.switchLabel?.text = "Previously Stored"
         } else {
             self.switchLabel?.text = "Being Stored"
+        }
+        
+        if config.displaySwitch {
+            set(status: config.status)
         }
     }
     

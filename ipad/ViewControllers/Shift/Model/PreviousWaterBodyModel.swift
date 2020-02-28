@@ -12,7 +12,6 @@ import RealmSwift
 
 class JourneyModel: Object {
     @objc dynamic var numberOfDaysOut : Int = 0
-    @objc dynamic var dryStorage: Bool = false
     @objc dynamic var shouldSync: Bool = false
     @objc dynamic var remoteId: Int = -1
 }
@@ -76,13 +75,12 @@ class PreviousWaterbodyModel: JourneyModel, BaseRealmObject {
     
     func toDictionary() -> [String : Any] {
         if self.remoteId < 0 {
-            return ["dryStorage" : self.dryStorage]
+            return [:]
         }
         return [
             "journeyType": 1,
             "numberOfDaysOut": numberOfDaysOut,
-            "waterBody": remoteId,
-            "dryStorage": false
+            "waterBody": remoteId
         ]
     }
 }
