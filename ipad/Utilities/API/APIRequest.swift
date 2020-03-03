@@ -56,7 +56,7 @@ class APIRequest {
         _ = Alamofire.SessionManager(configuration: configuration)
         
         // Make the call
-        let req = Alamofire.request(endpoint, method: .get, headers: headers()).responseData { (response) in
+        _ = Alamofire.request(endpoint, method: .get, headers: headers()).responseData { (response) in
             completed = true
             if timedOut {return}
             
@@ -91,7 +91,7 @@ class APIRequest {
         }
         
         // Request
-        let req = Alamofire.request(endpoint, method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers()).responseJSON { response in
+        _ = Alamofire.request(endpoint, method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers()).responseJSON { response in
             completed = true
             if timedOut {return}
             guard response.result.description == "SUCCESS", let value = response.result.value else {

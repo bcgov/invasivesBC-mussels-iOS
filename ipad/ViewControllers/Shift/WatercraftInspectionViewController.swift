@@ -125,7 +125,7 @@ class WatercraftInspectionViewController: BaseViewController {
             return
         }
         if show && model.highRiskAssessments.isEmpty {
-            model.addHighRiskAssessment()
+            let _ = model.addHighRiskAssessment()
         }
         self.showHighRiskAssessment = show
         self.collectionView.reloadData()

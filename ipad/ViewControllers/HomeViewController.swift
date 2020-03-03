@@ -90,7 +90,6 @@ class HomeViewController: BaseViewController {
                 Alert.show(title: "Sync is disabled", message: "Please re-start application")
             }
         }
-        
     }
     
     @IBAction func addEntryClicked(_ sender: Any) {

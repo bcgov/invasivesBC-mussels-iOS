@@ -120,7 +120,7 @@ class Auth {
     
     public static func logout() {
         authServices.logout()
-        guard let viewController = UIApplication.shared.windows.first?.rootViewController as? UIViewController else {
+        guard let viewController = UIApplication.shared.windows.first?.rootViewController else {
             return
         }
         viewController.dismiss(animated: true, completion: nil)

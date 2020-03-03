@@ -81,7 +81,7 @@ class ShiftService {
             guard let data = dat as? [String : Any] else {
                 return then(nil)
             }
-            let map: [String : Any] = resp as? [String : Any] ?? [:]
+            let _: [String : Any] = resp as? [String : Any] ?? [:]
             if let id = data["observer_workflow_id"] as? Int {
                 return then(id)
             } else {
@@ -103,7 +103,7 @@ class ShiftService {
             guard let data = dat as? [String : Any] else {
                 return then(nil)
             }
-            let map: [String : Any] = resp as? [String : Any] ?? [:]
+            let _: [String : Any] = resp as? [String : Any] ?? [:]
             if let id = data["observer_workflow_id"] as? Int {
                 return then(id)
             } else {

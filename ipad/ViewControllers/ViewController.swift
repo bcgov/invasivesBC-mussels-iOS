@@ -40,7 +40,6 @@ class ViewController: UIViewController, Theme {
     }
     
     private func showPendingAccess() {
-        print(Auth.getAccessToken())
         let awaitingAccessResponseView: AwaitingAccessResponse = UIView.fromNib()
         awaitingAccessResponseView.show(in: self.view)
     }
