@@ -56,6 +56,10 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
     // Inspection Details
     @objc dynamic var marineMusslesFound: Bool = false
     
+    // Dry Storage
+    @objc dynamic var previousDryStorage: Bool = false
+    @objc dynamic var destinationDryStorage: Bool = false
+    
     // High Risk Assesment fields
     @objc dynamic var highriskAIS: Bool = false {
         didSet {
@@ -235,6 +239,8 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
             "previousInspectionDays": previousInspectionDays,
             "passportNumber": passportNumber.count > 1 ? passportNumber : "None",
             "provinceOfResidence": province.count > 1 ? province : "None",
+            "previousDryStorage": previousDryStorage,
+            "destinationDryStorage": destinationDryStorage,
             "journeys": []
         ]
         
@@ -309,6 +315,7 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
         let key = String(splitKey[1])
         highRiskForm.set(value: value, for: key)
     }
+    
     
     func removePreviousWaterBody(at index: Int) {
         if index > self.previousWaterBodies.count - 1 {
@@ -398,6 +405,34 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
             print(error)
         }
     }
+    
+    func set(previous dryStorage: Bool) {
+        do {
+            let realm = try Realm()
+            try realm.write {
+                self.previousDryStorage = dryStorage
+            }
+            
+        } catch let error as NSError {
+            print("** REALM ERROR")
+            print(error)
+        }
+    }
+    
+    func set(destination dryStorage: Bool) {
+        do {
+            let realm = try Realm()
+            try realm.write {
+                self.destinationDryStorage = dryStorage
+            }
+            
+        } catch let error as NSError {
+            print("** REALM ERROR")
+            print(error)
+        }
+    }
+    
+    
     
     // MARK: UI Helpers
     func getInputputFields(for section: WatercraftFromSection, editable: Bool? = nil) -> [InputItem] {

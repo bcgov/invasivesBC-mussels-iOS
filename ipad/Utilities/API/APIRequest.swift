@@ -119,7 +119,7 @@ class APIRequest {
             let data = response["data"]
             DispatchQueue.global(qos: .background).async {
                 for (key, value) in data {
-                    result[key] = value.arrayValue.map { $0.stringValue}
+                    result[key] = value.arrayValue
                 }
                 return then(result)
             }

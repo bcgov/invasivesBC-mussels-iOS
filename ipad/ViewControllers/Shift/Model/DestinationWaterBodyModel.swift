@@ -12,7 +12,7 @@ import Foundation
 import Realm
 import RealmSwift
 
-class DestinationWaterbodyModel: Object, BaseRealmObject {
+class DestinationWaterbodyModel: JourneyModel, BaseRealmObject {
     @objc dynamic var userId: String = ""
     @objc dynamic var localId: String = {
         return UUID().uuidString
@@ -22,14 +22,11 @@ class DestinationWaterbodyModel: Object, BaseRealmObject {
         return "localId"
     }
     
-    @objc dynamic var remoteId: Int = -1
-    
-    @objc dynamic var shouldSync: Bool = false
+
     
     @objc dynamic var waterbody: String = ""
     @objc dynamic var nearestCity: String = ""
     @objc dynamic var province: String = ""
-    @objc dynamic var numberOfDaysOut : Int = 0
     
     func set(from model: WaterBodyTableModel) {
         do {
@@ -64,11 +61,11 @@ class DestinationWaterbodyModel: Object, BaseRealmObject {
     
     func toDictionary() -> [String : Any] {
         if self.remoteId < 0 {
-            return [String : Any]()
+            return [:]
         }
         return [
             "journeyType": 2,
-            "waterBody": remoteId,
+            "waterBody": remoteId
         ]
     }
 }
