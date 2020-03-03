@@ -188,6 +188,7 @@
 		5C82D3FF23761B1400B065BA /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C82D3FE23761B1400B065BA /* API.swift */; };
 		5C82D404237B31C200B065BA /* WatercraftRiskAssessmentAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C82D403237B31C200B065BA /* WatercraftRiskAssessmentAPI.swift */; };
 		5C82D406237B326A00B065BA /* WatercraftRiskAssessment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C82D405237B326A00B065BA /* WatercraftRiskAssessment.swift */; };
+		5CD8360A240EE71A000E3368 /* UploadAPITest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD83609240EE71A000E3368 /* UploadAPITest.swift */; };
 		9FB225820DBE019B5CE1031C /* Pods_ipadTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CED730649CF3E43FB1AD51F6 /* Pods_ipadTests.framework */; };
 		A7AE5275237CC3660044DBB7 /* unapproved-cross.json in Resources */ = {isa = PBXBuildFile; fileRef = A7AE5272237CC3660044DBB7 /* unapproved-cross.json */; };
 		A7AE5276237CC3660044DBB7 /* check-mark-success.json in Resources */ = {isa = PBXBuildFile; fileRef = A7AE5273237CC3660044DBB7 /* check-mark-success.json */; };
@@ -393,6 +394,7 @@
 		5C82D3FE23761B1400B065BA /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		5C82D403237B31C200B065BA /* WatercraftRiskAssessmentAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatercraftRiskAssessmentAPI.swift; sourceTree = "<group>"; };
 		5C82D405237B326A00B065BA /* WatercraftRiskAssessment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatercraftRiskAssessment.swift; sourceTree = "<group>"; };
+		5CD83609240EE71A000E3368 /* UploadAPITest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadAPITest.swift; sourceTree = "<group>"; };
 		5E19532C9F39231DE6E43099 /* Pods_ipad.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ipad.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		654A566D8395B17BDF172F9F /* Pods-ipad.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ipad.release.xcconfig"; path = "Target Support Files/Pods-ipad/Pods-ipad.release.xcconfig"; sourceTree = "<group>"; };
 		763C8716EF742F6764FFE7D7 /* Pods-ipad.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ipad.debug.xcconfig"; path = "Target Support Files/Pods-ipad/Pods-ipad.debug.xcconfig"; sourceTree = "<group>"; };
@@ -1005,6 +1007,7 @@
 				5C82D3FA2376051600B065BA /* WorkflowAPITest.swift */,
 				5C82D405237B326A00B065BA /* WatercraftRiskAssessment.swift */,
 				5C0F697A237B63F500F96CA5 /* MusselAppAPITest.swift */,
+				5CD83609240EE71A000E3368 /* UploadAPITest.swift */,
 			);
 			path = ipadTests;
 			sourceTree = "<group>";
@@ -1658,6 +1661,7 @@
 				5C82D3F72375E56400B065BA /* RemoteAPITest.swift in Sources */,
 				5C82D3FB2376051600B065BA /* WorkflowAPITest.swift in Sources */,
 				1E6D9A3023A2C8310034FDEF /* testShift.swift in Sources */,
+				5CD8360A240EE71A000E3368 /* UploadAPITest.swift in Sources */,
 				29CEC93123676425003B21B9 /* ipadTests.swift in Sources */,
 				5C0F697B237B63F500F96CA5 /* MusselAppAPITest.swift in Sources */,
 				5C82D406237B326A00B065BA /* WatercraftRiskAssessment.swift in Sources */,
