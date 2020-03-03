@@ -174,17 +174,4 @@ class HighRiskFormHelper {
         
         return sectionItems
     }
-    
-    static func getGeneralCommentsFields(for object: HighRiskAssessmentModel? = nil, editable: Bool? = true) -> [InputItem] {
-        var sectionItems: [InputItem] = []
-        let generalComments = TextAreaInput(
-            key: "highRisk-generalComments",
-            header: "General Comments",
-            editable: editable ?? true,
-            value: object?.generalComments ?? "",
-            width: .Full
-        )
-        sectionItems.append(generalComments)
-        return sectionItems
-    }
 }

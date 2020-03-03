@@ -128,6 +128,7 @@ class WatercraftInspectionViewController: BaseViewController {
             let _ = model.addHighRiskAssessment()
         }
         self.showHighRiskAssessment = show
+        self.showFullHighRiskAssessment = !(model.highRiskAssessments.first?.cleanDrainDryAfterInspection ?? false)
         self.collectionView.reloadData()
     }
     
@@ -472,7 +473,7 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
             guard let strongerSelf = self else {return}
             print(result)
             for waterBody in result {
-                model.addPreviousWaterBody(model: waterBody)
+                model.addDestinationWaterBody(model: waterBody)
             }
             strongerSelf.setNavigationBar(hidden: false, style: .black)
             strongerSelf.viewLayoutMarginsDidChange()
@@ -484,8 +485,6 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
     @objc private func previousDryStorageOn(sender: Any?) {
         guard let switchObj: UISwitch = sender as? UISwitch else { return }
         self.model?.set(previous: switchObj.isOn)
-        
-        
     }
     
     @objc private func nextDryStorageOn(sender: Any?) {

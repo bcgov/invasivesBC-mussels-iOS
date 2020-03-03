@@ -15,7 +15,6 @@ public enum HighRiskFormSection: Int, CaseIterable {
     case BasicInformation = 0
     case Inspection
     case InspectionOutcomes
-    case GeneralComments
 }
 
 
@@ -104,8 +103,6 @@ class HighRiskAssessmentModel: Object, BaseRealmObject {
             return HighRiskFormHelper.getInspectionFields(for: self, editable: editable)
         case .InspectionOutcomes:
             return HighRiskFormHelper.getInspectionOutcomesFields(for: self, editable: editable)
-        case .GeneralComments:
-            return HighRiskFormHelper.getGeneralCommentsFields(for: self, editable: editable)
         }
     }
 }

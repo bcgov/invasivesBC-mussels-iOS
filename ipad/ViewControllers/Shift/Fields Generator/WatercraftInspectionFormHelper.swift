@@ -257,6 +257,15 @@ class WatercraftInspectionFormHelper {
         )
         sectionItems.append(marineMusslesFound)
         
+        let highRiskArea = SwitchInput(
+            key: "highRiskArea",
+            header: WatercraftFieldHeaderConstants.WatercraftDetails.highRiskArea,
+            editable: editable ?? true,
+            value: object?.highRiskArea ?? nil,
+            width: .Third
+        )
+        sectionItems.append(highRiskArea)
+        
         return sectionItems
     }
     
@@ -280,15 +289,6 @@ class WatercraftInspectionFormHelper {
         )
         sectionItems.append(adultDreissenidFound)
        
-        
-        let highRiskArea = SwitchInput(
-            key: "highRiskArea",
-            header: WatercraftFieldHeaderConstants.WatercraftDetails.highRiskArea,
-            editable: editable ?? true,
-            value: object?.highRiskArea ?? nil,
-            width: .Third
-        )
-        sectionItems.append(highRiskArea)
         return sectionItems
     }
     
@@ -296,7 +296,7 @@ class WatercraftInspectionFormHelper {
         var sectionItems: [InputItem] = []
         let generalComments = TextAreaInput(
             key: "generalComments",
-            header: "General Comments",
+            header: WatercraftFieldHeaderConstants.GeneralComments.generalComments,
             editable: editable ?? true,
             value: object?.generalComments ?? "",
             width: .Full

@@ -74,7 +74,6 @@ class WaterbodyPicker: UIView, Theme {
     @IBAction func selectAction(_ sender: UIButton) {
         returnResult()
         dismissWithAnimation()
-        
     }
     
     @IBAction func backAction(_ sender: UIButton) {
@@ -195,12 +194,19 @@ class WaterbodyPicker: UIView, Theme {
     // Filter Reaults
     private func filter(by text: String) {
         self.otherContainer.alpha = 0
-        self.filteredItems = items.filter{$0.display.contains(text)}
+        self.filteredItems = items.filter{$0.display.lowercased().contains(text.lowercased())}.sorted(by: { (first, second) -> Bool in
+            return first.display.lowercased() < second.display.lowercased()
+        })
         self.tableView.reloadData()
     }
     
     private func position() {
-        guard let window = UIApplication.shared.keyWindow else {return}
+        guard let window = UIApplication.shared.connectedScenes
+        .filter({$0.activationState == .foregroundActive})
+        .map({$0 as? UIWindowScene})
+        .compactMap({$0})
+        .first?.windows
+        .filter({$0.isKeyWindow}).first else {return}
         // Set initial position with 0 alpha and add as subview
         self.frame = CGRect(x: 0, y: window.frame.maxY, width: window.bounds.width, height: window.bounds.height)
         self.center.x = window.center.x
@@ -234,7 +240,12 @@ class WaterbodyPicker: UIView, Theme {
     }
     
     private func createConstraints() {
-        guard let window = UIApplication.shared.keyWindow else {return}
+        guard let window = UIApplication.shared.connectedScenes
+        .filter({$0.activationState == .foregroundActive})
+        .map({$0 as? UIWindowScene})
+        .compactMap({$0})
+        .first?.windows
+        .filter({$0.isKeyWindow}).first else {return}
         viewConstraints[.trailing] = self.trailingAnchor.constraint(equalTo: window.trailingAnchor, constant: 0)
         viewConstraints[.leading] = self.leadingAnchor.constraint(equalTo: window.leadingAnchor, constant: 0)
         viewConstraints[.centerY] = self.centerYAnchor.constraint(equalTo: window.centerYAnchor, constant: 0)
