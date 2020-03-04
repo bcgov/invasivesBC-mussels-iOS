@@ -20,7 +20,7 @@ struct ShiftFormHeaders {
         static let snowing = "Snowing"
         static let foggy = "Foggy"
         static let windy = "Windy"
-        static let comments = "Additional Comments"
+        static let comments = "Shift Start Comments"
     }
     
     struct ShiftEnd {
@@ -28,7 +28,7 @@ struct ShiftFormHeaders {
         static let boatsInspected = "Boats Inspected During Shift?"
         static let motorizedBlowBys = "Motorized blow-bys"
         static let nonMotorizedBlowBys = "Non Motorized blow-Bys"
-        static let comments = "Additional Comments"
+        static let comments = "Shift End Comments"
     }
 }
 
@@ -72,6 +72,6 @@ struct WatercraftFieldHeaderConstants {
         static let adultDreissenidFound = "Adult dreissenid mussels found"
     }
     struct GeneralComments {
-        static let generalComments = "General Comments"
+        static let generalComments = "Inspection Comments"
     }
 }

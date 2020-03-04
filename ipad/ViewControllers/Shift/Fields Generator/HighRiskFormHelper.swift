@@ -46,13 +46,16 @@ class HighRiskFormHelper {
         )
         sectionItems.append(standingWaterPresent)
         
-        let standingWaterLocation = TextInput(
+        let standingWaterLocation = DropdownInput(
             key: "highRisk-standingWaterLocation",
             header: HighRiskFormFieldHeaders.InspectionOutcomes.standingWaterLocation,
             editable: editable ?? true,
             value: object?.standingWaterLocation ?? "",
-            width: .Half
+            width: .Half,
+            dropdownItems: DropdownHelper.shared.getDropDownObject(for: .adultMusselsLocation),
+            codes: DropdownHelper.shared.getDropDownCodes(for: .adultMusselsLocation)
         )
+        
         standingWaterLocation.dependency = InputDependency(to: standingWaterPresent, equalTo: true)
         sectionItems.append(standingWaterLocation)
         
@@ -70,13 +73,16 @@ class HighRiskFormHelper {
         )
         sectionItems.append(adultDreissenidMusselsFound)
         
-        let adultDreissenidMusselsLocation = TextInput(
+        let adultDreissenidMusselsLocation = DropdownInput(
             key: "highRisk-adultDreissenidMusselsLocation",
             header: HighRiskFormFieldHeaders.InspectionOutcomes.adultDreissenidMusselsLocation,
             editable: editable ?? true,
             value: object?.adultDreissenidMusselsLocation ?? "",
-            width: .Half
+            width: .Half,
+            dropdownItems: DropdownHelper.shared.getDropDownObject(for: .adultMusselsLocation),
+            codes: DropdownHelper.shared.getDropDownCodes(for: .adultMusselsLocation)
         )
+        
         adultDreissenidMusselsLocation.dependency = InputDependency(to: adultDreissenidMusselsFound, equalTo: true)
         sectionItems.append(adultDreissenidMusselsLocation)
         let spacer2 = InputSpacer()
@@ -172,19 +178,6 @@ class HighRiskFormHelper {
         )
         sectionItems.append(quarantinePeriodIssued)
         
-        return sectionItems
-    }
-    
-    static func getGeneralCommentsFields(for object: HighRiskAssessmentModel? = nil, editable: Bool? = true) -> [InputItem] {
-        var sectionItems: [InputItem] = []
-        let generalComments = TextAreaInput(
-            key: "highRisk-generalComments",
-            header: "General Comments",
-            editable: editable ?? true,
-            value: object?.generalComments ?? "",
-            width: .Full
-        )
-        sectionItems.append(generalComments)
         return sectionItems
     }
 }
