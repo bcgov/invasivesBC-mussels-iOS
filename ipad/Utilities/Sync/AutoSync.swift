@@ -99,8 +99,8 @@ class AutoSync {
     }
     
     private func performSync() {
+        if isSynchronizing {return}
         print("Executing Autosync...")
-        
         // Block autosync from being re-executed.
         self.isSynchronizing = true
         
@@ -108,22 +108,21 @@ class AutoSync {
         self.syncView.initialize()
         
         let itemsToSync = Storage.shared.itemsToSync()
-        ShiftService.shared.submit(shifts: itemsToSync) {  [weak self] (syncSuccess) in
-            guard let strongSelf = self else { return }
+        ShiftService.shared.submit(shifts: itemsToSync) { (syncSuccess) in
             if syncSuccess {
                 Banner.show(message: "Sync Executed")
                 NotificationCenter.default.post(name: .syncExecuted, object: nil)
             } else {
                 Banner.show(message: "Could not sync items")
-                strongSelf.isAutoSyncEnabled = false
+                self.isAutoSyncEnabled = false
             }
             // Remove SyncView
             // Delay added because the sync could fail faster than the view can finish displaying
             // with animations. calling remove before its done displaying will cause a crash.
-            strongSelf.delayWithSeconds(1) {
-                strongSelf.syncView.remove()
+            self.delayWithSeconds(1) {
+                self.syncView.remove()
                 // Free Autosync
-                strongSelf.isSynchronizing = false
+                self.isSynchronizing = false
             }
         }
     }
@@ -250,8 +249,7 @@ class AutoSync {
     
     func showAuthDialogAndSync() {
         if Auth.isAuthenticated() { return }
-        Alert.show(title: "Authentication Required", message: "You need to authenticate to perform the initial sync.\n Would you like to authenticate now and synchronize?\n\nIf you select no, You will not be able to create records.\n", yes: { [weak self] in
-            guard let strongSelf = self else { return }
+        Alert.show(title: "Authentication Required", message: "You need to authenticate to perform the initial sync.\n Would you like to authenticate now and synchronize?\n\nIf you select no, You will not be able to create records.\n", yes: {
             switch Settings.shared.getAuthType() {
             case .Idir:
                 Auth.refreshEnviormentConstants(withIdpHint: "idir")
@@ -260,7 +258,7 @@ class AutoSync {
             }
             Auth.authenticate(completion: { (success) in
                 if success && Settings.shared.isCorrectUser() {
-                    strongSelf.syncIfPossible()
+                    self.syncIfPossible()
                 } else if !Settings.shared.isCorrectUser() {
                     Auth.logout()
                 }

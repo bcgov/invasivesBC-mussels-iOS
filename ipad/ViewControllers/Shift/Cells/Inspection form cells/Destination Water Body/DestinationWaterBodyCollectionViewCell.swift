@@ -30,7 +30,9 @@ class DestinationWaterBodyCollectionViewCell: BaseJourneyCollectionViewCell, The
     func setup(with model: DestinationWaterbodyModel, isEditable: Bool, delegate: InputDelegate, onDelete: @escaping ()-> Void) {
         self.onDelete = onDelete
         self.delegate = delegate
-        if let waterbody = Storage.shared.getWaterbodyModel(withId: model.remoteId) {
+        if !model.otherWaterbody.isEmpty {
+            self.inputField.text = model.otherWaterbody
+        } else if let waterbody = Storage.shared.getWaterbodyModel(withId: model.remoteId) {
             self.inputField.text = "\(waterbody.name), \(waterbody.province), \(waterbody.country) (\(waterbody.closest))"
         }
         style()

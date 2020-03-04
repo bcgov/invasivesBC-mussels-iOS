@@ -55,7 +55,7 @@ class AccessService {
         }
     }
 
-    public func hasAccess(completion: @escaping(Bool)->Void) {
+    public func hasAccess(completion: @escaping(Bool) -> Void) {
         if reachability.connection == .unavailable {
             return completion(Settings.shared.userHasAppAccess())
         }

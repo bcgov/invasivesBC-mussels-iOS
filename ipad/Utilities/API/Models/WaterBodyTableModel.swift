@@ -27,6 +27,7 @@ class WaterBodyTableModel: Object {
     @objc dynamic var country: String = ""
     @objc dynamic var closest: String = ""
     @objc dynamic var province: String = ""
+    @objc dynamic var other: String = ""
     
     func toDictionary() -> [String : Any] {
         return [

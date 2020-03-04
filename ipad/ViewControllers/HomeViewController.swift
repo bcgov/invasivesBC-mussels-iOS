@@ -82,18 +82,14 @@ class HomeViewController: BaseViewController {
                 Alert.show(title: "Can't Synchronize", message: "Device is offline")
             case .NeedsAccess:
                 Alert.show(title: "Access Deined", message: "You need the required access level to submit.\nAccess request has been created and is awaiting approval")
-                
             case .AuthExpired:
                 AutoSync.shared.showAuthDialogAndSync()
-                
-                
             case .NothingToSync:
                 Alert.show(title: "Nothing to sync", message: "There is nothing to sync")
             case .SyncDisabled:
                 Alert.show(title: "Sync is disabled", message: "Please re-start application")
             }
         }
-        
     }
     
     @IBAction func addEntryClicked(_ sender: Any) {
@@ -228,10 +224,9 @@ class HomeViewController: BaseViewController {
     }
     
     private func styleUserButton() {
-        makeCircle(button: userButton)
-        userButton.backgroundColor = UIColor.white
         userButton.setTitleColor(Colors.primary, for: .normal)
-        userButton.setTitle("AB", for: .normal)
+        userButton.setImage(UIImage(systemName: "person.crop.circle", withConfiguration: UIImage.SymbolConfiguration(pointSize: 45, weight: .light)), for: .normal)
+        userButton.tintColor = UIColor.white
     }
     
     private func styleSyncButton() {

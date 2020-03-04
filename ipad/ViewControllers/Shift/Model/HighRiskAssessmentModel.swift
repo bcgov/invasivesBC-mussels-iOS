@@ -15,7 +15,6 @@ public enum HighRiskFormSection: Int, CaseIterable {
     case BasicInformation = 0
     case Inspection
     case InspectionOutcomes
-    case GeneralComments
 }
 
 
@@ -76,7 +75,11 @@ class HighRiskAssessmentModel: Object, BaseRealmObject {
     
     // MARK: To Dictionary
     func toDictionary() -> [String : Any] {
-        return [
+        
+        let standingWaterLocationId = Storage.shared.codeId(type: .adultMusselsLocation, name: standingWaterLocation)
+        let adultDreissenidMusselsLocationId = Storage.shared.codeId(type: .adultMusselsLocation, name: adultDreissenidMusselsLocation)
+        
+        var body: [String : Any] = [
             "cleanDrainDryAfterInspection": cleanDrainDryAfterInspection,
             "quarantinePeriodIssued": quarantinePeriodIssued,
             "standingWaterPresent": standingWaterPresent,
@@ -88,11 +91,19 @@ class HighRiskAssessmentModel: Object, BaseRealmObject {
             "decontaminationReference": decontaminationReference > 0 ? decontaminationReference : -1,
             "decontaminationOrderNumber": decontaminationOrderNumber > 0 ? decontaminationOrderNumber : -1,
             "sealNumber": sealNumber > 0 ? sealNumber : -1,
-            "standingWaterLocation": standingWaterLocation.count > 1 ? standingWaterLocation : "NA",
-            "adultDreissenidaeMusselDetail": adultDreissenidMusselsLocation.count > 1 ? adultDreissenidMusselsLocation : "NA",
-            "otherInspectionFindings": otherInspectionFindings.count > 1 ? otherInspectionFindings : "NA",
-            "generalComments": generalComments.count > 1 ? generalComments : "NA",
+            "otherInspectionFindings": otherInspectionFindings.count > 1 ? otherInspectionFindings : "None",
+            "generalComments": generalComments.count > 1 ? generalComments : "None",
         ]
+        
+        if let _standingWaterLocationId = standingWaterLocationId, standingWaterPresent {
+            body["standingWaterLocation"] = _standingWaterLocationId
+        }
+        
+        if let _adultDreissenidMusselsLocationId = adultDreissenidMusselsLocationId, adultDreissenidMusselsFound {
+            body["adultDreissenidaeMusselDetail"] = _adultDreissenidMusselsLocationId
+        }
+        
+        return body
     }
     
     // MARK: UI Helpers
@@ -104,8 +115,6 @@ class HighRiskAssessmentModel: Object, BaseRealmObject {
             return HighRiskFormHelper.getInspectionFields(for: self, editable: editable)
         case .InspectionOutcomes:
             return HighRiskFormHelper.getInspectionOutcomesFields(for: self, editable: editable)
-        case .GeneralComments:
-            return HighRiskFormHelper.getGeneralCommentsFields(for: self, editable: editable)
         }
     }
 }

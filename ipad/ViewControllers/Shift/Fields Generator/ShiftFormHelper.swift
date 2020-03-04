@@ -11,7 +11,6 @@ import Foundation
 class ShiftFormHelper {
     
     static func getShiftStartFields(for object: ShiftModel? = nil, editable: Bool? = true, modalSize: Bool? = false) -> [InputItem] {
-        let isModalSize = modalSize ?? false
         var sectionItems: [InputItem] = []
         
         let startTime = TimeInput(

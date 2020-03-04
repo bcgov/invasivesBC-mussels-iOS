@@ -42,7 +42,6 @@ class WaterbodyPicker: UIView, Theme {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var collectionView: UICollectionView!
-    
     @IBOutlet weak var barContainer: UIView!
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var selectButton: UIButton!
@@ -50,6 +49,7 @@ class WaterbodyPicker: UIView, Theme {
     @IBOutlet weak var otherContainer: UIView!
     @IBOutlet weak var addManuallyButton: UIButton!
     @IBOutlet weak var selectionsHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var manualLocationField: UITextField!
     
     // MARK: Constants
     private let tableCells = [
@@ -66,6 +66,7 @@ class WaterbodyPicker: UIView, Theme {
     private var completion: ((_ result: [WaterBodyTableModel]) -> Void )?
     private var selections: [DropdownModel] = []
     private var viewConstraints: [contraintType : NSLayoutConstraint] = [contraintType : NSLayoutConstraint]()
+    private var manualFields: [String] = []
     
     deinit {
         print("de-init waterbodyPicker")
@@ -74,7 +75,6 @@ class WaterbodyPicker: UIView, Theme {
     @IBAction func selectAction(_ sender: UIButton) {
         returnResult()
         dismissWithAnimation()
-        
     }
     
     @IBAction func backAction(_ sender: UIButton) {
@@ -90,6 +90,19 @@ class WaterbodyPicker: UIView, Theme {
         }) { (done) in
             self.removeFromSuperview()
         }
+    }
+    
+    @IBAction func manualLocationChanged(_ sender: UITextField) {
+        
+    }
+    
+    @IBAction func addLocationManually(_ sender: UIButton) {
+        guard let text = manualLocationField.text, !text.isEmpty else {return}
+        selections.append(DropdownModel(display: text, key: text))
+        manualFields.append(text)
+        self.showOrHideSelectionsIfNeeded()
+        self.collectionView.reloadData()
+        manualLocationField.text?.removeAll()
     }
     
     /**
@@ -113,8 +126,12 @@ class WaterbodyPicker: UIView, Theme {
         guard let callback = self.completion else {return}
         var results: [WaterBodyTableModel] = []
         for selection in selections {
-            if let model = Storage.shared.getWaterbodyModel(withId: Int(selection.key) ?? -1) {
+            if let id = Int(selection.key), let model = Storage.shared.getWaterbodyModel(withId: id) {
                 results.append(model)
+            } else {
+                let customWaterBody = WaterBodyTableModel()
+                customWaterBody.other = selection.display
+                results.append(customWaterBody)
             }
         }
         return callback(results)
@@ -195,12 +212,19 @@ class WaterbodyPicker: UIView, Theme {
     // Filter Reaults
     private func filter(by text: String) {
         self.otherContainer.alpha = 0
-        self.filteredItems = items.filter{$0.display.contains(text)}
+        self.filteredItems = items.filter{$0.display.lowercased().contains(text.lowercased())}.sorted(by: { (first, second) -> Bool in
+            return first.display.lowercased() < second.display.lowercased()
+        })
         self.tableView.reloadData()
     }
     
     private func position() {
-        guard let window = UIApplication.shared.keyWindow else {return}
+        guard let window = UIApplication.shared.connectedScenes
+        .filter({$0.activationState == .foregroundActive})
+        .map({$0 as? UIWindowScene})
+        .compactMap({$0})
+        .first?.windows
+        .filter({$0.isKeyWindow}).first else {return}
         // Set initial position with 0 alpha and add as subview
         self.frame = CGRect(x: 0, y: window.frame.maxY, width: window.bounds.width, height: window.bounds.height)
         self.center.x = window.center.x
@@ -234,7 +258,12 @@ class WaterbodyPicker: UIView, Theme {
     }
     
     private func createConstraints() {
-        guard let window = UIApplication.shared.keyWindow else {return}
+        guard let window = UIApplication.shared.connectedScenes
+        .filter({$0.activationState == .foregroundActive})
+        .map({$0 as? UIWindowScene})
+        .compactMap({$0})
+        .first?.windows
+        .filter({$0.isKeyWindow}).first else {return}
         viewConstraints[.trailing] = self.trailingAnchor.constraint(equalTo: window.trailingAnchor, constant: 0)
         viewConstraints[.leading] = self.leadingAnchor.constraint(equalTo: window.leadingAnchor, constant: 0)
         viewConstraints[.centerY] = self.centerYAnchor.constraint(equalTo: window.centerYAnchor, constant: 0)
