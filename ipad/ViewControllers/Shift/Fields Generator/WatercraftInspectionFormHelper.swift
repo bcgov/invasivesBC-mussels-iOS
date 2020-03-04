@@ -178,19 +178,18 @@ class WatercraftInspectionFormHelper {
         )
         sectionItems.append(previousAISKnowlede)
         
-        let previousAISKnowledeSource = TextInput(
+        let previousAISKnowledeSource = DropdownInput(
             key: "previousAISKnowledeSource",
             header: WatercraftFieldHeaderConstants.WatercraftDetails.previousAISKnowledeSource,
             editable: editable ?? true,
             value: object?.previousAISKnowledeSource ?? nil,
-            width: .Half
+            width: .Full,
+            dropdownItems: DropdownHelper.shared.getDropDownObject(for: .previousAISKnowledgeSource),
+            codes: DropdownHelper.shared.getDropDownCodes(for: .previousAISKnowledgeSource)
         )
         previousAISKnowledeSource.dependency = InputDependency(to: previousAISKnowlede, equalTo: true)
         sectionItems.append(previousAISKnowledeSource)
         
-        let spacer1 = InputSpacer()
-        spacer1.dependency = InputDependency(to: previousAISKnowlede, equalTo: true)
-        sectionItems.append(spacer1)
         /// ---------------------------
         
         let previousInspection = SwitchInput(
@@ -202,13 +201,17 @@ class WatercraftInspectionFormHelper {
         )
         sectionItems.append(previousInspection)
         
-        let previousInspectionSource = TextInput(
+        
+        let previousInspectionSource = DropdownInput(
             key: "previousInspectionSource",
             header: WatercraftFieldHeaderConstants.WatercraftDetails.previousInspectionSource,
             editable: editable ?? true,
             value: object?.previousInspectionSource ?? nil,
-            width: .Third
+            width: .Full,
+            dropdownItems: DropdownHelper.shared.getDropDownObject(for: .previousInspectionSource),
+            codes: DropdownHelper.shared.getDropDownCodes(for: .previousInspectionSource)
         )
+        
         previousInspectionSource.dependency = InputDependency(to: previousInspection, equalTo: true)
         sectionItems.append(previousInspectionSource)
         
@@ -217,7 +220,7 @@ class WatercraftInspectionFormHelper {
             header: WatercraftFieldHeaderConstants.WatercraftDetails.previousInspectionDays,
             editable: editable ?? true,
             value: object?.previousInspectionDays ?? 0,
-            width: .Third
+            width: .Full
         )
         previousInspectionDays.dependency = InputDependency(to: previousInspection, equalTo: true)
         sectionItems.append(previousInspectionDays)
@@ -245,6 +248,15 @@ class WatercraftInspectionFormHelper {
         )
         sectionItems.append(marineMusslesFound)
         
+        let highRiskArea = SwitchInput(
+            key: "highRiskArea",
+            header: WatercraftFieldHeaderConstants.WatercraftDetails.highRiskArea,
+            editable: editable ?? true,
+            value: object?.highRiskArea ?? nil,
+            width: .Third
+        )
+        sectionItems.append(highRiskArea)
+        
         return sectionItems
     }
     
@@ -268,15 +280,6 @@ class WatercraftInspectionFormHelper {
         )
         sectionItems.append(adultDreissenidFound)
        
-        
-        let highRiskArea = SwitchInput(
-            key: "highRiskArea",
-            header: WatercraftFieldHeaderConstants.WatercraftDetails.highRiskArea,
-            editable: editable ?? true,
-            value: object?.highRiskArea ?? nil,
-            width: .Third
-        )
-        sectionItems.append(highRiskArea)
         return sectionItems
     }
     
@@ -284,7 +287,7 @@ class WatercraftInspectionFormHelper {
         var sectionItems: [InputItem] = []
         let generalComments = TextAreaInput(
             key: "generalComments",
-            header: "General Comments",
+            header: WatercraftFieldHeaderConstants.GeneralComments.generalComments,
             editable: editable ?? true,
             value: object?.generalComments ?? "",
             width: .Full

@@ -14,6 +14,11 @@ import SingleSignOn
 import Realm
 import RealmSwift
 
+enum APIRequestType {
+    case Get
+    case Post
+}
+
 class APIRequest {
     static func headers() -> HTTPHeaders {
         if let token = Auth.getAccessToken() {
@@ -25,8 +30,8 @@ class APIRequest {
     
     /*************************************************************************************************************/
     
-    // MARK: GET request
-    private static func get(endpoint: URL, completion: @escaping (_ response: JSON?) -> Void) {
+    static func request(type: APIRequestType, endpoint: URL, params: [String: Any]? = nil, completion: @escaping (_ response: JSON?) -> Void) {
+        
         // Reachability
         do {
             let reacahbility = try Reachability()
@@ -39,6 +44,36 @@ class APIRequest {
             print(error)
             return completion(nil)
         }
+        
+        if Auth.isAuthTokenExpired() && !Auth.isRefreshExpired() {
+            Auth.refreshCredentials { (success) in
+                if !success {
+                    return completion(nil)
+                }
+                switch type {
+                case .Get:
+                    get(endpoint: endpoint, completion: completion)
+                case .Post:
+                    post(endpoint: endpoint, params: params ?? [String: Any](), completion: completion)
+                }
+            }
+        } else if !Auth.isAuthTokenExpired() {
+            switch type {
+            case .Get:
+                get(endpoint: endpoint, completion: completion)
+            case .Post:
+                post(endpoint: endpoint, params: params ?? [String: Any](), completion: completion)
+            }
+        } else {
+            print("Tokens Expired")
+            return completion(nil)
+        }
+        
+    }
+    
+    
+    // MARK: GET request
+    private static func get(endpoint: URL, completion: @escaping (_ response: JSON?) -> Void) {
         // Manual 20 second timeout for each call
         var completed = false
         var timedOut = false
@@ -56,7 +91,7 @@ class APIRequest {
         _ = Alamofire.SessionManager(configuration: configuration)
         
         // Make the call
-        let req = Alamofire.request(endpoint, method: .get, headers: headers()).responseData { (response) in
+        _ = Alamofire.request(endpoint, method: .get, headers: headers()).responseData { (response) in
             completed = true
             if timedOut {return}
             
@@ -75,7 +110,7 @@ class APIRequest {
             }
             
         }
-//        debugPrint(req)
+        //        debugPrint(req)
     }
     
     static func post(endpoint: URL, params: [String: Any], completion: @escaping (_ response: JSON?) -> Void) {
@@ -91,7 +126,7 @@ class APIRequest {
         }
         
         // Request
-        let req = Alamofire.request(endpoint, method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers()).responseJSON { response in
+        _ = Alamofire.request(endpoint, method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers()).responseJSON { response in
             completed = true
             if timedOut {return}
             guard response.result.description == "SUCCESS", let value = response.result.value else {
@@ -108,18 +143,18 @@ class APIRequest {
                 return completion(json)
             }
         }
-//        debugPrint(req);
+        //        debugPrint(req);
     }
     
     public static func fetchCodeTables(then: @escaping([String:Any]?)->Void) {
         guard let url = URL(string: APIURL.codes) else {return then(nil)}
-        self.get(endpoint: url) { (_response) in
+        self.request(type: .Get, endpoint: url) { (_response) in
             guard let response = _response else {return then(nil)}
             var result: [String:Any] = [String:Any]()
             let data = response["data"]
             DispatchQueue.global(qos: .background).async {
                 for (key, value) in data {
-                    result[key] = value.arrayValue.map { $0.stringValue}
+                    result[key] = value.arrayValue
                 }
                 return then(result)
             }
@@ -128,7 +163,7 @@ class APIRequest {
     
     public static func fetchWaterBodies(then: @escaping([[String:Any]]?)->Void) {
         guard let url = URL(string: APIURL.waterBody) else {return then(nil)}
-        self.get(endpoint: url) { (_response) in
+        self.request(type: .Get, endpoint: url) { (_response) in
             guard let response = _response else {return then(nil)}
             var result: [[String:Any]] = [[String:Any]()]
             let data = response["data"]
@@ -143,7 +178,7 @@ class APIRequest {
     
     private static func fetchUser(then: @escaping([String: JSON]?)->Void) {
         guard let url = URL(string: APIURL.user) else {return then(nil)}
-        self.get(endpoint: url) { (_response) in
+        self.request(type: .Get, endpoint: url) { (_response) in
             guard let response = _response else {return then(nil)}
             let data = response["data"].dictionaryValue
             return then(data)
@@ -178,7 +213,7 @@ class APIRequest {
     
     public static func checkAccessRequest(then: @escaping(Bool)-> Void) {
         guard let url = URL(string: APIURL.assessRequest) else {return then(false)}
-        self.get(endpoint: url) { (_response) in
+        self.request(type: .Get, endpoint: url) { (_response) in
             // TODO: THIS ENDPOINT IS CURRENTLY NOT FUNCTIONION PROPERLY.
             print(_response)
             return then(false)
@@ -193,7 +228,7 @@ class APIRequest {
                 "requestedAccessCode": AccessService.AccessRoleID,
                 "requestNote": "Mobile Access"
             ]
-            self.post(endpoint: url, params: body){ (_response) in
+            self.request(type: .Post, endpoint: url, params: body){ (_response) in
                 guard let response = _response else {return then(nil)}
                 print(response)
                 let errors = response["errors"].arrayValue

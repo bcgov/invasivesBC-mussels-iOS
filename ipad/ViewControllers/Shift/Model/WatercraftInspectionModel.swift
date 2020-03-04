@@ -56,6 +56,10 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
     // Inspection Details
     @objc dynamic var marineMusslesFound: Bool = false
     
+    // Dry Storage
+    @objc dynamic var previousDryStorage: Bool = false
+    @objc dynamic var destinationDryStorage: Bool = false
+    
     // High Risk Assesment fields
     @objc dynamic var highriskAIS: Bool = false {
         didSet {
@@ -209,6 +213,10 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
         
         let journeysBody = getJourneyDetailsDictionary()
         
+        let previousAISKnowledeSourceId: Int? = Storage.shared.codeId(type: .previousAISKnowledgeSource, name: previousAISKnowledeSource)
+        let previousInspectionSourceId: Int? = Storage.shared.codeId(type: .previousInspectionSource, name: previousInspectionSource)
+
+        
         var body: [String : Any] = [
             "workflow": id,
             "timestamp": formattedDateFull,
@@ -224,8 +232,6 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
             "simple": simple,
             "complex": complex,
             "veryComplex": veryComplex,
-            "previousAISKnowledgeSource": previousAISKnowledeSource.count > 1 ? previousAISKnowledeSource : "None" ,
-            "previousInspectionSource": previousInspectionSource.count > 1 ? previousInspectionSource : "None",
             "generalComment": generalComments.count > 1 ? generalComments : "None",
             "launchedOutsideBC": launchedOutsideBC,
             "decontaminationPerformed": decontaminationPerformed,
@@ -235,8 +241,18 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
             "previousInspectionDays": previousInspectionDays,
             "passportNumber": passportNumber.count > 1 ? passportNumber : "None",
             "provinceOfResidence": province.count > 1 ? province : "None",
+            "previousDryStorage": previousDryStorage,
+            "destinationDryStorage": destinationDryStorage,
             "journeys": []
         ]
+        
+        if let _previousAISKnowledeSourceId = previousAISKnowledeSourceId, previousAISKnowlede {
+            body[ "previousAISKnowledgeSource"] = _previousAISKnowledeSourceId
+        }
+        
+        if let _previousInspectionSourceId = previousInspectionSourceId, previousInspection {
+            body["previousInspectionSource"] = _previousInspectionSourceId
+        }
         
         if highRiskAssessmentForm.count > 0 {
             body["highRiskAssessment"] = highRiskAssessmentForm
@@ -308,7 +324,9 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
         let splitKey = inputItemKey.split(separator: "-")
         let key = String(splitKey[1])
         highRiskForm.set(value: value, for: key)
+        print(highRiskForm)
     }
+    
     
     func removePreviousWaterBody(at index: Int) {
         if index > self.previousWaterBodies.count - 1 {
@@ -398,6 +416,34 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
             print(error)
         }
     }
+    
+    func set(previous dryStorage: Bool) {
+        do {
+            let realm = try Realm()
+            try realm.write {
+                self.previousDryStorage = dryStorage
+            }
+            
+        } catch let error as NSError {
+            print("** REALM ERROR")
+            print(error)
+        }
+    }
+    
+    func set(destination dryStorage: Bool) {
+        do {
+            let realm = try Realm()
+            try realm.write {
+                self.destinationDryStorage = dryStorage
+            }
+            
+        } catch let error as NSError {
+            print("** REALM ERROR")
+            print(error)
+        }
+    }
+    
+    
     
     // MARK: UI Helpers
     func getInputputFields(for section: WatercraftFromSection, editable: Bool? = nil) -> [InputItem] {

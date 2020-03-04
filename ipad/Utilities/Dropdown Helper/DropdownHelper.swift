@@ -30,6 +30,14 @@ class DropdownHelper {
         return dropdown(from: items)
     }
     
+    public func getDropDownObject(for type: CodeTableType) -> [DropdownModel] {
+        return dropdown(from: Storage.shared.codeObjects(type: type))
+    }
+    
+    public func getDropDownCodes(for type: CodeTableType ) -> [CodeObject] {
+        return Storage.shared.codes(type: type)
+    }
+    
     public func dropdown(from items: [String]) -> [DropdownModel] {
         var options: [DropdownModel] = []
         let set = Array(Set(items)).sorted()

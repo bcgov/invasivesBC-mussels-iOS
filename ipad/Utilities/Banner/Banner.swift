@@ -37,7 +37,12 @@ class Banner {
         self.messages.remove(at: 0)
         self.showing = true
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            if let window = UIApplication.shared.keyWindow {
+            if let window = UIApplication.shared.connectedScenes
+            .filter({$0.activationState == .foregroundActive})
+            .map({$0 as? UIWindowScene})
+            .compactMap({$0})
+            .first?.windows
+            .filter({$0.isKeyWindow}).first {
                 let banner: BannerView = UIView.fromNib()
                 window.addSubview(banner)
                 banner.show(message: message, x: window.frame.origin.x, y: window.frame.origin.y + 20,duration: self.displayDuration, then: {

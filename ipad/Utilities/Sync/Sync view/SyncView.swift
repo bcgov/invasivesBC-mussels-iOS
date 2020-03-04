@@ -43,6 +43,7 @@ class SyncView: ModalView, Theme {
     @IBAction func cancelSyncAction(_ sender: Any) {
         self.remove()
     }
+    
     @IBAction func continueAction(_ sender: Any) {
         if syncState == SyncState.complete {
             self.remove()

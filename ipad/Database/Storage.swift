@@ -97,6 +97,48 @@ class Storage {
         }
     }
     
+    public func codeObjects(type: CodeTableType) -> [String] {
+        do {
+            let realm = try Realm()
+            let objs = realm.objects(CodeTableModel.self).filter("type ==  %@", "\(type)").map { $0 }
+            let found = Array(objs)
+            if let first = found.first {
+                return Array(first.codes.map { $0.des })
+            } else {
+                return []
+            }
+        } catch let error as NSError {
+            print("** REALM ERROR")
+            print(error)
+            return []
+        }
+    }
+    
+    public func codes(type: CodeTableType) -> [CodeObject] {
+        do {
+            let realm = try Realm()
+            let objs = realm.objects(CodeTableModel.self).filter("type ==  %@", "\(type)").map { $0 }
+            let found = Array(objs)
+            if let first = found.first {
+                return Array(first.codes)
+            } else {
+                return []
+            }
+        } catch let error as NSError {
+            print("** REALM ERROR")
+            print(error)
+            return []
+        }
+    }
+    
+    public func codeId(type: CodeTableType, name: String) -> Int? {
+        let codeTable = codes(type: type)
+        for item in codeTable where item.des == name {
+            return item.remoteId
+        }
+        return nil
+    }
+    
     public func codeTables() -> [CodeTableModel] {
         do {
             let realm = try Realm()

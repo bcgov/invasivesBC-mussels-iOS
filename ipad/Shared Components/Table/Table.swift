@@ -192,6 +192,6 @@ class Table {
         columns.append(TableViewColumnConfig(key: "", header: "Actions", type: .Button, buttonName: "View", showHeader: false))
         
         // Create table
-        show(columns: columns, in: objects, container: container)
+        let _ = (columns: columns, in: objects, container: container)
     }
 }
