@@ -73,14 +73,14 @@ class WaterbodyPicker: UIView, Theme {
     }
     
     @IBAction func selectAction(_ sender: UIButton) {
-        dismissWithAnimation()
         returnResult()
+        dismissWithAnimation()
     }
     
     @IBAction func backAction(_ sender: UIButton) {
         guard let callback = self.completion else {return}
-        dismissWithAnimation()
         callback([])
+        dismissWithAnimation()
     }
     
     private func dismissWithAnimation() {
