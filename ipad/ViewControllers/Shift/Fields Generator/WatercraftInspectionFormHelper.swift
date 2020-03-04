@@ -178,16 +178,6 @@ class WatercraftInspectionFormHelper {
         )
         sectionItems.append(previousAISKnowlede)
         
-        /*let previousAISKnowledeSource = TextInput(
-            key: "previousAISKnowledeSource",
-            header: WatercraftFieldHeaderConstants.WatercraftDetails.previousAISKnowledeSource,
-            editable: editable ?? true,
-            value: object?.previousAISKnowledeSource ?? nil,
-            width: .Half
-        )
-        previousAISKnowledeSource.dependency = InputDependency(to: previousAISKnowlede, equalTo: true)
-        sectionItems.append(previousAISKnowledeSource)*/
-        
         let previousAISKnowledeSource = DropdownInput(
             key: "previousAISKnowledeSource",
             header: WatercraftFieldHeaderConstants.WatercraftDetails.previousAISKnowledeSource,
@@ -200,9 +190,6 @@ class WatercraftInspectionFormHelper {
         previousAISKnowledeSource.dependency = InputDependency(to: previousAISKnowlede, equalTo: true)
         sectionItems.append(previousAISKnowledeSource)
         
-        /*let spacer1 = InputSpacer()
-        spacer1.dependency = InputDependency(to: previousAISKnowlede, equalTo: true)
-        sectionItems.append(spacer1)*/
         /// ---------------------------
         
         let previousInspection = SwitchInput(
@@ -210,17 +197,21 @@ class WatercraftInspectionFormHelper {
             header: WatercraftFieldHeaderConstants.WatercraftDetails.previousInspection,
             editable: editable ?? true,
             value: object?.previousInspection ?? nil,
-            width: .Third
+            width: .Full
         )
         sectionItems.append(previousInspection)
         
-        let previousInspectionSource = TextInput(
+        
+        let previousInspectionSource = DropdownInput(
             key: "previousInspectionSource",
             header: WatercraftFieldHeaderConstants.WatercraftDetails.previousInspectionSource,
             editable: editable ?? true,
             value: object?.previousInspectionSource ?? nil,
-            width: .Third
+            width: .Full,
+            dropdownItems: DropdownHelper.shared.getDropDownObject(for: .previousInspectionSource),
+            codes: DropdownHelper.shared.getDropDownCodes(for: .previousInspectionSource)
         )
+        
         previousInspectionSource.dependency = InputDependency(to: previousInspection, equalTo: true)
         sectionItems.append(previousInspectionSource)
         
@@ -229,7 +220,7 @@ class WatercraftInspectionFormHelper {
             header: WatercraftFieldHeaderConstants.WatercraftDetails.previousInspectionDays,
             editable: editable ?? true,
             value: object?.previousInspectionDays ?? 0,
-            width: .Third
+            width: .Full
         )
         previousInspectionDays.dependency = InputDependency(to: previousInspection, equalTo: true)
         sectionItems.append(previousInspectionDays)

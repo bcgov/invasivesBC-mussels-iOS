@@ -138,6 +138,22 @@ class Auth {
         }
     }
     
+    public static func isAuthTokenExpired() -> Bool {
+        if let creds = authServices.credentials {
+            return creds.isAuthTokenExpired()
+        } else {
+            return true
+        }
+    }
+    
+    public static func isRefreshExpired() -> Bool {
+        if let creds = authServices.credentials {
+            return creds.isRefreshTokenExpired()
+        } else {
+            return true
+        }
+    }
+    
     private static func getCurrentViewController() -> UIViewController? {
         guard let window = UIApplication.shared.keyWindow else {return nil}
         if var topController = window.rootViewController {

@@ -99,8 +99,8 @@ class AutoSync {
     }
     
     private func performSync() {
+        if isSynchronizing {return}
         print("Executing Autosync...")
-        
         // Block autosync from being re-executed.
         self.isSynchronizing = true
         

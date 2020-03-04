@@ -42,7 +42,6 @@ class WaterbodyPicker: UIView, Theme {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var collectionView: UICollectionView!
-    
     @IBOutlet weak var barContainer: UIView!
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var selectButton: UIButton!
@@ -50,6 +49,7 @@ class WaterbodyPicker: UIView, Theme {
     @IBOutlet weak var otherContainer: UIView!
     @IBOutlet weak var addManuallyButton: UIButton!
     @IBOutlet weak var selectionsHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var manualLocationField: UITextField!
     
     // MARK: Constants
     private let tableCells = [
@@ -66,20 +66,21 @@ class WaterbodyPicker: UIView, Theme {
     private var completion: ((_ result: [WaterBodyTableModel]) -> Void )?
     private var selections: [DropdownModel] = []
     private var viewConstraints: [contraintType : NSLayoutConstraint] = [contraintType : NSLayoutConstraint]()
+    private var manualFields: [String] = []
     
     deinit {
         print("de-init waterbodyPicker")
     }
     
     @IBAction func selectAction(_ sender: UIButton) {
-        returnResult()
         dismissWithAnimation()
+        returnResult()
     }
     
     @IBAction func backAction(_ sender: UIButton) {
         guard let callback = self.completion else {return}
-        callback([])
         dismissWithAnimation()
+        callback([])
     }
     
     private func dismissWithAnimation() {
@@ -89,6 +90,19 @@ class WaterbodyPicker: UIView, Theme {
         }) { (done) in
             self.removeFromSuperview()
         }
+    }
+    
+    @IBAction func manualLocationChanged(_ sender: UITextField) {
+        
+    }
+    
+    @IBAction func addLocationManually(_ sender: UIButton) {
+        guard let text = manualLocationField.text, !text.isEmpty else {return}
+        selections.append(DropdownModel(display: text, key: text))
+        manualFields.append(text)
+        self.showOrHideSelectionsIfNeeded()
+        self.collectionView.reloadData()
+        manualLocationField.text?.removeAll()
     }
     
     /**
@@ -112,8 +126,12 @@ class WaterbodyPicker: UIView, Theme {
         guard let callback = self.completion else {return}
         var results: [WaterBodyTableModel] = []
         for selection in selections {
-            if let model = Storage.shared.getWaterbodyModel(withId: Int(selection.key) ?? -1) {
+            if let id = Int(selection.key), let model = Storage.shared.getWaterbodyModel(withId: id) {
                 results.append(model)
+            } else {
+                let customWaterBody = WaterBodyTableModel()
+                customWaterBody.other = selection.display
+                results.append(customWaterBody)
             }
         }
         return callback(results)

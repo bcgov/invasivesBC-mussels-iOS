@@ -29,15 +29,20 @@ class PreviousWaterbodyModel: JourneyModel, BaseRealmObject {
     @objc dynamic var waterbody: String = ""
     @objc dynamic var nearestCity: String = ""
     @objc dynamic var province: String = ""
+    @objc dynamic var otherWaterbody: String = ""
     
     func set(from model: WaterBodyTableModel) {
         do {
             let realm = try Realm()
             try realm.write {
-                self.waterbody = model.name
-                self.nearestCity = model.closest
-                self.province = model.province
-                self.remoteId = model.water_body_id
+                if !model.other.isEmpty {
+                    self.otherWaterbody = model.other
+                } else {
+                    self.waterbody = model.name
+                    self.nearestCity = model.closest
+                    self.province = model.province
+                    self.remoteId = model.water_body_id
+                }
             }
         } catch let error as NSError {
             print("** REALM ERROR")
@@ -74,9 +79,18 @@ class PreviousWaterbodyModel: JourneyModel, BaseRealmObject {
     }
     
     func toDictionary() -> [String : Any] {
+        if !self.otherWaterbody.isEmpty {
+            return [
+                "journeyType": 1,
+                "numberOfDaysOut": numberOfDaysOut,
+                "otherWaterBody": self.otherWaterbody
+            ]
+        }
+        
         if self.remoteId < 0 {
             return [:]
         }
+        
         return [
             "journeyType": 1,
             "numberOfDaysOut": numberOfDaysOut,
