@@ -246,11 +246,11 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
             "journeys": []
         ]
         
-        if let _previousAISKnowledeSourceId = previousAISKnowledeSourceId {
+        if let _previousAISKnowledeSourceId = previousAISKnowledeSourceId, previousAISKnowlede {
             body[ "previousAISKnowledgeSource"] = _previousAISKnowledeSourceId
         }
         
-        if let _previousInspectionSourceId = previousInspectionSourceId {
+        if let _previousInspectionSourceId = previousInspectionSourceId, previousInspection {
             body["previousInspectionSource"] = _previousInspectionSourceId
         }
         
