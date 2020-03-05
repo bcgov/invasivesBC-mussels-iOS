@@ -305,10 +305,6 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
         return collectionView!.dequeueReusableCell(withReuseIdentifier: "HeaderCollectionViewCell", for: indexPath as IndexPath) as! HeaderCollectionViewCell
     }
     
-    func getJourneyHeaderCell(indexPath: IndexPath) -> JourneyHeaderCollectionViewCell {
-        return collectionView!.dequeueReusableCell(withReuseIdentifier: "JourneyHeaderCollectionViewCell", for: indexPath as IndexPath) as! JourneyHeaderCollectionViewCell
-    }
-    
     func getButtonCell(indexPath: IndexPath) -> FormButtonCollectionViewCell {
         return collectionView!.dequeueReusableCell(withReuseIdentifier: "FormButtonCollectionViewCell", for: indexPath as IndexPath) as! FormButtonCollectionViewCell
     }
@@ -368,7 +364,10 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
             return cell
         case .WatercraftDetails:
             let cell = getBasicCell(indexPath: indexPath)
-            cell.setup(title: "Watercraft Details", input: model.getInputputFields(for: sectionType, editable: isEditable), delegate: self)
+            cell.setup(title: "Watercraft Details", input: model.getInputputFields(for: sectionType, editable: isEditable), delegate: self, buttonName: "View Map", buttonIcon: "map", onButtonClick: { [weak self] in
+                guard let strongSelf = self else {return}
+                strongSelf.showPDFMap()
+            })
             return cell
         case .JourneyDetails:
             return getJourneyDetailsCell(for: indexPath)
@@ -408,7 +407,7 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
         }
         
         let estimatedContentHeight = InputGroupView.estimateContentHeight(for: highRiskForm.getInputputFields(for: sectionType))
-        return CGSize(width: self.collectionView.frame.width, height: estimatedContentHeight + 80)
+        return CGSize(width: self.collectionView.frame.width, height: estimatedContentHeight + BasicCollectionViewCell.minHeight)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -418,21 +417,21 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
         switch sectionType {
         case .PassportInfo:
             let estimatedContentHeight = InputGroupView.estimateContentHeight(for: model.getInputputFields(for: sectionType))
-            return CGSize(width: self.collectionView.frame.width, height: estimatedContentHeight + 80)
+            return CGSize(width: self.collectionView.frame.width, height: estimatedContentHeight + BasicCollectionViewCell.minHeight)
         case .BasicInformation:
             let estimatedContentHeight = InputGroupView.estimateContentHeight(for: model.getInputputFields(for: sectionType))
-            return CGSize(width: self.collectionView.frame.width, height: estimatedContentHeight + 80)
+            return CGSize(width: self.collectionView.frame.width, height: estimatedContentHeight + BasicCollectionViewCell.minHeight)
         case .WatercraftDetails:
             let estimatedContentHeight = InputGroupView.estimateContentHeight(for: model.getInputputFields(for: sectionType))
-            return CGSize(width: self.collectionView.frame.width, height: estimatedContentHeight + 80)
+            return CGSize(width: self.collectionView.frame.width, height: estimatedContentHeight + BasicCollectionViewCell.minHeight)
         case .JourneyDetails:
             return estimateJourneyDetailsCellHeight(for: indexPath)
         case .InspectionDetails:
             let estimatedContentHeight = InputGroupView.estimateContentHeight(for: model.getInputputFields(for: sectionType))
-            return CGSize(width: self.collectionView.frame.width, height: estimatedContentHeight + 80)
+            return CGSize(width: self.collectionView.frame.width, height: estimatedContentHeight + BasicCollectionViewCell.minHeight)
         case .HighRiskAssessmentFields:
             let estimatedContentHeight = InputGroupView.estimateContentHeight(for: model.getInputputFields(for: sectionType))
-            return CGSize(width: self.collectionView.bounds.width - 16, height: estimatedContentHeight + 80)
+            return CGSize(width: self.collectionView.bounds.width - 16, height: estimatedContentHeight + BasicCollectionViewCell.minHeight)
         case .HighRiskAssessment:
             return getSizeForHighRiskAssessmentCell(indexPath: indexPath)
         case .GeneralComments:
@@ -495,11 +494,8 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
         guard let model = self.model else {return UICollectionViewCell()}
         switch getJourneyDetailsCellType(for: indexPath) {
         case .Header:
-            let cell = getJourneyHeaderCell(indexPath: indexPath)
-            cell.setup { [weak self] in
-                guard let strongSelf = self else {return}
-                strongSelf.showPDFMap()
-            }
+            let cell = getHeaderCell(indexPath: indexPath)
+            cell.setup(with: "Journey Details")
             return cell
         case .PreviousWaterBody:
             let cell = getPreviousWaterBodyCell(indexPath: indexPath)

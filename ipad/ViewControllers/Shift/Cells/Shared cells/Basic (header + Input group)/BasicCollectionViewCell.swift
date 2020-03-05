@@ -10,6 +10,7 @@ import UIKit
 
 class BasicCollectionViewCell: UICollectionViewCell, Theme {
     
+    @IBOutlet weak var button: UIButton!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var container: UIView!
     @IBOutlet weak var divider: UIView!
@@ -17,6 +18,10 @@ class BasicCollectionViewCell: UICollectionViewCell, Theme {
     @IBOutlet weak var trailingMargin: NSLayoutConstraint!
     
     weak var inputGroup: UIView?
+    
+    static let minHeight: CGFloat = 120
+    
+    private var callback: (() -> Void)?
     
     var showBox = false
     var showDivider = true
@@ -28,12 +33,25 @@ class BasicCollectionViewCell: UICollectionViewCell, Theme {
         style()
     }
     
-    public func setup(title: String, input items: [InputItem], delegate: InputDelegate, boxed: Bool? = false, showDivider: Bool? = true, padding: CGFloat? = 0) {
+    public func setup(title: String, input items: [InputItem], delegate: InputDelegate, boxed: Bool? = false, showDivider: Bool? = true, padding: CGFloat? = 0, buttonName: String? = nil, buttonIcon: String? = nil, onButtonClick: (()->Void)? = nil) {
         self.inputGroup?.removeFromSuperview()
         
         self.extraPadding = padding ?? 0
         self.showBox = boxed ?? false
         self.showDivider = showDivider ?? true
+        
+        button.alpha = 0
+        if let btnName = buttonName {
+            button.setTitle(btnName, for: .normal)
+            button.alpha = 1
+        }
+        if let iconName = buttonIcon, let image = UIImage(systemName: iconName) {
+            button.setImage(image, for: .normal)
+            button.alpha = 1
+        }
+        
+        self.callback = onButtonClick
+        
         style()
         
         self.titleLabel.text = title
@@ -43,7 +61,13 @@ class BasicCollectionViewCell: UICollectionViewCell, Theme {
         inputGroup.initialize(with: items, delegate: delegate, in: container)
     }
     
+    @IBAction func buttonClicked(_ sender: UIButton) {
+        guard let callback = self.callback else {return}
+        return callback()
+    }
+    
     private func style() {
+        styleHollowButton(button: button)
         styleSectionTitle(label: titleLabel)
         styleBox()
         styleDivider()
