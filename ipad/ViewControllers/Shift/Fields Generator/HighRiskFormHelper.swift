@@ -11,11 +11,12 @@ class HighRiskFormHelper {
     
     static func getBasicInfoFields(for object: HighRiskAssessmentModel? = nil, editable: Bool? = true) -> [InputItem] {
         var sectionItems: [InputItem] = []
-        let watercraftRegistration = IntegerInput(
+        let watercraftRegistration = TextInput(
             key: "highRisk-watercraftRegistration",
             header: HighRiskFormFieldHeaders.BasicInformation.watercraftRegistration,
             editable: editable ?? true,
-            value: object?.watercraftRegistration ?? 0,
+            value: object?.watercraftRegistration ?? "",
+            validation: .AlphaNumberic,
             width: .Full
         )
         sectionItems.append(watercraftRegistration)

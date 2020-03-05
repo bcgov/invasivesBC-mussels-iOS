@@ -87,6 +87,7 @@ extension Theme {
     // MARK: Buttons
     public func styleHollowButton(button: UIButton) {
         styleButton(button: button, bg: UIColor.white, borderColor: Colors.primary.cgColor, titleColor:Colors.primary)
+        button.tintColor = Colors.primary
     }
     
     public func styleFillButton(button: UIButton) {

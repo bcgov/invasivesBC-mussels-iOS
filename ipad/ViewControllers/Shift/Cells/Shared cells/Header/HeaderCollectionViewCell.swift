@@ -11,13 +11,32 @@ import UIKit
 class HeaderCollectionViewCell: UICollectionViewCell, Theme {
 
     @IBOutlet weak var titleLabel: UILabel!
-
-    func setup(with title: String) {
+    @IBOutlet weak var button: UIButton!
+    
+    private var callback: (() -> Void)?
+    
+    func setup(with title: String, buttonName: String? = nil, buttonIcon: String? = nil, onButtonClick: (()->Void)? = nil) {
         self.titleLabel.text = title
+        button.alpha = 0
+        if let btnName = buttonName {
+            button.setTitle(btnName, for: .normal)
+            button.alpha = 1
+        }
+        if let iconName = buttonIcon, let image = UIImage(systemName: iconName) {
+            button.setImage(image, for: .normal)
+            button.alpha = 1
+        }
+        self.callback = onButtonClick
         style()
     }
     
+    @IBAction func buttonClicked(_ sender: UIButton) {
+        guard let callback = self.callback else {return}
+        return callback()
+    }
+    
     private func style() {
+        styleHollowButton(button: button)
         styleSectionTitle(label: titleLabel)
     }
 }

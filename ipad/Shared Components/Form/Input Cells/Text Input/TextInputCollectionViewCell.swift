@@ -44,6 +44,8 @@ class TextInputCollectionViewCell: BaseInputCell<TextInput>, UITextFieldDelegate
             }
         case .None:
             return true
+        case .AlphaNumberic:
+            return string.isAlphanumeric
         }
     }
     
