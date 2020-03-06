@@ -213,6 +213,10 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
         
         let journeysBody = getJourneyDetailsDictionary()
         
+        let previousAISKnowledeSourceId: Int? = Storage.shared.codeId(type: .previousAISKnowledgeSource, name: previousAISKnowledeSource)
+        let previousInspectionSourceId: Int? = Storage.shared.codeId(type: .previousInspectionSource, name: previousInspectionSource)
+
+        
         var body: [String : Any] = [
             "workflow": id,
             "timestamp": formattedDateFull,
@@ -228,8 +232,6 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
             "simple": simple,
             "complex": complex,
             "veryComplex": veryComplex,
-            "previousAISKnowledgeSource": previousAISKnowledeSource.count > 1 ? previousAISKnowledeSource : "None" ,
-            "previousInspectionSource": previousInspectionSource.count > 1 ? previousInspectionSource : "None",
             "generalComment": generalComments.count > 1 ? generalComments : "None",
             "launchedOutsideBC": launchedOutsideBC,
             "decontaminationPerformed": decontaminationPerformed,
@@ -243,6 +245,14 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
             "destinationDryStorage": destinationDryStorage,
             "journeys": []
         ]
+        
+        if let _previousAISKnowledeSourceId = previousAISKnowledeSourceId, previousAISKnowlede {
+            body[ "previousAISKnowledgeSource"] = _previousAISKnowledeSourceId
+        }
+        
+        if let _previousInspectionSourceId = previousInspectionSourceId, previousInspection {
+            body["previousInspectionSource"] = _previousInspectionSourceId
+        }
         
         if highRiskAssessmentForm.count > 0 {
             body["highRiskAssessment"] = highRiskAssessmentForm
@@ -314,6 +324,7 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
         let splitKey = inputItemKey.split(separator: "-")
         let key = String(splitKey[1])
         highRiskForm.set(value: value, for: key)
+        print(highRiskForm)
     }
     
     

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="ipad9_7" orientation="portrait" layout="fullscreen" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -182,13 +182,13 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qs0-Z8-kOT">
-                                        <rect key="frame" x="707" y="36" width="46" height="46"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qs0-Z8-kOT">
+                                        <rect key="frame" x="709" y="37" width="44" height="44"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="qs0-Z8-kOT" secondAttribute="height" multiplier="1:1" id="CU7-V2-qHh"/>
                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="44" id="DIm-Xd-vmA"/>
                                         </constraints>
-                                        <state key="normal" title="Button">
+                                        <state key="normal" image="person.circle.fill" catalog="system">
                                             <color key="titleColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
@@ -196,7 +196,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jtj-bV-8r4">
-                                        <rect key="frame" x="576" y="41" width="120" height="36"/>
+                                        <rect key="frame" x="578" y="41" width="120" height="36"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="120" id="Qeo-xa-8qE"/>
                                             <constraint firstAttribute="height" constant="36" id="uBx-aT-V4k"/>
@@ -488,6 +488,7 @@
     <resources>
         <image name="bclogo" width="172" height="148"/>
         <image name="launch" width="1024" height="768"/>
+        <image name="person.circle.fill" catalog="system" width="64" height="60"/>
         <image name="share" width="128" height="128"/>
     </resources>
     <inferredMetricsTieBreakers>

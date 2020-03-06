@@ -35,7 +35,7 @@ class FormButtonCollectionViewCell: UICollectionViewCell, Theme {
         self.button?.isEnabled = !status
     }
     
-    func setupConfig(config: Config) {
+    private func setupConfig(config: Config) {
         self.dryStorageSwitch?.isHidden = !config.displaySwitch
         self.switchLabel?.isHidden = !config.displaySwitch
         self.dryStorageSwitch?.isOn = config.status

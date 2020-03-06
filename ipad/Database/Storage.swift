@@ -131,6 +131,14 @@ class Storage {
         }
     }
     
+    public func codeId(type: CodeTableType, name: String) -> Int? {
+        let codeTable = codes(type: type)
+        for item in codeTable where item.des == name {
+            return item.remoteId
+        }
+        return nil
+    }
+    
     public func codeTables() -> [CodeTableModel] {
         do {
             let realm = try Realm()

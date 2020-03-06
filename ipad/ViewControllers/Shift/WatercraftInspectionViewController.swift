@@ -125,9 +125,10 @@ class WatercraftInspectionViewController: BaseViewController {
             return
         }
         if show && model.highRiskAssessments.isEmpty {
-            model.addHighRiskAssessment()
+            let _ = model.addHighRiskAssessment()
         }
         self.showHighRiskAssessment = show
+        self.showFullHighRiskAssessment = !(model.highRiskAssessments.first?.cleanDrainDryAfterInspection ?? false)
         self.collectionView.reloadData()
     }
     
@@ -449,15 +450,14 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
         self.setNavigationBar(hidden: true, style: .black)
         let waterBodyPicker: WaterbodyPicker = UIView.fromNib()
         self.viewLayoutMarginsDidChange()
-        waterBodyPicker.setup() { [weak self] (result) in
-            guard let strongerSelf = self else {return}
+        waterBodyPicker.setup() { (result) in
             print(result)
             for waterBody in result {
                 model.addPreviousWaterBody(model: waterBody)
             }
-            strongerSelf.setNavigationBar(hidden: false, style: .black)
-            strongerSelf.viewLayoutMarginsDidChange()
-            strongerSelf.collectionView.reloadData()
+            self.setNavigationBar(hidden: false, style: .black)
+            self.viewLayoutMarginsDidChange()
+            self.collectionView.reloadData()
         }
     }
     
@@ -472,7 +472,7 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
             guard let strongerSelf = self else {return}
             print(result)
             for waterBody in result {
-                model.addPreviousWaterBody(model: waterBody)
+                model.addDestinationWaterBody(model: waterBody)
             }
             strongerSelf.setNavigationBar(hidden: false, style: .black)
             strongerSelf.viewLayoutMarginsDidChange()
@@ -484,8 +484,6 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
     @objc private func previousDryStorageOn(sender: Any?) {
         guard let switchObj: UISwitch = sender as? UISwitch else { return }
         self.model?.set(previous: switchObj.isOn)
-        
-        
     }
     
     @objc private func nextDryStorageOn(sender: Any?) {
@@ -529,14 +527,7 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
             return cell
         case .AddPreviousWaterBody:
             let cell = getButtonCell(indexPath: indexPath)
-            cell.setup(with: "Add Previuos Water Body",
-                       isEnabled: isEditable,
-                       config: FormButtonCollectionViewCell.Config(status: model.previousDryStorage, isPreviousJourney: true,
-                                                                   displaySwitch: true),
-                       target: self,
-                       selectorButton: #selector(self.addPreviousWaterBody(sender:)),
-                       selectorSwitch: #selector(self.previousDryStorageOn(sender:)))
-            /*cell.setup(with: "Add Previous Water Body", isEnabled: isEditable, config: FormButtonCollectionViewCell.Config(status: false, isPreviousJourney: true, displaySwitch: true)) { [weak self] in
+            cell.setup(with: "Add Previous Water Body", isEnabled: isEditable, config: FormButtonCollectionViewCell.Config(status: false, isPreviousJourney: true, displaySwitch: true)) { [weak self] in
                 guard let strongSelf = self else {return}
                 /// ---------waterbody picker------------
                 strongSelf.setNavigationBar(hidden: true, style: .black)
@@ -554,19 +545,12 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
                 }
                 /// --------------------------------
                 
-            }*/
+            }
             return cell
         case .AddDestinationWaterBody:
             let cell = getButtonCell(indexPath: indexPath)
-            cell.setup(with: "Add Destination Water Body",
-            isEnabled: isEditable,
-            config: FormButtonCollectionViewCell.Config(status: model.destinationDryStorage, isPreviousJourney: false,
-                                                        displaySwitch: true),
-            target: self,
-            selectorButton: #selector(self.addNextWaterBody(sender:)),
-            selectorSwitch: #selector(self.nextDryStorageOn(sender:)))
-            /*cell.setup(with: "Add Destination Water Body", isEnabled: isEditable, config: FormButtonCollectionViewCell.Config(status: false, isPreviousJourney: false, displaySwitch: true)) { [weak self] in
-            guard let strongSelf = self else {return}
+            cell.setup(with: "Add Destination Water Body", isEnabled: isEditable, config: FormButtonCollectionViewCell.Config(status: false, isPreviousJourney: false, displaySwitch: true)) { [weak self] in
+                guard let strongSelf = self else {return}
                 /// ---------waterbody picker------------
                 strongSelf.setNavigationBar(hidden: true, style: .black)
                 let waterBodyPicker: WaterbodyPicker = UIView.fromNib()
@@ -582,7 +566,7 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
                     strongerSelf.collectionView.reloadData()
                 }
                 /// --------------------------------
-            }*/
+            }
             return cell
         case .Divider:
             return getDividerCell(indexPath: indexPath)

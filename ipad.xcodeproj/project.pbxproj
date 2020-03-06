@@ -1063,9 +1063,9 @@
 		29DB4E3A23870B1F00B13646 /* Shared cells */ = {
 			isa = PBXGroup;
 			children = (
+				29DB0118237207AD0046E605 /* Button */,
 				29DB010B2371EE2F0046E605 /* Basic (header + Input group) */,
 				29E4BBE5237211F10079475F /* Divider */,
-				29DB0118237207AD0046E605 /* Button */,
 				29DB0113237206B90046E605 /* Header */,
 			);
 			path = "Shared cells";
@@ -1819,9 +1819,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = L796QSLV3E;
 				INFOPLIST_FILE = ipad/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1842,9 +1843,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = L796QSLV3E;
 				INFOPLIST_FILE = ipad/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
