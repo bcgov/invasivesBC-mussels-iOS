@@ -170,6 +170,7 @@
 		5C0F697B237B63F500F96CA5 /* MusselAppAPITest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0F697A237B63F500F96CA5 /* MusselAppAPITest.swift */; };
 		5C0F697D237B683200F96CA5 /* CodesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0F697C237B683200F96CA5 /* CodesAPI.swift */; };
 		5C0F6980237C6DDA00F96CA5 /* APIChain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0F697E237B6F7800F96CA5 /* APIChain.swift */; };
+		5C649C922412F6E300F01AE5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5C649C912412F6E200F01AE5 /* GoogleService-Info.plist */; };
 		5C82D3D32374A0D400B065BA /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 5C82D3D22374A0D400B065BA /* .gitignore */; };
 		5C82D3D72374AECC00B065BA /* HighRiskModalView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C82D3D52374AECC00B065BA /* HighRiskModalView.xib */; };
 		5C82D3D82374AECC00B065BA /* HighRiskModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C82D3D62374AECC00B065BA /* HighRiskModalView.swift */; };
@@ -374,6 +375,7 @@
 		5C0F697A237B63F500F96CA5 /* MusselAppAPITest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusselAppAPITest.swift; sourceTree = "<group>"; };
 		5C0F697C237B683200F96CA5 /* CodesAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodesAPI.swift; sourceTree = "<group>"; };
 		5C0F697E237B6F7800F96CA5 /* APIChain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIChain.swift; sourceTree = "<group>"; };
+		5C649C912412F6E200F01AE5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		5C82D3D22374A0D400B065BA /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		5C82D3D52374AECC00B065BA /* HighRiskModalView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HighRiskModalView.xib; sourceTree = "<group>"; };
 		5C82D3D62374AECC00B065BA /* HighRiskModalView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HighRiskModalView.swift; sourceTree = "<group>"; };
@@ -992,6 +994,7 @@
 				29CEC91B23676424003B21B9 /* SceneDelegate.swift */,
 				29CEC92223676425003B21B9 /* Assets.xcassets */,
 				29CEC92423676425003B21B9 /* LaunchScreen.storyboard */,
+				5C649C912412F6E200F01AE5 /* GoogleService-Info.plist */,
 				29CEC92723676425003B21B9 /* Info.plist */,
 			);
 			path = ipad;
@@ -1445,6 +1448,7 @@
 				296237D72374B6B400032BB5 /* RadioSwitchInputCollectionViewCell.xib in Resources */,
 				29CEC92123676424003B21B9 /* Main.storyboard in Resources */,
 				29514BED2368CAAA00DC89C4 /* Dropdown.storyboard in Resources */,
+				5C649C922412F6E300F01AE5 /* GoogleService-Info.plist in Resources */,
 				1E54FFB623D783940044721F /* InputTitleCollectionViewCell.xib in Resources */,
 				29CE5E1D2375E48000C54F96 /* ConditionalInputCollectionViewCell.xib in Resources */,
 			);

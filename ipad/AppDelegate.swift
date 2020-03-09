@@ -10,6 +10,7 @@ import UIKit
 import IQKeyboardManagerSwift
 import Realm
 import RealmSwift
+import Firebase
 
 class AppLogDataSource: NSObject, LoggerDataSource {
     var csvLogFileName: String = "app_logger.csv"
@@ -39,6 +40,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print("documents = \(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!)")
         // Begin Autosync change listener
         AutoSync.shared.beginListener()
+        // Crash Lytics
+        FirebaseApp.configure()
+        
         return true
     }
     
