@@ -215,7 +215,7 @@ class APIRequest {
         guard let url = URL(string: APIURL.assessRequest) else {return then(false)}
         self.request(type: .Get, endpoint: url) { (_response) in
             // TODO: THIS ENDPOINT IS CURRENTLY NOT FUNCTIONION PROPERLY.
-            print(_response)
+           //  print(_response)
             return then(false)
         }
     }
@@ -243,5 +243,75 @@ class APIRequest {
                 return then(false)
             }
         }
+    }
+    
+    /*!
+     * File Upload API
+     * @param File URL
+     * @param Other File info
+     * @param Completion Handler
+     */
+    public static func uploadFile(fileURL: URL, info: [String : String], timeout: TimeInterval = 60, then: @escaping BooleanAction) {
+        if !fileURL.isFileURL || FileManager.default.fileExists(atPath: fileURL.absoluteString) {
+            ErrorLog("File does not exists in path: \(fileURL.absoluteString)")
+            then(false)
+            return
+        }
+        
+        // Timer
+        var completed = false
+        setTimeout(time: timeout) {
+            if !completed {
+                ErrorLog("File upload [TIMEOUT] \n file: (\(fileURL)) ")
+                Banner.show(message: "File Upload Timeout")
+                then(false)
+            }
+        }
+        
+        
+        // Send Request
+        upload(multipartFormData: { (form: MultipartFormData) in
+            // Adding attributes
+            for (k,v) in info {
+                form.append(v.data, withName: k)
+            }
+            // Adding file data
+            form.append( fileURL, withName: "file")
+        }, usingThreshold: UInt64.init(), to: APIURL.uploads,  method: .post, headers: headers()) { result in
+            switch result {
+            case .success(let request, _, _):
+                request.responseJSON { response in
+                    // Mark completed
+                    completed = true
+                    // Check error
+                    if let err = response.error {
+                        ErrorLog("Request failure for file: \(fileURL) \nError: \(err)")
+                        then(false)
+                        return
+                    }
+                    // Check response body
+                    guard let value = response.result.value else {
+                        ErrorLog("No Value return by server \n file: \(fileURL)")
+                        then(false)
+                        return
+                    }
+                    let json = JSON(value)
+                    if let err = json["error"].string {
+                        ErrorLog("Server returns error: \(err)\n file: \(fileURL)")
+                        then(false)
+                        return
+                    }
+                    InfoLog("File Upload [SUCCESS] \n file: \(fileURL)")
+                    then(true)
+                }
+            case .failure(let err):
+                ErrorLog("File Encoding error: \(err) \n file: \(fileURL)")
+                completed = true
+                then(false)
+            }
+        }
+    }
+    public static func uploadFile(filePath: String, info: [String: String], timeout: TimeInterval = 60, then: @escaping (Bool) -> Void) {
+        self.uploadFile(fileURL: URL(fileURLWithPath: filePath), info: info, timeout: timeout, then: then)
     }
 }

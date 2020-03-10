@@ -22,6 +22,7 @@ class HomeViewController: BaseViewController {
     @IBOutlet weak var addEntryButton: UIButton!
     @IBOutlet weak var switcherHolder: UIView!
     @IBOutlet weak var tableContainer: UIView!
+    @IBOutlet weak var reportBugButton: UIButton?
     
     // MARK: Constants
     let switcherItems: [String] = ["All", "Pending Sync", "Submitted"]
@@ -102,6 +103,30 @@ class HomeViewController: BaseViewController {
                 self.navigateToShiftOverview(object: model, editable: true)
             }) {
                 print("cancelled")
+            }
+        }
+    }
+    
+    @IBAction func reportAnIssueAction(_ sender: Any?) {
+        InfoLog("User want to report")
+        Alert.show(title: "Report", message: "Do you want to report an issue?", yes: {
+            InfoLog("User wants to report")
+            self.sendReport()
+        }) {
+            InfoLog("User does not want to report")
+        }
+    }
+    
+    private func sendReport() {
+        let urls = ApplicationLogger.defalutLogger.logsURLs()
+        Banner.show(message: "Reporting issue ...")
+        APIRequest.uploadFile(fileURL: urls[0], info: ["name": "ios_log.txt"]) { (sucess) in
+            if sucess {
+                InfoLog("Reporting [SUCCESS]")
+                Banner.show(message: "Successfully submitted the report. System Admin will contact you as soon as possible.")
+            } else {
+                Banner.show(message: "Unable to submit the report, please try again later. ")
+                InfoLog("Reporting FAIL")
             }
         }
     }
@@ -199,6 +224,7 @@ class HomeViewController: BaseViewController {
     private func style() {
         styleNavigationBar()
         styleUserButton()
+        styleReportBugButton()
         styleSyncButton()
         styleFillButton(button: addEntryButton)
     }
@@ -236,6 +262,15 @@ class HomeViewController: BaseViewController {
         syncButton.layer.borderColor = UIColor.white.cgColor
         syncButton.setTitleColor(.white, for: .normal)
         syncButton.setTitle("Sync Now", for: .normal)
+    }
+    
+    private func styleReportBugButton() {
+        reportBugButton?.backgroundColor = .none
+        reportBugButton?.layer.cornerRadius = 18
+        reportBugButton?.layer.borderWidth = 3
+        reportBugButton?.layer.borderColor = UIColor.white.cgColor
+        reportBugButton?.setTitleColor(.white, for: .normal)
+        reportBugButton?.setTitle("Report an issue", for: .normal)
     }
     
     // MARK: Reachability
