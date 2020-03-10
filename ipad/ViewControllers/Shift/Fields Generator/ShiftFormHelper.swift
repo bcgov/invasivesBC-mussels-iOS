@@ -32,63 +32,6 @@ class ShiftFormHelper {
         )
         sectionItems.append(station)
         
-        let weatherTitle = InputTitle(title: "Weather Conditions")
-        sectionItems.append(weatherTitle)
-        
-        let sunny = RadioBoolean(
-            key: "sunny",
-            header: ShiftFormHeaders.ShiftStart.sunny,
-            editable: editable ?? true,
-            value: object?.sunny,
-            width: .Third 
-        )
-        sectionItems.append(sunny)
-        
-        let cloudy = RadioBoolean(
-            key: "cloudy",
-            header: ShiftFormHeaders.ShiftStart.cloudy,
-            editable: editable ?? true,
-            value: object?.cloudy,
-            width: .Third
-        )
-        sectionItems.append(cloudy)
-        
-        let raining = RadioBoolean(
-            key: "raining",
-            header: ShiftFormHeaders.ShiftStart.raining,
-            editable: editable ?? true,
-            value: object?.raining,
-            width: .Third
-        )
-        sectionItems.append(raining)
-        
-        let snowing = RadioBoolean(
-            key: "snowing",
-            header: ShiftFormHeaders.ShiftStart.snowing,
-            editable: editable ?? true,
-            value: object?.snowing,
-            width: .Third
-        )
-        sectionItems.append(snowing)
-        
-        let foggy = RadioBoolean(
-            key: "foggy",
-            header: ShiftFormHeaders.ShiftStart.foggy,
-            editable: editable ?? true,
-            value: object?.foggy,
-            width: .Third
-        )
-        sectionItems.append(foggy)
-        
-        let windy = RadioBoolean(
-            key: "windy",
-            header: ShiftFormHeaders.ShiftStart.windy,
-            editable: editable ?? true,
-            value: object?.windy,
-            width: .Third
-        )
-        sectionItems.append(windy)
-        
         let shitStartComments = TextAreaInput(
             key: "shitStartComments",
             header: ShiftFormHeaders.ShiftStart.comments,

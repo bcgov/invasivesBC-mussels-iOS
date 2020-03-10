@@ -13,13 +13,6 @@ struct ShiftFormHeaders {
         static let startTime = "Shift Start Time"
         static let k9OnShift = "k9 On Shift"
         static let station = "Station"
-        static let weatherConditions = "Weather Conditions"
-        static let sunny = "Sunny"
-        static let cloudy = "Cloudy"
-        static let raining = "Raining"
-        static let snowing = "Snowing"
-        static let foggy = "Foggy"
-        static let windy = "Windy"
         static let comments = "Shift Start Comments"
     }
     
