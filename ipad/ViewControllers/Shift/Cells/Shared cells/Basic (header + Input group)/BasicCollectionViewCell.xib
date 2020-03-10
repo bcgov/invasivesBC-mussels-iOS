@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -18,13 +17,13 @@
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bw2-kK-axj">
-                        <rect key="frame" x="0.0" y="44" width="42" height="21"/>
+                        <rect key="frame" x="0.0" y="44" width="42" height="42"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="brl-30-ocF">
-                        <rect key="frame" x="0.0" y="80" width="625" height="243"/>
+                        <rect key="frame" x="0.0" y="102" width="625" height="221"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GA1-Gd-uQy">
@@ -34,6 +33,16 @@
                             <constraint firstAttribute="height" constant="2" id="qDM-k1-ciO"/>
                         </constraints>
                     </view>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fZc-1s-7DL">
+                        <rect key="frame" x="475" y="44" width="150" height="42"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="42" id="dCb-bZ-KOe"/>
+                            <constraint firstAttribute="width" constant="150" id="sK0-xC-IgI"/>
+                        </constraints>
+                        <connections>
+                            <action selector="buttonClicked:" destination="gTV-IL-0wX" eventType="touchUpInside" id="n0G-FR-ugr"/>
+                        </connections>
+                    </button>
                 </subviews>
             </view>
             <constraints>
@@ -43,20 +52,24 @@
                 <constraint firstItem="GA1-Gd-uQy" firstAttribute="top" secondItem="brl-30-ocF" secondAttribute="bottom" constant="15" id="8mb-MO-tKa"/>
                 <constraint firstItem="brl-30-ocF" firstAttribute="leading" secondItem="bw2-kK-axj" secondAttribute="leading" id="96F-v1-j5Z"/>
                 <constraint firstItem="GA1-Gd-uQy" firstAttribute="leading" secondItem="brl-30-ocF" secondAttribute="leading" id="9bF-Xm-lPl"/>
+                <constraint firstItem="bw2-kK-axj" firstAttribute="centerY" secondItem="fZc-1s-7DL" secondAttribute="centerY" id="Ikh-db-IXG"/>
+                <constraint firstItem="fZc-1s-7DL" firstAttribute="trailing" secondItem="gTV-IL-0wX" secondAttribute="trailingMargin" id="Jyx-V8-gtb"/>
                 <constraint firstItem="GA1-Gd-uQy" firstAttribute="trailing" secondItem="brl-30-ocF" secondAttribute="trailing" id="WoI-8J-Fgg"/>
-                <constraint firstItem="brl-30-ocF" firstAttribute="top" secondItem="bw2-kK-axj" secondAttribute="bottom" constant="15" id="e9Y-63-vOn"/>
                 <constraint firstItem="bw2-kK-axj" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="topMargin" id="v0r-iX-4cz"/>
+                <constraint firstItem="fZc-1s-7DL" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="topMargin" id="xkN-as-bTn"/>
+                <constraint firstItem="brl-30-ocF" firstAttribute="top" secondItem="fZc-1s-7DL" secondAttribute="bottom" constant="16" id="yBf-zT-z0p"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <size key="customSize" width="645" height="374"/>
             <connections>
+                <outlet property="button" destination="fZc-1s-7DL" id="6i9-73-65F"/>
                 <outlet property="container" destination="brl-30-ocF" id="mzs-d8-Cfk"/>
                 <outlet property="divider" destination="GA1-Gd-uQy" id="IHn-G1-mU4"/>
                 <outlet property="leadingMargin" destination="1Aa-QV-tz6" id="Ua1-bR-TR4"/>
                 <outlet property="titleLabel" destination="bw2-kK-axj" id="rsH-Je-rQM"/>
                 <outlet property="trailingMargin" destination="8ff-Yw-O4T" id="Ktj-eR-sur"/>
             </connections>
-            <point key="canvasLocation" x="44.20289855072464" y="261.83035714285711"/>
+            <point key="canvasLocation" x="44.20289855072464" y="261.16071428571428"/>
         </collectionViewCell>
     </objects>
 </document>

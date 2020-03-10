@@ -32,7 +32,7 @@ class HighRiskAssessmentModel: Object, BaseRealmObject {
     @objc dynamic var shouldSync: Bool = false
     
     // Basic Info
-    @objc dynamic var watercraftRegistration: Int = 0
+    @objc dynamic var watercraftRegistration: String = ""
     // Inspection
     @objc dynamic var cleanDrainDryAfterInspection: Bool = false
     // Inspection Outcomes
@@ -87,7 +87,7 @@ class HighRiskAssessmentModel: Object, BaseRealmObject {
             "decontaminationPerformed": decontaminationPerformed,
             "decontaminationOrderIssued": decontaminationOrderIssued,
             "sealIssued": sealIssued,
-            "watercraftRegistration": watercraftRegistration > 0 ? watercraftRegistration : -1,
+            "watercraftRegistration": watercraftRegistration.count > 1 ? watercraftRegistration : "None",
             "decontaminationReference": decontaminationReference > 0 ? decontaminationReference : -1,
             "decontaminationOrderNumber": decontaminationOrderNumber > 0 ? decontaminationOrderNumber : -1,
             "sealNumber": sealNumber > 0 ? sealNumber : -1,
