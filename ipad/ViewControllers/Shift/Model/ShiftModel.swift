@@ -36,14 +36,6 @@ class ShiftModel: Object, BaseRealmObject {
     @objc dynamic var motorizedBlowBys: Int = 0
     @objc dynamic var nonMotorizedBlowBys: Int = 0
     @objc dynamic var k9OnShif: Bool = false
-    
-    @objc dynamic var sunny: Bool = false
-    @objc dynamic var cloudy: Bool = false
-    @objc dynamic var raining: Bool = false
-    @objc dynamic var snowing: Bool = false
-    @objc dynamic var foggy: Bool = false
-    @objc dynamic var windy: Bool = false
-    
     @objc dynamic var date: Date?
     ///
     @objc dynamic var station: String = " "
@@ -208,12 +200,6 @@ class ShiftModel: Object, BaseRealmObject {
             "motorizedBlowBys": motorizedBlowBys,
             "nonMotorizedBlowBys": nonMotorizedBlowBys,
             "boatsInspected": boatsInspected,
-            "sunny": sunny,
-            "cloudy": sunny,
-            "raining": raining,
-            "snowing": snowing,
-            "foggy": foggy,
-            "windy": windy,
             "k9OnShift": k9OnShif
         ]
     }
