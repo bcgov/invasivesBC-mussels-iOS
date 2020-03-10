@@ -26,7 +26,7 @@ struct HighRiskFormFieldHeaders {
         static let adultDreissenidMusselsFound = "Adult Dreissendid mussels found?"
         static let adultDreissenidMusselsLocation = "Adult Dreissendid mussels location"
         static let decontaminationPerformed = "Decontamination performed?"
-        static let decontaminationReference = "Record of Decontamination reference number#"
+        static let decontaminationReference = "Record of Decontamination number"
         static let decontaminationOrderIssued = "Decontamination order issued?"
         static let decontaminationOrderNumber = "Decontamination order number"
         static let sealIssued = "Seal issued?"

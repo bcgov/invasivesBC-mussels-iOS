@@ -59,7 +59,7 @@ class CodeTables {
             }
             status("Wrapping up")
             let waterBodies = Storage.shared.fullWaterBodyTables()
-            let provinces = waterBodies.map{$0.country}.uniques.sorted{$0.lowercased() < $1.lowercased()}
+            let provinces = waterBodies.map{$0.province}.uniques.sorted{$0.lowercased() < $1.lowercased()}
             let cities = waterBodies.map{$0.closest}.uniques.sorted{$0.lowercased() < $1.lowercased()}
             let waters = waterBodies.map{$0.name}.uniques.sorted{$0.lowercased() < $1.lowercased()}
             

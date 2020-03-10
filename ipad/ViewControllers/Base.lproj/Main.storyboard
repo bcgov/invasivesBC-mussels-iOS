@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="ipad9_7" orientation="portrait" layout="fullscreen" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -198,7 +197,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jtj-bV-8r4">
                                         <rect key="frame" x="578" y="41" width="120" height="36"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="120" id="Qeo-xa-8qE"/>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="120" id="Qeo-xa-8qE"/>
                                             <constraint firstAttribute="height" constant="36" id="uBx-aT-V4k"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
@@ -209,15 +208,30 @@
                                             <action selector="syncButtonAction:" destination="JwX-i7-BNh" eventType="touchUpInside" id="MB5-N8-Jci"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pCs-z5-og6">
+                                        <rect key="frame" x="410" y="41" width="160" height="36"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="160" id="yKB-3v-EvF"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <state key="normal" title="Report an issue"/>
+                                        <connections>
+                                            <action selector="reportAnIssueAction:" destination="JwX-i7-BNh" eventType="touchUpInside" id="uEp-QV-b4M"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="qs0-Z8-kOT" secondAttribute="trailing" constant="15" id="1bT-Y7-Slx"/>
+                                    <constraint firstItem="pCs-z5-og6" firstAttribute="height" secondItem="Jtj-bV-8r4" secondAttribute="height" id="3ah-wM-b1k"/>
                                     <constraint firstItem="4eR-8r-kOm" firstAttribute="top" secondItem="C0H-M0-0am" secondAttribute="bottom" constant="5" id="D5i-qW-CgH"/>
+                                    <constraint firstItem="pCs-z5-og6" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="C0H-M0-0am" secondAttribute="trailing" constant="8" symbolic="YES" id="E94-k5-8oz"/>
                                     <constraint firstAttribute="height" constant="118" id="ENh-sc-G7b"/>
                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="4eR-8r-kOm" secondAttribute="trailing" constant="20" symbolic="YES" id="Oef-AI-2p2"/>
                                     <constraint firstItem="qs0-Z8-kOT" firstAttribute="centerY" secondItem="oEL-Ux-yq2" secondAttribute="centerY" id="WS8-wD-RKe"/>
                                     <constraint firstItem="4eR-8r-kOm" firstAttribute="leading" secondItem="G3o-nN-cQJ" secondAttribute="leading" id="WUt-O9-MSF"/>
+                                    <constraint firstItem="pCs-z5-og6" firstAttribute="top" secondItem="Jtj-bV-8r4" secondAttribute="top" id="Y3V-no-b0Z"/>
+                                    <constraint firstItem="Jtj-bV-8r4" firstAttribute="leading" secondItem="pCs-z5-og6" secondAttribute="trailing" constant="8" id="gbs-Ck-Maf"/>
                                     <constraint firstItem="qs0-Z8-kOT" firstAttribute="leading" secondItem="Jtj-bV-8r4" secondAttribute="trailing" constant="11" id="gtv-dz-DXp"/>
                                     <constraint firstItem="C0H-M0-0am" firstAttribute="top" secondItem="oEL-Ux-yq2" secondAttribute="top" constant="30" id="lyq-gL-cOy"/>
                                     <constraint firstItem="qs0-Z8-kOT" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="C0H-M0-0am" secondAttribute="trailing" constant="8" symbolic="YES" id="vtd-FV-Fsn"/>
@@ -284,6 +298,7 @@
                         <outlet property="navigationBar" destination="oEL-Ux-yq2" id="cCb-cB-SxG"/>
                         <outlet property="reachabilityIndicator" destination="G3o-nN-cQJ" id="iNX-NX-Rou"/>
                         <outlet property="reachabilityLabel" destination="BhB-gb-4tS" id="63R-G4-qzp"/>
+                        <outlet property="reportBugButton" destination="pCs-z5-og6" id="9L2-A4-a4O"/>
                         <outlet property="switcherHolder" destination="Mee-2o-RFj" id="JvT-Yr-KK6"/>
                         <outlet property="syncButton" destination="Jtj-bV-8r4" id="o7S-k6-SQf"/>
                         <outlet property="tableContainer" destination="Gry-6r-RjL" id="xR0-cV-tIo"/>

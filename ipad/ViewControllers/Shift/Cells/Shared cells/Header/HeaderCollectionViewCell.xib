@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -23,15 +22,28 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Asd-EN-BE9">
+                        <rect key="frame" x="596" y="44" width="150" height="42"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="150" id="1TG-Mh-w8X"/>
+                            <constraint firstAttribute="height" constant="42" id="VCE-Wk-lLC"/>
+                        </constraints>
+                        <connections>
+                            <action selector="buttonClicked:" destination="gTV-IL-0wX" eventType="touchUpInside" id="Lyq-wP-SHM"/>
+                        </connections>
+                    </button>
                 </subviews>
             </view>
             <constraints>
+                <constraint firstAttribute="trailing" secondItem="Asd-EN-BE9" secondAttribute="trailing" id="aN3-9H-HhO"/>
                 <constraint firstItem="46X-G8-bY4" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leadingMargin" id="kMc-fq-gGU"/>
+                <constraint firstItem="Asd-EN-BE9" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="topMargin" id="qGj-sz-X0D"/>
                 <constraint firstItem="46X-G8-bY4" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="topMargin" id="seG-yg-s8k"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <size key="customSize" width="746" height="284"/>
             <connections>
+                <outlet property="button" destination="Asd-EN-BE9" id="86t-ta-MdD"/>
                 <outlet property="titleLabel" destination="46X-G8-bY4" id="DDP-dq-INj"/>
             </connections>
             <point key="canvasLocation" x="108.69565217391305" y="106.47321428571428"/>

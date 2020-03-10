@@ -11,6 +11,7 @@ import UIKit
 
 enum TextInputValidation {
     case PassportNumber
+    case AlphaNumberic
     case None
 }
 

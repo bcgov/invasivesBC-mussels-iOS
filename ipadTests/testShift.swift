@@ -34,7 +34,7 @@ class testShift: XCTestCase {
     func createTestModel() -> ShiftModel {
         let model = ShiftModel()
         model.date = Date()
-        model.location = "Victoria, BC"
+        // model.location = "Victoria, BC"
         return model
     }
     

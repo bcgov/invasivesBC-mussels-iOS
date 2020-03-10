@@ -290,6 +290,20 @@ extension String {
         }
         return ""
     }
+    
+    func fileData() -> Data? {
+        // Check file exists at self path
+        if !FileManager.default.fileExists(atPath: self) {
+            return nil
+        }
+        let url: URL = URL(fileURLWithPath: self)
+        do {
+            let data = try Data(contentsOf: url)
+            return data
+        } catch  {
+           return nil
+        }
+    }
 }
 
 
