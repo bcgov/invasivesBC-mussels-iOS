@@ -42,6 +42,11 @@ target 'ipad' do
   pod 'DatePicker'
   # JSON handler
   pod 'SwiftyJSON'
+  # add pods for desired Firebase products
+  # https://firebase.google.com/docs/ios/setup#available-pods
+  pod 'Firebase/Analytics'
+  pod 'Fabric'
+  pod 'Crashlytics'
   target 'ipadTests' do
     inherit! :search_paths
     # Pods for testing
