@@ -60,6 +60,10 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
     @objc dynamic var previousDryStorage: Bool = false
     @objc dynamic var destinationDryStorage: Bool = false
     
+    // Unknown
+    @objc dynamic var unknownPreviousWaterBody: Bool = false
+    @objc dynamic var unknownDestinationWaterBody: Bool = false
+    
     // High Risk Assesment fields
     @objc dynamic var highriskAIS: Bool = false {
         didSet {
@@ -243,6 +247,8 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
             "provinceOfResidence": province.count > 1 ? province : "None",
             "previousDryStorage": previousDryStorage,
             "destinationDryStorage": destinationDryStorage,
+            "unknownPreviousWaterBody": unknownPreviousWaterBody,
+            "unknownDestinationWaterBody": unknownDestinationWaterBody,
             "journeys": []
         ]
         
@@ -422,6 +428,8 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
             let realm = try Realm()
             try realm.write {
                 self.previousDryStorage = dryStorage
+                // TODO: Find a way to delete the existing list
+                self.previousWaterBodies = List<PreviousWaterbodyModel>()
             }
             
         } catch let error as NSError {
@@ -435,6 +443,38 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
             let realm = try Realm()
             try realm.write {
                 self.destinationDryStorage = dryStorage
+                // TODO: Find a way to delete the existing list
+                self.destinationWaterBodies = List<DestinationWaterbodyModel>()
+            }
+            
+        } catch let error as NSError {
+            print("** REALM ERROR")
+            print(error)
+        }
+    }
+    
+    func set(unknownPreviuos: Bool) {
+        do {
+            let realm = try Realm()
+            try realm.write {
+                self.unknownPreviousWaterBody = unknownPreviuos
+                // TODO: Find a way to delete the existing list
+                self.previousWaterBodies =  List<PreviousWaterbodyModel>()
+            }
+            
+        } catch let error as NSError {
+            print("** REALM ERROR")
+            print(error)
+        }
+    }
+    
+    func set(unknownDestination: Bool) {
+        do {
+            let realm = try Realm()
+            try realm.write {
+                self.unknownDestinationWaterBody = unknownDestination
+                // TODO: Find a way to delete the existing list
+                self.destinationWaterBodies = List<DestinationWaterbodyModel>()
             }
             
         } catch let error as NSError {
