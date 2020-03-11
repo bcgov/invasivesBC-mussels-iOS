@@ -204,7 +204,7 @@ class APIRequest {
     
     public static func checkAccess(then: @escaping(Bool)-> Void) {
         fetchUserRoles { (roles) in
-            for role in roles where role.roleCode == AccessService.AccessRoleID {
+            for role in roles where role.roleCode == AccessService.AccessRoleID || role.roleCode == AccessService.AccessRoleID_ADM || role.roleCode == AccessService.AccessRoleID_Inspect_ADM {
                 return then(true)
             }
             return then(false)

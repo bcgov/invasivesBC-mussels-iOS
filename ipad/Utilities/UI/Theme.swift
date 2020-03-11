@@ -90,6 +90,10 @@ extension Theme {
         button.tintColor = Colors.primary
     }
     
+    public func styleDisable(button: UIButton) {
+        styleButton(button: button, bg: UIColor.white, borderColor: UIColor.gray.cgColor, titleColor: UIColor.gray)
+    }
+    
     public func styleFillButton(button: UIButton) {
         styleButton(button: button, bg: Colors.primary, borderColor: Colors.primary.cgColor, titleColor: UIColor.white)
         if let label = button.titleLabel {
