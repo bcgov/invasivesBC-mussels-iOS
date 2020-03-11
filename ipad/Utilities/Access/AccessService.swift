@@ -11,11 +11,19 @@ import Reachability
 
 class AccessService {
     
+    // Inspect Officer
     public static let AccessRoleID = 5
+    // Inspect Admin
+    public static let AccessRoleID_Inspect_ADM = 6
+    // System Admin
+    public static let AccessRoleID_ADM = 1
+    // Singleton
     public static let shared = AccessService()
     
+    // Prop: Status to store access
     public var hasAppAccess: Bool = false
     
+    // Network reachability 
     private let reachability =  try! Reachability()
     
     private init() {
