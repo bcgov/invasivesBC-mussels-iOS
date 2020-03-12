@@ -11,9 +11,10 @@ typealias RemoteResponse = Any
 let APIErrorKey: String = "errors"
 let APIDataKey: String = "data"
 class API: RemoteAPI<RemoteResponse>  {
+    
     // TODO: Remove test token
     override var token: String {
-        return TestToken
+        return Auth.getAccessToken() ?? TestToken
     }
     
     // Processing sever response

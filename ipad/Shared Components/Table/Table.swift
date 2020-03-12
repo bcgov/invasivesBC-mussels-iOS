@@ -88,7 +88,7 @@ class Table {
         // 5) Create tableview
         let tableView: TableView = TableView.fromNib()
         tableView.frame = CGRect(x: 0, y: 0, width: container.frame.width - 5, height: container.frame.height)
-        tableView.initialize(with: tableModel, in: container)
+        tableView.initialize(with: tableModel, in: container, emptyState: "No Inspections have been added yet.")
         return tableView
     }
     

@@ -73,6 +73,9 @@ class InspectionsTableCollectionViewCell: BaseShiftOverviewCollectionViewCell {
     }
     
     static func getTableHeight(for model: ShiftModel) -> CGFloat {
+        if model.inspections.isEmpty {
+            return 100
+        }
         // Convert list to array
         
         let inspections: [WatercradftInspectionModel] = model.inspections.map{ $0 }
@@ -86,7 +89,7 @@ class InspectionsTableCollectionViewCell: BaseShiftOverviewCollectionViewCell {
         }
         
         // TODO: FIX IT
-        let extraDEBUG: CGFloat = 10
+        let extraDEBUG: CGFloat = 20
         
         if CGFloat(numberOfRows) > maxVisibleRows {
             return ( maxVisibleRows * (rowHeight + extraDEBUG)) + headerHeight + extraDEBUG

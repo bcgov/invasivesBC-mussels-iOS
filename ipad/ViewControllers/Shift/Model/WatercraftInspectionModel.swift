@@ -61,15 +61,7 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
     @objc dynamic var destinationDryStorage: Bool = false
     
     // High Risk Assesment fields
-    @objc dynamic var highriskAIS: Bool = false {
-        didSet {
-            if highriskAIS == true {
-                set(value: "High", for: "riskLevel")
-            } else {
-                set(value: "Low", for: "riskLevel")
-            }
-        }
-    }
+    @objc dynamic var highriskAIS: Bool = false
     @objc dynamic var adultDreissenidFound: Bool = false
     
     // General comments
@@ -100,6 +92,17 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
         } catch let error as NSError {
             print("** REALM ERROR")
             print(error)
+        }
+        if key == "highriskAIS" || key == "adultDreissenidFound" {
+            setRiskLevel()
+        }
+    }
+    
+    func setRiskLevel() {
+        if highriskAIS == true || adultDreissenidFound == true {
+            set(value: "High", for: "riskLevel")
+        } else {
+            set(value: "Low", for: "riskLevel")
         }
     }
     

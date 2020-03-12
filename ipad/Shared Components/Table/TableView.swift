@@ -15,10 +15,12 @@ class TableView: UIView {
     @IBOutlet weak var tableView: UITableView!
     
     weak var container: UIView?
+    private var emptyStateMessage = "Nothing to be seen"
     
     // MARK: Constants
     private let tableCells = [
         "TableRowTableViewCell",
+        "TableEmptyStateTableViewCell"
     ]
     
     // MARK: Variables
@@ -34,8 +36,9 @@ class TableView: UIView {
     }
     
     // MARK: Setup
-    public func initialize(with model: TableViewModel, in container: UIView) {
+    public func initialize(with model: TableViewModel, in container: UIView, emptyState message: String) {
         self.removeFromSuperview()
+        self.emptyStateMessage = message
         self.container = container
         container.addSubview(self)
         self.model = model
@@ -120,17 +123,23 @@ extension TableView: UITableViewDelegate, UITableViewDataSource {
         return tableView.dequeueReusableCell(withIdentifier: "TableRowTableViewCell", for: indexPath) as! TableRowTableViewCell
     }
     
+    func getEmptyCell(indexPath: IndexPath) -> TableEmptyStateTableViewCell {
+        return tableView.dequeueReusableCell(withIdentifier: "TableEmptyStateTableViewCell", for: indexPath) as! TableEmptyStateTableViewCell
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let model = self.model else  {
-            return 0
+        guard let model = self.model, model.rows.count > 0 else  {
+            return 1
         }
         return model.rows.count
         
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let model = self.model else {
-            return UITableViewCell()
+        guard let model = self.model, model.rows.count > 0 else {
+            let cell = getEmptyCell(indexPath: indexPath)
+            cell.setup(message: emptyStateMessage)
+            return cell
         }
         let cell = getRowCell(indexPath: indexPath)
         cell.setup(model: model.rows[indexPath.row], tableHeaders: tableHeaders, columnSizes: model.relativeSizes)
