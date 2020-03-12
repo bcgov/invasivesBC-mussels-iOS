@@ -74,7 +74,7 @@ class InspectionsTableCollectionViewCell: BaseShiftOverviewCollectionViewCell {
     
     static func getTableHeight(for model: ShiftModel) -> CGFloat {
         if model.inspections.isEmpty {
-            return 100
+            return 250
         }
         // Convert list to array
         

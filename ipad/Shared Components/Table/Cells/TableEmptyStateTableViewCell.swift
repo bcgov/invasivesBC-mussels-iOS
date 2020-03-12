@@ -15,12 +15,16 @@ class TableEmptyStateTableViewCell: UITableViewCell {
     @IBOutlet weak var messageLabel: UILabel!
     
     func setup(title: String, message: String, iconName: String) {
-        self.messageLabel.text = message
+        messageLabel.text = message
+        titleLabel.text = title
         messageLabel.font = Fonts.getPrimaryMedium(size: 17)
         titleLabel.font = Fonts.getPrimaryBold(size: 22)
         if let icon = UIImage(systemName: iconName) {
             iconImageView.image = icon
         }
+        iconImageView.tintColor = Colors.bodyText
+        messageLabel.textColor = Colors.bodyText
+        titleLabel.textColor = Colors.bodyText
     }
     
 }
