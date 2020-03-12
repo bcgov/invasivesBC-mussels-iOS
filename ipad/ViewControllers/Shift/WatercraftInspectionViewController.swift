@@ -364,16 +364,16 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
             return cell
         case .WatercraftDetails:
             let cell = getBasicCell(indexPath: indexPath)
-            cell.setup(title: "Watercraft Details", input: model.getInputputFields(for: sectionType, editable: isEditable), delegate: self, buttonName: "View Map", buttonIcon: "map", onButtonClick: { [weak self] in
-                guard let strongSelf = self else {return}
-                strongSelf.showPDFMap()
-            })
+            cell.setup(title: "Watercraft Details", input: model.getInputputFields(for: sectionType, editable: isEditable), delegate: self)
             return cell
         case .JourneyDetails:
             return getJourneyDetailsCell(for: indexPath)
         case .InspectionDetails:
             let cell = getBasicCell(indexPath: indexPath)
-            cell.setup(title: "Inspection Details", input: model.getInputputFields(for: sectionType, editable: isEditable), delegate: self, showDivider: false)
+            cell.setup(title: "Inspection Details", input: model.getInputputFields(for: sectionType, editable: isEditable), delegate: self, showDivider: false, buttonName: "View Map", buttonIcon: "map", onButtonClick: { [weak self] in
+                guard let strongSelf = self else {return}
+                strongSelf.showPDFMap()
+            })
             return cell
         case .HighRiskAssessmentFields:
             let cell = getBasicCell(indexPath: indexPath)
