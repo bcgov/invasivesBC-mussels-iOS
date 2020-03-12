@@ -15,7 +15,9 @@ class TableView: UIView {
     @IBOutlet weak var tableView: UITableView!
     
     weak var container: UIView?
-    private var emptyStateMessage = "Nothing to be seen"
+    private var emptyStateMessage = "You have not created entries"
+    private var emptyStateTitle = "Loooking a little empty around here"
+    private var emptyStateIconName = "folder.fill.badge.plus"
     
     // MARK: Constants
     private let tableCells = [
@@ -36,9 +38,11 @@ class TableView: UIView {
     }
     
     // MARK: Setup
-    public func initialize(with model: TableViewModel, in container: UIView, emptyState message: String) {
+    public func initialize(with model: TableViewModel, in container: UIView, emptyStateTitle: String, emptyStateMessage: String, emptyStateSystemIconName: String? = "folder.fill.badge.plus") {
         self.removeFromSuperview()
-        self.emptyStateMessage = message
+        self.emptyStateTitle = emptyStateTitle
+        self.emptyStateMessage = emptyStateMessage
+        self.emptyStateIconName = emptyStateSystemIconName ?? "folder.fill.badge.plus"
         self.container = container
         container.addSubview(self)
         self.model = model
@@ -138,7 +142,7 @@ extension TableView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let model = self.model, model.rows.count > 0 else {
             let cell = getEmptyCell(indexPath: indexPath)
-            cell.setup(message: emptyStateMessage)
+            cell.setup(title: emptyStateTitle, message: emptyStateMessage, iconName: emptyStateIconName)
             return cell
         }
         let cell = getRowCell(indexPath: indexPath)

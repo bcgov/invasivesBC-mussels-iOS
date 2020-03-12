@@ -59,7 +59,7 @@ class InspectionsTableCollectionViewCell: BaseShiftOverviewCollectionViewCell {
         columns.append(TableViewColumnConfig(key: "inspectionTime", header: "Time Added", type: .Normal))
         columns.append(TableViewColumnConfig(key: "status", header: "Status", type: .WithIcon))
         columns.append(TableViewColumnConfig(key: "", header: "Actions", type: .Button, buttonName: buttonName, showHeader: false))
-        let tableView = table.show(columns: columns, in: inspections, container: tableContainer)
+        let tableView = table.show(columns: columns, in: inspections, container: tableContainer, emptyTitle: "It's looking a little empty around here.", emptyMessage: "You have not added any inspections to this shift.")
         tableView.layoutIfNeeded()
         self.layoutIfNeeded()
     }

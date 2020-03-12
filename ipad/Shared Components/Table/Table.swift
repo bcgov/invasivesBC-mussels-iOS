@@ -40,7 +40,7 @@ class Table {
     /// - Parameter objects: PropertyReflectable Objects to display in rows
     /// - Parameter container: Container to place table in
     public func
-        show(columns: [TableViewColumnConfig], in objects: [Object], container: UIView) -> UIView {
+        show(columns: [TableViewColumnConfig], in objects: [Object], container: UIView, emptyTitle: String, emptyMessage: String, emptySystemIcon: String? = nil) -> UIView {
         // 1) Create models for Rows
         var counter = 0
         var rows: [TableViewRowModel] = []
@@ -88,7 +88,7 @@ class Table {
         // 5) Create tableview
         let tableView: TableView = TableView.fromNib()
         tableView.frame = CGRect(x: 0, y: 0, width: container.frame.width - 5, height: container.frame.height)
-        tableView.initialize(with: tableModel, in: container, emptyState: "No Inspections have been added yet.")
+        tableView.initialize(with: tableModel, in: container, emptyStateTitle: emptyTitle, emptyStateMessage: emptyMessage, emptyStateSystemIconName: emptySystemIcon)
         return tableView
     }
     
