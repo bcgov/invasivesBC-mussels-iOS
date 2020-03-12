@@ -21,7 +21,8 @@ class ShifOverviewHeaderCollectionViewCell: BaseShiftOverviewCollectionViewCell 
     
     override func autofill() {
         guard let model = self.model else {return}
-        self.numberAndDateLabel.text = "\(model.remoteId) - \(model.formattedDate)"
+        let remoteId: String = model.remoteId > 1 ? "\(model.remoteId) - " : ""
+        self.numberAndDateLabel.text = "\(remoteId)\(model.formattedDate)"
         self.locationLabel.text = model.station
         self.statusLabel.text = model.status
         self.statusIndicator.backgroundColor = StatusColor.color(for: model.status)
@@ -48,10 +49,10 @@ class ShifOverviewHeaderCollectionViewCell: BaseShiftOverviewCollectionViewCell 
         // Divider
         styleDivider(view: divider)
         // Status
-        numberAndDateLabel.font = Fonts.getPrimary(size: 17)
-        locationLabel.font = Fonts.getPrimary(size: 17)
+        numberAndDateLabel.font = Fonts.getPrimaryBold(size: 17)
+        locationLabel.font = Fonts.getPrimaryBold(size: 17)
         locationLabel.textColor = Colors.Status.DarkGray
-        statusLabel.font = Fonts.getPrimary(size: 17)
+        statusLabel.font = Fonts.getPrimaryBold(size: 17)
         statusIndicator.backgroundColor = colorFor(status: model?.getStatus() ?? .Draft)
         makeCircle(view: statusIndicator)
     }

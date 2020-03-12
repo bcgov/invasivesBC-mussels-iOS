@@ -51,7 +51,12 @@ class Table {
                 switch column.type {
                 case .Normal:
                     if let value = object[column.key] {
-                        rowFields.append(TableViewFieldModel(header: column.header, value: "\(value) "))
+                        if column.key == "remoteId", let v = value as? Int, v < 0 {
+                            rowFields.append(TableViewFieldModel(header: column.header, value: "-"))
+                        } else {
+                            rowFields.append(TableViewFieldModel(header: column.header, value: "\(value) "))
+                        }
+                        
                     }
                 case .Button:
                     rowFields.append(TableViewFieldModel(header: column.header, value: column.buttonName, isButton: true))
