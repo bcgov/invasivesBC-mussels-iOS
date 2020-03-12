@@ -559,7 +559,6 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
                     strongSelf.viewLayoutMarginsDidChange()
                     waterBodyPicker.setup() { [weak self] (result) in
                         guard let strongerSelf = self else {return}
-                        print(result)
                         for waterBody in result {
                             model.addPreviousWaterBody(model: waterBody)
                         }
