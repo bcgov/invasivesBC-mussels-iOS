@@ -82,6 +82,8 @@
 		296DEC28238C61A80035E7FA /* IntegerStepperInputCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 296DEC26238C61A80035E7FA /* IntegerStepperInputCollectionViewCell.xib */; };
 		296DEC2B238C73AF0035E7FA /* TimePicker.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 296DEC2A238C73AF0035E7FA /* TimePicker.storyboard */; };
 		296DEC2D238C73BD0035E7FA /* TimePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 296DEC2C238C73BD0035E7FA /* TimePickerViewController.swift */; };
+		29856ABE241AAF3100E4E0FC /* TableEmptyStateTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29856ABC241AAF3100E4E0FC /* TableEmptyStateTableViewCell.swift */; };
+		29856ABF241AAF3100E4E0FC /* TableEmptyStateTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29856ABD241AAF3100E4E0FC /* TableEmptyStateTableViewCell.xib */; };
 		298BF7C12394C0270072AA28 /* waterBodies.txt in Resources */ = {isa = PBXBuildFile; fileRef = 298BF7C02394C0270072AA28 /* waterBodies.txt */; };
 		298BF7C523958A220072AA28 /* SpacerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 298BF7C323958A220072AA28 /* SpacerCollectionViewCell.swift */; };
 		298BF7C623958A220072AA28 /* SpacerCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 298BF7C423958A220072AA28 /* SpacerCollectionViewCell.xib */; };
@@ -283,6 +285,8 @@
 		296DEC26238C61A80035E7FA /* IntegerStepperInputCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IntegerStepperInputCollectionViewCell.xib; sourceTree = "<group>"; };
 		296DEC2A238C73AF0035E7FA /* TimePicker.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TimePicker.storyboard; sourceTree = "<group>"; };
 		296DEC2C238C73BD0035E7FA /* TimePickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimePickerViewController.swift; sourceTree = "<group>"; };
+		29856ABC241AAF3100E4E0FC /* TableEmptyStateTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableEmptyStateTableViewCell.swift; sourceTree = "<group>"; };
+		29856ABD241AAF3100E4E0FC /* TableEmptyStateTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TableEmptyStateTableViewCell.xib; sourceTree = "<group>"; };
 		298BF7C02394C0270072AA28 /* waterBodies.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = waterBodies.txt; sourceTree = "<group>"; };
 		298BF7C323958A220072AA28 /* SpacerCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpacerCollectionViewCell.swift; sourceTree = "<group>"; };
 		298BF7C423958A220072AA28 /* SpacerCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SpacerCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -576,6 +580,8 @@
 			children = (
 				294D8F5F23847C9A0094090D /* TableRowTableViewCell.swift */,
 				294D8F6023847C9A0094090D /* TableRowTableViewCell.xib */,
+				29856ABC241AAF3100E4E0FC /* TableEmptyStateTableViewCell.swift */,
+				29856ABD241AAF3100E4E0FC /* TableEmptyStateTableViewCell.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -1397,6 +1403,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				29856ABF241AAF3100E4E0FC /* TableEmptyStateTableViewCell.xib in Resources */,
 				294EF3142370885B00EEB3B6 /* BannerView.xib in Resources */,
 				29514BF12368CB5D00DC89C4 /* DropdownTableViewCell.xib in Resources */,
 				29514BD72368AD6F00DC89C4 /* OptionsTableViewCell.xib in Resources */,
@@ -1633,6 +1640,7 @@
 				29BAC50E236790C900A620F4 /* HomeViewController.swift in Sources */,
 				299BF01823FC9045001732CD /* JourneyHeaderCollectionViewCell.swift in Sources */,
 				1E6D9A2E2399BDEE0034FDEF /* BaseJourneyCollectionViewCell.swift in Sources */,
+				29856ABE241AAF3100E4E0FC /* TableEmptyStateTableViewCell.swift in Sources */,
 				29514BE62368B70900DC89C4 /* Options.swift in Sources */,
 				1E54FFB523D783940044721F /* InputTitleCollectionViewCell.swift in Sources */,
 				29F29FA4236B9114004F12E7 /* InputItem.swift in Sources */,

@@ -193,7 +193,7 @@ class HomeViewController: BaseViewController {
         columns.append(TableViewColumnConfig(key: "station", header: "Station Location", type: .Normal))
         columns.append(TableViewColumnConfig(key: "status", header: "Status", type: .WithIcon))
         columns.append(TableViewColumnConfig(key: "", header: "Actions", type: .Button, buttonName: "View", showHeader: false))
-        let tableView = table.show(columns: columns, in: shifts, container: tableContainer)
+        let tableView = table.show(columns: columns, in: shifts, container: tableContainer, emptyTitle: "It's looking a little empty around here", emptyMessage: "You have not created any entries in the InvasivesBC app. Use the Add Entry button to create a new watercraft inspection or passport.")
         tableView.layoutIfNeeded()
         self.view.layoutIfNeeded()
         beginListener()

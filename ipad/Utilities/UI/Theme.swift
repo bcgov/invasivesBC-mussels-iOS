@@ -55,7 +55,7 @@ extension Theme {
     // Input field header
     public func styleFieldHeader(label: UILabel) {
         label.textColor = Colors.inputHeaderText
-        label.font = Fonts.getPrimaryBold(size: 12)
+        label.font = Fonts.getPrimaryBold(size: 14)
         label.adjustsFontSizeToFitWidth = true
     }
     
