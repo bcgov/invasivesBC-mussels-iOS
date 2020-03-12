@@ -277,7 +277,7 @@ extension ShiftViewController: UICollectionViewDataSource, UICollectionViewDeleg
         switch rowType {
         case .Header:
             let cell = getShiftInformationHeaderCell(indexPath: indexPath)
-            cell.setup(isHidden: showShiftInfo) { [weak self] in
+            cell.setup(isHidden: !showShiftInfo) { [weak self] in
                 guard let strongSelf = self else {return}
                 // OnClick
                 strongSelf.showShiftInfo = !strongSelf.showShiftInfo

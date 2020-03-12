@@ -11,11 +11,13 @@ import Modal
 
 class HighRiskModalView: ModalView, Theme {
     
+    @IBOutlet weak var iconImageView: UIImageView!
+    @IBOutlet weak var messageLabel: UILabel!
+    @IBOutlet weak var optionTwo: UILabel!
+    @IBOutlet weak var optionOne: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var topDividerView: UIView!
     @IBOutlet weak var bottomDividerView: UIView!
     
-    @IBOutlet weak var checkmarkImage: UIImageView!
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var confirmButton: UIButton!
     
@@ -42,7 +44,7 @@ class HighRiskModalView: ModalView, Theme {
     public func initialize(onSubmit: @escaping () -> Void, onCancel:  @escaping () -> Void) {
         self.onSubmit = onSubmit
         self.onCancel = onCancel
-        setFixed(width: 550, height: 285)
+        setFixed(width: 520, height: 350)
         present()
         style()
     }
@@ -51,9 +53,14 @@ class HighRiskModalView: ModalView, Theme {
         styleCard(layer: self.layer)
         styleHollowButton(button: backButton)
         styleFillButton(button: confirmButton)
-        styleDividerGrey(view: topDividerView)
         styleDividerGrey(view: bottomDividerView)
+        bottomDividerView.alpha = 0.7
         titleLabel.textColor = Colors.primary
+        styleSectionTitle(label: titleLabel)
+        styleFieldHeader(label: messageLabel)
+        styleFieldHeader(label: optionOne)
+        styleFieldHeader(label: optionTwo)
+        iconImageView.tintColor = Colors.primary
     }
     
 }

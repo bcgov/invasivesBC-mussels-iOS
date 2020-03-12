@@ -15,10 +15,14 @@ class TableView: UIView {
     @IBOutlet weak var tableView: UITableView!
     
     weak var container: UIView?
+    private var emptyStateMessage = "You have not created entries"
+    private var emptyStateTitle = "Loooking a little empty around here"
+    private var emptyStateIconName = "folder.fill.badge.plus"
     
     // MARK: Constants
     private let tableCells = [
         "TableRowTableViewCell",
+        "TableEmptyStateTableViewCell"
     ]
     
     // MARK: Variables
@@ -34,8 +38,11 @@ class TableView: UIView {
     }
     
     // MARK: Setup
-    public func initialize(with model: TableViewModel, in container: UIView) {
+    public func initialize(with model: TableViewModel, in container: UIView, emptyStateTitle: String, emptyStateMessage: String, emptyStateSystemIconName: String? = "folder.fill.badge.plus") {
         self.removeFromSuperview()
+        self.emptyStateTitle = emptyStateTitle
+        self.emptyStateMessage = emptyStateMessage
+        self.emptyStateIconName = emptyStateSystemIconName ?? "folder.fill.badge.plus"
         self.container = container
         container.addSubview(self)
         self.model = model
@@ -120,17 +127,23 @@ extension TableView: UITableViewDelegate, UITableViewDataSource {
         return tableView.dequeueReusableCell(withIdentifier: "TableRowTableViewCell", for: indexPath) as! TableRowTableViewCell
     }
     
+    func getEmptyCell(indexPath: IndexPath) -> TableEmptyStateTableViewCell {
+        return tableView.dequeueReusableCell(withIdentifier: "TableEmptyStateTableViewCell", for: indexPath) as! TableEmptyStateTableViewCell
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let model = self.model else  {
-            return 0
+        guard let model = self.model, model.rows.count > 0 else  {
+            return 1
         }
         return model.rows.count
         
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let model = self.model else {
-            return UITableViewCell()
+        guard let model = self.model, model.rows.count > 0 else {
+            let cell = getEmptyCell(indexPath: indexPath)
+            cell.setup(title: emptyStateTitle, message: emptyStateMessage, iconName: emptyStateIconName)
+            return cell
         }
         let cell = getRowCell(indexPath: indexPath)
         cell.setup(model: model.rows[indexPath.row], tableHeaders: tableHeaders, columnSizes: model.relativeSizes)
