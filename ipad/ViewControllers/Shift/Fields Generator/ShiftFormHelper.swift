@@ -41,8 +41,6 @@ class ShiftFormHelper {
         )
         sectionItems.append(shitStartComments)
         
-        print(sectionItems.count)
-        
         return sectionItems
     }
     
@@ -105,8 +103,6 @@ class ShiftFormHelper {
             width: .Full
         )
         sectionItems.append(shitEndComments)
-        
-         print(sectionItems.count)
         
         return sectionItems
     }
