@@ -65,7 +65,7 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
     @objc dynamic var unknownDestinationWaterBody: Bool = false
     
     // Commercial manufacturer
-    @objc dynamic var commercialManufacturerAsPrviousWaterBody: Bool = false
+    @objc dynamic var commercialManufacturerAsPreviousWaterBody: Bool = false
     @objc dynamic var commercialManufacturerAsDestinationWaterBody: Bool = false
     
     // High Risk Assesment fields
@@ -256,7 +256,7 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
             "destinationDryStorage": destinationDryStorage,
             "unknownPreviousWaterBody": unknownPreviousWaterBody,
             "unknownDestinationWaterBody": unknownDestinationWaterBody,
-            "commercialManufacturerAsPrviousWaterBody": commercialManufacturerAsPrviousWaterBody,
+            "commercialManufacturerAsPreviousWaterBody": commercialManufacturerAsPreviousWaterBody,
             "commercialManufacturerAsDestinationWaterBody": commercialManufacturerAsDestinationWaterBody,
             "journeys": []
         ]
@@ -440,7 +440,7 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
                 if isPrevious {
                     self.previousDryStorage = dryStorage
                     self.unknownPreviousWaterBody = unknown
-                    self.commercialManufacturerAsPrviousWaterBody = commercialManufacturer
+                    self.commercialManufacturerAsPreviousWaterBody = commercialManufacturer
                     // TODO: Find a way to delete the existing list
                     self.previousWaterBodies =  List<PreviousWaterbodyModel>()
                 } else {

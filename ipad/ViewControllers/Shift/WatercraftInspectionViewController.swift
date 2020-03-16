@@ -527,7 +527,7 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
                 config: FormButtonCollectionViewCell.Config(
                     status: self.model?.previousDryStorage ?? false,
                     unknownWaterBodyStatus: self.model?.unknownPreviousWaterBody ?? false,
-                    commercialManufacturerStatus: self.model?.commercialManufacturerAsPrviousWaterBody ?? false,
+                    commercialManufacturerStatus: self.model?.commercialManufacturerAsPreviousWaterBody ?? false,
                     isPreviousJourney: true,
                     displaySwitch: true,
                     displayUnknowSwitch: true)
