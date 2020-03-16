@@ -64,6 +64,10 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
     @objc dynamic var unknownPreviousWaterBody: Bool = false
     @objc dynamic var unknownDestinationWaterBody: Bool = false
     
+    // Commercial manufacturer
+    @objc dynamic var commercialManufacturerAsPrviousWaterBody: Bool = false
+    @objc dynamic var commercialManufacturerAsDestinationWaterBody: Bool = false
+    
     // High Risk Assesment fields
     @objc dynamic var highriskAIS: Bool = false
     @objc dynamic var adultDreissenidFound: Bool = false
@@ -252,6 +256,8 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
             "destinationDryStorage": destinationDryStorage,
             "unknownPreviousWaterBody": unknownPreviousWaterBody,
             "unknownDestinationWaterBody": unknownDestinationWaterBody,
+            "commercialManufacturerAsPrviousWaterBody": commercialManufacturerAsPrviousWaterBody,
+            "commercialManufacturerAsDestinationWaterBody": commercialManufacturerAsDestinationWaterBody,
             "journeys": []
         ]
         
@@ -426,63 +432,28 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
         }
     }
     
-    func set(previous dryStorage: Bool) {
-        do {
-            let realm = try Realm()
-            try realm.write {
-                self.previousDryStorage = dryStorage
-                // TODO: Find a way to delete the existing list
-                self.previousWaterBodies = List<PreviousWaterbodyModel>()
-            }
-            
-        } catch let error as NSError {
-            print("** REALM ERROR")
-            print(error)
-        }
-    }
     
-    func set(destination dryStorage: Bool) {
+    func setJournyStatusFlags(dryStorage: Bool, unknown: Bool, commercialManufacturer: Bool, isPrevious: Bool) {
         do {
-            let realm = try Realm()
-            try realm.write {
-                self.destinationDryStorage = dryStorage
-                // TODO: Find a way to delete the existing list
-                self.destinationWaterBodies = List<DestinationWaterbodyModel>()
+            let relam = try Realm()
+            try relam.write {
+                if isPrevious {
+                    self.previousDryStorage = dryStorage
+                    self.unknownPreviousWaterBody = unknown
+                    self.commercialManufacturerAsPrviousWaterBody = commercialManufacturer
+                    // TODO: Find a way to delete the existing list
+                    self.previousWaterBodies =  List<PreviousWaterbodyModel>()
+                } else {
+                    self.destinationDryStorage = dryStorage
+                    self.unknownDestinationWaterBody = unknown
+                    self.commercialManufacturerAsDestinationWaterBody = commercialManufacturer
+                    // TODO: Find a way to delete the existing list
+                    self.destinationWaterBodies = List<DestinationWaterbodyModel>()
+                }
             }
             
         } catch let error as NSError {
-            print("** REALM ERROR")
-            print(error)
-        }
-    }
-    
-    func set(unknownPreviuos: Bool) {
-        do {
-            let realm = try Realm()
-            try realm.write {
-                self.unknownPreviousWaterBody = unknownPreviuos
-                // TODO: Find a way to delete the existing list
-                self.previousWaterBodies =  List<PreviousWaterbodyModel>()
-            }
-            
-        } catch let error as NSError {
-            print("** REALM ERROR")
-            print(error)
-        }
-    }
-    
-    func set(unknownDestination: Bool) {
-        do {
-            let realm = try Realm()
-            try realm.write {
-                self.unknownDestinationWaterBody = unknownDestination
-                // TODO: Find a way to delete the existing list
-                self.destinationWaterBodies = List<DestinationWaterbodyModel>()
-            }
-            
-        } catch let error as NSError {
-            print("** REALM ERROR")
-            print(error)
+            ErrorLog("** RELAM ERROR: \(error)")
         }
     }
     
