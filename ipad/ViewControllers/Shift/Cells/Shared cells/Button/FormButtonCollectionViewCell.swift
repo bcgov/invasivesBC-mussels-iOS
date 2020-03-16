@@ -10,24 +10,33 @@ import UIKit
 
 class FormButtonCollectionViewCell: UICollectionViewCell, Theme {
     
-    typealias FormButtonCompletion = (_ action: FormButtonAction,_ info: Bool?) -> Void
+    typealias FormButtonCompletion = (_ action: FormButtonAction) -> Void
 
     @IBOutlet weak var button: UIButton!
     @IBOutlet weak var dryStorageSwitch: UISwitch?
     @IBOutlet weak var switchLabel: UILabel?
     @IBOutlet weak var unknownWaterBodySwitchLabel: UILabel?
     @IBOutlet weak var unknownWaterBodySwitch: UISwitch?
+    @IBOutlet weak var commercialManufacturerSwitch: UISwitch?
     
     struct Config {
         var status: Bool = false
         var unknownWaterBodyStatus: Bool = false
+        var commercialManufacturerStatus: Bool = false
         var isPreviousJourney: Bool = false
         var displaySwitch: Bool = false
         var displayUnknowSwitch: Bool = false
     }
     
+
+    struct Result {
+        var dryStorgae: Bool = false
+        var unknown: Bool = false
+        var commercialManufacturer: Bool
+    }
+    
     enum FormButtonAction {
-        case add, dryStorage, unknownWaterBody
+        case add, statusChange(Result)
     }
     
     
@@ -36,27 +45,52 @@ class FormButtonCollectionViewCell: UICollectionViewCell, Theme {
     @objc var _selector: Selector?
     
     var disableButton: Bool {
-        return (dryStorageSwitch?.isOn ?? false) || (unknownWaterBodySwitch?.isOn ?? false)
+        return (dryStorageSwitch?.isOn ?? false) || (unknownWaterBodySwitch?.isOn ?? false) || (commercialManufacturerSwitch?.isOn ?? false)
+    }
+    
+    var result: Result {
+        return Result(dryStorgae: (dryStorageSwitch?.isOn ?? false),
+                      unknown: unknownWaterBodySwitch?.isOn ?? false,
+                      commercialManufacturer: commercialManufacturerSwitch?.isOn ?? false)
     }
     
     @IBAction func buttonAction(_ sender: UIButton) {
         // let _ = self.target?.perform(_selector, with: [:])
         guard let onClick = self.completion else {return}
-        return onClick(.add, nil)
+        return onClick(.add)
     }
     
     @IBAction func dryStorageSwitchAction(_ sender: UISwitch?) {
         guard let onClick = self.completion else {return}
         guard let switchObj: UISwitch = sender else {return}
         self.set(status: disableButton)
-        return onClick(.dryStorage, switchObj.isOn)
+        if switchObj.isOn {
+            self.unknownWaterBodySwitch?.isOn = false
+            self.commercialManufacturerSwitch?.isOn = false
+        }
+        return onClick(.statusChange(self.result))
     }
     
     @IBAction func unknownSwitchAction(_ sender: UISwitch?) {
         guard let onClick = self.completion else {return}
         guard let switchObj: UISwitch = sender else {return}
         self.set(status: disableButton)
-        return onClick(.unknownWaterBody, switchObj.isOn)
+        if switchObj.isOn {
+            self.dryStorageSwitch?.isOn = false
+            self.commercialManufacturerSwitch?.isOn = false
+        }
+        return onClick(.statusChange(self.result))
+    }
+    
+    @IBAction func commercialManufacturerSwitchAction(_ sender: UISwitch?) {
+        guard let onClick = self.completion else {return}
+        guard let switchObj: UISwitch = sender else {return}
+        self.set(status: disableButton)
+        if switchObj.isOn {
+            self.dryStorageSwitch?.isOn = false
+            self.unknownWaterBodySwitch?.isOn = false
+        }
+        return onClick(.statusChange(self.result))
     }
     
     func set(status: Bool) {
@@ -80,8 +114,10 @@ class FormButtonCollectionViewCell: UICollectionViewCell, Theme {
         self.unknownWaterBodySwitch?.isHidden = !config.displayUnknowSwitch
         self.unknownWaterBodySwitch?.isOn = config.unknownWaterBodyStatus
         
+        self.commercialManufacturerSwitch?.isOn = config.commercialManufacturerStatus
+        
         if config.displaySwitch || config.displayUnknowSwitch {
-            set(status: (config.status || config.unknownWaterBodyStatus))
+            set(status: (config.status || config.unknownWaterBodyStatus || config.commercialManufacturerStatus))
         } else {
             set(status: true)
         }
