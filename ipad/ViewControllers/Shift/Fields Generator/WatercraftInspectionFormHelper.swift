@@ -95,7 +95,7 @@ class WatercraftInspectionFormHelper {
         return items
     }
     
-    static func getBasicInfoFields(for object: WatercradftInspectionModel? = nil, editable: Bool? = true) -> [InputItem] {
+    static func getBasicInfoFields(for object: WatercradftInspectionModel? = nil, editable: Bool? = true, passportField: RadioSwitchInput) -> [InputItem] {
         var sectionItems: [InputItem] = []
         let province = DropdownInput(
             key: "province",
@@ -106,8 +106,20 @@ class WatercraftInspectionFormHelper {
             dropdownItems: DropdownHelper.shared.getDropdown(for: .provinces)
         )
         sectionItems.append(province)
+       
+        let inspectionTime = TimeInput(
+            key: "inspectionTime",
+            header: WatercraftFieldHeaderConstants.Passport.inspectionTime,
+            editable: editable ?? true,
+            value: object?.inspectionTime ?? nil,
+            width: .Third
+        )
+        inspectionTime.dependency = InputDependency(to: passportField, equalTo: false)
+        sectionItems.append(inspectionTime)
         sectionItems.append(InputSpacer(width: .Third))
-        sectionItems.append(InputSpacer(width: .Third))
+        let spacer = InputSpacer(width: .Third)
+        spacer.dependency = InputDependency(to: passportField, equalTo: true)
+        sectionItems.append(spacer)
         
         let nonMotorized = IntegerStepperInput(
             key: "nonMotorized",

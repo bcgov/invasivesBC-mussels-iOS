@@ -82,6 +82,8 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
     
     @objc dynamic var riskLevel: String = "low"
     
+    private var inputputFields: [WatercraftFromSection: [InputItem]] = [WatercraftFromSection: [InputItem]]()
+    
     // MARK: Setters
     func set(value: Any, for key: String) {
         if self[key] == nil {
@@ -490,25 +492,24 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
     
     // MARK: UI Helpers
     func getInputputFields(for section: WatercraftFromSection, editable: Bool? = nil) -> [InputItem] {
-        switch section {
-        case .PassportInfo:
-            return WatercraftInspectionFormHelper.getPassportFields(for: self, editable: editable)
-        case .BasicInformation:
-            return WatercraftInspectionFormHelper.getBasicInfoFields(for: self, editable: editable)
-        case .WatercraftDetails:
-            return WatercraftInspectionFormHelper.getWatercraftDetailsFields(for: self, editable: editable)
-        case .JourneyDetails:
-            return WatercraftInspectionFormHelper.getPassportFields(for: self, editable: editable)
-        case .InspectionDetails:
-            return WatercraftInspectionFormHelper.getInspectionDetailsFields(for: self, editable: editable)
-        case .GeneralComments:
-            return WatercraftInspectionFormHelper.getGeneralCommentsFields(for: self, editable: editable)
-        case .HighRiskAssessmentFields:
-            return WatercraftInspectionFormHelper.getHighriskAssessmentFieldsFields(for: self, editable: editable)
-        case .Divider:
-            return []
-        case .HighRiskAssessment:
-            return []
+        if let existing = inputputFields[section] { return existing}
+        
+        var inputputFields: [WatercraftFromSection: [InputItem]] = [WatercraftFromSection: [InputItem]]()
+        var passportFields = WatercraftInspectionFormHelper.getPassportFields(for: self, editable: editable)
+        var passportHolderField: InputItem? = nil
+        for field in passportFields where field.key.lowercased() == "isPassportHolder".lowercased() {
+            passportHolderField = field
         }
+        guard let _passportHolderField = passportHolderField as? RadioSwitchInput else {return []}
+        inputputFields[.PassportInfo] = passportFields
+        inputputFields[.BasicInformation] = WatercraftInspectionFormHelper.getBasicInfoFields(for: self, editable: editable, passportField: _passportHolderField)
+        inputputFields[.WatercraftDetails] = WatercraftInspectionFormHelper.getWatercraftDetailsFields(for: self, editable: editable)
+        inputputFields[.JourneyDetails] = WatercraftInspectionFormHelper.getPassportFields(for: self, editable: editable)
+        inputputFields[.InspectionDetails] = WatercraftInspectionFormHelper.getInspectionDetailsFields(for: self, editable: editable)
+        inputputFields[.GeneralComments] = WatercraftInspectionFormHelper.getGeneralCommentsFields(for: self, editable: editable)
+        inputputFields[.HighRiskAssessmentFields] = WatercraftInspectionFormHelper.getHighriskAssessmentFieldsFields(for: self, editable: editable)
+        inputputFields[.Divider] = []
+        inputputFields[.HighRiskAssessment] = []
+        return inputputFields[section] ?? []
     }
 }
