@@ -16,7 +16,6 @@ class HomeViewController: BaseViewController {
     @IBOutlet weak var appTitle: UILabel!
     @IBOutlet weak var reachabilityIndicator: UIView!
     @IBOutlet weak var reachabilityLabel: UILabel!
-    @IBOutlet weak var lastSyncLabel: UILabel!
     @IBOutlet weak var userButton: UIButton!
     @IBOutlet weak var syncButton: UIButton!
     @IBOutlet weak var addEntryButton: UIButton!
@@ -109,12 +108,9 @@ class HomeViewController: BaseViewController {
     
     @IBAction func reportAnIssueAction(_ sender: Any?) {
         InfoLog("User want to report")
-        Alert.show(title: "Report", message: "Do you want to report an issue?", yes: {
-            InfoLog("User wants to report")
-            self.sendReport()
-        }) {
-            InfoLog("User does not want to report")
-        }
+        // Show Message With Admin Email Address
+        // TODO: Call send report when API is fixed
+        Alert.show(title: "Report", message: "Send an email to michael.shasko@gov.bc.ca describing the nature of the problem (screenshots are appreciated!) and the expected behaviour. Please also indicate the version number at the time you encountered the bug. (Version: \(ApplicationLogger.defalutLogger.applicationVersion))")
     }
     
     private func sendReport() {
@@ -234,7 +230,6 @@ class HomeViewController: BaseViewController {
         setGradiantBackground(view: navigationBar)
         setAppTitle(label: appTitle, darkBackground: true)
         styleBody(label: reachabilityLabel, darkBackground: true)
-        styleBody(label: lastSyncLabel, darkBackground: true)
     }
     
     // Style network status indicators

@@ -480,21 +480,12 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
         /// --------------------------------
     }
     
-    @objc private func previousDryStorageOn(status: Bool) {
-        
-        self.model?.set(previous: status)
-    }
-    
-    @objc private func nextDryStorageOn(status: Bool) {
-        self.model?.set(destination: status)
-    }
-    
-    @objc private func unknownPreviousWaterBody(unknown: Bool) {
-        self.model?.set(unknownPreviuos: unknown)
-    }
-    
-    @objc private func unknownDestinationWaterBody(unknown: Bool) {
-        self.model?.set(unknownDestination: unknown)
+    // Reload Journey Details section
+    private func reloadJourneyDetailSection(indexPath: IndexPath) {
+        self.collectionView.performBatchUpdates({
+            self.collectionView?.reloadSections(IndexSet(integer: indexPath.section))
+        }, completion: nil)
+
     }
     
     private func getJourneyDetailsCell(for indexPath: IndexPath) -> UICollectionViewCell {
@@ -536,21 +527,18 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
                 config: FormButtonCollectionViewCell.Config(
                     status: self.model?.previousDryStorage ?? false,
                     unknownWaterBodyStatus: self.model?.unknownPreviousWaterBody ?? false,
+                    commercialManufacturerStatus: self.model?.commercialManufacturerAsPreviousWaterBody ?? false,
                     isPreviousJourney: true,
                     displaySwitch: true,
                     displayUnknowSwitch: true)
-            ) { [weak self] action, info in
+            ) { [weak self] action in
                 guard let strongSelf = self else {return}
                 /// ----- Switch Action ------
                 switch action {
-                case .dryStorage:
-                    guard let status: Bool = info else { return }
-                    InfoLog("User select previous dry storage")
-                    strongSelf.previousDryStorageOn(status: status)
-                case .unknownWaterBody:
-                    InfoLog("User select unknown previuos water body")
-                    guard let status: Bool = info else { return }
-                    strongSelf.unknownPreviousWaterBody(unknown: status)
+                case .statusChange(let result):
+                    InfoLog("User change status: \(result) of previous water body")
+                    strongSelf.model?.setJournyStatusFlags(dryStorage: result.dryStorgae, unknown: result.unknown, commercialManufacturer: result.commercialManufacturer, isPrevious: true)
+                    strongSelf.reloadJourneyDetailSection(indexPath: indexPath)
                 case .add:
                     /// ---------waterbody picker------------
                     InfoLog("User want to add previous water body")
@@ -578,22 +566,19 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
                 config: FormButtonCollectionViewCell.Config(
                     status: self.model?.destinationDryStorage ?? false,
                     unknownWaterBodyStatus: self.model?.unknownDestinationWaterBody ?? false,
+                    commercialManufacturerStatus: self.model?.commercialManufacturerAsDestinationWaterBody ?? false,
                     isPreviousJourney: false,
                     displaySwitch: true,
                     displayUnknowSwitch: true)
-            ) { [weak self] action, info in
+            ) { [weak self] action in
                 
                 guard let strongSelf = self else {return}
                 /// ----- Switch Action ------
                 switch action {
-                case .dryStorage:
-                    guard let status: Bool = info else { return }
-                    InfoLog("User select previous dry storage")
-                    strongSelf.nextDryStorageOn(status: status)
-                case .unknownWaterBody:
-                    InfoLog("User select unknown destination water body")
-                    guard let status: Bool = info else { return }
-                    strongSelf.unknownDestinationWaterBody(unknown: status)
+                case .statusChange(let result):
+                    InfoLog("User change status: \(result) of destination water body")
+                    strongSelf.model?.setJournyStatusFlags(dryStorage: result.dryStorgae, unknown: result.unknown, commercialManufacturer: result.commercialManufacturer, isPrevious: false)
+                    strongSelf.reloadJourneyDetailSection(indexPath: indexPath)
                 case .add:
                     /// ---------waterbody picker------------
                     strongSelf.setNavigationBar(hidden: true, style: .black)

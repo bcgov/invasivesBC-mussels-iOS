@@ -64,6 +64,10 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
     @objc dynamic var unknownPreviousWaterBody: Bool = false
     @objc dynamic var unknownDestinationWaterBody: Bool = false
     
+    // Commercial manufacturer
+    @objc dynamic var commercialManufacturerAsPreviousWaterBody: Bool = false
+    @objc dynamic var commercialManufacturerAsDestinationWaterBody: Bool = false
+    
     // High Risk Assesment fields
     @objc dynamic var highriskAIS: Bool = false
     @objc dynamic var adultDreissenidFound: Bool = false
@@ -81,6 +85,8 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
     @objc dynamic var status: String = "Draft"
     
     @objc dynamic var riskLevel: String = "low"
+    
+    private var inputputFields: [WatercraftFromSection: [InputItem]] = [WatercraftFromSection: [InputItem]]()
     
     // MARK: Setters
     func set(value: Any, for key: String) {
@@ -252,6 +258,8 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
             "destinationDryStorage": destinationDryStorage,
             "unknownPreviousWaterBody": unknownPreviousWaterBody,
             "unknownDestinationWaterBody": unknownDestinationWaterBody,
+            "commercialManufacturerAsPreviousWaterBody": commercialManufacturerAsPreviousWaterBody,
+            "commercialManufacturerAsDestinationWaterBody": commercialManufacturerAsDestinationWaterBody,
             "journeys": []
         ]
         
@@ -426,63 +434,37 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
         }
     }
     
-    func set(previous dryStorage: Bool) {
-        do {
-            let realm = try Realm()
-            try realm.write {
-                self.previousDryStorage = dryStorage
-                // TODO: Find a way to delete the existing list
-                self.previousWaterBodies = List<PreviousWaterbodyModel>()
-            }
-            
-        } catch let error as NSError {
-            print("** REALM ERROR")
-            print(error)
-        }
-    }
     
-    func set(destination dryStorage: Bool) {
+    func setJournyStatusFlags(dryStorage: Bool, unknown: Bool, commercialManufacturer: Bool, isPrevious: Bool) {
         do {
-            let realm = try Realm()
-            try realm.write {
-                self.destinationDryStorage = dryStorage
-                // TODO: Find a way to delete the existing list
-                self.destinationWaterBodies = List<DestinationWaterbodyModel>()
+            
+            // Removing existing waterbodies
+            // 1. Convert into array iterator
+            let waterBodies: [Any] = isPrevious ? Array(self.previousWaterBodies) : Array(self.destinationWaterBodies)
+            // 2. Removing each item
+            for item in waterBodies {
+                if let body: JourneyModel = item as? JourneyModel {
+                    RealmRequests.deleteObject(body)
+                }
+            }
+            
+            let relam = try Realm()
+            try relam.write {
+                if isPrevious {
+                    self.previousDryStorage = dryStorage
+                    self.unknownPreviousWaterBody = unknown
+                    self.commercialManufacturerAsPreviousWaterBody = commercialManufacturer
+                    self.previousWaterBodies =  List<PreviousWaterbodyModel>()
+                } else {
+                    self.destinationDryStorage = dryStorage
+                    self.unknownDestinationWaterBody = unknown
+                    self.commercialManufacturerAsDestinationWaterBody = commercialManufacturer
+                    self.destinationWaterBodies = List<DestinationWaterbodyModel>()
+                }
             }
             
         } catch let error as NSError {
-            print("** REALM ERROR")
-            print(error)
-        }
-    }
-    
-    func set(unknownPreviuos: Bool) {
-        do {
-            let realm = try Realm()
-            try realm.write {
-                self.unknownPreviousWaterBody = unknownPreviuos
-                // TODO: Find a way to delete the existing list
-                self.previousWaterBodies =  List<PreviousWaterbodyModel>()
-            }
-            
-        } catch let error as NSError {
-            print("** REALM ERROR")
-            print(error)
-        }
-    }
-    
-    func set(unknownDestination: Bool) {
-        do {
-            let realm = try Realm()
-            try realm.write {
-                self.unknownDestinationWaterBody = unknownDestination
-                // TODO: Find a way to delete the existing list
-                self.destinationWaterBodies = List<DestinationWaterbodyModel>()
-            }
-            
-        } catch let error as NSError {
-            print("** REALM ERROR")
-            print(error)
+            ErrorLog("** RELAM ERROR: \(error)")
         }
     }
     
@@ -490,25 +472,24 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
     
     // MARK: UI Helpers
     func getInputputFields(for section: WatercraftFromSection, editable: Bool? = nil) -> [InputItem] {
-        switch section {
-        case .PassportInfo:
-            return WatercraftInspectionFormHelper.getPassportFields(for: self, editable: editable)
-        case .BasicInformation:
-            return WatercraftInspectionFormHelper.getBasicInfoFields(for: self, editable: editable)
-        case .WatercraftDetails:
-            return WatercraftInspectionFormHelper.getWatercraftDetailsFields(for: self, editable: editable)
-        case .JourneyDetails:
-            return WatercraftInspectionFormHelper.getPassportFields(for: self, editable: editable)
-        case .InspectionDetails:
-            return WatercraftInspectionFormHelper.getInspectionDetailsFields(for: self, editable: editable)
-        case .GeneralComments:
-            return WatercraftInspectionFormHelper.getGeneralCommentsFields(for: self, editable: editable)
-        case .HighRiskAssessmentFields:
-            return WatercraftInspectionFormHelper.getHighriskAssessmentFieldsFields(for: self, editable: editable)
-        case .Divider:
-            return []
-        case .HighRiskAssessment:
-            return []
+        if let existing = inputputFields[section] { return existing}
+        
+        var inputputFields: [WatercraftFromSection: [InputItem]] = [WatercraftFromSection: [InputItem]]()
+        var passportFields = WatercraftInspectionFormHelper.getPassportFields(for: self, editable: editable)
+        var passportHolderField: InputItem? = nil
+        for field in passportFields where field.key.lowercased() == "isPassportHolder".lowercased() {
+            passportHolderField = field
         }
+        guard let _passportHolderField = passportHolderField as? RadioSwitchInput else {return []}
+        inputputFields[.PassportInfo] = passportFields
+        inputputFields[.BasicInformation] = WatercraftInspectionFormHelper.getBasicInfoFields(for: self, editable: editable, passportField: _passportHolderField)
+        inputputFields[.WatercraftDetails] = WatercraftInspectionFormHelper.getWatercraftDetailsFields(for: self, editable: editable)
+        inputputFields[.JourneyDetails] = WatercraftInspectionFormHelper.getPassportFields(for: self, editable: editable)
+        inputputFields[.InspectionDetails] = WatercraftInspectionFormHelper.getInspectionDetailsFields(for: self, editable: editable)
+        inputputFields[.GeneralComments] = WatercraftInspectionFormHelper.getGeneralCommentsFields(for: self, editable: editable)
+        inputputFields[.HighRiskAssessmentFields] = WatercraftInspectionFormHelper.getHighriskAssessmentFieldsFields(for: self, editable: editable)
+        inputputFields[.Divider] = []
+        inputputFields[.HighRiskAssessment] = []
+        return inputputFields[section] ?? []
     }
 }

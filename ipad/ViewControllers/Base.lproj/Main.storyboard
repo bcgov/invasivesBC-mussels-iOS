@@ -23,7 +23,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-417" y="-364"/>
+            <point key="canvasLocation" x="-405" y="-281"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="oqx-Jp-mkB">
@@ -63,7 +63,7 @@
                                                 <inset key="contentEdgeInsets" minX="12" minY="0.0" maxX="12" maxY="0.0"/>
                                                 <inset key="imageEdgeInsets" minX="32" minY="16" maxX="200" maxY="16"/>
                                                 <size key="titleShadowOffset" width="1" height="0.0"/>
-                                                <state key="normal" title="Login with BCeID" image="arrowshape.turn.up.right.fill" catalog="system">
+                                                <state key="normal" title="Login with BCeID" image="arrow.up.right.square" catalog="system">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
@@ -81,7 +81,7 @@
                                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <inset key="contentEdgeInsets" minX="12" minY="0.0" maxX="12" maxY="0.0"/>
                                                 <inset key="imageEdgeInsets" minX="32" minY="16" maxX="200" maxY="16"/>
-                                                <state key="normal" title="Login with IDIR" image="arrowshape.turn.up.right.fill" catalog="system">
+                                                <state key="normal" title="Login with IDIR" image="arrow.up.right.square" catalog="system">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
@@ -129,7 +129,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gEs-MR-1fG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="286" y="-830"/>
+            <point key="canvasLocation" x="286" y="-648"/>
         </scene>
         <!--Home View Controller-->
         <scene sceneID="u0t-z8-zdG">
@@ -143,7 +143,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="768" height="118"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" layoutMarginsFollowReadableWidth="YES" distribution="fillProportionally" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="C0H-M0-0am">
-                                        <rect key="frame" x="30" y="30" width="260.5" height="58"/>
+                                        <rect key="frame" x="30" y="30" width="153" height="58"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nBL-FE-Fch">
                                                 <rect key="frame" x="0.0" y="0.0" width="58" height="58"/>
@@ -166,12 +166,6 @@
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Online Mode" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BhB-gb-4tS">
                                                 <rect key="frame" x="66" y="20" width="87" height="18"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Last Synced: *" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fj2-GR-1yn">
-                                                <rect key="frame" x="161" y="20" width="99.5" height="18"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -297,7 +291,6 @@
                     <connections>
                         <outlet property="addEntryButton" destination="avH-r0-8vm" id="Rd5-E0-05A"/>
                         <outlet property="appTitle" destination="4eR-8r-kOm" id="nNX-fD-1fy"/>
-                        <outlet property="lastSyncLabel" destination="Fj2-GR-1yn" id="fKi-Ui-54e"/>
                         <outlet property="navigationBar" destination="oEL-Ux-yq2" id="cCb-cB-SxG"/>
                         <outlet property="reachabilityIndicator" destination="G3o-nN-cQJ" id="iNX-NX-Rou"/>
                         <outlet property="reachabilityLabel" destination="BhB-gb-4tS" id="63R-G4-qzp"/>
@@ -504,12 +497,12 @@
         </scene>
     </scenes>
     <resources>
-        <image name="arrowshape.turn.up.right.fill" catalog="system" width="64" height="52"/>
+        <image name="arrow.up.right.square" catalog="system" width="64" height="56"/>
         <image name="bclogo" width="172" height="148"/>
         <image name="launch" width="1024" height="768"/>
         <image name="person.circle.fill" catalog="system" width="64" height="60"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="0hg-be-P9B"/>
+        <segue reference="4OX-36-Cn0"/>
     </inferredMetricsTieBreakers>
 </document>
