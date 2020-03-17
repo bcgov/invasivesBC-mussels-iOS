@@ -2,15 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "flag.png",
+      "filename" : "United States.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
+      "filename" : "United States@2x.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
+      "filename" : "United States@3x.png",
       "scale" : "3x"
     }
   ],

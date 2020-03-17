@@ -16,7 +16,6 @@ class HomeViewController: BaseViewController {
     @IBOutlet weak var appTitle: UILabel!
     @IBOutlet weak var reachabilityIndicator: UIView!
     @IBOutlet weak var reachabilityLabel: UILabel!
-    @IBOutlet weak var lastSyncLabel: UILabel!
     @IBOutlet weak var userButton: UIButton!
     @IBOutlet weak var syncButton: UIButton!
     @IBOutlet weak var addEntryButton: UIButton!
@@ -231,7 +230,6 @@ class HomeViewController: BaseViewController {
         setGradiantBackground(view: navigationBar)
         setAppTitle(label: appTitle, darkBackground: true)
         styleBody(label: reachabilityLabel, darkBackground: true)
-        styleBody(label: lastSyncLabel, darkBackground: true)
     }
     
     // Style network status indicators
