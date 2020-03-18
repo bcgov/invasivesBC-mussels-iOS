@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -17,7 +17,7 @@
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X9m-fe-BEs">
-                        <rect key="frame" x="20" y="29" width="220" height="43"/>
+                        <rect key="frame" x="10" y="29" width="220" height="43"/>
                         <constraints>
                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="220" id="3tN-Od-xqE"/>
                             <constraint firstAttribute="height" constant="43" id="hRr-QE-zJH"/>
@@ -28,13 +28,13 @@
                         </connections>
                     </button>
                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="udV-gw-iIm">
-                        <rect key="frame" x="724" y="35" width="51" height="31"/>
+                        <rect key="frame" x="734" y="35" width="51" height="31"/>
                         <connections>
                             <action selector="dryStorageSwitchAction:" destination="gTV-IL-0wX" eventType="valueChanged" id="fPx-zb-Ooa"/>
                         </connections>
                     </switch>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Previously Stored" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f0F-1A-sf6">
-                        <rect key="frame" x="649" y="33.5" width="60" height="34"/>
+                        <rect key="frame" x="659" y="33.5" width="60" height="34"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="34" id="PQu-Jh-PjI"/>
                             <constraint firstAttribute="width" constant="60" id="fre-Xf-Rkz"/>
@@ -44,13 +44,13 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="DaX-9v-2TV">
-                        <rect key="frame" x="585" y="35" width="51" height="31"/>
+                        <rect key="frame" x="595" y="35" width="51" height="31"/>
                         <connections>
                             <action selector="unknownSwitchAction:" destination="gTV-IL-0wX" eventType="valueChanged" id="GEO-ua-TJm"/>
                         </connections>
                     </switch>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Unknown Water Body" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aL0-zi-zQ5">
-                        <rect key="frame" x="490" y="28" width="80" height="45"/>
+                        <rect key="frame" x="500" y="28" width="80" height="45"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="80" id="0Jl-Xl-mvv"/>
                             <constraint firstAttribute="height" constant="45" id="a4n-lC-Q56"/>
@@ -60,13 +60,13 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="PjW-Od-wIg" userLabel="Commercial manufacturer Switch">
-                        <rect key="frame" x="426" y="35" width="51" height="31"/>
+                        <rect key="frame" x="436" y="35" width="51" height="31"/>
                         <connections>
                             <action selector="commercialManufacturerSwitchAction:" destination="gTV-IL-0wX" eventType="valueChanged" id="DGR-ff-Nx0"/>
                         </connections>
                     </switch>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Commercial manufacturer" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iVs-PP-3iX">
-                        <rect key="frame" x="331" y="15.5" width="80" height="70"/>
+                        <rect key="frame" x="341" y="15.5" width="80" height="70"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="80" id="pbh-JM-SEu"/>
                             <constraint firstAttribute="height" constant="70" id="ps1-kU-CAQ"/>
@@ -79,6 +79,7 @@
             </view>
             <constraints>
                 <constraint firstItem="f0F-1A-sf6" firstAttribute="centerY" secondItem="udV-gw-iIm" secondAttribute="centerY" id="8Jx-kc-Aon"/>
+                <constraint firstItem="iVs-PP-3iX" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="X9m-fe-BEs" secondAttribute="trailing" constant="30" id="BVs-m2-aif"/>
                 <constraint firstItem="PjW-Od-wIg" firstAttribute="centerY" secondItem="aL0-zi-zQ5" secondAttribute="centerY" id="FGk-Gm-7k7"/>
                 <constraint firstItem="f0F-1A-sf6" firstAttribute="centerY" secondItem="DaX-9v-2TV" secondAttribute="centerY" id="HSu-nL-6HZ"/>
                 <constraint firstItem="udV-gw-iIm" firstAttribute="leading" secondItem="f0F-1A-sf6" secondAttribute="trailing" constant="15" id="LGe-Ru-HCE"/>
@@ -88,9 +89,9 @@
                 <constraint firstItem="udV-gw-iIm" firstAttribute="centerY" secondItem="X9m-fe-BEs" secondAttribute="centerY" id="OCn-bm-syS"/>
                 <constraint firstItem="iVs-PP-3iX" firstAttribute="centerY" secondItem="PjW-Od-wIg" secondAttribute="centerY" id="evD-nr-drA"/>
                 <constraint firstItem="f0F-1A-sf6" firstAttribute="leading" secondItem="DaX-9v-2TV" secondAttribute="trailing" constant="15" id="i2y-78-Dei"/>
-                <constraint firstItem="ZTg-uK-7eu" firstAttribute="trailing" secondItem="udV-gw-iIm" secondAttribute="trailing" constant="20" id="it8-Pn-gb3"/>
+                <constraint firstItem="ZTg-uK-7eu" firstAttribute="trailing" secondItem="udV-gw-iIm" secondAttribute="trailing" constant="10" id="it8-Pn-gb3"/>
                 <constraint firstItem="DaX-9v-2TV" firstAttribute="leading" secondItem="aL0-zi-zQ5" secondAttribute="trailing" constant="15" id="p39-b7-LRC"/>
-                <constraint firstItem="X9m-fe-BEs" firstAttribute="leading" secondItem="ZTg-uK-7eu" secondAttribute="leading" constant="20" id="vCw-2r-y1U"/>
+                <constraint firstItem="X9m-fe-BEs" firstAttribute="leading" secondItem="ZTg-uK-7eu" secondAttribute="leading" constant="10" id="vCw-2r-y1U"/>
                 <constraint firstItem="PjW-Od-wIg" firstAttribute="leading" secondItem="iVs-PP-3iX" secondAttribute="trailing" constant="15" id="wGF-SM-pMl"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>

@@ -14,6 +14,8 @@ private enum JourneyDetailsSectionRow {
     case DestinationWaterBody
     case AddPreviousWaterBody
     case AddDestinationWaterBody
+    case PreviousHeader
+    case DestinationHeader
     case Divider
 }
 
@@ -326,7 +328,7 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
         
         switch sectionType {
         case .JourneyDetails:
-            return model.previousWaterBodies.count + model.destinationWaterBodies.count + 4
+            return model.previousWaterBodies.count + model.destinationWaterBodies.count + 6
         case .HighRiskAssessment:
             if !showHighRiskAssessment {
                 return 0
@@ -497,7 +499,7 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
             return cell
         case .PreviousWaterBody:
             let cell = getPreviousWaterBodyCell(indexPath: indexPath)
-            let itemsIndex: Int = indexPath.row - 1
+            let itemsIndex: Int = indexPath.row - 2
             let previousWaterBody = model.previousWaterBodies[itemsIndex]
             cell.setup(with: previousWaterBody, isEditable: self.isEditable, delegate: self, onDelete: { [weak self] in
                 guard let strongSelf = self else {return}
@@ -509,7 +511,7 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
             return cell
         case .DestinationWaterBody:
             let cell = getDestinationWaterBodyCell(indexPath: indexPath)
-            let itemsIndex: Int = indexPath.row - (model.previousWaterBodies.count + 2)
+            let itemsIndex: Int = indexPath.row - (model.previousWaterBodies.count + 4)
             let destinationWaterBody = model.destinationWaterBodies[itemsIndex]
             cell.setup(with: destinationWaterBody, isEditable: self.isEditable, delegate: self, onDelete: { [weak self] in
                 guard let strongSelf = self else {return}
@@ -600,6 +602,14 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
             return cell
         case .Divider:
             return getDividerCell(indexPath: indexPath)
+        case .PreviousHeader:
+            let cell = getHeaderCell(indexPath: indexPath)
+            cell.setup(with: "Previous Waterbody")
+            return cell
+        case .DestinationHeader:
+            let cell = getHeaderCell(indexPath: indexPath)
+            cell.setup(with: "Destination Waterbody")
+            return cell
         }
     }
     
@@ -621,6 +631,10 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
             return CGSize(width: width, height: 50)
         case .Divider:
             return CGSize(width: width, height: 10)
+        case .PreviousHeader:
+            return CGSize(width: width, height: 50)
+        case .DestinationHeader:
+            return CGSize(width: width, height: 50)
         }
     }
     
@@ -630,19 +644,27 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
             return .Header
         }
         
-        if indexPath.row == model.previousWaterBodies.count + 1 {
+        if indexPath.row ==  1 {
+            return .PreviousHeader
+        }
+        
+        if indexPath.row == model.previousWaterBodies.count + 2 {
             return .AddPreviousWaterBody
         }
         
-        if indexPath.row == model.previousWaterBodies.count + model.destinationWaterBodies.count + 2 {
+        if indexPath.row == model.previousWaterBodies.count + 3 {
+            return .DestinationHeader
+        }
+        
+        if indexPath.row == model.previousWaterBodies.count + model.destinationWaterBodies.count + 4 {
             return .AddDestinationWaterBody
         }
         
-        if indexPath.row <= model.previousWaterBodies.count {
+        if indexPath.row <= model.previousWaterBodies.count + 3 {
             return .PreviousWaterBody
         }
         
-        if indexPath.row <= (model.previousWaterBodies.count + model.destinationWaterBodies.count + 1) {
+        if indexPath.row <= (model.previousWaterBodies.count + model.destinationWaterBodies.count + 4) {
             return .DestinationWaterBody
         }
         

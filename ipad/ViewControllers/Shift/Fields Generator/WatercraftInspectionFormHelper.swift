@@ -82,15 +82,33 @@ class WatercraftInspectionFormHelper {
         aquaticPlantsFound.dependency = InputDependency(to: isPassportHolder, equalTo: true)
         items.append(aquaticPlantsFound)
         
+        var decontaminationValue: String? = nil
+        var decontaminationPerformedValue: Bool? = nil
+        if let highRiskForm = object?.highRiskAssessments.first {
+            decontaminationValue = highRiskForm.decontaminationReference
+            decontaminationPerformedValue = highRiskForm.decontaminationPerformed
+        }
+        
         let decontaminationPerformed = SwitchInput(
-            key: "decontaminationPerformed",
+            key: "highRisk-decontaminationPerformed",
             header: WatercraftFieldHeaderConstants.Passport.decontaminationPerformed,
             editable: editable ?? true,
-            value: object?.decontaminationPerformed ?? nil,
+            value: decontaminationPerformedValue ?? nil,
             width: .Third
         )
         decontaminationPerformed.dependency = InputDependency(to: isPassportHolder, equalTo: true)
         items.append(decontaminationPerformed)
+        
+        let decontaminationReference = TextInput (
+            key: "highRisk-decontaminationReference",
+            header: HighRiskFormFieldHeaders.InspectionOutcomes.decontaminationReference,
+            editable: editable ?? true,
+            value: decontaminationValue ?? "",
+            validation: .AlphaNumberic,
+            width: .Half
+        )
+        decontaminationReference.dependency = InputDependency(to: decontaminationPerformed, equalTo: true)
+        items.append(decontaminationReference)
         
         return items
     }
@@ -106,7 +124,7 @@ class WatercraftInspectionFormHelper {
             dropdownItems: DropdownHelper.shared.getDropdown(for: .provinces)
         )
         sectionItems.append(province)
-       
+        
         let inspectionTime = TimeInput(
             key: "inspectionTime",
             header: WatercraftFieldHeaderConstants.Passport.inspectionTime,
@@ -291,7 +309,7 @@ class WatercraftInspectionFormHelper {
             width: .Third
         )
         sectionItems.append(adultDreissenidFound)
-       
+        
         return sectionItems
     }
     
@@ -365,7 +383,7 @@ class WatercraftInspectionFormHelper {
             width: .Third,
             dropdownItems: DropdownHelper.shared.getDropdown(for: .provinces)
         )
-       
+        
         let destinationWaterBody = DropdownInput(
             key: "destinationWaterBody-waterbody-\(index)",
             header: "Destination WaterBody",
