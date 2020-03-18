@@ -198,7 +198,7 @@ protocol InputItem {
     var value: InputValue { get set }
     var header: String { get set }
     var editable: Bool { get set }
-    var dependency: InputDependency? { get set }
+    var dependency: [InputDependency] { get set }
 }
 
 protocol StringInputItem: InputItem {
@@ -213,7 +213,7 @@ class ViewField: InputItem {
     var value: InputValue
     var header: String = ""
     var editable: Bool = false
-    var dependency: InputDependency?
+    var dependency: [InputDependency] = []
     var computation: FieldComputation?
     
     init(header: String, computation: FieldComputation? = nil, width: InputItemWidthSize? = .Full) {
@@ -234,7 +234,7 @@ class ViewField: InputItem {
 }
 
 class DropdownInput: InputItem {
-    var dependency: InputDependency?
+    var dependency: [InputDependency] = []
     var value: InputValue
     var type: InputItemType = .Dropdown
     var width: InputItemWidthSize
@@ -279,7 +279,7 @@ class DropdownInput: InputItem {
 }
 
 class TextInput: InputItem {
-    var dependency: InputDependency?
+    var dependency: [InputDependency] = []
     var type: InputItemType = .Text
     var width: InputItemWidthSize
     var height: CGFloat = 70
@@ -309,7 +309,7 @@ class TextInput: InputItem {
 }
 
 class SwitchInput: InputItem {
-    var dependency: InputDependency?
+    var dependency: [InputDependency] = []
     var type: InputItemType = .Switch
     var width: InputItemWidthSize
     var height: CGFloat = 70
@@ -337,7 +337,7 @@ class SwitchInput: InputItem {
 }
 
 class DateInput: InputItem {
-    var dependency: InputDependency?
+    var dependency: [InputDependency] = []
     var type: InputItemType = .Date
     var width: InputItemWidthSize
     var height: CGFloat = 70
@@ -365,7 +365,7 @@ class DateInput: InputItem {
 }
 
 class TimeInput: InputItem {
-    var dependency: InputDependency?
+    var dependency: [InputDependency] = []
     var type: InputItemType = .Time
     var width: InputItemWidthSize
     var height: CGFloat = 70
@@ -395,7 +395,7 @@ class TimeInput: InputItem {
 }
 
 class TextAreaInput: InputItem {
-    var dependency: InputDependency?
+    var dependency: [InputDependency] = []
     var type: InputItemType = .TextArea
     var width: InputItemWidthSize
     var height: CGFloat = 200
@@ -423,7 +423,7 @@ class TextAreaInput: InputItem {
 }
 
 class IntegerInput: InputItem {
-    var dependency: InputDependency?
+    var dependency: [InputDependency] = []
     var type: InputItemType = .Int
     var width: InputItemWidthSize
     var height: CGFloat = 70
@@ -451,7 +451,7 @@ class IntegerInput: InputItem {
 }
 
 class IntegerStepperInput: InputItem {
-    var dependency: InputDependency?
+    var dependency: [InputDependency] = []
     var type: InputItemType = .Stepper
     var width: InputItemWidthSize
     var height: CGFloat = 70
@@ -479,7 +479,7 @@ class IntegerStepperInput: InputItem {
 }
 
 class DoubleInput: InputItem {
-    var dependency: InputDependency?
+    var dependency: [InputDependency] = []
     var type: InputItemType = .Double
     var width: InputItemWidthSize
     var height: CGFloat = 70
@@ -507,7 +507,7 @@ class DoubleInput: InputItem {
 }
 
 class RadioSwitchInput: InputItem {
-    var dependency: InputDependency?
+    var dependency: [InputDependency] = []
     var type: InputItemType = .RadioSwitch
     var width: InputItemWidthSize
     var height: CGFloat = 70
@@ -535,7 +535,7 @@ class RadioSwitchInput: InputItem {
 }
 
 class RadioBoolean: InputItem {
-    var dependency: InputDependency?
+    var dependency: [InputDependency] = []
     var type: InputItemType = .RadioBoolean
     var width: InputItemWidthSize
     var height: CGFloat = 70
@@ -563,7 +563,7 @@ class RadioBoolean: InputItem {
 }
 
 class InputSpacer: InputItem {
-    var dependency: InputDependency?
+    var dependency: [InputDependency] = []
     var type: InputItemType = .Spacer
     var width: InputItemWidthSize
     var height: CGFloat = 70
@@ -583,7 +583,7 @@ class InputSpacer: InputItem {
 }
 
 class InputTitle: InputItem {
-    var dependency: InputDependency?
+    var dependency: [InputDependency] = []
     var type: InputItemType = .Title
     var width: InputItemWidthSize
     var height: CGFloat = 30

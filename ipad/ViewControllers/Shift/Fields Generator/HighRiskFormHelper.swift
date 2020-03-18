@@ -57,11 +57,11 @@ class HighRiskFormHelper {
             codes: DropdownHelper.shared.getDropDownCodes(for: .adultMusselsLocation)
         )
         
-        standingWaterLocation.dependency = InputDependency(to: standingWaterPresent, equalTo: true)
+        standingWaterLocation.dependency.append(InputDependency(to: standingWaterPresent, equalTo: true))
         sectionItems.append(standingWaterLocation)
         
         let spacer1 = InputSpacer()
-        spacer1.dependency = InputDependency(to: standingWaterPresent, equalTo: true)
+        spacer1.dependency.append(InputDependency(to: standingWaterPresent, equalTo: true))
         sectionItems.append(spacer1)
         /// ---------------------------
         
@@ -84,10 +84,10 @@ class HighRiskFormHelper {
             codes: DropdownHelper.shared.getDropDownCodes(for: .adultMusselsLocation)
         )
         
-        adultDreissenidMusselsLocation.dependency = InputDependency(to: adultDreissenidMusselsFound, equalTo: true)
+        adultDreissenidMusselsLocation.dependency.append(InputDependency(to: adultDreissenidMusselsFound, equalTo: true))
         sectionItems.append(adultDreissenidMusselsLocation)
         let spacer2 = InputSpacer()
-        spacer2.dependency = InputDependency(to: adultDreissenidMusselsFound, equalTo: true)
+        spacer2.dependency.append(InputDependency(to: adultDreissenidMusselsFound, equalTo: true))
         sectionItems.append(spacer2)
         /// ---------------------------
         
@@ -108,10 +108,10 @@ class HighRiskFormHelper {
             validation: .AlphaNumberic,
             width: .Half
         )
-        decontaminationReference.dependency = InputDependency(to: decontaminationPerformed, equalTo: true)
+        decontaminationReference.dependency.append(InputDependency(to: decontaminationPerformed, equalTo: true))
         sectionItems.append(decontaminationReference)
         let spacer3 = InputSpacer()
-        spacer3.dependency = InputDependency(to: decontaminationPerformed, equalTo: true)
+        spacer3.dependency.append(InputDependency(to: decontaminationPerformed, equalTo: true))
         sectionItems.append(spacer3)
         /// ---------------------------
         
@@ -131,10 +131,10 @@ class HighRiskFormHelper {
             value: object?.decontaminationOrderNumber ?? 0,
             width: .Half
         )
-        decontaminationOrderNumber.dependency = InputDependency(to: decontaminationOrderIssued, equalTo: true)
+        decontaminationOrderNumber.dependency.append(InputDependency(to: decontaminationOrderIssued, equalTo: true))
         sectionItems.append(decontaminationOrderNumber)
         let spacer4 = InputSpacer()
-        spacer4.dependency = InputDependency(to: decontaminationOrderIssued, equalTo: true)
+        spacer4.dependency.append(InputDependency(to: decontaminationOrderIssued, equalTo: true))
         sectionItems.append(spacer4)
         /// ---------------------------
         
@@ -154,11 +154,11 @@ class HighRiskFormHelper {
             value: object?.sealNumber ?? 0,
             width: .Full
         )
-        sealNumber.dependency = InputDependency(to: sealIssued, equalTo: true)
+        sealNumber.dependency.append(InputDependency(to: sealIssued, equalTo: true))
         sectionItems.append(sealNumber)
-        let spacer5 = InputSpacer()
-        spacer5.dependency = InputDependency(to: sealIssued, equalTo: true)
-        sectionItems.append(spacer5)
+//        let spacer5 = InputSpacer()
+//        spacer5.dependency = InputDependency(to: sealIssued, equalTo: true)
+//        sectionItems.append(spacer5)
         /// ---------------------------
         
         let otherInspectionFindings = DropdownInput(

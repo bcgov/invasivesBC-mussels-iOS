@@ -28,7 +28,7 @@ class WatercraftInspectionFormHelper {
             value: object?.inspectionTime ?? nil,
             width: .Third
         )
-        inspectionTime.dependency = InputDependency(to: isPassportHolder, equalTo: true)
+        inspectionTime.dependency.append(InputDependency(to: isPassportHolder, equalTo: true))
         items.append(inspectionTime)
         
         let passportNumber = TextInput(
@@ -39,7 +39,7 @@ class WatercraftInspectionFormHelper {
             validation: .PassportNumber,
             width: .Third
         )
-        passportNumber.dependency = InputDependency(to: isPassportHolder, equalTo: true)
+        passportNumber.dependency.append(InputDependency(to: isPassportHolder, equalTo: true))
         items.append(passportNumber)
         
         let launchedOutsideBC = SwitchInput(
@@ -49,7 +49,7 @@ class WatercraftInspectionFormHelper {
             value: object?.launchedOutsideBC ?? nil,
             width: .Third
         )
-        launchedOutsideBC.dependency = InputDependency(to: isPassportHolder, equalTo: true)
+        launchedOutsideBC.dependency.append(InputDependency(to: isPassportHolder, equalTo: true))
         items.append(launchedOutsideBC)
         
         let k9Inspection = SwitchInput(
@@ -59,7 +59,7 @@ class WatercraftInspectionFormHelper {
             value: object?.k9Inspection ?? nil,
             width: .Third
         )
-        k9Inspection.dependency = InputDependency(to: isPassportHolder, equalTo: true)
+        k9Inspection.dependency.append(InputDependency(to: isPassportHolder, equalTo: true))
         items.append(k9Inspection)
         
         let marineSpeciesFound = SwitchInput(
@@ -69,7 +69,7 @@ class WatercraftInspectionFormHelper {
             value: object?.marineSpeciesFound ?? nil,
             width: .Third
         )
-        marineSpeciesFound.dependency = InputDependency(to: isPassportHolder, equalTo: true)
+        marineSpeciesFound.dependency.append(InputDependency(to: isPassportHolder, equalTo: true))
         items.append(marineSpeciesFound)
         
         let aquaticPlantsFound = SwitchInput(
@@ -79,7 +79,7 @@ class WatercraftInspectionFormHelper {
             value: object?.aquaticPlantsFound ?? nil,
             width: .Third
         )
-        aquaticPlantsFound.dependency = InputDependency(to: isPassportHolder, equalTo: true)
+        aquaticPlantsFound.dependency.append(InputDependency(to: isPassportHolder, equalTo: true))
         items.append(aquaticPlantsFound)
         
         var decontaminationValue: String? = nil
@@ -96,7 +96,7 @@ class WatercraftInspectionFormHelper {
             value: decontaminationPerformedValue ?? nil,
             width: .Third
         )
-        decontaminationPerformed.dependency = InputDependency(to: isPassportHolder, equalTo: true)
+        decontaminationPerformed.dependency.append(InputDependency(to: isPassportHolder, equalTo: true))
         items.append(decontaminationPerformed)
         
         let decontaminationReference = TextInput (
@@ -107,7 +107,8 @@ class WatercraftInspectionFormHelper {
             validation: .AlphaNumberic,
             width: .Half
         )
-        decontaminationReference.dependency = InputDependency(to: decontaminationPerformed, equalTo: true)
+        decontaminationReference.dependency.append(InputDependency(to: decontaminationPerformed, equalTo: true))
+        decontaminationReference.dependency.append(InputDependency(to: isPassportHolder, equalTo: true))
         items.append(decontaminationReference)
         
         return items
@@ -132,11 +133,11 @@ class WatercraftInspectionFormHelper {
             value: object?.inspectionTime ?? nil,
             width: .Third
         )
-        inspectionTime.dependency = InputDependency(to: passportField, equalTo: false)
+        inspectionTime.dependency.append(InputDependency(to: passportField, equalTo: false))
         sectionItems.append(inspectionTime)
         sectionItems.append(InputSpacer(width: .Third))
         let spacer = InputSpacer(width: .Third)
-        spacer.dependency = InputDependency(to: passportField, equalTo: true)
+        spacer.dependency.append(InputDependency(to: passportField, equalTo: true))
         sectionItems.append(spacer)
         
         let nonMotorized = IntegerStepperInput(
@@ -217,7 +218,7 @@ class WatercraftInspectionFormHelper {
             dropdownItems: DropdownHelper.shared.getDropDownObject(for: .previousAISKnowledgeSource),
             codes: DropdownHelper.shared.getDropDownCodes(for: .previousAISKnowledgeSource)
         )
-        previousAISKnowledeSource.dependency = InputDependency(to: previousAISKnowlede, equalTo: true)
+        previousAISKnowledeSource.dependency.append(InputDependency(to: previousAISKnowlede, equalTo: true))
         sectionItems.append(previousAISKnowledeSource)
         
         /// ---------------------------
@@ -242,7 +243,7 @@ class WatercraftInspectionFormHelper {
             codes: DropdownHelper.shared.getDropDownCodes(for: .previousInspectionSource)
         )
         
-        previousInspectionSource.dependency = InputDependency(to: previousInspection, equalTo: true)
+        previousInspectionSource.dependency.append(InputDependency(to: previousInspection, equalTo: true))
         sectionItems.append(previousInspectionSource)
         
         let previousInspectionDays = IntegerInput(
@@ -252,7 +253,7 @@ class WatercraftInspectionFormHelper {
             value: object?.previousInspectionDays ?? 0,
             width: .Full
         )
-        previousInspectionDays.dependency = InputDependency(to: previousInspection, equalTo: true)
+        previousInspectionDays.dependency.append(InputDependency(to: previousInspection, equalTo: true))
         sectionItems.append(previousInspectionDays)
         
         return sectionItems

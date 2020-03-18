@@ -55,15 +55,20 @@ class InputGroupView: UIView {
         displayableInputItems = []
         dependencyKeys = []
         for item in inputItems {
-            if let dependency = item.dependency {
-                self.dependencyKeys.append(dependency.item.key)
-                if(!dependency.isSatisfied()) {
-                    continue
-                } else {
+            if item.dependency.isEmpty {
+                self.displayableInputItems.append(item)
+            } else {
+                var isSatisfied = true
+                for dependency in item.dependency {
+                    self.dependencyKeys.append(dependency.item.key)
+                    if(!dependency.isSatisfied()) {
+                        isSatisfied = false
+                    }
+                }
+                
+                if isSatisfied {
                     self.displayableInputItems.append(item)
                 }
-            } else {
-                self.displayableInputItems.append(item)
             }
         }
     }
@@ -153,7 +158,13 @@ class InputGroupView: UIView {
             
             // TODO: handle height for items with dependency where dependency is not satisfied
             // Its buggy for rows with .Forth width items
-            if let dependency = item.dependency, !dependency.isSatisfied() {
+            var dependencySatisfied = true
+            for dependency in item.dependency where !dependency.isSatisfied() {
+                dependencySatisfied = false
+                break
+            }
+            
+            if !item.dependency.isEmpty && !dependencySatisfied {
                 if index == (items.count - 1) {
                     rowHeights.append(tempMaxRowItemHeight)
                 }
