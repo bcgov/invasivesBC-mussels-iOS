@@ -86,7 +86,7 @@ class FormEntryViewController: BaseViewController {
         
         // Integer Input
         let inti1 = IntegerInput(key: "intInput1", header: "Integer", editable: true, width: .Third)
-        inti1.dependency = InputDependency(to: rs1, equalTo: true)
+        inti1.dependency.append(InputDependency(to: rs1, equalTo: true))
         
         // View field with computation
         let compute1 = FieldComputation(fields: [dbi1, inti1], rule: .Add)
