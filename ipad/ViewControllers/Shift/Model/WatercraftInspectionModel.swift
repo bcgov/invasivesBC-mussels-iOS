@@ -335,15 +335,14 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
     }
     
     func editHighRiskForm(inputItemKey: String, value: Any) {
-        guard let highRiskForm = self.highRiskAssessments.first else {
-            return
-        }
         let splitKey = inputItemKey.split(separator: "-")
         let key = String(splitKey[1])
-        highRiskForm.set(value: value, for: key)
-        print(highRiskForm)
+        if let highRiskForm = self.highRiskAssessments.first {
+           highRiskForm.set(value: value, for: key)
+        } else if let newHighRiskForm = self.addHighRiskAssessment() {
+            newHighRiskForm.set(value: value, for: key)
+        }
     }
-    
     
     func removePreviousWaterBody(at index: Int) {
         if index > self.previousWaterBodies.count - 1 {

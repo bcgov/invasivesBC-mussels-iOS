@@ -10,7 +10,6 @@ import UIKit
 import Reachability
 
 class ViewController: UIViewController, Theme {
-    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
