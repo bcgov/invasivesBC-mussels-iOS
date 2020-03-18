@@ -229,6 +229,10 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
         let previousAISKnowledeSourceId: Int? = Storage.shared.codeId(type: .previousAISKnowledgeSource, name: previousAISKnowledeSource)
         let previousInspectionSourceId: Int? = Storage.shared.codeId(type: .previousInspectionSource, name: previousInspectionSource)
 
+        var _decontaminationPerformed = false
+        if let highRisk = highRiskAssessments.first {
+            _decontaminationPerformed = highRisk.decontaminationPerformed
+        }
         
         var body: [String : Any] = [
             "workflow": id,
@@ -247,8 +251,8 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
             "veryComplex": veryComplex,
             "generalComment": generalComments.count > 1 ? generalComments : "None",
             "launchedOutsideBC": launchedOutsideBC,
-            "decontaminationPerformed": decontaminationPerformed,
             "commerciallyHauled": commerciallyHauled,
+            "decontaminationPerformed": _decontaminationPerformed,
             "highRiskArea": highRiskArea,
             "highRiskAIS": highriskAIS,
             "previousInspectionDays": previousInspectionDays,

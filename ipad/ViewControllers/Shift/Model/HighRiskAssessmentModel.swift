@@ -78,7 +78,6 @@ class HighRiskAssessmentModel: Object, BaseRealmObject {
         
         let standingWaterLocationId = Storage.shared.codeId(type: .adultMusselsLocation, name: standingWaterLocation)
         let adultDreissenidMusselsLocationId = Storage.shared.codeId(type: .adultMusselsLocation, name: adultDreissenidMusselsLocation)
-        
         var body: [String : Any] = [
             "cleanDrainDryAfterInspection": cleanDrainDryAfterInspection,
             "quarantinePeriodIssued": quarantinePeriodIssued,
