@@ -154,6 +154,9 @@ class InputGroupView: UIView {
             // TODO: handle height for items with dependency where dependency is not satisfied
             // Its buggy for rows with .Forth width items
             if let dependency = item.dependency, !dependency.isSatisfied() {
+                if index == (items.count - 1) {
+                    rowHeights.append(tempMaxRowItemHeight)
+                }
                 continue
             }
             

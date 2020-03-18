@@ -92,7 +92,7 @@ class HighRiskFormHelper {
         /// ---------------------------
         
         let decontaminationPerformed = SwitchInput(
-            key: "highRisk-adultDreissenidMusselsFound",
+            key: "highRisk-decontaminationPerformed",
             header: HighRiskFormFieldHeaders.InspectionOutcomes.decontaminationPerformed,
             editable: editable ?? true,
             value: object?.decontaminationPerformed ?? false,
@@ -100,11 +100,12 @@ class HighRiskFormHelper {
         )
         sectionItems.append(decontaminationPerformed)
         
-        let decontaminationReference = IntegerInput(
+        let decontaminationReference = TextInput (
             key: "highRisk-decontaminationReference",
             header: HighRiskFormFieldHeaders.InspectionOutcomes.decontaminationReference,
             editable: editable ?? true,
-            value: object?.decontaminationReference ?? 0,
+            value: object?.decontaminationReference ?? "",
+            validation: .AlphaNumberic,
             width: .Half
         )
         decontaminationReference.dependency = InputDependency(to: decontaminationPerformed, equalTo: true)
