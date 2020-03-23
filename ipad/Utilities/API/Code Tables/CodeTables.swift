@@ -24,6 +24,7 @@ public enum CodeTableType {
     case adultMusselsLocation
     case previousAISKnowledgeSource
     case previousInspectionSource
+    case countryProvince
 }
 
 class CodeTables {
@@ -118,6 +119,19 @@ class CodeTables {
         }
     }
     
+    private func processCountryProvinceTable(input: [[String : Any]]) -> CodeTableModel {
+        let table: CodeTableModel = CodeTableModel()
+        for item in input {
+            let code: CountryProvince = CountryProvince()
+            code.des = item["displayLabel"] as? String ?? ""
+            code.country = item["countryCode"] as? String ?? ""
+            code.province = item["provinceCode"] as? String ?? ""
+            table.provinces.append(code)
+        }
+        table.type = "countryProvince"
+        return table
+    }
+    
     private func processCodeTableJSON(dict: [String: Any]) -> [CodeTableModel]{
         var codeTables: [CodeTableModel] = []
         
@@ -127,6 +141,12 @@ class CodeTables {
                 continue
             }
             let tempCodeItems = itemJSON.map { $0.dictionaryObject }
+            // Check for CountryProvince : countryProvince
+            if let items = tempCodeItems as? [[String : Any]], key == "countryProvince" {
+                // Proccess countryProvince
+                codeTables.append(self.processCountryProvinceTable(input: items))
+                continue
+            }
             if let codeItems: [[String: Any]] = tempCodeItems as? [[String: Any]] {
                 // Saving CodeObj
                 let model = CodeTableModel()

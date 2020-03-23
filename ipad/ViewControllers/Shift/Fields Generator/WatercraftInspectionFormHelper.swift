@@ -117,12 +117,13 @@ class WatercraftInspectionFormHelper {
     static func getBasicInfoFields(for object: WatercradftInspectionModel? = nil, editable: Bool? = true, passportField: RadioSwitchInput) -> [InputItem] {
         var sectionItems: [InputItem] = []
         let province = DropdownInput(
-            key: "province",
+            key: "countryProvince",
             header: WatercraftFieldHeaderConstants.BasicInfo.province,
             editable: editable ?? true,
-            value: object?.province ?? "",
+            value: object?.countryProvince ?? "",
             width: .Third,
-            dropdownItems: DropdownHelper.shared.getDropdown(for: .provinces)
+            dropdownItems: DropdownHelper.shared.getDropdownForPrvinces(),
+            codes: DropdownHelper.shared.getProvinceCodes()
         )
         sectionItems.append(province)
         
