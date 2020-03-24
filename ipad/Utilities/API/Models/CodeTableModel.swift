@@ -36,4 +36,10 @@ class CodeTableModel: Object {
     @objc dynamic var type: String = ""
     let items: List<String> = List<String>()
     var codes: List<CodeObject> = List<CodeObject>()
+    var provinces: List<CountryProvince> = List<CountryProvince>()
+}
+
+class CountryProvince: CodeObject {
+    @objc dynamic var province: String = ""
+    @objc dynamic var country: String = ""
 }

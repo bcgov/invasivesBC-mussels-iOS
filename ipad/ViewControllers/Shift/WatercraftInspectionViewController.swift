@@ -234,6 +234,21 @@ class WatercraftInspectionViewController: BaseViewController {
                 guard let value = item.value.get(type: .RadioBoolean) as? Bool else {return}
                 self.showFullHighRiskForm(show: !value)
             }
+        } else if item.key.lowercased() == "countryprovince" {
+            // Store directly
+            InfoLog("countryProvider Selected: \(item)")
+            
+            model.set(value: item.value.get(type: item.type) as Any, for: item.key)
+            // Now Get code
+            guard let dropDown: DropdownInput = item as? DropdownInput else {
+                return
+            }
+            guard let code: CountryProvince = dropDown.getCode() as? CountryProvince else {
+                return
+            }
+            InfoLog("Selected Code: \(code)")
+            model.set(value: code.country, for: "countryOfResidence")
+            model.set(value: code.province, for: "provinceOfResidence")
         } else {
             // All other keys, store directly
             // TODO: needs cleanup for nil case

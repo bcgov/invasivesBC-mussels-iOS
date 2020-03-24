@@ -263,7 +263,14 @@ class DropdownInput: InputItem {
     }
     
     func getCode() -> CodeObject? {
-        return self.selectedCode
+        if let code = self.selectedCode {
+            return code
+        }
+        guard let value = self.getValue(), let codes: [CodeObject] = self.codeObjects else {
+            return nil
+        }
+        let filtered = codes.filter { $0.des == value}
+        return filtered.count > 0 ? filtered[0] : nil
     }
     
     func setValue(value: String?) {

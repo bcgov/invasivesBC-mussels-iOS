@@ -38,6 +38,14 @@ class DropdownHelper {
         return Storage.shared.codes(type: type)
     }
     
+    public func getDropdownForPrvinces() -> [DropdownModel] {
+        return dropdown(from: Storage.shared.provinces())
+    }
+    
+    public func getProvinceCodes() -> [CountryProvince] {
+        return Storage.shared.provincesCodes()
+    }
+    
     public func dropdown(from items: [String]) -> [DropdownModel] {
         var options: [DropdownModel] = []
         let set = Array(Set(items)).sorted()
