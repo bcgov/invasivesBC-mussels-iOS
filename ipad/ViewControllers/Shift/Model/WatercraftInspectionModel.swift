@@ -38,7 +38,12 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
     @objc dynamic var aquaticPlantsFound: Bool = false
     // Full Inspection
     // Basic
-    @objc dynamic var province: String = ""
+    // Province of residence
+    @objc dynamic var countryProvince: String = ""
+    // Key for Remote DB
+    @objc dynamic var provinceOfResidence = ""
+    @objc dynamic var countryOfResidence = ""
+    
     @objc dynamic var nonMotorized: Int = 0
     @objc dynamic var simple: Int = 0
     @objc dynamic var complex: Int = 0
@@ -257,13 +262,14 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
             "highRiskAIS": highriskAIS,
             "previousInspectionDays": previousInspectionDays,
             "passportNumber": passportNumber.count > 1 ? passportNumber : "None",
-            "provinceOfResidence": province.count > 1 ? province : "None",
             "previousDryStorage": previousDryStorage,
             "destinationDryStorage": destinationDryStorage,
             "unknownPreviousWaterBody": unknownPreviousWaterBody,
             "unknownDestinationWaterBody": unknownDestinationWaterBody,
             "commercialManufacturerAsPreviousWaterBody": commercialManufacturerAsPreviousWaterBody,
             "commercialManufacturerAsDestinationWaterBody": commercialManufacturerAsDestinationWaterBody,
+            "provinceOfResidence": provinceOfResidence != "" ? provinceOfResidence : "BC",
+            "countryOfResidence": countryOfResidence != "" ? countryOfResidence : "CAN",
             "journeys": []
         ]
         

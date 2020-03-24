@@ -114,6 +114,40 @@ class Storage {
         }
     }
     
+    public func provinces() -> [String] {
+        do {
+           let realm = try Realm()
+           let objs = realm.objects(CodeTableModel.self).filter("type ==  %@", "countryProvince").map { $0 }
+           let found = Array(objs)
+           if let first = found.first {
+               return Array(first.provinces.map { $0.des })
+           } else {
+               return []
+           }
+       } catch let error as NSError {
+           print("** REALM ERROR")
+           print(error)
+           return []
+       }
+    }
+    
+    public func provincesCodes() -> [CountryProvince] {
+        do {
+            let realm = try Realm()
+            let objs = realm.objects(CodeTableModel.self).filter("type ==  %@", "countryProvince").map { $0 }
+            let found = Array(objs)
+            if let first = found.first {
+                return Array(first.provinces)
+            } else {
+                return []
+            }
+        } catch let error as NSError {
+            print("** REALM ERROR")
+            print(error)
+            return []
+        }
+    }
+    
     public func codes(type: CodeTableType) -> [CodeObject] {
         do {
             let realm = try Realm()
