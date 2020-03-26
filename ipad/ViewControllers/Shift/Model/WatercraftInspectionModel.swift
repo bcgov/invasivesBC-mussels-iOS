@@ -220,8 +220,9 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
     
     func toDictionary(shift id: Int) -> [String : Any] {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "YYYY-MM-dd"
+        dateFormatter.dateFormat = "YYYY-MM-dd'T'HH:mm:ss.SSSZ"
         let formattedDateFull = dateFormatter.string(from: self.timeStamp)
+        print(formattedDateFull)
         
         // Create dictionary for high-risk assessment
         var highRiskAssessmentForm: [String: Any] = [String: Any] ()
@@ -301,7 +302,6 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
             if journeyDict.count > 1 {
                 journeys.append(journeyDict)
             }
-            
         }
         
         for destinationJourney in self.destinationWaterBodies {
@@ -310,8 +310,6 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
                 journeys.append(journeyDict)
             }
         }
-        
-        
         return journeys
     }
     

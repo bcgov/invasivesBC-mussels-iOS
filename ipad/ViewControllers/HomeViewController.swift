@@ -66,10 +66,11 @@ class HomeViewController: BaseViewController {
     
     // MARK: Outlet actions
     @IBAction func userButtonAction(_ sender: Any) {
-        showOptions(options: [.Logout], on: sender as! UIButton) { (selected) in
+        showOptions(options: [.Logout], on: sender as! UIButton) { [weak self] (selected) in
+            guard let _self = self else {return}
             Alert.show(title: StringConstants.Alerts.Logout.title, message: StringConstants.Alerts.Logout.message, yes: {
                 Auth.logout()
-                self.dismiss(animated: true, completion: nil)
+                _self.dismiss(animated: true, completion: nil)
             }) {}
         }
     }
@@ -80,29 +81,30 @@ class HomeViewController: BaseViewController {
             case .Ready:
                 AutoSync.shared.syncIfPossible()
             case .isOffline:
-                Alert.show(title: "Can't Synchronize", message: "Device is offline")
+                Alert.show(title: StringConstants.Alerts.IsOffline.title, message: StringConstants.Alerts.IsOffline.message)
             case .NeedsAccess:
-                Alert.show(title: "Access Deined", message: "You need the required access level to submit.\nAccess request has been created and is awaiting approval")
+                Alert.show(title: StringConstants.Alerts.NeedsAccess.title, message: StringConstants.Alerts.NeedsAccess.message)
             case .AuthExpired:
                 AutoSync.shared.showAuthDialogAndSync()
             case .NothingToSync:
-                Alert.show(title: "Nothing to sync", message: "There is nothing to sync")
+                Alert.show(title: StringConstants.Alerts.NothingToSync.title, message: StringConstants.Alerts.NothingToSync.message)
             case .SyncDisabled:
-                Alert.show(title: "Sync is disabled", message: "Please re-start application")
+                Alert.show(title: StringConstants.Alerts.SyncIsDisabled.title, message: StringConstants.Alerts.SyncIsDisabled.message)
             }
         }
     }
     
-    @IBAction func addEntryClicked(_ sender: Any) {
+    @IBAction func addEntryAction(_ sender: Any) {
         if let existing = getActiveShift() {
             self.navigateToShiftOverview(object: existing, editable: true)
         } else {
             let shiftModal: NewShiftModal = NewShiftModal.fromNib()
-            shiftModal.initialize(delegate: self, onStart: { (model) in
+            shiftModal.initialize(delegate: self, onStart: { [weak self] (model) in
+                guard let _self = self else {return}
                 Storage.shared.save(shift: model)
-                self.navigateToShiftOverview(object: model, editable: true)
+                _self.navigateToShiftOverview(object: model, editable: true)
             }) {
-                print("cancelled")
+                // Canceled
             }
         }
     }
@@ -112,28 +114,6 @@ class HomeViewController: BaseViewController {
         // Show Message With Admin Email Address
         // TODO: Call send report when API is fixed
         Alert.show(title: "Report", message: "Send an email to michael.shasko@gov.bc.ca describing the nature of the problem (screenshots are appreciated!) and the expected behaviour. Please also indicate the version number at the time you encountered the bug. (Version: \(ApplicationLogger.defalutLogger.applicationVersion))")
-    }
-    
-    private func sendReport() {
-        let urls = ApplicationLogger.defalutLogger.logsURLs()
-        Banner.show(message: "Reporting issue ...")
-        APIRequest.uploadFile(fileURL: urls[0], info: ["name": "ios_log.txt"]) { (sucess) in
-            if sucess {
-                InfoLog("Reporting [SUCCESS]")
-                Banner.show(message: "Successfully submitted the report. System Admin will contact you as soon as possible.")
-            } else {
-                Banner.show(message: "Unable to submit the report, please try again later. ")
-                InfoLog("Reporting FAIL")
-            }
-        }
-    }
-    
-    func getActiveShift() -> ShiftModel? {
-        let existingShifts = Storage.shared.shifts(by: Date().stringShort())
-        for shift in existingShifts where shift.shouldSync == false && shift.remoteId < 0 {
-            return shift
-        }
-        return nil
     }
     
     // MARK: - Navigation
@@ -148,7 +128,7 @@ class HomeViewController: BaseViewController {
         self.performSegue(withIdentifier: "showShiftOverview", sender: self)
     }
     
-    // MARK: Functions
+    // MARK: Initialization
     private func initialize() {
         let shifts = Storage.shared.shifts()
         beginReachabilityNotification()
@@ -161,17 +141,53 @@ class HomeViewController: BaseViewController {
         for subview in switcherHolder.subviews {
             subview.removeFromSuperview()
         }
-        _ = Switcher.show(items: switcherItems, in: switcherHolder, initial: switcherItems.first) { (selection) in
+        _ = Switcher.show(items: switcherItems, in: switcherHolder, initial: switcherItems.first) { [weak self] (selection) in
+            guard let _self = self else {return}
             let shifts = Storage.shared.shifts()
             if selection.lowercased() == "all" {
-                self.createTable(with: shifts)
+                _self.createTable(with: shifts)
                 return
             }
             var fileter: [ShiftModel] = []
             for shift in shifts where shift.status.lowercased() == selection.lowercased() {
                 fileter.append(shift)
             }
-            self.createTable(with: fileter)
+            _self.createTable(with: fileter)
+        }
+    }
+    
+    func beginListener() {
+        NotificationCenter.default.removeObserver(self, name: .TableButtonClicked, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.tableButtonClicked(notification:)), name: .TableButtonClicked, object: nil)
+        NotificationCenter.default.removeObserver(self, name: .syncExecuted, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.syncExecuted(notification:)), name: .syncExecuted, object: nil)
+    }
+    
+    @objc func syncExecuted(notification: Notification) {
+        self.initialize()
+    }
+    
+    // MARK: Utilities
+    func getActiveShift() -> ShiftModel? {
+        let existingShifts = Storage.shared.shifts(by: Date().stringShort())
+        for shift in existingShifts where shift.shouldSync == false && shift.remoteId < 0 {
+            return shift
+        }
+        return nil
+    }
+    
+    // MARK: Feedback
+    private func sendReport() {
+        let urls = ApplicationLogger.defalutLogger.logsURLs()
+        Banner.show(message: "Reporting issue ...")
+        APIRequest.uploadFile(fileURL: urls[0], info: ["name": "ios_log.txt"]) { (sucess) in
+            if sucess {
+                InfoLog("Reporting [SUCCESS]")
+                Banner.show(message: "Successfully submitted the report. System Admin will contact you as soon as possible.")
+            } else {
+                Banner.show(message: "Unable to submit the report, please try again later. ")
+                InfoLog("Reporting FAIL")
+            }
         }
     }
     
@@ -196,25 +212,12 @@ class HomeViewController: BaseViewController {
         beginListener()
     }
     
-    // Listener for Table button action
-    func beginListener() {
-        NotificationCenter.default.removeObserver(self, name: .TableButtonClicked, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.tableButtonClicked(notification:)), name: .TableButtonClicked, object: nil)
-        NotificationCenter.default.removeObserver(self, name: .syncExecuted, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.syncExecuted(notification:)), name: .syncExecuted, object: nil)
-        
-    }
-    
     // Table Button clicked
     @objc func tableButtonClicked(notification: Notification) {
         guard let actionModel = notification.object as? TableClickActionModel, let shiftModel = actionModel.object as? ShiftModel else {return}
         if actionModel.buttonName.lowercased() == "view" {
             self.navigateToShiftOverview(object: shiftModel, editable: shiftModel.localId == getActiveShift()?.localId)
         }
-    }
-    
-    @objc func syncExecuted(notification: Notification) {
-        self.initialize()
     }
     
     // MARK: Style

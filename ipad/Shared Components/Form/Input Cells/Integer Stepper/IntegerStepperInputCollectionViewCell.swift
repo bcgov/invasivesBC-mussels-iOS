@@ -61,7 +61,7 @@ class IntegerStepperInputCollectionViewCell: BaseInputCell<IntegerStepperInput>,
     }
     
     func style() {
-        styleFieldInput(textField: textField)
-        styleFieldHeader(label: headerLabel)
+        styleInput(field: textField, header: headerLabel, editable: model?.editable ?? false)
+        stepper.alpha = ((model?.editable) ?? true) ? 1 : 0
     }
 }

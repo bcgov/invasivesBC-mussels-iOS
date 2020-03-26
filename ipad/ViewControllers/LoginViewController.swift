@@ -10,16 +10,19 @@ import UIKit
 
 class LoginViewController: BaseViewController {
     
+    // MARK: Outlets
     @IBOutlet weak var appTitle: UILabel!
     @IBOutlet weak var loginWithIdirButton: UIButton!
     @IBOutlet weak var loginWithBCeIDButton: UIButton!
     @IBOutlet weak var loginContainer: UIView!
     
+    // MARK: ViewController Functions
     override func viewDidLoad() {
         super.viewDidLoad()
         style()
     }
     
+    // MARK: Outlet Actions
     @IBAction func loginWithIdirAction(_ sender: UIButton) {
         Auth.refreshEnviormentConstants(withIdpHint: "idir")
         Settings.shared.setAuth(type: .Idir)
@@ -47,19 +50,9 @@ class LoginViewController: BaseViewController {
     private func afterLogin() {
         Settings.shared.setUserAuthId()
         self.dismiss(animated: true, completion: nil)
-//        if !AutoSync.shared.shouldPerformInitialSync() {
-//            self.dismiss(animated: true, completion: nil)
-//            return
-//        }
-//        AutoSync.shared.performInitialSync { (success) in
-//            if (!success) {
-//                Auth.logout()
-//                return
-//            }
-//            self.dismiss(animated: true, completion: nil)
-//        }
     }
     
+    // MARK: Style
     private func style() {
         setAppTitle(label: appTitle, darkBackground: false)
         styleFillButton(button: loginWithIdirButton)

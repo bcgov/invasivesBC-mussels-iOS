@@ -60,13 +60,33 @@ extension Theme {
     }
     
     // Input field content
-    public func styleFieldInput(textField: UITextField) {
+    private func styleFieldInput(textField: UITextField) {
         textField.textColor = Colors.inputText
         textField.backgroundColor = Colors.inputBackground
         textField.font = getInputFieldFont()
         textField.layer.cornerRadius = 3
         textField.borderStyle = .roundedRect
         textField.layer.borderColor = Colors.inputBackground.cgColor
+    }
+    
+    private func styleFieldInputReadOnly(textField: UITextField) {
+        textField.textColor = Colors.inputText
+        textField.backgroundColor = .clear
+        textField.font = getInputFieldFont()
+        textField.layer.cornerRadius = 0
+        textField.borderStyle = .none
+        textField.layer.borderColor = UIColor.clear.cgColor
+    }
+    
+    public func styleInput(field: UITextField, header: UILabel, editable: Bool) {
+        if editable {
+            styleFieldInput(textField: field)
+            styleFieldHeader(label: header)
+        } else {
+            styleFieldHeader(label: header)
+            styleFieldInputReadOnly(textField: field)
+        }
+        
     }
     
     // Input field content
