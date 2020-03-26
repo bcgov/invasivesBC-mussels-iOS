@@ -40,6 +40,7 @@ class DropdownCollectionViewCell: BaseInputCell<DropdownInput>, UITextFieldDeleg
         let gesture = UITapGestureRecognizer(target: self, action:  #selector(self.onClick))
         self.textField.addGestureRecognizer(gesture)
         self.arrowDown.isHidden = !model.editable
+        style()
     }
     
     @objc func onClick(sender : UITapGestureRecognizer) {
@@ -71,8 +72,7 @@ class DropdownCollectionViewCell: BaseInputCell<DropdownInput>, UITextFieldDeleg
     
     // MARK: Style
     private func style() {
-        styleFieldInput(textField: textField)
-        styleFieldHeader(label: headerLabel)
+        styleInput(field: textField, header: headerLabel, editable: model?.editable ?? false)
     }
     
 }

@@ -51,8 +51,7 @@ class DoubleInputCollectionViewCell: BaseInputCell<DoubleInput>, UITextFieldDele
     
     // MARK: Style
     private func style() {
-        styleFieldInput(textField: textField)
-        styleFieldHeader(label: headerLabel)
+        styleInput(field: textField, header: headerLabel, editable: model?.editable ?? false)
     }
     
 }

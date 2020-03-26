@@ -10,56 +10,74 @@ import UIKit
 import Reachability
 
 class ViewController: UIViewController, Theme {
+    
+    // MARK: ViewController Functions
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        // On viewDidLoad, Choose between presenting
+        // Login ViewController
+        // Or Home ViewController
         presentNext()
     }
     
+    // MARK: Class Functions
     private func presentNext() {
         if (!isAuthenticated()) {
-            showLoginPage()
+            segueToLoginPage()
             return
-        } else {
-            AccessService.shared.hasAccess { [weak self] (hasAccess) in
-                guard let strongSelf = self else {return}
-                if hasAccess {
-                    strongSelf.showHomePage()
-                } else {
-                    strongSelf.showPendingAccess()
-                }
+        }
+        AccessService.shared.hasAccess { [weak self] (hasAccess) in
+            guard let strongSelf = self else {return}
+            if hasAccess {
+                strongSelf.showHomePage()
+            } else {
+                strongSelf.showPendingAccess()
             }
         }
     }
     
-    private func showLoginPage() {
+    private func segueToLoginPage() {
         performSegue(withIdentifier: "performLogin", sender: nil)
+    }
+    
+    private func segueToHomePage() {
+        performSegue(withIdentifier: "showHomePage", sender: nil)
     }
     
     private func showPendingAccess() {
         let awaitingAccessResponseView: AwaitingAccessResponse = UIView.fromNib()
-        awaitingAccessResponseView.show(in: self.view)
+        awaitingAccessResponseView.show(in: self.view, onRefresh: { [weak self] in
+            guard let _self = self else {return}
+            awaitingAccessResponseView.removeFromSuperview()
+            _self.presentNext()
+        })
     }
     
     private func showHomePage() {
         if !AutoSync.shared.shouldPerformInitialSync() {
-            self.performSegue(withIdentifier: "showHomePage", sender: nil)
+            segueToHomePage()
             return
         }
         AutoSync.shared.performInitialSync { [weak self] (success) in
-            guard let strongSelf = self else {return}
+            guard let _self = self else {return}
             if success {
-                strongSelf.performSegue(withIdentifier: "showHomePage", sender: nil)
+                _self.segueToHomePage()
             } else {
-                Alert.show(title: "Can't continue", message: "On your first login, we need to download some information.\nMake sure you have a stable connection")
-                Auth.logout()
+                _self.onFailedLogin()
             }
         }
     }
     
+    private func onFailedLogin() {
+        Alert.show(title: "Can't continue", message: "On your first login, we need to download some information.\nMake sure you have a stable connection")
+        Auth.logout()
+    }
+    
+    // MARK: Auth check
     private func isAuthenticated() -> Bool {
         // 1) User has logged in
         if !Auth.isLoggedIn() {
