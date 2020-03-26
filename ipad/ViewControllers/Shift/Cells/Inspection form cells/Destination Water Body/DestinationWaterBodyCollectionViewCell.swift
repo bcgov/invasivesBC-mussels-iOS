@@ -18,6 +18,8 @@ class DestinationWaterBodyCollectionViewCell: BaseJourneyCollectionViewCell, The
     var onDelete: (()-> Void)?
     weak var delegate: InputDelegate?
     
+    var isEditable: Bool = false
+    
     @IBAction func optionsAction(_ sender: UIButton) {
         guard let onDelete = onDelete, let delegate = delegate else {return}
         delegate.showOptionsDelegate(options: [.Delete], on: sender) { (selected) in
@@ -28,6 +30,7 @@ class DestinationWaterBodyCollectionViewCell: BaseJourneyCollectionViewCell, The
     }
     
     func setup(with model: DestinationWaterbodyModel, isEditable: Bool, delegate: InputDelegate, onDelete: @escaping ()-> Void) {
+        self.isEditable = isEditable
         self.onDelete = onDelete
         self.delegate = delegate
         if !model.otherWaterbody.isEmpty {
@@ -41,8 +44,7 @@ class DestinationWaterBodyCollectionViewCell: BaseJourneyCollectionViewCell, The
     
     private func style() {
         deleteButton.tintColor = Colors.primary
-        styleFieldHeader(label: fieldHeader)
-        styleFieldInput(textField: inputField)
+        styleInput(field: inputField, header: fieldHeader, editable: false)
         inputField.isEnabled = false
         contentView.backgroundColor = UIColor.yellow
         contentView.layer.cornerRadius = 3

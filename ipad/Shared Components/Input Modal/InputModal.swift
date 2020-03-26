@@ -147,8 +147,7 @@ class InputModal: ModalView, Theme {
     
     // MARK: Style
     func style() {
-        styleFieldHeader(label: titleLabel)
-        styleFieldInput(textField: input)
+        styleInput(field: input, header: titleLabel, editable: true)
         styleHollowButton(button: cancelButton)
         styleFillButton(button: addButton)
         self.backgroundColor = UIColor.white

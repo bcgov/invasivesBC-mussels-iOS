@@ -14,6 +14,17 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launch" translatesAutoresizingMaskIntoConstraints="NO" id="3G0-oI-rfl">
+                                <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                            </imageView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="3G0-oI-rfl" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="6EP-sg-uuC"/>
+                            <constraint firstItem="3G0-oI-rfl" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Ls6-cS-eBs"/>
+                            <constraint firstItem="3G0-oI-rfl" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="bie-1H-N7c"/>
+                            <constraint firstItem="3G0-oI-rfl" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="lJv-Ds-zYp"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
@@ -251,7 +262,7 @@
                                         </constraints>
                                         <state key="normal" title="Add New Shift"/>
                                         <connections>
-                                            <action selector="addEntryClicked:" destination="JwX-i7-BNh" eventType="touchUpInside" id="vg4-rN-YmO"/>
+                                            <action selector="addEntryAction:" destination="JwX-i7-BNh" eventType="touchUpInside" id="vg4-rN-YmO"/>
                                         </connections>
                                     </button>
                                 </subviews>
