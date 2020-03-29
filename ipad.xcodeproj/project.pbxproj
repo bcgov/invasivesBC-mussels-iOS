@@ -173,6 +173,7 @@
 		5C0F697D237B683200F96CA5 /* CodesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0F697C237B683200F96CA5 /* CodesAPI.swift */; };
 		5C0F6980237C6DDA00F96CA5 /* APIChain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0F697E237B6F7800F96CA5 /* APIChain.swift */; };
 		5C649C922412F6E300F01AE5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5C649C912412F6E200F01AE5 /* GoogleService-Info.plist */; };
+		5C7D32F424304CFC00AFCE43 /* UIViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7D32F324304CFC00AFCE43 /* UIViewControllerExtensions.swift */; };
 		5C82D3D32374A0D400B065BA /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 5C82D3D22374A0D400B065BA /* .gitignore */; };
 		5C82D3D72374AECC00B065BA /* HighRiskModalView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C82D3D52374AECC00B065BA /* HighRiskModalView.xib */; };
 		5C82D3D82374AECC00B065BA /* HighRiskModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C82D3D62374AECC00B065BA /* HighRiskModalView.swift */; };
@@ -380,6 +381,7 @@
 		5C0F697C237B683200F96CA5 /* CodesAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodesAPI.swift; sourceTree = "<group>"; };
 		5C0F697E237B6F7800F96CA5 /* APIChain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIChain.swift; sourceTree = "<group>"; };
 		5C649C912412F6E200F01AE5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		5C7D32F324304CFC00AFCE43 /* UIViewControllerExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtensions.swift; sourceTree = "<group>"; };
 		5C82D3D22374A0D400B065BA /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		5C82D3D52374AECC00B065BA /* HighRiskModalView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HighRiskModalView.xib; sourceTree = "<group>"; };
 		5C82D3D62374AECC00B065BA /* HighRiskModalView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HighRiskModalView.swift; sourceTree = "<group>"; };
@@ -1268,6 +1270,7 @@
 				5C82D3EB2374BD1300B065BA /* Promise.swift */,
 				5C82D3E72374BCDB00B065BA /* GenericConst.swift */,
 				5C82D3E92374BCFA00B065BA /* FoundationExtension.swift */,
+				5C7D32F324304CFC00AFCE43 /* UIViewControllerExtensions.swift */,
 			);
 			path = GenericCore;
 			sourceTree = "<group>";
@@ -1577,6 +1580,7 @@
 				29DB4E59238715A300B13646 /* ShiftInformationHeaderCollectionViewCell.swift in Sources */,
 				298BF7CE2395D57E0072AA28 /* DestinationWaterBodyModel.swift in Sources */,
 				296DEC27238C61A80035E7FA /* IntegerStepperInputCollectionViewCell.swift in Sources */,
+				5C7D32F424304CFC00AFCE43 /* UIViewControllerExtensions.swift in Sources */,
 				29BAC5192367B34000A620F4 /* Fonts.swift in Sources */,
 				5C82D404237B31C200B065BA /* WatercraftRiskAssessmentAPI.swift in Sources */,
 				5C82D3D82374AECC00B065BA /* HighRiskModalView.swift in Sources */,
