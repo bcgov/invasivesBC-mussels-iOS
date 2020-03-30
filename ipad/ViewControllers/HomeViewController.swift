@@ -111,9 +111,14 @@ class HomeViewController: BaseViewController {
     
     @IBAction func reportAnIssueAction(_ sender: Any?) {
         InfoLog("User want to report")
-        // Show Message With Admin Email Address
-        // TODO: Call send report when API is fixed
-        Alert.show(title: "Report", message: "Send an email to michael.shasko@gov.bc.ca describing the nature of the problem (screenshots are appreciated!) and the expected behaviour. Please also indicate the version number at the time you encountered the bug. (Version: \(ApplicationLogger.defalutLogger.applicationVersion))")
+        // Showing alert with input
+        self.showAlert("Do you want to report an issue?", "Report", ["Message to admin"], ["Cancel", "OK"]) {[weak self] (info) in
+            if info.selectedButtonIndex == 1 {
+                InfoLog("User selects => Report")
+                let message = info.textFieldValues.count > 0 ? info.textFieldValues[0] : ""
+                self?.sendReport(message: message)
+            }
+        }
     }
     
     // MARK: - Navigation
@@ -177,10 +182,10 @@ class HomeViewController: BaseViewController {
     }
     
     // MARK: Feedback
-    private func sendReport() {
+    private func sendReport(message: String = "") {
         let urls = ApplicationLogger.defalutLogger.logsURLs()
         Banner.show(message: "Reporting issue ...")
-        APIRequest.uploadFile(fileURL: urls[0], info: ["name": "ios_log.txt"]) { (sucess) in
+        APIRequest.uploadFile(fileURL: urls[0], info: ["name": "ios_log.txt", "message": message]) { (sucess) in
             if sucess {
                 InfoLog("Reporting [SUCCESS]")
                 Banner.show(message: "Successfully submitted the report. System Admin will contact you as soon as possible.")
