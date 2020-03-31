@@ -12,6 +12,7 @@ class FormButtonCollectionViewCell: UICollectionViewCell, Theme {
     
     typealias FormButtonCompletion = (_ action: FormButtonAction) -> Void
 
+    // MARK: Outlets
     @IBOutlet weak var button: UIButton!
     @IBOutlet weak var dryStorageSwitch: UISwitch?
     @IBOutlet weak var switchLabel: UILabel?
@@ -95,6 +96,9 @@ class FormButtonCollectionViewCell: UICollectionViewCell, Theme {
     
     func set(status: Bool) {
         self.button?.isEnabled = !status
+        self.unknownWaterBodySwitch?.isEnabled = !status
+        self.commercialManufacturerSwitch?.isEnabled = !status
+        self.dryStorageSwitch?.isEnabled = !status
         if status {
             styleDisable(button: self.button)
         } else {

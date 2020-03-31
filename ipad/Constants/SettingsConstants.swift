@@ -8,7 +8,7 @@
 
 import Foundation
 
-
+// MARK: Settings
 struct SettingsConstants {
     static let shortAnimationDuration: Double = 0.3
     static let animationDuration: Double = 0.5

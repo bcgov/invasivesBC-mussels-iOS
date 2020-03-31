@@ -20,7 +20,6 @@
 		2907E4B42368CE3600946B3F /* PopoverSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2907E4B32368CE3600946B3F /* PopoverSize.swift */; };
 		2907E4B72368D24900946B3F /* InputModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2907E4B62368D24900946B3F /* InputModal.swift */; };
 		2907E4B92368D25800946B3F /* InputModal.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2907E4B82368D25800946B3F /* InputModal.xib */; };
-		2907E4BB2368FEA500946B3F /* FormEntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2907E4BA2368FEA500946B3F /* FormEntryViewController.swift */; };
 		290DA9DC24044A5C00438699 /* AccessService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 290DA9DB24044A5C00438699 /* AccessService.swift */; };
 		290DA9DF2404621700438699 /* AwaitingAccessResponse.xib in Resources */ = {isa = PBXBuildFile; fileRef = 290DA9DE2404621700438699 /* AwaitingAccessResponse.xib */; };
 		290DA9E12404622700438699 /* AwaitingAccessResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 290DA9E02404622700438699 /* AwaitingAccessResponse.swift */; };
@@ -37,7 +36,6 @@
 		294D8F672385D11C0094090D /* TableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294D8F662385D11C0094090D /* TableViewModel.swift */; };
 		294D8F692385D1F10094090D /* TestTableViewObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294D8F682385D1F10094090D /* TestTableViewObject.swift */; };
 		294D9A882379C62F00BD4928 /* WatercraftInspectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294D9A872379C62F00BD4928 /* WatercraftInspectionModel.swift */; };
-		294D9A8C237B1E7400BD4928 /* WatercraftInspectionFieldHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294D9A8B237B1E7400BD4928 /* WatercraftInspectionFieldHeaders.swift */; };
 		294D9A8F237B1EA300BD4928 /* WatercraftInspectionFormHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294D9A8E237B1EA300BD4928 /* WatercraftInspectionFormHelper.swift */; };
 		294EF30B2370841B00EEB3B6 /* SyncView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 294EF30A2370841B00EEB3B6 /* SyncView.xib */; };
 		294EF30F2370845700EEB3B6 /* SyncView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294EF30E2370845700EEB3B6 /* SyncView.swift */; };
@@ -65,10 +63,8 @@
 		29514BF12368CB5D00DC89C4 /* DropdownTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29514BEF2368CB5D00DC89C4 /* DropdownTableViewCell.xib */; };
 		29547B4A23F0BF4F000173F1 /* SelectedWaterBodyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29547B4823F0BF4F000173F1 /* SelectedWaterBodyCollectionViewCell.swift */; };
 		29547B4B23F0BF4F000173F1 /* SelectedWaterBodyCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29547B4923F0BF4F000173F1 /* SelectedWaterBodyCollectionViewCell.xib */; };
-		29588745237B50CC00224FFA /* HighRiskFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29588744237B50CC00224FFA /* HighRiskFormViewController.swift */; };
 		29588748237B52F000224FFA /* HighRiskAssessmentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29588747237B52F000224FFA /* HighRiskAssessmentModel.swift */; };
 		2958874A237B583C00224FFA /* HighRiskFormHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29588749237B583C00224FFA /* HighRiskFormHelper.swift */; };
-		2958874D237B58D600224FFA /* HighRiskFormFieldHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2958874C237B58D600224FFA /* HighRiskFormFieldHeaders.swift */; };
 		296237D62374B6B400032BB5 /* RadioSwitchInputCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 296237D42374B6B400032BB5 /* RadioSwitchInputCollectionViewCell.swift */; };
 		296237D72374B6B400032BB5 /* RadioSwitchInputCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 296237D52374B6B400032BB5 /* RadioSwitchInputCollectionViewCell.xib */; };
 		296DEC15238C4CA70035E7FA /* RadioBooleanCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 296DEC13238C4CA70035E7FA /* RadioBooleanCollectionViewCell.swift */; };
@@ -223,7 +219,6 @@
 		2907E4B32368CE3600946B3F /* PopoverSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopoverSize.swift; sourceTree = "<group>"; };
 		2907E4B62368D24900946B3F /* InputModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputModal.swift; sourceTree = "<group>"; };
 		2907E4B82368D25800946B3F /* InputModal.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InputModal.xib; sourceTree = "<group>"; };
-		2907E4BA2368FEA500946B3F /* FormEntryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormEntryViewController.swift; sourceTree = "<group>"; };
 		290DA9DB24044A5C00438699 /* AccessService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessService.swift; sourceTree = "<group>"; };
 		290DA9DE2404621700438699 /* AwaitingAccessResponse.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AwaitingAccessResponse.xib; sourceTree = "<group>"; };
 		290DA9E02404622700438699 /* AwaitingAccessResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AwaitingAccessResponse.swift; sourceTree = "<group>"; };
@@ -240,7 +235,6 @@
 		294D8F662385D11C0094090D /* TableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewModel.swift; sourceTree = "<group>"; };
 		294D8F682385D1F10094090D /* TestTableViewObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestTableViewObject.swift; sourceTree = "<group>"; };
 		294D9A872379C62F00BD4928 /* WatercraftInspectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatercraftInspectionModel.swift; sourceTree = "<group>"; };
-		294D9A8B237B1E7400BD4928 /* WatercraftInspectionFieldHeaders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatercraftInspectionFieldHeaders.swift; sourceTree = "<group>"; };
 		294D9A8E237B1EA300BD4928 /* WatercraftInspectionFormHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatercraftInspectionFormHelper.swift; sourceTree = "<group>"; };
 		294EF30A2370841B00EEB3B6 /* SyncView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SyncView.xib; sourceTree = "<group>"; };
 		294EF30E2370845700EEB3B6 /* SyncView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncView.swift; sourceTree = "<group>"; };
@@ -269,10 +263,8 @@
 		29514BEF2368CB5D00DC89C4 /* DropdownTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DropdownTableViewCell.xib; sourceTree = "<group>"; };
 		29547B4823F0BF4F000173F1 /* SelectedWaterBodyCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedWaterBodyCollectionViewCell.swift; sourceTree = "<group>"; };
 		29547B4923F0BF4F000173F1 /* SelectedWaterBodyCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectedWaterBodyCollectionViewCell.xib; sourceTree = "<group>"; };
-		29588744237B50CC00224FFA /* HighRiskFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighRiskFormViewController.swift; sourceTree = "<group>"; };
 		29588747237B52F000224FFA /* HighRiskAssessmentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighRiskAssessmentModel.swift; sourceTree = "<group>"; };
 		29588749237B583C00224FFA /* HighRiskFormHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighRiskFormHelper.swift; sourceTree = "<group>"; };
-		2958874C237B58D600224FFA /* HighRiskFormFieldHeaders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighRiskFormFieldHeaders.swift; sourceTree = "<group>"; };
 		296237D42374B6B400032BB5 /* RadioSwitchInputCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioSwitchInputCollectionViewCell.swift; sourceTree = "<group>"; };
 		296237D52374B6B400032BB5 /* RadioSwitchInputCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RadioSwitchInputCollectionViewCell.xib; sourceTree = "<group>"; };
 		296DEC13238C4CA70035E7FA /* RadioBooleanCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioBooleanCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -503,7 +495,9 @@
 		2907E4B22368CE2700946B3F /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				2907E4B32368CE3600946B3F /* PopoverSize.swift */,
+				2944BCD52433928400826F48 /* Shift */,
+				2944BCD62433929700826F48 /* Waterfract Inspection */,
+				2944BCD7243392A500826F48 /* Other */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -577,6 +571,108 @@
 			path = "View Field";
 			sourceTree = "<group>";
 		};
+		2944BCD52433928400826F48 /* Shift */ = {
+			isa = PBXGroup;
+			children = (
+				29DB4E4023870F2B00B13646 /* ShiftModel.swift */,
+				2944BCD92433931600826F48 /* Form Fields */,
+			);
+			path = Shift;
+			sourceTree = "<group>";
+		};
+		2944BCD62433929700826F48 /* Waterfract Inspection */ = {
+			isa = PBXGroup;
+			children = (
+				294D9A872379C62F00BD4928 /* WatercraftInspectionModel.swift */,
+				29588747237B52F000224FFA /* HighRiskAssessmentModel.swift */,
+				298BF7CB2395D45C0072AA28 /* PreviousWaterBodyModel.swift */,
+				298BF7CD2395D57E0072AA28 /* DestinationWaterBodyModel.swift */,
+				2944BCD8243392F600826F48 /* Form Fields */,
+			);
+			path = "Waterfract Inspection";
+			sourceTree = "<group>";
+		};
+		2944BCD7243392A500826F48 /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				2907E4B32368CE3600946B3F /* PopoverSize.swift */,
+			);
+			path = Other;
+			sourceTree = "<group>";
+		};
+		2944BCD8243392F600826F48 /* Form Fields */ = {
+			isa = PBXGroup;
+			children = (
+				294D9A8E237B1EA300BD4928 /* WatercraftInspectionFormHelper.swift */,
+				29588749237B583C00224FFA /* HighRiskFormHelper.swift */,
+			);
+			path = "Form Fields";
+			sourceTree = "<group>";
+		};
+		2944BCD92433931600826F48 /* Form Fields */ = {
+			isa = PBXGroup;
+			children = (
+				296DEC22238C56A30035E7FA /* ShiftFormHelper.swift */,
+			);
+			path = "Form Fields";
+			sourceTree = "<group>";
+		};
+		2944BCDA243393F700826F48 /* Watercraft Inspections */ = {
+			isa = PBXGroup;
+			children = (
+				29F4EC502370B007001D5CFA /* WatercraftInspectionViewController.swift */,
+				2944BCDE2433949200826F48 /* Cells */,
+			);
+			path = "Watercraft Inspections";
+			sourceTree = "<group>";
+		};
+		2944BCDB2433945A00826F48 /* Entry Point */ = {
+			isa = PBXGroup;
+			children = (
+				29CEC91D23676424003B21B9 /* ViewController.swift */,
+			);
+			path = "Entry Point";
+			sourceTree = "<group>";
+		};
+		2944BCDC2433946A00826F48 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				29BAC50D236790C900A620F4 /* HomeViewController.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		2944BCDD2433947200826F48 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				29BAC50B23677EDC00A620F4 /* LoginViewController.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		2944BCDE2433949200826F48 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				1E6D9A2D2399BDEE0034FDEF /* BaseJourneyCollectionViewCell.swift */,
+				29DB0118237207AD0046E605 /* Button */,
+				299BF01523FC9023001732CD /* Journey Header */,
+				29E4BBEB237217F40079475F /* Destination Water Body */,
+				29E4BBEA237217E60079475F /* Previous Water Body */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		2944BCDF243394A300826F48 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				29DB4E422387111700B13646 /* Base */,
+				29DB4E432387112000B13646 /* Header */,
+				29DB4E4B238712ED00B13646 /* Inspections */,
+				29DB4E502387153400B13646 /* Shift Information */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
 		294D8F5A23847BB30094090D /* Cells */ = {
 			isa = PBXGroup;
 			children = (
@@ -586,37 +682,6 @@
 				29856ABD241AAF3100E4E0FC /* TableEmptyStateTableViewCell.xib */,
 			);
 			path = Cells;
-			sourceTree = "<group>";
-		};
-		294D9A89237B1D8100BD4928 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				294D9A872379C62F00BD4928 /* WatercraftInspectionModel.swift */,
-				29588747237B52F000224FFA /* HighRiskAssessmentModel.swift */,
-				29DB4E4023870F2B00B13646 /* ShiftModel.swift */,
-				298BF7CB2395D45C0072AA28 /* PreviousWaterBodyModel.swift */,
-				298BF7CD2395D57E0072AA28 /* DestinationWaterBodyModel.swift */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		294D9A8A237B1D9100BD4928 /* Contants */ = {
-			isa = PBXGroup;
-			children = (
-				294D9A8B237B1E7400BD4928 /* WatercraftInspectionFieldHeaders.swift */,
-				2958874C237B58D600224FFA /* HighRiskFormFieldHeaders.swift */,
-			);
-			path = Contants;
-			sourceTree = "<group>";
-		};
-		294D9A8D237B1E8900BD4928 /* Fields Generator */ = {
-			isa = PBXGroup;
-			children = (
-				294D9A8E237B1EA300BD4928 /* WatercraftInspectionFormHelper.swift */,
-				29588749237B583C00224FFA /* HighRiskFormHelper.swift */,
-				296DEC22238C56A30035E7FA /* ShiftFormHelper.swift */,
-			);
-			path = "Fields Generator";
 			sourceTree = "<group>";
 		};
 		294EF309237083F600EEB3B6 /* Sync view */ = {
@@ -930,11 +995,12 @@
 			children = (
 				29CEC91F23676424003B21B9 /* Main.storyboard */,
 				29514BDE2368AFC100DC89C4 /* BaseViewController.swift */,
-				29CEC91D23676424003B21B9 /* ViewController.swift */,
-				29BAC50B23677EDC00A620F4 /* LoginViewController.swift */,
-				29BAC50D236790C900A620F4 /* HomeViewController.swift */,
-				2907E4BA2368FEA500946B3F /* FormEntryViewController.swift */,
+				2944BCDB2433945A00826F48 /* Entry Point */,
+				2944BCDD2433947200826F48 /* Login */,
+				2944BCDC2433946A00826F48 /* Home */,
 				29F4EC522370B142001D5CFA /* Shift */,
+				2944BCDA243393F700826F48 /* Watercraft Inspections */,
+				29DB4E3A23870B1F00B13646 /* Shared cells */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -992,9 +1058,9 @@
 		29CEC91823676424003B21B9 /* ipad */ = {
 			isa = PBXGroup;
 			children = (
+				2907E4B22368CE2700946B3F /* Models */,
 				29BAC50A23677EB200A620F4 /* ViewControllers */,
 				29A9743923700408006C668F /* Database */,
-				2907E4B22368CE2700946B3F /* Models */,
 				29514BD22368ACF700DC89C4 /* Shared Components */,
 				29BAC4FC23676C2300A620F4 /* Utilities */,
 				29CEC93D236766A0003B21B9 /* Constants */,
@@ -1026,6 +1092,7 @@
 		29CEC93D236766A0003B21B9 /* Constants */ = {
 			isa = PBXGroup;
 			children = (
+				5C82D3DA2374B9D600B065BA /* AppRemoteAPIConst.swift */,
 				29CEC93B23676691003B21B9 /* KeycloakConstants.swift */,
 				29BAC5112367A21300A620F4 /* StringConstants.swift */,
 				29514BE02368B4BE00DC89C4 /* SettingsConstants.swift */,
@@ -1060,37 +1127,14 @@
 			path = Button;
 			sourceTree = "<group>";
 		};
-		29DB4E3923870B0000B13646 /* Shift Overview cells */ = {
-			isa = PBXGroup;
-			children = (
-				29DB4E422387111700B13646 /* Base */,
-				29DB4E432387112000B13646 /* Header */,
-				29DB4E4B238712ED00B13646 /* Inspections */,
-				29DB4E502387153400B13646 /* Shift Information */,
-			);
-			path = "Shift Overview cells";
-			sourceTree = "<group>";
-		};
 		29DB4E3A23870B1F00B13646 /* Shared cells */ = {
 			isa = PBXGroup;
 			children = (
-				29DB0118237207AD0046E605 /* Button */,
 				29DB010B2371EE2F0046E605 /* Basic (header + Input group) */,
 				29E4BBE5237211F10079475F /* Divider */,
 				29DB0113237206B90046E605 /* Header */,
 			);
 			path = "Shared cells";
-			sourceTree = "<group>";
-		};
-		29DB4E3B23870B3000B13646 /* Inspection form cells */ = {
-			isa = PBXGroup;
-			children = (
-				1E6D9A2D2399BDEE0034FDEF /* BaseJourneyCollectionViewCell.swift */,
-				299BF01523FC9023001732CD /* Journey Header */,
-				29E4BBEB237217F40079475F /* Destination Water Body */,
-				29E4BBEA237217E60079475F /* Previous Water Body */,
-			);
-			path = "Inspection form cells";
 			sourceTree = "<group>";
 		};
 		29DB4E422387111700B13646 /* Base */ = {
@@ -1197,25 +1241,10 @@
 		29F4EC522370B142001D5CFA /* Shift */ = {
 			isa = PBXGroup;
 			children = (
-				294D9A8D237B1E8900BD4928 /* Fields Generator */,
-				294D9A8A237B1D9100BD4928 /* Contants */,
-				294D9A89237B1D8100BD4928 /* Model */,
-				29F4EC532370B1BB001D5CFA /* Cells */,
 				2991968F23846AE000634F81 /* ShiftViewController.swift */,
-				29F4EC502370B007001D5CFA /* WatercraftInspectionViewController.swift */,
-				29588744237B50CC00224FFA /* HighRiskFormViewController.swift */,
+				2944BCDF243394A300826F48 /* Cells */,
 			);
 			path = Shift;
-			sourceTree = "<group>";
-		};
-		29F4EC532370B1BB001D5CFA /* Cells */ = {
-			isa = PBXGroup;
-			children = (
-				29DB4E3A23870B1F00B13646 /* Shared cells */,
-				29DB4E3B23870B3000B13646 /* Inspection form cells */,
-				29DB4E3923870B0000B13646 /* Shift Overview cells */,
-			);
-			path = Cells;
 			sourceTree = "<group>";
 		};
 		29F4EC592370DB72001D5CFA /* TextArea Input */ = {
@@ -1288,7 +1317,6 @@
 		5C82D40023762B7400B065BA /* APICore */ = {
 			isa = PBXGroup;
 			children = (
-				5C82D3DA2374B9D600B065BA /* AppRemoteAPIConst.swift */,
 				5C82D3DB2374B9D700B065BA /* RemoteAPI.swift */,
 				5C82D3DC2374B9D700B065BA /* RemoteAPIManager.swift */,
 			);
@@ -1599,7 +1627,6 @@
 				298BF7CA239592950072AA28 /* ArrayExtension.swift in Sources */,
 				5C82D3F02374BECD00B065BA /* ApplicationErrorConst.swift in Sources */,
 				29F4EC562370B1F8001D5CFA /* BasicCollectionViewCell.swift in Sources */,
-				294D9A8C237B1E7400BD4928 /* WatercraftInspectionFieldHeaders.swift in Sources */,
 				29DB011B237207BF0046E605 /* FormButtonCollectionViewCell.swift in Sources */,
 				29514BD62368AD6F00DC89C4 /* OptionsTableViewCell.swift in Sources */,
 				294EF3122370885100EEB3B6 /* BannerView.swift in Sources */,
@@ -1634,7 +1661,6 @@
 				29E4BBEE237218500079475F /* PreviousWaterBodyCollectionViewCell.swift in Sources */,
 				29F29FAB236CA948004F12E7 /* TextInputCollectionViewCell.swift in Sources */,
 				2933DD5E238DC2150068E9DF /* CodeTables.swift in Sources */,
-				29588745237B50CC00224FFA /* HighRiskFormViewController.swift in Sources */,
 				2933DD67238ED4470068E9DF /* ShiftService.swift in Sources */,
 				29FEA0A023FF12C200F490DB /* UserRoleModel.swift in Sources */,
 				29DB4E3E23870B7B00B13646 /* ShifOverviewHeaderCollectionViewCell.swift in Sources */,
@@ -1661,8 +1687,6 @@
 				29BAC5172367B12300A620F4 /* Colors.swift in Sources */,
 				1EE5FE5923EC968C00A06407 /* WaterbodyTableViewCell.swift in Sources */,
 				294D8F652385C7310094090D /* Table.swift in Sources */,
-				2958874D237B58D600224FFA /* HighRiskFormFieldHeaders.swift in Sources */,
-				2907E4BB2368FEA500946B3F /* FormEntryViewController.swift in Sources */,
 				296DEC1A238C51810035E7FA /* TimeInputCollectionViewCell.swift in Sources */,
 				29FFEBC1237F1F6F00574E3F /* SettingsModel.swift in Sources */,
 				296237D62374B6B400032BB5 /* RadioSwitchInputCollectionViewCell.swift in Sources */,
@@ -1857,7 +1881,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 350;
+				CURRENT_PROJECT_VERSION = 437;
 				DEVELOPMENT_TEAM = L796QSLV3E;
 				INFOPLIST_FILE = ipad/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -1883,7 +1907,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 350;
+				CURRENT_PROJECT_VERSION = 437;
 				DEVELOPMENT_TEAM = L796QSLV3E;
 				INFOPLIST_FILE = ipad/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;

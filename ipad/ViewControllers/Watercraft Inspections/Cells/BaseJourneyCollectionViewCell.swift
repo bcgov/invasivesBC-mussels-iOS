@@ -10,7 +10,7 @@ import UIKit
 
 class BaseJourneyCollectionViewCell: UICollectionViewCell {
     
-        // MARK: Variables
+    // MARK: Variables
     weak var inputGroup: UIView?
     private var waterbodyKey = "waterbody"
     private var nearestCityKey = "nearestCity"
