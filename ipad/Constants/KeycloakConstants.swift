@@ -20,13 +20,8 @@ struct SSO {
     
     static var baseUrl: URL {
         return SSO.Dev.baseUrl
-//        switch SettingsManager.shared.getCurrentEnvironment() {
-//        case .Dev:
-//            return SSO.Test.baseUrl
-//        case .Prod:
-//            return SSO.Prod.baseUrl
-//        }
     }
+    
     static let redirectUri = "ibc-ios://client"
     static let clientId = "lucy"
     static let realmName = "dfmlcg7z"

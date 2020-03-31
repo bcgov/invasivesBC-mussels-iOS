@@ -8,6 +8,7 @@
 
 import UIKit
 
+// MARK: Ennums
 private enum JourneyDetailsSectionRow {
     case Header
     case PreviousWaterBody
@@ -85,6 +86,7 @@ class WatercraftInspectionViewController: BaseViewController {
         super.viewDidLayoutSubviews()
     }
     
+    // MARK: Setup
     func setup(model: WatercradftInspectionModel) {
         self.model = model
         self.isEditable = model.getStatus() == .Draft
@@ -97,6 +99,7 @@ class WatercraftInspectionViewController: BaseViewController {
         self.showFullHighRiskAssessment = shouldShowFullHighRiskForm()
     }
     
+    // MARK: High Risk
     func shouldShowHighRiskForm() -> Bool {
         guard let model = self.model else {return false}
         let highRiskFieldKeys = WatercraftInspectionFormHelper.getHighriskAssessmentFieldsFields().map{ $0.key}
@@ -111,15 +114,6 @@ class WatercraftInspectionViewController: BaseViewController {
     func shouldShowFullHighRiskForm() -> Bool {
         guard let model = self.model, let highRisk = model.highRiskAssessments.first else {return false}
         return !highRisk.cleanDrainDryAfterInspection
-    }
-    
-    // MARK: - Navigation
-    
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let destination = segue.destination as? HighRiskFormViewController, let model = self.model, let assessment = model.addHighRiskAssessment() {
-            destination.setup(with: assessment, editable: self.isEditable)
-        }
     }
     
     func showHighRiskForm(show: Bool) {
@@ -139,6 +133,7 @@ class WatercraftInspectionViewController: BaseViewController {
         self.collectionView.reloadData()
     }
     
+    // MARK: Listeners
     private func addListeners() {
         NotificationCenter.default.removeObserver(self, name: .InputItemValueChanged, object: nil)
         NotificationCenter.default.removeObserver(self, name: .ShouldResizeInputGroup, object: nil)
@@ -174,7 +169,6 @@ class WatercraftInspectionViewController: BaseViewController {
         self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: type, target: self, action: #selector(self.action(sender:)))
     }
     
-    // MARK: Navigation
     // Navigation bar right button action
     @objc func action(sender: UIBarButtonItem) {
         self.dismissKeyboard()

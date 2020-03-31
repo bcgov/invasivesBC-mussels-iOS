@@ -8,6 +8,8 @@
 
 import UIKit
 
+
+// MARK: Enums
 private enum ShiftOverviewSectionRow: Int, CaseIterable {
     case Header
     case Inspections
@@ -79,6 +81,7 @@ class ShiftViewController: BaseViewController {
         self.styleNavBar()
     }
     
+    // MARK: Actions
     // Navigation bar right button action
     @objc func completeAction(sender: UIBarButtonItem) {
         guard let model = self.model else { return }
@@ -119,7 +122,7 @@ class ShiftViewController: BaseViewController {
         }
     }
     
-    // MARK: - Navigation
+    // MARK: - Navigate to Inspection
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let inspectionVC = segue.destination as? WatercraftInspectionViewController, let inspectionModel = self.inspection {
             inspectionVC.setup(model: inspectionModel)
@@ -197,6 +200,7 @@ class ShiftViewController: BaseViewController {
     }
 }
 
+// MARK: CollectionView
 extension ShiftViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     private func setupCollectionView() {
         for cell in collectionCells {
