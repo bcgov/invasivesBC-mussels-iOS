@@ -19,7 +19,7 @@ struct SSO {
     }
     
     static var baseUrl: URL {
-        return SSO.Dev.baseUrl
+        return SSO.Test.baseUrl
     }
     
     static let redirectUri = "ibc-ios://client"
