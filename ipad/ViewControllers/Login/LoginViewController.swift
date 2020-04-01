@@ -20,6 +20,7 @@ class LoginViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         style()
+        loginWithBCeIDButton.isHidden = true
     }
     
     // MARK: Outlet Actions
