@@ -96,9 +96,6 @@ class FormButtonCollectionViewCell: UICollectionViewCell, Theme {
     
     func set(status: Bool) {
         self.button?.isEnabled = !status
-        self.unknownWaterBodySwitch?.isEnabled = !status
-        self.commercialManufacturerSwitch?.isEnabled = !status
-        self.dryStorageSwitch?.isEnabled = !status
         if status {
             styleDisable(button: self.button)
         } else {
@@ -146,6 +143,9 @@ class FormButtonCollectionViewCell: UICollectionViewCell, Theme {
         if !isEnabled {
             self.button.isEnabled = false
             self.alpha = 0
+            self.unknownWaterBodySwitch?.isEnabled = false
+            self.commercialManufacturerSwitch?.isEnabled = false
+            self.dryStorageSwitch?.isEnabled = false
         }
     }
     
