@@ -316,7 +316,7 @@
 		29BAC51D2367B6FA00A620F4 /* BaseRealmObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseRealmObject.swift; sourceTree = "<group>"; };
 		29CE5E1A2375E48000C54F96 /* ConditionalInputCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConditionalInputCollectionViewCell.swift; sourceTree = "<group>"; };
 		29CE5E1B2375E48000C54F96 /* ConditionalInputCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConditionalInputCollectionViewCell.xib; sourceTree = "<group>"; };
-		29CEC91623676424003B21B9 /* InvasivesBC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InvasivesBC.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		29CEC91623676424003B21B9 /* Inspect.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Inspect.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		29CEC91923676424003B21B9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		29CEC91B23676424003B21B9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		29CEC91D23676424003B21B9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -1049,7 +1049,7 @@
 		29CEC91723676424003B21B9 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				29CEC91623676424003B21B9 /* InvasivesBC.app */,
+				29CEC91623676424003B21B9 /* Inspect.app */,
 				29CEC92C23676425003B21B9 /* ipadTests.xctest */,
 			);
 			name = Products;
@@ -1368,7 +1368,7 @@
 			);
 			name = ipad;
 			productName = ipad;
-			productReference = 29CEC91623676424003B21B9 /* InvasivesBC.app */;
+			productReference = 29CEC91623676424003B21B9 /* Inspect.app */;
 			productType = "com.apple.product-type.application";
 		};
 		29CEC92B23676425003B21B9 /* ipadTests */ = {
@@ -1890,7 +1890,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = ca.bc.gov.InvasivesBC;
-				PRODUCT_NAME = InvasivesBC;
+				PRODUCT_NAME = Inspect;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "ipad/Utilities/GenericCore/ObjC/ipad-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -1916,7 +1916,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = ca.bc.gov.InvasivesBC;
-				PRODUCT_NAME = InvasivesBC;
+				PRODUCT_NAME = Inspect;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "ipad/Utilities/GenericCore/ObjC/ipad-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
