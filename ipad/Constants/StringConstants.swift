@@ -19,7 +19,7 @@ enum AlertMessage {
 
 struct StringConstants {
     // MARK: App title
-    static let appTitle: String = "InvasivesBC"
+    static let appTitle: String = "Mussel Inspect App"
     struct Alerts {
         // MARK: Alerts
         struct Logout {
