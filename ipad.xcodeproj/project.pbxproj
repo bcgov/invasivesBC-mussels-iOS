@@ -669,7 +669,6 @@
 				2944BCEA2437AD9300826F48 /* UI */,
 				2950510B2374DFAB000FBD6E /* Extensions */,
 				29FFEBC2237F23A800574E3F /* JWT Decoder */,
-				5C82D40023762B7400B065BA /* APICore */,
 				A7AE5271237CC3660044DBB7 /* LottieAnimations */,
 			);
 			path = Core;
@@ -975,7 +974,6 @@
 				2933DD62238DE3220068E9DF /* Dropdown Helper */,
 				29DB4E482387125800B13646 /* Status Color */,
 				29FFEBBC237F1E9100574E3F /* Settings */,
-				5C82D3E62374BC9F00B065BA /* GenericCore */,
 				294EF31723708A1700EEB3B6 /* API */,
 				29514BE42368B5BA00DC89C4 /* Notifications */,
 			);
@@ -1047,6 +1045,7 @@
 				2944BCF52437C0EA00826F48 /* Views */,
 				2944BCF42437B93B00826F48 /* Services */,
 				29BAC51A2367B5A900A620F4 /* Core Realm */,
+				5C82D3E62374BC9F00B065BA /* Core Generic */,
 				2944BCE92437AD2800826F48 /* Core */,
 				29BAC4FC23676C2300A620F4 /* Utilities */,
 				29CEC93D236766A0003B21B9 /* Constants */,
@@ -1276,15 +1275,16 @@
 			path = "High Risk Modal";
 			sourceTree = "<group>";
 		};
-		5C82D3E62374BC9F00B065BA /* GenericCore */ = {
+		5C82D3E62374BC9F00B065BA /* Core Generic */ = {
 			isa = PBXGroup;
 			children = (
+				5C82D40023762B7400B065BA /* Core API */,
 				5C82D3F12374D07400B065BA /* ObjC */,
 				5C82D3EF2374BECD00B065BA /* ApplicationErrorConst.swift */,
 				5C82D3EB2374BD1300B065BA /* Promise.swift */,
 				5C82D3E72374BCDB00B065BA /* GenericConst.swift */,
 			);
-			path = GenericCore;
+			path = "Core Generic";
 			sourceTree = "<group>";
 		};
 		5C82D3F12374D07400B065BA /* ObjC */ = {
@@ -1297,13 +1297,13 @@
 			path = ObjC;
 			sourceTree = "<group>";
 		};
-		5C82D40023762B7400B065BA /* APICore */ = {
+		5C82D40023762B7400B065BA /* Core API */ = {
 			isa = PBXGroup;
 			children = (
 				5C82D3DB2374B9D700B065BA /* RemoteAPI.swift */,
 				5C82D3DC2374B9D700B065BA /* RemoteAPIManager.swift */,
 			);
-			path = APICore;
+			path = "Core API";
 			sourceTree = "<group>";
 		};
 		718555F643FB0D413A8C0B7B /* Pods */ = {
