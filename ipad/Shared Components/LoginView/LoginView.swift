@@ -24,11 +24,18 @@ class LoginView: ModalView, Theme {
         guard let password = passwordField.text, let username = usernameField.text else {
             return
         }
+        
         if password.isEmpty || username.isEmpty {
             Alert.show(title: "Invalid Credentials", message: "Please enter valid credentials")
+            return
         }
         
-        Alert.show(title: "Could not authenticate", message: "Please check the information you've entered")
+        resignFirstResponder()
+        continueButton.isEnabled = false
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            Alert.show(title: "Could not authenticate", message: "Please check the information you've entered")
+            self.continueButton.isEnabled = true
+        }
     }
     
     @IBAction func forgotPasswordAction(_ sender: Any) {
@@ -51,6 +58,7 @@ class LoginView: ModalView, Theme {
         styleFillButton(button: continueButton)
         passwordField.textContentType = .password
         usernameField.textContentType = .username
+        passwordField.isSecureTextEntry = true
         roundCorners(layer: self.layer)
     }
     
