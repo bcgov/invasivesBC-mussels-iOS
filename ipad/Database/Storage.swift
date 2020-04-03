@@ -17,7 +17,7 @@ class Storage {
     public func itemsToSync() -> [ShiftModel] {
         do {
             let realm = try Realm()
-            let objs = realm.objects(ShiftModel.self).filter("shouldSync == %@ AND userId == %@", true, Auth.getUserID()).map { $0 }
+            let objs = realm.objects(ShiftModel.self).filter("shouldSync == %@ AND userId == %@", true, AuthenticationService.getUserID()).map { $0 }
             return Array(objs)
         } catch let error as NSError {
             print("** REALM ERROR")
@@ -30,7 +30,7 @@ class Storage {
     public func shifts() -> [ShiftModel] {
         do {
             let realm = try Realm()
-            let objs = realm.objects(ShiftModel.self).filter("userId == %@ ", Auth.getUserID()).map { $0 }
+            let objs = realm.objects(ShiftModel.self).filter("userId == %@ ", AuthenticationService.getUserID()).map { $0 }
             return Array(objs)
         } catch let error as NSError {
             print("** REALM ERROR")
@@ -43,7 +43,7 @@ class Storage {
         do {
             let realm = try Realm()
             try realm.write {
-                shift.userId = Auth.getUserID()
+                shift.userId = AuthenticationService.getUserID()
                 realm.add(shift)
             }
         } catch let error as NSError {
@@ -55,7 +55,7 @@ class Storage {
     public func shifts(by shortDate: String) -> [ShiftModel] {
         do {
             let realm = try Realm()
-            let objs = realm.objects(ShiftModel.self).filter("userId == %@ AND formattedDate == %@", Auth.getUserID(), shortDate).map { $0 }
+            let objs = realm.objects(ShiftModel.self).filter("userId == %@ AND formattedDate == %@", AuthenticationService.getUserID(), shortDate).map { $0 }
             return Array(objs)
         } catch let error as NSError {
             print("** REALM ERROR")

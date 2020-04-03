@@ -9,7 +9,7 @@
 import Foundation
 import SingleSignOn
 
-class Auth {
+class AuthenticationService {
     
     private static var authServices: AuthServices = {
         return AuthServices(baseUrl: SSO.baseUrl, redirectUri: SSO.redirectUri,

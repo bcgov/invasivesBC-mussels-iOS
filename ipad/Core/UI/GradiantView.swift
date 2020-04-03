@@ -10,17 +10,6 @@ import Foundation
 import UIKit
 
 // MARK: UIView Gradiant
-extension UIView {
-    func insertHorizontalGradient(_ color1: UIColor, _ color2: UIColor) {
-        let gradientView = GradientView(frame: bounds)
-        gradientView.color1 = color1
-        gradientView.color2 = color2
-        gradientView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-
-        self.insertSubview(gradientView, at: 0)
-    }
-}
-
 @IBDesignable
 public class GradientView: UIView {
     private func createGradient() -> CAGradientLayer {
@@ -129,22 +118,5 @@ class UINavigationBarGradientView: UIView {
         guard let gradientLayer = gradientLayer else { return }
         gradientLayer.frame = frame
         superview?.addSubview(self)
-    }
-}
-
-extension UINavigationBar {
-    func setGradientBackground(colors: [UIColor],
-                               startPoint: UINavigationBarGradientView.Point = .topLeft,
-                               endPoint: UINavigationBarGradientView.Point = .bottomLeft,
-                               locations: [NSNumber] = [0, 1]) {
-        guard let backgroundView = value(forKey: "backgroundView") as? UIView else { return }
-        guard let gradientView = backgroundView.subviews.first(where: { $0 is UINavigationBarGradientView }) as? UINavigationBarGradientView else {
-            let gradientView = UINavigationBarGradientView(colors: colors, startPoint: startPoint,
-                                                           endPoint: endPoint, locations: locations)
-            backgroundView.addSubview(gradientView)
-            gradientView.setupConstraints()
-            return
-        }
-        gradientView.set(colors: colors, startPoint: startPoint, endPoint: endPoint, locations: locations)
     }
 }

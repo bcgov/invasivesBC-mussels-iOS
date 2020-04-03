@@ -17,7 +17,7 @@ let TEST_URL: String = "https://api-test-invasivesbc.pathfinder.gov.bc.ca/api"
 let PROD_URL: String = "https://api-invasivesbc.pathfinder.gov.bc.ca/api"
 
 /**
-  * KeyClocl URL
+  * KeyCloak URL
  */
 let KC_DEV_URL: String = "https://sso-dev.pathfinder.gov.bc.ca"
 let KC_TEST_URL: String = "https://sso-test.pathfinder.gov.bc.ca"
