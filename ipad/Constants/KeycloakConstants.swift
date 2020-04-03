@@ -8,18 +8,8 @@
 
 import Foundation
 struct SSO {
-    struct Dev {
-        static let baseUrl = URL(string: "https://sso-dev.pathfinder.gov.bc.ca")!
-    }
-    struct Test {
-        static let baseUrl = URL(string: "https://sso-test.pathfinder.gov.bc.ca")!
-    }
-    struct Prod {
-        static let baseUrl = URL(string: "https://sso.pathfinder.gov.bc.ca")!
-    }
-    
     static var baseUrl: URL {
-        return SSO.Prod.baseUrl
+        return RemoteURLManager.default.keyCloakURL
     }
     
     static let redirectUri = "ibc-ios://client"

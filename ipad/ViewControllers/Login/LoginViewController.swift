@@ -20,7 +20,6 @@ class LoginViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         style()
-        loginWithBCeIDButton.isHidden = true
     }
     
     // MARK: Outlet Actions
@@ -37,15 +36,19 @@ class LoginViewController: BaseViewController {
     }
     
     @IBAction func loginWithBCeIDAction(_ sender: UIButton) {
-        Auth.refreshEnviormentConstants(withIdpHint: "bceid")
-        Settings.shared.setAuth(type: .BCeID)
-        Auth.authenticate { (success) in
-            if (!success) {
-                Auth.logout()
-                return
-            }
-            self.afterLogin()
-        }
+//        Auth.refreshEnviormentConstants(withIdpHint: "bceid")
+//        Settings.shared.setAuth(type: .BCeID)
+//        Auth.authenticate { (success) in
+//            if (!success) {
+//                Auth.logout()
+//                return
+//            }
+//            self.afterLogin()
+//        }
+        let dummyLogin: LoginView = UIView.fromNib()
+        dummyLogin.setFixed(width: 400, height: 550)
+        dummyLogin.present()
+        dummyLogin.style()
     }
     
     private func afterLogin() {

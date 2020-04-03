@@ -9,15 +9,69 @@
 import Foundation
 
 /**
-  * Remote URL
+  * Remote/Local URL
  */
-let DEV_URL: String = "https://api-invasivesbc.pathfinder.gov.bc.ca/api"
-#if DEBUG
-let remoteURL: String = DEV_URL
-#else
-let remoteURL: String = "https://api-invasivesbc.pathfinder.gov.bc.ca/api"
-#endif
+let LOCAL_URL: String = "http://localhost/api"
+let DEV_URL: String = "https://api-dev-invasivesbc.pathfinder.gov.bc.ca/api"
+let TEST_URL: String = "https://api-test-invasivesbc.pathfinder.gov.bc.ca/api"
+let PROD_URL: String = "https://api-invasivesbc.pathfinder.gov.bc.ca/api"
 
+/**
+  * KeyClocl URL
+ */
+let KC_DEV_URL: String = "https://sso-dev.pathfinder.gov.bc.ca"
+let KC_TEST_URL: String = "https://sso-test.pathfinder.gov.bc.ca"
+let KC_PROD_URL: String = "https://sso.pathfinder.gov.bc.ca"
+
+enum RemoteEnv: String {
+    case local, dev, test, prod
+    
+    var remoteURL: String {
+        switch self {
+        case .local:
+            return LOCAL_URL
+        case .dev:
+            return DEV_URL
+        case .test:
+            return TEST_URL
+        case .prod:
+            return PROD_URL
+        }
+    }
+    
+    var keyCloakURL: String {
+        switch self {
+        case .local,.dev:
+            return KC_DEV_URL
+        case .test:
+            return KC_TEST_URL
+        case .prod:
+            return KC_PROD_URL
+        }
+    }
+}
+
+class RemoteURLManager {
+    var env: RemoteEnv = .dev
+    static var `default` = {
+        // Here We Can use Target Flag to customize
+        // Switch Env 
+        return RemoteURLManager(.prod)
+    }()
+    
+    init(_ env: RemoteEnv) {
+        self.env = env
+    }
+    
+    var remoteURL: String {
+        return self.env.remoteURL
+    }
+    
+    var keyCloakURL: URL {
+        return URL(string: self.env.keyCloakURL)!
+    }
+    
+}
 
 /**
   * Diffirent EndPoints
@@ -37,7 +91,7 @@ enum EndPoints: String {
  * API
  */
 struct APIURL {
-    static var baseURL: String = remoteURL
+    static var baseURL: String = RemoteURLManager.default.remoteURL
     static let wokrflow: String =  {
         return Self.baseURL + EndPoints.workflow.rawValue
     }()
