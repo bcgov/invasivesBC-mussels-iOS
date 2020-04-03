@@ -30,6 +30,8 @@
 		2933DD67238ED4470068E9DF /* ShiftService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2933DD66238ED4470068E9DF /* ShiftService.swift */; };
 		2944AF9B2379B243007517DC /* ViewFieldCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2944AF992379B243007517DC /* ViewFieldCollectionViewCell.swift */; };
 		2944AF9C2379B243007517DC /* ViewFieldCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2944AF9A2379B243007517DC /* ViewFieldCollectionViewCell.xib */; };
+		2944BCE624378D2800826F48 /* LoginView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2944BCE524378D2800826F48 /* LoginView.xib */; };
+		2944BCE824378D3800826F48 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2944BCE724378D3800826F48 /* LoginView.swift */; };
 		294D8F6123847C9A0094090D /* TableRowTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294D8F5F23847C9A0094090D /* TableRowTableViewCell.swift */; };
 		294D8F6223847C9A0094090D /* TableRowTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 294D8F6023847C9A0094090D /* TableRowTableViewCell.xib */; };
 		294D8F652385C7310094090D /* Table.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294D8F642385C7310094090D /* Table.swift */; };
@@ -229,6 +231,8 @@
 		2933DD66238ED4470068E9DF /* ShiftService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShiftService.swift; sourceTree = "<group>"; };
 		2944AF992379B243007517DC /* ViewFieldCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewFieldCollectionViewCell.swift; sourceTree = "<group>"; };
 		2944AF9A2379B243007517DC /* ViewFieldCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ViewFieldCollectionViewCell.xib; sourceTree = "<group>"; };
+		2944BCE524378D2800826F48 /* LoginView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginView.xib; sourceTree = "<group>"; };
+		2944BCE724378D3800826F48 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		294D8F5F23847C9A0094090D /* TableRowTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableRowTableViewCell.swift; sourceTree = "<group>"; };
 		294D8F6023847C9A0094090D /* TableRowTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TableRowTableViewCell.xib; sourceTree = "<group>"; };
 		294D8F642385C7310094090D /* Table.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Table.swift; sourceTree = "<group>"; };
@@ -673,6 +677,15 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
+		2944BCE424378D0900826F48 /* LoginView */ = {
+			isa = PBXGroup;
+			children = (
+				2944BCE524378D2800826F48 /* LoginView.xib */,
+				2944BCE724378D3800826F48 /* LoginView.swift */,
+			);
+			path = LoginView;
+			sourceTree = "<group>";
+		};
 		294D8F5A23847BB30094090D /* Cells */ = {
 			isa = PBXGroup;
 			children = (
@@ -733,6 +746,7 @@
 		29514BD22368ACF700DC89C4 /* Shared Components */ = {
 			isa = PBXGroup;
 			children = (
+				2944BCE424378D0900826F48 /* LoginView */,
 				290DA9DD240461E700438699 /* AwaitingAccessResponse */,
 				299BF01A23FC9CE9001732CD /* PDFViewer */,
 				1EF7EBF023EC8E24003886F6 /* Waterbody picker */,
@@ -1436,6 +1450,7 @@
 			files = (
 				29856ABF241AAF3100E4E0FC /* TableEmptyStateTableViewCell.xib in Resources */,
 				294EF3142370885B00EEB3B6 /* BannerView.xib in Resources */,
+				2944BCE624378D2800826F48 /* LoginView.xib in Resources */,
 				29514BF12368CB5D00DC89C4 /* DropdownTableViewCell.xib in Resources */,
 				29514BD72368AD6F00DC89C4 /* OptionsTableViewCell.xib in Resources */,
 				29547B4B23F0BF4F000173F1 /* SelectedWaterBodyCollectionViewCell.xib in Resources */,
@@ -1633,6 +1648,7 @@
 				299BF01C23FC9D10001732CD /* PDFViewer.swift in Sources */,
 				296DEC1F238C53820035E7FA /* NewShiftModal.swift in Sources */,
 				29514BDF2368AFC100DC89C4 /* BaseViewController.swift in Sources */,
+				2944BCE824378D3800826F48 /* LoginView.swift in Sources */,
 				5C0F697D237B683200F96CA5 /* CodesAPI.swift in Sources */,
 				5C82D3FF23761B1400B065BA /* API.swift in Sources */,
 				29514BF02368CB5D00DC89C4 /* DropdownTableViewCell.swift in Sources */,

@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="LoginView" customModule="Inspect" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="428" height="661"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Xc2-dl-mkk">
+                    <rect key="frame" x="114" y="269" width="200" height="34"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="200" id="Crj-0s-XTI"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits" textContentType="username"/>
+                </textField>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BCeID" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6It-rt-kgw">
+                    <rect key="frame" x="114" y="240" width="49" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SfF-iA-GE1">
+                    <rect key="frame" x="114" y="319" width="74" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bclogo" translatesAutoresizingMaskIntoConstraints="NO" id="Rz4-hR-Hqw">
+                    <rect key="frame" x="128" y="60" width="172" height="148"/>
+                </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WVg-Lh-h0l">
+                    <rect key="frame" x="139" y="426" width="150" height="42"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="42" id="L5e-5R-SIK"/>
+                        <constraint firstAttribute="width" constant="150" id="mF6-FV-chD"/>
+                    </constraints>
+                    <state key="normal" title="Continue"/>
+                    <connections>
+                        <action selector="ContinueAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="OtC-iX-1zZ"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wr0-Wo-wFA">
+                    <rect key="frame" x="100.5" y="484" width="227" height="30"/>
+                    <color key="tintColor" red="0.050980392159999999" green="0.24313725489999999" blue="0.45098039220000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <state key="normal" title="Forgot your user ID or password?"/>
+                    <connections>
+                        <action selector="forgotPasswordAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="K2v-Py-pO3"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8AW-Uo-2pv">
+                    <rect key="frame" x="144.5" y="530" width="139" height="30"/>
+                    <color key="tintColor" red="0.050980392159999999" green="0.24313725489999999" blue="0.45098039220000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <state key="normal" title="Register for a BCeID"/>
+                    <connections>
+                        <action selector="signUpAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="MfS-3y-0C1"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eH3-72-UkC">
+                    <rect key="frame" x="8" y="8" width="43" height="52"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="43" id="kSU-Ig-47C"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="43"/>
+                    <color key="tintColor" red="0.050980392159999999" green="0.24313725489999999" blue="0.45098039220000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <state key="normal" image="xmark" catalog="system">
+                        <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large" weight="heavy"/>
+                    </state>
+                    <connections>
+                        <action selector="closeAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="Zoo-N1-DzX"/>
+                    </connections>
+                </button>
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="StG-Qi-z4n">
+                    <rect key="frame" x="114" y="348" width="200" height="34"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="200" id="yF1-dd-QA7"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits" textContentType="password"/>
+                </textField>
+            </subviews>
+            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+            <constraints>
+                <constraint firstItem="SfF-iA-GE1" firstAttribute="leading" secondItem="StG-Qi-z4n" secondAttribute="leading" id="1jb-Ua-7LU"/>
+                <constraint firstItem="6It-rt-kgw" firstAttribute="top" secondItem="Rz4-hR-Hqw" secondAttribute="bottom" constant="32" id="6qg-22-YEs"/>
+                <constraint firstItem="Xc2-dl-mkk" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="AwE-g7-bTm"/>
+                <constraint firstItem="WVg-Lh-h0l" firstAttribute="top" secondItem="StG-Qi-z4n" secondAttribute="bottom" constant="44" id="Ino-MT-fkF"/>
+                <constraint firstItem="StG-Qi-z4n" firstAttribute="top" secondItem="SfF-iA-GE1" secondAttribute="bottom" constant="8" id="J3X-PI-016"/>
+                <constraint firstItem="Rz4-hR-Hqw" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="LSh-AA-0yU"/>
+                <constraint firstItem="eH3-72-UkC" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="8" id="LfY-cI-fkZ"/>
+                <constraint firstItem="StG-Qi-z4n" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="LuV-mu-kYz"/>
+                <constraint firstItem="SfF-iA-GE1" firstAttribute="top" secondItem="Xc2-dl-mkk" secondAttribute="bottom" constant="16" id="Ntk-D4-25o"/>
+                <constraint firstItem="8AW-Uo-2pv" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="Ont-nZ-p8e"/>
+                <constraint firstItem="eH3-72-UkC" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="WrO-gV-0TF"/>
+                <constraint firstItem="6It-rt-kgw" firstAttribute="leading" secondItem="Xc2-dl-mkk" secondAttribute="leading" id="Ylz-TX-qxx"/>
+                <constraint firstItem="8AW-Uo-2pv" firstAttribute="top" secondItem="wr0-Wo-wFA" secondAttribute="bottom" constant="16" id="YwZ-9d-W5i"/>
+                <constraint firstItem="Xc2-dl-mkk" firstAttribute="top" secondItem="6It-rt-kgw" secondAttribute="bottom" constant="8" id="dZO-Ta-lWZ"/>
+                <constraint firstItem="Rz4-hR-Hqw" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="16" id="uTN-kR-NPj"/>
+                <constraint firstItem="WVg-Lh-h0l" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="wVf-CR-1Ep"/>
+                <constraint firstItem="wr0-Wo-wFA" firstAttribute="top" secondItem="WVg-Lh-h0l" secondAttribute="bottom" constant="16" id="yiT-ck-IUO"/>
+                <constraint firstItem="wr0-Wo-wFA" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="ymT-Of-Xet"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <connections>
+                <outlet property="continueButton" destination="WVg-Lh-h0l" id="IKg-e4-urU"/>
+                <outlet property="passwordField" destination="StG-Qi-z4n" id="IcB-gU-eH7"/>
+                <outlet property="passwordHeader" destination="SfF-iA-GE1" id="J3Y-jQ-nke"/>
+                <outlet property="usernameField" destination="Xc2-dl-mkk" id="nJg-88-LnY"/>
+                <outlet property="usernameHeader" destination="6It-rt-kgw" id="Iv1-bk-ay0"/>
+            </connections>
+            <point key="canvasLocation" x="138" y="57"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="bclogo" width="172" height="148"/>
+        <image name="xmark" catalog="system" width="128" height="113"/>
+    </resources>
+</document>

@@ -17,3 +17,4 @@ extension Notification.Name {
     
     static let journeyItemValueChanged = Notification.Name("journeyItemValueChanged")
 }
+
