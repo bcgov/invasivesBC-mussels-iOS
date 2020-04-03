@@ -574,7 +574,6 @@
 		2944BCD7243392A500826F48 /* Other */ = {
 			isa = PBXGroup;
 			children = (
-				2907E4B32368CE3600946B3F /* PopoverSize.swift */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -664,6 +663,7 @@
 		2944BCE92437AD2800826F48 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				5C82D3E72374BCDB00B065BA /* GenericConst.swift */,
 				29BAC50823676FDC00A620F4 /* ThemeGeneric.swift */,
 				5C82D3ED2374BD2800B065BA /* ApplicationLogger.swift */,
 				2944BCEA2437AD9300826F48 /* UI */,
@@ -677,6 +677,7 @@
 		2944BCEA2437AD9300826F48 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				2907E4B32368CE3600946B3F /* PopoverSize.swift */,
 				29514BE72368C3E400DC89C4 /* Dropdown */,
 				29514BD32368AD4A00DC89C4 /* Options */,
 				2907E4B52368D21D00946B3F /* Input Modal */,
@@ -704,6 +705,7 @@
 		2944BCF52437C0EA00826F48 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				29A97437236FD615006C668F /* Form */,
 				294EF309237083F600EEB3B6 /* Sync view */,
 				1EF7EBF023EC8E24003886F6 /* Waterbody picker */,
 				299196912384723400634F81 /* Table */,
@@ -955,13 +957,13 @@
 			path = "Date Input";
 			sourceTree = "<group>";
 		};
-		29A97437236FD615006C668F /* Core Form */ = {
+		29A97437236FD615006C668F /* Form */ = {
 			isa = PBXGroup;
 			children = (
 				29A97435236FD5FC006C668F /* InputGroup.swift */,
 				1E5D7D492369F1A400707D08 /* Input Cells */,
 			);
-			path = "Core Form";
+			path = Form;
 			sourceTree = "<group>";
 		};
 		29A9743923700408006C668F /* Database */ = {
@@ -975,10 +977,11 @@
 		29BAC4FC23676C2300A620F4 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				2944BDEB2437E10100826F48 /* GenericCore */,
 				2944BCED2437AF4F00826F48 /* Theme.swift */,
-				29BAC5162367B12300A620F4 /* Colors.swift */,
-				29BAC5182367B34000A620F4 /* Fonts.swift */,
+				2944BCE92437AD2800826F48 /* Core */,
+				29BAC51A2367B5A900A620F4 /* Core Realm */,
+				5C82D3E62374BC9F00B065BA /* Core Generic */,
+				2944BDEB2437E10100826F48 /* GenericCore */,
 				2933DD62238DE3220068E9DF /* Dropdown Helper */,
 				29DB4E482387125800B13646 /* Status Color */,
 				29FFEBBC237F1E9100574E3F /* Settings */,
@@ -1052,10 +1055,6 @@
 				29A9743923700408006C668F /* Database */,
 				2944BCF52437C0EA00826F48 /* Views */,
 				2944BCF42437B93B00826F48 /* Services */,
-				29A97437236FD615006C668F /* Core Form */,
-				29BAC51A2367B5A900A620F4 /* Core Realm */,
-				5C82D3E62374BC9F00B065BA /* Core Generic */,
-				2944BCE92437AD2800826F48 /* Core */,
 				29BAC4FC23676C2300A620F4 /* Utilities */,
 				29CEC93D236766A0003B21B9 /* Constants */,
 				29CEC91923676424003B21B9 /* AppDelegate.swift */,
@@ -1090,6 +1089,8 @@
 				29CEC93B23676691003B21B9 /* KeycloakConstants.swift */,
 				29BAC5112367A21300A620F4 /* StringConstants.swift */,
 				29514BE02368B4BE00DC89C4 /* SettingsConstants.swift */,
+				29BAC5162367B12300A620F4 /* Colors.swift */,
+				29BAC5182367B34000A620F4 /* Fonts.swift */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -1290,7 +1291,6 @@
 				5C82D40023762B7400B065BA /* Core API */,
 				5C82D3EF2374BECD00B065BA /* ApplicationErrorConst.swift */,
 				5C82D3EB2374BD1300B065BA /* Promise.swift */,
-				5C82D3E72374BCDB00B065BA /* GenericConst.swift */,
 			);
 			path = "Core Generic";
 			sourceTree = "<group>";
