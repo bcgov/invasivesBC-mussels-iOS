@@ -670,7 +670,6 @@
 				2950510B2374DFAB000FBD6E /* Extensions */,
 				29FFEBC2237F23A800574E3F /* JWT Decoder */,
 				5C82D40023762B7400B065BA /* APICore */,
-				29BAC51A2367B5A900A620F4 /* Realm */,
 				A7AE5271237CC3660044DBB7 /* LottieAnimations */,
 			);
 			path = Core;
@@ -998,13 +997,13 @@
 			path = ViewControllers;
 			sourceTree = "<group>";
 		};
-		29BAC51A2367B5A900A620F4 /* Realm */ = {
+		29BAC51A2367B5A900A620F4 /* Core Realm */ = {
 			isa = PBXGroup;
 			children = (
 				29BAC51B2367B5B500A620F4 /* RealmRequests.swift */,
 				29BAC51D2367B6FA00A620F4 /* BaseRealmObject.swift */,
 			);
-			path = Realm;
+			path = "Core Realm";
 			sourceTree = "<group>";
 		};
 		29CE5E192375E44A00C54F96 /* Conditional Input */ = {
@@ -1047,6 +1046,7 @@
 				29A9743923700408006C668F /* Database */,
 				2944BCF52437C0EA00826F48 /* Views */,
 				2944BCF42437B93B00826F48 /* Services */,
+				29BAC51A2367B5A900A620F4 /* Core Realm */,
 				2944BCE92437AD2800826F48 /* Core */,
 				29BAC4FC23676C2300A620F4 /* Utilities */,
 				29CEC93D236766A0003B21B9 /* Constants */,
