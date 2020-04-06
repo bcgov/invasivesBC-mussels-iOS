@@ -22,9 +22,9 @@ enum SyncValidation {
     case SyncDisabled
 }
 
-class AutoSync {
+class SyncService {
     
-    internal static let shared = AutoSync()
+    internal static let shared = SyncService()
     
     private var isEnabled: Bool = true
     private var isAutoSyncEnabled: Bool = true
@@ -152,7 +152,7 @@ class AutoSync {
 
             // Fetch code tables
             dispatchGroup.enter()
-            CodeTables.shared.fetchCodes(completion: { (success) in
+            CodeTableService.shared.fetchCodes(completion: { (success) in
                 if !success {
                     hadErrors = true
                     Banner.show(message: "Could not fetch code tables")
@@ -207,7 +207,7 @@ class AutoSync {
         }
         
         // Is Authenticated
-        if !Auth.isAuthenticated() {
+        if !AuthenticationService.isAuthenticated() {
             showAuthDialogAndSync()
             return false
         }
@@ -233,7 +233,7 @@ class AutoSync {
             return completion(.NothingToSync)
         }
         
-        if !Auth.isAuthenticated() {
+        if !AuthenticationService.isAuthenticated() {
             return completion(.AuthExpired)
         }
         
@@ -248,19 +248,19 @@ class AutoSync {
     }
     
     func showAuthDialogAndSync() {
-        if Auth.isAuthenticated() { return }
+        if AuthenticationService.isAuthenticated() { return }
         Alert.show(title: "Authentication Required", message: "You need to authenticate to perform the initial sync.\n Would you like to authenticate now and synchronize?\n\nIf you select no, You will not be able to create records.\n", yes: {
             switch Settings.shared.getAuthType() {
             case .Idir:
-                Auth.refreshEnviormentConstants(withIdpHint: "idir")
+                AuthenticationService.refreshEnviormentConstants(withIdpHint: "idir")
             case .BCeID:
-                Auth.refreshEnviormentConstants(withIdpHint: "bceid")
+                AuthenticationService.refreshEnviormentConstants(withIdpHint: "bceid")
             }
-            Auth.authenticate(completion: { (success) in
+            AuthenticationService.authenticate(completion: { (success) in
                 if success && Settings.shared.isCorrectUser() {
                     self.syncIfPossible()
                 } else if !Settings.shared.isCorrectUser() {
-                    Auth.logout()
+                    AuthenticationService.logout()
                 }
             })
         }) {

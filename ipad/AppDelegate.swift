@@ -39,7 +39,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         IQKeyboardManager.shared.enableAutoToolbar = false
         print("documents = \(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!)")
         // Begin Autosync change listener
-        AutoSync.shared.beginListener()
+        SyncService.shared.beginListener()
         // Crash Lytics
         FirebaseApp.configure()
         
@@ -47,11 +47,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func applicationDidEnterBackground(_ application: UIApplication) {
-        AutoSync.shared.endListener()
+        SyncService.shared.endListener()
     }
     
     func applicationWillEnterForeground(_ application: UIApplication) {
-        AutoSync.shared.beginListener()
+        SyncService.shared.beginListener()
     }
     
     /// https://realm.io/docs/swift/latest/#migrations

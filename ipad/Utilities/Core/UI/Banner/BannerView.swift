@@ -124,6 +124,6 @@ class BannerView: UIView, Theme {
     func style() {
         addShadow(to: self.layer, opacity: 0.4, height: 2)
         self.label.font = Banner.bannerTextFont()
-        self.label.textColor = Colors.active.blue
+        self.label.textColor = UIColor.black
     }
 }

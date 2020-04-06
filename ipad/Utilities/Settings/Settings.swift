@@ -51,11 +51,11 @@ class Settings {
     
     func setAutoSync(enabled: Bool) {
         guard let model = getModel() else {return}
-        AutoSync.shared.endListener()
+        SyncService.shared.endListener()
         model.setAutoSync(enabled: enabled)
         if enabled {
-            AutoSync.shared.beginListener()
-            AutoSync.shared.syncIfPossible()
+            SyncService.shared.beginListener()
+            SyncService.shared.syncIfPossible()
             Banner.show(message: "AutoSync is on")
         } else {
             Banner.show(message: "AutoSync is off")
@@ -78,7 +78,7 @@ class Settings {
             setUserAuthId()
             return true
         }
-        return Auth.getUserID() == storedId
+        return AuthenticationService.getUserID() == storedId
     }
     
     public func getUserAuthId() -> String? {
@@ -88,7 +88,7 @@ class Settings {
     
     public func setUserAuthId() {
         guard let model = getModel() else {return}
-        model.setAuth(id: Auth.getUserID())
+        model.setAuth(id: AuthenticationService.getUserID())
     }
     
     // MARK: Users
