@@ -83,6 +83,7 @@
 		296DEC28238C61A80035E7FA /* IntegerStepperInputCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 296DEC26238C61A80035E7FA /* IntegerStepperInputCollectionViewCell.xib */; };
 		296DEC2B238C73AF0035E7FA /* TimePicker.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 296DEC2A238C73AF0035E7FA /* TimePicker.storyboard */; };
 		296DEC2D238C73BD0035E7FA /* TimePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 296DEC2C238C73BD0035E7FA /* TimePickerViewController.swift */; };
+		297F8F05243B9D8400D554D3 /* WebKitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 297F8F04243B9D8400D554D3 /* WebKitViewController.swift */; };
 		29856ABE241AAF3100E4E0FC /* TableEmptyStateTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29856ABC241AAF3100E4E0FC /* TableEmptyStateTableViewCell.swift */; };
 		29856ABF241AAF3100E4E0FC /* TableEmptyStateTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29856ABD241AAF3100E4E0FC /* TableEmptyStateTableViewCell.xib */; };
 		298BF7C12394C0270072AA28 /* waterBodies.txt in Resources */ = {isa = PBXBuildFile; fileRef = 298BF7C02394C0270072AA28 /* waterBodies.txt */; };
@@ -288,6 +289,7 @@
 		296DEC26238C61A80035E7FA /* IntegerStepperInputCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IntegerStepperInputCollectionViewCell.xib; sourceTree = "<group>"; };
 		296DEC2A238C73AF0035E7FA /* TimePicker.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TimePicker.storyboard; sourceTree = "<group>"; };
 		296DEC2C238C73BD0035E7FA /* TimePickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimePickerViewController.swift; sourceTree = "<group>"; };
+		297F8F04243B9D8400D554D3 /* WebKitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebKitViewController.swift; sourceTree = "<group>"; };
 		29856ABC241AAF3100E4E0FC /* TableEmptyStateTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableEmptyStateTableViewCell.swift; sourceTree = "<group>"; };
 		29856ABD241AAF3100E4E0FC /* TableEmptyStateTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TableEmptyStateTableViewCell.xib; sourceTree = "<group>"; };
 		298BF7C02394C0270072AA28 /* waterBodies.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = waterBodies.txt; sourceTree = "<group>"; };
@@ -891,6 +893,14 @@
 			path = "Time Picker";
 			sourceTree = "<group>";
 		};
+		297F8F06243B9D8A00D554D3 /* dummy Login Webkit */ = {
+			isa = PBXGroup;
+			children = (
+				297F8F04243B9D8400D554D3 /* WebKitViewController.swift */,
+			);
+			path = "dummy Login Webkit";
+			sourceTree = "<group>";
+		};
 		298BF7C223958A060072AA28 /* Spacer */ = {
 			isa = PBXGroup;
 			children = (
@@ -1002,6 +1012,7 @@
 				29F4EC522370B142001D5CFA /* Shift */,
 				2944BCDA243393F700826F48 /* Watercraft Inspections */,
 				29DB4E3A23870B1F00B13646 /* Shared cells */,
+				297F8F06243B9D8A00D554D3 /* dummy Login Webkit */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -1663,6 +1674,7 @@
 				29DB4E462387113900B13646 /* BaseShiftOverviewCollectionViewCell.swift in Sources */,
 				5C82D3DF2374B9D700B065BA /* RemoteAPIManager.swift in Sources */,
 				290DA9DC24044A5C00438699 /* AccessService.swift in Sources */,
+				297F8F05243B9D8400D554D3 /* WebKitViewController.swift in Sources */,
 				29BAC50E236790C900A620F4 /* HomeViewController.swift in Sources */,
 				299BF01823FC9045001732CD /* JourneyHeaderCollectionViewCell.swift in Sources */,
 				1E6D9A2E2399BDEE0034FDEF /* BaseJourneyCollectionViewCell.swift in Sources */,

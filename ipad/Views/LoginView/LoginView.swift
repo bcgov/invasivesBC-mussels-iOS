@@ -11,10 +11,11 @@ import Modal
 
 class LoginView: ModalView, Theme {
     
+    var onForgotPassword: (() -> Void)?
+    var onSignUp: (() -> Void)?
+    
     @IBOutlet weak var usernameHeader: UILabel!
     @IBOutlet weak var usernameField: UITextField!
-    
-    
     @IBOutlet weak var passwordHeader: UILabel!
     @IBOutlet weak var passwordField: UITextField!
     @IBOutlet weak var continueButton: UIButton!
@@ -39,17 +40,24 @@ class LoginView: ModalView, Theme {
     }
     
     @IBAction func forgotPasswordAction(_ sender: Any) {
-        guard let url = URL(string: "https://www.bceid.ca/clp/account_recovery.aspx") else { return }
-        UIApplication.shared.open(url)
+        guard let url = URL(string: "https://www.bceid.ca/clp/account_recovery.aspx"), let callback = onForgotPassword else { return }
+//        UIApplication.shared.open(url)
+        callback()
     }
     
     @IBAction func signUpAction(_ sender: Any) {
-        guard let url = URL(string: "https://www.bceid.ca/register/") else { return }
-        UIApplication.shared.open(url)
+        guard let url = URL(string: "https://www.bceid.ca/register/"), let callback = onSignUp else { return }
+//        UIApplication.shared.open(url)
+        callback()
     }
     
     @IBAction func closeAction(_ sender: Any) {
         self.remove()
+    }
+    
+    func setup(onForgotPassword: @escaping ()-> Void, onSignUp: @escaping() -> Void) {
+        self.onSignUp = onSignUp
+        self.onForgotPassword = onForgotPassword
     }
     
     public func style() {

@@ -10,6 +10,10 @@ import UIKit
 
 class LoginViewController: BaseViewController {
     
+    let signupURL: URL = URL(string: "https://www.bceid.ca/register/")!
+    let forgotPasswordURL: URL = URL(string: "https://www.bceid.ca/clp/account_recovery.aspx")!
+    var webURL: URL?
+    
     // MARK: Outlets
     @IBOutlet weak var appTitle: UILabel!
     @IBOutlet weak var loginWithIdirButton: UIButton!
@@ -20,6 +24,11 @@ class LoginViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         style()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let destination = segue.destination as? WebKitViewController, let url = webURL else {return}
+        destination.setInitial(url: url)
     }
     
     // MARK: Outlet Actions
@@ -49,6 +58,17 @@ class LoginViewController: BaseViewController {
         dummyLogin.setFixed(width: 400, height: 550)
         dummyLogin.present()
         dummyLogin.style()
+        dummyLogin.setup(onForgotPassword: { [weak self] in
+            guard let _self = self else {return}
+            _self.webURL = _self.forgotPasswordURL
+            dummyLogin.remove()
+            _self.performSegue(withIdentifier: "showWebView", sender: self)
+        }) {[weak self] in
+            guard let _self = self else {return}
+            _self.webURL = _self.signupURL
+            dummyLogin.remove()
+            _self.performSegue(withIdentifier: "showWebView", sender: self)
+        }
     }
     
     private func afterLogin() {
@@ -63,5 +83,4 @@ class LoginViewController: BaseViewController {
         styleFillButton(button: loginWithBCeIDButton)
         styleCard(layer: loginContainer.layer)
     }
-    
 }
