@@ -21,7 +21,7 @@ enum APIRequestType {
 
 class APIRequest {
     static func headers() -> HTTPHeaders {
-        if let token = Auth.getAccessToken() {
+        if let token = AuthenticationService.getAccessToken() {
             return ["Authorization": "Bearer \(token)"]
         } else {
             return ["Content-Type": "application/json"]
@@ -45,8 +45,8 @@ class APIRequest {
             return completion(nil)
         }
         
-        if Auth.isAuthTokenExpired() && !Auth.isRefreshExpired() {
-            Auth.refreshCredentials { (success) in
+        if AuthenticationService.isAuthTokenExpired() && !AuthenticationService.isRefreshExpired() {
+            AuthenticationService.refreshCredentials { (success) in
                 if !success {
                     return completion(nil)
                 }
@@ -57,7 +57,7 @@ class APIRequest {
                     post(endpoint: endpoint, params: params ?? [String: Any](), completion: completion)
                 }
             }
-        } else if !Auth.isAuthTokenExpired() {
+        } else if !AuthenticationService.isAuthTokenExpired() {
             switch type {
             case .Get:
                 get(endpoint: endpoint, completion: completion)

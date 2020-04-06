@@ -69,23 +69,23 @@ class HomeViewController: BaseViewController {
         showOptions(options: [.Logout], on: sender as! UIButton) { [weak self] (selected) in
             guard let _self = self else {return}
             Alert.show(title: StringConstants.Alerts.Logout.title, message: StringConstants.Alerts.Logout.message, yes: {
-                Auth.logout()
+                AuthenticationService.logout()
                 _self.dismiss(animated: true, completion: nil)
             }) {}
         }
     }
     
     @IBAction func syncButtonAction(_ sender: Any) {
-        AutoSync.shared.canSync { (syncValidation) in
+        SyncService.shared.canSync { (syncValidation) in
             switch syncValidation {
             case .Ready:
-                AutoSync.shared.syncIfPossible()
+                SyncService.shared.syncIfPossible()
             case .isOffline:
                 Alert.show(title: StringConstants.Alerts.IsOffline.title, message: StringConstants.Alerts.IsOffline.message)
             case .NeedsAccess:
                 Alert.show(title: StringConstants.Alerts.NeedsAccess.title, message: StringConstants.Alerts.NeedsAccess.message)
             case .AuthExpired:
-                AutoSync.shared.showAuthDialogAndSync()
+                SyncService.shared.showAuthDialogAndSync()
             case .NothingToSync:
                 Alert.show(title: StringConstants.Alerts.NothingToSync.title, message: StringConstants.Alerts.NothingToSync.message)
             case .SyncDisabled:

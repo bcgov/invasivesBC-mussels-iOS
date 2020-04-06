@@ -27,9 +27,9 @@ public enum CodeTableType {
     case countryProvince
 }
 
-class CodeTables {
+class CodeTableService {
     
-    static let shared = CodeTables()
+    static let shared = CodeTableService()
     private init() {}
     
     private let waterBodyAPI: WaterBodyAPI =  WaterBodyAPI.api()
@@ -235,7 +235,7 @@ class CodeTables {
 }
 
 // MARK: Fetching using Promise
-extension CodeTables {
+extension CodeTableService {
     private func OLD_fetchAndStoreCodes(completion: @escaping (_ success: Bool) -> Void, status: @escaping(_ newStatus: String) -> Void) {
         do {
             let reacahbility = try Reachability()

@@ -14,7 +14,7 @@ class API: RemoteAPI<RemoteResponse>  {
     
     // TODO: Remove test token
     override var token: String {
-        return Auth.getAccessToken() ?? TestToken
+        return AuthenticationService.getAccessToken() ?? TestToken
     }
     
     // Processing sever response

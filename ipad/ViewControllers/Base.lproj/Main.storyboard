@@ -10,7 +10,7 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="InvasivesBC" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Inspect" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -39,7 +39,7 @@
         <!--Login View Controller-->
         <scene sceneID="oqx-Jp-mkB">
             <objects>
-                <viewController modalPresentationStyle="fullScreen" id="mUX-cz-9L9" customClass="LoginViewController" customModule="InvasivesBC" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" id="mUX-cz-9L9" customClass="LoginViewController" customModule="Inspect" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="djJ-c0-Aw4">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -136,6 +136,7 @@
                         <outlet property="loginContainer" destination="cVa-U7-NGL" id="UAW-nr-MZ1"/>
                         <outlet property="loginWithBCeIDButton" destination="yed-rD-Fhc" id="PI4-Zy-R1v"/>
                         <outlet property="loginWithIdirButton" destination="rli-kb-fGi" id="SWa-8a-1jo"/>
+                        <segue destination="Q4g-cA-Hsz" kind="presentation" identifier="showWebView" id="y4B-1I-zDH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gEs-MR-1fG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -145,7 +146,7 @@
         <!--Home View Controller-->
         <scene sceneID="u0t-z8-zdG">
             <objects>
-                <viewController modalPresentationStyle="fullScreen" id="JwX-i7-BNh" customClass="HomeViewController" customModule="InvasivesBC" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" id="JwX-i7-BNh" customClass="HomeViewController" customModule="Inspect" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="c0f-Dq-1g0">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -339,7 +340,7 @@
         <!--Form Entry View Controller-->
         <scene sceneID="sQu-BZ-g0V">
             <objects>
-                <viewController id="fxD-jA-8IB" customClass="FormEntryViewController" customModule="InvasivesBC" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="fxD-jA-8IB" customClass="FormEntryViewController" customModule="Inspect" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Q7a-6c-L9o">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -380,7 +381,7 @@
         <!--Watercraft Inspection View Controller-->
         <scene sceneID="riO-oX-bCE">
             <objects>
-                <viewController modalPresentationStyle="fullScreen" id="wRQ-S5-s9o" customClass="WatercraftInspectionViewController" customModule="InvasivesBC" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" id="wRQ-S5-s9o" customClass="WatercraftInspectionViewController" customModule="Inspect" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="1Uh-bw-RIl">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -419,7 +420,7 @@
         <!--High Risk Form View Controller-->
         <scene sceneID="UsZ-hl-ade">
             <objects>
-                <viewController modalPresentationStyle="fullScreen" id="k5I-JH-KcY" customClass="HighRiskFormViewController" customModule="InvasivesBC" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" id="k5I-JH-KcY" customClass="HighRiskFormViewController" customModule="Inspect" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Q8k-Xc-LJW">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -457,7 +458,7 @@
         <!--Shift View Controller-->
         <scene sceneID="3Zv-N1-NFj">
             <objects>
-                <viewController id="Y5d-In-vCW" customClass="ShiftViewController" customModule="InvasivesBC" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Y5d-In-vCW" customClass="ShiftViewController" customModule="Inspect" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="AIY-Pr-WmG">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -506,6 +507,92 @@
             </objects>
             <point key="canvasLocation" x="2104" y="87"/>
         </scene>
+        <!--Web Kit View Controller-->
+        <scene sceneID="XRQ-1O-kMX">
+            <objects>
+                <viewController id="Q4g-cA-Hsz" customClass="WebKitViewController" customModule="Inspect" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="2WC-Js-Eal">
+                        <rect key="frame" x="0.0" y="0.0" width="712" height="984"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="adW-Cg-73u">
+                                <rect key="frame" x="0.0" y="0.0" width="712" height="60"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D9P-Dy-PaF">
+                                        <rect key="frame" x="8" y="9" width="42" height="42"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="D9P-Dy-PaF" secondAttribute="height" multiplier="1:1" id="In4-1c-hwM"/>
+                                        </constraints>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" image="xmark" catalog="system">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large" weight="semibold"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="closeButtonAction:" destination="Q4g-cA-Hsz" eventType="touchUpInside" id="7Dz-mF-Vch"/>
+                                        </connections>
+                                    </button>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lock.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="eY8-2T-3xv">
+                                        <rect key="frame" x="308.5" y="20.5" width="20" height="18.5"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="eY8-2T-3xv" secondAttribute="height" multiplier="1:1" id="OVZ-kD-FEh"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QJl-ZH-lw8">
+                                        <rect key="frame" x="336.5" y="20.5" width="39.5" height="19.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.050980392159999999" green="0.24313725489999999" blue="0.45098039220000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="QJl-ZH-lw8" firstAttribute="centerX" secondItem="adW-Cg-73u" secondAttribute="centerX" id="2wW-fT-Kh8"/>
+                                    <constraint firstAttribute="width" secondItem="D9P-Dy-PaF" secondAttribute="height" multiplier="356:21" id="3RN-i5-o9o"/>
+                                    <constraint firstItem="eY8-2T-3xv" firstAttribute="centerY" secondItem="adW-Cg-73u" secondAttribute="centerY" id="3mz-Rq-XSr"/>
+                                    <constraint firstItem="D9P-Dy-PaF" firstAttribute="top" secondItem="adW-Cg-73u" secondAttribute="top" constant="9" id="4wv-X6-W7f"/>
+                                    <constraint firstItem="D9P-Dy-PaF" firstAttribute="centerY" secondItem="adW-Cg-73u" secondAttribute="centerY" id="Cbt-Ob-HN5"/>
+                                    <constraint firstAttribute="width" secondItem="D9P-Dy-PaF" secondAttribute="width" multiplier="16.9524" id="NaI-bf-FeI"/>
+                                    <constraint firstItem="D9P-Dy-PaF" firstAttribute="leading" secondItem="adW-Cg-73u" secondAttribute="leading" constant="8" id="TrV-Yo-pLw"/>
+                                    <constraint firstAttribute="height" constant="60" id="ZNG-CV-OMc"/>
+                                    <constraint firstItem="QJl-ZH-lw8" firstAttribute="leading" secondItem="eY8-2T-3xv" secondAttribute="trailing" constant="8" id="acJ-gz-V39"/>
+                                    <constraint firstItem="QJl-ZH-lw8" firstAttribute="centerY" secondItem="adW-Cg-73u" secondAttribute="centerY" id="mjR-oZ-uNl"/>
+                                    <constraint firstItem="eY8-2T-3xv" firstAttribute="top" secondItem="adW-Cg-73u" secondAttribute="top" constant="20" id="vnH-Oq-pJt"/>
+                                </constraints>
+                            </view>
+                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qgs-Qt-xFT">
+                                <rect key="frame" x="0.0" y="60" width="712" height="924"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="raC-nB-vKP" firstAttribute="bottom" secondItem="qgs-Qt-xFT" secondAttribute="bottom" id="DaQ-MN-hNO"/>
+                            <constraint firstItem="qgs-Qt-xFT" firstAttribute="leading" secondItem="raC-nB-vKP" secondAttribute="leading" id="O50-nh-inx"/>
+                            <constraint firstItem="raC-nB-vKP" firstAttribute="trailing" secondItem="qgs-Qt-xFT" secondAttribute="trailing" id="PHU-oQ-sfy"/>
+                            <constraint firstItem="adW-Cg-73u" firstAttribute="top" secondItem="raC-nB-vKP" secondAttribute="top" id="QBq-uD-7am"/>
+                            <constraint firstItem="raC-nB-vKP" firstAttribute="trailing" secondItem="adW-Cg-73u" secondAttribute="trailing" id="grA-rx-fFc"/>
+                            <constraint firstItem="adW-Cg-73u" firstAttribute="leading" secondItem="raC-nB-vKP" secondAttribute="leading" id="ilw-ts-G56"/>
+                            <constraint firstItem="qgs-Qt-xFT" firstAttribute="top" secondItem="adW-Cg-73u" secondAttribute="bottom" id="lhP-IV-Uz2"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="raC-nB-vKP"/>
+                    </view>
+                    <connections>
+                        <outlet property="addressLabel" destination="QJl-ZH-lw8" id="FG4-5j-ItS"/>
+                        <outlet property="lockIcon" destination="eY8-2T-3xv" id="czx-iz-DNM"/>
+                        <outlet property="navbar" destination="adW-Cg-73u" id="YI3-U7-5h8"/>
+                        <outlet property="webview" destination="qgs-Qt-xFT" id="oEm-oW-wOa"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CFs-sA-4M5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1158.59375" y="-648.046875"/>
+        </scene>
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="4OX-36-Cn0"/>
@@ -514,6 +601,8 @@
         <image name="arrow.up.right.square" catalog="system" width="128" height="114"/>
         <image name="bclogo" width="172" height="148"/>
         <image name="launch" width="1024" height="768"/>
+        <image name="lock.fill" catalog="system" width="128" height="128"/>
         <image name="person.circle.fill" catalog="system" width="128" height="121"/>
+        <image name="xmark" catalog="system" width="128" height="113"/>
     </resources>
 </document>
