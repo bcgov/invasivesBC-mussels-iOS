@@ -28,7 +28,7 @@ class InputTitleCollectionViewCell:  BaseInputCell<InputTitle> {
         style()
     }
     
-    private func style() {
+    override func style() {
         styleFieldHeader(label: titleLabel)
     }
 

@@ -49,7 +49,7 @@ class DateInputCollectionViewCell: BaseInputCell<DateInput>, UITextFieldDelegate
     }
     
     // MARK: Style
-    private func style() {
+    override func style() {
         styleInput(field: textField, header: headerLabel, editable: model?.editable ?? false)
     }
     

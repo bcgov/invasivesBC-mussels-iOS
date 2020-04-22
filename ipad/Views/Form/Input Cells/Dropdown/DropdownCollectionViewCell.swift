@@ -71,7 +71,7 @@ class DropdownCollectionViewCell: BaseInputCell<DropdownInput>, UITextFieldDeleg
     }
     
     // MARK: Style
-    private func style() {
+    override func style() {
         styleInput(field: textField, header: headerLabel, editable: model?.editable ?? false)
     }
     

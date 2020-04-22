@@ -31,7 +31,7 @@ class TextAreaInputCollectionViewCell: BaseInputCell<TextAreaInput>, UITextViewD
     }
     
     // MARK: Style
-    private func style() {
+    override func style() {
         styleFieldInput(textField: textArea)
         styleFieldHeader(label: fieldHeader)
     }
