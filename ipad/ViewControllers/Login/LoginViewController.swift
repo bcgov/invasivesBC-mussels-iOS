@@ -45,30 +45,32 @@ class LoginViewController: BaseViewController {
     }
     
     @IBAction func loginWithBCeIDAction(_ sender: UIButton) {
-//        AuthenticationService.refreshEnviormentConstants(withIdpHint: "bceid")
-//        Settings.shared.setAuth(type: .BCeID)
-//        AuthenticationService.authenticate { (success) in
-//            if (!success) {
-//                AuthenticationService.logout()
-//                return
-//            }
-//            self.afterLogin()
-//        }
-        let dummyLogin: LoginView = UIView.fromNib()
-        dummyLogin.setFixed(width: 400, height: 550)
-        dummyLogin.present()
-        dummyLogin.style()
-        dummyLogin.setup(onForgotPassword: { [weak self] in
-            guard let _self = self else {return}
-            _self.webURL = _self.forgotPasswordURL
-            dummyLogin.remove()
-            _self.performSegue(withIdentifier: "showWebView", sender: self)
-        }) {[weak self] in
-            guard let _self = self else {return}
-            _self.webURL = _self.signupURL
-            dummyLogin.remove()
-            _self.performSegue(withIdentifier: "showWebView", sender: self)
+        AuthenticationService.refreshEnviormentConstants(withIdpHint: "bceid")
+        Settings.shared.setAuth(type: .BCeID)
+        AuthenticationService.authenticate { (success) in
+            if (!success) {
+                AuthenticationService.logout()
+                return
+            }
+            self.afterLogin()
         }
+        // TODO: Use this code and comment the piece above before submitting to app store
+        // Delete this and use the code above when BCeID in prod is available
+//        let dummyLogin: LoginView = UIView.fromNib()
+//        dummyLogin.setFixed(width: 400, height: 550)
+//        dummyLogin.present()
+//        dummyLogin.style()
+//        dummyLogin.setup(onForgotPassword: { [weak self] in
+//            guard let _self = self else {return}
+//            _self.webURL = _self.forgotPasswordURL
+//            dummyLogin.remove()
+//            _self.performSegue(withIdentifier: "showWebView", sender: self)
+//        }) {[weak self] in
+//            guard let _self = self else {return}
+//            _self.webURL = _self.signupURL
+//            dummyLogin.remove()
+//            _self.performSegue(withIdentifier: "showWebView", sender: self)
+//        }
     }
     
     private func afterLogin() {

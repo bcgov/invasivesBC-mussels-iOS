@@ -51,7 +51,7 @@ class RadioBooleanCollectionViewCell: BaseInputCell<RadioBoolean>  {
     }
     
     // MARK: Style
-    private func style() {
+    override func style() {
         makeCircle(view: radioView)
         radioView.layer.borderWidth = 1
         radioView.layer.borderColor = Colors.primary.cgColor

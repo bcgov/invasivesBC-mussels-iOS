@@ -87,7 +87,7 @@ class RadioSwitchInputCollectionViewCell: BaseInputCell<RadioSwitchInput> {
     }
     
     // MARK: Style
-    private func style() {
+    override func style() {
         makeCircle(view: noView)
         makeCircle(view: yesView)
         noView.layer.borderWidth = 1

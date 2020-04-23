@@ -35,6 +35,7 @@ class BaseInputCell<Model: InputItem>: UICollectionViewCell, Theme {
     }
     
     func beginListener() {
+        NotificationCenter.default.removeObserver(self, name: .InputFieldShouldUpdate, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.InputFieldshouldUpdate(notification:)), name: .InputFieldShouldUpdate, object: nil)
     }
     
@@ -54,6 +55,7 @@ class BaseInputCell<Model: InputItem>: UICollectionViewCell, Theme {
         }
         initialize(with: model)
         beginListener()
+        style()
     }
     
     func initialize(with model: Model) {}
@@ -61,4 +63,6 @@ class BaseInputCell<Model: InputItem>: UICollectionViewCell, Theme {
     func emitChange() {
         NotificationCenter.default.post(name: .InputItemValueChanged, object: self.model)
     }
+    
+    func style() {}
 }

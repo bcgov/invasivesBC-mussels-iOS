@@ -564,6 +564,7 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
                         strongerSelf.setNavigationBar(hidden: false, style: .black)
                         strongerSelf.viewLayoutMarginsDidChange()
                         strongerSelf.collectionView.reloadData()
+                        waterBodyPicker.removeFromSuperview()
                     }
                     /// --------------------------------
                 }
