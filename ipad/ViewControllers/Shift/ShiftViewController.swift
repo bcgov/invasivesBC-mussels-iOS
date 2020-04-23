@@ -86,7 +86,7 @@ class ShiftViewController: BaseViewController {
     @objc func didTapDeleteButton(sender: UIBarButtonItem) {
         guard let model = self.model else {return}
         self.dismissKeyboard()
-        Alert.show(title: "Deleting Inspection", message: "Would you like to delete this inspection?", yes: { [weak self] in
+        Alert.show(title: "Deleting Shift", message: "Would you like to delete this shift?", yes: { [weak self] in
             guard let _self = self else {return}
             // Delete Children
             for inspection in model.inspections {
