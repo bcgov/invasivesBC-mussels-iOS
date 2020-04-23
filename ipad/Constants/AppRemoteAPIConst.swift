@@ -56,7 +56,7 @@ class RemoteURLManager {
     static var `default` = {
         // Here We Can use Target Flag to customize
         // Switch Env 
-        return RemoteURLManager(.prod)
+        return RemoteURLManager(.dev)
     }()
     
     init(_ env: RemoteEnv) {

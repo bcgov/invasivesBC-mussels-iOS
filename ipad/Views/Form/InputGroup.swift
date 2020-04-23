@@ -74,6 +74,8 @@ class InputGroupView: UIView {
     }
     
     private func addListeners() {
+        NotificationCenter.default.removeObserver(self, name: .screenOrientationChanged, object: nil)
+        NotificationCenter.default.removeObserver(self, name: .InputItemValueChanged, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.screenOrientationChanged(notification:)), name: .screenOrientationChanged, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.inputItemValueChanged(notification:)), name: .InputItemValueChanged, object: nil)
     }

@@ -14,11 +14,6 @@ class TextInputCollectionViewCell: BaseInputCell<TextInput>, UITextFieldDelegate
     @IBOutlet weak var headerLabel: UILabel!
     @IBOutlet weak var textField: UITextField!
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        style()
-    }
-    
     // MARK: UITextFieldDelegate
     func textFieldDidEndEditing(_ textField: UITextField) {
         guard let model = self.model else {return}
@@ -65,7 +60,7 @@ class TextInputCollectionViewCell: BaseInputCell<TextInput>, UITextFieldDelegate
     }
     
     // MARK: Style
-    private func style() {
+    override func style() {
         styleInput(field: textField, header: headerLabel, editable: model?.editable ?? false)
     }
     

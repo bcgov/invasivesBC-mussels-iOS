@@ -37,7 +37,7 @@ class SwitchInputCollectionViewCell: BaseInputCell<SwitchInput> {
     }
     
     // MARK: Style
-    private func style() {
+    override func style() {
         styleFieldHeader(label: headerLabel)
     }
 }

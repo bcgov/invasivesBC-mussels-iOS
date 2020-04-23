@@ -76,7 +76,7 @@ class ViewFieldCollectionViewCell: BaseInputCell<ViewField> {
         
     }
     
-    private func style() {
+    override func style() {
         styleFieldHeader(label: fieldHeader)
     }
 }

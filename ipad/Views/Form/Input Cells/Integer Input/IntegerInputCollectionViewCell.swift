@@ -49,7 +49,7 @@ class IntegerInputCollectionViewCell: BaseInputCell<IntegerInput>, UITextFieldDe
         textField.delegate = self
     }
     
-    func style() {
+    override func style() {
         styleInput(field: textField, header: headerLabel, editable: model?.editable ?? false)
     }
     
