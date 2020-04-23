@@ -83,6 +83,23 @@ class ShiftViewController: BaseViewController {
     
     // MARK: Actions
     // Navigation bar right button action
+    @objc func didTapDeleteButton(sender: UIBarButtonItem) {
+        guard let model = self.model else {return}
+        self.dismissKeyboard()
+        Alert.show(title: "Deleting Inspection", message: "Would you like to delete this inspection?", yes: { [weak self] in
+            guard let _self = self else {return}
+            // Delete Children
+            for inspection in model.inspections {
+                RealmRequests.deleteObject(inspection)
+            }
+            // Delete main object
+            RealmRequests.deleteObject(model)
+            _self.navigationController?.popViewController(animated: true)
+        }) {
+            return
+        }
+    }
+    
     @objc func completeAction(sender: UIBarButtonItem) {
         guard let model = self.model else { return }
         self.dismissKeyboard()
@@ -144,9 +161,15 @@ class ShiftViewController: BaseViewController {
         navigation.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
         setGradiantBackground(navigationBar: navigation.navigationBar)
         if let model = self.model, model.getStatus() == .Draft {
-            let logoutBarButtonItem = UIBarButtonItem(title: "Submit", style: .done, target: self, action: #selector (self.completeAction(sender:)))
-            self.navigationItem.rightBarButtonItem = logoutBarButtonItem
+            setRightNavButtons()
         }
+    }
+    
+    private func setRightNavButtons() {
+        let deleteButton = UIBarButtonItem(title: "Delete", style: .plain, target: self, action: #selector(self.didTapDeleteButton(sender:)))
+        let saveButton = UIBarButtonItem(title: "Submit", style: .done, target: self, action: #selector(self.completeAction(sender:)))
+        let spacer = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
+        navigationItem.setRightBarButtonItems([saveButton, spacer, deleteButton], animated: true)
     }
     
     // MARK: Validation
