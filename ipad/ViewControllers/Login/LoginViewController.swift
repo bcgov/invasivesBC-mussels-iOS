@@ -54,6 +54,8 @@ class LoginViewController: BaseViewController {
             }
             self.afterLogin()
         }
+        // TODO: Use this code and comment the piece above before submitting to app store
+        // Delete this and use the code above when BCeID in prod is available
 //        let dummyLogin: LoginView = UIView.fromNib()
 //        dummyLogin.setFixed(width: 400, height: 550)
 //        dummyLogin.present()
