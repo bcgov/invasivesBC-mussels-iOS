@@ -161,15 +161,44 @@ class WatercraftInspectionViewController: BaseViewController {
         navigation.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
         setGradiantBackground(navigationBar: navigation.navigationBar)
         if let model = self.model, model.getStatus() == .Draft {
-            setRightNavButtonTo(type: .save)
+            setRightNavButtons()
         }
     }
     
-    private func setRightNavButtonTo(type: UIBarButtonItem.SystemItem) {
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: type, target: self, action: #selector(self.action(sender:)))
+    private func setRightNavButtons() {
+        let deleteIcon = UIImage(systemName: "trash")
+        let deleteButton = UIBarButtonItem(image: deleteIcon,  style: .plain, target: self, action: #selector(self.didTapDeleteButton(sender:)))
+        
+        let saveIcon = UIImage(systemName: "checkmark")
+        let saveButton = UIBarButtonItem(image: saveIcon,  style: .plain, target: self, action: #selector(self.action(sender:)))
+        
+        navigationItem.rightBarButtonItems = [saveButton, deleteButton]
     }
     
     // Navigation bar right button action
+    @objc func didTapDeleteButton(sender: UIBarButtonItem) {
+        guard let model = self.model else {return}
+        self.dismissKeyboard()
+        Alert.show(title: "Deleting Inspection", message: "Would you like to delete this inspection?", yes: {[weak self] in
+            guard let _self = self else {return}
+            // Delete child objects
+            for item in model.previousWaterBodies {
+                RealmRequests.deleteObject(item)
+            }
+            for item in model.destinationWaterBodies {
+                RealmRequests.deleteObject(item)
+            }
+            for item in model.highRiskAssessments {
+                RealmRequests.deleteObject(item)
+            }
+            // Delete main object
+            RealmRequests.deleteObject(model)
+            _self.navigationController?.popViewController(animated: true)
+        }) {
+            return
+        }
+    }
+    
     @objc func action(sender: UIBarButtonItem) {
         self.dismissKeyboard()
         self.navigationController?.popViewController(animated: true)
