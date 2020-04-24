@@ -17,6 +17,10 @@ class DividerCollectionViewCell: UICollectionViewCell, Theme {
         style()
     }
     
+    func setup(visible: Bool) {
+        divider.alpha = visible ? 1 : 0
+    }
+    
     func style() {
         styleDivider(view: divider)
     }
