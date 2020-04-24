@@ -423,10 +423,12 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
             return getHighRiskAssessmentCell(indexPath: indexPath)
         case .GeneralComments:
             let cell = getBasicCell(indexPath: indexPath)
-            cell.setup(title: "Comments", input: model.getInputputFields(for: sectionType, editable: isEditable), delegate: self)
+            cell.setup(title: "Comments", input: model.getInputputFields(for: sectionType, editable: isEditable), delegate: self, showDivider: false)
             return cell
         case .Divider:
-            return getDividerCell(indexPath: indexPath)
+            let dividerCell = getDividerCell(indexPath: indexPath)
+            dividerCell.setup(visible: !showHighRiskAssessment)
+            return dividerCell
         }
     }
     
@@ -437,7 +439,7 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
         
         let sectionTitle = "\(sectionType)".convertFromCamelCase()
         let cell = getBasicCell(indexPath: indexPath)
-        cell.setup(title: sectionTitle, input: highRiskForm.getInputputFields(for: sectionType, editable: isEditable), delegate: self)
+        cell.setup(title: sectionTitle, input: highRiskForm.getInputputFields(for: sectionType, editable: isEditable), delegate: self, showDivider: true)
         return cell
     }
     
@@ -640,7 +642,9 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
             }
             return cell
         case .Divider:
-            return getDividerCell(indexPath: indexPath)
+            let dividerCell = getDividerCell(indexPath: indexPath)
+            dividerCell.setup(visible: true)
+            return dividerCell
         case .PreviousHeader:
             let cell = getHeaderCell(indexPath: indexPath)
             cell.setup(with: "Previous Waterbody")
