@@ -271,6 +271,7 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
             "commercialManufacturerAsDestinationWaterBody": commercialManufacturerAsDestinationWaterBody,
             "provinceOfResidence": provinceOfResidence != "" ? provinceOfResidence : "BC",
             "countryOfResidence": countryOfResidence != "" ? countryOfResidence : "CAN",
+            "numberOfPeopleInParty": numberOfPeopleInParty,
             "journeys": []
         ]
         
