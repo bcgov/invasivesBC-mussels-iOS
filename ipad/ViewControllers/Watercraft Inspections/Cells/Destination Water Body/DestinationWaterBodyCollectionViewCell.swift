@@ -21,12 +21,8 @@ class DestinationWaterBodyCollectionViewCell: BaseJourneyCollectionViewCell, The
     var isEditable: Bool = false
     
     @IBAction func optionsAction(_ sender: UIButton) {
-        guard let onDelete = onDelete, let delegate = delegate else {return}
-        delegate.showOptionsDelegate(options: [.Delete], on: sender) { (selected) in
-            if selected == .Delete {
-                return onDelete()
-            }
-        }
+        guard let onDelete = onDelete else {return}
+        onDelete()
     }
     
     func setup(with model: DestinationWaterbodyModel, isEditable: Bool, delegate: InputDelegate, onDelete: @escaping ()-> Void) {
