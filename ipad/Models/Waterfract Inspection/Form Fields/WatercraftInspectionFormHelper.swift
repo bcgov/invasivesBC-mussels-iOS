@@ -136,7 +136,7 @@ class WatercraftInspectionFormHelper {
         )
         inspectionTime.dependency.append(InputDependency(to: passportField, equalTo: false))
         sectionItems.append(inspectionTime)
-        sectionItems.append(InputSpacer(width: .Third))
+         sectionItems.append(InputSpacer(width: .Third))
         let spacer = InputSpacer(width: .Third)
         spacer.dependency.append(InputDependency(to: passportField, equalTo: true))
         sectionItems.append(spacer)
