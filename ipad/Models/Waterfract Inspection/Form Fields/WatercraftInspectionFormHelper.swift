@@ -136,6 +136,7 @@ class WatercraftInspectionFormHelper {
         )
         inspectionTime.dependency.append(InputDependency(to: passportField, equalTo: false))
         sectionItems.append(inspectionTime)
+        
         let k9Inspection = SwitchInput(
             key: "k9Inspection",
             header: WatercraftFieldHeaderConstants.Passport.k9Inspection,
