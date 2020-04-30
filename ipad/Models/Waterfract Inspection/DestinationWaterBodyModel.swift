@@ -14,9 +14,6 @@ import RealmSwift
 
 class DestinationWaterbodyModel: JourneyModel, BaseRealmObject {
     @objc dynamic var userId: String = ""
-    @objc dynamic var localId: String = {
-        return UUID().uuidString
-    }()
     
     override class func primaryKey() -> String? {
         return "localId"

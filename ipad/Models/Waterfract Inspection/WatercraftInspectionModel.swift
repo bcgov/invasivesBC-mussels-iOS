@@ -445,14 +445,18 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
     
     func setJournyStatusFlags(dryStorage: Bool, unknown: Bool, commercialManufacturer: Bool, isPrevious: Bool) {
         do {
-            
             // Removing existing waterbodies
             // 1. Convert into array iterator
             let waterBodies: [Any] = isPrevious ? Array(self.previousWaterBodies) : Array(self.destinationWaterBodies)
             // 2. Removing each item
             for item in waterBodies {
                 if let body: JourneyModel = item as? JourneyModel {
-                    RealmRequests.deleteObject(body)
+                    guard
+                        let realm = try? Realm(),
+                        let object = realm.objects(JourneyModel.self).filter("localId = %@", body.localId).first else {
+                            continue
+                    }
+                    RealmRequests.deleteObject(object)
                 }
             }
             

@@ -136,10 +136,22 @@ class WatercraftInspectionFormHelper {
         )
         inspectionTime.dependency.append(InputDependency(to: passportField, equalTo: false))
         sectionItems.append(inspectionTime)
-         sectionItems.append(InputSpacer(width: .Third))
+        let k9Inspection = SwitchInput(
+            key: "k9Inspection",
+            header: WatercraftFieldHeaderConstants.Passport.k9Inspection,
+            editable: editable ?? true,
+            value: object?.k9Inspection ?? nil,
+            width: .Third
+        )
+        k9Inspection.dependency.append(InputDependency(to: passportField, equalTo: false))
+        sectionItems.append(k9Inspection)
+        
         let spacer = InputSpacer(width: .Third)
         spacer.dependency.append(InputDependency(to: passportField, equalTo: true))
         sectionItems.append(spacer)
+        let spacer2 = InputSpacer(width: .Third)
+        spacer2.dependency.append(InputDependency(to: passportField, equalTo: true))
+        sectionItems.append(spacer2)
         
         let nonMotorized = IntegerStepperInput(
             key: "nonMotorized",
@@ -267,7 +279,7 @@ class WatercraftInspectionFormHelper {
             header: WatercraftFieldHeaderConstants.InspectionDetails.aquaticPlantsFound,
             editable: editable ?? true,
             value: object?.aquaticPlantsFound ?? nil,
-            width: .Forth
+            width: .Third
         )
         sectionItems.append(aquaticPlantsFound)
         
@@ -276,7 +288,7 @@ class WatercraftInspectionFormHelper {
             header: WatercraftFieldHeaderConstants.InspectionDetails.marineMusslesFound,
             editable: editable ?? true,
             value: object?.marineMusslesFound ?? nil,
-            width: .Forth
+            width: .Third
         )
         sectionItems.append(marineMusslesFound)
         
