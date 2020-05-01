@@ -14,13 +14,13 @@ class JourneyModel: Object {
     @objc dynamic var numberOfDaysOut : Int = 0
     @objc dynamic var shouldSync: Bool = false
     @objc dynamic var remoteId: Int = -1
+    @objc dynamic var localId: String = {
+        return UUID().uuidString
+    }()
 }
 
 class PreviousWaterbodyModel: JourneyModel, BaseRealmObject {
     @objc dynamic var userId: String = ""
-    @objc dynamic var localId: String = {
-        return UUID().uuidString
-    }()
     
     override class func primaryKey() -> String? {
         return "localId"

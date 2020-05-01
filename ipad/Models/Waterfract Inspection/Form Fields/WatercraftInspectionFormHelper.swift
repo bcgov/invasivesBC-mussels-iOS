@@ -280,7 +280,7 @@ class WatercraftInspectionFormHelper {
             header: WatercraftFieldHeaderConstants.InspectionDetails.aquaticPlantsFound,
             editable: editable ?? true,
             value: object?.aquaticPlantsFound ?? nil,
-            width: .Forth
+            width: .Third
         )
         sectionItems.append(aquaticPlantsFound)
         
@@ -289,7 +289,7 @@ class WatercraftInspectionFormHelper {
             header: WatercraftFieldHeaderConstants.InspectionDetails.marineMusslesFound,
             editable: editable ?? true,
             value: object?.marineMusslesFound ?? nil,
-            width: .Forth
+            width: .Third
         )
         sectionItems.append(marineMusslesFound)
         
