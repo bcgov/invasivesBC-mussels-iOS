@@ -27,6 +27,7 @@ class WatercraftInspectionFormHelper {
             editable: editable ?? true,
             value: object?.isNewPassportIssued ?? nil,
             width: .Full)
+        isNewPassportIssued.dependency.append(InputDependency(to: isPassportHolder, equalTo: true))
         items.append(isNewPassportIssued)
         
         let inspectionTime = TimeInput(
