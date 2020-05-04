@@ -82,6 +82,7 @@ struct ShiftFormHeaders {
 struct WatercraftFieldHeaderConstants {
     struct Passport {
         static let isPassportHolder = "Is this a Passport Holder?"
+        static let isNewPassportIssued = "Was a passport issued?"
         static let inspectionTime = "Time of Inspection"
         static let passportNumber = "Passport Number"
         static let launchedOutsideBC = "Launched outside BC/AB in the last 30 days?"
