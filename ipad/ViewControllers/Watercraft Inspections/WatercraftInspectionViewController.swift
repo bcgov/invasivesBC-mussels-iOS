@@ -91,7 +91,7 @@ class WatercraftInspectionViewController: BaseViewController {
         self.model = model
         self.isEditable = model.getStatus() == .Draft
         self.styleNavBar()
-        if !model.isPassportHolder || model.launchedOutsideBC {
+        if !model.isPassportHolder || model.launchedOutsideBC || model.isNewPassportIssued {
             self.showFullInspection = true
         }
         
@@ -303,6 +303,15 @@ class WatercraftInspectionViewController: BaseViewController {
             }
             
             self.collectionView.reloadData()
+        }
+        
+        if item.key.lowercased() == "isNewPassportIssued".lowercased() {
+            DispatchQueue.main.async {
+                let isNewPassportIssued = item.value.get(type: item.type) as? Bool ?? nil
+                self.showFullInspection = isNewPassportIssued == true && model.isPassportHolder
+                self.collectionView.reloadData()
+                InfoLog("check : \(model.isNewPassportIssued)")
+            }
         }
     }
     

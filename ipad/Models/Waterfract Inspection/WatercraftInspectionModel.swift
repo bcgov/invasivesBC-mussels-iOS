@@ -93,6 +93,9 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
     
     private var inputputFields: [WatercraftFromSection: [InputItem]] = [WatercraftFromSection: [InputItem]]()
     
+    // Passport issue flag
+    @objc dynamic var isNewPassportIssued: Bool = false
+    
     // MARK: Setters
     func set(value: Any, for key: String) {
         if self[key] == nil {
@@ -101,8 +104,10 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
         }
         do {
             let realm = try Realm()
+            InfoLog("check1 : \(self.isNewPassportIssued)")
             try realm.write {
                 self[key] = value
+                InfoLog("check2 : \(self.isNewPassportIssued)")
             }
         } catch let error as NSError {
             print("** REALM ERROR")

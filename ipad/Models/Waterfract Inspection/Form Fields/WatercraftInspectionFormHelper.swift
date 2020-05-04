@@ -21,6 +21,14 @@ class WatercraftInspectionFormHelper {
         )
         items.append(isPassportHolder)
         
+        let isNewPassportIssued = RadioSwitchInput(
+            key: "isNewPassportIssued",
+            header: WatercraftFieldHeaderConstants.Passport.isNewPassportIssued,
+            editable: editable ?? true,
+            value: object?.isNewPassportIssued ?? nil,
+            width: .Full)
+        items.append(isNewPassportIssued)
+        
         let inspectionTime = TimeInput(
             key: "inspectionTime",
             header: WatercraftFieldHeaderConstants.Passport.inspectionTime,
