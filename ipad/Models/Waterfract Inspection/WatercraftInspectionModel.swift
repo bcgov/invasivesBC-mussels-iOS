@@ -104,10 +104,8 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
         }
         do {
             let realm = try Realm()
-            InfoLog("check1 : \(self.isNewPassportIssued)")
             try realm.write {
                 self[key] = value
-                InfoLog("check2 : \(self.isNewPassportIssued)")
             }
         } catch let error as NSError {
             print("** REALM ERROR")

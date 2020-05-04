@@ -310,7 +310,6 @@ class WatercraftInspectionViewController: BaseViewController {
                 let isNewPassportIssued = item.value.get(type: item.type) as? Bool ?? nil
                 self.showFullInspection = isNewPassportIssued == true && model.isPassportHolder
                 self.collectionView.reloadData()
-                InfoLog("check : \(model.isNewPassportIssued)")
             }
         }
     }
