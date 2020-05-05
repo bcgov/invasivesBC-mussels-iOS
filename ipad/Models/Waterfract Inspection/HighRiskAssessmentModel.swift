@@ -17,7 +17,6 @@ public enum HighRiskFormSection: Int, CaseIterable {
     case InspectionOutcomes
 }
 
-
 class HighRiskAssessmentModel: Object, BaseRealmObject {
     @objc dynamic var userId: String = ""
     @objc dynamic var localId: String = {
