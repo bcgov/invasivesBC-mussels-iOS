@@ -70,7 +70,6 @@ class RemoteURLManager {
     var keyCloakURL: URL {
         return URL(string: self.env.keyCloakURL)!
     }
-    
 }
 
 /**
