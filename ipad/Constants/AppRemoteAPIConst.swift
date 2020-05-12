@@ -52,11 +52,11 @@ enum RemoteEnv: String {
 }
 
 class RemoteURLManager {
-    var env: RemoteEnv = .dev
+    var env: RemoteEnv = .prod
     static var `default` = {
         // Here We Can use Target Flag to customize
         // Switch Env 
-        return RemoteURLManager(.dev)
+        return RemoteURLManager(.prod)
     }()
     
     init(_ env: RemoteEnv) {
