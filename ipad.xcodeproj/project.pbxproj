@@ -23,6 +23,7 @@
 		290DA9DC24044A5C00438699 /* AccessService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 290DA9DB24044A5C00438699 /* AccessService.swift */; };
 		290DA9DF2404621700438699 /* AwaitingAccessResponse.xib in Resources */ = {isa = PBXBuildFile; fileRef = 290DA9DE2404621700438699 /* AwaitingAccessResponse.xib */; };
 		290DA9E12404622700438699 /* AwaitingAccessResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 290DA9E02404622700438699 /* AwaitingAccessResponse.swift */; };
+		291F918224742FD800974D33 /* WaterbodiesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 291F918124742FD800974D33 /* WaterbodiesService.swift */; };
 		2933DD5B238C78350068E9DF /* TimePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2933DD5A238C78350068E9DF /* TimePicker.swift */; };
 		2933DD5E238DC2150068E9DF /* CodeTableService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2933DD5D238DC2150068E9DF /* CodeTableService.swift */; };
 		2933DD61238DC5120068E9DF /* CodeTableModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2933DD60238DC5120068E9DF /* CodeTableModel.swift */; };
@@ -228,6 +229,7 @@
 		290DA9DB24044A5C00438699 /* AccessService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessService.swift; sourceTree = "<group>"; };
 		290DA9DE2404621700438699 /* AwaitingAccessResponse.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AwaitingAccessResponse.xib; sourceTree = "<group>"; };
 		290DA9E02404622700438699 /* AwaitingAccessResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AwaitingAccessResponse.swift; sourceTree = "<group>"; };
+		291F918124742FD800974D33 /* WaterbodiesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterbodiesService.swift; sourceTree = "<group>"; };
 		2933DD5A238C78350068E9DF /* TimePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimePicker.swift; sourceTree = "<group>"; };
 		2933DD5D238DC2150068E9DF /* CodeTableService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeTableService.swift; sourceTree = "<group>"; };
 		2933DD60238DC5120068E9DF /* CodeTableModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeTableModel.swift; sourceTree = "<group>"; };
@@ -699,6 +701,7 @@
 				290DA9DB24044A5C00438699 /* AccessService.swift */,
 				2933DD66238ED4470068E9DF /* ShiftService.swift */,
 				2933DD5D238DC2150068E9DF /* CodeTableService.swift */,
+				291F918124742FD800974D33 /* WaterbodiesService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -1616,6 +1619,7 @@
 				5C82D404237B31C200B065BA /* WatercraftRiskAssessmentAPI.swift in Sources */,
 				5C82D3D82374AECC00B065BA /* HighRiskModalView.swift in Sources */,
 				29BAC5102367984000A620F4 /* GradiantView.swift in Sources */,
+				291F918224742FD800974D33 /* WaterbodiesService.swift in Sources */,
 				29514BE32368B5AF00DC89C4 /* Notifications.swift in Sources */,
 				294D9A8F237B1EA300BD4928 /* WatercraftInspectionFormHelper.swift in Sources */,
 				298BF7C523958A220072AA28 /* SpacerCollectionViewCell.swift in Sources */,

@@ -194,15 +194,7 @@ class Storage {
     
     // MARK: Water Body
     public func fullWaterBodyTables() -> [WaterBodyTableModel] {
-        do {
-            let realm = try Realm()
-            let objs = realm.objects(WaterBodyTableModel.self)
-            return Array(objs)
-        } catch let error as NSError {
-            print("** REALM ERROR")
-            print(error)
-            return []
-        }
+        return WaterbodiesService.shared.get()
     }
     
     public func getWaterBodyDropdowns() -> [DropdownModel] {
@@ -215,135 +207,64 @@ class Storage {
     }
     
     public func getWaterbodyModel(withId id: Int) -> WaterBodyTableModel? {
-        do {
-            let realm = try Realm()
-            let objs = realm.objects(WaterBodyTableModel.self).filter("water_body_id ==  %@", id).map { $0 }
-            let found = Array(objs)
-            return found.first
-        } catch let error as NSError {
-            print("** REALM ERROR")
-            print(error)
-            return nil
+        let waterbodies = fullWaterBodyTables()
+        for waterbody in waterbodies where waterbody.water_body_id == id {
+            return waterbody
         }
+        return nil
     }
     
     public func getWaterbodies(inProvince province: String) -> [String] {
-        do {
-            let realm = try Realm()
-            let objs = realm.objects(WaterBodyTableModel.self).filter("abbrev ==  %@", province).map { $0 }
-            let found = Array(objs)
-            return found.map{ $0.name}
-        } catch let error as NSError {
-            print("** REALM ERROR")
-            print(error)
-            return []
+        let waterbodies = fullWaterBodyTables()
+        var result: [String] = []
+        for waterbody in waterbodies where waterbody.province == province {
+            result.append(waterbody.name)
         }
+        return result
     }
     
     public func getWaterbodies(nearCity city: String) -> [String] {
-        do {
-            let realm = try Realm()
-            let objs = realm.objects(WaterBodyTableModel.self).filter("closest ==  %@", city).map { $0 }
-            let found = Array(objs)
-            return found.map{ $0.name}
-        } catch let error as NSError {
-            print("** REALM ERROR")
-            print(error)
-            return []
+        let waterbodies = fullWaterBodyTables()
+        var result: [String] = []
+        for waterbody in waterbodies where waterbody.closest == city {
+            result.append(waterbody.name)
         }
+        return result
     }
     
     public func getCities(nearWaterBody waterBody: String) -> [String] {
-        do {
-            let realm = try Realm()
-            let objs = realm.objects(WaterBodyTableModel.self).filter("name ==  %@", waterBody).map { $0 }
-            let found = Array(objs)
-            return found.map{ $0.closest}
-        } catch let error as NSError {
-            print("** REALM ERROR")
-            print(error)
-            return []
+        let waterbodies = fullWaterBodyTables()
+        var result: [String] = []
+        for waterbodyModel in waterbodies where waterbodyModel.name == waterBody {
+            result.append(waterbodyModel.closest)
         }
+        return result
     }
     
     public func getCities(inProvince province: String) -> [String] {
-        do {
-            let realm = try Realm()
-            let objs = realm.objects(WaterBodyTableModel.self).filter("abbrev ==  %@", province).map { $0 }
-            let found = Array(objs)
-            return found.map{ $0.closest}
-        } catch let error as NSError {
-            print("** REALM ERROR")
-            print(error)
-            return []
+        let waterbodies = fullWaterBodyTables()
+        var result: [String] = []
+        for waterbodyModel in waterbodies where waterbodyModel.province == province {
+            result.append(waterbodyModel.closest)
         }
+        return result
     }
     
     public func getProvinces(withWaterBody waterBody: String) -> [String] {
-        do {
-            let realm = try Realm()
-            let objs = realm.objects(WaterBodyTableModel.self).filter("name ==  %@", waterBody).map { $0 }
-            let found = Array(objs)
-            return found.map{ $0.country}
-        } catch let error as NSError {
-            print("** REALM ERROR")
-            print(error)
-            return []
+        let waterbodies = fullWaterBodyTables()
+        var result: [String] = []
+        for waterbodyModel in waterbodies where waterbodyModel.name == waterBody {
+            result.append(waterbodyModel.province)
         }
+        return result
     }
     
     public func getProvinces(withCity city: String) -> [String] {
-        do {
-            let realm = try Realm()
-            let objs = realm.objects(WaterBodyTableModel.self).filter("closest ==  %@", city).map { $0 }
-            let found = Array(objs)
-            return found.map{ $0.country}
-        } catch let error as NSError {
-            print("** REALM ERROR")
-            print(error)
-            return []
+       let waterbodies = fullWaterBodyTables()
+        var result: [String] = []
+        for waterbodyModel in waterbodies where waterbodyModel.closest == city {
+            result.append(waterbodyModel.province)
         }
-    }
-    
-    public func deteleFullWaterBodyTables() {
-        let all = fullWaterBodyTables()
-        for each in all {
-            RealmRequests.deleteObject(each)
-        }
-    }
-    
-    // MARK: Water Bodies from JSON
-    func saveWaterBodiesFromJSON(status: @escaping(_ newStatus: String) -> Void) {
-        let filePath = Bundle.main.url(forResource: "waterBodies", withExtension: "txt")!
-        do {
-            let data = try Data(contentsOf: filePath, options: .mappedIfSafe)
-            let jsonResult = try JSONSerialization.jsonObject(with: data, options: .mutableLeaves)
-            
-            if let jsonResult = jsonResult as? [[String: Any]] {
-                Storage.shared.deteleFullWaterBodyTables()
-                var counter = 1
-                for item in jsonResult {
-                    status("Storing Waterbodies:\t\((counter * 100 ) / jsonResult.count)%")
-                    counter += 1
-                    let model = WaterBodyTableModel()
-                    model.name = item["Name"] as? String ?? ""
-                    model.water_body_id = item["water_body_id"] as? Int ?? 0
-                    model.latitude = item["LatDD"] as? Double ?? 0
-                    model.longitude = item["LongDD"] as? Double ?? 0
-                    model.country = item["Abbrev"] as? String ?? ""
-                    model.closest = item["Closest"] as? String ?? ""
-                    if model.name == "" || model.country == "" || model.closest == "" {
-                        continue
-                    } else {
-                        RealmRequests.saveObject(object: model)
-                    }
-                }
-            } else {
-                print("Cant read")
-            }
-        } catch {
-            // handle error
-            print("Error")
-        }
+        return result
     }
 }

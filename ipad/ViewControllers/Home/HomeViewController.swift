@@ -22,7 +22,7 @@ class HomeViewController: BaseViewController {
     @IBOutlet weak var addEntryButton: UIButton!
     @IBOutlet weak var switcherHolder: UIView!
     @IBOutlet weak var tableContainer: UIView!
-    @IBOutlet weak var reportBugButton: UIButton?
+    @IBOutlet weak var gearButton: UIButton?
     
     // MARK: Constants
     let switcherItems: [String] = ["All", "Pending Sync", "Submitted"]
@@ -109,14 +109,24 @@ class HomeViewController: BaseViewController {
         }
     }
     
-    @IBAction func reportAnIssueAction(_ sender: Any?) {
-        InfoLog("User want to report")
-        // Showing alert with input
-        self.showAlert("Do you want to report an issue?", "Report", ["Message to admin"], ["Cancel", "OK"]) {[weak self] (info) in
-            if info.selectedButtonIndex == 1 {
-                InfoLog("User selects => Report")
-                let message = info.textFieldValues.count > 0 ? info.textFieldValues[0] : ""
-                self?.sendReport(message: message)
+    @IBAction func gearAction(_ sender: Any?) {
+        guard let sender = sender as? UIButton else {return}
+        showOptions(options: [.RefreshContent, .ReportAnIssue], on: sender) { (selectedOption) in
+            switch selectedOption {
+            case .ReportAnIssue:
+                InfoLog("User wants to report")
+                // Showing alert with input
+                self.showAlert("Do you want to report an issue?", "Report", ["Message to admin"], ["Cancel", "OK"]) {[weak self] (info) in
+                    if info.selectedButtonIndex == 1 {
+                        InfoLog("User selects => Report")
+                        let message = info.textFieldValues.count > 0 ? info.textFieldValues[0] : ""
+                        self?.sendReport(message: message)
+                    }
+                }
+            case .RefreshContent:
+                SyncService.shared.syncCodeTablesAndWaterBodiesIfPossible()
+            default:
+                return
             }
         }
     }
@@ -229,7 +239,6 @@ class HomeViewController: BaseViewController {
     private func style() {
         styleNavigationBar()
         styleUserButton()
-        styleReportBugButton()
         styleSyncButton()
         styleFillButton(button: addEntryButton)
     }
@@ -266,15 +275,6 @@ class HomeViewController: BaseViewController {
         syncButton.layer.borderColor = UIColor.white.cgColor
         syncButton.setTitleColor(.white, for: .normal)
         syncButton.setTitle("Sync Now", for: .normal)
-    }
-    
-    private func styleReportBugButton() {
-        reportBugButton?.backgroundColor = .none
-        reportBugButton?.layer.cornerRadius = 18
-        reportBugButton?.layer.borderWidth = 3
-        reportBugButton?.layer.borderColor = UIColor.white.cgColor
-        reportBugButton?.setTitleColor(.white, for: .normal)
-        reportBugButton?.setTitle("Report an issue", for: .normal)
     }
     
     // MARK: Reachability

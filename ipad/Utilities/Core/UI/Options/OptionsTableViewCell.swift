@@ -32,6 +32,10 @@ class OptionsTableViewCell: UITableViewCell, Theme {
             self.label.text = "Copy"
         case .Logout:
             self.label.text = "Logout"
+        case .ReportAnIssue:
+            self.label.text = "Report an issue"
+        case .RefreshContent:
+            self.label.text = "Refresh Content"
         }
         style()
     }
