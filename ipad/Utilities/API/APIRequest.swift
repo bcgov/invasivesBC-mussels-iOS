@@ -161,21 +161,6 @@ class APIRequest {
         }
     }
     
-//    public static func fetchWaterBodies(then: @escaping([[String:Any]]?)->Void) {
-//        guard let url = URL(string: APIURL.waterBody) else {return then(nil)}
-//        self.request(type: .Get, endpoint: url) { (_response) in
-//            guard let response = _response else {return then(nil)}
-//            var result: [[String:Any]] = [[String:Any]()]
-//            let data = response["data"]
-//            DispatchQueue.global(qos: .background).async {
-//                for (_, value) in data {
-//                    result.append(value.dictionaryValue)
-//                }
-//                return then(result)
-//            }
-//        }
-//    }
-    
     private static func fetchUser(then: @escaping([String: JSON]?)->Void) {
         guard let url = URL(string: APIURL.user) else {return then(nil)}
         self.request(type: .Get, endpoint: url) { (_response) in
