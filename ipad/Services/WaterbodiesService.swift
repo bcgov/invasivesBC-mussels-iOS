@@ -24,6 +24,7 @@ class WaterbodiesService {
             }
             do {
                 try data.write(to: self.waterbodiesDirectoryPath())
+                self.loadTable()
                 return completion(true)
             } catch {
                 print(error)

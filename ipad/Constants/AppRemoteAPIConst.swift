@@ -48,7 +48,6 @@ enum RemoteEnv: String {
         case .prod:
             return KC_PROD_URL
         }
-        
     }
 }
 
