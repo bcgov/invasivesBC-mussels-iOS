@@ -89,6 +89,13 @@ class BaseViewController: UIViewController, Theme ,InputDelegate {
     }
     
     // MARK: Options Popover
+    public func showOptions(options: [OptionType], on button: UIButton, completion: @escaping (_ option: OptionType) -> Void) {
+        let optionsObject = Options()
+        let optionsViewController = optionsObject.getVC()
+        let popoverSize = optionsViewController.setup(options: options, completion: completion)
+        showPopOver(on: button, popOverVC: optionsViewController, height: popoverSize.height, width: popoverSize.width)
+    }
+    
     public func showOptions(options: [OptionType], on button: UIView, completion: @escaping (_ option: OptionType) -> Void) {
         let optionsObject = Options()
         let optionsViewController = optionsObject.getVC()

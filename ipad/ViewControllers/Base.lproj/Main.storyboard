@@ -218,14 +218,17 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pCs-z5-og6">
-                                        <rect key="frame" x="395" y="41" width="160" height="36"/>
+                                        <rect key="frame" x="515" y="41" width="40" height="36"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="160" id="yKB-3v-EvF"/>
+                                            <constraint firstAttribute="width" constant="40" id="pjK-G1-WSK"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                        <state key="normal" title="Report an issue"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" image="gear" catalog="system">
+                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large" weight="semibold"/>
+                                        </state>
                                         <connections>
-                                            <action selector="reportAnIssueAction:" destination="JwX-i7-BNh" eventType="touchUpInside" id="uEp-QV-b4M"/>
+                                            <action selector="gearAction:" destination="JwX-i7-BNh" eventType="touchUpInside" id="uEp-QV-b4M"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -303,10 +306,10 @@
                     <connections>
                         <outlet property="addEntryButton" destination="avH-r0-8vm" id="Rd5-E0-05A"/>
                         <outlet property="appTitle" destination="4eR-8r-kOm" id="nNX-fD-1fy"/>
+                        <outlet property="gearButton" destination="pCs-z5-og6" id="9L2-A4-a4O"/>
                         <outlet property="navigationBar" destination="oEL-Ux-yq2" id="cCb-cB-SxG"/>
                         <outlet property="reachabilityIndicator" destination="G3o-nN-cQJ" id="iNX-NX-Rou"/>
                         <outlet property="reachabilityLabel" destination="BhB-gb-4tS" id="63R-G4-qzp"/>
-                        <outlet property="reportBugButton" destination="pCs-z5-og6" id="9L2-A4-a4O"/>
                         <outlet property="switcherHolder" destination="Mee-2o-RFj" id="JvT-Yr-KK6"/>
                         <outlet property="syncButton" destination="Jtj-bV-8r4" id="o7S-k6-SQf"/>
                         <outlet property="tableContainer" destination="Gry-6r-RjL" id="xR0-cV-tIo"/>
@@ -595,11 +598,12 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="0hg-be-P9B"/>
+        <segue reference="4OX-36-Cn0"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="arrow.up.right.square" catalog="system" width="128" height="114"/>
         <image name="bclogo" width="172" height="148"/>
+        <image name="gear" catalog="system" width="128" height="119"/>
         <image name="launch" width="1024" height="768"/>
         <image name="lock.fill" catalog="system" width="128" height="128"/>
         <image name="person.circle.fill" catalog="system" width="128" height="121"/>
