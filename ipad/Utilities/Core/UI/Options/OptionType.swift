@@ -12,4 +12,6 @@ enum OptionType {
     case Delete
     case Copy
     case Logout
+    case ReportAnIssue
+    case RefreshContent
 }

@@ -98,6 +98,57 @@ class SyncService {
         })
     }
     
+    public func syncCodeTablesAndWaterBodiesIfPossible() {
+        if self.isSynchronizing {
+            print("Wait for Sync to finish")
+            return
+        }
+        
+        canReadFromApi { (validation) in
+            if validation != .Ready {
+                print("can't sync right now")
+                return
+            } else {
+                // Perform sync if needed
+                self.syncCodeTablesAndWaterBodies()
+            }
+        }
+    }
+    
+    private func syncCodeTablesAndWaterBodies() {
+        if isSynchronizing {return}
+        // Block sync from being executed
+        self.isSynchronizing = true
+        self.endListener()
+        // Add the autosync view
+        syncView.initialize()
+        syncView.showSyncInProgressAnimation()
+        syncView.set(title: "Refreshing content")
+        
+        CodeTableService.shared.fetchCodes(completion: { (success) in
+            if !success {
+                Banner.show(message: "Could not fetch code tables")
+                self.syncView.set(status: "Failed")
+                self.syncView.showSyncFailedAnimation()
+            } else {
+                self.syncView.set(status: "Completed")
+                self.syncView.showSyncCompletedAnimation()
+            }
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                self.syncView.remove()
+                // free autosync
+                self.isSynchronizing = false
+                self.beginListener()
+            }
+            
+        }) {  [weak self] (statusUpdate) in
+            guard let strongSelf = self else { return }
+            strongSelf.syncView.set(status: statusUpdate)
+        }
+        
+    }
+    
     private func performSync() {
         if isSynchronizing {return}
         print("Executing Autosync...")
@@ -106,23 +157,29 @@ class SyncService {
         
         // Add the autosync view
         self.syncView.initialize()
-        
         let itemsToSync = Storage.shared.itemsToSync()
         ShiftService.shared.submit(shifts: itemsToSync) { (syncSuccess) in
             if syncSuccess {
-                Banner.show(message: "Sync Executed")
-                NotificationCenter.default.post(name: .syncExecuted, object: nil)
+                CodeTableService.shared.fetchAndStoreCodeTables(completion: { (updatedCodeTables) in
+                    Banner.show(message: "Sync Executed")
+                    NotificationCenter.default.post(name: .syncExecuted, object: nil)
+                    self.syncView.remove()
+                    // Free Autosync
+                    self.isSynchronizing = false
+                }) { (statusUpdate) in
+                    print(statusUpdate)
+                }
             } else {
                 Banner.show(message: "Could not sync items")
                 self.isAutoSyncEnabled = false
-            }
-            // Remove SyncView
-            // Delay added because the sync could fail faster than the view can finish displaying
-            // with animations. calling remove before its done displaying will cause a crash.
-            self.delayWithSeconds(1) {
-                self.syncView.remove()
-                // Free Autosync
-                self.isSynchronizing = false
+                // Remove SyncView
+                // Delay added because the sync could fail faster than the view can finish displaying
+                // with animations. calling remove before its done displaying will cause a crash.
+                self.delayWithSeconds(1) {
+                    self.syncView.remove()
+                    // Free Autosync
+                    self.isSynchronizing = false
+                }
             }
         }
     }
@@ -202,7 +259,7 @@ class SyncService {
         }
         
         // Code tables dont exist
-        if Storage.shared.codeTables().count > 0 && Storage.shared.fullWaterBodyTables().count > 5000 {
+        if Storage.shared.codeTables().count > 0 && WaterbodiesService.shared.get().count > 5000 {
             return false
         }
         
@@ -224,13 +281,15 @@ class SyncService {
     
     public func canSync(completion: @escaping (SyncValidation)->Void) {
         if !self.isEnabled { return completion(.SyncDisabled) }
-        
-        if !isOnline() {
-            return completion(.isOffline)
-        }
-        
         if Storage.shared.itemsToSync().count < 1 {
             return completion(.NothingToSync)
+        }
+        canReadFromApi(completion: completion)
+    }
+    
+    public func canReadFromApi(completion: @escaping (SyncValidation)->Void) {
+        if !isOnline() {
+            return completion(.isOffline)
         }
         
         if !AuthenticationService.isAuthenticated() {
