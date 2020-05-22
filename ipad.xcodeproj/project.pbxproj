@@ -1893,7 +1893,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 490;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = L796QSLV3E;
 				INFOPLIST_FILE = ipad/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -1901,7 +1901,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = ca.bc.gov.InvasivesBC;
 				PRODUCT_NAME = Inspect;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1920,7 +1920,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 490;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = L796QSLV3E;
 				INFOPLIST_FILE = ipad/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -1928,7 +1928,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = ca.bc.gov.InvasivesBC;
 				PRODUCT_NAME = Inspect;
 				PROVISIONING_PROFILE_SPECIFIER = "";
