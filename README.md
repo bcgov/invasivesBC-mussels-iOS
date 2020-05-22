@@ -10,7 +10,7 @@ Alternatively, you could sign the compiled IPA using [this mobile signing tool](
 
 ### Using the Pipeline
 You can upload your builds to `App Store Connect` through the pipeline by merging a pull request from `master`, by following the steps below.
-Note: Build number will be handled by the pipeline.
+Note: `Build` number will be handled by the pipeline, but you need to update the `version` yourself after each app store release.
  1) Create a pull request to `master` to trigger a build on the pipeline.
  2) Check the status of the build [here](https://fullboar.visualstudio.com/Invasive%20Species%20BC/_build?definitionId=10&_a=summary).
  3) When the build is successful, merge your pull request.
