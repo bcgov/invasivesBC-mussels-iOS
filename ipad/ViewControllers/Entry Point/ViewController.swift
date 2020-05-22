@@ -18,6 +18,7 @@ class ViewController: UIViewController, Theme {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
         // On viewDidLoad, Choose between presenting
         // Login ViewController
         // Or Home ViewController
