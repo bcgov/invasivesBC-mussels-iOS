@@ -22,7 +22,7 @@ The forms in the app are created with the help of a framework created for this a
 | `.ViewField` |  - |   |   |
 
 You can change the UI Appearance of each input type, by changing the corresponding cell's XIB file.
-### Creating an InputGroup
+### Creating an `InputGroup`
 
 1 - Create an `InputGroupView`
 ```swift
@@ -36,7 +36,7 @@ inputGroup.initialize(with Items: [InputItem], delegate: InputDelegate, in conta
 - `delegate` is a [`BaseViewController`](https://github.com/bcgov/invasivesBC-mussels-iOS/blob/master/ipad/ViewControllers/BaseViewController.swift) for displaying popovers
 - `container` is a `UIView`that the `InputGroupView` will be displayed in
 
-### Defining `InputItem`s for an `InputGroupView`  
+### Fields  
 -  Fields for the Watercraft Inspection form are defined [here](https://github.com/bcgov/invasivesBC-mussels-iOS/tree/master/ipad/Models/Waterfract%20Inspection/Form%20Fields).
 - Fields for the shift form are defined [here](https://github.com/bcgov/invasivesBC-mussels-iOS/tree/master/ipad/Models/Shift/Form%20Fields)
 
