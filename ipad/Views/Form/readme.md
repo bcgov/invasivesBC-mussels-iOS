@@ -36,8 +36,8 @@ inputGroup.initialize(with Items: [InputItem], delegate: InputDelegate, in conta
 - `container` is a `UIView`that the `InputGroupView` will be displayed in
 
 ### Defining `InputItem`s for an `InputGroupView`  
--- Fields for the Watercraft Inspection form are defined [here](https://github.com/bcgov/invasivesBC-mussels-iOS/tree/master/ipad/Models/Waterfract%20Inspection/Form%20Fields).
--- Fields for the shift form are defined [here](https://github.com/bcgov/invasivesBC-mussels-iOS/tree/master/ipad/Models/Shift/Form%20Fields)
+-  Fields for the Watercraft Inspection form are defined [here](https://github.com/bcgov/invasivesBC-mussels-iOS/tree/master/ipad/Models/Waterfract%20Inspection/Form%20Fields).
+- Fields for the shift form are defined [here](https://github.com/bcgov/invasivesBC-mussels-iOS/tree/master/ipad/Models/Shift/Form%20Fields)
 
 There is a function for each section of the form, to grab the fields for that section.
 
