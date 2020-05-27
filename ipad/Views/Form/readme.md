@@ -200,5 +200,5 @@ let isNewPassportIssued = TextInput( // text input
 items.append(isNewPassportIssued)
 ```
 
-You can follow the same easy steps to change a field to a dropdown in the future as requirements change.&nbsp;
+You can follow the same easy steps to change a field to a dropdown in the future as requirements change.&nbsp;&nbsp;
 Note: When you change the model, you also need to add [a migration](https://realm.io/docs/swift/latest/#migrations), otherwise the application will crash. A quick workaround would be to re-install the application.
