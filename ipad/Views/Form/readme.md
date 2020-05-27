@@ -218,7 +218,7 @@ let isNewPassportIssued = DropdownInput(
 )
 ```
 `DropdownInput`s have 2 extra parameters: 
-- `dropdownItems` an array of [`[DropdownModel]`](https://github.com/bcgov/invasivesBC-mussels-iOS/blob/master/ipad/Utilities/Core/UI/Dropdown/Dropdown.swift)
+- `dropdownItems` an array of [`[DropdownModel]`](https://github.com/bcgov/invasivesBC-mussels-iOS/blob/master/ipad/Utilities/Core/UI/Dropdown/DropdownModel.swift)
     - dropdown options that will be displayed.
 - `codes` an array of [`[CodeObject]`](https://github.com/bcgov/invasivesBC-mussels-iOS/blob/master/ipad/Models/CodeTableModel.swift)
     - code table used to match the values from the dropdown options.
