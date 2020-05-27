@@ -140,8 +140,9 @@ model.set(value: item.value.get(type: item.type) as Any, for: item.key)
 or we can also handle other changes we need to make to the view based on the new value before storing it.
 
 ### Changing a field type
-You can easily change the type of a field by changing the `InputItem` type it uses.&nbsp;
-&nbsp;
+You can easily change the type of a field by changing the `InputItem` type it uses. &nbsp;
+
+Note: When you change the model, you also need to add [a migration](https://realm.io/docs/swift/latest/#migrations), otherwise the application will crash. A quick workaround would be to re-install the application.&nbsp;
 
 If the type of variable in the model doesnt need to change, then you only need to change the field type.&nbsp;
 For example: We have many ways to display a boolean field. if we want to change the `isNewPassportIssued` field to use a regular switch instead of using radio buttons, we can do the following:
@@ -202,6 +203,21 @@ let isNewPassportIssued = TextInput( // text input
 items.append(isNewPassportIssued)
 ```
 
-You can follow the same easy steps to change a field to a dropdown in the future as requirements change.&nbsp;&nbsp;
+You can follow the same easy steps to change a field to a dropdown in the future as requirements change.
 
-Note: When you change the model, you also need to add [a migration](https://realm.io/docs/swift/latest/#migrations), otherwise the application will crash. A quick workaround would be to re-install the application.
+```swift
+let isNewPassportIssued = DropdownInput(
+    key: "isNewPassportIssued",
+    header: WatercraftFieldHeaderConstants.Passport.isNewPassportIssued,
+    editable: editable ?? true,
+    value: object?.isNewPassportIssued ?? nil,
+    width: .Full
+    dropdownItems: DropdownHelper.shared.getDropdownForPrvinces(),
+    codes: DropdownHelper.shared.getProvinceCodes()
+)
+```
+`DropdownInput`s have 2 extra parameters: 
+- `dropdownItems` an array of [`[DropdownModel]`](https://github.com/bcgov/invasivesBC-mussels-iOS/blob/master/ipad/Utilities/Core/UI/Dropdown/Dropdown.swift)
+    - dropdown options that will be displayed.
+- `codes` an array of [`[CodeObject]`](https://github.com/bcgov/invasivesBC-mussels-iOS/blob/master/ipad/Models/CodeTableModel.swift)
+    - code table used to match the values from the dropdown options.
