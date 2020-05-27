@@ -24,6 +24,7 @@
 		290DA9DF2404621700438699 /* AwaitingAccessResponse.xib in Resources */ = {isa = PBXBuildFile; fileRef = 290DA9DE2404621700438699 /* AwaitingAccessResponse.xib */; };
 		290DA9E12404622700438699 /* AwaitingAccessResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 290DA9E02404622700438699 /* AwaitingAccessResponse.swift */; };
 		291F918224742FD800974D33 /* WaterbodiesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 291F918124742FD800974D33 /* WaterbodiesService.swift */; };
+		2925E857247DD44C009EB518 /* readme.md in Resources */ = {isa = PBXBuildFile; fileRef = 2925E856247DD44C009EB518 /* readme.md */; };
 		2933DD5B238C78350068E9DF /* TimePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2933DD5A238C78350068E9DF /* TimePicker.swift */; };
 		2933DD5E238DC2150068E9DF /* CodeTableService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2933DD5D238DC2150068E9DF /* CodeTableService.swift */; };
 		2933DD61238DC5120068E9DF /* CodeTableModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2933DD60238DC5120068E9DF /* CodeTableModel.swift */; };
@@ -230,6 +231,7 @@
 		290DA9DE2404621700438699 /* AwaitingAccessResponse.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AwaitingAccessResponse.xib; sourceTree = "<group>"; };
 		290DA9E02404622700438699 /* AwaitingAccessResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AwaitingAccessResponse.swift; sourceTree = "<group>"; };
 		291F918124742FD800974D33 /* WaterbodiesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterbodiesService.swift; sourceTree = "<group>"; };
+		2925E856247DD44C009EB518 /* readme.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = readme.md; sourceTree = "<group>"; };
 		2933DD5A238C78350068E9DF /* TimePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimePicker.swift; sourceTree = "<group>"; };
 		2933DD5D238DC2150068E9DF /* CodeTableService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeTableService.swift; sourceTree = "<group>"; };
 		2933DD60238DC5120068E9DF /* CodeTableModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeTableModel.swift; sourceTree = "<group>"; };
@@ -975,6 +977,7 @@
 			children = (
 				29A97435236FD5FC006C668F /* InputGroup.swift */,
 				1E5D7D492369F1A400707D08 /* Input Cells */,
+				2925E856247DD44C009EB518 /* readme.md */,
 			);
 			path = Form;
 			sourceTree = "<group>";
@@ -1485,6 +1488,7 @@
 				29E4BBEF237218500079475F /* PreviousWaterBodyCollectionViewCell.xib in Resources */,
 				296DEC2B238C73AF0035E7FA /* TimePicker.storyboard in Resources */,
 				29DB011C237207BF0046E605 /* FormButtonCollectionViewCell.xib in Resources */,
+				2925E857247DD44C009EB518 /* readme.md in Resources */,
 				29F29F99236B6B9C004F12E7 /* SwitcherCollectionViewCell.xib in Resources */,
 				29DB010A2370EFD60046E605 /* TextAreaInputCollectionViewCell.xib in Resources */,
 				29F4EC572370B1F8001D5CFA /* BasicCollectionViewCell.xib in Resources */,
