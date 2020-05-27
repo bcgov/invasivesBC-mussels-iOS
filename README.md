@@ -1,6 +1,19 @@
 # invasivesBC- Mussels
 
+# [Forms](https://github.com/bcgov/invasivesBC-mussels-iOS/tree/master/ipad/Views/Form)
+The forms in the app are created with the help of a framework created for this application called [`InputGroupView`](https://github.com/bcgov/invasivesBC-mussels-iOS/tree/master/ipad/Views/Form) which allows us to create and edit the forms quickly and directly from the code.&nbsp;
 
+- Fields for the Watercraft Inspection form are defined [here](https://github.com/bcgov/invasivesBC-mussels-iOS/tree/master/ipad/Models/Waterfract%20Inspection/Form%20Fields).
+- for the shift form are defined [here](https://github.com/bcgov/invasivesBC-mussels-iOS/tree/master/ipad/Models/Shift/Form%20Fields).
+
+These files functions that return the fields for each section of the forms. here you can:
+- change the placement of the fields by changing the order in which the fields are creared or by chaning the function (section) that the fields are included in.
+- change the type of field that's displayed by changing a single line of code.
+- change the width size of each field by changing the width value.
+
+This framework also allows you to change the look of all fields of a centain type, for example text fields, by chaing a single xib file.&nbsp;
+
+[There are a lot of time saving advantages to suing this framework in an agile enviorment and you can find more details about this framework here](https://github.com/bcgov/invasivesBC-mussels-iOS/tree/master/ipad/Views/Form)
 
 # Deploy
 
