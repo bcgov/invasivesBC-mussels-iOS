@@ -63,7 +63,7 @@ These functions are also used to grab the fields in a section and estimate their
 ```swift
 InputGroupView.estimateContentHeight(for items: [InputItem]) -> CGFloat {}
 ```
-### Defining `InputItem`s 
+### Adding Fields
 
 ```swift
 // Create an empty array
