@@ -13,7 +13,7 @@ These files functions that return the fields for each section of the forms. here
 
 This framework also allows you to change the look of all fields of a centain type, for example text fields, by chaing a single xib file.&nbsp;
 
-[There are a lot of time saving advantages to suing this framework in an agile enviorment and you can find more details about this framework here](https://github.com/bcgov/invasivesBC-mussels-iOS/tree/master/ipad/Views/Form)
+[There are a lot of time saving advantages to using this framework in an agile enviorment and you can find more details about this framework here](https://github.com/bcgov/invasivesBC-mussels-iOS/tree/master/ipad/Views/Form)
 
 # Deploy
 
