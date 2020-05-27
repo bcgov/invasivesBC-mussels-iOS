@@ -1,5 +1,6 @@
 # Forms
 The forms in the app are created with the help of a framework created for this application called `InputGroupView`.&nbsp;
+
 - An`InputGroupView` is a collection of fields for a section of the form.
 - Under the hood, an`InputGroupView` is a `UIView` that contains a `UICollectionView` that contains the fields for the group in its `UICollectionViewCell` cells.
 ### Input Types and Cells
@@ -141,6 +142,7 @@ or we can also handle other changes we need to make to the view based on the new
 ### Changing a field type
 You can easily change the type of a field by changing the `InputItem` type it uses.&nbsp;
 &nbsp;
+
 If the type of variable in the model doesnt need to change, then you only need to change the field type.&nbsp;
 For example: We have many ways to display a boolean field. if we want to change the `isNewPassportIssued` field to use a regular switch instead of using radio buttons, we can do the following:
 
