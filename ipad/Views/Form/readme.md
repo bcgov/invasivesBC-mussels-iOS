@@ -145,6 +145,7 @@ You can easily change the type of a field by changing the `InputItem` type it us
 Note: When you change the model, you also need to add [a migration](https://realm.io/docs/swift/latest/#migrations), otherwise the application will crash. A quick workaround would be to re-install the application.&nbsp;
 
 If the type of variable in the model doesnt need to change, then you only need to change the field type.&nbsp;
+
 For example: We have many ways to display a boolean field. if we want to change the `isNewPassportIssued` field to use a regular switch instead of using radio buttons, we can do the following:
 
 ```swift
