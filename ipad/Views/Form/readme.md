@@ -137,3 +137,68 @@ In this function, we can extract the value from the changed `InputItem` and stor
 model.set(value: item.value.get(type: item.type) as Any, for: item.key)
 ```
 or we can also handle other changes we need to make to the view based on the new value before storing it.
+
+### Changing a field type
+You can easily change the type of a field by changing the `InputItem` type it uses.&nbsp;
+&nbsp;
+If the type of variable in the model doesnt need to change, then you only need to change the field type.&nbsp;
+For example: We have many ways to display a boolean field. if we want to change the `isNewPassportIssued` field to use a regular switch instead of using radio buttons, we can do the following:
+
+```swift
+// Before
+let isNewPassportIssued = RadioSwitchInput( // radio buttons
+    key: "isNewPassportIssued",
+    header: WatercraftFieldHeaderConstants.Passport.isNewPassportIssued,
+    editable: editable ?? true,
+    value: object?.isNewPassportIssued ?? nil,
+    width: .Full
+)
+items.append(isNewPassportIssued)
+```
+```swift
+// After
+let isNewPassportIssued = SwitchInput( // switch button
+    key: "isNewPassportIssued",
+    header: WatercraftFieldHeaderConstants.Passport.isNewPassportIssued,
+    editable: editable ?? true,
+    value: object?.isNewPassportIssued ?? nil,
+    width: .Full
+)
+items.append(isNewPassportIssued)
+```
+That's it. we only changed `RadioSwitchInput` to `SwitchInput`.&nbsp;&nbsp;
+
+If the we wanted `isNewPassportIssued` to be a `string` instead of a `boolean`, we would first need to update our data model:
+```swift
+// Before
+class WatercradftInspectionModel: Object, BaseRealmObject {
+    ...
+    // Passport issue flag
+    @objc dynamic var isNewPassportIssued: Bool = false
+    ...
+}
+```
+```swift
+// After
+class WatercradftInspectionModel: Object, BaseRealmObject {
+    ...
+    // Passport issue flag
+    @objc dynamic var isNewPassportIssued: String = ""
+    ...
+}
+```
+
+And then change the field type:
+```swift
+let isNewPassportIssued = TextInput( // text input
+    key: "isNewPassportIssued",
+    header: WatercraftFieldHeaderConstants.Passport.isNewPassportIssued,
+    editable: editable ?? true,
+    value: object?.isNewPassportIssued ?? nil,
+    width: .Full
+)
+items.append(isNewPassportIssued)
+```
+
+You can follow the same easy steps to change a field to a dropdown in the future as requirements change.&nbsp;
+Note: When you change the model, you also need to add [a migration](https://realm.io/docs/swift/latest/#migrations), otherwise the application will crash. A quick workaround would be to re-install the application.
