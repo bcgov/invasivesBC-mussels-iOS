@@ -9,7 +9,7 @@ Anyone with a `BCeID` or `idir` can log into the application, but only users wit
 
 To grant access to the inspect application:
 1) Go to the [invasivesBC](https://invasivesbc.pathfinder.gov.bc.ca/admin) web app and log-in as `Admin Mussel Inspect App` or `Admin`.
-2) Ope the Admin tab.
+2) Open the Admin tab.
 3) Find the user that you want to give access to and give them the `Officer Mussel Inspect App` role.
 
 # Setup Instructions
