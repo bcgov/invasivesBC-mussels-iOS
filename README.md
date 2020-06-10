@@ -1,4 +1,58 @@
-# invasivesBC- Mussels
+# Inspect
+
+This application is for the field-based recording of watercraft inspections for Zebra and Quagga Mussels in British Columbia, Canada.&nbsp;
+
+Anyone with a `BCeID` or `idir` can log into the application, but only users with the following roles can create and submit entries.
+- `Officer Mussel Inspect App`
+- `Admin Mussel Inspect App`
+- `Admin`
+
+To grant access to the inspect application:
+1) Go to the [invasivesBC](https://invasivesbc.pathfinder.gov.bc.ca/admin) web app and log-in as `Admin Mussel Inspect App` or `Admin`.
+2) Open the Admin tab.
+3) Find the user that you want to give access to and give them the `Officer Mussel Inspect App` role.
+
+# Setup Instructions
+
+Before you begin, install [Cocoapods](https://cocoapods.org) on your machine if you don't have it yet.
+```
+sudo gem install cocoapods
+```
+Once you have installed the dependency manager, follow the setup instructions below. 
+
+1) Clone [this](https://github.com/bcgov/invasivesBC-mussels-iOS) repo:
+```
+git clone https://github.com/bcgov/invasivesBC-mussels-iOS
+```
+2) Navigate to project folder:
+```
+cd invasivesBC-mussels-iOS
+```
+3)  Install Pods/Dependencies:
+```
+pod install
+```
+4) Open `ipad.xcworkspace` to open the project in Xcode.
+```
+open ipad.xcworkspace
+```
+
+*Note: Always use `ipad.xcworkspace` to open this project.
+
+You may need to update the Signing & Capabilities to be able to run the application
+1) Open the `Project Navigator`
+2) Click the top most icon `ipad`
+3) Select 'iPad' under `Targets`
+3) Select the `Signing & Capabilities` tab
+4) Here you may need to sign-in or select the appropriate team.
+
+## Tests
+The application's tests are [in this folder.](https://github.com/bcgov/invasivesBC-mussels-iOS/tree/master/ipadTests)
+To run all tests, 
+1) Open the project in Xcode ( `ipad.xcworkspace` ) 
+2) Click `Product` -> `Test` from Xcode's top menu.
+
+You can run individual tests by selecting the `Show the test navigator` tab on the left menu bar of Xcode. 
 
 # [Forms](https://github.com/bcgov/invasivesBC-mussels-iOS/tree/master/ipad/Views/Form)
 The forms in the app are created with the help of a framework created for this application called [`InputGroupView`](https://github.com/bcgov/invasivesBC-mussels-iOS/tree/master/ipad/Views/Form) which allows us to create and edit the forms quickly and directly from the code.&nbsp;
