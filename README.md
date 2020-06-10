@@ -12,7 +12,7 @@ To grant access to the inspect application:
 2) Open the Admin tab.
 3) Find the user that you want to give access to and give them the `Officer Mussel Inspect App` role.
 
-# Setup Instructions
+# Setup
 
 Before you begin, install [Cocoapods](https://cocoapods.org) on your machine if you don't have it yet.
 ```
@@ -46,7 +46,7 @@ You may need to update the Signing & Capabilities to be able to run the applicat
 3) Select the `Signing & Capabilities` tab
 4) Here you may need to sign-in or select the appropriate team.
 
-## Tests
+## Test
 The application's tests are [in this folder.](https://github.com/bcgov/invasivesBC-mussels-iOS/tree/master/ipadTests)
 To run all tests, 
 1) Open the project in Xcode ( `ipad.xcworkspace` ) 
@@ -55,7 +55,7 @@ To run all tests,
 You can run individual tests by selecting the `Show the test navigator` tab on the left menu bar of Xcode.
 
 
-# Deploy
+## Deploy
 
 The Pipeline for this application was created by [Jason](https://github.com/jleach) using [Azure](https://docs.microsoft.com/en-us/azure/devops/pipelines/ecosystems/xcode?view=azure-devops).
 This pipeline allows developers to sign and deploy the application to [App Store Connect](https://appstoreconnect.apple.com/login) without having the elevated permission on the BC Government Apple account.
@@ -71,6 +71,7 @@ Note: `Build` number will be handled by the pipeline, but you need to update the
  This will trigger another build [here](https://fullboar.visualstudio.com/Invasive%20Species%20BC/_build?definitionId=10&_a=summary), but this time it will also uplod the build to [App Store Connect](https://appstoreconnect.apple.com/login).
  Then you can [login into App store Connect](https://appstoreconnect.apple.com/login) and deploy a testflight build or create an App Store submission. 
 
+*Note: The appstore submission provides `istest3` credentials to apple for testing. Make sure `istest3` has `Officer Mussel Inspect App` role and provide a new password in the submission if needed.
 
 # [Forms](https://github.com/bcgov/invasivesBC-mussels-iOS/tree/master/ipad/Views/Form)
 The forms in the app are created with the help of a framework created for this application called [`InputGroupView`](https://github.com/bcgov/invasivesBC-mussels-iOS/tree/master/ipad/Views/Form) which allows us to create and edit the forms quickly and directly from the code.&nbsp;
