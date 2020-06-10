@@ -1,6 +1,7 @@
 # Inspect
 
 This application is for the field-based recording of watercraft inspections for Zebra and Quagga Mussels in British Columbia, Canada.&nbsp;
+
 Anyone with a `BCeID` or `idir` can log into the application, but only users with the following roles can create and submit entries.
 - `Officer Mussel Inspect App`
 - `Admin Mussel Inspect App`
