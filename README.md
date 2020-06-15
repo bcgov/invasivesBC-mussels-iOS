@@ -75,10 +75,10 @@ Note: `Build` number will be handled by the pipeline, but you need to update the
 
 # Workflows
 
-![Login](https://github.com/bcgov/invasivesBC-mussels-iOS/blob/master/Workflow-login.jpg)
-![Home](https://github.com/bcgov/invasivesBC-mussels-iOS/blob/master/Workflow-home.jpg)
-![Shift](https://github.com/bcgov/invasivesBC-mussels-iOS/blob/master/Workflow-shift.jpg)
-![Inspection](https://github.com/bcgov/invasivesBC-mussels-iOS/blob/master/Workflow-inspection.jpg)
+- Login ![Login](https://github.com/bcgov/invasivesBC-mussels-iOS/blob/master/Workflow-login.jpg)
+- Home ![Home](https://github.com/bcgov/invasivesBC-mussels-iOS/blob/master/Workflow-home.jpg)
+- Shift ![Shift](https://github.com/bcgov/invasivesBC-mussels-iOS/blob/master/workflow-shift.jpg)
+- Inspection ![Inspection](https://github.com/bcgov/invasivesBC-mussels-iOS/blob/master/Workflow-inspection.jpg)
 
 # [Forms](https://github.com/bcgov/invasivesBC-mussels-iOS/tree/master/ipad/Views/Form)
 The forms in the app are created with the help of a framework created for this application called [`InputGroupView`](https://github.com/bcgov/invasivesBC-mussels-iOS/tree/master/ipad/Views/Form) which allows us to create and edit the forms quickly and directly from the code.&nbsp;
