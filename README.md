@@ -77,7 +77,7 @@ Note: `Build` number will be handled by the pipeline, but you need to update the
 
 - Login ![Login](https://github.com/bcgov/invasivesBC-mussels-iOS/blob/master/Workflow-login.jpg)
 - Home ![Home](https://github.com/bcgov/invasivesBC-mussels-iOS/blob/master/Workflow-home.jpg)
-- Shift ![Shift](https://github.com/bcgov/invasivesBC-mussels-iOS/blob/master/workflow-shift.jpg)
+- Shift ![Shift](https://github.com/bcgov/invasivesBC-mussels-iOS/blob/master/workflow-shift.jpeg)
 - Inspection ![Inspection](https://github.com/bcgov/invasivesBC-mussels-iOS/blob/master/Workflow-inspection.jpg)
 
 # [Forms](https://github.com/bcgov/invasivesBC-mussels-iOS/tree/master/ipad/Views/Form)
