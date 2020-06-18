@@ -101,7 +101,6 @@ class shift_page: XCTestCase {
         
         // Submit
         app.navigationBars["Shift Overview"].buttons["Submit"].tap()
-        //        app.children(matching: .window).element(boundBy: 0).tap()
         app.buttons["Yes"].tap()
         
         // Check that we are back at the home page
