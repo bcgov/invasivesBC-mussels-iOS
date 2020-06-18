@@ -10,7 +10,6 @@
 		1E54FFB523D783940044721F /* InputTitleCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E54FFB323D783940044721F /* InputTitleCollectionViewCell.swift */; };
 		1E54FFB623D783940044721F /* InputTitleCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1E54FFB423D783940044721F /* InputTitleCollectionViewCell.xib */; };
 		1E6D9A2E2399BDEE0034FDEF /* BaseJourneyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E6D9A2D2399BDEE0034FDEF /* BaseJourneyCollectionViewCell.swift */; };
-		1E6D9A3023A2C8310034FDEF /* testShift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E6D9A2F23A2C8310034FDEF /* testShift.swift */; };
 		1EE5FE5923EC968C00A06407 /* WaterbodyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE5FE5723EC968C00A06407 /* WaterbodyTableViewCell.swift */; };
 		1EE5FE5A23EC968C00A06407 /* WaterbodyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1EE5FE5823EC968C00A06407 /* WaterbodyTableViewCell.xib */; };
 		1EF7EBEF23EC8E1D003886F6 /* WaterbodyPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF7EBEE23EC8E1D003886F6 /* WaterbodyPicker.swift */; };
@@ -104,6 +103,8 @@
 		299BF01C23FC9D10001732CD /* PDFViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299BF01B23FC9D10001732CD /* PDFViewer.swift */; };
 		299BF01E23FC9D20001732CD /* PDFViewer.xib in Resources */ = {isa = PBXBuildFile; fileRef = 299BF01D23FC9D20001732CD /* PDFViewer.xib */; };
 		299BF02023FCA19A001732CD /* pdfMap.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 299BF01F23FCA19A001732CD /* pdfMap.pdf */; };
+		29A4AD0F249BDBCB0088793B /* InspectUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A4AD0E249BDBCB0088793B /* InspectUITests.swift */; };
+		29A4AD17249BDBDD0088793B /* shift page.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A4AD16249BDBDD0088793B /* shift page.swift */; };
 		29A9742D236CB59F006C668F /* SwitchInputCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A9742B236CB59F006C668F /* SwitchInputCollectionViewCell.swift */; };
 		29A9742E236CB59F006C668F /* SwitchInputCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29A9742C236CB59F006C668F /* SwitchInputCollectionViewCell.xib */; };
 		29A97433236CDD8F006C668F /* DateInputCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A97431236CDD8F006C668F /* DateInputCollectionViewCell.swift */; };
@@ -130,7 +131,6 @@
 		29CEC92123676424003B21B9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 29CEC91F23676424003B21B9 /* Main.storyboard */; };
 		29CEC92323676425003B21B9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 29CEC92223676425003B21B9 /* Assets.xcassets */; };
 		29CEC92623676425003B21B9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 29CEC92423676425003B21B9 /* LaunchScreen.storyboard */; };
-		29CEC93123676425003B21B9 /* ipadTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29CEC93023676425003B21B9 /* ipadTests.swift */; };
 		29CEC93C23676691003B21B9 /* KeycloakConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29CEC93B23676691003B21B9 /* KeycloakConstants.swift */; };
 		29DB01092370EFD60046E605 /* TextAreaInputCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29DB01072370EFD60046E605 /* TextAreaInputCollectionViewCell.swift */; };
 		29DB010A2370EFD60046E605 /* TextAreaInputCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29DB01082370EFD60046E605 /* TextAreaInputCollectionViewCell.xib */; };
@@ -173,7 +173,6 @@
 		29FFEBC1237F1F6F00574E3F /* SettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29FFEBC0237F1F6F00574E3F /* SettingsModel.swift */; };
 		29FFEBC4237F23B800574E3F /* JWTDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29FFEBC3237F23B800574E3F /* JWTDecoder.swift */; };
 		5C0F6979237B635800F96CA5 /* WaterBodyAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0F6978237B635800F96CA5 /* WaterBodyAPI.swift */; };
-		5C0F697B237B63F500F96CA5 /* MusselAppAPITest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0F697A237B63F500F96CA5 /* MusselAppAPITest.swift */; };
 		5C0F697D237B683200F96CA5 /* CodesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0F697C237B683200F96CA5 /* CodesAPI.swift */; };
 		5C0F6980237C6DDA00F96CA5 /* APIChain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0F697E237B6F7800F96CA5 /* APIChain.swift */; };
 		5C649C922412F6E300F01AE5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5C649C912412F6E200F01AE5 /* GoogleService-Info.plist */; };
@@ -190,21 +189,16 @@
 		5C82D3EE2374BD2900B065BA /* ApplicationLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C82D3ED2374BD2800B065BA /* ApplicationLogger.swift */; };
 		5C82D3F02374BECD00B065BA /* ApplicationErrorConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C82D3EF2374BECD00B065BA /* ApplicationErrorConst.swift */; };
 		5C82D3F52374D09000B065BA /* UtilityObjC.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C82D3F32374D09000B065BA /* UtilityObjC.m */; };
-		5C82D3F72375E56400B065BA /* RemoteAPITest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C82D3F62375E56400B065BA /* RemoteAPITest.swift */; };
 		5C82D3F92376036700B065BA /* WorkflowAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C82D3F82376036700B065BA /* WorkflowAPI.swift */; };
-		5C82D3FB2376051600B065BA /* WorkflowAPITest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C82D3FA2376051600B065BA /* WorkflowAPITest.swift */; };
 		5C82D3FF23761B1400B065BA /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C82D3FE23761B1400B065BA /* API.swift */; };
 		5C82D404237B31C200B065BA /* WatercraftRiskAssessmentAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C82D403237B31C200B065BA /* WatercraftRiskAssessmentAPI.swift */; };
-		5C82D406237B326A00B065BA /* WatercraftRiskAssessment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C82D405237B326A00B065BA /* WatercraftRiskAssessment.swift */; };
-		5CD8360A240EE71A000E3368 /* UploadAPITest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD83609240EE71A000E3368 /* UploadAPITest.swift */; };
-		9FB225820DBE019B5CE1031C /* Pods_ipadTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CED730649CF3E43FB1AD51F6 /* Pods_ipadTests.framework */; };
 		A7AE5275237CC3660044DBB7 /* unapproved-cross.json in Resources */ = {isa = PBXBuildFile; fileRef = A7AE5272237CC3660044DBB7 /* unapproved-cross.json */; };
 		A7AE5276237CC3660044DBB7 /* check-mark-success.json in Resources */ = {isa = PBXBuildFile; fileRef = A7AE5273237CC3660044DBB7 /* check-mark-success.json */; };
 		A7AE5277237CC3660044DBB7 /* sync-circle.json in Resources */ = {isa = PBXBuildFile; fileRef = A7AE5274237CC3660044DBB7 /* sync-circle.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		29CEC92D23676425003B21B9 /* PBXContainerItemProxy */ = {
+		29A4AD11249BDBCB0088793B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 29CEC90E23676424003B21B9 /* Project object */;
 			proxyType = 1;
@@ -312,6 +306,10 @@
 		299BF01B23FC9D10001732CD /* PDFViewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFViewer.swift; sourceTree = "<group>"; };
 		299BF01D23FC9D20001732CD /* PDFViewer.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PDFViewer.xib; sourceTree = "<group>"; };
 		299BF01F23FCA19A001732CD /* pdfMap.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = pdfMap.pdf; sourceTree = "<group>"; };
+		29A4AD0C249BDBCB0088793B /* InspectUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = InspectUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		29A4AD0E249BDBCB0088793B /* InspectUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InspectUITests.swift; sourceTree = "<group>"; };
+		29A4AD10249BDBCB0088793B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		29A4AD16249BDBDD0088793B /* shift page.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "shift page.swift"; sourceTree = "<group>"; };
 		29A9742B236CB59F006C668F /* SwitchInputCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchInputCollectionViewCell.swift; sourceTree = "<group>"; };
 		29A9742C236CB59F006C668F /* SwitchInputCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SwitchInputCollectionViewCell.xib; sourceTree = "<group>"; };
 		29A97431236CDD8F006C668F /* DateInputCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateInputCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -340,7 +338,6 @@
 		29CEC92223676425003B21B9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		29CEC92523676425003B21B9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		29CEC92723676425003B21B9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		29CEC92C23676425003B21B9 /* ipadTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ipadTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		29CEC93023676425003B21B9 /* ipadTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ipadTests.swift; sourceTree = "<group>"; };
 		29CEC93223676425003B21B9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		29CEC93B23676691003B21B9 /* KeycloakConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeycloakConstants.swift; sourceTree = "<group>"; };
@@ -426,19 +423,18 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		29A4AD09249BDBCB0088793B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		29CEC91323676424003B21B9 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				22692B6074F0478BDEE57B10 /* Pods_ipad.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		29CEC92923676425003B21B9 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				9FB225820DBE019B5CE1031C /* Pods_ipadTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -954,6 +950,16 @@
 			path = PDFViewer;
 			sourceTree = "<group>";
 		};
+		29A4AD0D249BDBCB0088793B /* InspectUITests */ = {
+			isa = PBXGroup;
+			children = (
+				29A4AD16249BDBDD0088793B /* shift page.swift */,
+				29A4AD0E249BDBCB0088793B /* InspectUITests.swift */,
+				29A4AD10249BDBCB0088793B /* Info.plist */,
+			);
+			path = InspectUITests;
+			sourceTree = "<group>";
+		};
 		29A9742A236CB588006C668F /* Switch Input */ = {
 			isa = PBXGroup;
 			children = (
@@ -1048,6 +1054,7 @@
 				299BF01F23FCA19A001732CD /* pdfMap.pdf */,
 				29CEC91823676424003B21B9 /* ipad */,
 				29CEC92F23676425003B21B9 /* ipadTests */,
+				29A4AD0D249BDBCB0088793B /* InspectUITests */,
 				29CEC91723676424003B21B9 /* Products */,
 				718555F643FB0D413A8C0B7B /* Pods */,
 				18111C9AFB5C438A79708A93 /* Frameworks */,
@@ -1059,7 +1066,7 @@
 			isa = PBXGroup;
 			children = (
 				29CEC91623676424003B21B9 /* Inspect.app */,
-				29CEC92C23676425003B21B9 /* ipadTests.xctest */,
+				29A4AD0C249BDBCB0088793B /* InspectUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1359,6 +1366,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		29A4AD0B249BDBCB0088793B /* InspectUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 29A4AD15249BDBCB0088793B /* Build configuration list for PBXNativeTarget "InspectUITests" */;
+			buildPhases = (
+				29A4AD08249BDBCB0088793B /* Sources */,
+				29A4AD09249BDBCB0088793B /* Frameworks */,
+				29A4AD0A249BDBCB0088793B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				29A4AD12249BDBCB0088793B /* PBXTargetDependency */,
+			);
+			name = InspectUITests;
+			productName = InspectUITests;
+			productReference = 29A4AD0C249BDBCB0088793B /* InspectUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		29CEC91523676424003B21B9 /* ipad */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 29CEC93523676425003B21B9 /* Build configuration list for PBXNativeTarget "ipad" */;
@@ -1379,42 +1404,23 @@
 			productReference = 29CEC91623676424003B21B9 /* Inspect.app */;
 			productType = "com.apple.product-type.application";
 		};
-		29CEC92B23676425003B21B9 /* ipadTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 29CEC93823676425003B21B9 /* Build configuration list for PBXNativeTarget "ipadTests" */;
-			buildPhases = (
-				30535566E0634F42BCBAED5D /* [CP] Check Pods Manifest.lock */,
-				29CEC92823676425003B21B9 /* Sources */,
-				29CEC92923676425003B21B9 /* Frameworks */,
-				29CEC92A23676425003B21B9 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				29CEC92E23676425003B21B9 /* PBXTargetDependency */,
-			);
-			name = ipadTests;
-			productName = ipadTests;
-			productReference = 29CEC92C23676425003B21B9 /* ipadTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		29CEC90E23676424003B21B9 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1110;
+				LastSwiftUpdateCheck = 1150;
 				LastUpgradeCheck = 1110;
 				ORGANIZATIONNAME = "Amir Shayegh";
 				TargetAttributes = {
+					29A4AD0B249BDBCB0088793B = {
+						CreatedOnToolsVersion = 11.5;
+						TestTargetID = 29CEC91523676424003B21B9;
+					};
 					29CEC91523676424003B21B9 = {
 						CreatedOnToolsVersion = 11.1;
 						LastSwiftMigration = 1110;
-					};
-					29CEC92B23676425003B21B9 = {
-						CreatedOnToolsVersion = 11.1;
-						TestTargetID = 29CEC91523676424003B21B9;
 					};
 				};
 			};
@@ -1432,12 +1438,19 @@
 			projectRoot = "";
 			targets = (
 				29CEC91523676424003B21B9 /* ipad */,
-				29CEC92B23676425003B21B9 /* ipadTests */,
+				29A4AD0B249BDBCB0088793B /* InspectUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		29A4AD0A249BDBCB0088793B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		29CEC91423676424003B21B9 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1503,13 +1516,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		29CEC92A23676425003B21B9 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
@@ -1529,28 +1535,6 @@
 			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-ipad-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		30535566E0634F42BCBAED5D /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-ipadTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1597,6 +1581,15 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		29A4AD08249BDBCB0088793B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				29A4AD17249BDBDD0088793B /* shift page.swift in Sources */,
+				29A4AD0F249BDBCB0088793B /* InspectUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		29CEC91223676424003B21B9 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1731,27 +1724,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		29CEC92823676425003B21B9 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				5C82D3F72375E56400B065BA /* RemoteAPITest.swift in Sources */,
-				5C82D3FB2376051600B065BA /* WorkflowAPITest.swift in Sources */,
-				1E6D9A3023A2C8310034FDEF /* testShift.swift in Sources */,
-				5CD8360A240EE71A000E3368 /* UploadAPITest.swift in Sources */,
-				29CEC93123676425003B21B9 /* ipadTests.swift in Sources */,
-				5C0F697B237B63F500F96CA5 /* MusselAppAPITest.swift in Sources */,
-				5C82D406237B326A00B065BA /* WatercraftRiskAssessment.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		29CEC92E23676425003B21B9 /* PBXTargetDependency */ = {
+		29A4AD12249BDBCB0088793B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 29CEC91523676424003B21B9 /* ipad */;
-			targetProxy = 29CEC92D23676425003B21B9 /* PBXContainerItemProxy */;
+			targetProxy = 29A4AD11249BDBCB0088793B /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1775,6 +1754,46 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		29A4AD13249BDBCB0088793B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = YJY3GTSU5J;
+				INFOPLIST_FILE = InspectUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = ca.imnextdoor.InspectUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = ipad;
+			};
+			name = Debug;
+		};
+		29A4AD14249BDBCB0088793B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = YJY3GTSU5J;
+				INFOPLIST_FILE = InspectUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = ca.imnextdoor.InspectUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = ipad;
+			};
+			name = Release;
+		};
 		29CEC93323676425003B21B9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1942,55 +1961,18 @@
 			};
 			name = Release;
 		};
-		29CEC93923676425003B21B9 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = BF19B164AC2CB08CEE35035D /* Pods-ipadTests.debug.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = MAW84PUNHD;
-				INFOPLIST_FILE = ipadTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = shayegh.ipadTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/InvasivesBC.app/InvasivesBC";
-			};
-			name = Debug;
-		};
-		29CEC93A23676425003B21B9 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 99C48CD83AAD3AAA2CD083BF /* Pods-ipadTests.release.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = MAW84PUNHD;
-				INFOPLIST_FILE = ipadTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = shayegh.ipadTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/InvasivesBC.app/InvasivesBC";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		29A4AD15249BDBCB0088793B /* Build configuration list for PBXNativeTarget "InspectUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				29A4AD13249BDBCB0088793B /* Debug */,
+				29A4AD14249BDBCB0088793B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		29CEC91123676424003B21B9 /* Build configuration list for PBXProject "ipad" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -2005,15 +1987,6 @@
 			buildConfigurations = (
 				29CEC93623676425003B21B9 /* Debug */,
 				29CEC93723676425003B21B9 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		29CEC93823676425003B21B9 /* Build configuration list for PBXNativeTarget "ipadTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				29CEC93923676425003B21B9 /* Debug */,
-				29CEC93A23676425003B21B9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

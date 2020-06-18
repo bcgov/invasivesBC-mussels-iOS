@@ -52,6 +52,8 @@ class NewShiftModal: ModalView, Theme {
         self.model = ShiftModel()
         generateInput(delegate: delegate)
         addListeners()
+        accessibilityLabel = "newShiftModal"
+        accessibilityValue = "newShiftModal"
     }
     
     private func addListeners() {
