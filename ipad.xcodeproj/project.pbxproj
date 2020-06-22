@@ -87,6 +87,7 @@
 		297F8F05243B9D8400D554D3 /* WebKitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 297F8F04243B9D8400D554D3 /* WebKitViewController.swift */; };
 		29856ABE241AAF3100E4E0FC /* TableEmptyStateTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29856ABC241AAF3100E4E0FC /* TableEmptyStateTableViewCell.swift */; };
 		29856ABF241AAF3100E4E0FC /* TableEmptyStateTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29856ABD241AAF3100E4E0FC /* TableEmptyStateTableViewCell.xib */; };
+		298BD43724A108A50082B9E6 /* observation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 298BD43624A108A50082B9E6 /* observation.swift */; };
 		298BF7C12394C0270072AA28 /* waterBodies.txt in Resources */ = {isa = PBXBuildFile; fileRef = 298BF7C02394C0270072AA28 /* waterBodies.txt */; };
 		298BF7C523958A220072AA28 /* SpacerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 298BF7C323958A220072AA28 /* SpacerCollectionViewCell.swift */; };
 		298BF7C623958A220072AA28 /* SpacerCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 298BF7C423958A220072AA28 /* SpacerCollectionViewCell.xib */; };
@@ -290,6 +291,7 @@
 		297F8F04243B9D8400D554D3 /* WebKitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebKitViewController.swift; sourceTree = "<group>"; };
 		29856ABC241AAF3100E4E0FC /* TableEmptyStateTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableEmptyStateTableViewCell.swift; sourceTree = "<group>"; };
 		29856ABD241AAF3100E4E0FC /* TableEmptyStateTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TableEmptyStateTableViewCell.xib; sourceTree = "<group>"; };
+		298BD43624A108A50082B9E6 /* observation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = observation.swift; sourceTree = "<group>"; };
 		298BF7C02394C0270072AA28 /* waterBodies.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = waterBodies.txt; sourceTree = "<group>"; };
 		298BF7C323958A220072AA28 /* SpacerCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpacerCollectionViewCell.swift; sourceTree = "<group>"; };
 		298BF7C423958A220072AA28 /* SpacerCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SpacerCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -953,6 +955,7 @@
 		29A4AD0D249BDBCB0088793B /* InspectUITests */ = {
 			isa = PBXGroup;
 			children = (
+				298BD43624A108A50082B9E6 /* observation.swift */,
 				29A4AD16249BDBDD0088793B /* shift page.swift */,
 				29A4AD0E249BDBCB0088793B /* InspectUITests.swift */,
 				29A4AD10249BDBCB0088793B /* Info.plist */,
@@ -1587,6 +1590,7 @@
 			files = (
 				29A4AD17249BDBDD0088793B /* shift page.swift in Sources */,
 				29A4AD0F249BDBCB0088793B /* InspectUITests.swift in Sources */,
+				298BD43724A108A50082B9E6 /* observation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

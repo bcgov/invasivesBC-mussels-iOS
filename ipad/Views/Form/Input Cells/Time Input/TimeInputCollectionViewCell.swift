@@ -22,6 +22,8 @@ class TimeInputCollectionViewCell:  BaseInputCell<TimeInput>, UITextFieldDelegat
         self.headerLabel.text = model.header
         self.textField.accessibilityLabel = model.header.removeWhitespaces().lowercased()
         self.textField.accessibilityValue = model.header.removeWhitespaces().lowercased()
+        self.accessibilityValue = "\(model.header.removeWhitespaces().lowercased())cell"
+        self.accessibilityLabel = "\(model.header.removeWhitespaces().lowercased())cell"
         setTextFieldText()
         let gesture = UITapGestureRecognizer(target: self, action:  #selector(self.onClick))
         self.textField.addGestureRecognizer(gesture)
