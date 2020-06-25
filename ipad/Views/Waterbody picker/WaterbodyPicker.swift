@@ -119,6 +119,19 @@ class WaterbodyPicker: UIView, Theme {
         self.tableView.reloadData()
         self.selectionsHeightConstraint.constant = 0
         self.selectButton.isEnabled = !self.selections.isEmpty
+        searchBar.isAccessibilityElement = true
+        searchBar.accessibilityLabel = "search-waterbodies"
+        searchBar.accessibilityValue = "search-waterbodies"
+        searchBar.searchTextField.accessibilityValue = "type-search-waterbodies"
+        searchBar.searchTextField.accessibilityLabel = "type-search-waterbodies"
+        collectionView.accessibilityLabel = "selected-waterbodies"
+        collectionView.accessibilityValue = "selected-waterbodies"
+        tableView.accessibilityValue = "waterbodies-table"
+        tableView.accessibilityLabel = "waterbodies-table"
+        accessibilityValue = "waterbodypicker-view"
+        accessibilityLabel = "waterbodypicker-view"
+        barContainer.accessibilityValue = "waterbodypickerview-nav"
+        barContainer.accessibilityLabel = "waterbodypickerview-nav"
     }
     
     // Return Results

@@ -53,11 +53,12 @@ class shift_page: XCTestCase {
      - Create a shift, edit shift & submit
      */
     func testShiftCreation() throws {
-        //        createAndSubmitShift()
-        //        createShiftDraft()
         let app = XCUIApplication()
         let newShiftButton = app.buttons["Add New Shift"]
         
+        if !shiftExists() {
+            createShiftDraft()
+        }
         expectation(for: exists, evaluatedWith: newShiftButton, handler: nil)
         waitForExpectations(timeout: 10, handler: nil)
         app.buttons["Add New Shift"].tap()
@@ -81,13 +82,22 @@ class shift_page: XCTestCase {
          teardown()
          }
          */
-        
-        
-        // Add Previous waterbody
-        XCUIApplication().collectionViews/*@START_MENU_TOKEN@*/.buttons["Add Previous Water Body"]/*[[".cells.buttons[\"Add Previous Water Body\"]",".buttons[\"Add Previous Water Body\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
                 
-        XCUIApplication().collectionViews/*@START_MENU_TOKEN@*/.buttons["Add Previous Water Body"]/*[[".cells.buttons[\"Add Previous Water Body\"]",".buttons[\"Add Previous Water Body\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
-                        
+        
+        
+//        type-search-waterbodies
+        
+//        let app = XCUIApplication()
+//        app/*@START_MENU_TOKEN@*/.staticTexts["Add New Shift"]/*[[".buttons[\"Add New Shift\"].staticTexts[\"Add New Shift\"]",".staticTexts[\"Add New Shift\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+//        app.collectionViews["shiftform"]/*@START_MENU_TOKEN@*/.tables/*[[".cells.tables",".tables"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.cells.containing(.staticText, identifier:"4").buttons["Edit"].tap()
+//
+//        let collectionViewsQuery = app.collectionViews
+//        collectionViewsQuery/*@START_MENU_TOKEN@*/.staticTexts["Watercraft Details"]/*[[".cells.staticTexts[\"Watercraft Details\"]",".staticTexts[\"Watercraft Details\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.swipeUp()
+//
+//        let addPreviousWaterBodyButton = collectionViewsQuery/*@START_MENU_TOKEN@*/.buttons["Add Previous Water Body"]/*[[".cells.buttons[\"Add Previous Water Body\"]",".buttons[\"Add Previous Water Body\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/
+//        addPreviousWaterBodyButton.tap()
+//        addPreviousWaterBodyButton.tap()
+        
         
     }
     
@@ -179,6 +189,7 @@ class shift_page: XCTestCase {
         
         // Submit
         submitShiftPage()
+        
     }
     
     func fillShiftPageWithInspections() {
@@ -275,6 +286,14 @@ class shift_page: XCTestCase {
         
         // Select is Passport Holder
         cellsQuery.otherElements.containing(.staticText, identifier:"Is this a Passport Holder?").children(matching: .other).element.children(matching: .other).element(boundBy: 0).tap()
+        
+        // Type passport number
+        let passportField = app.collectionViews/*@START_MENU_TOKEN@*/.collectionViews.textFields["Passport Number"]/*[[".cells.collectionViews",".cells.textFields[\"Passport Number\"]",".textFields[\"Passport Number\"]",".collectionViews"],[[[-1,3,1],[-1,0,1]],[[-1,2],[-1,1]]],[0,0]]@END_MENU_TOKEN@*/
+//        XCTAssertTrue(passportField.exists, "Passport field Exists")
+        passportField.tap()
+        passportField.typeText("BC123456")
+        
+        
         // Select Launched Outside BC to trigger full form
         let lancuedOutsideBC = app.collectionViews/*@START_MENU_TOKEN@*/.collectionViews.switches["launchedoutsidebc/abinthelast30days?"]/*[[".cells.collectionViews",".cells[\"launchedoutsidebc\/abinthelast30days?cell\"].switches[\"launchedoutsidebc\/abinthelast30days?\"]",".switches[\"launchedoutsidebc\/abinthelast30days?\"]",".collectionViews"],[[[-1,3,1],[-1,0,1]],[[-1,2],[-1,1]]],[0,0]]@END_MENU_TOKEN@*/
         expectation(for: exists, evaluatedWith: lancuedOutsideBC, handler: nil)
@@ -286,6 +305,9 @@ class shift_page: XCTestCase {
     }
     
     func fillFullInspection() {
+        let app = XCUIApplication()
+        let collectionViewsQuery = app.collectionViews
+        
         // Enter some basic info
         collectionViewsQuery/*@START_MENU_TOKEN@*/.collectionViews.textFields["province/state of boat residence"]/*[[".cells.collectionViews",".cells.textFields[\"province\/state of boat residence\"]",".textFields[\"province\/state of boat residence\"]",".collectionViews"],[[[-1,3,1],[-1,0,1]],[[-1,2],[-1,1]]],[0,0]]@END_MENU_TOKEN@*/.tap()
         app.popovers.tables/*@START_MENU_TOKEN@*/.staticTexts["British Columbia - CAN"]/*[[".cells.staticTexts[\"British Columbia - CAN\"]",".staticTexts[\"British Columbia - CAN\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
@@ -300,6 +322,29 @@ class shift_page: XCTestCase {
         
         // Scroll down
         collectionViewsQuery/*@START_MENU_TOKEN@*/.staticTexts["Watercraft Details"]/*[[".cells.staticTexts[\"Watercraft Details\"]",".staticTexts[\"Watercraft Details\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.swipeUp()
+        
+        // Add Previous waterbody
+        app.collectionViews/*@START_MENU_TOKEN@*/.buttons["Add Previous Water Body"]/*[[".cells.buttons[\"Add Previous Water Body\"]",".buttons[\"Add Previous Water Body\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+        
+        // Search
+        
+        let searchBarElement = app.textFields["type-search-waterbodies"]
+//        searchBarElement.tap()
+        XCTAssertTrue(searchBarElement.exists, "Search bar Exists")
+        searchBarElement.tap()
+        searchBarElement.firstMatch.typeText("sylvan")
+//        let searchfield = app.otherElements["search-waterbodies"].firstMatch
+//        searchfield.tap()
+//        searchfield.typeText("sylvan")
+        
+        app/*@START_MENU_TOKEN@*/.tables["waterbodies"].staticTexts["Sylvan Lake, AB, CAN (Sylvan Lake)"]/*[[".otherElements[\"waterbodypicker\"].tables[\"waterbodies\"]",".cells.staticTexts[\"Sylvan Lake, AB, CAN (Sylvan Lake)\"]",".staticTexts[\"Sylvan Lake, AB, CAN (Sylvan Lake)\"]",".tables[\"waterbodies\"]"],[[[-1,3,1],[-1,0,1]],[[-1,2],[-1,1]]],[0,0]]@END_MENU_TOKEN@*/.tap()
+        app/*@START_MENU_TOKEN@*/.tables["waterbodies"].staticTexts["Duck Lake, AB, CAN (Sylvan Glen)"]/*[[".otherElements[\"waterbodypicker\"].tables[\"waterbodies\"]",".cells.staticTexts[\"Duck Lake, AB, CAN (Sylvan Glen)\"]",".staticTexts[\"Duck Lake, AB, CAN (Sylvan Glen)\"]",".tables[\"waterbodies\"]"],[[[-1,3,1],[-1,0,1]],[[-1,2],[-1,1]]],[0,0]]@END_MENU_TOKEN@*/.tap()
+        app/*@START_MENU_TOKEN@*/.collectionViews["selectedvalues"]/*[[".otherElements[\"waterbodypicker\"].collectionViews[\"selectedvalues\"]",".collectionViews[\"selectedvalues\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.children(matching: .cell).element(boundBy: 1).buttons["Close"].tap()
+        
+        // DELETE
+        let newShiftButton = app.buttons["Add New Shift"]
+        expectation(for: exists, evaluatedWith: newShiftButton, handler: nil)
+        waitForExpectations(timeout: 10, handler: nil)
     }
     
 }

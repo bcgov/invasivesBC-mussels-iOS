@@ -57,6 +57,8 @@ class TextInputCollectionViewCell: BaseInputCell<TextInput>, UITextFieldDelegate
         self.headerLabel.text = model.header
         self.textField.text = model.value.get(type: model.type) as? String ?? ""
         textField.delegate = self
+        self.textField.accessibilityLabel = model.header
+        self.textField.accessibilityValue = model.header
     }
     
     // MARK: Style
