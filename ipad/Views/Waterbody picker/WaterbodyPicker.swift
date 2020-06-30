@@ -128,8 +128,6 @@ class WaterbodyPicker: UIView, Theme {
         collectionView.accessibilityValue = "selected-waterbodies"
         tableView.accessibilityValue = "waterbodies-table"
         tableView.accessibilityLabel = "waterbodies-table"
-        accessibilityValue = "waterbodypicker-view"
-        accessibilityLabel = "waterbodypicker-view"
         barContainer.accessibilityValue = "waterbodypickerview-nav"
         barContainer.accessibilityLabel = "waterbodypickerview-nav"
     }

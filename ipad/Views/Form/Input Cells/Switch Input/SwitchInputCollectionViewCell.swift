@@ -33,6 +33,7 @@ class SwitchInputCollectionViewCell: BaseInputCell<SwitchInput> {
         self.switchView.accessibilityLabel = model.header.removeWhitespaces().lowercased()
         self.accessibilityValue = "\(model.header.removeWhitespaces().lowercased())cell"
         self.accessibilityLabel = "\(model.header.removeWhitespaces().lowercased())cell"
+        
     }
     
     override func updateValue(value: InputValue) {
