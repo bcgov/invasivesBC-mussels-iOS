@@ -108,10 +108,10 @@ class WaterbodyPicker: UIView, Theme {
     /**
      Displays Wateroicker in Container and returns DropdownModel Result
      */
-    func setup(result: @escaping([WaterBodyTableModel]) -> Void) {
+    func setup(in vc: UIViewController, result: @escaping([WaterBodyTableModel]) -> Void) {
         self.completion = result
         self.loadWaterBodies()
-        self.position()
+        self.position(in: vc)
         self.style()
         self.setUpTable()
         self.setupCollectionView()
@@ -229,7 +229,7 @@ class WaterbodyPicker: UIView, Theme {
         self.tableView.reloadData()
     }
     
-    private func position() {
+    private func position(in vc: ViewController) {
         guard let window = UIApplication.shared.connectedScenes
         .filter({$0.activationState == .foregroundActive})
         .map({$0 as? UIWindowScene})

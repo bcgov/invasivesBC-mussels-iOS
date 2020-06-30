@@ -86,6 +86,12 @@ class WatercraftInspectionViewController: BaseViewController {
         super.viewDidLayoutSubviews()
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showWaterbodyPicker", let vc = segue.destination as? WaterbodyPickerViewController {
+            vc.model = model
+        }
+    }
+    
     // MARK: Setup
     func setup(model: WatercradftInspectionModel) {
         self.model = model
@@ -492,44 +498,6 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
         }
     }
     
-    @objc private func addPreviousWaterBody(sender: Any?) {
-        /// -- Model
-        guard let model = self.model else { return }
-        /// ---------waterbody picker------------
-        self.setNavigationBar(hidden: true, style: .black)
-        let waterBodyPicker: WaterbodyPicker = UIView.fromNib()
-        self.viewLayoutMarginsDidChange()
-        waterBodyPicker.setup() { (result) in
-            print(result)
-            for waterBody in result {
-                model.addPreviousWaterBody(model: waterBody)
-            }
-            self.setNavigationBar(hidden: false, style: .black)
-            self.viewLayoutMarginsDidChange()
-            self.collectionView.reloadData()
-        }
-    }
-    
-    @objc private func addNextWaterBody(sender: Any?) {
-        /// -- Model
-        guard let model = self.model else { return }
-        /// ---------waterbody picker------------
-        self.setNavigationBar(hidden: true, style: .black)
-        let waterBodyPicker: WaterbodyPicker = UIView.fromNib()
-        self.viewLayoutMarginsDidChange()
-        waterBodyPicker.setup() { [weak self] (result) in
-            guard let strongerSelf = self else {return}
-            print(result)
-            for waterBody in result {
-                model.addDestinationWaterBody(model: waterBody)
-            }
-            strongerSelf.setNavigationBar(hidden: false, style: .black)
-            strongerSelf.viewLayoutMarginsDidChange()
-            strongerSelf.collectionView.reloadData()
-        }
-        /// --------------------------------
-    }
-    
     // Reload Journey Details section
     private func reloadJourneyDetailSection(indexPath: IndexPath) {
         self.collectionView.performBatchUpdates({
@@ -592,19 +560,7 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
                 case .add:
                     /// ---------waterbody picker------------
                     InfoLog("User want to add previous water body")
-                    strongSelf.setNavigationBar(hidden: true, style: .black)
-                    let waterBodyPicker: WaterbodyPicker = UIView.fromNib()
-                    strongSelf.viewLayoutMarginsDidChange()
-                    waterBodyPicker.setup() { [weak self] (result) in
-                        guard let strongerSelf = self else {return}
-                        for waterBody in result {
-                            model.addPreviousWaterBody(model: waterBody)
-                        }
-                        strongerSelf.setNavigationBar(hidden: false, style: .black)
-                        strongerSelf.viewLayoutMarginsDidChange()
-                        strongerSelf.collectionView.reloadData()
-                        waterBodyPicker.removeFromSuperview()
-                    }
+                    strongSelf.performSegue(withIdentifier: "showWaterbodyPicker", sender: self)
                     /// --------------------------------
                 }
             }
@@ -632,19 +588,7 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
                     strongSelf.reloadJourneyDetailSection(indexPath: indexPath)
                 case .add:
                     /// ---------waterbody picker------------
-                    strongSelf.setNavigationBar(hidden: true, style: .black)
-                    let waterBodyPicker: WaterbodyPicker = UIView.fromNib()
-                    strongSelf.viewLayoutMarginsDidChange()
-                    waterBodyPicker.setup() { [weak self] (result) in
-                        guard let strongerSelf = self else {return}
-                        print(result)
-                        for waterBody in result {
-                            model.addDestinationWaterBody(model: waterBody)
-                        }
-                        strongerSelf.setNavigationBar(hidden: false, style: .black)
-                        strongerSelf.viewLayoutMarginsDidChange()
-                        strongerSelf.collectionView.reloadData()
-                    }
+                    strongSelf.performSegue(withIdentifier: "showWaterbodyPicker", sender: self)
                     /// --------------------------------
                 }
             }
