@@ -226,6 +226,8 @@ class ShiftViewController: BaseViewController {
 // MARK: CollectionView
 extension ShiftViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     private func setupCollectionView() {
+        collectionView.accessibilityLabel = "shiftform"
+        collectionView.accessibilityValue = "shiftform"
         for cell in collectionCells {
             register(cell: cell)
         }

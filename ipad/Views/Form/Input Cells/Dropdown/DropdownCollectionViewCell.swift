@@ -45,6 +45,8 @@ class DropdownCollectionViewCell: BaseInputCell<DropdownInput>, UITextFieldDeleg
     // MARK: Setup
     override func initialize(with model: DropdownInput) {
         self.headerLabel.text = model.header
+        self.textField.accessibilityLabel = model.header.lowercased()
+        self.textField.accessibilityValue = model.header.lowercased()
         if let currentValue = model.value.get(type: .Dropdown) as? String {
             for item in model.dropdownItems where item.key == currentValue {
                 self.textField.text = item.key

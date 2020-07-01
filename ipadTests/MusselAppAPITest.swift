@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import InvasivesBC
+@testable import Inspect
 
 class MusselAppAPITest: XCTestCase {
     let waterBodyAPI: WaterBodyAPI =  WaterBodyAPI.api()

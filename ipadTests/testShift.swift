@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import InvasivesBC
+@testable import Inspect
 
 class testShift: XCTestCase {
 
