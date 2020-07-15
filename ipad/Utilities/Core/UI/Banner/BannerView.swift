@@ -47,6 +47,7 @@ class BannerView: UIView, Theme {
         self.width = titleWidth
         
         if !message.detail.isEmpty {
+            detailLabel.isHidden = false
             // Set detail message
             detailLabel.text = message.detail
             // update height
