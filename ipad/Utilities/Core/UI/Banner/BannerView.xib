@@ -17,18 +17,26 @@
                     <rect key="frame" x="5" y="49" width="842" height="297"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0a9-og-8Pt">
-                            <rect key="frame" x="400" y="0.0" width="42" height="144.5"/>
+                            <rect key="frame" x="0.0" y="0.0" width="842" height="144.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bTO-03-RSv">
-                            <rect key="frame" x="400" y="152.5" width="42" height="144.5"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="bTO-03-RSv">
+                            <rect key="frame" x="0.0" y="152.5" width="842" height="144.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
+                    <constraints>
+                        <constraint firstItem="bTO-03-RSv" firstAttribute="leading" secondItem="UTb-8t-PKY" secondAttribute="leading" id="DQn-MK-eKO"/>
+                        <constraint firstAttribute="trailing" secondItem="0a9-og-8Pt" secondAttribute="trailing" id="FYL-gR-44q"/>
+                        <constraint firstItem="0a9-og-8Pt" firstAttribute="top" secondItem="UTb-8t-PKY" secondAttribute="top" id="NmU-12-3LP"/>
+                        <constraint firstAttribute="trailing" secondItem="bTO-03-RSv" secondAttribute="trailing" id="WgI-Q6-IdK"/>
+                        <constraint firstItem="0a9-og-8Pt" firstAttribute="leading" secondItem="UTb-8t-PKY" secondAttribute="leading" id="jUO-9X-ahm"/>
+                        <constraint firstAttribute="bottom" secondItem="bTO-03-RSv" secondAttribute="bottom" id="nIr-Af-dge"/>
+                    </constraints>
                 </stackView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

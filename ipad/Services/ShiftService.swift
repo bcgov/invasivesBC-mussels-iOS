@@ -91,6 +91,7 @@ class ShiftService {
         self.promise[shift.localId]??.error({ (e, _) in
             print("Error during Shift POST")
             print(e)
+            Banner.show(message: "Could not create shift", detail: e.message)
             return then(nil)
         })
     }
@@ -113,6 +114,7 @@ class ShiftService {
         self.promise[inspection.localId]??.error({ (e, _) in
             print("Error during Inspection POST")
             print(e)
+            Banner.show(message: "Could not create Inspection", detail: e.message)
             return then(nil)
         })
     }
