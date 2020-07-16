@@ -16,7 +16,7 @@ post_install do |installer|
     end
 end
 
-target 'ipad' do
+target 'invasives' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
 
