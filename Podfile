@@ -16,7 +16,7 @@ post_install do |installer|
     end
 end
 
-target 'inspect' do
+target 'ipad' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
 

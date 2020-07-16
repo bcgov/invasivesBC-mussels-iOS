@@ -37,7 +37,7 @@ variables:
 - name: 'WorkspacePath'
   value: '**/ipad.xcworkspace'
 - name: 'SchemaName'
-  value: 'inspect'
+  value: 'ipad'
 - name: 'ExportOptionsFileName'
   value: 'options.plist'
 - name: 'ExportMethod'
