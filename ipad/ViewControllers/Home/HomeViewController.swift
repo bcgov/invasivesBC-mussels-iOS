@@ -95,6 +95,8 @@ class HomeViewController: BaseViewController {
     }
     
     @IBAction func addEntryAction(_ sender: Any) {
+        performSegue(withIdentifier: "showNewForm", sender: self)
+        return
         if let existing = getActiveShift() {
             self.navigateToShiftOverview(object: existing, editable: true)
         } else {

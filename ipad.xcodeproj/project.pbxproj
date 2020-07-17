@@ -112,6 +112,8 @@
 		29A97434236CDD8F006C668F /* DateInputCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29A97432236CDD8F006C668F /* DateInputCollectionViewCell.xib */; };
 		29A97436236FD5FC006C668F /* InputGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A97435236FD5FC006C668F /* InputGroup.swift */; };
 		29A9743B2370042E006C668F /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A9743A2370042E006C668F /* Storage.swift */; };
+		29B02F1224C233FA0018D836 /* NewFormModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B02F1124C233FA0018D836 /* NewFormModel.swift */; };
+		29B02F1424C235440018D836 /* NewFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B02F1324C235440018D836 /* NewFormViewController.swift */; };
 		29BAC4FE23676C3000A620F4 /* AuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29BAC4FD23676C3000A620F4 /* AuthenticationService.swift */; };
 		29BAC50623676EA400A620F4 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29BAC50523676EA400A620F4 /* Alert.swift */; };
 		29BAC50923676FDC00A620F4 /* ThemeGeneric.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29BAC50823676FDC00A620F4 /* ThemeGeneric.swift */; };
@@ -318,6 +320,8 @@
 		29A97432236CDD8F006C668F /* DateInputCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DateInputCollectionViewCell.xib; sourceTree = "<group>"; };
 		29A97435236FD5FC006C668F /* InputGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputGroup.swift; sourceTree = "<group>"; };
 		29A9743A2370042E006C668F /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
+		29B02F1124C233FA0018D836 /* NewFormModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewFormModel.swift; sourceTree = "<group>"; };
+		29B02F1324C235440018D836 /* NewFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewFormViewController.swift; sourceTree = "<group>"; };
 		29BAC4FD23676C3000A620F4 /* AuthenticationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationService.swift; sourceTree = "<group>"; };
 		29BAC50523676EA400A620F4 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		29BAC50823676FDC00A620F4 /* ThemeGeneric.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeGeneric.swift; sourceTree = "<group>"; };
@@ -515,6 +519,7 @@
 				298BF7C7239590730072AA28 /* WaterBodyTableModel.swift */,
 				29FEA09F23FF12C200F490DB /* UserRoleModel.swift */,
 				2944BCD7243392A500826F48 /* Other */,
+				29B02F1124C233FA0018D836 /* NewFormModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1028,6 +1033,7 @@
 				2944BCDA243393F700826F48 /* Watercraft Inspections */,
 				29DB4E3A23870B1F00B13646 /* Shared cells */,
 				297F8F06243B9D8A00D554D3 /* dummy Login Webkit */,
+				29B02F1324C235440018D836 /* NewFormViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -1626,6 +1632,7 @@
 				298BF7C523958A220072AA28 /* SpacerCollectionViewCell.swift in Sources */,
 				29F29FA6236BB541004F12E7 /* BaseInputCell.swift in Sources */,
 				295051092374D764000FBD6E /* DoubleInputCollectionViewCell.swift in Sources */,
+				29B02F1224C233FA0018D836 /* NewFormModel.swift in Sources */,
 				5C82D3DD2374B9D700B065BA /* AppRemoteAPIConst.swift in Sources */,
 				29F29FA1236B8670004F12E7 /* DropdownCollectionViewCell.swift in Sources */,
 				29514BD92368ADB100DC89C4 /* OptionType.swift in Sources */,
@@ -1656,6 +1663,7 @@
 				2907E4B72368D24900946B3F /* InputModal.swift in Sources */,
 				29547B4A23F0BF4F000173F1 /* SelectedWaterBodyCollectionViewCell.swift in Sources */,
 				2991969023846AE000634F81 /* ShiftViewController.swift in Sources */,
+				29B02F1424C235440018D836 /* NewFormViewController.swift in Sources */,
 				29DB01092370EFD60046E605 /* TextAreaInputCollectionViewCell.swift in Sources */,
 				5C82D3EA2374BCFA00B065BA /* FoundationExtension.swift in Sources */,
 				29CEC91E23676424003B21B9 /* ViewController.swift in Sources */,
