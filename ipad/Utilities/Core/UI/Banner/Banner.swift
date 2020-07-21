@@ -79,6 +79,6 @@ class Banner {
     }
     
     public static func bannerDetailFont() -> UIFont {
-        return Fonts.getPrimaryBold(size: 11)
+        return Fonts.getPrimary(size: 14)
     }
 }

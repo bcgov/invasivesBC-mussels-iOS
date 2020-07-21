@@ -42,8 +42,9 @@ class BannerView: UIView, Theme {
         self.label.text = message.title
         self.originY = y
         self.originX = x
+        let padding: CGFloat = 32
         
-        let titleWidth = message.title.width(withConstrainedHeight: height, font: Banner.bannerTextFont()) + 30
+        let titleWidth = message.title.width(withConstrainedHeight: height, font: Banner.bannerTextFont()) + padding
         self.width = titleWidth
         
         if !message.detail.isEmpty {
@@ -51,7 +52,7 @@ class BannerView: UIView, Theme {
             // Set detail message
             detailLabel.text = message.detail
             // update height
-            let detailHeight = message.detail.height(withConstrainedWidth: titleWidth, font: Banner.bannerDetailFont()) + 16
+            let detailHeight = message.detail.height(withConstrainedWidth: titleWidth - padding, font: Banner.bannerDetailFont()) + (padding * 2)
             height += detailHeight
         } else {
             detailLabel.isHidden = true
@@ -128,5 +129,9 @@ class BannerView: UIView, Theme {
         self.label.textColor = .black
         self.detailLabel.font = Banner.bannerDetailFont()
         self.detailLabel.textColor = .black
+        self.clipsToBounds = true
+        self.roundCorners(corners: [.topRight, .bottomRight], radius: 8)
+        self.layer.cornerRadius = 8
+        self.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMaxXMaxYCorner]
     }
 }
