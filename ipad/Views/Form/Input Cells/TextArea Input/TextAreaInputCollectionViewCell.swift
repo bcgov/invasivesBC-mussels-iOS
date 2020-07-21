@@ -14,6 +14,11 @@ class TextAreaInputCollectionViewCell: BaseInputCell<TextAreaInput>, UITextViewD
     @IBOutlet weak var textArea: UITextView!
     
     // MARK: Delegate functions
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        let newValue = (textView.text as NSString).replacingCharacters(in: range, with: text)
+        return newValue.count <= 300
+    }
+    
     func textViewDidChange(_ textView: UITextView) {
         guard let model = self.model else {return}
         if model.value.get(type: model.type) as? String != textView.text {

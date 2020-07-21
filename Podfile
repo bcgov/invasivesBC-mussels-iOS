@@ -48,9 +48,5 @@ target 'ipad' do
   pod 'Fabric'
   pod 'Crashlytics'
   pod 'Firebase/Crashlytics'
-  target 'ipadTests' do
-    inherit! :search_paths
-    # Pods for testing
-  end
 
 end

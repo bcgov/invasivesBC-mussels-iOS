@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SwiftyJSON
 import Realm
 import RealmSwift
 import Reachability
@@ -74,47 +75,54 @@ class ShiftService {
         return true
     }
     
+    private func showError(in json: JSON) {
+        var message = ""
+        if let apiMessage = json["message"].string {
+            message = apiMessage
+        }
+        var errors: String = ""
+        if let apiErrors = json["errors"].array {
+            for error in apiErrors {
+                guard let msg = error["msg"].string else {continue}
+                errors = "\(errors)*Error:\n\(msg)\n"
+            }
+        }
+        print(errors)
+        DispatchQueue.main.async {
+            Banner.show(message: message, detail: errors)
+        }
+    }
+    
     private func post(shift: ShiftModel, then: @escaping (_ id: Int?) -> Void) {
         if (!isOnline()) {return then(nil)}
-        self.promise[shift.localId] = shiftAPI.post(shift.toDictionary())
-        self.promise[shift.localId]??.then({ (dat, resp) in
-            guard let data = dat as? [String : Any] else {
+        guard let endpoint = URL(string: APIURL.wokrflow) else { return then(nil)}
+        APIRequest.request(type: .Post, endpoint: endpoint, params: shift.toDictionary()) { (result) in
+            guard let responseJSON = result else {
+                Banner.show(message: "Didn't receive a valid API response when posting shift")
                 return then(nil)
             }
-            let _: [String : Any] = resp as? [String : Any] ?? [:]
-            if let id = data["observer_workflow_id"] as? Int {
-                return then(id)
-            } else {
+            guard let dataDict = responseJSON["data"].dictionary, let id = dataDict["observer_workflow_id"]?.int else {
+                self.showError(in: responseJSON)
                 return then(nil)
             }
-        })
-        self.promise[shift.localId]??.error({ (e, _) in
-            print("Error during Shift POST")
-            print(e)
-            return then(nil)
-        })
+            return then(id)
+        }
     }
     
     private func post(inspection: WatercradftInspectionModel, shift id: Int,then: @escaping (_ id: Int?) -> Void) {
         if (!isOnline()) {return then(nil)}
-        self.promise[inspection.localId] = inspectionAPI.post(inspection.toDictionary(shift: id))
-        self.promise[inspection.localId]??.then({ (dat, resp) in
-            
-            guard let data = dat as? [String : Any] else {
+        guard let endpoint = URL(string: APIURL.watercraftRiskAssessment) else { return then(nil)}
+        APIRequest.request(type: .Post, endpoint: endpoint, params: inspection.toDictionary(shift: id)) { (result) in
+            guard let responseJSON = result else {
+                Banner.show(message: "Didn't receive a valid API response when posting inspection")
                 return then(nil)
             }
-            let _: [String : Any] = resp as? [String : Any] ?? [:]
-            if let id = data["observer_workflow_id"] as? Int {
-                return then(id)
-            } else {
+            guard let dataDict = responseJSON["data"].dictionary, let id = dataDict["watercraft_risk_assessment_id"]?.int else {
+                self.showError(in: responseJSON)
                 return then(nil)
             }
-        })
-        self.promise[inspection.localId]??.error({ (e, _) in
-            print("Error during Inspection POST")
-            print(e)
-            return then(nil)
-        })
+            return then(id)
+        }
     }
     
     // Submit inspection objects recursively
@@ -128,27 +136,12 @@ class ShiftService {
         }
         let inspectionLocalId = inspection.localId
         
-        let body = inspection.toDictionary(shift: shiftId)
-        
-        self.promise[inspection.localId] = inspectionAPI.post(body)
-        self.promise[inspection.localId]??.then({ (dat, resp) in
-            guard let data = dat as? [String : Any] else {
+        post(inspection: inspection, shift: shiftId) { (inspectionId) in
+            guard let id = inspectionId, let refetchedInspection = Storage.shared.inspection(withLocalId: inspectionLocalId) else {
                 return then(false)
             }
-            if
-                let shiftRemoteid = data["watercraft_risk_assessment_id"] as? Int,
-                let refetchedInspection = Storage.shared.inspection(withLocalId: inspectionLocalId)
-            {
-                refetchedInspection.set(remoteId: shiftRemoteid)
-                self.submit(inspections: remainingInspections, shiftId: shiftId, then: then)
-            } else {
-                return then(false)
-            }
-        })
-        self.promise[inspection.localId]??.error({ (e, _) in
-            print("Error during Inspection POST")
-            print(e)
-            return then(false)
-        })
+            refetchedInspection.set(remoteId: id)
+            self.submit(inspections: remainingInspections, shiftId: shiftId, then: then)
+        }
     }
 }
