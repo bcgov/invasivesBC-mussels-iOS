@@ -80,6 +80,9 @@ class ShiftViewController: BaseViewController {
         self.isEditable = model.getStatus() == .Draft ||  model.getStatus() == .PendingSync
         if model.getStatus() == .PendingSync {
             model.set(shouldSync: false)
+            for inspection in model.inspections {
+                inspection.set(shouldSync: false)
+            }
             Alert.show(title: "Changed to draft", message: "Status changed to draft. tap submit when you've made your changes.")
         }
         self.styleNavBar()
