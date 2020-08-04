@@ -137,6 +137,7 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
     }
     
     func set(shouldSync should: Bool) {
+        set(status: should ? .PendingSync : .Draft )
         do {
             let realm = try Realm()
             try realm.write {
@@ -147,6 +148,7 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
             print("** REALM ERROR")
             print(error)
         }
+        set(status: should ? .PendingSync : .Draft )
     }
     
     func set(status statusEnum: SyncableItemStatus) {

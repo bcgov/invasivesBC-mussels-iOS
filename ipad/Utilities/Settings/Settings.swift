@@ -21,7 +21,8 @@ class Settings {
     static let shared = Settings()
     
     private init() {
-        guard getModel() != nil else {
+        guard Settings.getModel() != nil else {
+            RealmRequests.getObject(SettingsModel.self)
             let newModel = SettingsModel()
             RealmRequests.saveObject(object: newModel)
             return
@@ -29,7 +30,7 @@ class Settings {
     }
     
     // MARK: Internal Functions
-    private func getModel()-> SettingsModel? {
+    private static func getModel()-> SettingsModel? {
         if let query = RealmRequests.getObject(SettingsModel.self), let model = query.last {
             return model
         } else {
@@ -45,12 +46,12 @@ class Settings {
     
     // MARK: Sync
     func isAutoSyncEnabled()-> Bool {
-        guard let model = getModel() else {return false}
+        guard let model = Settings.getModel() else {return false}
         return model.autoSyncEndbaled
     }
     
     func setAutoSync(enabled: Bool) {
-        guard let model = getModel() else {return}
+        guard let model = Settings.getModel() else {return}
         SyncService.shared.endListener()
         model.setAutoSync(enabled: enabled)
         if enabled {
@@ -64,12 +65,12 @@ class Settings {
     
     // MARK: Auth
     func setAuth(type: AuthType) {
-        guard let model = getModel() else {return}
+        guard let model = Settings.getModel() else {return}
         model.setLoginType(idir: type == .Idir)
     }
     
     func getAuthType() -> AuthType {
-        guard let model = getModel() else {return .Idir}
+        guard let model = Settings.getModel() else {return .Idir}
         return model.isIdirLogin ? .Idir : .BCeID
     }
     
@@ -82,37 +83,37 @@ class Settings {
     }
     
     public func getUserAuthId() -> String? {
-        guard let model = getModel() else {return nil}
+        guard let model = Settings.getModel() else {return nil}
         return model.authId
     }
     
     public func setUserAuthId() {
-        guard let model = getModel() else {return}
+        guard let model = Settings.getModel() else {return}
         model.setAuth(id: AuthenticationService.getUserID())
     }
     
     // MARK: Users
     func setUserHasAppAccess(hasAccess: Bool) {
-        guard let model = getModel() else {return}
+        guard let model = Settings.getModel() else {return}
         model.setUserAccess(hasAccess: hasAccess)
     }
     func userHasAppAccess() -> Bool {
-        guard let model = getModel() else {return false}
+        guard let model = Settings.getModel() else {return false}
         return model.userHasAccess
     }
     func setUser(firstName: String, lastName: String) {
-        guard let model = getModel() else {return}
+        guard let model = Settings.getModel() else {return}
         model.setUser(firstName: firstName, lastName: lastName)
         //           NotificationCenter.default.post(name: .usernameUpdatedInSettings, object: nil)
     }
     
     func getUserName(full: Bool = false) -> String {
-        guard let model = getModel() else {return ""}
+        guard let model = Settings.getModel() else {return ""}
         return full ? "\(model.userFirstName) \(model.userLastName)" : model.userFirstName
     }
     
     func getUserInitials() -> String {
-        guard let model = getModel(), let last = model.userLastName.first, let first = model.userFirstName.first else {return "RO"}
+        guard let model = Settings.getModel(), let last = model.userLastName.first, let first = model.userFirstName.first else {return "RO"}
         return ("\(first)\(last)")
     }
 }

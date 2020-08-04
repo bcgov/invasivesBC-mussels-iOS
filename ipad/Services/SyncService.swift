@@ -40,9 +40,6 @@ class SyncService {
     public func beginListener() {
         
         print("Listening to database changes in AutoSync.")
-        if isOnline() {
-            self.syncIfPossible()
-        }
         do {
             let realm = try Realm()
             self.realmNotificationToken = realm.observe { [weak self] notification, realm  in

@@ -37,8 +37,7 @@ class ShiftModel: Object, BaseRealmObject {
     @objc dynamic var nonMotorizedBlowBys: Int = 0
     @objc dynamic var k9OnShif: Bool = false
     @objc dynamic var date: Date?
-    ///
-    @objc dynamic var station: String = " "
+    @objc dynamic var station: String = ""
 //    @objc dynamic var location: String = " "
     ///
     @objc dynamic var shitStartComments: String = ""
@@ -92,6 +91,7 @@ class ShiftModel: Object, BaseRealmObject {
     }
     
     func set(shouldSync should: Bool) {
+        set(status: should ? .PendingSync : .Draft )
         do {
             let realm = try Realm()
             try realm.write {

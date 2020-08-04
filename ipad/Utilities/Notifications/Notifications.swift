@@ -14,6 +14,7 @@ extension Notification.Name {
     static let InputFieldShouldUpdate = Notification.Name("InputFieldShouldUpdate")
     static let TableButtonClicked = Notification.Name("tableButtonClicked")
     static let syncExecuted = Notification.Name("syncExecuted")
+    static let shouldRefreshTable = Notification.Name("shouldRefreshTable")
     
     static let journeyItemValueChanged = Notification.Name("journeyItemValueChanged")
 }

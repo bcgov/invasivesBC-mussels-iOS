@@ -173,10 +173,25 @@ class InputGroupView: UIView {
                 continue
             }
             
+            var itemHeight = item.height
+            
+            print(item.type)
+            
+            if item.type == .TextArea, let value = item.value.get(type: .TextArea) as? String, value.count > 100 {
+            if let _window = UIApplication.shared.connectedScenes
+                .filter({$0.activationState == .foregroundActive})
+                .map({$0 as? UIWindowScene})
+                .compactMap({$0})
+                .first?.windows
+                .filter({$0.isKeyWindow}).first{
+                itemHeight = value.height(withConstrainedWidth: _window.bounds.width  -  50, font: Fonts.getPrimary(size: 15))
+                }
+            }
+            
             // If current item's height is greater than the max item height for row
             // set max item hight for row
-            if tempMaxRowItemHeight < item.height {
-                tempMaxRowItemHeight = item.height
+            if tempMaxRowItemHeight < itemHeight {
+                tempMaxRowItemHeight = itemHeight
             }
             // increase width counter
             widthCounter = widthCounter + itemWidth

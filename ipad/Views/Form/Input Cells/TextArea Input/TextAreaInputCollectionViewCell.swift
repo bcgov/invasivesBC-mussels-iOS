@@ -13,10 +13,13 @@ class TextAreaInputCollectionViewCell: BaseInputCell<TextAreaInput>, UITextViewD
     @IBOutlet weak var fieldHeader: UILabel!
     @IBOutlet weak var textArea: UITextView!
     
+    let charLimit = 300
+    
     // MARK: Delegate functions
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         let newValue = (textView.text as NSString).replacingCharacters(in: range, with: text)
-        return newValue.count <= 300
+        if newValue.count <= textView.text.count {return true}
+        return newValue.count <= charLimit
     }
     
     func textViewDidChange(_ textView: UITextView) {
@@ -24,6 +27,7 @@ class TextAreaInputCollectionViewCell: BaseInputCell<TextAreaInput>, UITextViewD
         if model.value.get(type: model.type) as? String != textView.text {
             model.value.set(value: textView.text ?? "", type: model.type)
             self.emitChange()
+            style()
         }
     }
     
@@ -39,6 +43,11 @@ class TextAreaInputCollectionViewCell: BaseInputCell<TextAreaInput>, UITextViewD
     override func style() {
         styleFieldInput(textField: textArea)
         styleFieldHeader(label: fieldHeader)
+        textArea.isScrollEnabled = true
+        
+        if let m = model, let value = m.value.get(type: .TextArea) as? String, value.count > charLimit {
+            textArea.backgroundColor = Colors.warn.withAlphaComponent(0.3)
+        }
     }
     
     

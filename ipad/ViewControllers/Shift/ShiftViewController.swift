@@ -85,6 +85,13 @@ class ShiftViewController: BaseViewController {
             }
             Alert.show(title: "Changed to draft", message: "Status changed to draft. tap submit when you've made your changes.")
         }
+        
+        if model.getStatus() == .Draft {
+            // make sure inspections are editable. 
+            for inspection in model.inspections {
+                inspection.set(shouldSync: false)
+            }
+        }
         self.styleNavBar()
     }
     
@@ -368,15 +375,16 @@ extension ShiftViewController: UICollectionViewDataSource, UICollectionViewDeleg
     
     fileprivate func getSizeForShiftInfo(row: ShiftInformationSectionRow?) -> CGSize {
         guard let row = row else {return CGSize(width: 0, height: 0)}
+        guard let model = model else {return CGSize(width: 0, height: 0)}
         let fullWdtih = self.collectionView.frame.width
         switch row {
         case .Header:
             return CGSize(width: fullWdtih, height: 35)
         case .StartShift:
-            let estimatedContentHeight = InputGroupView.estimateContentHeight(for: ShiftFormHelper.getShiftStartFields())
+            let estimatedContentHeight = InputGroupView.estimateContentHeight(for: ShiftFormHelper.getShiftEndFields(for: model, editable: true))
             return CGSize(width: fullWdtih, height: estimatedContentHeight)
         case .EndShift:
-            let estimatedContentHeight = InputGroupView.estimateContentHeight(for: ShiftFormHelper.getShiftEndFields())
+            let estimatedContentHeight = InputGroupView.estimateContentHeight(for: ShiftFormHelper.getShiftEndFields(for: model, editable: true))
             return CGSize(width: fullWdtih, height: estimatedContentHeight)
         }
     }

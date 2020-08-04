@@ -57,7 +57,8 @@ class Storage {
         }
         
         if !invalidShifts.isEmpty {
-            Alert.show(title: "Review your submissions", message: "Some of your records have been changed tp darft state.\nPlease make sure all comment fields have at most 300 characters and that you have defined a station for all your shifts.")
+            NotificationCenter.default.post(name: .shouldRefreshTable, object: nil)
+            Alert.show(title: "Review your submissions", message: "Some of your records have been changed to darft state.\nPlease make sure all comment fields have at most 300 characters and that you have selected a station for all shifts before submitting.")
         }
     }
     

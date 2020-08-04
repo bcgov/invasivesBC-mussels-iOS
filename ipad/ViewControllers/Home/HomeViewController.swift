@@ -57,6 +57,7 @@ class HomeViewController: BaseViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         initialize()
+        SyncService.shared.syncIfPossible()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -176,9 +177,15 @@ class HomeViewController: BaseViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(self.tableButtonClicked(notification:)), name: .TableButtonClicked, object: nil)
         NotificationCenter.default.removeObserver(self, name: .syncExecuted, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.syncExecuted(notification:)), name: .syncExecuted, object: nil)
+        NotificationCenter.default.removeObserver(self, name: .shouldRefreshTable, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.shouldRefreshTable(notification:)), name: .shouldRefreshTable, object: nil)
     }
     
     @objc func syncExecuted(notification: Notification) {
+        self.initialize()
+    }
+    
+    @objc func shouldRefreshTable(notification: Notification) {
         self.initialize()
     }
     
