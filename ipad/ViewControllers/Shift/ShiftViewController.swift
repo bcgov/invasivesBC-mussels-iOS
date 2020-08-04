@@ -192,18 +192,27 @@ class ShiftViewController: BaseViewController {
             message = "\(message)\n\(counter)- Missing Shift Start time."
             counter += 1
         }
+        
         if model.endTime == "" {
             message = "\(message)\n\(counter)- Missing Shift End time."
             counter += 1
         }
+        
         if model.inspections.count > 0 && model.boatsInspected == false {
             message = "\(message)\n\(counter)- You indicated that no boats were inspected, but inspections exist."
             counter += 1
         }
+        
         if model.inspections.count < 1 && model.boatsInspected == true {
             message = "\(message)\n\(counter)- You indicated that boats were inspected but inspections are missing."
             counter += 1
         }
+        
+        if model.station.isEmpty {
+            message = "\(message)\n\(counter)- Please choose a station."
+            counter += 1
+        }
+        
         return message
     }
     
