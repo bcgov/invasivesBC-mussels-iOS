@@ -16,7 +16,7 @@ class TextAreaInputCollectionViewCell: BaseInputCell<TextAreaInput>, UITextViewD
     // MARK: Delegate functions
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         let newValue = (textView.text as NSString).replacingCharacters(in: range, with: text)
-        return newValue.count <= 500
+        return newValue.count <= 300
     }
     
     func textViewDidChange(_ textView: UITextView) {
