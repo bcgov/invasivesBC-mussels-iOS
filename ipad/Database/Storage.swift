@@ -15,6 +15,11 @@ class Storage {
     private init() {}
     
     public func itemsToSync() -> [ShiftModel] {
+        checkForInvalidSubmissions()
+        return getSyncableItems()
+    }
+    
+    private func getSyncableItems() -> [ShiftModel] {
         do {
             let realm = try Realm()
             let objs = realm.objects(ShiftModel.self).filter("shouldSync == %@ AND userId == %@", true, AuthenticationService.getUserID()).map { $0 }
@@ -23,6 +28,37 @@ class Storage {
             print("** REALM ERROR")
             print(error)
             return []
+        }
+    }
+    
+    private func checkForInvalidSubmissions() {
+        let shifts = Storage.shared.getSyncableItems()
+        var invalidShifts: [ShiftModel] = []
+        for shift in shifts {
+            if shift.shitEndComments.count > 300 || shift.shitStartComments.count > 300 {
+                invalidShifts.append(shift)
+                continue
+            }
+            if shift.station.isEmpty {
+                invalidShifts.append(shift)
+                continue
+            }
+            for inspection in shift.inspections where inspection.generalComments.count > 300 {
+                invalidShifts.append(shift)
+                continue
+            }
+        }
+        
+        for shift in invalidShifts {
+            shift.set(shouldSync: false)
+            for inspection in shift.inspections {
+                inspection.set(shouldSync: false)
+            }
+        }
+        
+        if !invalidShifts.isEmpty {
+            NotificationCenter.default.post(name: .shouldRefreshTable, object: nil)
+            Alert.show(title: "Review your submissions", message: "Some of your records have been changed to darft state.\nPlease make sure all comment fields have at most 300 characters and that you have selected a station for all shifts before submitting.")
         }
     }
     

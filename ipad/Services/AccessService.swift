@@ -57,6 +57,18 @@ class AccessService {
     }
     
     private func setAccess() {
+        // Reachability
+        do {
+            let reacahbility = try Reachability()
+            if (reacahbility.connection == .unavailable) {
+                self.hasAppAccess = Settings.shared.userHasAppAccess()
+                return
+            }
+        } catch  let error as NSError {
+            print("** Reachability ERROR")
+            print(error)
+        }
+        
         APIRequest.checkAccess { (hasAccess) in
             self.hasAppAccess = hasAccess
             Settings.shared.setUserHasAppAccess(hasAccess: hasAccess)
