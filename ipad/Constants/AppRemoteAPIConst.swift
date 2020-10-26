@@ -19,9 +19,9 @@ let PROD_URL: String = "https://api-invasivesbc.pathfinder.gov.bc.ca/api"
 /**
   * KeyCloak URL
  */
-let KC_DEV_URL: String = "https://sso-dev.pathfinder.gov.bc.ca"
-let KC_TEST_URL: String = "https://sso-test.pathfinder.gov.bc.ca"
-let KC_PROD_URL: String = "https://sso.pathfinder.gov.bc.ca"
+let KC_DEV_URL: String = "https://dev.oidc.gov.bc.ca"
+let KC_TEST_URL: String = "https://test.oidc.gov.bc.ca"
+let KC_PROD_URL: String = "https://oidc.gov.bc.ca"
 
 enum RemoteEnv: String {
     case local, dev, test, prod
