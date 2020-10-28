@@ -79,7 +79,7 @@ steps:
     forceRepoUpdate: false
 - task: Xcode@5
   displayName: Build
-  timeoutInMinutes: 20
+  timeoutInMinutes: 45
   inputs:
     actions: 'archive' # build, clean, test, analyze, and archive
     scheme: $(SchemaName)
