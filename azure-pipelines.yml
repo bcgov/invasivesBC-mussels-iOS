@@ -67,7 +67,7 @@ steps:
   inputs:
     script: |
         ./scripts/az-set-build-no.sh $(SchemaName) # SchemaName matches the target.
-- task: CmdLine@3
+- task: CmdLine@2
   displayName: Update CocaPods
   timeoutInMinutes: 3
   inputs:
