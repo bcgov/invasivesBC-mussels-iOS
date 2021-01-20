@@ -47,9 +47,8 @@ class DropdownHelper {
     }
     
     public func dropdown(from items: [String], sort: Bool) -> [DropdownModel] {
-        let sort = true;
         var options: [DropdownModel] = []
-        var set = Array(Set(items))
+        var set = Array(Set(items)).sorted()
         if (sort) {
             let CAN = set.filter({$0.contains("CAN")}).sorted()
             let USA = set.filter({$0.contains("USA")}).sorted()
