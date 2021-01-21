@@ -161,6 +161,15 @@ class HighRiskFormHelper {
 //        sectionItems.append(spacer5)
         /// ---------------------------
         
+        let dreissenidFoundPrevious = SwitchInput(
+            key: "highRisk-dreissenidFoundPrevious",
+            header: HighRiskFormFieldHeaders.InspectionOutcomes.dreisennidFoundPrevious,
+            editable: editable ?? true,
+            value: object?.dreissenidFoundPrevious ?? false,
+            width: .Full
+        )
+        sectionItems.append(dreissenidFoundPrevious)
+        
         let otherInspectionFindings = DropdownInput(
             key: "highRisk-otherInspectionFindings",
             header: HighRiskFormFieldHeaders.InspectionOutcomes.otherInspectionFindings,
