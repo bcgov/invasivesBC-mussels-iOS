@@ -11,7 +11,7 @@ import Realm
 import RealmSwift
 
 class JourneyModel: Object {
-    @objc dynamic var numberOfDaysOut : Int = 0
+    @objc dynamic var numberOfDaysOut : String = "0-10 days"
     @objc dynamic var shouldSync: Bool = false
     @objc dynamic var remoteId: Int = -1
     @objc dynamic var localId: String = {
@@ -66,7 +66,7 @@ class PreviousWaterbodyModel: JourneyModel, BaseRealmObject {
         }
     }
     
-    func setNumberOfDays(days: Int) {
+    func setNumberOfDays(days: String) {
         do {
             let realm = try Realm()
             try realm.write {

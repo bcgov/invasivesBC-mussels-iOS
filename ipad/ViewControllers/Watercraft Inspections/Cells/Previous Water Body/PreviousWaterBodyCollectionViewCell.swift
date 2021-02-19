@@ -10,6 +10,7 @@ import UIKit
 
 class PreviousWaterBodyCollectionViewCell: BaseJourneyCollectionViewCell, Theme {
     
+    // Todo update this 
     @IBOutlet weak var deleteButton: UIButton!
     @IBOutlet weak var cellContainer: UIView!
     @IBOutlet weak var fieldHeader: UILabel!

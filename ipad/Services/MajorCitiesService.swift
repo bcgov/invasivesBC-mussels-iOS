@@ -1,47 +1,47 @@
 //
-//  WaterbodiesService.swift
+//  MajorCitiesService.swift
 //  ipad
 //
-//  Created by Amir Shayegh on 2020-05-19.
-//  Copyright © 2020 Amir Shayegh. All rights reserved.
+//  Created by Warren, Sam on 2021-02-08.
+//  Copyright © 2021 Amir Shayegh. All rights reserved.
 //
 
 import Foundation
 import SwiftyJSON
 
-class WaterbodiesService {
-    public static var shared = WaterbodiesService()
-    private var table: [WaterBodyTableModel] = []
-    private var fileName: String = "waterbodies"
+class MajorCitiesService {
+    public static var shared = MajorCitiesService()
+    private var table: [MajorCitiesTableModel] = []
+    private var fileName: String = "majorcities"
     private init() {
         loadTable()
     }
     
-    public func fetchAndStoreWaterBodies(completion: @escaping (_ success: Bool) -> Void, status: @escaping(_ newStatus: String) -> Void) {
-        fetchWaterBodies { (response) in
+    public func fetchAndStoreMajorCities(completion: @escaping (_ success: Bool) -> Void, status: @escaping(_ newStatus: String) -> Void) {
+        fetchMajorCities { (response) in
             guard let data = response else {
                 return completion(false)
             }
             do {
-                try data.write(to: self.waterbodiesDirectoryPath())
+                try data.write(to: self.majorCitiesDirectoryPath())
                 self.loadTable()
                 return completion(true)
             } catch {
                 print(error)
-                print("Write Error WaterbodiesService -> fetchAndStoreWaterBodies()")
+                print("Write Error MajorCitiesService -> fetchAndStoreMajorCities()")
                 return completion(false)
             }
         }
     }
     
-    public func get() -> [WaterBodyTableModel] {
+    public func get() -> [MajorCitiesTableModel] {
         return table
     }
     
     // MARK: Read
     private func loadTable() {
-        guard waterbodiesExist() else {return}
-        guard let data = getData(at: waterbodiesDirectoryPath()) else {return}
+        guard majorCitiesExist() else {return}
+        guard let data = getData(at: majorCitiesDirectoryPath()) else {return}
         guard let dataArray = data.array else {return}
         table.removeAll()
         for entry in dataArray {
@@ -52,23 +52,19 @@ class WaterbodiesService {
         }
     }
     
-    private func process(dictionary: [String: Any]) -> WaterBodyTableModel? {
-        let model = WaterBodyTableModel()
-        model.name = (dictionary["name"] as? JSON)?.string ?? ""
-        model.water_body_id = (dictionary["water_body_id"] as? JSON)?.int ?? 0
-        model.latitude = (dictionary["latitude"] as? JSON)?.double ?? 0
-        model.longitude = (dictionary["longitude"] as? JSON)?.double ?? 0
-        model.country = (dictionary["country"] as? JSON)?.string ?? ""
-        model.closest = (dictionary["closest"] as? JSON)?.string ?? ""
+    private func process(dictionary: [String: Any]) -> MajorCitiesTableModel? {
+        let model = MajorCitiesTableModel()
+        model.city_name = (dictionary["city_name"] as? JSON)?.string ?? ""
+        model.city_latitude = (dictionary["city_latitude"] as? JSON)?.double ?? 0
+        model.city_longitude = (dictionary["city_longitude"] as? JSON)?.double ?? 0
+        model.country_code = (dictionary["country_code"] as? JSON)?.string ?? ""
+        model.closest_water_body = (dictionary["closest_water_body"] as? JSON)?.string ?? ""
         model.province = (dictionary["province"] as? JSON)?.string ?? ""
-        if model.water_body_id > 0 {
-            return model
-        } else {
-            return nil
-        }
+        model.distance = (dictionary["distance"] as? JSON)?.double ?? 0
+        return model
     }
     
-    private func waterbodiesExist() -> Bool {
+    private func majorCitiesExist() -> Bool {
         let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
         let url = NSURL(fileURLWithPath: path)
         if let pathComponent = url.appendingPathComponent(fileName) {
@@ -90,20 +86,20 @@ class WaterbodiesService {
             let json = try JSON(data: data)
             return json
         } catch {
-            print("Error in WaterbodiesService -> getData()")
+            print("Error in MajorCitiesService -> getData()")
             return nil
         }
     }
     
     // MARK: API
-    private func fetchWaterBodies(then: @escaping(Data?)->Void) {
-        guard let url = URL(string: APIURL.waterBody) else {return then(nil)}
+    private func fetchMajorCities(then: @escaping(Data?)->Void) {
+        guard let url = URL(string: APIURL.majorCities) else {return then(nil)}
         APIRequest.request(type: .Get, endpoint: url) { (_response) in
             guard let response = _response else {return then(nil)}
             let data = response["data"]
             do {
                 let rawdata = try data.rawData()
-                debugPrint("*** RESPONSE: ***", rawdata)
+                debugPrint("*** MAJOR CITIES RESPONSE: ***", rawdata)
                 return then(rawdata)
             } catch {
                 return then(nil)
@@ -112,7 +108,7 @@ class WaterbodiesService {
     }
     
     // MARK: Documents Directory
-    private func waterbodiesDirectoryPath() -> URL {
+    private func majorCitiesDirectoryPath() -> URL {
         let documentsDirectory = documentDirectoryPath()
         let dirPath = documentsDirectory.appendingPathComponent(fileName)
         return dirPath

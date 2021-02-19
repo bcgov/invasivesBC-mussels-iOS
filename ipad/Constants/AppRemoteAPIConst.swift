@@ -11,10 +11,10 @@ import Foundation
 /**
   * Remote/Local URL
  */
-let LOCAL_URL: String = "http://localhost/api"
-let DEV_URL: String = "https://api-dev-invasivesbc.pathfinder.gov.bc.ca/api"
-let TEST_URL: String = "https://api-test-invasivesbc.pathfinder.gov.bc.ca/api"
-let PROD_URL: String = "https://api-invasivesbc.pathfinder.gov.bc.ca/api"
+let LOCAL_URL: String = "https://api-dev-invasivesbc.apps.silver.devops.gov.bc.ca/api"
+let DEV_URL: String = "https://api-dev-invasivesbc.apps.silver.devops.gov.bc.ca/api"
+let TEST_URL: String = "https://api-dev-invasivesbc.apps.silver.devops.gov.bc.ca/api"
+let PROD_URL: String = "https://api-dev-invasivesbc.apps.silver.devops.gov.bc.ca/api"
 
 /**
   * KeyCloak URL
@@ -29,13 +29,13 @@ enum RemoteEnv: String {
     var remoteURL: String {
         switch self {
         case .local:
-            return LOCAL_URL
+            return DEV_URL
         case .dev:
             return DEV_URL
         case .test:
-            return TEST_URL
+            return DEV_URL
         case .prod:
-            return PROD_URL
+            return DEV_URL
         }
     }
     
@@ -44,15 +44,15 @@ enum RemoteEnv: String {
         case .local,.dev:
             return KC_DEV_URL
         case .test:
-            return KC_TEST_URL
+            return KC_DEV_URL
         case .prod:
-            return KC_PROD_URL
+            return KC_DEV_URL
         }
     }
 }
 
 class RemoteURLManager {
-    var env: RemoteEnv = .prod
+    var env: RemoteEnv = .dev
     static var `default` = {
         // Here We Can use Target Flag to customize
         // Switch Env 
@@ -84,6 +84,7 @@ enum EndPoints: String {
     case accessRequest = "/request-access"
     case user = "/account/me"
     case uploads = "/uploads/report-issue"
+    case majorCities = "/mussels/major-cities"
 }
 
 /**
@@ -101,6 +102,10 @@ struct APIURL {
     
     static let waterBody: String = {
         return Self.baseURL + EndPoints.waterBody.rawValue
+    }()
+    
+    static let majorCities: String = {
+        return Self.baseURL + EndPoints.majorCities.rawValue
     }()
     
     static let codes: String = {
