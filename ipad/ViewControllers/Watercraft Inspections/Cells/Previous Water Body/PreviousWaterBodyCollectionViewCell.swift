@@ -45,7 +45,7 @@ class PreviousWaterBodyCollectionViewCell: BaseJourneyCollectionViewCell, Theme 
     }
     
     @IBAction func daysOutFieldChanged(_ sender: UITextField) {
-        guard let model = self.model, let input = sender.text, let days = Int(input) else {return}
+        guard let model = self.model, let input = sender.text, let days = Optional(input) else {return}
         model.setNumberOfDays(days: days)
     }
     

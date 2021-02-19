@@ -12,7 +12,7 @@ import Foundation
   * Remote/Local URL
  */
 let LOCAL_URL: String = "https://api-dev-invasivesbc.apps.silver.devops.gov.bc.ca/api"
-let DEV_URL: String = "https://api-dev-invasivesbc.apps.silver.devops.gov.bc.ca/api"
+let DEV_URL: String = "http://localhost:7070/api"
 let TEST_URL: String = "https://api-dev-invasivesbc.apps.silver.devops.gov.bc.ca/api"
 let PROD_URL: String = "https://api-dev-invasivesbc.apps.silver.devops.gov.bc.ca/api"
 
