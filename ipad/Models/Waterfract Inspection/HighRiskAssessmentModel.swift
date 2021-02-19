@@ -40,7 +40,7 @@ class HighRiskAssessmentModel: Object, BaseRealmObject {
     
     @objc dynamic var standingWaterPresent: Bool = false
     @objc dynamic var standingWaterLocation: String = ""
-    
+        
     @objc dynamic var adultDreissenidMusselsFound: Bool = false
     @objc dynamic var adultDreissenidMusselsLocation: String = ""
     
@@ -49,9 +49,13 @@ class HighRiskAssessmentModel: Object, BaseRealmObject {
     
     @objc dynamic var decontaminationOrderIssued: Bool = false
     @objc dynamic var decontaminationOrderNumber: Int = 0
+    @objc dynamic var decontaminationOrderReason: String = ""
     
     @objc dynamic var sealIssued: Bool = false
     @objc dynamic var sealNumber: Int = 0
+    
+    @objc dynamic var dreissenidFoundPrevious: Bool = false;
+
     // General Comments
     @objc dynamic var generalComments: String = ""
     
@@ -82,12 +86,14 @@ class HighRiskAssessmentModel: Object, BaseRealmObject {
             "quarantinePeriodIssued": quarantinePeriodIssued,
             "standingWaterPresent": standingWaterPresent,
             "adultDreissenidaeMusselFound": adultDreissenidMusselsFound,
+            "dreissenidFoundPrevious": dreissenidFoundPrevious,
             "decontaminationPerformed": decontaminationPerformed,
             "decontaminationOrderIssued": decontaminationOrderIssued,
             "sealIssued": sealIssued,
             "watercraftRegistration": watercraftRegistration.count > 1 ? watercraftRegistration : "None",
             "decontaminationReference": decontaminationReference.count > 1 ? decontaminationReference : "None",
             "decontaminationOrderNumber": decontaminationOrderNumber > 0 ? decontaminationOrderNumber : -1,
+            "decontaminationOrderReason": decontaminationOrderReason.count > 1 ? decontaminationOrderReason : "None",
             "sealNumber": sealNumber > 0 ? sealNumber : -1,
             "otherInspectionFindings": otherInspectionFindings.count > 1 ? otherInspectionFindings : "None",
             "generalComments": generalComments.count > 1 ? generalComments : "None",

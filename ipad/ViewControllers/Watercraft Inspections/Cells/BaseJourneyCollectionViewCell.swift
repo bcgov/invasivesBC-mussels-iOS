@@ -50,7 +50,7 @@ class BaseJourneyCollectionViewCell: UICollectionViewCell {
             // Change dropdown items of Cities for this group
             for item in inputgroupView.inputItems where item.key.contains(nearestCityKey) {
                 guard let dropdownItem = item as? DropdownInput else { return }
-                dropdownItem.dropdownItems = DropdownHelper.shared.dropdown(from: Storage.shared.getCities(nearWaterBody: changedValue))
+                dropdownItem.dropdownItems = DropdownHelper.shared.dropdown(from: Storage.shared.getCities(nearWaterBody: changedValue), sort: false)
                 if dropdownItem.dropdownItems.count == 1, let firstItem = dropdownItem.dropdownItems.first {
                     dropdownItem.setValue(value: firstItem.display)
                     NotificationCenter.default.post(name: .InputFieldShouldUpdate, object: dropdownItem)
@@ -68,7 +68,7 @@ class BaseJourneyCollectionViewCell: UICollectionViewCell {
             // Change the dropdown items of Provinces in this group
             for item in inputgroupView.inputItems where item.key.contains(provinceKey) {
                 guard let dropdownItem = item as? DropdownInput else { return }
-                dropdownItem.dropdownItems = DropdownHelper.shared.dropdown(from: Storage.shared.getProvinces(withWaterBody: changedValue))
+                dropdownItem.dropdownItems = DropdownHelper.shared.dropdown(from: Storage.shared.getProvinces(withWaterBody: changedValue), sort: true)
                 if dropdownItem.dropdownItems.count == 1, let firstItem = dropdownItem.dropdownItems.first {
                     dropdownItem.setValue(value: firstItem.display)
                     NotificationCenter.default.post(name: .InputFieldShouldUpdate, object: dropdownItem)
@@ -97,7 +97,7 @@ class BaseJourneyCollectionViewCell: UICollectionViewCell {
             // Change the dropdown items of Water bodies in this group
             for item in inputgroupView.inputItems where item.key.contains(waterbodyKey) {
                 guard let dropdownItem = item as? DropdownInput else { return }
-                dropdownItem.dropdownItems = DropdownHelper.shared.dropdown(from: Storage.shared.getWaterbodies(nearCity: changedValue))
+                dropdownItem.dropdownItems = DropdownHelper.shared.dropdown(from: Storage.shared.getWaterbodies(nearCity: changedValue), sort: false)
                 if dropdownItem.dropdownItems.count == 1, let firstItem = dropdownItem.dropdownItems.first {
                     dropdownItem.setValue(value: firstItem.display)
                     NotificationCenter.default.post(name: .InputFieldShouldUpdate, object: dropdownItem)
@@ -115,7 +115,7 @@ class BaseJourneyCollectionViewCell: UICollectionViewCell {
             // Change the dropdown items of Provinces in this group
             for item in inputgroupView.inputItems where item.key.contains(provinceKey) {
                 guard let dropdownItem = item as? DropdownInput else { return }
-                dropdownItem.dropdownItems = DropdownHelper.shared.dropdown(from: Storage.shared.getProvinces(withCity: changedValue))
+                dropdownItem.dropdownItems = DropdownHelper.shared.dropdown(from: Storage.shared.getProvinces(withCity: changedValue), sort: true)
                 if dropdownItem.dropdownItems.count == 1, let firstItem = dropdownItem.dropdownItems.first {
                     dropdownItem.setValue(value: firstItem.display)
                     NotificationCenter.default.post(name: .InputFieldShouldUpdate, object: dropdownItem)
@@ -144,7 +144,7 @@ class BaseJourneyCollectionViewCell: UICollectionViewCell {
             // Change dropdown of waterbodies for this group
             for item in inputgroupView.inputItems where item.key.contains(waterbodyKey) {
                 guard let dropdownItem = item as? DropdownInput else { return }
-                dropdownItem.dropdownItems = DropdownHelper.shared.dropdown(from: Storage.shared.getWaterbodies(inProvince: changedValue))
+                dropdownItem.dropdownItems = DropdownHelper.shared.dropdown(from: Storage.shared.getWaterbodies(inProvince: changedValue), sort: false)
                 if dropdownItem.dropdownItems.count == 1, let firstItem = dropdownItem.dropdownItems.first {
                     dropdownItem.setValue(value: firstItem.display)
                     NotificationCenter.default.post(name: .InputFieldShouldUpdate, object: dropdownItem)
@@ -162,7 +162,7 @@ class BaseJourneyCollectionViewCell: UICollectionViewCell {
             // Change dropdown items of Cities for this group
             for item in inputgroupView.inputItems where item.key.contains(nearestCityKey) {
                 guard let dropdownItem = item as? DropdownInput else { return }
-                dropdownItem.dropdownItems = DropdownHelper.shared.dropdown(from: Storage.shared.getCities(inProvince: changedValue))
+                dropdownItem.dropdownItems = DropdownHelper.shared.dropdown(from: Storage.shared.getCities(inProvince: changedValue), sort: false)
                 if dropdownItem.dropdownItems.count == 1, let firstItem = dropdownItem.dropdownItems.first {
                     dropdownItem.setValue(value: firstItem.display)
                     NotificationCenter.default.post(name: .InputFieldShouldUpdate, object: dropdownItem)
