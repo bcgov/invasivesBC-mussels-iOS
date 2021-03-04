@@ -11,10 +11,10 @@ import Foundation
 /**
   * Remote/Local URL
  */
-let LOCAL_URL: String = "https://api-dev-invasivesbc.apps.silver.devops.gov.bc.ca/api"
-let DEV_URL: String = "http://localhost:7070/api"
-let TEST_URL: String = "https://api-dev-invasivesbc.apps.silver.devops.gov.bc.ca/api"
-let PROD_URL: String = "https://api-dev-invasivesbc.apps.silver.devops.gov.bc.ca/api"
+let LOCAL_URL: String = "http://localhost:7070/api"
+let DEV_URL: String = "https://api-dev-invasivesbc.apps.silver.devops.gov.bc.ca/api"
+let TEST_URL: String = "https://api-test-invasivesbc.apps.silver.devops.gov.bc.ca/api"
+let PROD_URL: String = "https://api-invasivesbc.pathfinder.gov.bc.ca/api"
 
 /**
   * KeyCloak URL
@@ -29,13 +29,13 @@ enum RemoteEnv: String {
     var remoteURL: String {
         switch self {
         case .local:
-            return DEV_URL
+            return LOCAL_URL
         case .dev:
             return DEV_URL
         case .test:
-            return DEV_URL
+            return TEST_URL
         case .prod:
-            return DEV_URL
+            return PROD_URL
         }
     }
     
@@ -44,9 +44,9 @@ enum RemoteEnv: String {
         case .local,.dev:
             return KC_DEV_URL
         case .test:
-            return KC_DEV_URL
+            return KC_TEST_URL
         case .prod:
-            return KC_DEV_URL
+            return KC_PROD_URL
         }
     }
 }
