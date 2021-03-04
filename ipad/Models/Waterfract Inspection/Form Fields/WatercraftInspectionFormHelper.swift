@@ -119,21 +119,6 @@ class WatercraftInspectionFormHelper {
         decontaminationReference.dependency.append(InputDependency(to: decontaminationPerformed, equalTo: true))
         decontaminationReference.dependency.append(InputDependency(to: isPassportHolder, equalTo: true))
         items.append(decontaminationReference)
-        
-        // Add dropdown for decontamination order reason
-        let decontaminationOrderReason = DropdownInput(
-            key: "highrisk-decontaminationOrderReason",
-            header: HighRiskFormFieldHeaders.InspectionOutcomes.decontaminationOrderReason,
-            editable: editable ?? true,
-            value: object?.decontaminationOrderReason ?? "",
-            width: .Third,
-            dropdownItems: DropdownHelper.shared.getDropdown(for: .decontaminationOrderReasons),
-            codes: DropdownHelper.shared.getDropDownCodes(for: .decontaminationOrderReasons)
-        )
-        decontaminationOrderReason.dependency.append(InputDependency(to: decontaminationPerformed, equalTo: true))
-        decontaminationOrderReason.dependency.append(InputDependency(to: isPassportHolder, equalTo: true))
-        items.append(decontaminationOrderReason)
-        
         return items
     }
     

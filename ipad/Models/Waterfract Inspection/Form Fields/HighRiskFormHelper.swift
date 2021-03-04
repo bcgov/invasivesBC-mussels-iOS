@@ -131,13 +131,21 @@ class HighRiskFormHelper {
             value: object?.decontaminationOrderNumber ?? 0,
             width: .Half
         )
+        
+        let decontaminationOrderReason = DropdownInput(
+            key: "highRisk-decontaminationOrderReason",
+            header: HighRiskFormFieldHeaders.InspectionOutcomes.decontaminationOrderReason,
+            editable: editable ?? true,
+            value: object?.decontaminationOrderReason ?? "",
+            width: .Half,
+            dropdownItems: DropdownHelper.shared.getDropdown(for: .decontaminationOrderReasons)
+        )
         decontaminationOrderNumber.dependency.append(InputDependency(to: decontaminationOrderIssued, equalTo: true))
         sectionItems.append(decontaminationOrderNumber)
-        let spacer4 = InputSpacer()
-        spacer4.dependency.append(InputDependency(to: decontaminationOrderIssued, equalTo: true))
-        sectionItems.append(spacer4)
-        /// ---------------------------
         
+        decontaminationOrderReason.dependency.append(InputDependency(to: decontaminationOrderIssued, equalTo: true))
+        sectionItems.append(decontaminationOrderReason)
+                
         let sealIssued = SwitchInput(
             key: "highRisk-sealIssued",
             header: HighRiskFormFieldHeaders.InspectionOutcomes.sealIssued,

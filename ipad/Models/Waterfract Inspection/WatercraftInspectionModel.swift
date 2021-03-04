@@ -34,7 +34,6 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
     @objc dynamic var launchedOutsideBC : Bool = false
     @objc dynamic var k9Inspection: Bool = false
     @objc dynamic var decontaminationPerformed: Bool = false
-    @objc dynamic var decontaminationOrderReason: String = ""
     @objc dynamic var marineSpeciesFound: Bool = false
     @objc dynamic var aquaticPlantsFound: Bool = false
     // Full Inspection
@@ -265,7 +264,6 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
             "launchedOutsideBC": launchedOutsideBC,
             "commerciallyHauled": commerciallyHauled,
             "decontaminationPerformed": _decontaminationPerformed,
-            "decontaminationOrderReason": decontaminationOrderReason,
             "highRiskArea": highRiskArea,
             "highRiskAIS": highriskAIS,
             "previousInspectionDays": previousInspectionDays,
