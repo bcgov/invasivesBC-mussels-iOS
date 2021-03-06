@@ -32,7 +32,7 @@ class ShiftModel: Object, BaseRealmObject {
     
     @objc dynamic var startTime: String = ""
     @objc dynamic var endTime: String = ""
-    @objc dynamic var boatsInspected: Bool = false
+    @objc dynamic var boatsInspected: Bool = true
     @objc dynamic var motorizedBlowBys: Int = 0
     @objc dynamic var nonMotorizedBlowBys: Int = 0
     @objc dynamic var k9OnShif: Bool = false

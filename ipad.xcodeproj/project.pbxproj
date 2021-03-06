@@ -133,6 +133,8 @@
 		29CEC92323676425003B21B9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 29CEC92223676425003B21B9 /* Assets.xcassets */; };
 		29CEC92623676425003B21B9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 29CEC92423676425003B21B9 /* LaunchScreen.storyboard */; };
 		29CEC93C23676691003B21B9 /* KeycloakConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29CEC93B23676691003B21B9 /* KeycloakConstants.swift */; };
+		29D5866925D20E6F00FEB37E /* MajorCitiesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D5866825D20E6F00FEB37E /* MajorCitiesService.swift */; };
+		29D5866D25D20F6500FEB37E /* MajorCitiesTableModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D5866C25D20F6500FEB37E /* MajorCitiesTableModel.swift */; };
 		29DB01092370EFD60046E605 /* TextAreaInputCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29DB01072370EFD60046E605 /* TextAreaInputCollectionViewCell.swift */; };
 		29DB010A2370EFD60046E605 /* TextAreaInputCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29DB01082370EFD60046E605 /* TextAreaInputCollectionViewCell.xib */; };
 		29DB0116237206D30046E605 /* HeaderCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29DB0114237206D30046E605 /* HeaderCollectionViewCell.swift */; };
@@ -343,6 +345,8 @@
 		29CEC93023676425003B21B9 /* ipadTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ipadTests.swift; sourceTree = "<group>"; };
 		29CEC93223676425003B21B9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		29CEC93B23676691003B21B9 /* KeycloakConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeycloakConstants.swift; sourceTree = "<group>"; };
+		29D5866825D20E6F00FEB37E /* MajorCitiesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MajorCitiesService.swift; sourceTree = "<group>"; };
+		29D5866C25D20F6500FEB37E /* MajorCitiesTableModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MajorCitiesTableModel.swift; sourceTree = "<group>"; };
 		29DB01072370EFD60046E605 /* TextAreaInputCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextAreaInputCollectionViewCell.swift; sourceTree = "<group>"; };
 		29DB01082370EFD60046E605 /* TextAreaInputCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextAreaInputCollectionViewCell.xib; sourceTree = "<group>"; };
 		29DB0114237206D30046E605 /* HeaderCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -515,6 +519,7 @@
 				298BF7C7239590730072AA28 /* WaterBodyTableModel.swift */,
 				29FEA09F23FF12C200F490DB /* UserRoleModel.swift */,
 				2944BCD7243392A500826F48 /* Other */,
+				29D5866C25D20F6500FEB37E /* MajorCitiesTableModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -702,6 +707,7 @@
 				2933DD66238ED4470068E9DF /* ShiftService.swift */,
 				2933DD5D238DC2150068E9DF /* CodeTableService.swift */,
 				291F918124742FD800974D33 /* WaterbodiesService.swift */,
+				29D5866825D20E6F00FEB37E /* MajorCitiesService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -1077,8 +1083,8 @@
 		29CEC91823676424003B21B9 /* ipad */ = {
 			isa = PBXGroup;
 			children = (
-				2907E4B22368CE2700946B3F /* Models */,
 				29BAC50A23677EB200A620F4 /* ViewControllers */,
+				2907E4B22368CE2700946B3F /* Models */,
 				29A9743923700408006C668F /* Database */,
 				2944BCF52437C0EA00826F48 /* Views */,
 				2944BCF42437B93B00826F48 /* Services */,
@@ -1601,6 +1607,7 @@
 				29E4BBE82372120F0079475F /* DividerCollectionViewCell.swift in Sources */,
 				5C82D3E82374BCDB00B065BA /* GenericConst.swift in Sources */,
 				29E4BBF2237218610079475F /* DestinationWaterBodyCollectionViewCell.swift in Sources */,
+				29D5866D25D20F6500FEB37E /* MajorCitiesTableModel.swift in Sources */,
 				294D8F692385D1F10094090D /* TestTableViewObject.swift in Sources */,
 				299BF01023F46D45001732CD /* APIRequest.swift in Sources */,
 				298BF7C8239590730072AA28 /* WaterBodyTableModel.swift in Sources */,
@@ -1628,6 +1635,7 @@
 				295051092374D764000FBD6E /* DoubleInputCollectionViewCell.swift in Sources */,
 				5C82D3DD2374B9D700B065BA /* AppRemoteAPIConst.swift in Sources */,
 				29F29FA1236B8670004F12E7 /* DropdownCollectionViewCell.swift in Sources */,
+				29D5866925D20E6F00FEB37E /* MajorCitiesService.swift in Sources */,
 				29514BD92368ADB100DC89C4 /* OptionType.swift in Sources */,
 				290DA9E12404622700438699 /* AwaitingAccessResponse.swift in Sources */,
 				29BAC5122367A21300A620F4 /* StringConstants.swift in Sources */,
@@ -1930,7 +1938,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.5;
+				MARKETING_VERSION = 1.6;
 				PRODUCT_BUNDLE_IDENTIFIER = ca.bc.gov.InvasivesBC;
 				PRODUCT_NAME = Inspect;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1957,7 +1965,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.5;
+				MARKETING_VERSION = 1.6;
 				PRODUCT_BUNDLE_IDENTIFIER = ca.bc.gov.InvasivesBC;
 				PRODUCT_NAME = Inspect;
 				PROVISIONING_PROFILE_SPECIFIER = "";

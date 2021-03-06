@@ -22,6 +22,8 @@ public enum CodeTableType {
     case cities
     case provinces
     case adultMusselsLocation
+    case decontaminationOrderReasons
+    case daysOutOfWater
     case previousAISKnowledgeSource
     case previousInspectionSource
     case countryProvince
@@ -95,8 +97,9 @@ class CodeTableService {
     
     public func fetchAndStoreCodeTables(completion: @escaping (_ success: Bool) -> Void, status: @escaping(_ newStatus: String) -> Void) {
         status("Fetching Code Tables")
-        APIRequest.fetchCodeTables { (response) in
+        let req = APIRequest.fetchCodeTables { (response) in
             // Check for failure
+            debugPrint("** RESPONSE!!! ", response);
             guard let result = response else {
                 return completion(false)
             }
@@ -117,6 +120,7 @@ class CodeTableService {
                 }
             }
         }
+        debugPrint("** REQUEST!!! ", req);
     }
     
     private func processCountryProvinceTable(input: [[String : Any]]) -> CodeTableModel {

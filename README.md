@@ -1,4 +1,5 @@
 # Inspect
+[![img](https://img.shields.io/badge/Lifecycle-Maturing-007EC6)](https://github.com/bcgov/repomountie/blob/master/doc/lifecycle-badges.md)
 
 This application is for the field-based recording of watercraft inspections for Zebra and Quagga Mussels in British Columbia, Canada.&nbsp;
 
@@ -90,6 +91,7 @@ These files have functions that return the fields for each section of the forms.
 - change the placement of the fields by changing the order in which the fields are creared or by changing the function (section) that the fields are included in.
 - change the type of field that's displayed by changing a single line of code.
 - change the width size of each field by changing the width value.
+
 
 This framework also allows you to change the look of all fields of a centain type, for example text fields, by changing a single xib file.&nbsp;
 

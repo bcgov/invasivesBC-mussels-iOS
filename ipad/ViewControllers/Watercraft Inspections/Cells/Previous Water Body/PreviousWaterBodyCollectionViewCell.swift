@@ -10,6 +10,7 @@ import UIKit
 
 class PreviousWaterBodyCollectionViewCell: BaseJourneyCollectionViewCell, Theme {
     
+    // Todo update this 
     @IBOutlet weak var deleteButton: UIButton!
     @IBOutlet weak var cellContainer: UIView!
     @IBOutlet weak var fieldHeader: UILabel!
@@ -44,7 +45,7 @@ class PreviousWaterBodyCollectionViewCell: BaseJourneyCollectionViewCell, Theme 
     }
     
     @IBAction func daysOutFieldChanged(_ sender: UITextField) {
-        guard let model = self.model, let input = sender.text, let days = Int(input) else {return}
+        guard let model = self.model, let input = sender.text, let days = Optional(input) else {return}
         model.setNumberOfDays(days: days)
     }
     

@@ -120,6 +120,20 @@ class WatercraftInspectionFormHelper {
         decontaminationReference.dependency.append(InputDependency(to: isPassportHolder, equalTo: true))
         items.append(decontaminationReference)
         
+        // Add dropdown for decontamination order reason
+        let decontaminationOrderReason = DropdownInput(
+            key: "highrisk-decontaminationOrderReason",
+            header: HighRiskFormFieldHeaders.InspectionOutcomes.decontaminationOrderReason,
+            editable: editable ?? true,
+            value: object?.decontaminationOrderReason ?? "",
+            width: .Third,
+            dropdownItems: DropdownHelper.shared.getDropdown(for: .decontaminationOrderReasons),
+            codes: DropdownHelper.shared.getDropDownCodes(for: .decontaminationOrderReasons)
+        )
+        decontaminationOrderReason.dependency.append(InputDependency(to: decontaminationPerformed, equalTo: true))
+        decontaminationOrderReason.dependency.append(InputDependency(to: isPassportHolder, equalTo: true))
+        items.append(decontaminationOrderReason)
+        
         return items
     }
     
@@ -380,12 +394,13 @@ class WatercraftInspectionFormHelper {
             dropdownItems: DropdownHelper.shared.getDropdown(for: .provinces)
         )
         
-        let numberOfDaysOut = IntegerInput(
+        let numberOfDaysOut = DropdownInput(
             key: "previousWaterBody-numberOfDaysOut-\(index)",
             header: "Number of days out of waterbody?",
             editable: isEditable ?? true,
-            value: item?["numberOfDaysOut"] as? Int,
-            width: .Forth
+            value: item?["numberOfDaysOut"] as? String,
+            width: .Forth,
+            dropdownItems: DropdownHelper.shared.getDropdown(for: .daysOutOfWater)
         )
         
         sectionItems.append(province)

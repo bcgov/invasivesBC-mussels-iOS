@@ -67,13 +67,19 @@ steps:
   inputs:
     script: |
         ./scripts/az-set-build-no.sh $(SchemaName) # SchemaName matches the target.
+- task: CmdLine@2
+  displayName: Update CocaPods
+  timeoutInMinutes: 3
+  inputs:
+    script: |
+        gem install cocoapods
 - task: CocoaPods@0
   timeoutInMinutes: 10
   inputs:
     forceRepoUpdate: false
 - task: Xcode@5
   displayName: Build
-  timeoutInMinutes: 20
+  timeoutInMinutes: 45
   inputs:
     actions: 'archive' # build, clean, test, analyze, and archive
     scheme: $(SchemaName)
