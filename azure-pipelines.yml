@@ -31,7 +31,7 @@ variables:
 - name: 'ProfileFileName'
   value: 'Invasive_Species.mobileprovision'
 - name: 'ProfileUUID'
-  value: '2102259a-ce94-4a64-a594-6df94ad87a63'
+  value: 'c47e48d4-da1f-4690-b069-81785adc2af1'
 - name: 'CertificateFileName'
   value: 'itunes-store.p12'
 - name: 'WorkspacePath'
