@@ -549,7 +549,7 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
             let cell = getPreviousWaterBodyCell(indexPath: indexPath)
             let itemsIndex: Int = indexPath.row - 2
             let previousWaterBody = model.previousWaterBodies[itemsIndex]
-            cell.setup(with: previousWaterBody, isEditable: self.isEditable, delegate: self, onDelete: { [weak self] in
+            cell.setup(with: previousWaterBody, isEditable: self.isEditable, input: model.getInputputFields(for: .JourneyDetails, editable: isEditable),  delegate: self, onDelete: { [weak self] in
                 guard let strongSelf = self else {return}
                 model.removePreviousWaterBody(at: itemsIndex)
                 strongSelf.collectionView.performBatchUpdates({
@@ -667,11 +667,10 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
     private func estimateJourneyDetailsCellHeight(for indexPath: IndexPath) -> CGSize {
         let width = self.collectionView.frame.width
         switch getJourneyDetailsCellType(for: indexPath) {
-            
         case .Header:
             return CGSize(width: width, height: 50)
         case .PreviousWaterBody:
-            let estimatedContentHeight = InputGroupView.estimateContentHeight(for: WatercraftInspectionFormHelper.watercraftInspectionPreviousWaterBodyInputs(index: 0))
+            let estimatedContentHeight = InputGroupView.estimateContentHeight(for: WatercraftInspectionFormHelper.getPreviousWaterBodyFields(index: 0))
             return CGSize(width: width, height: estimatedContentHeight + 20)
         case .DestinationWaterBody:
             let estimatedContentHeight = InputGroupView.estimateContentHeight(for: WatercraftInspectionFormHelper.watercraftInspectionDestinationWaterBodyInputs(index: 0))

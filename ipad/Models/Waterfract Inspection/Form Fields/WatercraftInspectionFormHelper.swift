@@ -349,49 +349,22 @@ class WatercraftInspectionFormHelper {
         return sectionItems
     }
     
-    public static func watercraftInspectionPreviousWaterBodyInputs(for object: WatercradftInspectionModel? = nil, index: Int, isEditable: Bool? = true) -> [InputItem] {
-        let item = object?.previousWaterBodies[index] ?? nil
+    public static func getPreviousWaterBodyFields(for object: WatercradftInspectionModel? = nil, index: Int, isEditable: Bool? = true) -> [InputItem] {
         var sectionItems: [InputItem] = []
-        let previousWaterBody = DropdownInput(
-            key: "previousWaterBody-waterbody-\(index)",
-            header: "Previous WaterBody",
-            editable: isEditable ?? true,
-            value: item?["waterbody"] as? String ?? "",
-            width: .Forth,
-            dropdownItems: DropdownHelper.shared.getDropdown(for: .waterBodies)
-        )
-        
-        let nearestCity = DropdownInput(
-            key: "previousWaterBody-nearestCity-\(index)",
-            header: "Nearest City",
-            editable: isEditable ?? true,
-            value: item?["nearestCity"] as? String ?? "",
-            width: .Forth,
-            dropdownItems: DropdownHelper.shared.getDropdown(for: .cities)
-        )
-        
-        let province = DropdownInput(
-            key: "previousWaterBody-province-\(index)",
-            header: "Province / State",
-            editable: isEditable ?? true,
-            value: item?["province"] as? String ?? "",
-            width: .Forth,
-            dropdownItems: DropdownHelper.shared.getDropdown(for: .provinces)
-        )
-        
-        let numberOfDaysOut = DropdownInput(
-            key: "previousWaterBody-numberOfDaysOut-\(index)",
-            header: "Number of days out of waterbody?",
-            editable: isEditable ?? true,
-            value: item?["numberOfDaysOut"] as? String,
-            width: .Forth,
-            dropdownItems: DropdownHelper.shared.getDropdown(for: .daysOutOfWater)
-        )
-        
-        sectionItems.append(province)
-        sectionItems.append(previousWaterBody)
-        sectionItems.append(nearestCity)
-        sectionItems.append(numberOfDaysOut)
+
+        if (object?.previousWaterBodies.count ?? 0 > 0) {
+            let item = object?.previousWaterBodies[index] ?? nil
+            let daysOut = DropdownInput(
+                key: "previousWaterBody-daysOut-\(index)",
+                header: "Days out of water",
+                editable: isEditable ?? true,
+                value: item?["numberOfDaysOut"] as? String ?? "",
+                width: .Full,
+                dropdownItems: DropdownHelper.shared.getDropdown(for: .daysOutOfWater)
+            )
+            
+            sectionItems.append(daysOut)
+        }
         return sectionItems
     }
     

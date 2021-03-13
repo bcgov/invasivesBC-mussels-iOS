@@ -233,6 +233,10 @@ class Storage {
         return WaterbodiesService.shared.get()
     }
     
+    public func majorCitiesTables() -> [MajorCitiesTableModel] {
+        return MajorCitiesService.shared.get()
+    }
+    
     public func getWaterBodyDropdowns() -> [DropdownModel] {
         let waterbodies = fullWaterBodyTables()
         var dropdowns: [DropdownModel] = []
@@ -285,7 +289,7 @@ class Storage {
         }
         return result
     }
-    
+        
     public func getProvinces(withWaterBody waterBody: String) -> [String] {
         let waterbodies = fullWaterBodyTables()
         var result: [String] = []

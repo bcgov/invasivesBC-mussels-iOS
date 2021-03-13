@@ -19,6 +19,7 @@ public enum CodeTableType {
     case stations
     case watercraftList
     case waterBodies
+    case majorCities
     case cities
     case provinces
     case adultMusselsLocation
@@ -35,6 +36,7 @@ class CodeTableService {
     private init() {}
     
     private let waterBodyAPI: WaterBodyAPI =  WaterBodyAPI.api()
+    private let majorCitiesAPI: MajorCitiesAPI = MajorCitiesAPI.api()
     private let codesAPI: CodesAPI = CodesAPI.api()
     
     var promise: Promise<RemoteResponse>?
@@ -90,6 +92,25 @@ class CodeTableService {
             group.leave()
         }, status: status)
         
+        group.enter()
+        self.fetchAndStoreMajorCities(completion: { (majorCitiesFetched) in
+            if !majorCitiesFetched {
+                hadFails = true
+            }
+            status("Wrapping up")
+            let majorCities = Storage.shared.majorCitiesTables()
+            let cities = majorCities.map{$0.city_name}.uniques.sorted{$0.lowercased() < $1.lowercased()}
+            
+            let majorCitiesTable = CodeTableModel()
+            majorCitiesTable.type = "majorCities"
+            for majorCity in cities {
+                majorCitiesTable.items.append(majorCity)
+            }
+            RealmRequests.saveObject(object: majorCitiesTable)
+            
+            group.leave()
+        }, status: status)
+        
         group.notify(queue: .main) {
             return completion(!hadFails)
         }
@@ -97,9 +118,8 @@ class CodeTableService {
     
     public func fetchAndStoreCodeTables(completion: @escaping (_ success: Bool) -> Void, status: @escaping(_ newStatus: String) -> Void) {
         status("Fetching Code Tables")
-        let req = APIRequest.fetchCodeTables { (response) in
+        APIRequest.fetchCodeTables { (response) in
             // Check for failure
-            debugPrint("** RESPONSE!!! ", response);
             guard let result = response else {
                 return completion(false)
             }
@@ -120,7 +140,6 @@ class CodeTableService {
                 }
             }
         }
-        debugPrint("** REQUEST!!! ", req);
     }
     
     private func processCountryProvinceTable(input: [[String : Any]]) -> CodeTableModel {
@@ -184,6 +203,11 @@ class CodeTableService {
     private func fetchAndStoreWaterBodies(completion: @escaping (_ success: Bool) -> Void, status: @escaping(_ newStatus: String) -> Void) {
         status("Fetching Waterbodies")
         WaterbodiesService.shared.fetchAndStoreWaterBodies(completion: completion, status: status)
+    }
+    
+    private func fetchAndStoreMajorCities(completion: @escaping (_ success: Bool) -> Void, status: @escaping(_ newStatus: String) -> Void) {
+        status("Fetching Major Cities")
+        MajorCitiesService.shared.fetchAndStoreMajorCities(completion: completion, status: status)
     }
     
     func findWaterbody(name: String, province: String, nearestCity: String) -> WaterBodyTableModel? {

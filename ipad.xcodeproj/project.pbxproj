@@ -133,6 +133,7 @@
 		29CEC92323676425003B21B9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 29CEC92223676425003B21B9 /* Assets.xcassets */; };
 		29CEC92623676425003B21B9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 29CEC92423676425003B21B9 /* LaunchScreen.storyboard */; };
 		29CEC93C23676691003B21B9 /* KeycloakConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29CEC93B23676691003B21B9 /* KeycloakConstants.swift */; };
+		29CF648525F740F4001728A9 /* MajorCitiesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29CF648425F740F4001728A9 /* MajorCitiesAPI.swift */; };
 		29D5866925D20E6F00FEB37E /* MajorCitiesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D5866825D20E6F00FEB37E /* MajorCitiesService.swift */; };
 		29D5866D25D20F6500FEB37E /* MajorCitiesTableModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D5866C25D20F6500FEB37E /* MajorCitiesTableModel.swift */; };
 		29DB01092370EFD60046E605 /* TextAreaInputCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29DB01072370EFD60046E605 /* TextAreaInputCollectionViewCell.swift */; };
@@ -345,6 +346,7 @@
 		29CEC93023676425003B21B9 /* ipadTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ipadTests.swift; sourceTree = "<group>"; };
 		29CEC93223676425003B21B9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		29CEC93B23676691003B21B9 /* KeycloakConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeycloakConstants.swift; sourceTree = "<group>"; };
+		29CF648425F740F4001728A9 /* MajorCitiesAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MajorCitiesAPI.swift; sourceTree = "<group>"; };
 		29D5866825D20E6F00FEB37E /* MajorCitiesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MajorCitiesService.swift; sourceTree = "<group>"; };
 		29D5866C25D20F6500FEB37E /* MajorCitiesTableModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MajorCitiesTableModel.swift; sourceTree = "<group>"; };
 		29DB01072370EFD60046E605 /* TextAreaInputCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextAreaInputCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -777,6 +779,7 @@
 				5C82D403237B31C200B065BA /* WatercraftRiskAssessmentAPI.swift */,
 				5C0F6978237B635800F96CA5 /* WaterBodyAPI.swift */,
 				5C0F697C237B683200F96CA5 /* CodesAPI.swift */,
+				29CF648425F740F4001728A9 /* MajorCitiesAPI.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -1611,6 +1614,7 @@
 				294D8F692385D1F10094090D /* TestTableViewObject.swift in Sources */,
 				299BF01023F46D45001732CD /* APIRequest.swift in Sources */,
 				298BF7C8239590730072AA28 /* WaterBodyTableModel.swift in Sources */,
+				29CF648525F740F4001728A9 /* MajorCitiesAPI.swift in Sources */,
 				5C82D3EC2374BD1300B065BA /* Promise.swift in Sources */,
 				5C0F6980237C6DDA00F96CA5 /* APIChain.swift in Sources */,
 				29DB4E4123870F2B00B13646 /* ShiftModel.swift in Sources */,

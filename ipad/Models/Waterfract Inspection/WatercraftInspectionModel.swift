@@ -83,6 +83,7 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
     // Journey
     var previousWaterBodies: List<PreviousWaterbodyModel> = List<PreviousWaterbodyModel>()
     var destinationWaterBodies: List<DestinationWaterbodyModel> = List<DestinationWaterbodyModel>()
+    var majorCities: List<MajorCitiesTableModel> = List<MajorCitiesTableModel>()
     
     // High Risk Assessments
     var highRiskAssessments: List<HighRiskAssessmentModel> = List<HighRiskAssessmentModel>()
@@ -492,7 +493,7 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
         if let existing = inputputFields[section] { return existing}
         
         var inputputFields: [WatercraftFromSection: [InputItem]] = [WatercraftFromSection: [InputItem]]()
-        var passportFields = WatercraftInspectionFormHelper.getPassportFields(for: self, editable: editable)
+        let passportFields = WatercraftInspectionFormHelper.getPassportFields(for: self, editable: editable)
         var passportHolderField: InputItem? = nil
         for field in passportFields where field.key.lowercased() == "isPassportHolder".lowercased() {
             passportHolderField = field
@@ -501,7 +502,7 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
         inputputFields[.PassportInfo] = passportFields
         inputputFields[.BasicInformation] = WatercraftInspectionFormHelper.getBasicInfoFields(for: self, editable: editable, passportField: _passportHolderField)
         inputputFields[.WatercraftDetails] = WatercraftInspectionFormHelper.getWatercraftDetailsFields(for: self, editable: editable)
-        inputputFields[.JourneyDetails] = WatercraftInspectionFormHelper.getPassportFields(for: self, editable: editable)
+        inputputFields[.JourneyDetails] = WatercraftInspectionFormHelper.getPreviousWaterBodyFields(for: self, index: 0, isEditable: editable)
         inputputFields[.InspectionDetails] = WatercraftInspectionFormHelper.getInspectionDetailsFields(for: self, editable: editable)
         inputputFields[.GeneralComments] = WatercraftInspectionFormHelper.getGeneralCommentsFields(for: self, editable: editable)
         inputputFields[.HighRiskAssessmentFields] = WatercraftInspectionFormHelper.getHighriskAssessmentFieldsFields(for: self, editable: editable)
