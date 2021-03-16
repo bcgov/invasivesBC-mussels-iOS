@@ -152,6 +152,13 @@
 		29DB4E4F2387131000B13646 /* InspectionsTableCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29DB4E4D2387131000B13646 /* InspectionsTableCollectionViewCell.xib */; };
 		29DB4E59238715A300B13646 /* ShiftInformationHeaderCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29DB4E57238715A300B13646 /* ShiftInformationHeaderCollectionViewCell.swift */; };
 		29DB4E5A238715A300B13646 /* ShiftInformationHeaderCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29DB4E58238715A300B13646 /* ShiftInformationHeaderCollectionViewCell.xib */; };
+		29E484F62600731300DEB672 /* MajorCityPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E484F52600731300DEB672 /* MajorCityPicker.swift */; };
+		29E484FA2600733D00DEB672 /* MajorCityPicker.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29E484F92600733D00DEB672 /* MajorCityPicker.xib */; };
+		29E484FE260073E100DEB672 /* SelectedMajorCityCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29E484FD260073E100DEB672 /* SelectedMajorCityCollectionViewCell.xib */; };
+		29E48502260073F100DEB672 /* SelectedMajorCityCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E48501260073F100DEB672 /* SelectedMajorCityCollectionViewCell.swift */; };
+		29E485062600742600DEB672 /* MajorCityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E485052600742600DEB672 /* MajorCityTableViewCell.swift */; };
+		29E4850A2600743800DEB672 /* MajorCityTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29E485092600743800DEB672 /* MajorCityTableViewCell.xib */; };
+		29E4850E26009DC900DEB672 /* MajorCityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E4850D26009DC900DEB672 /* MajorCityModel.swift */; };
 		29E4BBE82372120F0079475F /* DividerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E4BBE62372120F0079475F /* DividerCollectionViewCell.swift */; };
 		29E4BBE92372120F0079475F /* DividerCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29E4BBE72372120F0079475F /* DividerCollectionViewCell.xib */; };
 		29E4BBEE237218500079475F /* PreviousWaterBodyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E4BBEC237218500079475F /* PreviousWaterBodyCollectionViewCell.swift */; };
@@ -365,6 +372,13 @@
 		29DB4E4D2387131000B13646 /* InspectionsTableCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InspectionsTableCollectionViewCell.xib; sourceTree = "<group>"; };
 		29DB4E57238715A300B13646 /* ShiftInformationHeaderCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShiftInformationHeaderCollectionViewCell.swift; sourceTree = "<group>"; };
 		29DB4E58238715A300B13646 /* ShiftInformationHeaderCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ShiftInformationHeaderCollectionViewCell.xib; sourceTree = "<group>"; };
+		29E484F52600731300DEB672 /* MajorCityPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MajorCityPicker.swift; path = ../../../../../../MajorCityPicker.swift; sourceTree = "<group>"; };
+		29E484F92600733D00DEB672 /* MajorCityPicker.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = MajorCityPicker.xib; path = ../../../../../../MajorCityPicker.xib; sourceTree = "<group>"; };
+		29E484FD260073E100DEB672 /* SelectedMajorCityCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SelectedMajorCityCollectionViewCell.xib; path = ../../../../../../../SelectedMajorCityCollectionViewCell.xib; sourceTree = "<group>"; };
+		29E48501260073F100DEB672 /* SelectedMajorCityCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SelectedMajorCityCollectionViewCell.swift; path = ../../../../../../../SelectedMajorCityCollectionViewCell.swift; sourceTree = "<group>"; };
+		29E485052600742600DEB672 /* MajorCityTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MajorCityTableViewCell.swift; path = ../../../../../../../MajorCityTableViewCell.swift; sourceTree = "<group>"; };
+		29E485092600743800DEB672 /* MajorCityTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = MajorCityTableViewCell.xib; path = ../../../../../../../MajorCityTableViewCell.xib; sourceTree = "<group>"; };
+		29E4850D26009DC900DEB672 /* MajorCityModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MajorCityModel.swift; sourceTree = "<group>"; };
 		29E4BBE62372120F0079475F /* DividerCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DividerCollectionViewCell.swift; sourceTree = "<group>"; };
 		29E4BBE72372120F0079475F /* DividerCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DividerCollectionViewCell.xib; sourceTree = "<group>"; };
 		29E4BBEC237218500079475F /* PreviousWaterBodyCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviousWaterBodyCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -520,7 +534,6 @@
 				2933DD60238DC5120068E9DF /* CodeTableModel.swift */,
 				298BF7C7239590730072AA28 /* WaterBodyTableModel.swift */,
 				29FEA09F23FF12C200F490DB /* UserRoleModel.swift */,
-				2944BCD7243392A500826F48 /* Other */,
 				29D5866C25D20F6500FEB37E /* MajorCitiesTableModel.swift */,
 			);
 			path = Models;
@@ -576,17 +589,11 @@
 				294D9A872379C62F00BD4928 /* WatercraftInspectionModel.swift */,
 				29588747237B52F000224FFA /* HighRiskAssessmentModel.swift */,
 				298BF7CB2395D45C0072AA28 /* PreviousWaterBodyModel.swift */,
+				29E4850D26009DC900DEB672 /* MajorCityModel.swift */,
 				298BF7CD2395D57E0072AA28 /* DestinationWaterBodyModel.swift */,
 				2944BCD8243392F600826F48 /* Form Fields */,
 			);
 			path = "Waterfract Inspection";
-			sourceTree = "<group>";
-		};
-		2944BCD7243392A500826F48 /* Other */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Other;
 			sourceTree = "<group>";
 		};
 		2944BCD8243392F600826F48 /* Form Fields */ = {
@@ -717,6 +724,7 @@
 		2944BCF52437C0EA00826F48 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				29E484ED260072D100DEB672 /* Major Cities Picker */,
 				2907E4B52368D21D00946B3F /* Input Modal */,
 				29A97437236FD615006C668F /* Form */,
 				294EF309237083F600EEB3B6 /* Sync view */,
@@ -1212,6 +1220,27 @@
 			path = "Shift Information";
 			sourceTree = "<group>";
 		};
+		29E484ED260072D100DEB672 /* Major Cities Picker */ = {
+			isa = PBXGroup;
+			children = (
+				29E484EE260072DE00DEB672 /* Cells */,
+				29E484F52600731300DEB672 /* MajorCityPicker.swift */,
+				29E484F92600733D00DEB672 /* MajorCityPicker.xib */,
+			);
+			path = "Major Cities Picker";
+			sourceTree = "<group>";
+		};
+		29E484EE260072DE00DEB672 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				29E484FD260073E100DEB672 /* SelectedMajorCityCollectionViewCell.xib */,
+				29E48501260073F100DEB672 /* SelectedMajorCityCollectionViewCell.swift */,
+				29E485052600742600DEB672 /* MajorCityTableViewCell.swift */,
+				29E485092600743800DEB672 /* MajorCityTableViewCell.xib */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
 		29E4BBE5237211F10079475F /* Divider */ = {
 			isa = PBXGroup;
 			children = (
@@ -1476,6 +1505,7 @@
 				1EF7EBF223EC8E3E003886F6 /* WaterbodyPicker.xib in Resources */,
 				29F29F93236B6A22004F12E7 /* SwitcherView.xib in Resources */,
 				5C82D3D32374A0D400B065BA /* .gitignore in Resources */,
+				29E484FA2600733D00DEB672 /* MajorCityPicker.xib in Resources */,
 				5C82D3D72374AECC00B065BA /* HighRiskModalView.xib in Resources */,
 				2944AF9C2379B243007517DC /* ViewFieldCollectionViewCell.xib in Resources */,
 				A7AE5275237CC3660044DBB7 /* unapproved-cross.json in Resources */,
@@ -1488,6 +1518,7 @@
 				1EE5FE5A23EC968C00A06407 /* WaterbodyTableViewCell.xib in Resources */,
 				299BF01923FC9045001732CD /* JourneyHeaderCollectionViewCell.xib in Resources */,
 				29DB4E4F2387131000B13646 /* InspectionsTableCollectionViewCell.xib in Resources */,
+				29E484FE260073E100DEB672 /* SelectedMajorCityCollectionViewCell.xib in Resources */,
 				2950510A2374D764000FBD6E /* DoubleInputCollectionViewCell.xib in Resources */,
 				29E4BBE92372120F0079475F /* DividerCollectionViewCell.xib in Resources */,
 				296DEC21238C53930035E7FA /* NewShiftModal.xib in Resources */,
@@ -1525,6 +1556,7 @@
 				5C649C922412F6E300F01AE5 /* GoogleService-Info.plist in Resources */,
 				1E54FFB623D783940044721F /* InputTitleCollectionViewCell.xib in Resources */,
 				29CE5E1D2375E48000C54F96 /* ConditionalInputCollectionViewCell.xib in Resources */,
+				29E4850A2600743800DEB672 /* MajorCityTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1613,6 +1645,7 @@
 				29D5866D25D20F6500FEB37E /* MajorCitiesTableModel.swift in Sources */,
 				294D8F692385D1F10094090D /* TestTableViewObject.swift in Sources */,
 				299BF01023F46D45001732CD /* APIRequest.swift in Sources */,
+				29E48502260073F100DEB672 /* SelectedMajorCityCollectionViewCell.swift in Sources */,
 				298BF7C8239590730072AA28 /* WaterBodyTableModel.swift in Sources */,
 				29CF648525F740F4001728A9 /* MajorCitiesAPI.swift in Sources */,
 				5C82D3EC2374BD1300B065BA /* Promise.swift in Sources */,
@@ -1666,6 +1699,7 @@
 				29BAC4FE23676C3000A620F4 /* AuthenticationService.swift in Sources */,
 				29A97436236FD5FC006C668F /* InputGroup.swift in Sources */,
 				2907E4B72368D24900946B3F /* InputModal.swift in Sources */,
+				29E484F62600731300DEB672 /* MajorCityPicker.swift in Sources */,
 				29547B4A23F0BF4F000173F1 /* SelectedWaterBodyCollectionViewCell.swift in Sources */,
 				2991969023846AE000634F81 /* ShiftViewController.swift in Sources */,
 				29DB01092370EFD60046E605 /* TextAreaInputCollectionViewCell.swift in Sources */,
@@ -1686,6 +1720,7 @@
 				29F29FAB236CA948004F12E7 /* TextInputCollectionViewCell.swift in Sources */,
 				2933DD5E238DC2150068E9DF /* CodeTableService.swift in Sources */,
 				2933DD67238ED4470068E9DF /* ShiftService.swift in Sources */,
+				29E485062600742600DEB672 /* MajorCityTableViewCell.swift in Sources */,
 				29FEA0A023FF12C200F490DB /* UserRoleModel.swift in Sources */,
 				29DB4E3E23870B7B00B13646 /* ShifOverviewHeaderCollectionViewCell.swift in Sources */,
 				29DB4E462387113900B13646 /* BaseShiftOverviewCollectionViewCell.swift in Sources */,
@@ -1704,6 +1739,7 @@
 				29DB0116237206D30046E605 /* HeaderCollectionViewCell.swift in Sources */,
 				5C82D3EE2374BD2900B065BA /* ApplicationLogger.swift in Sources */,
 				29514BDB2368AED600DC89C4 /* OptionsViewController.swift in Sources */,
+				29E4850E26009DC900DEB672 /* MajorCityModel.swift in Sources */,
 				29CE5E1C2375E48000C54F96 /* ConditionalInputCollectionViewCell.swift in Sources */,
 				2944AF9B2379B243007517DC /* ViewFieldCollectionViewCell.swift in Sources */,
 				29F4EC512370B007001D5CFA /* WatercraftInspectionViewController.swift in Sources */,

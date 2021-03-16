@@ -103,7 +103,6 @@ class WaterbodiesService {
             let data = response["data"]
             do {
                 let rawdata = try data.rawData()
-                debugPrint("*** RESPONSE: ***", rawdata)
                 return then(rawdata)
             } catch {
                 return then(nil)

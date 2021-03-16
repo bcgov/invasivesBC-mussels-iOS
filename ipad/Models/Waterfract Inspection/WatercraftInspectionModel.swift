@@ -73,6 +73,10 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
     @objc dynamic var commercialManufacturerAsPreviousWaterBody: Bool = false
     @objc dynamic var commercialManufacturerAsDestinationWaterBody: Bool = false
     
+    // Closest major city
+    @objc dynamic var previousMajorCity: String = ""
+    @objc dynamic var destinationMajorCity: String = ""
+    
     // High Risk Assesment fields
     @objc dynamic var highriskAIS: Bool = false
     @objc dynamic var adultDreissenidFound: Bool = false
@@ -83,7 +87,8 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
     // Journey
     var previousWaterBodies: List<PreviousWaterbodyModel> = List<PreviousWaterbodyModel>()
     var destinationWaterBodies: List<DestinationWaterbodyModel> = List<DestinationWaterbodyModel>()
-    var majorCities: List<MajorCitiesTableModel> = List<MajorCitiesTableModel>()
+    var previousMajorCities: List<MajorCityModel> = List<MajorCityModel>()
+    var destinationMajorCities: List<MajorCityModel> = List<MajorCityModel>()
     
     // High Risk Assessments
     var highRiskAssessments: List<HighRiskAssessmentModel> = List<HighRiskAssessmentModel>()
@@ -271,6 +276,8 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
             "passportNumber": passportNumber.count > 1 ? passportNumber : "None",
             "previousDryStorage": previousDryStorage,
             "destinationDryStorage": destinationDryStorage,
+            "previousMajorCity": previousMajorCity,
+            "destinationMajorCity": destinationMajorCity,
             "unknownPreviousWaterBody": unknownPreviousWaterBody,
             "unknownDestinationWaterBody": unknownDestinationWaterBody,
             "commercialManufacturerAsPreviousWaterBody": commercialManufacturerAsPreviousWaterBody,
@@ -448,7 +455,23 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
         }
     }
     
-    
+    func setMajorCity(isPrevious: Bool, majorCity: MajorCitiesTableModel) {
+        let object = MajorCityModel()
+        object.set(from: majorCity)
+        do {
+            let realm = try Realm()
+            try realm.write {
+                if isPrevious {
+                    self.previousMajorCities.append(object)
+                } else {
+                    self.destinationMajorCities.append(object)
+                }
+            }
+        } catch let error as NSError {
+            ErrorLog("** RELAM ERROR: \(error)")
+        }
+    }
+        
     func setJournyStatusFlags(dryStorage: Bool, unknown: Bool, commercialManufacturer: Bool, isPrevious: Bool) {
         do {
             // Removing existing waterbodies

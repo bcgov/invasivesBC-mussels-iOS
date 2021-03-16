@@ -509,6 +509,7 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
             self.collectionView.reloadData()
         }
     }
+
     
     @objc private func addNextWaterBody(sender: Any?) {
         /// -- Model
@@ -605,6 +606,23 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
                         strongerSelf.collectionView.reloadData()
                         waterBodyPicker.removeFromSuperview()
                     }
+                case .addMajorCity:
+                    /// ---------waterbody picker------------
+                    InfoLog("User want to add previous major city")
+                    strongSelf.setNavigationBar(hidden: true, style: .black)
+                    let majorCityPicker: MajorCityPicker = UIView.fromNib()
+                    strongSelf.viewLayoutMarginsDidChange()
+                    majorCityPicker.setup() { [weak self] (result) in
+                        guard let strongerSelf = self else {return}
+                        for majorCity in result {
+                            model.setMajorCity(isPrevious: true, majorCity: majorCity)
+                        }
+                        strongerSelf.setNavigationBar(hidden: false, style: .black)
+                        strongerSelf.viewLayoutMarginsDidChange()
+                        strongerSelf.collectionView.reloadData()
+                        majorCityPicker.removeFromSuperview()
+                    }
+                    
                     /// --------------------------------
                 }
             }
@@ -645,6 +663,22 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
                         strongerSelf.viewLayoutMarginsDidChange()
                         strongerSelf.collectionView.reloadData()
                     }
+                case .addMajorCity:
+                    /// ---------waterbody picker------------
+                    InfoLog("User want to add destination major city")
+                    strongSelf.setNavigationBar(hidden: true, style: .black)
+                    let majorCityPicker: MajorCityPicker = UIView.fromNib()
+                    strongSelf.viewLayoutMarginsDidChange()
+                    majorCityPicker.setup() { [weak self] (result) in
+                        guard let strongerSelf = self else {return}
+                        for majorCity in result {
+                            model.setMajorCity(isPrevious: false, majorCity: majorCity)
+                        }
+                        strongerSelf.setNavigationBar(hidden: false, style: .black)
+                        strongerSelf.viewLayoutMarginsDidChange()
+                        strongerSelf.collectionView.reloadData()
+                        majorCityPicker.removeFromSuperview()
+                    }
                     /// --------------------------------
                 }
             }
@@ -676,9 +710,9 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
             let estimatedContentHeight = InputGroupView.estimateContentHeight(for: WatercraftInspectionFormHelper.watercraftInspectionDestinationWaterBodyInputs(index: 0))
             return CGSize(width: width, height: estimatedContentHeight + 20)
         case .AddPreviousWaterBody:
-            return CGSize(width: width, height: 50)
+            return CGSize(width: width, height: 110)
         case .AddDestinationWaterBody:
-            return CGSize(width: width, height: 50)
+            return CGSize(width: width, height: 110)
         case .Divider:
             return CGSize(width: width, height: 10)
         case .PreviousHeader:

@@ -61,6 +61,7 @@ class MajorCitiesService {
         model.closest_water_body = (dictionary["closest_water_body"] as? JSON)?.string ?? ""
         model.province = (dictionary["province"] as? JSON)?.string ?? ""
         model.distance = (dictionary["distance"] as? JSON)?.double ?? 0
+        model.major_city_id = (dictionary["major_city_id"] as? JSON)?.int ?? 0
         return model
     }
     
@@ -99,7 +100,6 @@ class MajorCitiesService {
             let data = response["data"]
             do {
                 let rawdata = try data.rawData()
-                debugPrint("*** MAJOR CITIES RESPONSE: ***", rawdata)
                 return then(rawdata)
             } catch {
                 return then(nil)

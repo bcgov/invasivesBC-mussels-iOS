@@ -98,7 +98,7 @@ class CodeTableService {
                 hadFails = true
             }
             status("Wrapping up")
-            let majorCities = Storage.shared.majorCitiesTables()
+            let majorCities = Storage.shared.fullMajorCitiesTables()
             let cities = majorCities.map{$0.city_name}.uniques.sorted{$0.lowercased() < $1.lowercased()}
             
             let majorCitiesTable = CodeTableModel()
