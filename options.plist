@@ -11,7 +11,7 @@
 	<key>stripSwiftSymbols</key>
 	<true/>
 	<key>uploadBitcode</key>
-	<true/>
+	<false/>
 	<key>uploadSymbols</key>
 	<true/>
 	<key>provisioningProfiles</key>
