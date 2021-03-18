@@ -54,7 +54,7 @@ class HighRiskAssessmentModel: Object, BaseRealmObject {
     @objc dynamic var sealIssued: Bool = false
     @objc dynamic var sealNumber: Int = 0
     
-    @objc dynamic var dreissenidFoundPrevious: Bool = false;
+    @objc dynamic var dreissenidMusselsFoundPrevious: Bool = false;
 
     // General Comments
     @objc dynamic var generalComments: String = ""
@@ -86,7 +86,7 @@ class HighRiskAssessmentModel: Object, BaseRealmObject {
             "quarantinePeriodIssued": quarantinePeriodIssued,
             "standingWaterPresent": standingWaterPresent,
             "adultDreissenidaeMusselFound": adultDreissenidMusselsFound,
-            "dreissenidFoundPrevious": dreissenidFoundPrevious,
+            "dreissenidMusselsFoundPrevious": dreissenidMusselsFoundPrevious,
             "decontaminationPerformed": decontaminationPerformed,
             "decontaminationOrderIssued": decontaminationOrderIssued,
             "sealIssued": sealIssued,

@@ -87,8 +87,6 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
     // Journey
     var previousWaterBodies: List<PreviousWaterbodyModel> = List<PreviousWaterbodyModel>()
     var destinationWaterBodies: List<DestinationWaterbodyModel> = List<DestinationWaterbodyModel>()
-    var previousMajorCities: List<MajorCityModel> = List<MajorCityModel>()
-    var destinationMajorCities: List<MajorCityModel> = List<MajorCityModel>()
     
     // High Risk Assessments
     var highRiskAssessments: List<HighRiskAssessmentModel> = List<HighRiskAssessmentModel>()
@@ -462,9 +460,9 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
             let realm = try Realm()
             try realm.write {
                 if isPrevious {
-                    self.previousMajorCities.append(object)
+                    self.previousMajorCity = object.majorCity + ", " + object.province + ", " + object.country
                 } else {
-                    self.destinationMajorCities.append(object)
+                    self.destinationMajorCity = object.majorCity + ", " + object.province + ", " + object.country
                 }
             }
         } catch let error as NSError {
