@@ -84,7 +84,7 @@ class PreviousWaterbodyModel: JourneyModel, BaseRealmObject {
         if !self.otherWaterbody.isEmpty {
             return [
                 "journeyType": 1,
-                "numberOfDaysOut": numberOfDaysOut,
+                "numberOfDaysOut": numberOfDaysOut.count > 0 ? numberOfDaysOut : "N/A",
                 "otherWaterBody": self.otherWaterbody
             ]
         }
@@ -95,7 +95,7 @@ class PreviousWaterbodyModel: JourneyModel, BaseRealmObject {
         
         return [
             "journeyType": 1,
-            "numberOfDaysOut": numberOfDaysOut,
+            "numberOfDaysOut": numberOfDaysOut.count > 0 ? numberOfDaysOut : "N/A",
             "waterBody": remoteId
         ]
     }
