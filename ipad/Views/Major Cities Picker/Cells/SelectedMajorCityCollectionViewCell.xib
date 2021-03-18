@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="9dJ-a9-li2" customClass="SelectedMajorCityCollectionViewCell" customModule="Inspect" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="594" height="176"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="594" height="176"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t3M-vi-3Xp">
+                        <rect key="frame" x="4" y="16" width="586" height="144"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EAA-ea-K8s">
+                                <rect key="frame" x="2" y="0.0" width="35" height="144"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="35" id="G5r-zV-sDt"/>
+                                </constraints>
+                                <state key="normal" image="xmark.circle.fill" catalog="system"/>
+                                <connections>
+                                    <action selector="buttonAction:" destination="9dJ-a9-li2" eventType="touchUpInside" id="Bo5-IX-WKZ"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8sV-eM-skg">
+                                <rect key="frame" x="41" y="59" width="54" height="26.5"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="22"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="EAA-ea-K8s" firstAttribute="centerY" secondItem="t3M-vi-3Xp" secondAttribute="centerY" id="AxW-Rg-bff"/>
+                            <constraint firstItem="8sV-eM-skg" firstAttribute="centerY" secondItem="t3M-vi-3Xp" secondAttribute="centerY" id="Idd-CP-344"/>
+                            <constraint firstItem="EAA-ea-K8s" firstAttribute="leading" secondItem="t3M-vi-3Xp" secondAttribute="leading" constant="2" id="SMe-7o-Dab"/>
+                            <constraint firstAttribute="bottom" secondItem="EAA-ea-K8s" secondAttribute="bottom" id="c9B-3H-fKY"/>
+                            <constraint firstItem="8sV-eM-skg" firstAttribute="leading" secondItem="EAA-ea-K8s" secondAttribute="trailing" constant="4" id="kjo-dK-XB5"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="7a4-sH-QOp"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="t3M-vi-3Xp" secondAttribute="trailing" constant="4" id="bzc-rR-yCr"/>
+                <constraint firstAttribute="bottom" secondItem="t3M-vi-3Xp" secondAttribute="bottom" constant="16" id="ezX-4d-Uje"/>
+                <constraint firstItem="t3M-vi-3Xp" firstAttribute="top" secondItem="9dJ-a9-li2" secondAttribute="top" constant="16" id="fNJ-mE-ey2"/>
+                <constraint firstItem="t3M-vi-3Xp" firstAttribute="leading" secondItem="9dJ-a9-li2" secondAttribute="leading" constant="4" id="r6c-MY-CSl"/>
+            </constraints>
+            <size key="customSize" width="594" height="176"/>
+            <connections>
+                <outlet property="container" destination="t3M-vi-3Xp" id="ZWz-aw-8Fe"/>
+                <outlet property="removeButton" destination="EAA-ea-K8s" id="wbt-Hs-sCx"/>
+                <outlet property="titleLabel" destination="8sV-eM-skg" id="4Yx-gw-lV8"/>
+            </connections>
+            <point key="canvasLocation" x="242" y="162"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="xmark.circle.fill" catalog="system" width="128" height="121"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
