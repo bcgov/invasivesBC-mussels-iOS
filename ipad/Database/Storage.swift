@@ -233,6 +233,19 @@ class Storage {
         return WaterbodiesService.shared.get()
     }
     
+    public func fullMajorCitiesTables() -> [MajorCitiesTableModel] {
+        return MajorCitiesService.shared.get()
+    }
+    
+    public func getMajorCitiesDropdowns() -> [DropdownModel] {
+        let majorCities = fullMajorCitiesTables()
+        var dropdowns: [DropdownModel] = []
+        for majorCity in majorCities {
+            dropdowns.append(DropdownModel(display: "\(majorCity.city_name), \(majorCity.province), \(majorCity.country_code)", key: "\(majorCity.major_city_id)"))
+        }
+        return dropdowns
+    }
+    
     public func getWaterBodyDropdowns() -> [DropdownModel] {
         let waterbodies = fullWaterBodyTables()
         var dropdowns: [DropdownModel] = []
@@ -246,6 +259,14 @@ class Storage {
         let waterbodies = fullWaterBodyTables()
         for waterbody in waterbodies where waterbody.water_body_id == id {
             return waterbody
+        }
+        return nil
+    }
+    
+    public func getMajorCityModel(withId id: Int) -> MajorCitiesTableModel? {
+        let majorCities = fullMajorCitiesTables()
+        for majorCity in majorCities where majorCity.major_city_id == id {
+            return majorCity
         }
         return nil
     }
@@ -285,7 +306,7 @@ class Storage {
         }
         return result
     }
-    
+        
     public func getProvinces(withWaterBody waterBody: String) -> [String] {
         let waterbodies = fullWaterBodyTables()
         var result: [String] = []

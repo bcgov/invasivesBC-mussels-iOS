@@ -34,7 +34,6 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
     @objc dynamic var launchedOutsideBC : Bool = false
     @objc dynamic var k9Inspection: Bool = false
     @objc dynamic var decontaminationPerformed: Bool = false
-    @objc dynamic var decontaminationOrderReason: String = ""
     @objc dynamic var marineSpeciesFound: Bool = false
     @objc dynamic var aquaticPlantsFound: Bool = false
     // Full Inspection
@@ -73,6 +72,10 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
     // Commercial manufacturer
     @objc dynamic var commercialManufacturerAsPreviousWaterBody: Bool = false
     @objc dynamic var commercialManufacturerAsDestinationWaterBody: Bool = false
+    
+    // Closest major city
+    @objc dynamic var previousMajorCity: String = ""
+    @objc dynamic var destinationMajorCity: String = ""
     
     // High Risk Assesment fields
     @objc dynamic var highriskAIS: Bool = false
@@ -265,13 +268,14 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
             "launchedOutsideBC": launchedOutsideBC,
             "commerciallyHauled": commerciallyHauled,
             "decontaminationPerformed": _decontaminationPerformed,
-            "decontaminationOrderReason": decontaminationOrderReason,
             "highRiskArea": highRiskArea,
             "highRiskAIS": highriskAIS,
             "previousInspectionDays": previousInspectionDays,
             "passportNumber": passportNumber.count > 1 ? passportNumber : "None",
             "previousDryStorage": previousDryStorage,
             "destinationDryStorage": destinationDryStorage,
+            "previousMajorCity": previousMajorCity.count > 0 ? previousMajorCity : "None",
+            "destinationMajorCity": destinationMajorCity.count > 0 ? destinationMajorCity : "None",
             "unknownPreviousWaterBody": unknownPreviousWaterBody,
             "unknownDestinationWaterBody": unknownDestinationWaterBody,
             "commercialManufacturerAsPreviousWaterBody": commercialManufacturerAsPreviousWaterBody,
@@ -449,7 +453,23 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
         }
     }
     
-    
+    func setMajorCity(isPrevious: Bool, majorCity: MajorCitiesTableModel) {
+        let object = MajorCityModel()
+        object.set(from: majorCity)
+        do {
+            let realm = try Realm()
+            try realm.write {
+                if isPrevious {
+                    self.previousMajorCity = object.majorCity + ", " + object.province + ", " + object.country
+                } else {
+                    self.destinationMajorCity = object.majorCity + ", " + object.province + ", " + object.country
+                }
+            }
+        } catch let error as NSError {
+            ErrorLog("** RELAM ERROR: \(error)")
+        }
+    }
+        
     func setJournyStatusFlags(dryStorage: Bool, unknown: Bool, commercialManufacturer: Bool, isPrevious: Bool) {
         do {
             // Removing existing waterbodies
@@ -494,7 +514,7 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
         if let existing = inputputFields[section] { return existing}
         
         var inputputFields: [WatercraftFromSection: [InputItem]] = [WatercraftFromSection: [InputItem]]()
-        var passportFields = WatercraftInspectionFormHelper.getPassportFields(for: self, editable: editable)
+        let passportFields = WatercraftInspectionFormHelper.getPassportFields(for: self, editable: editable)
         var passportHolderField: InputItem? = nil
         for field in passportFields where field.key.lowercased() == "isPassportHolder".lowercased() {
             passportHolderField = field
@@ -503,7 +523,7 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
         inputputFields[.PassportInfo] = passportFields
         inputputFields[.BasicInformation] = WatercraftInspectionFormHelper.getBasicInfoFields(for: self, editable: editable, passportField: _passportHolderField)
         inputputFields[.WatercraftDetails] = WatercraftInspectionFormHelper.getWatercraftDetailsFields(for: self, editable: editable)
-        inputputFields[.JourneyDetails] = WatercraftInspectionFormHelper.getPassportFields(for: self, editable: editable)
+        inputputFields[.JourneyDetails] = WatercraftInspectionFormHelper.getPreviousWaterBodyFields(for: self, index: 0, isEditable: editable)
         inputputFields[.InspectionDetails] = WatercraftInspectionFormHelper.getInspectionDetailsFields(for: self, editable: editable)
         inputputFields[.GeneralComments] = WatercraftInspectionFormHelper.getGeneralCommentsFields(for: self, editable: editable)
         inputputFields[.HighRiskAssessmentFields] = WatercraftInspectionFormHelper.getHighriskAssessmentFieldsFields(for: self, editable: editable)

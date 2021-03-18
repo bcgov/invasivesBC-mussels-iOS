@@ -110,7 +110,6 @@ class APIRequest {
             }
             
         }
-        //        debugPrint(req)
     }
     
     static func post(endpoint: URL, params: [String: Any], completion: @escaping (_ response: JSON?) -> Void) {
@@ -143,7 +142,6 @@ class APIRequest {
                 return completion(json)
             }
         }
-        //        debugPrint(req);
     }
     
     public static func fetchCodeTables(then: @escaping([String:Any]?)->Void) {

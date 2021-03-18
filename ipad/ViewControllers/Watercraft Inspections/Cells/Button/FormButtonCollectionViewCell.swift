@@ -14,6 +14,7 @@ class FormButtonCollectionViewCell: UICollectionViewCell, Theme {
 
     // MARK: Outlets
     @IBOutlet weak var button: UIButton!
+    @IBOutlet weak var majorCityButton: UIButton!;
     @IBOutlet weak var dryStorageSwitch: UISwitch?
     @IBOutlet weak var switchLabel: UILabel?
     @IBOutlet weak var unknownWaterBodySwitchLabel: UILabel?
@@ -22,6 +23,7 @@ class FormButtonCollectionViewCell: UICollectionViewCell, Theme {
     
     struct Config {
         var status: Bool = false
+        var majorCityStatus: Bool = false;
         var unknownWaterBodyStatus: Bool = false
         var commercialManufacturerStatus: Bool = false
         var isPreviousJourney: Bool = false
@@ -37,7 +39,7 @@ class FormButtonCollectionViewCell: UICollectionViewCell, Theme {
     }
     
     enum FormButtonAction {
-        case add, statusChange(Result)
+        case add, addMajorCity, statusChange(Result)
     }
     
     
@@ -47,6 +49,18 @@ class FormButtonCollectionViewCell: UICollectionViewCell, Theme {
     
     var disableButton: Bool {
         return (dryStorageSwitch?.isOn ?? false) || (unknownWaterBodySwitch?.isOn ?? false) || (commercialManufacturerSwitch?.isOn ?? false)
+    }
+    
+    var disableMajorCityButton: Bool {
+        if (dryStorageSwitch?.isOn ?? true) {
+            return false
+        } else if (unknownWaterBodySwitch?.isOn ?? true) {
+            return false
+        } else if (commercialManufacturerSwitch?.isOn ?? true) {
+            return false
+        } else {
+            return true
+        }
     }
     
     var result: Result {
@@ -61,10 +75,17 @@ class FormButtonCollectionViewCell: UICollectionViewCell, Theme {
         return onClick(.add)
     }
     
+    @IBAction func majorCityButtonAction(_ sender: UIButton) {
+        // let _ = self.target?.perform(_selector, with: [:])
+        guard let onClick = self.completion else {return}
+        return onClick(.addMajorCity)
+    }
+    
     @IBAction func dryStorageSwitchAction(_ sender: UISwitch?) {
         guard let onClick = self.completion else {return}
         guard let switchObj: UISwitch = sender else {return}
         self.set(status: disableButton)
+        self.set(status: disableMajorCityButton)
         if switchObj.isOn {
             self.unknownWaterBodySwitch?.isOn = false
             self.commercialManufacturerSwitch?.isOn = false
@@ -76,6 +97,7 @@ class FormButtonCollectionViewCell: UICollectionViewCell, Theme {
         guard let onClick = self.completion else {return}
         guard let switchObj: UISwitch = sender else {return}
         self.set(status: disableButton)
+        self.set(status: disableMajorCityButton)
         if switchObj.isOn {
             self.dryStorageSwitch?.isOn = false
             self.commercialManufacturerSwitch?.isOn = false
@@ -87,6 +109,7 @@ class FormButtonCollectionViewCell: UICollectionViewCell, Theme {
         guard let onClick = self.completion else {return}
         guard let switchObj: UISwitch = sender else {return}
         self.set(status: disableButton)
+        self.set(status: disableMajorCityButton)
         if switchObj.isOn {
             self.dryStorageSwitch?.isOn = false
             self.unknownWaterBodySwitch?.isOn = false
@@ -96,10 +119,13 @@ class FormButtonCollectionViewCell: UICollectionViewCell, Theme {
     
     func set(status: Bool) {
         self.button?.isEnabled = !status
+        self.majorCityButton?.isEnabled = status;
         if status {
             styleDisable(button: self.button)
+            styleHollowButton(button: self.majorCityButton)
         } else {
             styleHollowButton(button: button)
+            styleDisable(button: majorCityButton)
         }
     }
     
@@ -124,12 +150,15 @@ class FormButtonCollectionViewCell: UICollectionViewCell, Theme {
         }
     }
     
-    func setup(with title: String, isEnabled: Bool, config: Config, target: NSObject, selectorButton: Selector, selectorSwitch: Selector) {
+    func setup(with title: String, isEnabled: Bool, config: Config, target: NSObject, cityTarget: NSObject, selectorButton: Selector, selectorCityButton: Selector, selectorSwitch: Selector) {
         self.button.setTitle(title, for: .normal)
+        self.majorCityButton.setTitle("Add Closest Major City", for: .normal)
         self.setupConfig(config: config)
+        self.majorCityButton.addTarget(cityTarget, action: selectorCityButton, for: .touchUpInside)
         self.button.addTarget(target, action: selectorButton, for: .touchUpInside)
         self.dryStorageSwitch?.addTarget(target, action: selectorSwitch, for: .valueChanged)
         if !isEnabled {
+            self.majorCityButton.isEnabled = false;
             self.button.isEnabled = false
             self.dryStorageSwitch?.isEnabled = false
             self.alpha = 0
@@ -138,9 +167,11 @@ class FormButtonCollectionViewCell: UICollectionViewCell, Theme {
     
     func setup(with title: String, isEnabled: Bool, config: Config, onClick: @escaping FormButtonCompletion) {
         self.button.setTitle(title, for: .normal)
+        self.majorCityButton.setTitle("Add Closest Major City", for: .normal)
         self.setupConfig(config: config)
         self.completion = onClick
         if !isEnabled {
+            self.majorCityButton.isEnabled = false;
             self.button.isEnabled = false
             self.alpha = 0
             self.unknownWaterBodySwitch?.isEnabled = false
@@ -151,6 +182,8 @@ class FormButtonCollectionViewCell: UICollectionViewCell, Theme {
     
     func style() {
         styleHollowButton(button: button)
+        styleHollowButton(button: majorCityButton)
+
     }
 
 }

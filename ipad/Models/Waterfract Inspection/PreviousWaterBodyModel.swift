@@ -11,7 +11,7 @@ import Realm
 import RealmSwift
 
 class JourneyModel: Object {
-    @objc dynamic var numberOfDaysOut : String = "0-10 days"
+    @objc dynamic var numberOfDaysOut : String = ""
     @objc dynamic var shouldSync: Bool = false
     @objc dynamic var remoteId: Int = -1
     @objc dynamic var localId: String = {
@@ -30,6 +30,7 @@ class PreviousWaterbodyModel: JourneyModel, BaseRealmObject {
     @objc dynamic var nearestCity: String = ""
     @objc dynamic var province: String = ""
     @objc dynamic var otherWaterbody: String = ""
+    @objc dynamic var daysOut: String = ""
     
     func set(from model: WaterBodyTableModel) {
         do {
@@ -42,6 +43,7 @@ class PreviousWaterbodyModel: JourneyModel, BaseRealmObject {
                     self.nearestCity = model.closest
                     self.province = model.province
                     self.remoteId = model.water_body_id
+                    self.daysOut = model.daysOut
                 }
             }
         } catch let error as NSError {
@@ -82,7 +84,7 @@ class PreviousWaterbodyModel: JourneyModel, BaseRealmObject {
         if !self.otherWaterbody.isEmpty {
             return [
                 "journeyType": 1,
-                "numberOfDaysOut": numberOfDaysOut,
+                "numberOfDaysOut": daysOut.count > 1 ? daysOut : "N/A",
                 "otherWaterBody": self.otherWaterbody
             ]
         }
@@ -93,7 +95,7 @@ class PreviousWaterbodyModel: JourneyModel, BaseRealmObject {
         
         return [
             "journeyType": 1,
-            "numberOfDaysOut": numberOfDaysOut,
+            "numberOfDaysOut": daysOut.count > 1 ? daysOut : "N/A",
             "waterBody": remoteId
         ]
     }

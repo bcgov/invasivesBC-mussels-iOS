@@ -11,6 +11,7 @@ import Foundation
 /**
   * Remote/Local URL
  */
+
 let DEV_URL: String = "https://api-dev-invasivesbc.apps.silver.devops.gov.bc.ca/api"
 let LOCAL_URL: String = "http://localhost:7070/api"
 let TEST_URL: String = "https://api-dev-invasivesbc.apps.silver.devops.gov.bc.ca/api"
@@ -29,13 +30,13 @@ enum RemoteEnv: String {
     var remoteURL: String {
         switch self {
         case .local:
-            return DEV_URL
+            return LOCAL_URL
         case .dev:
             return DEV_URL
         case .test:
-            return DEV_URL
+            return TEST_URL
         case .prod:
-            return DEV_URL
+            return PROD_URL
         }
     }
     
@@ -44,9 +45,9 @@ enum RemoteEnv: String {
         case .local,.dev:
             return KC_DEV_URL
         case .test:
-            return KC_DEV_URL
+            return KC_TEST_URL
         case .prod:
-            return KC_DEV_URL
+            return KC_PROD_URL
         }
     }
 }
@@ -56,7 +57,7 @@ class RemoteURLManager {
     static var `default` = {
         // Here We Can use Target Flag to customize
         // Switch Env 
-        return RemoteURLManager(.prod)
+        return RemoteURLManager(.dev)
     }()
     
     init(_ env: RemoteEnv) {

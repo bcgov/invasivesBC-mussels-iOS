@@ -27,10 +27,12 @@ class MajorCitiesTableModel: Object {
     @objc dynamic var closest_water_body: String = ""
     @objc dynamic var province: String = ""
     @objc dynamic var distance: Double = 0
+    @objc dynamic var major_city_id: Int = 0
     
     func toDictionary() -> [String : Any] {
         return [
             "city_name": city_name,
+            "major_city_id": major_city_id,
             "city_latitude": city_latitude,
             "city_longitude": city_longitude,
             "country_code": country_code,

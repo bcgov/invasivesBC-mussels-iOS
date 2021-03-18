@@ -131,13 +131,21 @@ class HighRiskFormHelper {
             value: object?.decontaminationOrderNumber ?? 0,
             width: .Half
         )
+        
+        let decontaminationOrderReason = DropdownInput(
+            key: "highRisk-decontaminationOrderReason",
+            header: HighRiskFormFieldHeaders.InspectionOutcomes.decontaminationOrderReason,
+            editable: editable ?? true,
+            value: object?.decontaminationOrderReason ?? "",
+            width: .Half,
+            dropdownItems: DropdownHelper.shared.getDropdown(for: .decontaminationOrderReasons)
+        )
         decontaminationOrderNumber.dependency.append(InputDependency(to: decontaminationOrderIssued, equalTo: true))
         sectionItems.append(decontaminationOrderNumber)
-        let spacer4 = InputSpacer()
-        spacer4.dependency.append(InputDependency(to: decontaminationOrderIssued, equalTo: true))
-        sectionItems.append(spacer4)
-        /// ---------------------------
         
+        decontaminationOrderReason.dependency.append(InputDependency(to: decontaminationOrderIssued, equalTo: true))
+        sectionItems.append(decontaminationOrderReason)
+                
         let sealIssued = SwitchInput(
             key: "highRisk-sealIssued",
             header: HighRiskFormFieldHeaders.InspectionOutcomes.sealIssued,
@@ -161,14 +169,14 @@ class HighRiskFormHelper {
 //        sectionItems.append(spacer5)
         /// ---------------------------
         
-        let dreissenidFoundPrevious = SwitchInput(
-            key: "highRisk-dreissenidFoundPrevious",
+        let dreissenidMusselsFoundPrevious = SwitchInput(
+            key: "highRisk-dreissenidMusselsFoundPrevious",
             header: HighRiskFormFieldHeaders.InspectionOutcomes.dreisennidFoundPrevious,
             editable: editable ?? true,
-            value: object?.dreissenidFoundPrevious ?? false,
+            value: object?.dreissenidMusselsFoundPrevious ?? false,
             width: .Full
         )
-        sectionItems.append(dreissenidFoundPrevious)
+        sectionItems.append(dreissenidMusselsFoundPrevious)
         
         let otherInspectionFindings = DropdownInput(
             key: "highRisk-otherInspectionFindings",
