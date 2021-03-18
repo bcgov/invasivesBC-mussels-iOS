@@ -20,6 +20,7 @@ extension UISearchBar
     }
 }
 
+
 private enum contraintType {
     case top
     case bottom
