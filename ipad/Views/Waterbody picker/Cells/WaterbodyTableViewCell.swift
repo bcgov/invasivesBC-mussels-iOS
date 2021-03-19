@@ -37,7 +37,10 @@ class WaterbodyTableViewCell: UITableViewCell {
     
     func setup(item: DropdownModel, optionSelected: Bool, onClick: @escaping()->Void) {
         self.model = item
-        self.titleLabel.text = item.display
+//        self.titleLabel.text = item.display
+        let splitByComma = item.display.components(separatedBy: ",")
+        let splitCountryCity = splitByComma[2].components(separatedBy: "(")
+        self.titleLabel.text = splitByComma[0].trimmingCharacters(in: .whitespacesAndNewlines) + ", " + splitByComma[1].trimmingCharacters(in: .whitespacesAndNewlines) + ", " + splitCountryCity[0].trimmingCharacters(in: .whitespacesAndNewlines) + " (" + splitCountryCity[1].components(separatedBy: ")")[0].trimmingCharacters(in: .whitespacesAndNewlines) + ")"
         self.completion = onClick
         let onClickGesture = UITapGestureRecognizer(target: self, action:  #selector (self.selectAction (_:)))
         self.addGestureRecognizer(onClickGesture)

@@ -239,11 +239,21 @@ class Storage {
     
     public func getMajorCitiesDropdowns() -> [DropdownModel] {
         let majorCities = fullMajorCitiesTables()
-        var dropdowns: [DropdownModel] = []
+        var CAN: [DropdownModel] = []
+        var USA: [DropdownModel] = []
+        var MEX: [DropdownModel] = []
         for majorCity in majorCities {
-            dropdowns.append(DropdownModel(display: "\(majorCity.city_name), \(majorCity.province), \(majorCity.country_code)", key: "\(majorCity.major_city_id)"))
+            if majorCity.country_code == "CAN" {
+                CAN.append(DropdownModel(display: "\(majorCity.city_name), \(majorCity.province), \(majorCity.country_code)", key: "\(majorCity.major_city_id)"))
+            }
+            if majorCity.country_code == "USA" {
+                USA.append(DropdownModel(display: "\(majorCity.city_name), \(majorCity.province), \(majorCity.country_code)", key: "\(majorCity.major_city_id)"))
+            }
+            if majorCity.country_code == "MEX" {
+                MEX.append(DropdownModel(display: "\(majorCity.city_name), \(majorCity.province), \(majorCity.country_code)", key: "\(majorCity.major_city_id)"))
+            }
         }
-        return dropdowns
+        return CAN.sorted(by: {$0.display < $1.display}) + USA.sorted(by: {$0.display < $1.display}) + MEX.sorted(by: {$0.display < $1.display})
     }
     
     public func getWaterBodyDropdowns() -> [DropdownModel] {
