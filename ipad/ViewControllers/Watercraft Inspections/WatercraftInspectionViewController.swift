@@ -13,6 +13,8 @@ private enum JourneyDetailsSectionRow {
     case Header
     case PreviousWaterBody
     case DestinationWaterBody
+    case PreviousMajorCity
+    case DestinationMajorCity
     case AddPreviousWaterBody
     case AddDestinationWaterBody
     case PreviousHeader
@@ -45,7 +47,9 @@ class WatercraftInspectionViewController: BaseViewController {
         "DividerCollectionViewCell",
         "DestinationWaterBodyCollectionViewCell",
         "PreviousWaterBodyCollectionViewCell",
-        "JourneyHeaderCollectionViewCell"
+        "JourneyHeaderCollectionViewCell",
+        "PreviousMajorCityCollectionViewCell",
+        "DestinationMajorCityCollectionViewCell"
     ]
     
     // MARK: Variables
@@ -189,6 +193,12 @@ class WatercraftInspectionViewController: BaseViewController {
                 RealmRequests.deleteObject(item)
             }
             for item in model.highRiskAssessments {
+                RealmRequests.deleteObject(item)
+            }
+            for item in model.previousMajorCities {
+                RealmRequests.deleteObject(item)
+            }
+            for item in model.destinationMajorCities {
                 RealmRequests.deleteObject(item)
             }
             // Delete main object
@@ -369,12 +379,47 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
         return collectionView!.dequeueReusableCell(withReuseIdentifier: "DestinationWaterBodyCollectionViewCell", for: indexPath as IndexPath) as! DestinationWaterBodyCollectionViewCell
     }
     
+    func getPreviousMajorCityCell(indexPath: IndexPath) -> PreviousMajorCityCollectionViewCell {
+        return collectionView!.dequeueReusableCell(withReuseIdentifier: "PreviousMajorCityCollectionViewCell", for: indexPath as IndexPath) as!
+            PreviousMajorCityCollectionViewCell
+    }
+    
+    func getDestinationMajorCityCell(indexPath: IndexPath) -> DestinationMajorCityCollectionViewCell {
+        return collectionView!.dequeueReusableCell(withReuseIdentifier: "DestinationMajorCityCollectionViewCell", for: indexPath as IndexPath) as!
+            DestinationMajorCityCollectionViewCell
+    }
+    
+    private func arePreviousTogglesChecked(ref: WatercradftInspectionModel) -> Bool {
+        if ref.commercialManufacturerAsPreviousWaterBody || ref.unknownPreviousWaterBody || ref.previousDryStorage {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    private func areDestinationTogglesChecked(ref: WatercradftInspectionModel) -> Bool {
+        if ref.commercialManufacturerAsDestinationWaterBody || ref.unknownDestinationWaterBody || ref.destinationDryStorage {
+            return true
+        } else {
+            return false
+        }
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         guard let sectionType = WatercraftFromSection(rawValue: Int(section)), let model = self.model else {return 0}
         
         switch sectionType {
         case .JourneyDetails:
-            return model.previousWaterBodies.count + model.destinationWaterBodies.count + 6
+            if !arePreviousTogglesChecked(ref: model) && !areDestinationTogglesChecked(ref: model) {
+                return model.previousWaterBodies.count + model.destinationWaterBodies.count + 6
+            } else if arePreviousTogglesChecked(ref: model) && !areDestinationTogglesChecked(ref: model) {
+                return model.previousMajorCities.count + model.destinationWaterBodies.count + 6
+            } else if !arePreviousTogglesChecked(ref: model) && areDestinationTogglesChecked(ref: model) {
+                return model.previousWaterBodies.count + model.previousMajorCities.count + 6
+            } else {
+                return model.previousMajorCities.count + model.destinationMajorCities.count + 6
+            }
+    
         case .HighRiskAssessment:
             if !showHighRiskAssessment {
                 return 0
@@ -509,7 +554,44 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
             self.collectionView.reloadData()
         }
     }
-
+    
+    @objc private func addPreviousMajorCity(sender: Any?) {
+        /// -- Model
+        guard let model = self.model else { return }
+        /// ---------nahir city picker------------
+        self.setNavigationBar(hidden: true, style: .black)
+        let majorCityPicker: MajorCityPicker = UIView.fromNib()
+        self.viewLayoutMarginsDidChange()
+        majorCityPicker.setup() { (result) in
+            print(result)
+            for majorCity in result {
+                model.setMajorCity(isPrevious: true, majorCity: majorCity)
+            }
+            self.setNavigationBar(hidden: false, style: .black)
+            self.viewLayoutMarginsDidChange()
+            self.collectionView.reloadData()
+        }
+    }
+    
+    @objc private func addDestinationMajorCity(sender: Any?) {
+        /// -- Model
+        guard let model = self.model else { return }
+        /// ---------major city picker------------
+        self.setNavigationBar(hidden: true, style: .black)
+        let majorCityPicker: MajorCityPicker = UIView.fromNib()
+        self.viewLayoutMarginsDidChange()
+        majorCityPicker.setup() { [weak self] (result) in
+            guard let strongerSelf = self else {return}
+            print(result)
+            for majorCity in result {
+                model.setMajorCity(isPrevious: false, majorCity: majorCity)
+            }
+            strongerSelf.setNavigationBar(hidden: false, style: .black)
+            strongerSelf.viewLayoutMarginsDidChange()
+            strongerSelf.collectionView.reloadData()
+        }
+        /// --------------------------------
+    }
     
     @objc private func addNextWaterBody(sender: Any?) {
         /// -- Model
@@ -560,7 +642,12 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
             return cell
         case .DestinationWaterBody:
             let cell = getDestinationWaterBodyCell(indexPath: indexPath)
-            let itemsIndex: Int = indexPath.row - (model.previousWaterBodies.count + 4)
+            var itemsIndex: Int = 0
+            if arePreviousTogglesChecked(ref: model) {
+                itemsIndex = indexPath.row - (model.previousMajorCities.count + 4)
+            } else {
+                itemsIndex = indexPath.row - (model.previousWaterBodies.count + 4)
+            }
             let destinationWaterBody = model.destinationWaterBodies[itemsIndex]
             cell.setup(with: destinationWaterBody, isEditable: self.isEditable, delegate: self, onDelete: { [weak self] in
                 guard let strongSelf = self else {return}
@@ -569,6 +656,34 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
                     strongSelf.collectionView.reloadSections(IndexSet(integer: indexPath.section))
                 }, completion: nil)
             })
+            return cell
+        
+        case .PreviousMajorCity:
+            let cell = getPreviousMajorCityCell(indexPath: indexPath)
+            let itemsIndex: Int = 0
+            let previousMajorCity = model.previousMajorCities[itemsIndex]
+            cell.setup(with: previousMajorCity, isEditable: self.isEditable, delegate: self, onDelete: { [weak self] in
+                guard let strongSelf = self else {return}
+                model.deleteMajorCity(isPrevious: true)
+                strongSelf.collectionView.performBatchUpdates({
+                    strongSelf.collectionView.reloadSections(IndexSet(integer: indexPath.section))
+                }, completion: nil)
+            })
+            
+            return cell
+        
+        case .DestinationMajorCity:
+            let cell = getDestinationMajorCityCell(indexPath: indexPath)
+            let itemsIndex: Int = 0
+            let destinationMajorCity = model.destinationMajorCities[itemsIndex]
+            cell.setup(with: destinationMajorCity, isEditable: self.isEditable, delegate: self, onDelete: { [weak self] in
+                guard let strongSelf = self else {return}
+                model.deleteMajorCity(isPrevious: false)
+                strongSelf.collectionView.performBatchUpdates({
+                    strongSelf.collectionView.reloadSections(IndexSet(integer: indexPath.section))
+                }, completion: nil)
+            })
+            
             return cell
         case .AddPreviousWaterBody:
             let cell = getButtonCell(indexPath: indexPath)
@@ -607,7 +722,7 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
                         waterBodyPicker.removeFromSuperview()
                     }
                 case .addMajorCity:
-                    /// ---------waterbody picker------------
+                    /// ---------major city picker------------
                     InfoLog("User want to add previous major city")
                     strongSelf.setNavigationBar(hidden: true, style: .black)
                     let majorCityPicker: MajorCityPicker = UIView.fromNib()
@@ -703,6 +818,10 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
         switch getJourneyDetailsCellType(for: indexPath) {
         case .Header:
             return CGSize(width: width, height: 50)
+        case .PreviousMajorCity:
+            return CGSize(width: width, height: 200)
+        case .DestinationMajorCity:
+            return CGSize(width: width, height: 200)
         case .PreviousWaterBody:
             let estimatedContentHeight = InputGroupView.estimateContentHeight(for: WatercraftInspectionFormHelper.getPreviousWaterBodyFields(index: 0))
             return CGSize(width: width, height: estimatedContentHeight + 20)
@@ -732,24 +851,64 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
             return .PreviousHeader
         }
         
-        if indexPath.row == model.previousWaterBodies.count + 2 {
-            return .AddPreviousWaterBody
+        if arePreviousTogglesChecked(ref: model)  {
+            if indexPath.row == model.previousMajorCities.count + 2 {
+                return .AddPreviousWaterBody
+            }
+            
+            if indexPath.row == model.previousMajorCities.count + 3 {
+                return .DestinationHeader
+            }
+
+            if indexPath.row <= model.previousMajorCities.count + 3 {
+                return .PreviousMajorCity
+            }
+        } else {
+            if indexPath.row == model.previousWaterBodies.count + 2 {
+                return .AddPreviousWaterBody
+            }
+            if indexPath.row == model.previousWaterBodies.count + 3 {
+                return .DestinationHeader
+            }
+            if indexPath.row <= model.previousWaterBodies.count + 3 {
+                return .PreviousWaterBody
+            }
         }
         
-        if indexPath.row == model.previousWaterBodies.count + 3 {
-            return .DestinationHeader
+        if areDestinationTogglesChecked(ref: model) && arePreviousTogglesChecked(ref: model) {
+            if indexPath.row <= (model.previousMajorCities.count + model.destinationMajorCities.count + 3) {
+                return .DestinationMajorCity
+            }
+            if indexPath.row == model.previousMajorCities.count + model.destinationMajorCities.count + 4 {
+                return .AddDestinationWaterBody
+            }
         }
-        
-        if indexPath.row == model.previousWaterBodies.count + model.destinationWaterBodies.count + 4 {
-            return .AddDestinationWaterBody
+        else if areDestinationTogglesChecked(ref: model) && !arePreviousTogglesChecked(ref: model) {
+            if indexPath.row <= (model.previousWaterBodies.count + model.destinationMajorCities.count + 3) {
+                return .DestinationMajorCity
+            }
+            if indexPath.row == model.previousWaterBodies.count + model.destinationMajorCities.count + 4 {
+                return .AddDestinationWaterBody
+            }
         }
-        
-        if indexPath.row <= model.previousWaterBodies.count + 3 {
-            return .PreviousWaterBody
+        else if !areDestinationTogglesChecked(ref: model) && arePreviousTogglesChecked(ref: model) {
+            if indexPath.row <= (model.previousMajorCities.count + model.destinationWaterBodies.count + 3) {
+                return .DestinationWaterBody
+            }
+            if indexPath.row == model.previousMajorCities.count + model.destinationWaterBodies.count + 4 {
+                return .AddDestinationWaterBody
+            }
         }
-        
-        if indexPath.row <= (model.previousWaterBodies.count + model.destinationWaterBodies.count + 4) {
-            return .DestinationWaterBody
+        else {
+            model.deleteMajorCity(isPrevious: false)
+            model.deleteMajorCity(isPrevious: true)
+            if indexPath.row == model.previousWaterBodies.count + model.destinationWaterBodies.count + 4 {
+                return .AddDestinationWaterBody
+            }
+            
+            if indexPath.row <= (model.previousWaterBodies.count + model.destinationWaterBodies.count + 3) {
+                return .DestinationWaterBody
+            }
         }
         
         return .Divider

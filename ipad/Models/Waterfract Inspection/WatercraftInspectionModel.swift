@@ -73,10 +73,6 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
     @objc dynamic var commercialManufacturerAsPreviousWaterBody: Bool = false
     @objc dynamic var commercialManufacturerAsDestinationWaterBody: Bool = false
     
-    // Closest major city
-    @objc dynamic var previousMajorCity: String = ""
-    @objc dynamic var destinationMajorCity: String = ""
-    
     // High Risk Assesment fields
     @objc dynamic var highriskAIS: Bool = false
     @objc dynamic var adultDreissenidFound: Bool = false
@@ -87,6 +83,10 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
     // Journey
     var previousWaterBodies: List<PreviousWaterbodyModel> = List<PreviousWaterbodyModel>()
     var destinationWaterBodies: List<DestinationWaterbodyModel> = List<DestinationWaterbodyModel>()
+    
+    var previousMajorCities: List<MajorCityModel> = List<MajorCityModel>()
+    var destinationMajorCities: List<MajorCityModel> = List<MajorCityModel>()
+
     
     // High Risk Assessments
     var highRiskAssessments: List<HighRiskAssessmentModel> = List<HighRiskAssessmentModel>()
@@ -274,8 +274,8 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
             "passportNumber": passportNumber.count > 1 ? passportNumber : "None",
             "previousDryStorage": previousDryStorage,
             "destinationDryStorage": destinationDryStorage,
-            "previousMajorCity": previousMajorCity.count > 0 ? previousMajorCity : "None",
-            "destinationMajorCity": destinationMajorCity.count > 0 ? destinationMajorCity : "None",
+            "previousMajorCity": previousMajorCities.count > 0 ? (previousMajorCities[0].majorCity + ", " + previousMajorCities[0].province + ", " + previousMajorCities[0].country) : "None",
+            "destinationMajorCity": destinationMajorCities.count > 0 ? (destinationMajorCities[0].majorCity + ", " + previousMajorCities[0].province + ", " + previousMajorCities[0].country) : "None",
             "unknownPreviousWaterBody": unknownPreviousWaterBody,
             "unknownDestinationWaterBody": unknownDestinationWaterBody,
             "commercialManufacturerAsPreviousWaterBody": commercialManufacturerAsPreviousWaterBody,
@@ -453,6 +453,22 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
         }
     }
     
+    func deleteMajorCity(isPrevious: Bool) {
+        do {
+            let realm = try Realm()
+            try realm.write {
+                if isPrevious {
+                    self.previousMajorCities.removeAll()
+                } else {
+                    self.destinationMajorCities.removeAll()
+                }
+            }
+        } catch let error as NSError {
+            print("** REALM ERROR")
+            print(error)
+        }
+    }
+    
     func setMajorCity(isPrevious: Bool, majorCity: MajorCitiesTableModel) {
         let object = MajorCityModel()
         object.set(from: majorCity)
@@ -460,9 +476,12 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
             let realm = try Realm()
             try realm.write {
                 if isPrevious {
-                    self.previousMajorCity = object.majorCity + ", " + object.province + ", " + object.country
+                    self.previousMajorCities.removeAll()
+                    self.previousMajorCities.append(object)
+
                 } else {
-                    self.destinationMajorCity = object.majorCity + ", " + object.province + ", " + object.country
+                    self.destinationMajorCities.removeAll()
+                    self.destinationMajorCities.append(object)
                 }
             }
         } catch let error as NSError {
