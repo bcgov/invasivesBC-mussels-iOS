@@ -79,6 +79,10 @@
 		296885BD2603101E00ECA183 /* SelectedMajorCityCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 296885BC2603101E00ECA183 /* SelectedMajorCityCollectionViewCell.xib */; };
 		296885C12603102A00ECA183 /* MajorCityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 296885C02603102A00ECA183 /* MajorCityTableViewCell.swift */; };
 		296885C52603103A00ECA183 /* MajorCityTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 296885C42603103A00ECA183 /* MajorCityTableViewCell.xib */; };
+		29688613260A657900ECA183 /* DestinationMajorCityCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29688612260A657900ECA183 /* DestinationMajorCityCollectionViewCell.swift */; };
+		29688617260A659000ECA183 /* DestinationMajorCityCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29688616260A659000ECA183 /* DestinationMajorCityCollectionViewCell.xib */; };
+		2968861B260A65A000ECA183 /* PreviousMajorCityCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2968861A260A65A000ECA183 /* PreviousMajorCityCollectionViewCell.swift */; };
+		2968861F260A65AC00ECA183 /* PreviousMajorCityCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2968861E260A65AC00ECA183 /* PreviousMajorCityCollectionViewCell.xib */; };
 		296DEC15238C4CA70035E7FA /* RadioBooleanCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 296DEC13238C4CA70035E7FA /* RadioBooleanCollectionViewCell.swift */; };
 		296DEC16238C4CA70035E7FA /* RadioBooleanCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 296DEC14238C4CA70035E7FA /* RadioBooleanCollectionViewCell.xib */; };
 		296DEC1A238C51810035E7FA /* TimeInputCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 296DEC18238C51810035E7FA /* TimeInputCollectionViewCell.swift */; };
@@ -293,6 +297,10 @@
 		296885BC2603101E00ECA183 /* SelectedMajorCityCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectedMajorCityCollectionViewCell.xib; sourceTree = "<group>"; };
 		296885C02603102A00ECA183 /* MajorCityTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MajorCityTableViewCell.swift; sourceTree = "<group>"; };
 		296885C42603103A00ECA183 /* MajorCityTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MajorCityTableViewCell.xib; sourceTree = "<group>"; };
+		29688612260A657900ECA183 /* DestinationMajorCityCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestinationMajorCityCollectionViewCell.swift; sourceTree = "<group>"; };
+		29688616260A659000ECA183 /* DestinationMajorCityCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DestinationMajorCityCollectionViewCell.xib; sourceTree = "<group>"; };
+		2968861A260A65A000ECA183 /* PreviousMajorCityCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviousMajorCityCollectionViewCell.swift; sourceTree = "<group>"; };
+		2968861E260A65AC00ECA183 /* PreviousMajorCityCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PreviousMajorCityCollectionViewCell.xib; sourceTree = "<group>"; };
 		296DEC13238C4CA70035E7FA /* RadioBooleanCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioBooleanCollectionViewCell.swift; sourceTree = "<group>"; };
 		296DEC14238C4CA70035E7FA /* RadioBooleanCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RadioBooleanCollectionViewCell.xib; sourceTree = "<group>"; };
 		296DEC18238C51810035E7FA /* TimeInputCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeInputCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -649,6 +657,8 @@
 		2944BCDE2433949200826F48 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				29688611260A655C00ECA183 /* Destination Major City */,
+				29688610260A655300ECA183 /* Previous Major City */,
 				1E6D9A2D2399BDEE0034FDEF /* BaseJourneyCollectionViewCell.swift */,
 				29DB0118237207AD0046E605 /* Button */,
 				299BF01523FC9023001732CD /* Journey Header */,
@@ -885,6 +895,24 @@
 				296885C42603103A00ECA183 /* MajorCityTableViewCell.xib */,
 			);
 			path = Cells;
+			sourceTree = "<group>";
+		};
+		29688610260A655300ECA183 /* Previous Major City */ = {
+			isa = PBXGroup;
+			children = (
+				2968861A260A65A000ECA183 /* PreviousMajorCityCollectionViewCell.swift */,
+				2968861E260A65AC00ECA183 /* PreviousMajorCityCollectionViewCell.xib */,
+			);
+			path = "Previous Major City";
+			sourceTree = "<group>";
+		};
+		29688611260A655C00ECA183 /* Destination Major City */ = {
+			isa = PBXGroup;
+			children = (
+				29688612260A657900ECA183 /* DestinationMajorCityCollectionViewCell.swift */,
+				29688616260A659000ECA183 /* DestinationMajorCityCollectionViewCell.xib */,
+			);
+			path = "Destination Major City";
 			sourceTree = "<group>";
 		};
 		296DEC12238C4C8A0035E7FA /* Radio Boolean */ = {
@@ -1530,6 +1558,7 @@
 				29DB4E5A238715A300B13646 /* ShiftInformationHeaderCollectionViewCell.xib in Resources */,
 				2907E4B92368D25800946B3F /* InputModal.xib in Resources */,
 				290DA9DF2404621700438699 /* AwaitingAccessResponse.xib in Resources */,
+				29688617260A659000ECA183 /* DestinationMajorCityCollectionViewCell.xib in Resources */,
 				29DB4E3F23870B7B00B13646 /* ShifOverviewHeaderCollectionViewCell.xib in Resources */,
 				29E4BBF3237218610079475F /* DestinationWaterBodyCollectionViewCell.xib in Resources */,
 				296885BD2603101E00ECA183 /* SelectedMajorCityCollectionViewCell.xib in Resources */,
@@ -1539,6 +1568,7 @@
 				296885B526030FE900ECA183 /* MajorCityPicker.xib in Resources */,
 				A7AE5276237CC3660044DBB7 /* check-mark-success.json in Resources */,
 				298BF7C12394C0270072AA28 /* waterBodies.txt in Resources */,
+				2968861F260A65AC00ECA183 /* PreviousMajorCityCollectionViewCell.xib in Resources */,
 				29F29FA2236B8670004F12E7 /* DropdownCollectionViewCell.xib in Resources */,
 				29DB0117237206D30046E605 /* HeaderCollectionViewCell.xib in Resources */,
 				29DB4E472387113900B13646 /* BaseShiftOverviewCollectionViewCell.xib in Resources */,
@@ -1693,6 +1723,7 @@
 				29514BF02368CB5D00DC89C4 /* DropdownTableViewCell.swift in Sources */,
 				29BAC51E2367B6FA00A620F4 /* BaseRealmObject.swift in Sources */,
 				29BAC50623676EA400A620F4 /* Alert.swift in Sources */,
+				29688613260A657900ECA183 /* DestinationMajorCityCollectionViewCell.swift in Sources */,
 				2944BCF32437B8B400826F48 /* UINavigationBarExtention.swift in Sources */,
 				29A97433236CDD8F006C668F /* DateInputCollectionViewCell.swift in Sources */,
 				295051102374F54A000FBD6E /* IntegerInputCollectionViewCell.swift in Sources */,
@@ -1712,6 +1743,7 @@
 				2944BCF12437B87100826F48 /* UIViewExtention.swift in Sources */,
 				29F29F9D236B7750004F12E7 /* Switcher.swift in Sources */,
 				29CEC91A23676424003B21B9 /* AppDelegate.swift in Sources */,
+				2968861B260A65A000ECA183 /* PreviousMajorCityCollectionViewCell.swift in Sources */,
 				29514BE92368C41900DC89C4 /* DropdownModel.swift in Sources */,
 				29F29F90236B6A03004F12E7 /* SwitcherView.swift in Sources */,
 				29BAC50C23677EDC00A620F4 /* LoginViewController.swift in Sources */,
