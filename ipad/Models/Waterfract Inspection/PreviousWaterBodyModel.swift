@@ -11,7 +11,6 @@ import Realm
 import RealmSwift
 
 class JourneyModel: Object {
-    @objc dynamic var numberOfDaysOut : String = ""
     @objc dynamic var shouldSync: Bool = false
     @objc dynamic var remoteId: Int = -1
     @objc dynamic var localId: String = {
@@ -72,7 +71,7 @@ class PreviousWaterbodyModel: JourneyModel, BaseRealmObject {
         do {
             let realm = try Realm()
             try realm.write {
-                self.numberOfDaysOut = days
+                self.daysOut = days
             }
         } catch let error as NSError {
             print("** REALM ERROR")
@@ -84,7 +83,7 @@ class PreviousWaterbodyModel: JourneyModel, BaseRealmObject {
         if !self.otherWaterbody.isEmpty {
             return [
                 "journeyType": 1,
-                "numberOfDaysOut": daysOut.count > 1 ? daysOut : "N/A",
+                "numberOfDaysOut": daysOut.count > 0 ? daysOut : "N/A",
                 "otherWaterBody": self.otherWaterbody
             ]
         }
@@ -95,7 +94,7 @@ class PreviousWaterbodyModel: JourneyModel, BaseRealmObject {
         
         return [
             "journeyType": 1,
-            "numberOfDaysOut": daysOut.count > 1 ? daysOut : "N/A",
+            "numberOfDaysOut": daysOut.count > 0 ? daysOut : "N/A",
             "waterBody": remoteId
         ]
     }
