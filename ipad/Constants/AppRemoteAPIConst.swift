@@ -14,8 +14,8 @@ import Foundation
 
 let DEV_URL: String = "https://api-dev-invasivesbc.apps.silver.devops.gov.bc.ca/api"
 let LOCAL_URL: String = "http://localhost:7070/api"
-let TEST_URL: String = "https://api-dev-invasivesbc.apps.silver.devops.gov.bc.ca/api"
-let PROD_URL: String = "https://api-dev-invasivesbc.apps.silver.devops.gov.bc.ca/api"
+let TEST_URL: String = "https://api-test-invasivesbc.apps.silver.devops.gov.bc.ca/api"
+let PROD_URL: String = "https://api-invasivesbc.apps.silver.devops.gov.bc.ca/api"
 
 /**
   * KeyCloak URL
@@ -57,7 +57,7 @@ class RemoteURLManager {
     static var `default` = {
         // Here We Can use Target Flag to customize
         // Switch Env 
-        return RemoteURLManager(.dev)
+        return RemoteURLManager(.test)
     }()
     
     init(_ env: RemoteEnv) {
