@@ -32,7 +32,10 @@ class DestinationWaterBodyCollectionViewCell: BaseJourneyCollectionViewCell, The
         if !model.otherWaterbody.isEmpty {
             self.inputField.text = model.otherWaterbody
         } else if let waterbody = Storage.shared.getWaterbodyModel(withId: model.remoteId) {
-            self.inputField.text = "\(waterbody.name), \(waterbody.province), \(waterbody.country) (\(waterbody.closest))"
+            let label = "\(waterbody.name), \(waterbody.province), \(waterbody.country) (\(waterbody.closest))"
+            let splitByComma = label.components(separatedBy: ",")
+            let splitCountryCity = splitByComma[2].components(separatedBy: "(")
+            self.inputField.text = splitByComma[0].trimmingCharacters(in: .whitespacesAndNewlines) + ", " + splitByComma[1].trimmingCharacters(in: .whitespacesAndNewlines) + ", " + splitCountryCity[0].trimmingCharacters(in: .whitespacesAndNewlines) + " (" + splitCountryCity[1].components(separatedBy: ")")[0].trimmingCharacters(in: .whitespacesAndNewlines) + ")"
         }
         style()
         self.deleteButton.alpha = isEditable ? 1 : 0

@@ -526,7 +526,12 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
         }
     }
     
-    
+    func getPreviousWaterBodyInputFields(for section: WatercraftFromSection, editable: Bool? = nil, index: Int) -> [InputItem] {
+        if let existing = inputputFields[section] { return existing}
+        var inputFields: [WatercraftFromSection: [InputItem]] = [WatercraftFromSection: [InputItem]]()
+        inputFields[section] = WatercraftInspectionFormHelper.getPreviousWaterBodyFields(for: self, index: index, isEditable: editable)
+        return inputFields[section] ?? []
+    }
     
     // MARK: UI Helpers
     func getInputputFields(for section: WatercraftFromSection, editable: Bool? = nil) -> [InputItem] {
@@ -542,7 +547,6 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
         inputputFields[.PassportInfo] = passportFields
         inputputFields[.BasicInformation] = WatercraftInspectionFormHelper.getBasicInfoFields(for: self, editable: editable, passportField: _passportHolderField)
         inputputFields[.WatercraftDetails] = WatercraftInspectionFormHelper.getWatercraftDetailsFields(for: self, editable: editable)
-        inputputFields[.JourneyDetails] = WatercraftInspectionFormHelper.getPreviousWaterBodyFields(for: self, index: 0, isEditable: editable)
         inputputFields[.InspectionDetails] = WatercraftInspectionFormHelper.getInspectionDetailsFields(for: self, editable: editable)
         inputputFields[.GeneralComments] = WatercraftInspectionFormHelper.getGeneralCommentsFields(for: self, editable: editable)
         inputputFields[.HighRiskAssessmentFields] = WatercraftInspectionFormHelper.getHighriskAssessmentFieldsFields(for: self, editable: editable)
