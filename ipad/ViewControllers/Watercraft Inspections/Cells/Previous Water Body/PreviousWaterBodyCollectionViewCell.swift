@@ -10,7 +10,6 @@ import UIKit
 
 class PreviousWaterBodyCollectionViewCell: BaseJourneyCollectionViewCell, Theme {
     
-    // Todo update this 
     @IBOutlet weak var deleteButton: UIButton!
     @IBOutlet weak var cellContainer: UIView!
     @IBOutlet weak var fieldHeader: UILabel!
@@ -59,4 +58,3 @@ class PreviousWaterBodyCollectionViewCell: BaseJourneyCollectionViewCell, Theme 
         contentView.layer.borderColor = UIColor(red:0.8, green:0.81, blue:0.82, alpha:1).cgColor
     }
 }
-

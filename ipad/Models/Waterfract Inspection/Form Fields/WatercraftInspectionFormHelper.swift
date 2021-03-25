@@ -119,6 +119,7 @@ class WatercraftInspectionFormHelper {
         decontaminationReference.dependency.append(InputDependency(to: decontaminationPerformed, equalTo: true))
         decontaminationReference.dependency.append(InputDependency(to: isPassportHolder, equalTo: true))
         items.append(decontaminationReference)
+        
         return items
     }
     
@@ -354,16 +355,17 @@ class WatercraftInspectionFormHelper {
 
         if (object?.previousWaterBodies.count ?? 0 > 0) {
             let item = object?.previousWaterBodies[index] ?? nil
-            let daysOut = DropdownInput(
-                key: "previousWaterBody-daysOut-\(index)",
-                header: "Days out of water",
+
+
+            let numberOfDaysOut = DropdownInput(
+                key: "previousWaterBody-numberOfDaysOut-\(index)",
+                header: "Number of days out of waterbody?",
                 editable: isEditable ?? true,
-                value: item?["daysOut"] as? String ?? "",
+                value: item?["numberOfDaysOut"] as? String ?? "",
                 width: .Full,
                 dropdownItems: DropdownHelper.shared.getDropdown(for: .daysOutOfWater)
             )
-            
-            sectionItems.append(daysOut)
+            sectionItems.append(numberOfDaysOut)
         }
         return sectionItems
     }
