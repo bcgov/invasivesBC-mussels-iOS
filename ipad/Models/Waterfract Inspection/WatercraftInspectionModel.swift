@@ -253,6 +253,7 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
             "workflow": id,
             "timestamp": formattedDateFull,
             "passportHolder": isPassportHolder,
+            "isNewPassportIssued": isNewPassportIssued,
             "k9Inspection": k9Inspection,
             "marineSpeciesFound": marineSpeciesFound,
             "aquaticPlantsFound": aquaticPlantsFound,
