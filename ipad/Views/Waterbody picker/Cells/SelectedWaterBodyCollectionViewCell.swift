@@ -44,8 +44,16 @@ class SelectedWaterBodyCollectionViewCell: UICollectionViewCell, Theme {
     
     func setup(item: DropdownModel, onRemove: @escaping()-> Void) {
         let splitByComma = item.display.components(separatedBy: ",")
-        let splitCountryCity = splitByComma[2].components(separatedBy: "(")
-        self.titleLabel.text = splitByComma[0].trimmingCharacters(in: .whitespacesAndNewlines) + ", " + splitByComma[1].trimmingCharacters(in: .whitespacesAndNewlines) + ", " + splitCountryCity[0].trimmingCharacters(in: .whitespacesAndNewlines) + " (" + splitCountryCity[1].components(separatedBy: ")")[0].trimmingCharacters(in: .whitespacesAndNewlines) + ")"
+        if (splitByComma.count > 2) {
+            let splitCountryCity = splitByComma[2].components(separatedBy: "(")
+            if (splitCountryCity.count > 1) {
+                self.titleLabel.text = splitByComma[0].trimmingCharacters(in: .whitespacesAndNewlines) + ", " + splitByComma[1].trimmingCharacters(in: .whitespacesAndNewlines) + ", " + splitCountryCity[0].trimmingCharacters(in: .whitespacesAndNewlines) + " (" + splitCountryCity[1].components(separatedBy: ")")[0].trimmingCharacters(in: .whitespacesAndNewlines) + ")"
+            } else {
+                self.titleLabel.text = item.display
+            }
+        } else {
+            self.titleLabel.text = item.display
+        }
         self.completion = onRemove
         self.model = item
 //        let onClickGesture = UITapGestureRecognizer(target: self, action:  #selector (self.selectAction (_:)))

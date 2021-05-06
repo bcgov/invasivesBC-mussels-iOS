@@ -361,7 +361,7 @@ class WatercraftInspectionFormHelper {
                 key: "previousWaterBody-numberOfDaysOut-\(index)",
                 header: "Number of days out of waterbody?",
                 editable: isEditable ?? true,
-                value: item?["numberOfDaysOut"] as? String ?? "",
+                value: item?["numberOfDaysOut"] as? String ?? "N/A",
                 width: .Full,
                 dropdownItems: DropdownHelper.shared.getDropdown(for: .daysOutOfWater)
             )
