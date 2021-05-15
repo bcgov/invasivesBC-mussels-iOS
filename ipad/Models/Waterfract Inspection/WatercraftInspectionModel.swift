@@ -276,7 +276,7 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
             "previousDryStorage": previousDryStorage,
             "destinationDryStorage": destinationDryStorage,
             "previousMajorCity": previousMajorCities.count > 0 ? (previousMajorCities[0].majorCity + ", " + previousMajorCities[0].province + ", " + previousMajorCities[0].country) : "None",
-            "destinationMajorCity": destinationMajorCities.count > 0 ? (destinationMajorCities[0].majorCity + ", " + previousMajorCities[0].province + ", " + previousMajorCities[0].country) : "None",
+            "destinationMajorCity": destinationMajorCities.count > 0 ? (destinationMajorCities[0].majorCity + ", " + destinationMajorCities[0].province + ", " + destinationMajorCities[0].country) : "None",
             "unknownPreviousWaterBody": unknownPreviousWaterBody,
             "unknownDestinationWaterBody": unknownDestinationWaterBody,
             "commercialManufacturerAsPreviousWaterBody": commercialManufacturerAsPreviousWaterBody,
