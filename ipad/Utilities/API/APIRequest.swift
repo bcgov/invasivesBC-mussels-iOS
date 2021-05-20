@@ -77,7 +77,7 @@ class APIRequest {
         // Manual 20 second timeout for each call
         var completed = false
         var timedOut = false
-        DispatchQueue.main.asyncAfter(deadline: .now() + 20) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 300) {
             if !completed {
                 timedOut = true
                 Banner.show(message: "Request Time Out")
@@ -116,7 +116,7 @@ class APIRequest {
         // Manual 20 second timeout for each call
         var completed = false
         var timedOut = false
-        DispatchQueue.main.asyncAfter(deadline: .now() + 20) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 300) {
             if !completed {
                 timedOut = true
                 Banner.show(message: "Request Time Out")
