@@ -57,12 +57,14 @@ class Banner {
                     if self.messages.contains(where: { (message) -> Bool in
                         return message.title == message.title && message.detail == message.detail
                     }) {
-                        for i in 0...self.messages.count - 1
-                            where
-                            self.messages[i].title == message.title &&
-                            self.messages[i].detail == message.detail
-                            {
-                            self.messages.remove(at: i)
+                        if self.messages.count > 1 {
+                            for i in 0...self.messages.count - 1
+                                where
+                                self.messages[i].title == message.title &&
+                                self.messages[i].detail == message.detail
+                                {
+                                self.messages.remove(at: i)
+                            }
                         }
                     }
                     self.recursiveShow()
