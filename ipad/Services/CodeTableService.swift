@@ -62,7 +62,7 @@ class CodeTableService {
             if !waterBodiesFetched {
                 hadFails = true
             }
-            status("Wrapping up")
+            status("Storing Water Bodies...")
             let waterBodies = Storage.shared.fullWaterBodyTables()
             let provinces = waterBodies.map{$0.province}.uniques.sorted{$0.lowercased() < $1.lowercased()}
             let cities = waterBodies.map{$0.closest}.uniques.sorted{$0.lowercased() < $1.lowercased()}
@@ -97,7 +97,7 @@ class CodeTableService {
             if !majorCitiesFetched {
                 hadFails = true
             }
-            status("Wrapping up")
+            status("Storing Major Cities...")
             let majorCities = Storage.shared.fullMajorCitiesTables()
             let cities = majorCities.map{$0.city_name}.uniques.sorted{$0.lowercased() < $1.lowercased()}
             
