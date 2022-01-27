@@ -310,6 +310,15 @@ class WatercraftInspectionFormHelper {
             width: .Third
         )
         sectionItems.append(highRiskArea)
+
+        let cleanDrainDryAfter = RadioSwitchInput(
+            key: "cleanDrainDryAfterInspection",
+            header: WatercraftFieldHeaderConstants.WatercraftDetails.cleanDrainDryAfter,
+            editable: editable ?? true,
+            value: object?.cleanDrainDryAfterInspection ?? nil,
+            width: .Full
+        )
+        sectionItems.append(cleanDrainDryAfter)
         
         return sectionItems
     }
@@ -321,18 +330,18 @@ class WatercraftInspectionFormHelper {
             header: WatercraftFieldHeaderConstants.HighriskAssessmentFields.highriskAIS,
             editable: editable ?? true,
             value: object?.highriskAIS ?? nil,
-            width: .Third
+            width: .Full
         )
         sectionItems.append(highriskAIS)
         
-        let adultDreissenidFound = SwitchInput(
-            key: "adultDreissenidFound",
-            header: WatercraftFieldHeaderConstants.HighriskAssessmentFields.adultDreissenidFound,
-            editable: editable ?? true,
-            value: object?.adultDreissenidFound ?? nil,
-            width: .Third
-        )
-        sectionItems.append(adultDreissenidFound)
+//        let adultDreissenidFound = SwitchInput(
+//            key: "adultDreissenidFound",
+//            header: WatercraftFieldHeaderConstants.HighriskAssessmentFields.adultDreissenidFound,
+//            editable: editable ?? true,
+//            value: object?.adultDreissenidFound ?? nil,
+//            width: .Third
+//        )
+//        sectionItems.append(adultDreissenidFound)
         
         return sectionItems
     }

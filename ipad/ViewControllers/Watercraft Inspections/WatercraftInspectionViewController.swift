@@ -225,10 +225,17 @@ class WatercraftInspectionViewController: BaseViewController {
         // Set value in Realm object
         // Keys that need a pop up/ additional actions
         let highRiskFieldKeys = WatercraftInspectionFormHelper.getHighriskAssessmentFieldsFields().map{ $0.key}
+        
         if highRiskFieldKeys.contains(item.key) {
             let value = item.value.get(type: item.type) as? Bool
             let alreadyHasHighRiskForm = !model.highRiskAssessments.isEmpty
-            if value == true && alreadyHasHighRiskForm {
+            
+            if model.cleanDrainDryAfterInspection == true && value == true {
+                Alert.show(title: "Invalid Entry", message: "YES cannot be selected for both fields")
+                model.set(value: false, for: item.key)
+                item.value.set(value: false, type: item.type)
+                NotificationCenter.default.post(name: .InputFieldShouldUpdate, object: item)
+            } else if value == true && alreadyHasHighRiskForm {
                 // set value
                 model.set(value: true, for: item.key)
                 self.showHighRiskForm(show: true)

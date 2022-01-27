@@ -13,7 +13,7 @@ import RealmSwift
 
 public enum HighRiskFormSection: Int, CaseIterable {
     case BasicInformation = 0
-    case Inspection
+//    case Inspection
     case InspectionOutcomes
 }
 
@@ -115,8 +115,8 @@ class HighRiskAssessmentModel: Object, BaseRealmObject {
         switch section {
         case .BasicInformation:
             return HighRiskFormHelper.getBasicInfoFields(for: self, editable: editable)
-        case .Inspection:
-            return HighRiskFormHelper.getInspectionFields(for: self, editable: editable)
+//        case .Inspection:
+//            return HighRiskFormHelper.getInspectionFields(for: self, editable: editable)
         case .InspectionOutcomes:
             return HighRiskFormHelper.getInspectionOutcomesFields(for: self, editable: editable)
         }

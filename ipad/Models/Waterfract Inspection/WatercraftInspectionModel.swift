@@ -60,6 +60,7 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
     
     // Inspection Details
     @objc dynamic var marineMusslesFound: Bool = false
+    @objc dynamic var cleanDrainDryAfterInspection: Bool = false
     
     // Dry Storage
     @objc dynamic var previousDryStorage: Bool = false
@@ -115,16 +116,20 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
             print("** REALM ERROR")
             print(error)
         }
-        if key == "highriskAIS" || key == "adultDreissenidFound" {
+        if key == "highriskAIS" || key == "cleanDrainDryAfterInspection" {
             setRiskLevel()
         }
     }
     
     func setRiskLevel() {
-        if highriskAIS == true || adultDreissenidFound == true {
-            set(value: "High", for: "riskLevel")
+        if highriskAIS == true && cleanDrainDryAfterInspection == true {
+            Alert.show(title: "Invalid Entry", message: "YES cannot be selected for both fields")
         } else {
-            set(value: "Low", for: "riskLevel")
+            if highriskAIS == true {
+                set(value: "High", for: "riskLevel")
+            } else {
+                set(value: "Low", for: "riskLevel")
+            }
         }
     }
     
@@ -261,6 +266,7 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
             "previousAISKnowledge": previousAISKnowlede,
             "previousInspection": previousInspection,
             "marineMusselFound": marineMusslesFound,
+            "cleanDrainDryAfterInspection": cleanDrainDryAfterInspection,
             "adultDreissenidaeFound": adultDreissenidFound,
             "nonMotorized": nonMotorized,
             "simple": simple,
