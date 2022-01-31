@@ -122,14 +122,10 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
     }
     
     func setRiskLevel() {
-        if highriskAIS == true && cleanDrainDryAfterInspection == true {
-            Alert.show(title: "Invalid Entry", message: "YES cannot be selected for both fields")
+        if highriskAIS == true {
+            set(value: "High", for: "riskLevel")
         } else {
-            if highriskAIS == true {
-                set(value: "High", for: "riskLevel")
-            } else {
-                set(value: "Low", for: "riskLevel")
-            }
+            set(value: "Low", for: "riskLevel")
         }
     }
     

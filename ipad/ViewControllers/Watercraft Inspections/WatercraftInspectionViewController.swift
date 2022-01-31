@@ -225,13 +225,14 @@ class WatercraftInspectionViewController: BaseViewController {
         // Set value in Realm object
         // Keys that need a pop up/ additional actions
         let highRiskFieldKeys = WatercraftInspectionFormHelper.getHighriskAssessmentFieldsFields().map{ $0.key}
-        
+
         if highRiskFieldKeys.contains(item.key) {
             let value = item.value.get(type: item.type) as? Bool
             let alreadyHasHighRiskForm = !model.highRiskAssessments.isEmpty
             
             if model.cleanDrainDryAfterInspection == true && value == true {
                 Alert.show(title: "Invalid Entry", message: "YES cannot be selected for both fields")
+
                 model.set(value: false, for: item.key)
                 item.value.set(value: false, type: item.type)
                 NotificationCenter.default.post(name: .InputFieldShouldUpdate, object: item)
@@ -293,6 +294,16 @@ class WatercraftInspectionViewController: BaseViewController {
             // All other keys, store directly
             // TODO: needs cleanup for nil case
             model.set(value: item.value.get(type: item.type) as Any, for: item.key)
+            
+            if item.key.lowercased().contains("cleandraindryafterinspection".lowercased()) {
+                let value = item.value.get(type: item.type) as? Bool
+    
+                if model.highriskAIS == true && value == true {
+                    Alert.show(title: "Invalid Entry", message: "YES cannot be selected for both fields")
+                    model.set(value: false, for: item.key)
+                    self.collectionView.reloadData()
+                }
+            }
         }
         // TODO: CLEANUP
         // Handle Keys that alter form
