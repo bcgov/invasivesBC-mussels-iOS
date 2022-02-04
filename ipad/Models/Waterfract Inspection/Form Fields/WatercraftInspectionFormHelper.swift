@@ -269,12 +269,13 @@ class WatercraftInspectionFormHelper {
         previousInspectionSource.dependency.append(InputDependency(to: previousInspection, equalTo: true))
         sectionItems.append(previousInspectionSource)
         
-        let previousInspectionDays = IntegerInput(
+        let previousInspectionDays = DropdownInput(
             key: "previousInspectionDays",
             header: WatercraftFieldHeaderConstants.WatercraftDetails.previousInspectionDays,
             editable: editable ?? true,
-            value: object?.previousInspectionDays ?? 0,
-            width: .Full
+            value: object?.previousInspectionDays ?? nil,
+            width: .Full,
+            dropdownItems: DropdownHelper.shared.getDropdown(for: .daysSincePreviousInspection)
         )
         previousInspectionDays.dependency.append(InputDependency(to: previousInspection, equalTo: true))
         sectionItems.append(previousInspectionDays)

@@ -124,6 +124,15 @@ class HighRiskFormHelper {
         )
         sectionItems.append(decontaminationOrderIssued)
         
+        let decontaminationAppendixB = SwitchInput(
+            key: "highRisk-decontaminationAppendixB",
+            header: HighRiskFormFieldHeaders.InspectionOutcomes.decontaminationAppendixB,
+            editable: editable ?? true,
+            value: object?.decontaminationAppendixB ?? false,
+            width: .Full
+        )
+        sectionItems.append(decontaminationAppendixB)
+        
         let decontaminationOrderNumber = IntegerInput(
             key: "highRisk-decontaminationOrderNumber",
             header: HighRiskFormFieldHeaders.InspectionOutcomes.decontaminationOrderNumber,

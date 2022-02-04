@@ -28,6 +28,7 @@ public enum CodeTableType {
     case previousAISKnowledgeSource
     case previousInspectionSource
     case countryProvince
+    case daysSincePreviousInspection
 }
 
 class CodeTableService {

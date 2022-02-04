@@ -56,7 +56,7 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
     @objc dynamic var previousAISKnowledeSource: String = ""
     @objc dynamic var previousInspection: Bool = false
     @objc dynamic var previousInspectionSource: String = ""
-    @objc dynamic var previousInspectionDays: Int = 0
+    @objc dynamic var previousInspectionDays: String = ""
     
     // Inspection Details
     @objc dynamic var marineMusslesFound: Bool = false

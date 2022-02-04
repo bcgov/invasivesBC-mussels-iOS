@@ -48,6 +48,7 @@ class HighRiskAssessmentModel: Object, BaseRealmObject {
     @objc dynamic var decontaminationReference: String = ""
     
     @objc dynamic var decontaminationOrderIssued: Bool = false
+    @objc dynamic var decontaminationAppendixB: Bool = false
     @objc dynamic var decontaminationOrderNumber: Int = 0
     @objc dynamic var decontaminationOrderReason: String = ""
     
@@ -89,6 +90,7 @@ class HighRiskAssessmentModel: Object, BaseRealmObject {
             "dreissenidMusselsFoundPrevious": dreissenidMusselsFoundPrevious,
             "decontaminationPerformed": decontaminationPerformed,
             "decontaminationOrderIssued": decontaminationOrderIssued,
+            "decontaminationAppendixB": decontaminationAppendixB,
             "sealIssued": sealIssued,
             "watercraftRegistration": watercraftRegistration.count > 1 ? watercraftRegistration : "None",
             "decontaminationReference": decontaminationReference.count > 1 ? decontaminationReference : "None",
