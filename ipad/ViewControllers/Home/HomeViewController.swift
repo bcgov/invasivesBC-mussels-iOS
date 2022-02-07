@@ -8,7 +8,7 @@
 
 import UIKit
 import Reachability
-import Crashlytics
+//import Crashlytics
 
 class HomeViewController: BaseViewController {
     

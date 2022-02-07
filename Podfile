@@ -44,9 +44,7 @@ target 'ipad' do
   pod 'SwiftyJSON'
   # add pods for desired Firebase products
   # https://firebase.google.com/docs/ios/setup#available-pods
-  pod 'Firebase/Analytics'
   pod 'Fabric'
-  pod 'Crashlytics'
-  pod 'Firebase/Crashlytics'
+
 
 end
