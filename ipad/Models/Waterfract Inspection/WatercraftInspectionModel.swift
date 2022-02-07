@@ -11,7 +11,7 @@ import Foundation
 import Realm
 import RealmSwift
 
-class WatercradftInspectionModel: Object, BaseRealmObject {
+class WatercraftInspectionModel: Object, BaseRealmObject {
     @objc dynamic var userId: String = ""
     @objc dynamic var localId: String = {
         return UUID().uuidString
@@ -59,7 +59,7 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
     @objc dynamic var previousInspectionDays: String = ""
     
     // Inspection Details
-    @objc dynamic var marineMusslesFound: Bool = false
+    @objc dynamic var marineMusselsFound: Bool = false
     @objc dynamic var cleanDrainDryAfterInspection: Bool = false
     
     // Dry Storage
@@ -261,7 +261,7 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
             "aquaticPlantsFound": aquaticPlantsFound,
             "previousAISKnowledge": previousAISKnowlede,
             "previousInspection": previousInspection,
-            "marineMusselFound": marineMusslesFound,
+            "marineMusselFound": marineMusselsFound,
             "cleanDrainDryAfterInspection": cleanDrainDryAfterInspection,
             "adultDreissenidaeFound": adultDreissenidFound,
             "nonMotorized": nonMotorized,

@@ -43,7 +43,7 @@ class ShiftModel: Object, BaseRealmObject {
     @objc dynamic var shitStartComments: String = ""
     @objc dynamic var shitEndComments: String = ""
     
-    var inspections: List<WatercradftInspectionModel> = List<WatercradftInspectionModel>()
+    var inspections: List<WatercraftInspectionModel> = List<WatercraftInspectionModel>()
     
     @objc dynamic var status: String = "Draft"
     // used for quary purposes (and displaying)
@@ -55,8 +55,8 @@ class ShiftModel: Object, BaseRealmObject {
     }
     
     // MARK: Add Inspection object
-    func addInspection() -> WatercradftInspectionModel? {
-        let inspection = WatercradftInspectionModel()
+    func addInspection() -> WatercraftInspectionModel? {
+        let inspection = WatercraftInspectionModel()
         inspection.shouldSync = false
         inspection.userId = self.userId
         inspection.timeStamp = Date()

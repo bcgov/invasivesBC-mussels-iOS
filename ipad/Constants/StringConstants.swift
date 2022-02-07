@@ -111,7 +111,7 @@ struct WatercraftFieldHeaderConstants {
     }
     struct InspectionDetails {
         static let aquaticPlantsFound = "Aquatic plants found"
-        static let marineMusslesFound = "Marine mussels or barnacles found"
+        static let marineMusselsFound = "Marine mussels or barnacles found"
         static let failedToStop = "Watercraft pulled over for failing to stop at the inspection station"
         static let ticketIssued = "Violation ticket issued"
     }

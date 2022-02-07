@@ -9,7 +9,7 @@
 import Foundation
 class WatercraftInspectionFormHelper {
     
-    static func getPassportFields(for object: WatercradftInspectionModel? = nil, editable: Bool? = true) -> [InputItem] {
+    static func getPassportFields(for object: WatercraftInspectionModel? = nil, editable: Bool? = true) -> [InputItem] {
         var items: [InputItem] = []
         
         let isPassportHolder = RadioSwitchInput(
@@ -123,7 +123,7 @@ class WatercraftInspectionFormHelper {
         return items
     }
     
-    static func getBasicInfoFields(for object: WatercradftInspectionModel? = nil, editable: Bool? = true, passportField: RadioSwitchInput) -> [InputItem] {
+    static func getBasicInfoFields(for object: WatercraftInspectionModel? = nil, editable: Bool? = true, passportField: RadioSwitchInput) -> [InputItem] {
         var sectionItems: [InputItem] = []
         let province = DropdownInput(
             key: "countryProvince",
@@ -131,7 +131,7 @@ class WatercraftInspectionFormHelper {
             editable: editable ?? true,
             value: object?.countryProvince ?? "",
             width: .Third,
-            dropdownItems: DropdownHelper.shared.getDropdownForPrvinces(),
+            dropdownItems: DropdownHelper.shared.getDropdownForProvinces(),
             codes: DropdownHelper.shared.getProvinceCodes()
         )
         sectionItems.append(province)
@@ -202,7 +202,7 @@ class WatercraftInspectionFormHelper {
         return sectionItems
     }
     
-    static func getWatercraftDetailsFields(for object: WatercradftInspectionModel? = nil, editable: Bool? = true) -> [InputItem] {
+    static func getWatercraftDetailsFields(for object: WatercraftInspectionModel? = nil, editable: Bool? = true) -> [InputItem] {
         var sectionItems: [InputItem] = []
         let numberOfPeopleInParty = IntegerStepperInput(
             key: "numberOfPeopleInParty",
@@ -283,7 +283,7 @@ class WatercraftInspectionFormHelper {
         return sectionItems
     }
     
-    static func getInspectionDetailsFields(for object: WatercradftInspectionModel? = nil, editable: Bool? = true) -> [InputItem] {
+    static func getInspectionDetailsFields(for object: WatercraftInspectionModel? = nil, editable: Bool? = true) -> [InputItem] {
         var sectionItems: [InputItem] = []
         let aquaticPlantsFound = SwitchInput(
             key: "aquaticPlantsFound",
@@ -294,14 +294,14 @@ class WatercraftInspectionFormHelper {
         )
         sectionItems.append(aquaticPlantsFound)
         
-        let marineMusslesFound = SwitchInput(
-            key: "marineMusslesFound",
-            header: WatercraftFieldHeaderConstants.InspectionDetails.marineMusslesFound,
+        let marineMusselsFound = SwitchInput(
+            key: "marineMusselsFound",
+            header: WatercraftFieldHeaderConstants.InspectionDetails.marineMusselsFound,
             editable: editable ?? true,
-            value: object?.marineMusslesFound ?? nil,
+            value: object?.marineMusselsFound ?? nil,
             width: .Third
         )
-        sectionItems.append(marineMusslesFound)
+        sectionItems.append(marineMusselsFound)
         
         let highRiskArea = SwitchInput(
             key: "highRiskArea",
@@ -324,7 +324,7 @@ class WatercraftInspectionFormHelper {
         return sectionItems
     }
     
-    static func getHighriskAssessmentFieldsFields(for object: WatercradftInspectionModel? = nil, editable: Bool? = true) -> [InputItem] {
+    static func getHighriskAssessmentFieldsFields(for object: WatercraftInspectionModel? = nil, editable: Bool? = true) -> [InputItem] {
         var sectionItems: [InputItem] = []
         let highriskAIS = SwitchInput(
             key: "highriskAIS",
@@ -347,7 +347,7 @@ class WatercraftInspectionFormHelper {
         return sectionItems
     }
     
-    static func getGeneralCommentsFields(for object: WatercradftInspectionModel? = nil, editable: Bool? = true) -> [InputItem] {
+    static func getGeneralCommentsFields(for object: WatercraftInspectionModel? = nil, editable: Bool? = true) -> [InputItem] {
         var sectionItems: [InputItem] = []
         let generalComments = TextAreaInput(
             key: "generalComments",
@@ -360,7 +360,7 @@ class WatercraftInspectionFormHelper {
         return sectionItems
     }
     
-    public static func getPreviousWaterBodyFields(for object: WatercradftInspectionModel? = nil, index: Int, isEditable: Bool? = true) -> [InputItem] {
+    public static func getPreviousWaterBodyFields(for object: WatercraftInspectionModel? = nil, index: Int, isEditable: Bool? = true) -> [InputItem] {
         var sectionItems: [InputItem] = []
 
         if (object?.previousWaterBodies.count ?? 0 > 0) {
@@ -380,7 +380,7 @@ class WatercraftInspectionFormHelper {
         return sectionItems
     }
     
-    public static func watercraftInspectionDestinationWaterBodyInputs(for object: WatercradftInspectionModel? = nil, index: Int, isEditable: Bool? = true) -> [InputItem] {
+    public static func watercraftInspectionDestinationWaterBodyInputs(for object: WatercraftInspectionModel? = nil, index: Int, isEditable: Bool? = true) -> [InputItem] {
         let item = object?.destinationWaterBodies[index] ?? nil
         var sectionItems: [InputItem] = []
         

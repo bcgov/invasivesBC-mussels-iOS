@@ -10,6 +10,6 @@ import UIKit
 
 class WorkflowAPI: API {
     override class func apiURL() -> String {
-        return APIURL.wokrflow
+        return APIURL.workflow
     }
 }

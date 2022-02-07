@@ -108,8 +108,8 @@ class Storage {
     }
     
     // MARK: Inspections
-    public func inspection(withLocalId localId: String) -> WatercradftInspectionModel? {
-        guard let realm = try? Realm(), let object = realm.objects(WatercradftInspectionModel.self).filter("localId = %@", localId).first else {
+    public func inspection(withLocalId localId: String) -> WatercraftInspectionModel? {
+        guard let realm = try? Realm(), let object = realm.objects(WatercraftInspectionModel.self).filter("localId = %@", localId).first else {
             return nil
         }
         return object

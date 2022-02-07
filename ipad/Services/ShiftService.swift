@@ -95,7 +95,7 @@ class ShiftService {
     
     private func post(shift: ShiftModel, then: @escaping (_ id: Int?) -> Void) {
         if (!isOnline()) {return then(nil)}
-        guard let endpoint = URL(string: APIURL.wokrflow) else { return then(nil)}
+        guard let endpoint = URL(string: APIURL.workflow) else { return then(nil)}
         APIRequest.request(type: .Post, endpoint: endpoint, params: shift.toDictionary()) { (result) in
             guard let responseJSON = result else {
                 Banner.show(message: "Didn't receive a valid API response when posting shift")
@@ -109,7 +109,7 @@ class ShiftService {
         }
     }
     
-    private func post(inspection: WatercradftInspectionModel, shift id: Int,then: @escaping (_ id: Int?) -> Void) {
+    private func post(inspection: WatercraftInspectionModel, shift id: Int,then: @escaping (_ id: Int?) -> Void) {
         if (!isOnline()) {return then(nil)}
         guard let endpoint = URL(string: APIURL.watercraftRiskAssessment) else { return then(nil)}
         APIRequest.request(type: .Post, endpoint: endpoint, params: inspection.toDictionary(shift: id)) { (result) in
@@ -126,7 +126,7 @@ class ShiftService {
     }
     
     // Submit inspection objects recursively
-    private func submit(inspections: [WatercradftInspectionModel], shiftId: Int,then: @escaping (_ success: Bool) -> Void) {
+    private func submit(inspections: [WatercraftInspectionModel], shiftId: Int,then: @escaping (_ success: Bool) -> Void) {
         var remainingInspections = inspections
         if remainingInspections.count < 1 {
             return then(true)

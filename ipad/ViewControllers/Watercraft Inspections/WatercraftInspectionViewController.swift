@@ -54,7 +54,7 @@ class WatercraftInspectionViewController: BaseViewController {
     
     // MARK: Variables
     var shiftModel: ShiftModel?
-    var model: WatercradftInspectionModel? = nil
+    var model: WatercraftInspectionModel? = nil
     private var showFullInspection: Bool = false
     private var showHighRiskAssessment: Bool = false
     private var showFullHighRiskAssessment = false
@@ -91,7 +91,7 @@ class WatercraftInspectionViewController: BaseViewController {
     }
     
     // MARK: Setup
-    func setup(model: WatercradftInspectionModel) {
+    func setup(model: WatercraftInspectionModel) {
         self.model = model
         self.isEditable = model.getStatus() == .Draft
         self.styleNavBar()
@@ -407,7 +407,7 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
             DestinationMajorCityCollectionViewCell
     }
     
-    private func arePreviousTogglesChecked(ref: WatercradftInspectionModel) -> Bool {
+    private func arePreviousTogglesChecked(ref: WatercraftInspectionModel) -> Bool {
         if ref.commercialManufacturerAsPreviousWaterBody || ref.unknownPreviousWaterBody || ref.previousDryStorage {
             return true
         } else {
@@ -415,7 +415,7 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
         }
     }
     
-    private func areDestinationTogglesChecked(ref: WatercradftInspectionModel) -> Bool {
+    private func areDestinationTogglesChecked(ref: WatercraftInspectionModel) -> Bool {
         if ref.commercialManufacturerAsDestinationWaterBody || ref.unknownDestinationWaterBody || ref.destinationDryStorage {
             return true
         } else {
