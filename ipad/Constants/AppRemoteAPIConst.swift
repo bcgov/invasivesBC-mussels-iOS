@@ -93,7 +93,7 @@ enum EndPoints: String {
  */
 struct APIURL {
     static var baseURL: String = RemoteURLManager.default.remoteURL
-    static let wokrflow: String =  {
+    static let workflow: String =  {
         return Self.baseURL + EndPoints.workflow.rawValue
     }()
     
