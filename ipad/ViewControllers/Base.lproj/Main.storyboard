@@ -52,20 +52,38 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cVa-U7-NGL">
                                 <rect key="frame" x="139" y="292" width="490" height="440"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vvc-QZ-8vt">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vvc-QZ-8vt">
                                         <rect key="frame" x="8" y="228" width="474" height="41"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="34"/>
                                         <color key="textColor" red="0.13725490200000001" green="0.25098039220000001" blue="0.45882352939999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bclogo" translatesAutoresizingMaskIntoConstraints="NO" id="xMA-l7-a4f">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="bclogo" translatesAutoresizingMaskIntoConstraints="NO" id="xMA-l7-a4f">
                                         <rect key="frame" x="8" y="30" width="474" height="148"/>
                                     </imageView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="dft-do-w0L">
                                         <rect key="frame" x="105" y="294" width="280" height="116"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yed-rD-Fhc">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rli-kb-fGi">
                                                 <rect key="frame" x="0.0" y="0.0" width="280" height="54"/>
+                                                <color key="backgroundColor" red="0.13725490200000001" green="0.25098039220000001" blue="0.45882352939999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                <accessibility key="accessibilityConfiguration" identifier="loginButton"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="54" id="Jx1-vT-56f"/>
+                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="280" id="vjK-sv-rqv"/>
+                                                </constraints>
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <inset key="contentEdgeInsets" minX="12" minY="0.0" maxX="12" maxY="0.0"/>
+                                                <inset key="imageEdgeInsets" minX="32" minY="16" maxX="200" maxY="16"/>
+                                                <state key="normal" title="Login with IDIR" image="arrow.up.right.square" catalog="system">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="loginWithIdirAction:" destination="mUX-cz-9L9" eventType="touchUpInside" id="70n-ju-jmB"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yed-rD-Fhc">
+                                                <rect key="frame" x="0.0" y="62" width="280" height="54"/>
                                                 <color key="backgroundColor" red="0.13725490200000001" green="0.25098039220000001" blue="0.45882352939999999" alpha="1" colorSpace="calibratedRGB"/>
                                                 <accessibility key="accessibilityConfiguration" identifier="loginButton"/>
                                                 <constraints>
@@ -83,24 +101,6 @@
                                                     <action selector="loginWithBCeIDAction:" destination="mUX-cz-9L9" eventType="touchUpInside" id="7no-Pm-cmB"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rli-kb-fGi">
-                                                <rect key="frame" x="0.0" y="62" width="280" height="54"/>
-                                                <color key="backgroundColor" red="0.13725490200000001" green="0.25098039220000001" blue="0.45882352939999999" alpha="1" colorSpace="calibratedRGB"/>
-                                                <accessibility key="accessibilityConfiguration" identifier="loginButton"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="54" id="Jx1-vT-56f"/>
-                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="280" id="vjK-sv-rqv"/>
-                                                </constraints>
-                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <inset key="contentEdgeInsets" minX="12" minY="0.0" maxX="12" maxY="0.0"/>
-                                                <inset key="imageEdgeInsets" minX="32" minY="16" maxX="200" maxY="16"/>
-                                                <state key="normal" title="Login with IDIR" image="arrow.up.right.square" catalog="system">
-                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="loginWithIdirAction:" destination="mUX-cz-9L9" eventType="touchUpInside" id="70n-ju-jmB"/>
-                                                </connections>
-                                            </button>
                                         </subviews>
                                     </stackView>
                                 </subviews>
@@ -111,11 +111,11 @@
                                     <constraint firstItem="vvc-QZ-8vt" firstAttribute="leading" secondItem="cVa-U7-NGL" secondAttribute="leading" constant="8" id="BTh-Ox-8mJ"/>
                                     <constraint firstAttribute="trailing" secondItem="vvc-QZ-8vt" secondAttribute="trailing" constant="8" id="FdD-Q8-cUV"/>
                                     <constraint firstItem="dft-do-w0L" firstAttribute="leading" secondItem="cVa-U7-NGL" secondAttribute="leading" constant="105" id="P4g-3e-nkz"/>
-                                    <constraint firstAttribute="bottom" secondItem="dft-do-w0L" secondAttribute="bottom" constant="30" id="bOR-YU-RK4"/>
+                                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="dft-do-w0L" secondAttribute="bottom" constant="30" id="bOR-YU-RK4"/>
                                     <constraint firstAttribute="trailing" secondItem="xMA-l7-a4f" secondAttribute="trailing" constant="8" id="e9e-2G-hi4"/>
                                     <constraint firstItem="xMA-l7-a4f" firstAttribute="leading" secondItem="cVa-U7-NGL" secondAttribute="leading" constant="8" id="iDm-PK-CVZ"/>
                                     <constraint firstAttribute="trailing" secondItem="dft-do-w0L" secondAttribute="trailing" constant="105" id="mbt-xU-h6o"/>
-                                    <constraint firstItem="dft-do-w0L" firstAttribute="top" relation="greaterThanOrEqual" secondItem="vvc-QZ-8vt" secondAttribute="bottom" constant="15" id="p62-Zv-bzw"/>
+                                    <constraint firstItem="dft-do-w0L" firstAttribute="top" secondItem="vvc-QZ-8vt" secondAttribute="bottom" constant="50" id="p62-Zv-bzw"/>
                                     <constraint firstItem="vvc-QZ-8vt" firstAttribute="top" secondItem="xMA-l7-a4f" secondAttribute="bottom" constant="50" id="tYJ-SD-ekz"/>
                                     <constraint firstItem="xMA-l7-a4f" firstAttribute="top" secondItem="cVa-U7-NGL" secondAttribute="top" constant="30" id="wGv-DN-i2z"/>
                                 </constraints>
@@ -143,7 +143,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gEs-MR-1fG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="286" y="-648"/>
+            <point key="canvasLocation" x="285.9375" y="-648.046875"/>
         </scene>
         <!--Home View Controller-->
         <scene sceneID="u0t-z8-zdG">
@@ -521,10 +521,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="adW-Cg-73u">
-                                <rect key="frame" x="0.0" y="0.0" width="415.5" height="60"/>
+                                <rect key="frame" x="0.0" y="0.0" width="704" height="60"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D9P-Dy-PaF">
-                                        <rect key="frame" x="8" y="9" width="24.5" height="24.5"/>
+                                        <rect key="frame" x="8" y="9" width="41.5" height="41.5"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="D9P-Dy-PaF" secondAttribute="height" multiplier="1:1" id="In4-1c-hwM"/>
                                         </constraints>
@@ -538,14 +538,14 @@
                                         </connections>
                                     </button>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lock.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="eY8-2T-3xv">
-                                        <rect key="frame" x="160" y="20.5" width="20" height="18.5"/>
+                                        <rect key="frame" x="304.5" y="20.5" width="20" height="18.5"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="eY8-2T-3xv" secondAttribute="height" multiplier="1:1" id="OVZ-kD-FEh"/>
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QJl-ZH-lw8">
-                                        <rect key="frame" x="188" y="20.5" width="39.5" height="19.5"/>
+                                        <rect key="frame" x="332.5" y="20.5" width="39.5" height="19.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -567,7 +567,7 @@
                                 </constraints>
                             </view>
                             <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qgs-Qt-xFT">
-                                <rect key="frame" x="0.0" y="60" width="415.5" height="924"/>
+                                <rect key="frame" x="0.0" y="60" width="704" height="924"/>
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <wkWebViewConfiguration key="configuration">
                                     <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>

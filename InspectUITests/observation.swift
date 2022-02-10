@@ -32,7 +32,8 @@ class observation: XCTestCase {
         
         let app = XCUIApplication()
 
-        if app.buttons["Login with IDIR"].exists {
+        // if app.buttons["Login with IDIR"].exists {
+        if app.buttons["Login with BCeID"].exists {
             login()
         }
         

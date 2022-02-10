@@ -80,6 +80,12 @@ class LoginViewController: BaseViewController {
     
     // MARK: Style
     private func style() {
+        if APIURL.baseURL == "https://api-dev-invasivesbc.apps.silver.devops.gov.bc.ca/api" ||
+            APIURL.baseURL == "https://api-test-invasivesbc.apps.silver.devops.gov.bc.ca/api" {
+            loginWithBCeIDButton.isHidden = false
+        } else {
+            loginWithBCeIDButton.isHidden = true
+        }
         setAppTitle(label: appTitle, darkBackground: false)
         styleFillButton(button: loginWithIdirButton)
         styleFillButton(button: loginWithBCeIDButton)
