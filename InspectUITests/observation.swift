@@ -9,6 +9,8 @@
 import XCTest
 
 class observation: XCTestCase {
+    
+    let exists = NSPredicate(format: "exists == 1")
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -29,14 +31,49 @@ class observation: XCTestCase {
     func testExample() throws {
         
         let app = XCUIApplication()
-        app.collectionViews["shiftform"]/*@START_MENU_TOKEN@*/.buttons["Add Inspection"]/*[[".cells.buttons[\"Add Inspection\"]",".buttons[\"Add Inspection\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+
+        if app.buttons["Login with IDIR"].exists {
+            login()
+        }
         
+        let newShiftButton = app.buttons["Add New Shift"]
+        expectation(for: exists, evaluatedWith: newShiftButton, handler: nil)
+        waitForExpectations(timeout: 10, handler: nil)
+        
+        XCTAssertTrue(app.buttons["Add New Shift"].exists, "New Shift Button Exists")
+        app.buttons["Add New Shift"].tap()
+        
+        if app.buttons["Start Now"].exists {
+            app.buttons["Start Now"].tap()
+        }
+
+        app.collectionViews["shiftform"].buttons["Add Inspection"].tap()
+
         let cellsQuery = app.collectionViews.cells.collectionViews.cells
         cellsQuery.otherElements.containing(.staticText, identifier:"Is this a Passport Holder?").children(matching: .other).element.children(matching: .other).element(boundBy: 0).tap()
         
-        app.collectionViews/*@START_MENU_TOKEN@*/.collectionViews.switches["launchedoutsidebc/abinthelast30days?"]/*[[".cells.collectionViews",".cells[\"launchedoutsidebc\/abinthelast30days?cell\"].switches[\"launchedoutsidebc\/abinthelast30days?\"]",".switches[\"launchedoutsidebc\/abinthelast30days?\"]",".collectionViews"],[[[-1,3,1],[-1,0,1]],[[-1,2],[-1,1]]],[0,0]]@END_MENU_TOKEN@*/.tap()
+        if app.navigationBars["Watercraft Inspection"].exists {
+            app.navigationBars["Watercraft Inspection"].buttons["selected"].tap()
+        }
         
-                
+        if app.navigationBars["Shift Overview"].exists {
+            app.navigationBars["Shift Overview"].buttons["Delete"].tap()
+            app.buttons["Yes"].tap()
+        }
     }
 
+    func login() {
+        let app = XCUIApplication()
+//        let loginButton = app.buttons["Login with IDIR"]
+        let loginButton = app.buttons["Login with BCeID"]
+        loginButton.tap()
+        
+        let webViewsQuery = app.webViews.webViews.webViews
+        let governmentOfBritishColumbiaElement = webViewsQuery.otherElements["Government of British Columbia"]
+        governmentOfBritishColumbiaElement.children(matching: .textField).element.tap()
+        governmentOfBritishColumbiaElement.children(matching: .textField).element.typeText("musselstest")
+        governmentOfBritishColumbiaElement.children(matching: .secureTextField).element.tap()
+        governmentOfBritishColumbiaElement.children(matching: .secureTextField).element.typeText("DAuMFw52wSA5xp6")
+        webViewsQuery/*@START_MENU_TOKEN@*/.buttons["Continue"]/*[[".otherElements[\"Government of British Columbia\"].buttons[\"Continue\"]",".buttons[\"Continue\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+    }
 }
