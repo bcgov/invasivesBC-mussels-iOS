@@ -55,6 +55,7 @@ To run all tests,
 
 You can run individual tests by selecting the `Show the test navigator` tab on the left menu bar of Xcode.
 
+*Note: You'll need to setup the environment variables under Schemes (Product -> Scheme -> Edit Scheme) and provide the values for TestBCeID and TestPassword. You can find the values in Openshift Secrets for dev.
 
 ## Deploy
 

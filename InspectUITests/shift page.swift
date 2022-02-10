@@ -39,12 +39,15 @@ class shift_page: XCTestCase {
         let loginButton = app.buttons["Login with BCeID"]
         loginButton.tap()
         
+        let accountUsername = ProcessInfo.processInfo.environment["TestBCeID"]!
+        let accountPassword = ProcessInfo.processInfo.environment["TestPassword"]!
+        
         let webViewsQuery = app.webViews.webViews.webViews
         let governmentOfBritishColumbiaElement = webViewsQuery.otherElements["Government of British Columbia"]
         governmentOfBritishColumbiaElement.children(matching: .textField).element.tap()
-        governmentOfBritishColumbiaElement.children(matching: .textField).element.typeText("musselstest")
+        governmentOfBritishColumbiaElement.children(matching: .textField).element.typeText(accountUsername)
         governmentOfBritishColumbiaElement.children(matching: .secureTextField).element.tap()
-        governmentOfBritishColumbiaElement.children(matching: .secureTextField).element.typeText("DAuMFw52wSA5xp6")
+        governmentOfBritishColumbiaElement.children(matching: .secureTextField).element.typeText(accountPassword)
         webViewsQuery/*@START_MENU_TOKEN@*/.buttons["Continue"]/*[[".otherElements[\"Government of British Columbia\"].buttons[\"Continue\"]",".buttons[\"Continue\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
     }
     
