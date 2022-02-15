@@ -24,7 +24,7 @@ class shift_page: XCTestCase {
         // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
         let app = XCUIApplication()
         // If login page is presented, login
-        if app.buttons["Login with BCeID"].exists {
+        if app.buttons["Login with IDIR"].exists {
             login()
         }
     }
@@ -35,11 +35,10 @@ class shift_page: XCTestCase {
     
     func login() {
         let app = XCUIApplication()
-//        let loginButton = app.buttons["Login with IDIR"]
-        let loginButton = app.buttons["Login with BCeID"]
+        let loginButton = app.buttons["Login with IDIR"]
         loginButton.tap()
         
-        let accountUsername = ProcessInfo.processInfo.environment["TestBCeID"]!
+        let accountUsername = ProcessInfo.processInfo.environment["TestIDIR"]!
         let accountPassword = ProcessInfo.processInfo.environment["TestPassword"]!
         
         let webViewsQuery = app.webViews.webViews.webViews

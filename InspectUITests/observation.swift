@@ -32,8 +32,7 @@ class observation: XCTestCase {
         
         let app = XCUIApplication()
 
-        // if app.buttons["Login with IDIR"].exists {
-        if app.buttons["Login with BCeID"].exists {
+        if app.buttons["Login with IDIR"].exists {
             login()
         }
         
@@ -65,11 +64,10 @@ class observation: XCTestCase {
 
     func login() {
         let app = XCUIApplication()
-//        let loginButton = app.buttons["Login with IDIR"]
-        let loginButton = app.buttons["Login with BCeID"]
+        let loginButton = app.buttons["Login with IDIR"]
         loginButton.tap()
         
-        let accountUsername = ProcessInfo.processInfo.environment["TestBCeID"]!
+        let accountUsername = ProcessInfo.processInfo.environment["TestIDIR"]!
         let accountPassword = ProcessInfo.processInfo.environment["TestPassword"]!
         
         let webViewsQuery = app.webViews.webViews.webViews
