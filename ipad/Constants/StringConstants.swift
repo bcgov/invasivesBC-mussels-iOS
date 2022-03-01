@@ -148,7 +148,7 @@ struct HighRiskFormFieldHeaders {
         static let decontaminationOrderNumber = "Decontamination order number"
         static let decontaminationOrderReason = "Reason for issuing decontamination order"
         static let decontaminationAppendixB = "Appendix B filled out?"
-        static let sealIssued = "Seal issued?"
+        static let sealIssued = "Seal issued or existing seal?"
         static let sealNumber = "Seal #"
     }
     

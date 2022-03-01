@@ -220,6 +220,31 @@ class ShiftViewController: BaseViewController {
             counter += 1
         }
         
+        for inspection in model.inspections {
+            if inspection.inspectionTime == "" {
+                message = "\(message)\n\(counter)- Missing Time of Inspection."
+                counter += 1
+            }
+            
+            if inspection.unknownPreviousWaterBody == true ||
+                inspection.commercialManufacturerAsPreviousWaterBody == true ||
+                inspection.previousDryStorage == true {
+                if inspection.previousMajorCities.isEmpty {
+                    message = "\(message)\n\(counter)- Please add Closest Major City for Previous Waterbody."
+                    counter += 1
+                }
+            }
+            
+            if inspection.unknownDestinationWaterBody == true ||
+                inspection.commercialManufacturerAsDestinationWaterBody == true ||
+                inspection.destinationDryStorage == true {
+                if inspection.destinationMajorCities.isEmpty {
+                    message = "\(message)\n\(counter)- Please add Closest Major City for Destination Waterbody."
+                    counter += 1
+                }
+            }
+        }
+        
         return message
     }
     

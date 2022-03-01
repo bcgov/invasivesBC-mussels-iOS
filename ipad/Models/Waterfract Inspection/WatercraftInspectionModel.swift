@@ -184,6 +184,10 @@ class WatercraftInspectionModel: Object, BaseRealmObject {
         let assessment = HighRiskAssessmentModel()
         assessment.shouldSync = false
         assessment.userId = self.userId
+        if self.highriskAIS == true {
+            assessment.adultDreissenidMusselsFound = true
+        }
+
         do {
             let realm = try Realm()
             try realm.write {

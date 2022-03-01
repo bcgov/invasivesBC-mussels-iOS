@@ -112,6 +112,9 @@ class WatercraftInspectionViewController: BaseViewController {
                 return true
             }
         }
+        if model.cleanDrainDryAfterInspection == true {
+            return true
+        }
         return false
     }
     
@@ -209,9 +212,48 @@ class WatercraftInspectionViewController: BaseViewController {
         }
     }
     
+    func canSubmit() -> Bool {
+        return validationMessage() == ""
+    }
+    
+    func validationMessage() -> String {
+        var message: String = ""
+        guard let model = self.model else { return message }
+        var counter = 1
+        if model.inspectionTime == "" {
+            message = "\(message)\n\(counter)- Missing Time of Inspection."
+            counter += 1
+        }
+        
+        if model.unknownPreviousWaterBody == true ||
+            model.commercialManufacturerAsPreviousWaterBody == true ||
+            model.previousDryStorage == true {
+            if model.previousMajorCities.isEmpty {
+                message = "\(message)\n\(counter)- Please add Closest Major City for Previous Waterbody."
+                counter += 1
+            }
+        }
+        
+        if model.unknownDestinationWaterBody == true ||
+            model.commercialManufacturerAsDestinationWaterBody == true ||
+            model.destinationDryStorage == true {
+            if model.destinationMajorCities.isEmpty {
+                message = "\(message)\n\(counter)- Please add Closest Major City for Destination Waterbody."
+                counter += 1
+            }
+        }
+
+        return message
+    }
+    
     @objc func action(sender: UIBarButtonItem) {
         self.dismissKeyboard()
-        self.navigationController?.popViewController(animated: true)
+
+        if canSubmit() {
+            self.navigationController?.popViewController(animated: true)
+        } else {
+            Alert.show(title: "Incomplete", message: validationMessage())
+        }
     }
     
     // MARK: Notification functions
@@ -222,6 +264,7 @@ class WatercraftInspectionViewController: BaseViewController {
     // MARK: Input Item Changed
     @objc func inputItemValueChanged(notification: Notification) {
         guard var item: InputItem = notification.object as? InputItem, let model = self.model else {return}
+
         // Set value in Realm object
         // Keys that need a pop up/ additional actions
         let highRiskFieldKeys = WatercraftInspectionFormHelper.getHighriskAssessmentFieldsFields().map{ $0.key}
@@ -229,7 +272,7 @@ class WatercraftInspectionViewController: BaseViewController {
         if highRiskFieldKeys.contains(item.key) {
             let value = item.value.get(type: item.type) as? Bool
             let alreadyHasHighRiskForm = !model.highRiskAssessments.isEmpty
-            
+
             if model.cleanDrainDryAfterInspection == true && value == true {
                 Alert.show(title: "Invalid Entry", message: "YES cannot be selected for both fields")
 
@@ -243,9 +286,10 @@ class WatercraftInspectionViewController: BaseViewController {
             } else if value == true {
                 // Show a dialog for high risk form
                 let highRiskModal: HighRiskModalView = HighRiskModalView.fromNib()
-                highRiskModal.initialize(onSubmit: {
+                highRiskModal.initialize(onSubmit: { [self] in
                     // Confirmed
                     model.set(value: true, for: item.key)
+                    
                     // Show high risk form
                     self.showHighRiskForm(show: true)
                 }) {
@@ -290,20 +334,46 @@ class WatercraftInspectionViewController: BaseViewController {
             InfoLog("Selected Code: \(code)")
             model.set(value: code.country, for: "countryOfResidence")
             model.set(value: code.province, for: "provinceOfResidence")
+        } else if item.key.lowercased().contains("cleandraindryafterinspection".lowercased()) {
+            model.set(value: item.value.get(type: item.type) as Any, for: item.key)
+
+            let value = item.value.get(type: item.type) as? Bool
+            let alreadyHasHighRiskForm = !model.highRiskAssessments.isEmpty
+
+            if model.highriskAIS == true && value == true {
+                Alert.show(title: "Invalid Entry", message: "YES cannot be selected for both fields")
+                model.set(value: false, for: item.key)
+                self.collectionView.reloadData()
+            } else if value == true && alreadyHasHighRiskForm {
+                // set value
+                model.set(value: true, for: item.key)
+                self.showHighRiskForm(show: true)
+            } else if value == true {
+                // Show a dialog for high risk form
+                let highRiskModal: HighRiskModalView = HighRiskModalView.fromNib()
+                highRiskModal.initialize(onSubmit: {
+                    // Confirmed
+                    model.set(value: true, for: item.key)
+                    // Show high risk form
+                    self.showHighRiskForm(show: true)
+                }) {
+                    // Cancelled
+                    model.set(value: false, for: item.key)
+                    item.value.set(value: false, type: item.type)
+                    NotificationCenter.default.post(name: .InputFieldShouldUpdate, object: item)
+                }
+            } else {
+                model.set(value: false, for: item.key)
+                let shouldShowHighRisk = shouldShowHighRiskForm()
+                self.showHighRiskForm(show: shouldShowHighRisk)
+                if !shouldShowHighRisk {
+                    model.removeHighRiskAssessment()
+                }
+            }
         } else {
             // All other keys, store directly
             // TODO: needs cleanup for nil case
             model.set(value: item.value.get(type: item.type) as Any, for: item.key)
-            
-            if item.key.lowercased().contains("cleandraindryafterinspection".lowercased()) {
-                let value = item.value.get(type: item.type) as? Bool
-    
-                if model.highriskAIS == true && value == true {
-                    Alert.show(title: "Invalid Entry", message: "YES cannot be selected for both fields")
-                    model.set(value: false, for: item.key)
-                    self.collectionView.reloadData()
-                }
-            }
         }
         // TODO: CLEANUP
         // Handle Keys that alter form
@@ -721,7 +791,7 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
                 switch action {
                 case .statusChange(let result):
                     InfoLog("User change status: \(result) of previous water body")
-                    strongSelf.model?.setJournyStatusFlags(dryStorage: result.dryStorgae, unknown: result.unknown, commercialManufacturer: result.commercialManufacturer, isPrevious: true)
+                    strongSelf.model?.setJournyStatusFlags(dryStorage: result.dryStorage, unknown: result.unknown, commercialManufacturer: result.commercialManufacturer, isPrevious: true)
                     strongSelf.reloadJourneyDetailSection(indexPath: indexPath)
                 case .add:
                     /// ---------waterbody picker------------
@@ -779,7 +849,7 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
                 switch action {
                 case .statusChange(let result):
                     InfoLog("User change status: \(result) of destination water body")
-                    strongSelf.model?.setJournyStatusFlags(dryStorage: result.dryStorgae, unknown: result.unknown, commercialManufacturer: result.commercialManufacturer, isPrevious: false)
+                    strongSelf.model?.setJournyStatusFlags(dryStorage: result.dryStorage, unknown: result.unknown, commercialManufacturer: result.commercialManufacturer, isPrevious: false)
                     strongSelf.reloadJourneyDetailSection(indexPath: indexPath)
                 case .add:
                     /// ---------waterbody picker------------

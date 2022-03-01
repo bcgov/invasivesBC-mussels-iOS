@@ -33,7 +33,7 @@ class FormButtonCollectionViewCell: UICollectionViewCell, Theme {
     
 
     struct Result {
-        var dryStorgae: Bool = false
+        var dryStorage: Bool = false
         var unknown: Bool = false
         var commercialManufacturer: Bool
     }
@@ -64,7 +64,7 @@ class FormButtonCollectionViewCell: UICollectionViewCell, Theme {
     }
     
     var result: Result {
-        return Result(dryStorgae: (dryStorageSwitch?.isOn ?? false),
+        return Result(dryStorage: (dryStorageSwitch?.isOn ?? false),
                       unknown: unknownWaterBodySwitch?.isOn ?? false,
                       commercialManufacturer: commercialManufacturerSwitch?.isOn ?? false)
     }
