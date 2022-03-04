@@ -243,6 +243,20 @@ class ShiftViewController: BaseViewController {
                     counter += 1
                 }
             }
+
+            if !inspection.highRiskAssessments.isEmpty {
+                for highRisk in inspection.highRiskAssessments {
+                    if highRisk.sealIssued == true && highRisk.sealNumber <= 0 {
+                        message = "\(message)\n\(counter)- Please input the Seal #."
+                        counter += 1
+                    }
+                    
+                    if highRisk.decontaminationOrderIssued == true && highRisk.decontaminationOrderNumber <= 0 {
+                        message = "\(message)\n\(counter)- Please input the Decontamination order number."
+                        counter += 1
+                    }
+                }
+            }
         }
         
         return message

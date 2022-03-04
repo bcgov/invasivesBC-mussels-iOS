@@ -61,6 +61,7 @@ class WatercraftInspectionModel: Object, BaseRealmObject {
     // Inspection Details
     @objc dynamic var marineMusselsFound: Bool = false
     @objc dynamic var cleanDrainDryAfterInspection: Bool = false
+    @objc dynamic var dreissenidMusselsFoundPrevious: Bool = false
     
     // Dry Storage
     @objc dynamic var previousDryStorage: Bool = false
@@ -184,7 +185,7 @@ class WatercraftInspectionModel: Object, BaseRealmObject {
         let assessment = HighRiskAssessmentModel()
         assessment.shouldSync = false
         assessment.userId = self.userId
-        if self.highriskAIS == true {
+        if self.adultDreissenidFound == true {
             assessment.adultDreissenidMusselsFound = true
         }
 
@@ -268,6 +269,7 @@ class WatercraftInspectionModel: Object, BaseRealmObject {
             "marineMusselFound": marineMusselsFound,
             "cleanDrainDryAfterInspection": cleanDrainDryAfterInspection,
             "adultDreissenidaeFound": adultDreissenidFound,
+            "dreissenidMusselsFoundPrevious": dreissenidMusselsFoundPrevious,
             "nonMotorized": nonMotorized,
             "simple": simple,
             "complex": complex,

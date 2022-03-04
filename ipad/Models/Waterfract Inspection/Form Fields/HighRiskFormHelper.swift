@@ -178,14 +178,14 @@ class HighRiskFormHelper {
 //        sectionItems.append(spacer5)
         /// ---------------------------
         
-        let dreissenidMusselsFoundPrevious = SwitchInput(
-            key: "highRisk-dreissenidMusselsFoundPrevious",
-            header: HighRiskFormFieldHeaders.InspectionOutcomes.dreisennidFoundPrevious,
-            editable: editable ?? true,
-            value: object?.dreissenidMusselsFoundPrevious ?? false,
-            width: .Full
-        )
-        sectionItems.append(dreissenidMusselsFoundPrevious)
+//        let dreissenidMusselsFoundPrevious = SwitchInput(
+//            key: "highRisk-dreissenidMusselsFoundPrevious",
+//            header: HighRiskFormFieldHeaders.InspectionOutcomes.dreisennidFoundPrevious,
+//            editable: editable ?? true,
+//            value: object?.dreissenidMusselsFoundPrevious ?? false,
+//            width: .Full
+//        )
+//        sectionItems.append(dreissenidMusselsFoundPrevious)
         
         let otherInspectionFindings = DropdownInput(
             key: "highRisk-otherInspectionFindings",

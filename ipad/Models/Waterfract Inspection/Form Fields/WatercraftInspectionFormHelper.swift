@@ -312,20 +312,30 @@ class WatercraftInspectionFormHelper {
         )
         sectionItems.append(highRiskArea)
 
-        let cleanDrainDryAfter = RadioSwitchInput(
-            key: "cleanDrainDryAfterInspection",
-            header: WatercraftFieldHeaderConstants.WatercraftDetails.cleanDrainDryAfter,
+//        let cleanDrainDryAfter = RadioSwitchInput(
+//            key: "cleanDrainDryAfterInspection",
+//            header: WatercraftFieldHeaderConstants.WatercraftDetails.cleanDrainDryAfter,
+//            editable: editable ?? true,
+//            value: object?.cleanDrainDryAfterInspection ?? nil,
+//            width: .Full
+//        )
+//        sectionItems.append(cleanDrainDryAfter)
+
+        let dreissenidMusselsFoundPrevious = SwitchInput(
+            key: "dreissenidMusselsFoundPrevious",
+            header: HighRiskFormFieldHeaders.InspectionOutcomes.dreisennidFoundPrevious,
             editable: editable ?? true,
-            value: object?.cleanDrainDryAfterInspection ?? nil,
+            value: object?.dreissenidMusselsFoundPrevious ?? false,
             width: .Full
         )
-        sectionItems.append(cleanDrainDryAfter)
+        sectionItems.append(dreissenidMusselsFoundPrevious)
         
         return sectionItems
     }
     
     static func getHighriskAssessmentFieldsFields(for object: WatercraftInspectionModel? = nil, editable: Bool? = true) -> [InputItem] {
         var sectionItems: [InputItem] = []
+
         let highriskAIS = SwitchInput(
             key: "highriskAIS",
             header: WatercraftFieldHeaderConstants.HighriskAssessmentFields.highriskAIS,
@@ -334,16 +344,16 @@ class WatercraftInspectionFormHelper {
             width: .Full
         )
         sectionItems.append(highriskAIS)
-        
-//        let adultDreissenidFound = SwitchInput(
-//            key: "adultDreissenidFound",
-//            header: WatercraftFieldHeaderConstants.HighriskAssessmentFields.adultDreissenidFound,
-//            editable: editable ?? true,
-//            value: object?.adultDreissenidFound ?? nil,
-//            width: .Third
-//        )
-//        sectionItems.append(adultDreissenidFound)
-        
+
+        let adultDreissenidFound = SwitchInput(
+            key: "adultDreissenidFound",
+            header: WatercraftFieldHeaderConstants.HighriskAssessmentFields.adultDreissenidFound,
+            editable: editable ?? true,
+            value: object?.adultDreissenidFound ?? nil,
+            width: .Full
+        )
+        sectionItems.append(adultDreissenidFound)
+
         return sectionItems
     }
     

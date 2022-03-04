@@ -233,13 +233,27 @@ class WatercraftInspectionViewController: BaseViewController {
                 counter += 1
             }
         }
-        
+
         if model.unknownDestinationWaterBody == true ||
             model.commercialManufacturerAsDestinationWaterBody == true ||
             model.destinationDryStorage == true {
             if model.destinationMajorCities.isEmpty {
                 message = "\(message)\n\(counter)- Please add Closest Major City for Destination Waterbody."
                 counter += 1
+            }
+        }
+
+        if !model.highRiskAssessments.isEmpty {
+            for highRisk in model.highRiskAssessments {
+                if highRisk.sealIssued == true && highRisk.sealNumber <= 0 {
+                    message = "\(message)\n\(counter)- Please input the Seal #."
+                    counter += 1
+                }
+                
+                if highRisk.decontaminationOrderIssued == true && highRisk.decontaminationOrderNumber <= 0 {
+                    message = "\(message)\n\(counter)- Please input the Decontamination order number."
+                    counter += 1
+                }
             }
         }
 
