@@ -297,6 +297,13 @@ class WatercraftInspectionViewController: BaseViewController {
                 // set value
                 model.set(value: true, for: item.key)
                 self.showHighRiskForm(show: true)
+                
+                if item.key == "adultDreissenidFound" {
+                    let highRisk = model.highRiskAssessments.first
+                    highRisk?.set(value: true, for: "adultDreissenidMusselsFound")
+                    item.value.set(value: true, type: item.type)
+                    self.collectionView.reloadData()
+                }
             } else if value == true {
                 // Show a dialog for high risk form
                 let highRiskModal: HighRiskModalView = HighRiskModalView.fromNib()
@@ -332,6 +339,14 @@ class WatercraftInspectionViewController: BaseViewController {
             if item.key == "highRisk-cleanDrainDryAfterInspection" {
                 guard let value = item.value.get(type: .RadioBoolean) as? Bool else {return}
                 self.showFullHighRiskForm(show: !value)
+            }
+            
+            let value = item.value.get(type: item.type) as? Bool
+
+            if item.key == "highRisk-adultDreissenidMusselsFound" && value == true {
+                model.set(value: true, for: "adultDreissenidFound")
+                item.value.set(value: true, type: item.type)
+                self.collectionView.reloadData()
             }
         } else if item.key.lowercased() == "countryprovince" {
             // Store directly
