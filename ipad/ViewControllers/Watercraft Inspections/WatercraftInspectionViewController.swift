@@ -174,7 +174,7 @@ class WatercraftInspectionViewController: BaseViewController {
         let deleteButton = UIBarButtonItem(image: deleteIcon,  style: .plain, target: self, action: #selector(self.didTapDeleteButton(sender:)))
         
         let saveIcon = UIImage(systemName: "checkmark")
-        let saveButton = UIBarButtonItem(image: saveIcon,  style: .plain, target: self, action: #selector(self.action(sender:)))
+        let saveButton = UIBarButtonItem(image: saveIcon,  style: .plain, target: self, action: #selector(self.didTapCheckmarkButton(sender:)))
         
         navigationItem.rightBarButtonItems = [saveButton, deleteButton]
     }
@@ -209,8 +209,35 @@ class WatercraftInspectionViewController: BaseViewController {
         }
     }
     
-    @objc func action(sender: UIBarButtonItem) {
+    // Watercraft Inspection submission (checkmark)
+    @objc func didTapCheckmarkButton(sender: UIBarButtonItem) {
+        
+        // Allow exit if all other information is nil
+        guard let model = self.model else {return}
         self.dismissKeyboard()
+        
+        // Check if any of the watercraft types are at least greater than 0
+        // If this is a passport holder, watercraft types visible when issuing
+        // a new passport of if launchedOutsideBC is checked on
+        if (!model.isPassportHolder &&
+            model.nonMotorized == 0 &&
+            model.simple == 0 &&
+            model.complex == 0 &&
+            model.veryComplex == 0) ||
+            
+            (model.isPassportHolder &&
+             (model.launchedOutsideBC || model.isNewPassportIssued) &&
+             model.nonMotorized == 0 &&
+             model.simple == 0 &&
+             model.complex == 0 &&
+             model.veryComplex == 0)
+        {
+        
+            Alert.show(title: "Watercraft Required", message: "Add at least one of the following Watercraft Types in Basic Information:\n\n - Non-Motorized\n - Simple\n - Complex\n - Very Complex")
+            
+            return
+        }
+        
         self.navigationController?.popViewController(animated: true)
     }
     
