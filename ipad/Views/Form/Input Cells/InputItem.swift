@@ -22,6 +22,7 @@ enum InputItemType {
     case Double
     case Date
     case Switch
+    case NullSwitch
     case TextArea
     case RadioSwitch
     case ViewField
@@ -63,6 +64,8 @@ struct InputValue {
             return self.date
         case .Switch:
             return self.boolean
+        case .NullSwitch:
+            return self.boolean
         case .TextArea:
             return self.string
         case .RadioSwitch:
@@ -95,6 +98,8 @@ struct InputValue {
         case .Date:
             self.date = value as? Date
         case .Switch:
+            self.boolean = value as? Bool
+        case .NullSwitch:
             self.boolean = value as? Bool
         case .TextArea:
             self.string = value as? String
@@ -151,6 +156,8 @@ struct InputDependency {
         case .Date:
             return item.value.get(type: item.type) as? Date == _value.get(type: item.type) as? Date
         case .Switch:
+            return item.value.get(type: item.type) as? Bool == _value.get(type: item.type) as? Bool
+        case .NullSwitch:
             return item.value.get(type: item.type) as? Bool == _value.get(type: item.type) as? Bool
         case .TextArea:
             return item.value.get(type: item.type) as? String == _value.get(type: item.type) as? String
@@ -339,6 +346,36 @@ class SwitchInput: InputItem {
     }
     
     func setValue(value: Bool?) {
+        self.value.set(value: value, type: self.type)
+    }
+}
+
+class NullSwitchInput: InputItem {
+    var dependency: [InputDependency] = []
+    var type: InputItemType = .NullSwitch
+    var width: InputItemWidthSize
+    var height: CGFloat = 70
+    var key: String
+    var value: InputValue
+    var header: String
+    var editable: Bool
+    
+    // Difference from SwitchInput is that "value" cannot be nil
+    init(key: String, header: String, editable: Bool, value: Bool, width: InputItemWidthSize? = .Full) {
+        self.value = InputValue()
+        self.value.set(value: value, type: type)
+        self.key = key
+        self.header = header
+        self.editable = editable
+        self.width = width ?? .Full
+    }
+    
+    // Cannot get a nil value
+    func getValue() -> Bool {
+        return self.value.get(type: self.type) != nil
+    }
+    
+    func setValue(value: Bool) {
         self.value.set(value: value, type: self.type)
     }
 }

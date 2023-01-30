@@ -15,6 +15,7 @@ class InputGroupView: UIView {
         "TextInputCollectionViewCell",
         "DropdownCollectionViewCell",
         "SwitchInputCollectionViewCell",
+        "NullSwitchInputCollectionViewCell",
         "DateInputCollectionViewCell",
         "TextAreaInputCollectionViewCell",
         "RadioSwitchInputCollectionViewCell",
@@ -238,6 +239,10 @@ extension InputGroupView: UICollectionViewDataSource, UICollectionViewDelegate, 
         return collectionView!.dequeueReusableCell(withReuseIdentifier: "SwitchInputCollectionViewCell", for: indexPath as IndexPath) as! SwitchInputCollectionViewCell
     }
     
+    func getNullSwitchInputCell(indexPath: IndexPath) -> NullSwitchInputCollectionViewCell {
+        return collectionView!.dequeueReusableCell(withReuseIdentifier: "NullSwitchInputCollectionViewCell", for: indexPath as IndexPath) as! NullSwitchInputCollectionViewCell
+    }
+    
     func getDateInputCell(indexPath: IndexPath) -> DateInputCollectionViewCell {
         return collectionView!.dequeueReusableCell(withReuseIdentifier: "DateInputCollectionViewCell", for: indexPath as IndexPath) as! DateInputCollectionViewCell
     }
@@ -312,6 +317,10 @@ extension InputGroupView: UICollectionViewDataSource, UICollectionViewDelegate, 
         case .Switch:
             let cell = getSwitchInputCell(indexPath: indexPath)
             cell.setup(with: item as! SwitchInput, delegate: inputDelegate!)
+            return cell
+        case .NullSwitch:
+            let cell = getNullSwitchInputCell(indexPath: indexPath)
+            cell.setup(with: item as! NullSwitchInput, delegate: inputDelegate!)
             return cell
         case .TextArea:
             let cell = getTextAreaInputCell(indexPath: indexPath)

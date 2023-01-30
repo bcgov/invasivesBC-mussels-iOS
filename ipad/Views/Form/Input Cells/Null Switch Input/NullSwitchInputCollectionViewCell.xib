@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="ipad10_9rounded" orientation="portrait" layout="fullscreen" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="NullSwitchInputCollectionViewCell" customModule="Inspect" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="272" height="85"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="272" height="85"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aId-6E-4Fv">
+                        <rect key="frame" x="0.0" y="0.0" width="240" height="25"/>
+                        <constraints>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="25" id="Csi-Ou-Txg"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <segmentedControl opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" translatesAutoresizingMaskIntoConstraints="NO" id="fFi-uE-yov" userLabel="Null Switch View">
+                        <rect key="frame" x="0.0" y="43" width="248" height="43"/>
+                        <constraints>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="37" id="1pa-e4-F1h"/>
+                        </constraints>
+                        <segments>
+                            <segment title="No"/>
+                            <segment title="Yes"/>
+                        </segments>
+                        <color key="selectedSegmentTintColor" systemColor="systemGreenColor"/>
+                        <connections>
+                            <action selector="switchDidChange:" destination="gTV-IL-0wX" eventType="valueChanged" id="hxR-ei-7UY"/>
+                        </connections>
+                    </segmentedControl>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <constraints>
+                <constraint firstAttribute="trailingMargin" secondItem="fFi-uE-yov" secondAttribute="trailing" id="7Tf-tp-n3Z"/>
+                <constraint firstItem="fFi-uE-yov" firstAttribute="bottom" secondItem="gTV-IL-0wX" secondAttribute="bottomMargin" id="EGR-ep-Gk5"/>
+                <constraint firstItem="aId-6E-4Fv" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="topMargin" id="LRZ-Cx-db4"/>
+                <constraint firstItem="fFi-uE-yov" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leadingMargin" constant="-8" id="SMp-Cc-I6m"/>
+                <constraint firstAttribute="trailingMargin" secondItem="aId-6E-4Fv" secondAttribute="trailing" id="XPk-v7-eEc"/>
+                <constraint firstItem="fFi-uE-yov" firstAttribute="top" relation="greaterThanOrEqual" secondItem="aId-6E-4Fv" secondAttribute="bottom" constant="5" id="fSE-67-fpN"/>
+                <constraint firstItem="aId-6E-4Fv" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leadingMargin" id="gAw-O3-igS"/>
+            </constraints>
+            <size key="customSize" width="279" height="85"/>
+            <connections>
+                <outlet property="headerLabel" destination="aId-6E-4Fv" id="0kA-Wq-7Rg"/>
+                <outlet property="nullSwitchView" destination="fFi-uE-yov" id="9r0-xG-Fpl"/>
+            </connections>
+            <point key="canvasLocation" x="112.6829268292683" y="-15.508474576271187"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <systemColor name="systemGreenColor">
+            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>
