@@ -136,7 +136,7 @@ class SyncView: ModalView, Theme {
     
     func showSyncInProgressAnimation() {
         clearIcon()
-        let animationView = AnimationView(name: "sync-circle")
+        let animationView = LottieAnimationView(name: "sync-circle")
         animationView.frame = statusIconView.frame
         animationView.center.y = statusIconView.center.y
         animationView.center.x = statusIconView.center.x
@@ -157,7 +157,7 @@ class SyncView: ModalView, Theme {
     
     func showSyncFailedAnimation() {
         clearIcon()
-        let animationView = AnimationView(name: "unapproved-cross")
+        let animationView = LottieAnimationView(name: "unapproved-cross")
         animationView.frame = statusIconView.frame
         animationView.center.y = statusIconView.center.y
         animationView.center.x = statusIconView.center.x
@@ -178,7 +178,7 @@ class SyncView: ModalView, Theme {
     
     func showSyncCompletedAnimation() {
         clearIcon()
-        let animationView = AnimationView(name: "check-mark-success")
+        let animationView = LottieAnimationView(name: "check-mark-success")
         animationView.frame = statusIconView.frame
         animationView.center.y = statusIconView.center.y
         animationView.center.x = statusIconView.center.x
