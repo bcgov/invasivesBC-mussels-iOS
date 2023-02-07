@@ -359,23 +359,28 @@ class NullSwitchInput: InputItem {
     var value: InputValue
     var header: String
     var editable: Bool
+    var interacted: Bool
     
-    // Difference from SwitchInput is that "value" cannot be nil
-    init(key: String, header: String, editable: Bool, value: Bool, width: InputItemWidthSize? = .Full) {
+    init(key: String, header: String, editable: Bool, value: Bool? = false, width: InputItemWidthSize? = .Full, interacted: Bool) {
         self.value = InputValue()
-        self.value.set(value: value, type: type)
+        self.value.set(value: value ?? false, type: type)
         self.key = key
         self.header = header
         self.editable = editable
         self.width = width ?? .Full
+        self.interacted = interacted
     }
     
-    // Cannot get a nil value
-    func getValue() -> Bool {
-        return self.value.get(type: self.type) != nil
+    func setInteracted() {
+        self.interacted = true
+        return
     }
     
-    func setValue(value: Bool) {
+    func getValue() -> Bool? {
+        return self.value.get(type: self.type) as? Bool ?? nil
+    }
+    
+    func setValue(value: Bool?) {
         self.value.set(value: value, type: self.type)
     }
 }

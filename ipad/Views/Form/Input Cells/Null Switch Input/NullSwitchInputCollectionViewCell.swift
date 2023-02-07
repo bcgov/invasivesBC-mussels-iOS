@@ -15,30 +15,47 @@ class NullSwitchInputCollectionViewCell: BaseInputCell<NullSwitchInput> {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        nullSwitchView.setTitleTextAttributes([
+            NSAttributedString.Key.foregroundColor: UIColor.white], for: .selected)
         style()
     }
 
     @IBAction func switchDidChange(_ sender: UISegmentedControl) {
-
-        //set the new text color attributes on the selected segment's title
-        sender.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.white], for: .selected)
-
+        guard let model = self.model else {return}
+        
         switch sender.selectedSegmentIndex {
-            case 0:
-                Alert.show(title: "No", message:"Nope")
-            case 1:
-                Alert.show(title:"Yes", message:"Yup")
-            default:
-                Alert.show(title:"Nil", message:"Nothin'")
+            case 0:// Switch is set to "No"
+                model.setValue(value: false)
+            case 1:// Switch is set to "Yes"
+                model.setValue(value: true)
+            default:// Switch is unset and remains "nil"
+                model.setValue(value: nil)
         }
+        
+        model.setInteracted()
+        self.emitChange()
     }
     
     // MARK: Setup
     override func initialize(with model: NullSwitchInput) {
+        guard let model = self.model else {return}
+        
+        switch model.getValue() {
+            case false:// Switch is set to "No"
+                if model.interacted {
+                    self.nullSwitchView.selectedSegmentIndex = 0
+                } else {
+                    self.nullSwitchView.selectedSegmentIndex = UISegmentedControl.noSegment
+                }
+            case true:// Switch is set to "Yes"
+                self.nullSwitchView.selectedSegmentIndex = 1
+            default:
+                self.nullSwitchView.selectedSegmentIndex = UISegmentedControl.noSegment
+        }
+        
         self.headerLabel.text = model.header
-//        self.switchView.isOn = model.value.get(type: model.type) as? Bool ?? false
-        self.nullSwitchView.accessibilityValue = model.header.removeWhitespaces().lowercased()
-        self.nullSwitchView.accessibilityLabel = model.header.removeWhitespaces().lowercased()
+        self.nullSwitchView?.accessibilityValue = model.header.removeWhitespaces().lowercased()
+        self.nullSwitchView?.accessibilityLabel = model.header.removeWhitespaces().lowercased()
         self.accessibilityValue = "\(model.header.removeWhitespaces().lowercased())cell"
         self.accessibilityLabel = "\(model.header.removeWhitespaces().lowercased())cell"
     }

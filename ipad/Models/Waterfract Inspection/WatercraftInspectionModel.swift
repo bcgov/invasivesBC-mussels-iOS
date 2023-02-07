@@ -544,7 +544,7 @@ class WatercraftInspectionModel: Object, BaseRealmObject {
     }
     
     // MARK: UI Helpers
-    func getInputputFields(for section: WatercraftFromSection, editable: Bool? = nil) -> [InputItem] {
+    func getInputputFields(for section: WatercraftFromSection, editable: Bool? = nil, interacted: Bool? = nil) -> [InputItem] {
         if let existing = inputputFields[section] { return existing}
         
         var inputputFields: [WatercraftFromSection: [InputItem]] = [WatercraftFromSection: [InputItem]]()
@@ -555,7 +555,7 @@ class WatercraftInspectionModel: Object, BaseRealmObject {
         }
         guard let _passportHolderField = passportHolderField as? RadioSwitchInput else {return []}
         inputputFields[.PassportInfo] = passportFields
-        inputputFields[.BasicInformation] = WatercraftInspectionFormHelper.getBasicInfoFields(for: self, editable: editable, passportField: _passportHolderField)
+        inputputFields[.BasicInformation] = WatercraftInspectionFormHelper.getBasicInfoFields(for: self, editable: editable, passportField: _passportHolderField, interacted: interacted)
         inputputFields[.WatercraftDetails] = WatercraftInspectionFormHelper.getWatercraftDetailsFields(for: self, editable: editable)
         inputputFields[.InspectionDetails] = WatercraftInspectionFormHelper.getInspectionDetailsFields(for: self, editable: editable)
         inputputFields[.GeneralComments] = WatercraftInspectionFormHelper.getGeneralCommentsFields(for: self, editable: editable)

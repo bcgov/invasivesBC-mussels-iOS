@@ -61,11 +61,11 @@ class WatercraftInspectionFormHelper {
         launchedOutsideBC.dependency.append(InputDependency(to: isPassportHolder, equalTo: true))
         items.append(launchedOutsideBC)
         
-        let k9Inspection = NullSwitchInput(
+        let k9Inspection = SwitchInput(
             key: "k9Inspection",
             header: WatercraftFieldHeaderConstants.Passport.k9Inspection,
             editable: editable ?? true,
-            value: object!.k9Inspection,
+            value: object?.k9Inspection ?? nil,
             width: .Third
         )
         k9Inspection.dependency.append(InputDependency(to: isPassportHolder, equalTo: true))
@@ -146,12 +146,13 @@ class WatercraftInspectionFormHelper {
         inspectionTime.dependency.append(InputDependency(to: passportField, equalTo: false))
         sectionItems.append(inspectionTime)
         
-        let k9Inspection = SwitchInput(
+        let k9Inspection = NullSwitchInput(
             key: "k9Inspection",
             header: WatercraftFieldHeaderConstants.Passport.k9Inspection,
             editable: editable ?? true,
             value: object?.k9Inspection ?? nil,
-            width: .Third
+            width: .Third,
+            interacted: interacted ?? false
         )
         k9Inspection.dependency.append(InputDependency(to: passportField, equalTo: false))
         sectionItems.append(k9Inspection)
