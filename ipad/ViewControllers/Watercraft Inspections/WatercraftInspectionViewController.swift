@@ -59,7 +59,6 @@ class WatercraftInspectionViewController: BaseViewController {
     private var showHighRiskAssessment: Bool = false
     private var showFullHighRiskAssessment = false
     private var isEditable: Bool = true
-    private var isInteracted: Bool = false
     
     deinit {
         print("De-init inspection")
@@ -592,11 +591,11 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
             return cell
         case .BasicInformation:
             let cell = getBasicCell(indexPath: indexPath)
-            cell.setup(title: "Basic Information", input: model.getInputputFields(for: sectionType, editable: isEditable, interacted: isInteracted), delegate: self)
+            cell.setup(title: "Basic Information", input: model.getInputputFields(for: sectionType, editable: isEditable), delegate: self)
             return cell
         case .WatercraftDetails:
             let cell = getBasicCell(indexPath: indexPath)
-            cell.setup(title: "Watercraft Details", input: model.getInputputFields(for: sectionType, editable: isEditable, interacted: isInteracted), delegate: self)
+            cell.setup(title: "Watercraft Details", input: model.getInputputFields(for: sectionType, editable: isEditable), delegate: self)
             return cell
         case .JourneyDetails:
             return getJourneyDetailsCell(for: indexPath)

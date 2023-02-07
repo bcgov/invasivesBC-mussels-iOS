@@ -42,10 +42,12 @@ class NullSwitchInputCollectionViewCell: BaseInputCell<NullSwitchInput> {
         
         switch model.getValue() {
             case false:// Switch is set to "No"
+                // First time loading the form, neither "Yes" or "No" are selected (null state)
+                self.nullSwitchView.selectedSegmentIndex = UISegmentedControl.noSegment
+            
+                // If the button has been toggled before, then we show "No" as selected
                 if model.interacted {
                     self.nullSwitchView.selectedSegmentIndex = 0
-                } else {
-                    self.nullSwitchView.selectedSegmentIndex = UISegmentedControl.noSegment
                 }
             case true:// Switch is set to "Yes"
                 self.nullSwitchView.selectedSegmentIndex = 1

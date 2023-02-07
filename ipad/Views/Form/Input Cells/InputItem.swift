@@ -41,6 +41,10 @@ enum InputItemWidthSize {
     case Fill
 }
 
+enum InteractedWithItem {
+    case k9InspectionInteracted
+}
+
 struct InputValue {
     var boolean: Bool?
     var string: String?
@@ -197,6 +201,26 @@ struct FieldComputation {
     }
 }
 
+struct InteractedWithValue {
+    var boolean: Bool?
+    
+    func get(type: InteractedWithItem) -> Bool? {
+        switch type {
+        case .k9InspectionInteracted:
+            return self.boolean
+        }
+    }
+    
+    mutating func set(value: Bool?, type: String) {
+        switch type {
+        case "k9Inspection":
+            self.boolean = value
+        default:
+            return
+        }
+    }
+}
+
 protocol InputItem {
     var type: InputItemType { get set }
     var width: InputItemWidthSize { get set }
@@ -210,6 +234,10 @@ protocol InputItem {
 
 protocol StringInputItem: InputItem {
     var value: String? {get set}
+}
+
+protocol InteractedWith {
+    var interacted: InteractedWithValue { get set }
 }
 
 class ViewField: InputItem {
@@ -359,7 +387,7 @@ class NullSwitchInput: InputItem {
     var value: InputValue
     var header: String
     var editable: Bool
-    var interacted: Bool
+    var interacted: InteractedWithValue
     
     init(key: String, header: String, editable: Bool, value: Bool? = false, width: InputItemWidthSize? = .Full, interacted: Bool) {
         self.value = InputValue()
@@ -368,12 +396,12 @@ class NullSwitchInput: InputItem {
         self.header = header
         self.editable = editable
         self.width = width ?? .Full
-        self.interacted = interacted
+        self.interacted = InteractedWithValue()
+        self.interacted.set(value: value ?? false, type: key)
     }
     
     func setInteracted() {
-        self.interacted = true
-        return
+        self.interacted.set(value: interacted, type: self.key)
     }
     
     func getValue() -> Bool? {
