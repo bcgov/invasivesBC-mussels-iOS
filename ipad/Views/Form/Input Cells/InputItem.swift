@@ -41,8 +41,9 @@ enum InputItemWidthSize {
     case Fill
 }
 
-enum InteractedWithItem {
+enum InteractedValidationName {
     case k9InspectionInteracted
+    case None
 }
 
 struct InputValue {
@@ -204,18 +205,19 @@ struct FieldComputation {
 struct InteractedWithValue {
     var boolean: Bool?
     
-    func get(type: InteractedWithItem) -> Bool? {
+    func get(type: InteractedValidationName) -> Bool? {
         switch type {
         case .k9InspectionInteracted:
             return self.boolean
+        case .None:
+            return true
         }
     }
-    
-    mutating func set(value: Bool?, type: String) {
+    mutating func set(value: Bool?, type: InteractedValidationName) {
         switch type {
-        case "k9Inspection":
+        case .k9InspectionInteracted:
             self.boolean = value
-        default:
+        case .None:
             return
         }
     }
@@ -378,7 +380,7 @@ class SwitchInput: InputItem {
     }
 }
 
-class NullSwitchInput: InputItem {
+class NullSwitchInput: InputItem, InteractedWith {
     var dependency: [InputDependency] = []
     var type: InputItemType = .NullSwitch
     var width: InputItemWidthSize
@@ -387,21 +389,27 @@ class NullSwitchInput: InputItem {
     var value: InputValue
     var header: String
     var editable: Bool
+    var validationName: InteractedValidationName
     var interacted: InteractedWithValue
     
-    init(key: String, header: String, editable: Bool, value: Bool? = false, width: InputItemWidthSize? = .Full, interacted: Bool) {
+    init(key: String, header: String, editable: Bool, value: Bool? = false, width: InputItemWidthSize? = .Full, validationName: InteractedValidationName? = nil, interacted: Bool?) {
         self.value = InputValue()
         self.value.set(value: value ?? false, type: type)
         self.key = key
         self.header = header
         self.editable = editable
         self.width = width ?? .Full
+        self.validationName = validationName ?? .None
         self.interacted = InteractedWithValue()
-        self.interacted.set(value: value ?? false, type: key)
+        self.interacted.set(value: interacted ?? true, type: validationName ?? .None)
     }
     
-    func setInteracted() {
-        self.interacted.set(value: interacted, type: self.key)
+    func getInteracted() -> Bool? {
+        return self.interacted.get(type: self.validationName)
+    }
+    
+    func setInteracted(value: Bool?) {
+        self.interacted.set(value: value ?? false, type: self.validationName)
     }
     
     func getValue() -> Bool? {

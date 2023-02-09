@@ -24,15 +24,15 @@ class NullSwitchInputCollectionViewCell: BaseInputCell<NullSwitchInput> {
         guard let model = self.model else {return}
         
         switch sender.selectedSegmentIndex {
-            case 0:// Switch is set to "No"
-                model.setValue(value: false)
-            case 1:// Switch is set to "Yes"
-                model.setValue(value: true)
-            default:// Switch is unset and remains "nil"
-                model.setValue(value: nil)
+        case 0:// Switch is set to "No"
+            model.setValue(value: false)
+        case 1:// Switch is set to "Yes"
+            model.setValue(value: true)
+        default:// Switch is unset and remains "nil"
+            model.setValue(value: nil)
         }
         
-        model.setInteracted()
+        model.interacted.set(value: true, type: model.validationName)
         self.emitChange()
     }
     
@@ -41,18 +41,16 @@ class NullSwitchInputCollectionViewCell: BaseInputCell<NullSwitchInput> {
         guard let model = self.model else {return}
         
         switch model.getValue() {
-            case false:// Switch is set to "No"
-                // First time loading the form, neither "Yes" or "No" are selected (null state)
-                self.nullSwitchView.selectedSegmentIndex = UISegmentedControl.noSegment
+        case false:
+            // First time loading the form, neither "Yes" or "No" are selected (null state)
+            self.nullSwitchView.selectedSegmentIndex = UISegmentedControl.noSegment
             
-                // If the button has been toggled before, then we show "No" as selected
-                if model.interacted {
-                    self.nullSwitchView.selectedSegmentIndex = 0
-                }
-            case true:// Switch is set to "Yes"
-                self.nullSwitchView.selectedSegmentIndex = 1
-            default:
-                self.nullSwitchView.selectedSegmentIndex = UISegmentedControl.noSegment
+            // If the button has been toggled before, then we show "No" as selected
+            if model.interacted.get(type: model.validationName) ?? true { self.nullSwitchView.selectedSegmentIndex = 0 }
+        case true:
+            self.nullSwitchView.selectedSegmentIndex = 1
+        default:
+            self.nullSwitchView.selectedSegmentIndex = UISegmentedControl.noSegment
         }
         
         self.headerLabel.text = model.header

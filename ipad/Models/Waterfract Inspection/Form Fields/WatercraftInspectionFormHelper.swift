@@ -152,7 +152,8 @@ class WatercraftInspectionFormHelper {
             editable: editable ?? true,
             value: object?.k9Inspection ?? nil,
             width: .Third,
-            interacted: interacted ?? false
+            validationName: .k9InspectionInteracted,
+            interacted: object?.k9InspectionInteracted ?? nil
         )
         k9Inspection.dependency.append(InputDependency(to: passportField, equalTo: false))
         sectionItems.append(k9Inspection)
