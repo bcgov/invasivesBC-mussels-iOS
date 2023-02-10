@@ -404,14 +404,6 @@ class NullSwitchInput: InputItem, InteractedWith {
         self.interacted.set(value: interacted ?? true, type: validationName ?? .None)
     }
     
-    func getInteracted() -> Bool? {
-        return self.interacted.get(type: self.validationName)
-    }
-    
-    func setInteracted(value: Bool?) {
-        self.interacted.set(value: value ?? false, type: self.validationName)
-    }
-    
     func getValue() -> Bool? {
         return self.value.get(type: self.type) as? Bool ?? nil
     }
