@@ -248,12 +248,14 @@ class WatercraftInspectionFormHelper {
         
         /// ---------------------------
         
-        let previousInspection = SwitchInput(
+        let previousInspection = NullSwitchInput(
             key: "previousInspection",
             header: WatercraftFieldHeaderConstants.WatercraftDetails.previousInspection,
             editable: editable ?? true,
             value: object?.previousInspection ?? nil,
-            width: .Full
+            width: .Full,
+            validationName: .previousInspectionInteracted,
+            interacted: object?.previousInspectionInteracted ?? false
         )
         sectionItems.append(previousInspection)
         

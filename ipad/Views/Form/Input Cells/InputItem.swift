@@ -43,6 +43,7 @@ enum InputItemWidthSize {
 
 enum InteractedValidationName {
     case k9InspectionInteracted
+    case previousInspectionInteracted
     case None
 }
 
@@ -209,6 +210,8 @@ struct InteractedWithValue {
         switch type {
         case .k9InspectionInteracted:
             return self.boolean
+        case .previousInspectionInteracted:
+            return self.boolean
         case .None:
             return true
         }
@@ -216,6 +219,8 @@ struct InteractedWithValue {
     mutating func set(value: Bool?, type: InteractedValidationName) {
         switch type {
         case .k9InspectionInteracted:
+            self.boolean = value
+        case .previousInspectionInteracted:
             self.boolean = value
         case .None:
             return
