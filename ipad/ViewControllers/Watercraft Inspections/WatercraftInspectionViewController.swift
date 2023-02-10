@@ -242,7 +242,7 @@ class WatercraftInspectionViewController: BaseViewController {
         }
         
         if model.inspectionTime == "" {
-            message = "\(message)\n\(counter)- Missing Time of Inspection."
+            message = "\(message)\n\(counter)- Missing Time of Inspection.\n"
             counter += 1
         }
         
@@ -250,7 +250,7 @@ class WatercraftInspectionViewController: BaseViewController {
             model.commercialManufacturerAsPreviousWaterBody == true ||
             model.previousDryStorage == true {
             if model.previousMajorCities.isEmpty {
-                message = "\(message)\n\(counter)- Please add Closest Major City for Previous Waterbody."
+                message = "\(message)\n\(counter)- Please add Closest Major City for Previous Waterbody.\n"
                 counter += 1
             }
         }
@@ -259,7 +259,7 @@ class WatercraftInspectionViewController: BaseViewController {
             model.commercialManufacturerAsDestinationWaterBody == true ||
             model.destinationDryStorage == true {
             if model.destinationMajorCities.isEmpty {
-                message = "\(message)\n\(counter)- Please add Closest Major City for Destination Waterbody."
+                message = "\(message)\n\(counter)- Please add Closest Major City for Destination Waterbody.\n"
                 counter += 1
             }
         }
@@ -267,12 +267,12 @@ class WatercraftInspectionViewController: BaseViewController {
         if !model.highRiskAssessments.isEmpty {
             for highRisk in model.highRiskAssessments {
                 if highRisk.sealIssued == true && highRisk.sealNumber <= 0 {
-                    message = "\(message)\n\(counter)- Please input the Seal #."
+                    message = "\(message)\n\(counter)- Please input the Seal #.\n"
                     counter += 1
                 }
                 
                 if highRisk.decontaminationOrderIssued == true && highRisk.decontaminationOrderNumber <= 0 {
-                    message = "\(message)\n\(counter)- Please input the Decontamination order number."
+                    message = "\(message)\n\(counter)- Please input the Decontamination order number.\n"
                     counter += 1
                 }
             }
