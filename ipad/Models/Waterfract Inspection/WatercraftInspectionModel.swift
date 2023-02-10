@@ -103,7 +103,9 @@ class WatercraftInspectionModel: Object, BaseRealmObject {
     @objc dynamic var isNewPassportIssued: Bool = false
     
     // Validators
-    @objc dynamic var k9InspectionInteracted: Bool = false
+    var validatorNames = ["k9Inspection"]
+    
+    @objc dynamic var k9InspectionInteracted = false
     
     // MARK: Setters
     func set(value: Any, for key: String) {
@@ -123,19 +125,21 @@ class WatercraftInspectionModel: Object, BaseRealmObject {
         if key == "highriskAIS" || key == "cleanDrainDryAfterInspection" {
             setRiskLevel()
         }
-        if key == "k9Inspection" {
-            setInteractedBool()
+        
+        // Validation checks
+        if validatorNames.contains(key) {
+            setInteractedBool(validationName:"\(key)Interacted")
         }
     }
     
-    func setInteractedBool() {
+    func setInteractedBool(validationName: String) {
         do {
             let realm = try Realm()
             try realm.write {
-                self["k9InspectionInteracted"] = true
+                self[validationName] = true
             }
         } catch let error as NSError {
-            print("K9 Interaction")
+            print("Error with finding validation")
             print(error)
         }
     }
