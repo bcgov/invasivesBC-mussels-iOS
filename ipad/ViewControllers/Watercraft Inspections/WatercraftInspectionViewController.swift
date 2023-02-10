@@ -241,6 +241,11 @@ class WatercraftInspectionViewController: BaseViewController {
             counter += 1
         }
         
+        if !model.k9InspectionInteracted {
+            message = "\(message)\n\(counter)- Please Complete k9 Inspection\n"
+            counter += 1
+        }
+        
         if model.inspectionTime == "" {
             message = "\(message)\n\(counter)- Missing Time of Inspection.\n"
             counter += 1
