@@ -25,8 +25,10 @@ class NullSwitchInputCollectionViewCell: BaseInputCell<NullSwitchInput> {
         
         switch sender.selectedSegmentIndex {
         case 0:// Switch is set to "No"
+            nullSwitchView.selectedSegmentTintColor = .systemOrange
             model.value.set(value: false, type: model.type)
         case 1:// Switch is set to "Yes"
+            nullSwitchView.selectedSegmentTintColor = .systemGreen
             model.value.set(value: true, type: model.type)
         default:// Switch is unset and remains "nil"
             model.value.set(value: nil, type: model.type)
@@ -47,8 +49,12 @@ class NullSwitchInputCollectionViewCell: BaseInputCell<NullSwitchInput> {
             self.nullSwitchView.selectedSegmentIndex = UISegmentedControl.noSegment
             
             // If the button has been toggled before, then we show "No" as selected
-            if model.interacted.get(type: model.validationName) ?? true { self.nullSwitchView.selectedSegmentIndex = 0 }
+            if model.interacted.get(type: model.validationName) ?? true {
+                nullSwitchView.selectedSegmentTintColor = .systemOrange
+                self.nullSwitchView.selectedSegmentIndex = 0
+            }
         case true:
+            nullSwitchView.selectedSegmentTintColor = .systemGreen
             self.nullSwitchView.selectedSegmentIndex = 1
         default:
             self.nullSwitchView.selectedSegmentIndex = UISegmentedControl.noSegment
