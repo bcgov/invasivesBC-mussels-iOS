@@ -1981,8 +1981,9 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 320;
+				CURRENT_PROJECT_VERSION = 323;
 				DEVELOPMENT_TEAM = L796QSLV3E;
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = L796QSLV3E;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = ipad/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -1990,10 +1991,11 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.1;
+				MARKETING_VERSION = 2.3;
 				PRODUCT_BUNDLE_IDENTIFIER = ca.bc.gov.InvasivesBC;
 				PRODUCT_NAME = Inspect;
 				PROVISIONING_PROFILE_SPECIFIER = "InvasivesBC Muscles";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "InvasivesBC Muscles - 2023";
 				SWIFT_OBJC_BRIDGING_HEADER = "ipad/Utilities/GenericCore/ObjC/ipad-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -2009,8 +2011,9 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 320;
+				CURRENT_PROJECT_VERSION = 323;
 				DEVELOPMENT_TEAM = L796QSLV3E;
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = L796QSLV3E;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = ipad/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -2018,10 +2021,11 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.1;
+				MARKETING_VERSION = 2.3;
 				PRODUCT_BUNDLE_IDENTIFIER = ca.bc.gov.InvasivesBC;
 				PRODUCT_NAME = Inspect;
 				PROVISIONING_PROFILE_SPECIFIER = "InvasivesBC Muscles";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "InvasivesBC Muscles - 2023";
 				SWIFT_OBJC_BRIDGING_HEADER = "ipad/Utilities/GenericCore/ObjC/ipad-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 2;
