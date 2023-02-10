@@ -25,11 +25,11 @@ class NullSwitchInputCollectionViewCell: BaseInputCell<NullSwitchInput> {
         
         switch sender.selectedSegmentIndex {
         case 0:// Switch is set to "No"
-            model.setValue(value: false)
+            model.value.set(value: false, type: model.type)
         case 1:// Switch is set to "Yes"
-            model.setValue(value: true)
+            model.value.set(value: true, type: model.type)
         default:// Switch is unset and remains "nil"
-            model.setValue(value: nil)
+            model.value.set(value: nil, type: model.type)
         }
         
         model.interacted.set(value: true, type: model.validationName)
@@ -39,8 +39,9 @@ class NullSwitchInputCollectionViewCell: BaseInputCell<NullSwitchInput> {
     // MARK: Setup
     override func initialize(with model: NullSwitchInput) {
         guard let model = self.model else {return}
+        let value = model.getValue()
         
-        switch model.getValue() {
+        switch value {
         case false:
             // First time loading the form, neither "Yes" or "No" are selected (null state)
             self.nullSwitchView.selectedSegmentIndex = UISegmentedControl.noSegment

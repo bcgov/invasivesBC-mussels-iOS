@@ -153,7 +153,7 @@ class WatercraftInspectionFormHelper {
             value: object?.k9Inspection ?? nil,
             width: .Third,
             validationName: .k9InspectionInteracted,
-            interacted: object?.k9InspectionInteracted ?? nil
+            interacted: object?.k9InspectionInteracted ?? false
         )
         k9Inspection.dependency.append(InputDependency(to: passportField, equalTo: false))
         sectionItems.append(k9Inspection)
