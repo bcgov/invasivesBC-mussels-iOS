@@ -105,8 +105,8 @@ struct WatercraftFieldHeaderConstants {
         static let previousAISKnowlede = "Previous Knowledge of AIS or Clean, Drain, Dry"
         static let previousAISKnowledeSource = "Source"
         static let previousInspection = "Previous inspection and/or agency notification  *"
-        static let previousInspectionSource = "Source"
-        static let previousInspectionDays = "No. Of Days"
+        static let previousInspectionSource = "Source *"
+        static let previousInspectionDays = "No. Of Days *"
         static let cleanDrainDryAfter = "Is the watercraft Clean, Drain, Dry after full inspection without taking any further action?"
     }
     struct InspectionDetails {
