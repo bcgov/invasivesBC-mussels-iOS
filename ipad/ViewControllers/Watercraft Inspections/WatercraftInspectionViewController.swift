@@ -242,7 +242,12 @@ class WatercraftInspectionViewController: BaseViewController {
         }
         
         if !model.k9InspectionInteracted {
-            message = "\(message)\n\(counter)- Please Complete k9 Inspection\n"
+            message = "\(message)\n\(counter)- Please input k9 Inspection.\n"
+            counter += 1
+        }
+        
+        if !model.previousInspectionInteracted {
+            message = "\(message)\n\(counter)- Please input Previous Inspection and/or Agency Notification.\n"
             counter += 1
         }
         
