@@ -242,17 +242,33 @@ class WatercraftInspectionViewController: BaseViewController {
         }
         
         if !model.k9InspectionInteracted {
-            message = "\(message)\n\(counter)- Please input k9 Inspection.\n"
+            message = "\(message)\n\(counter). Please input k9 Inspection.\n"
             counter += 1
         }
         
         if !model.previousInspectionInteracted {
-            message = "\(message)\n\(counter)- Please input Previous Inspection and/or Agency Notification.\n"
+            message = "\(message)\n\(counter). Please input Previous Inspection and/or Agency Notification.\n"
+            counter += 1
+        }
+        
+        // Previous Inspection has been interacted with and set to "Yes", but Previous Inspection Source is empty
+        if model.previousInspectionInteracted &&
+            model.previousInspection &&
+            model.previousInspectionSource.isEmpty {
+            message = "\(message)\n\(counter). Please input Previous Inspection Source.\n"
+            counter += 1
+        }
+        
+        // Previous Inspection has been interacted with and set to "Yes", but Previous Inspection Days is empty
+        if model.previousInspectionInteracted &&
+            model.previousInspection &&
+            model.previousInspectionDays.isEmpty {
+            message = "\(message)\n\(counter). Please input Previous Inspection No. of Days.\n"
             counter += 1
         }
         
         if model.inspectionTime == "" {
-            message = "\(message)\n\(counter)- Missing Time of Inspection.\n"
+            message = "\(message)\n\(counter). Missing Time of Inspection.\n"
             counter += 1
         }
         
@@ -260,7 +276,7 @@ class WatercraftInspectionViewController: BaseViewController {
             model.commercialManufacturerAsPreviousWaterBody == true ||
             model.previousDryStorage == true {
             if model.previousMajorCities.isEmpty {
-                message = "\(message)\n\(counter)- Please add Closest Major City for Previous Waterbody.\n"
+                message = "\(message)\n\(counter). Please add Closest Major City for Previous Waterbody.\n"
                 counter += 1
             }
         }
@@ -269,7 +285,7 @@ class WatercraftInspectionViewController: BaseViewController {
             model.commercialManufacturerAsDestinationWaterBody == true ||
             model.destinationDryStorage == true {
             if model.destinationMajorCities.isEmpty {
-                message = "\(message)\n\(counter)- Please add Closest Major City for Destination Waterbody.\n"
+                message = "\(message)\n\(counter). Please add Closest Major City for Destination Waterbody.\n"
                 counter += 1
             }
         }
@@ -277,12 +293,12 @@ class WatercraftInspectionViewController: BaseViewController {
         if !model.highRiskAssessments.isEmpty {
             for highRisk in model.highRiskAssessments {
                 if highRisk.sealIssued == true && highRisk.sealNumber <= 0 {
-                    message = "\(message)\n\(counter)- Please input the Seal #.\n"
+                    message = "\(message)\n\(counter). Please input the Seal #.\n"
                     counter += 1
                 }
                 
                 if highRisk.decontaminationOrderIssued == true && highRisk.decontaminationOrderNumber <= 0 {
-                    message = "\(message)\n\(counter)- Please input the Decontamination order number.\n"
+                    message = "\(message)\n\(counter). Please input the Decontamination order number.\n"
                     counter += 1
                 }
             }
