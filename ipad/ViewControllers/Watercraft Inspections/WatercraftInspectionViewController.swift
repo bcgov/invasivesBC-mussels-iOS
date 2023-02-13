@@ -177,7 +177,7 @@ class WatercraftInspectionViewController: BaseViewController {
         let deleteButton = UIBarButtonItem(image: deleteIcon,  style: .plain, target: self, action: #selector(self.didTapDeleteButton(sender:)))
         
         let saveIcon = UIImage(systemName: "checkmark")
-        let saveButton = UIBarButtonItem(image: saveIcon,  style: .plain, target: self, action: #selector(self.action(sender:)))
+        let saveButton = UIBarButtonItem(image: saveIcon,  style: .plain, target: self, action: #selector(self.didTapCheckmarkButton(sender:)))
         
         navigationItem.rightBarButtonItems = [saveButton, deleteButton]
     }
@@ -220,6 +220,27 @@ class WatercraftInspectionViewController: BaseViewController {
         var message: String = ""
         guard let model = self.model else { return message }
         var counter = 1
+        
+        // Check if any of the watercraft types are at least greater than 0
+        // If this is a passport holder, watercraft types is visible when issuing
+        // a new passport or if launchedOutsideBC is checked as true
+        if (!model.isPassportHolder &&
+            model.nonMotorized == 0 &&
+            model.simple == 0 &&
+            model.complex == 0 &&
+            model.veryComplex == 0) ||
+            
+            (model.isPassportHolder &&
+             (model.launchedOutsideBC || model.isNewPassportIssued) &&
+             model.nonMotorized == 0 &&
+             model.simple == 0 &&
+             model.complex == 0 &&
+             model.veryComplex == 0) {
+                   
+            message = "\(message)\n\(counter). Please input Watercraft Type:\n - Non-Motorized\n - Simple\n - Complex\n - Very Complex\n"
+            counter += 1
+        }
+        
         if model.inspectionTime == "" {
             message = "\(message)\n\(counter)- Missing Time of Inspection."
             counter += 1
@@ -260,7 +281,7 @@ class WatercraftInspectionViewController: BaseViewController {
         return message
     }
     
-    @objc func action(sender: UIBarButtonItem) {
+    @objc func didTapCheckmarkButton(sender: UIBarButtonItem) {
         self.dismissKeyboard()
 
         if canSubmit() {
