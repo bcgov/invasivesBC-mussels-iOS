@@ -104,7 +104,6 @@ class WatercraftInspectionModel: Object, BaseRealmObject {
     
     // Validators
     var validatorNames = ["k9Inspection", "previousInspection"]
-    
     @objc dynamic var k9InspectionInteracted = false
     @objc dynamic var previousInspectionInteracted = false
     
@@ -127,12 +126,13 @@ class WatercraftInspectionModel: Object, BaseRealmObject {
             setRiskLevel()
         }
         
-        // Validation checks
+        // Validation checks - check if this key requires interaction validation
         if validatorNames.contains(key) {
             setInteractedBool(validationName:"\(key)Interacted")
         }
     }
     
+    // Validation check - if interacted with, set to true
     func setInteractedBool(validationName: String) {
         do {
             let realm = try Realm()

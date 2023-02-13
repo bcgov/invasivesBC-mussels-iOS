@@ -44,7 +44,6 @@ enum InputItemWidthSize {
 enum InteractedValidationName {
     case k9InspectionInteracted
     case previousInspectionInteracted
-    case None
 }
 
 struct InputValue {
@@ -212,8 +211,6 @@ struct InteractedWithValue {
             return self.boolean
         case .previousInspectionInteracted:
             return self.boolean
-        case .None:
-            return true
         }
     }
     mutating func set(value: Bool?, type: InteractedValidationName) {
@@ -222,8 +219,6 @@ struct InteractedWithValue {
             self.boolean = value
         case .previousInspectionInteracted:
             self.boolean = value
-        case .None:
-            return
         }
     }
 }
@@ -338,14 +333,14 @@ class TextInput: InputItem {
     var header: String
     var validation: TextInputValidation
     
-    init(key: String, header: String, editable: Bool, value: String? = "", validation: TextInputValidation? = .None, width: InputItemWidthSize? = .Full) {
+    init(key: String, header: String, editable: Bool, value: String? = "", validation: TextInputValidation, width: InputItemWidthSize? = .Full) {
         self.value = InputValue()
         self.value.set(value: value, type: type)
         self.key = key
         self.header = header
         self.editable = editable
         self.width = width ?? .Full
-        self.validation = validation ?? .None
+        self.validation = validation
     }
     
     func getValue() -> String? {
@@ -397,16 +392,16 @@ class NullSwitchInput: InputItem, InteractedWith {
     var validationName: InteractedValidationName
     var interacted: InteractedWithValue
     
-    init(key: String, header: String, editable: Bool, value: Bool? = false, width: InputItemWidthSize? = .Full, validationName: InteractedValidationName? = nil, interacted: Bool?) {
+    init(key: String, header: String, editable: Bool, value: Bool? = false, width: InputItemWidthSize? = .Full, validationName: InteractedValidationName, interacted: Bool?) {
         self.value = InputValue()
         self.value.set(value: value ?? false, type: type)
         self.key = key
         self.header = header
         self.editable = editable
         self.width = width ?? .Full
-        self.validationName = validationName ?? .None
+        self.validationName = validationName
         self.interacted = InteractedWithValue()
-        self.interacted.set(value: interacted ?? true, type: validationName ?? .None)
+        self.interacted.set(value: interacted ?? true, type: validationName)
     }
     
     func getValue() -> Bool? {

@@ -231,9 +231,9 @@ class WatercraftInspectionViewController: BaseViewController {
             counter += 1
         }
         
-        // Check if any of the watercraft types are at least greater than 0
-        // If this is a passport holder, watercraft types is visible when issuing
-        // a new passport or if launchedOutsideBC is checked as true
+        // Check if any of the Watercraft types are at least greater than 0
+        // If this is a passport holder, Watercraft types needs validation when
+        // issuing a new passport or if launchedOutsideBC is checked as true
         if (!model.isPassportHolder &&
             model.nonMotorized == 0 &&
             model.simple == 0 &&
