@@ -106,7 +106,7 @@ struct WatercraftFieldHeaderConstants {
         static let previousAISKnowledeSource = "Source"
         static let previousInspection = "Previous inspection and/or agency notification  *"
         static let previousInspectionSource = "Source *"
-        static let previousInspectionDays = "No. Of Days *"
+        static let previousInspectionDays = "No. of Days *"
         static let cleanDrainDryAfter = "Is the watercraft Clean, Drain, Dry after full inspection without taking any further action?"
     }
     struct InspectionDetails {
@@ -116,7 +116,7 @@ struct WatercraftFieldHeaderConstants {
         static let ticketIssued = "Violation ticket issued"
     }
     struct HighriskAssessmentFields {
-        static let highriskAIS = "The watercraft is NOT clean, drain, dry after full inspection and further action must be taken AND/OR a full inspection can not be completed."
+        static let highriskAIS = "The watercraft is NOT Clean, Drain, Dry after full inspection and further action must be taken AND/OR a full inspection can not be completed."
         static let adultDreissenidFound = "Adult dreissenid mussels found"
     }
     struct GeneralComments {

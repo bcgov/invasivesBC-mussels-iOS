@@ -221,6 +221,16 @@ class WatercraftInspectionViewController: BaseViewController {
         guard let model = self.model else { return message }
         var counter = 1
         
+        if model.inspectionTime == "" {
+            message = "\(message)\n\(counter). Missing Time of Inspection.\n"
+            counter += 1
+        }
+        
+        if !model.k9InspectionInteracted {
+            message = "\(message)\n\(counter). Please input k9 Inspection.\n"
+            counter += 1
+        }
+        
         // Check if any of the watercraft types are at least greater than 0
         // If this is a passport holder, watercraft types is visible when issuing
         // a new passport or if launchedOutsideBC is checked as true
@@ -241,11 +251,6 @@ class WatercraftInspectionViewController: BaseViewController {
             counter += 1
         }
         
-        if !model.k9InspectionInteracted {
-            message = "\(message)\n\(counter). Please input k9 Inspection.\n"
-            counter += 1
-        }
-        
         if !model.previousInspectionInteracted {
             message = "\(message)\n\(counter). Please input Previous Inspection and/or Agency Notification.\n"
             counter += 1
@@ -255,7 +260,7 @@ class WatercraftInspectionViewController: BaseViewController {
         if model.previousInspectionInteracted &&
             model.previousInspection &&
             model.previousInspectionSource.isEmpty {
-            message = "\(message)\n\(counter). Please input Previous Inspection Source.\n"
+            message = "\(message)\n\(counter). Please input Source for Previous Inspection and/or Agency Notification.\n"
             counter += 1
         }
         
@@ -263,12 +268,7 @@ class WatercraftInspectionViewController: BaseViewController {
         if model.previousInspectionInteracted &&
             model.previousInspection &&
             model.previousInspectionDays.isEmpty {
-            message = "\(message)\n\(counter). Please input Previous Inspection No. of Days.\n"
-            counter += 1
-        }
-        
-        if model.inspectionTime == "" {
-            message = "\(message)\n\(counter). Missing Time of Inspection.\n"
+            message = "\(message)\n\(counter). Please input No. of Days for Previous Inspection and/or Agency Notification.\n"
             counter += 1
         }
         
