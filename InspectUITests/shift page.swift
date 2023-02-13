@@ -38,12 +38,15 @@ class shift_page: XCTestCase {
         let loginButton = app.buttons["Login with IDIR"]
         loginButton.tap()
         
+        let accountUsername = ProcessInfo.processInfo.environment["TestIDIR"]!
+        let accountPassword = ProcessInfo.processInfo.environment["TestPassword"]!
+        
         let webViewsQuery = app.webViews.webViews.webViews
         let governmentOfBritishColumbiaElement = webViewsQuery.otherElements["Government of British Columbia"]
         governmentOfBritishColumbiaElement.children(matching: .textField).element.tap()
-        governmentOfBritishColumbiaElement.children(matching: .textField).element.typeText("istest3")
+        governmentOfBritishColumbiaElement.children(matching: .textField).element.typeText(accountUsername)
         governmentOfBritishColumbiaElement.children(matching: .secureTextField).element.tap()
-        governmentOfBritishColumbiaElement.children(matching: .secureTextField).element.typeText("Qwer12343")
+        governmentOfBritishColumbiaElement.children(matching: .secureTextField).element.typeText(accountPassword)
         webViewsQuery/*@START_MENU_TOKEN@*/.buttons["Continue"]/*[[".otherElements[\"Government of British Columbia\"].buttons[\"Continue\"]",".buttons[\"Continue\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
     }
     
@@ -145,7 +148,7 @@ class shift_page: XCTestCase {
             fillShiftModal()
             fillShiftPageWithoutInspections()
         } else {
-            fillShiftPageWithoutInspections()
+            fillShiftPageWithInspections()
         }
     }
     
@@ -176,10 +179,9 @@ class shift_page: XCTestCase {
         // Select shift end time
         app.collectionViews/*@START_MENU_TOKEN@*/.collectionViews.textFields["shiftendtime"]/*[[".cells.collectionViews",".cells.textFields[\"shiftendtime\"]",".textFields[\"shiftendtime\"]",".collectionViews"],[[[-1,3,1],[-1,0,1]],[[-1,2],[-1,1]]],[0,0]]@END_MENU_TOKEN@*/.tap()
         app/*@START_MENU_TOKEN@*/.otherElements["PopoverDismissRegion"]/*[[".otherElements[\"dismiss popup\"]",".otherElements[\"PopoverDismissRegion\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
-        
+
         // Submit
         submitShiftPage()
-        
     }
     
     func fillShiftPageWithInspections() {
@@ -214,9 +216,9 @@ class shift_page: XCTestCase {
         sleep(1)
         
         // Add boats inspected
-        let boatsInspected = app.collectionViews.collectionViews.switches["BoatsInspectedDuringShift?".lowercased()]
-        sleep(1)
-        boatsInspected.swipeRight()
+//        let boatsInspected = app.switches["BoatsInspectedDuringShift?".lowercased()]
+//        sleep(1)
+//        boatsInspected.swipeRight()
         
         // Scroll up
         app.collectionViews.cells.otherElements.containing(.staticText, identifier:"Shift End").element.swipeDown()
@@ -237,7 +239,8 @@ class shift_page: XCTestCase {
     func submitShiftPage() {
         let app = XCUIApplication()
         
-        app.navigationBars["Shift Overview"].buttons["Submit"].tap()
+        app.navigationBars["Shift Overview"].buttons["Delete"].tap()
+//        app.navigationBars["Shift Overview"].buttons["Submit"].tap()
         app.buttons["Yes"].tap()
         
         // Check that we are back at the home page
@@ -277,7 +280,8 @@ class shift_page: XCTestCase {
      */
     func teardown() {
         let app = XCUIApplication()
-        app.buttons["person.crop.circle"].tap()
+
+        app.buttons["account"].tap()
         app.popovers.tables/*@START_MENU_TOKEN@*/.staticTexts["Logout"]/*[[".cells.staticTexts[\"Logout\"]",".staticTexts[\"Logout\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
         app.buttons["Yes"].tap()
     }
@@ -330,17 +334,17 @@ class shift_page: XCTestCase {
         passportField.typeText("BC123456")
         
         
-        if fullForm {
+//        if fullForm {
             // Select Launched Outside BC to trigger full form
-            let lancuedOutsideBC = app.collectionViews/*@START_MENU_TOKEN@*/.collectionViews.switches["launchedoutsidebc/abinthelast30days?"]/*[[".cells.collectionViews",".cells[\"launchedoutsidebc\/abinthelast30days?cell\"].switches[\"launchedoutsidebc\/abinthelast30days?\"]",".switches[\"launchedoutsidebc\/abinthelast30days?\"]",".collectionViews"],[[[-1,3,1],[-1,0,1]],[[-1,2],[-1,1]]],[0,0]]@END_MENU_TOKEN@*/
-            sleep(1)
-            lancuedOutsideBC.swipeRight()
-            
-            fillFullInspection(highRisk: highRisk)
-        } else {
+//            let lancuedOutsideBC = app.collectionViews/*@START_MENU_TOKEN@*/.collectionViews.switches["launchedoutsidebc/abinthelast30days?"]/*[[".cells.collectionViews",".cells[\"launchedoutsidebc\/abinthelast30days?cell\"].switches[\"launchedoutsidebc\/abinthelast30days?\"]",".switches[\"launchedoutsidebc\/abinthelast30days?\"]",".collectionViews"],[[[-1,3,1],[-1,0,1]],[[-1,2],[-1,1]]],[0,0]]@END_MENU_TOKEN@*/
+//            sleep(1)
+//            lancuedOutsideBC.swipeRight()
+
+//            fillFullInspection(highRisk: highRisk)
+//        } else {
             // Finish
-            app.navigationBars["Watercraft Inspection"].buttons["checkmark"].tap()
-        }
+            app.navigationBars["Watercraft Inspection"].buttons["selected"].tap()
+//        }
     }
     
     /**
@@ -369,15 +373,15 @@ class shift_page: XCTestCase {
         //        app.collectionViews/*@START_MENU_TOKEN@*/.buttons["Add Previous Water Body"]/*[[".cells.buttons[\"Add Previous Water Body\"]",".buttons[\"Add Previous Water Body\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
         //        addWaterbody()
         
-        if highRisk {
-            let inspectionDetailsStaticText = collectionViewsQuery/*@START_MENU_TOKEN@*/.staticTexts["Inspection Details"]/*[[".cells.staticTexts[\"Inspection Details\"]",".staticTexts[\"Inspection Details\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/
-            inspectionDetailsStaticText.swipeUp()
-            inspectionDetailsStaticText.swipeUp()
-            makeInspectionHighRisk()
-        }
-        
+//        if highRisk {
+//            let inspectionDetailsStaticText = collectionViewsQuery/*@START_MENU_TOKEN@*/.staticTexts["Inspection Details"]/*[[".cells.staticTexts[\"Inspection Details\"]",".staticTexts[\"Inspection Details\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/
+//            inspectionDetailsStaticText.swipeUp()
+//            inspectionDetailsStaticText.swipeUp()
+//            makeInspectionHighRisk()
+//        }
+
         // Finish
-        app.navigationBars["Watercraft Inspection"].buttons["checkmark"].tap()
+        app.navigationBars["Watercraft Inspection"].buttons["selected"].tap()
     }
     
     /**

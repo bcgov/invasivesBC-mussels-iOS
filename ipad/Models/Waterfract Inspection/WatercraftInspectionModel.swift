@@ -11,7 +11,7 @@ import Foundation
 import Realm
 import RealmSwift
 
-class WatercradftInspectionModel: Object, BaseRealmObject {
+class WatercraftInspectionModel: Object, BaseRealmObject {
     @objc dynamic var userId: String = ""
     @objc dynamic var localId: String = {
         return UUID().uuidString
@@ -56,10 +56,12 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
     @objc dynamic var previousAISKnowledeSource: String = ""
     @objc dynamic var previousInspection: Bool = false
     @objc dynamic var previousInspectionSource: String = ""
-    @objc dynamic var previousInspectionDays: Int = 0
+    @objc dynamic var previousInspectionDays: String = ""
     
     // Inspection Details
-    @objc dynamic var marineMusslesFound: Bool = false
+    @objc dynamic var marineMusselsFound: Bool = false
+    @objc dynamic var cleanDrainDryAfterInspection: Bool = false
+    @objc dynamic var dreissenidMusselsFoundPrevious: Bool = false
     
     // Dry Storage
     @objc dynamic var previousDryStorage: Bool = false
@@ -115,13 +117,13 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
             print("** REALM ERROR")
             print(error)
         }
-        if key == "highriskAIS" || key == "adultDreissenidFound" {
+        if key == "highriskAIS" || key == "cleanDrainDryAfterInspection" {
             setRiskLevel()
         }
     }
     
     func setRiskLevel() {
-        if highriskAIS == true || adultDreissenidFound == true {
+        if highriskAIS == true {
             set(value: "High", for: "riskLevel")
         } else {
             set(value: "Low", for: "riskLevel")
@@ -183,6 +185,10 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
         let assessment = HighRiskAssessmentModel()
         assessment.shouldSync = false
         assessment.userId = self.userId
+        if self.adultDreissenidFound == true {
+            assessment.adultDreissenidMusselsFound = true
+        }
+
         do {
             let realm = try Realm()
             try realm.write {
@@ -260,8 +266,10 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
             "aquaticPlantsFound": aquaticPlantsFound,
             "previousAISKnowledge": previousAISKnowlede,
             "previousInspection": previousInspection,
-            "marineMusselFound": marineMusslesFound,
+            "marineMusselFound": marineMusselsFound,
+            "cleanDrainDryAfterInspection": cleanDrainDryAfterInspection,
             "adultDreissenidaeFound": adultDreissenidFound,
+            "dreissenidMusselsFoundPrevious": dreissenidMusselsFoundPrevious,
             "nonMotorized": nonMotorized,
             "simple": simple,
             "complex": complex,

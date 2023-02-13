@@ -38,8 +38,8 @@ class testShift: XCTestCase {
         return model
     }
     
-    func createTestInspection() -> WatercradftInspectionModel {
-        let inspection = WatercradftInspectionModel()
+    func createTestInspection() -> WatercraftInspectionModel {
+        let inspection = WatercraftInspectionModel()
         inspection.remoteId = 1000
         inspection.inspectionTime = "16.00"
         inspection.shouldSync = false

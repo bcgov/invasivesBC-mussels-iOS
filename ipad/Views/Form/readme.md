@@ -46,7 +46,7 @@ There is a function for each section of the form, to grab the fields for that se
 class WatercraftInspectionFormHelper {
     
     static func getPassportFields(
-        for object:WatercradftInspectionModel? = nil,
+        for object:WatercraftInspectionModel? = nil,
         editable: Bool? = true) -> [InputItem] {
     }
 }
@@ -175,7 +175,7 @@ That's it. we only changed `RadioSwitchInput` to `SwitchInput`.&nbsp;&nbsp;
 If the we wanted `isNewPassportIssued` to be a `string` instead of a `boolean`, we would first need to update our data model:
 ```swift
 // Before
-class WatercradftInspectionModel: Object, BaseRealmObject {
+class WatercraftInspectionModel: Object, BaseRealmObject {
     ...
     // Passport issue flag
     @objc dynamic var isNewPassportIssued: Bool = false
@@ -184,7 +184,7 @@ class WatercradftInspectionModel: Object, BaseRealmObject {
 ```
 ```swift
 // After
-class WatercradftInspectionModel: Object, BaseRealmObject {
+class WatercraftInspectionModel: Object, BaseRealmObject {
     ...
     // Passport issue flag
     @objc dynamic var isNewPassportIssued: String = ""
@@ -213,7 +213,7 @@ let isNewPassportIssued = DropdownInput(
     editable: editable ?? true,
     value: object?.isNewPassportIssued ?? nil,
     width: .Full
-    dropdownItems: DropdownHelper.shared.getDropdownForPrvinces(),
+    dropdownItems: DropdownHelper.shared.getDropdownForProvinces(),
     codes: DropdownHelper.shared.getProvinceCodes()
 )
 ```

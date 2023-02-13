@@ -41,7 +41,7 @@ class InspectionsTableCollectionViewCell: BaseShiftOverviewCollectionViewCell {
         let table = Table()
         
         // Convert list to array
-        let inspections: [WatercradftInspectionModel] = model.inspections.map{ $0 }
+        let inspections: [WatercraftInspectionModel] = model.inspections.map{ $0 }
         
         // Set table container height
         tableHeightConstraint.constant = InspectionsTableCollectionViewCell.getTableHeight(for: model)
@@ -78,7 +78,7 @@ class InspectionsTableCollectionViewCell: BaseShiftOverviewCollectionViewCell {
         }
         // Convert list to array
         
-        let inspections: [WatercradftInspectionModel] = model.inspections.map{ $0 }
+        let inspections: [WatercraftInspectionModel] = model.inspections.map{ $0 }
         let numberOfRows = inspections.count
         
         let rowHeight = Table.rowHeight

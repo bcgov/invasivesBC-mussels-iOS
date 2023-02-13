@@ -36,6 +36,7 @@ xcuserdata/
 
 ## Build generated
 build/
+buildArchive/
 DerivedData
 
 ## Various settings

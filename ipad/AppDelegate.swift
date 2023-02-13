@@ -10,13 +10,13 @@ import UIKit
 import IQKeyboardManagerSwift
 import Realm
 import RealmSwift
-import Firebase
+//import Firebase
 
 class AppLogDataSource: NSObject, LoggerDataSource {
     var csvLogFileName: String = "app_logger.csv"
     var logFileName: String = "app_logger.txt"
     var maxSize: Int = 1024 * 1024 * 1
-    var appNamePrefix: String = "Mussle-Inspect"
+    var appNamePrefix: String = "Mussel-Inspect"
     var timeFormat: String = "dd-MMM-yy HH:mm:ss"
 }
 
@@ -27,7 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         migrateRealm()
         //////
         // Setup App Name
-        SetAppName("Mussle-Inspect")
+        SetAppName("Mussel-Inspect")
         // Setup Logger
         LoggerSetDataSource(AppLogDataSource())
         // Start Logging
@@ -41,7 +41,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Begin Autosync change listener
         SyncService.shared.beginListener()
         // Crash Lytics
-        FirebaseApp.configure()
+        //FirebaseApp.configure()
         
         return true
     }

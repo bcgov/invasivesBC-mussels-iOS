@@ -63,8 +63,10 @@ class ViewController: UIViewController, Theme {
             segueToHomePage()
             return
         }
+
         SyncService.shared.performInitialSync { [weak self] (success) in
             guard let _self = self else {return}
+
             if success {
                 _self.segueToHomePage()
             } else {

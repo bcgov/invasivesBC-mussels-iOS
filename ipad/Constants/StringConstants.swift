@@ -63,14 +63,14 @@ struct StringConstants {
 // MARK: Shift
 struct ShiftFormHeaders {
     struct ShiftStart {
-        static let startTime = "Shift Start Time"
+        static let startTime = "Shift Start Time *"
         static let k9OnShift = "k9 On Shift"
         static let station = "Station"
         static let comments = "Shift Start Comments"
     }
     
     struct ShiftEnd {
-        static let endTime = "Shift End Time"
+        static let endTime = "Shift End Time *"
         static let boatsInspected = "Boats Inspected During Shift?"
         static let motorizedBlowBys = "Motorized blow-bys"
         static let nonMotorizedBlowBys = "Non Motorized blow-Bys"
@@ -83,7 +83,7 @@ struct WatercraftFieldHeaderConstants {
     struct Passport {
         static let isPassportHolder = "Is this a Passport Holder?"
         static let isNewPassportIssued = "Was a new passport issued?"
-        static let inspectionTime = "Time of Inspection"
+        static let inspectionTime = "Time of Inspection *"
         static let passportNumber = "Passport Number"
         static let launchedOutsideBC = "Launched outside BC/AB in the last 30 days?"
         static let k9Inspection = "k9 Inspection Performed?"
@@ -107,15 +107,16 @@ struct WatercraftFieldHeaderConstants {
         static let previousInspection = "Previous inspection and/or agency notification"
         static let previousInspectionSource = "Source"
         static let previousInspectionDays = "No. Of Days"
+        static let cleanDrainDryAfter = "Is the watercraft Clean, Drain, Dry after full inspection without taking any further action?"
     }
     struct InspectionDetails {
         static let aquaticPlantsFound = "Aquatic plants found"
-        static let marineMusslesFound = "Marine mussels or barnacles found"
+        static let marineMusselsFound = "Marine mussels or barnacles found"
         static let failedToStop = "Watercraft pulled over for failing to stop at the inspection station"
         static let ticketIssued = "Violation ticket issued"
     }
     struct HighriskAssessmentFields {
-        static let highriskAIS = "Watercraft/equipment high risk for dreissenid or other AIS *"
+        static let highriskAIS = "The watercraft is NOT clean, drain, dry after full inspection and further action must be taken AND/OR a full inspection can not be completed."
         static let adultDreissenidFound = "Adult dreissenid mussels found"
     }
     struct GeneralComments {
@@ -138,16 +139,17 @@ struct HighRiskFormFieldHeaders {
         static let quarantinePeriodIssued = "Quarantine period issued?"
         static let standingWaterPresent = "Standing water present?"
         static let standingWaterLocation = "Standing Water Location"
-        static let adultDreissenidMusselsFound = "Adult Dreissendid mussels found?"
+        static let adultDreissenidMusselsFound = "Adult dreissenid mussels found?"
         static let adultDreissenidMusselsLocation = "Adult Dreissenid mussels location"
-        static let dreisennidFoundPrevious = "Dreissenid mussels found on previous inspection"
+        static let dreisennidFoundPrevious = "Dreissenid mussels found during previous inspection and FULL decontamination already completed"
         static let decontaminationPerformed = "Decontamination performed?"
         static let decontaminationReference = "Record of Decontamination number"
         static let decontaminationOrderIssued = "Decontamination order issued?"
-        static let decontaminationOrderNumber = "Decontamination order number"
+        static let decontaminationOrderNumber = "Decontamination order number *"
         static let decontaminationOrderReason = "Reason for issuing decontamination order"
-        static let sealIssued = "Seal issued?"
-        static let sealNumber = "Seal #"
+        static let decontaminationAppendixB = "Appendix B filled out?"
+        static let sealIssued = "Seal issued or existing seal?"
+        static let sealNumber = "Seal # *"
     }
     
     struct GeneralComments {

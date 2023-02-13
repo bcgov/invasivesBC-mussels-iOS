@@ -41,7 +41,7 @@ class ShiftViewController: BaseViewController {
     var model: ShiftModel?
     var showShiftInfo: Bool = true
     var isEditable: Bool = true
-    private var inspection: WatercradftInspectionModel?
+    private var inspection: WatercraftInspectionModel?
     
     // MARK: Outlets
     @IBOutlet weak var containerView: UIView!
@@ -135,11 +135,11 @@ class ShiftViewController: BaseViewController {
     
     // Table Button clicked
     @objc func tableButtonClicked(notification: Notification) {
-        guard let actionModel = notification.object as? TableClickActionModel, let inspectionModel = actionModel.object as? WatercradftInspectionModel else {return}
+        guard let actionModel = notification.object as? TableClickActionModel, let inspectionModel = actionModel.object as? WatercraftInspectionModel else {return}
         nagivateToInspection(object: inspectionModel, editable: isEditable)
     }
     
-    func nagivateToInspection(object: WatercradftInspectionModel?, editable: Bool) {
+    func nagivateToInspection(object: WatercraftInspectionModel?, editable: Bool) {
         self.inspection = object
         self.performSegue(withIdentifier: "showWatercraftInspectionForm", sender: self)
     }
@@ -220,6 +220,45 @@ class ShiftViewController: BaseViewController {
             counter += 1
         }
         
+        for inspection in model.inspections {
+            if inspection.inspectionTime == "" {
+                message = "\(message)\n\(counter)- Missing Time of Inspection."
+                counter += 1
+            }
+            
+            if inspection.unknownPreviousWaterBody == true ||
+                inspection.commercialManufacturerAsPreviousWaterBody == true ||
+                inspection.previousDryStorage == true {
+                if inspection.previousMajorCities.isEmpty {
+                    message = "\(message)\n\(counter)- Please add Closest Major City for Previous Waterbody."
+                    counter += 1
+                }
+            }
+            
+            if inspection.unknownDestinationWaterBody == true ||
+                inspection.commercialManufacturerAsDestinationWaterBody == true ||
+                inspection.destinationDryStorage == true {
+                if inspection.destinationMajorCities.isEmpty {
+                    message = "\(message)\n\(counter)- Please add Closest Major City for Destination Waterbody."
+                    counter += 1
+                }
+            }
+
+            if !inspection.highRiskAssessments.isEmpty {
+                for highRisk in inspection.highRiskAssessments {
+                    if highRisk.sealIssued == true && highRisk.sealNumber <= 0 {
+                        message = "\(message)\n\(counter)- Please input the Seal #."
+                        counter += 1
+                    }
+                    
+                    if highRisk.decontaminationOrderIssued == true && highRisk.decontaminationOrderNumber <= 0 {
+                        message = "\(message)\n\(counter)- Please input the Decontamination order number."
+                        counter += 1
+                    }
+                }
+            }
+        }
+        
         return message
     }
     
@@ -228,13 +267,13 @@ class ShiftViewController: BaseViewController {
         model.date = Date()
         
         // Create dummy inspections
-        let inspection1 = WatercradftInspectionModel()
+        let inspection1 = WatercraftInspectionModel()
         inspection1.remoteId = 65100
         inspection1.inspectionTime = "16.00"
         inspection1.shouldSync = true
         
         // Create dummy inspections
-        let inspection2 = WatercradftInspectionModel()
+        let inspection2 = WatercraftInspectionModel()
         inspection2.remoteId = 65102
         inspection2.inspectionTime = "8.00"
         inspection2.shouldSync = false

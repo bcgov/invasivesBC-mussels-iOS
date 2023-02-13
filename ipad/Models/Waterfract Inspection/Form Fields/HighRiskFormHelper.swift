@@ -124,6 +124,15 @@ class HighRiskFormHelper {
         )
         sectionItems.append(decontaminationOrderIssued)
         
+        let decontaminationAppendixB = SwitchInput(
+            key: "highRisk-decontaminationAppendixB",
+            header: HighRiskFormFieldHeaders.InspectionOutcomes.decontaminationAppendixB,
+            editable: editable ?? true,
+            value: object?.decontaminationAppendixB ?? false,
+            width: .Full
+        )
+        sectionItems.append(decontaminationAppendixB)
+        
         let decontaminationOrderNumber = IntegerInput(
             key: "highRisk-decontaminationOrderNumber",
             header: HighRiskFormFieldHeaders.InspectionOutcomes.decontaminationOrderNumber,
@@ -169,14 +178,14 @@ class HighRiskFormHelper {
 //        sectionItems.append(spacer5)
         /// ---------------------------
         
-        let dreissenidMusselsFoundPrevious = SwitchInput(
-            key: "highRisk-dreissenidMusselsFoundPrevious",
-            header: HighRiskFormFieldHeaders.InspectionOutcomes.dreisennidFoundPrevious,
-            editable: editable ?? true,
-            value: object?.dreissenidMusselsFoundPrevious ?? false,
-            width: .Full
-        )
-        sectionItems.append(dreissenidMusselsFoundPrevious)
+//        let dreissenidMusselsFoundPrevious = SwitchInput(
+//            key: "highRisk-dreissenidMusselsFoundPrevious",
+//            header: HighRiskFormFieldHeaders.InspectionOutcomes.dreisennidFoundPrevious,
+//            editable: editable ?? true,
+//            value: object?.dreissenidMusselsFoundPrevious ?? false,
+//            width: .Full
+//        )
+//        sectionItems.append(dreissenidMusselsFoundPrevious)
         
         let otherInspectionFindings = DropdownInput(
             key: "highRisk-otherInspectionFindings",

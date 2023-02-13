@@ -38,7 +38,7 @@ class DropdownHelper {
         return Storage.shared.codes(type: type)
     }
     
-    public func getDropdownForPrvinces() -> [DropdownModel] {
+    public func getDropdownForProvinces() -> [DropdownModel] {
         return dropdown(from: Storage.shared.provinces(), sort: true)
     }
     
