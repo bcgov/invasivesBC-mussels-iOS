@@ -61,7 +61,7 @@ class HighRiskAssessmentModel: Object, BaseRealmObject {
     @objc dynamic var generalComments: String = ""
     
     // Validators
-    var validatorNames = ["decontaminationAppendixBInteracted"]
+    var validatorNames = ["decontaminationAppendixB"]
     @objc dynamic var decontaminationAppendixBInteracted = false
     
     // MARK: Setters
