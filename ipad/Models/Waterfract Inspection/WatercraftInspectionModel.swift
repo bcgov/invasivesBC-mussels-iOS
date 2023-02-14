@@ -103,10 +103,11 @@ class WatercraftInspectionModel: Object, BaseRealmObject {
     @objc dynamic var isNewPassportIssued: Bool = false
     
     // Validators
-    var validatorNames = ["k9Inspection", "previousInspection", "commerciallyHauled"]
+    var validatorNames = ["k9Inspection", "previousInspection", "commerciallyHauled", "previousAISKnowlede"]
     @objc dynamic var k9InspectionInteracted = false
     @objc dynamic var previousInspectionInteracted = false
     @objc dynamic var commerciallyHauledInteracted = false
+    @objc dynamic var previousAISKnowledeInteracted = false
     
     // MARK: Setters
     func set(value: Any, for key: String) {
