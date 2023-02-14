@@ -46,6 +46,9 @@ enum InteractedValidationName {
     case previousInspectionInteracted
     case commerciallyHauledInteracted
     case previousAISKnowledeInteracted
+    
+    // High Risk fields
+    case decontaminationAppendixBInteracted
 }
 
 struct InputValue {
@@ -217,6 +220,8 @@ struct InteractedWithValue {
             return self.boolean
         case .previousAISKnowledeInteracted:
             return self.boolean
+        case .decontaminationAppendixBInteracted:
+            return self.boolean
         }
     }
     mutating func set(value: Bool?, type: InteractedValidationName) {
@@ -228,6 +233,8 @@ struct InteractedWithValue {
         case .commerciallyHauledInteracted:
             self.boolean = value
         case .previousAISKnowledeInteracted:
+            self.boolean = value
+        case .decontaminationAppendixBInteracted:
             self.boolean = value
         }
     }
