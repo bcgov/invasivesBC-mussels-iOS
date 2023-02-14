@@ -257,7 +257,7 @@ class WatercraftInspectionViewController: BaseViewController {
         }
         
         if !model.previousAISKnowledeInteracted {
-            message = "\(message)\n\(counter). Please input Previous Knowledge of AIS or Clean, Drain, Dry.\n"
+            message = "\(message)\n\(counter). Please input Previous Knowledge of AIS or Clean, Drain, Dry field.\n"
             counter += 1
         }
         
@@ -269,7 +269,7 @@ class WatercraftInspectionViewController: BaseViewController {
         }
         
         if !model.previousInspectionInteracted {
-            message = "\(message)\n\(counter). Please input Previous Inspection and/or Agency Notification.\n"
+            message = "\(message)\n\(counter). Please input Previous Inspection and/or Agency Notification field.\n"
             counter += 1
         }
         
@@ -309,6 +309,11 @@ class WatercraftInspectionViewController: BaseViewController {
 
         if !model.highRiskAssessments.isEmpty {
             for highRisk in model.highRiskAssessments {
+                if !highRisk.decontaminationAppendixBInteracted {
+                    message = "\(message)\n\(counter). Please input Appendix B filled out field.\n"
+                    counter += 1
+                }
+                
                 if highRisk.sealIssued == true && highRisk.sealNumber <= 0 {
                     message = "\(message)\n\(counter). Please input the Seal #.\n"
                     counter += 1
