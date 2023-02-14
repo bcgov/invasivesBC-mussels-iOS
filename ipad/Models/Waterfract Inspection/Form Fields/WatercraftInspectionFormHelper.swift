@@ -215,12 +215,14 @@ class WatercraftInspectionFormHelper {
         )
         sectionItems.append(numberOfPeopleInParty)
         
-        let commerciallyHauled = SwitchInput(
+        let commerciallyHauled = NullSwitchInput(
             key: "commerciallyHauled",
             header: WatercraftFieldHeaderConstants.WatercraftDetails.commerciallyHauled,
             editable: editable ?? true,
             value: object?.commerciallyHauled ?? false,
-            width: .Third
+            width: .Third,
+            validationName: .commerciallyHauledInteracted,
+            interacted: object?.commerciallyHauledInteracted ?? false
         )
         sectionItems.append(commerciallyHauled)
         sectionItems.append(InputSpacer())
