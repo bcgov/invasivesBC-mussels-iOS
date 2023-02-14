@@ -261,6 +261,13 @@ class WatercraftInspectionViewController: BaseViewController {
             counter += 1
         }
         
+        if model.previousAISKnowledeInteracted &&
+            model.previousAISKnowlede &&
+            model.previousAISKnowledeSource.isEmpty {
+            message = "\(message)\n\(counter). Please input Source for Previous Knowledge of AIS or Clean, Drain, Dry.\n"
+            counter += 1
+        }
+        
         if !model.previousInspectionInteracted {
             message = "\(message)\n\(counter). Please input Previous Inspection and/or Agency Notification.\n"
             counter += 1
