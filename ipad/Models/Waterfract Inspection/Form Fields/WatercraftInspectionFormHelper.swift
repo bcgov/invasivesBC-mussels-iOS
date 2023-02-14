@@ -232,7 +232,7 @@ class WatercraftInspectionFormHelper {
             header: WatercraftFieldHeaderConstants.WatercraftDetails.previousAISKnowlede,
             editable: editable ?? true,
             value: object?.previousAISKnowlede ?? nil,
-            width: .Third,
+            width: .Full,
             validationName: .previousAISKnowledeInteracted,
             interacted: object?.previousAISKnowledeInteracted ?? false
         )
@@ -257,7 +257,7 @@ class WatercraftInspectionFormHelper {
             header: WatercraftFieldHeaderConstants.WatercraftDetails.previousInspection,
             editable: editable ?? true,
             value: object?.previousInspection ?? nil,
-            width: .Third,
+            width: .Full,
             validationName: .previousInspectionInteracted,
             interacted: object?.previousInspectionInteracted ?? false
         )
@@ -269,7 +269,7 @@ class WatercraftInspectionFormHelper {
             header: WatercraftFieldHeaderConstants.WatercraftDetails.previousInspectionSource,
             editable: editable ?? true,
             value: object?.previousInspectionSource ?? nil,
-            width: .Half,
+            width: .Full,
             dropdownItems: DropdownHelper.shared.getDropDownObject(for: .previousInspectionSource),
             codes: DropdownHelper.shared.getDropDownCodes(for: .previousInspectionSource)
         )

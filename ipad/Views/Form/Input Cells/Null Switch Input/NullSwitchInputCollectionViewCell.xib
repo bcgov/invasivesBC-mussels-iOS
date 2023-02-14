@@ -26,10 +26,12 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <segmentedControl opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" translatesAutoresizingMaskIntoConstraints="NO" id="fFi-uE-yov" userLabel="Null Switch View">
+                    <segmentedControl opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" id="fFi-uE-yov" userLabel="Null Switch View">
                         <rect key="frame" x="0.0" y="48" width="272" height="38"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                         <constraints>
                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="37" id="1pa-e4-F1h"/>
+                            <constraint firstAttribute="width" constant="272" id="L8A-hE-brN"/>
                         </constraints>
                         <segments>
                             <segment title="No"/>
@@ -44,6 +46,7 @@
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <constraints>
+                <constraint firstAttribute="width" constant="272" id="1SG-Bu-aVj"/>
                 <constraint firstAttribute="trailing" secondItem="fFi-uE-yov" secondAttribute="trailing" id="7Tf-tp-n3Z"/>
                 <constraint firstItem="fFi-uE-yov" firstAttribute="bottom" secondItem="gTV-IL-0wX" secondAttribute="bottom" id="EGR-ep-Gk5"/>
                 <constraint firstItem="aId-6E-4Fv" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="LRZ-Cx-db4"/>
