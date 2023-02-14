@@ -251,6 +251,11 @@ class WatercraftInspectionViewController: BaseViewController {
             counter += 1
         }
         
+        if !model.commerciallyHauledInteracted {
+            message = "\(message)\n\(counter). Please input Watercraft/equipment commerically hauled field.\n"
+            counter += 1
+        }
+        
         if !model.previousInspectionInteracted {
             message = "\(message)\n\(counter). Please input Previous Inspection and/or Agency Notification.\n"
             counter += 1

@@ -100,7 +100,7 @@ struct WatercraftFieldHeaderConstants {
     }
     struct WatercraftDetails {
         static let numberOfPeopleInParty = "Number of people in the party"
-        static let commerciallyHauled = "Watercraft/equipment commercially hauled"
+        static let commerciallyHauled = "Watercraft/equipment commercially hauled *"
         static let highRiskArea = "Watercraft coming from a high risk area for whirling disease"
         static let previousAISKnowlede = "Previous Knowledge of AIS or Clean, Drain, Dry"
         static let previousAISKnowledeSource = "Source"
