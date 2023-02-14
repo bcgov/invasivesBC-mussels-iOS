@@ -18,7 +18,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="272" height="85"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aId-6E-4Fv">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aId-6E-4Fv">
                         <rect key="frame" x="0.0" y="0.0" width="240" height="25"/>
                         <constraints>
                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="25" id="Csi-Ou-Txg"/>
@@ -45,15 +45,6 @@
                 </subviews>
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
-            <constraints>
-                <constraint firstAttribute="trailing" secondItem="fFi-uE-yov" secondAttribute="trailing" id="7Tf-tp-n3Z"/>
-                <constraint firstItem="fFi-uE-yov" firstAttribute="bottom" secondItem="gTV-IL-0wX" secondAttribute="bottom" id="EGR-ep-Gk5"/>
-                <constraint firstItem="aId-6E-4Fv" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="LRZ-Cx-db4"/>
-                <constraint firstItem="fFi-uE-yov" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="SMp-Cc-I6m"/>
-                <constraint firstAttribute="trailing" secondItem="aId-6E-4Fv" secondAttribute="trailing" id="XPk-v7-eEc"/>
-                <constraint firstItem="fFi-uE-yov" firstAttribute="top" relation="greaterThanOrEqual" secondItem="aId-6E-4Fv" secondAttribute="bottom" constant="5" id="fSE-67-fpN"/>
-                <constraint firstItem="aId-6E-4Fv" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="gAw-O3-igS"/>
-            </constraints>
             <size key="customSize" width="279" height="85"/>
             <connections>
                 <outlet property="headerLabel" destination="aId-6E-4Fv" id="0kA-Wq-7Rg"/>
