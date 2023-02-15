@@ -329,12 +329,14 @@ class WatercraftInspectionFormHelper {
 //        )
 //        sectionItems.append(cleanDrainDryAfter)
 
-        let dreissenidMusselsFoundPrevious = SwitchInput(
+        let dreissenidMusselsFoundPrevious = NullSwitchInput(
             key: "dreissenidMusselsFoundPrevious",
             header: HighRiskFormFieldHeaders.InspectionOutcomes.dreisennidFoundPrevious,
             editable: editable ?? true,
             value: object?.dreissenidMusselsFoundPrevious ?? false,
-            width: .Full
+            width: .Full,
+            validationName: .dreissenidMusselsFoundPreviousInteracted,
+            interacted: object?.dreissenidMusselsFoundPreviousInteracted ?? false
         )
         sectionItems.append(dreissenidMusselsFoundPrevious)
         

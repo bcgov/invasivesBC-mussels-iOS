@@ -42,11 +42,13 @@ enum InputItemWidthSize {
 }
 
 enum InteractedValidationName {
+    // Basic Info
     case k9InspectionInteracted
     case previousInspectionInteracted
     case commerciallyHauledInteracted
     case previousAISKnowledeInteracted
-    
+    // Inspection Details
+    case dreissenidMusselsFoundPreviousInteracted
     // High Risk fields
     case decontaminationAppendixBInteracted
     case decontaminationPerformedInteracted
@@ -213,6 +215,7 @@ struct InteractedWithValue {
     
     func get(type: InteractedValidationName) -> Bool? {
         switch type {
+        // Basic Info
         case .k9InspectionInteracted:
             return self.boolean
         case .previousInspectionInteracted:
@@ -221,6 +224,10 @@ struct InteractedWithValue {
             return self.boolean
         case .previousAISKnowledeInteracted:
             return self.boolean
+        // Inspection Details
+        case .dreissenidMusselsFoundPreviousInteracted:
+            return self.boolean
+        // High Risk
         case .decontaminationAppendixBInteracted:
             return self.boolean
         case .decontaminationPerformedInteracted:
@@ -229,6 +236,7 @@ struct InteractedWithValue {
     }
     mutating func set(value: Bool?, type: InteractedValidationName) {
         switch type {
+        // Basic Info
         case .k9InspectionInteracted:
             self.boolean = value
         case .previousInspectionInteracted:
@@ -237,6 +245,10 @@ struct InteractedWithValue {
             self.boolean = value
         case .previousAISKnowledeInteracted:
             self.boolean = value
+        // Inspection Details
+        case .dreissenidMusselsFoundPreviousInteracted:
+            self.boolean = value
+        // High Risk
         case .decontaminationAppendixBInteracted:
             self.boolean = value
         case .decontaminationPerformedInteracted:
