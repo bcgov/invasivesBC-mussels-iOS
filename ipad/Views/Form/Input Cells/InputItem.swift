@@ -22,6 +22,7 @@ enum InputItemType {
     case Double
     case Date
     case Switch
+    case NullSwitch
     case TextArea
     case RadioSwitch
     case ViewField
@@ -38,6 +39,11 @@ enum InputItemWidthSize {
     case Third
     case Forth
     case Fill
+}
+
+enum InteractedValidationName {
+    case k9InspectionInteracted
+    case previousInspectionInteracted
 }
 
 struct InputValue {
@@ -62,6 +68,8 @@ struct InputValue {
         case .Date:
             return self.date
         case .Switch:
+            return self.boolean
+        case .NullSwitch:
             return self.boolean
         case .TextArea:
             return self.string
@@ -95,6 +103,8 @@ struct InputValue {
         case .Date:
             self.date = value as? Date
         case .Switch:
+            self.boolean = value as? Bool
+        case .NullSwitch:
             self.boolean = value as? Bool
         case .TextArea:
             self.string = value as? String
@@ -152,6 +162,8 @@ struct InputDependency {
             return item.value.get(type: item.type) as? Date == _value.get(type: item.type) as? Date
         case .Switch:
             return item.value.get(type: item.type) as? Bool == _value.get(type: item.type) as? Bool
+        case .NullSwitch:
+            return item.value.get(type: item.type) as? Bool == _value.get(type: item.type) as? Bool
         case .TextArea:
             return item.value.get(type: item.type) as? String == _value.get(type: item.type) as? String
         case .RadioSwitch:
@@ -190,6 +202,27 @@ struct FieldComputation {
     }
 }
 
+struct InteractedWithValue {
+    var boolean: Bool?
+    
+    func get(type: InteractedValidationName) -> Bool? {
+        switch type {
+        case .k9InspectionInteracted:
+            return self.boolean
+        case .previousInspectionInteracted:
+            return self.boolean
+        }
+    }
+    mutating func set(value: Bool?, type: InteractedValidationName) {
+        switch type {
+        case .k9InspectionInteracted:
+            self.boolean = value
+        case .previousInspectionInteracted:
+            self.boolean = value
+        }
+    }
+}
+
 protocol InputItem {
     var type: InputItemType { get set }
     var width: InputItemWidthSize { get set }
@@ -203,6 +236,10 @@ protocol InputItem {
 
 protocol StringInputItem: InputItem {
     var value: String? {get set}
+}
+
+protocol InteractedWith {
+    var interacted: InteractedWithValue { get set }
 }
 
 class ViewField: InputItem {
@@ -296,14 +333,14 @@ class TextInput: InputItem {
     var header: String
     var validation: TextInputValidation
     
-    init(key: String, header: String, editable: Bool, value: String? = "", validation: TextInputValidation? = .None, width: InputItemWidthSize? = .Full) {
+    init(key: String, header: String, editable: Bool, value: String? = "", validation: TextInputValidation, width: InputItemWidthSize? = .Full) {
         self.value = InputValue()
         self.value.set(value: value, type: type)
         self.key = key
         self.header = header
         self.editable = editable
         self.width = width ?? .Full
-        self.validation = validation ?? .None
+        self.validation = validation
     }
     
     func getValue() -> String? {
@@ -332,6 +369,39 @@ class SwitchInput: InputItem {
         self.header = header
         self.editable = editable
         self.width = width ?? .Full
+    }
+    
+    func getValue() -> Bool? {
+        return self.value.get(type: self.type) as? Bool ?? nil
+    }
+    
+    func setValue(value: Bool?) {
+        self.value.set(value: value, type: self.type)
+    }
+}
+
+class NullSwitchInput: InputItem, InteractedWith {
+    var dependency: [InputDependency] = []
+    var type: InputItemType = .NullSwitch
+    var width: InputItemWidthSize
+    var height: CGFloat = 70
+    var key: String
+    var value: InputValue
+    var header: String
+    var editable: Bool
+    var validationName: InteractedValidationName
+    var interacted: InteractedWithValue
+    
+    init(key: String, header: String, editable: Bool, value: Bool? = false, width: InputItemWidthSize? = .Full, validationName: InteractedValidationName, interacted: Bool?) {
+        self.value = InputValue()
+        self.value.set(value: value ?? false, type: type)
+        self.key = key
+        self.header = header
+        self.editable = editable
+        self.width = width ?? .Full
+        self.validationName = validationName
+        self.interacted = InteractedWithValue()
+        self.interacted.set(value: interacted ?? true, type: validationName)
     }
     
     func getValue() -> Bool? {

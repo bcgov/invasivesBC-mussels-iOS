@@ -102,6 +102,11 @@ class WatercraftInspectionModel: Object, BaseRealmObject {
     // Passport issue flag
     @objc dynamic var isNewPassportIssued: Bool = false
     
+    // Validators
+    var validatorNames = ["k9Inspection", "previousInspection"]
+    @objc dynamic var k9InspectionInteracted = false
+    @objc dynamic var previousInspectionInteracted = false
+    
     // MARK: Setters
     func set(value: Any, for key: String) {
         if self[key] == nil {
@@ -119,6 +124,24 @@ class WatercraftInspectionModel: Object, BaseRealmObject {
         }
         if key == "highriskAIS" || key == "cleanDrainDryAfterInspection" {
             setRiskLevel()
+        }
+        
+        // Validation checks - check if this key requires interaction validation
+        if validatorNames.contains(key) {
+            setInteractedBool(validationName:"\(key)Interacted")
+        }
+    }
+    
+    // Validation check - if interacted with, set to true
+    func setInteractedBool(validationName: String) {
+        do {
+            let realm = try Realm()
+            try realm.write {
+                self[validationName] = true
+            }
+        } catch let error as NSError {
+            print("Error with finding validation")
+            print(error)
         }
     }
     

@@ -86,7 +86,7 @@ struct WatercraftFieldHeaderConstants {
         static let inspectionTime = "Time of Inspection *"
         static let passportNumber = "Passport Number"
         static let launchedOutsideBC = "Launched outside BC/AB in the last 30 days?"
-        static let k9Inspection = "k9 Inspection Performed?"
+        static let k9Inspection = "k9 Inspection Performed?  *"
         static let decontaminationPerformed = "Decontamination Performed?"
         static let marineSpeciesFound = "Marine Species Found"
         static let aquaticPlantsFound = "Aquatic Plants Found"
@@ -104,9 +104,9 @@ struct WatercraftFieldHeaderConstants {
         static let highRiskArea = "Watercraft coming from a high risk area for whirling disease"
         static let previousAISKnowlede = "Previous Knowledge of AIS or Clean, Drain, Dry"
         static let previousAISKnowledeSource = "Source"
-        static let previousInspection = "Previous inspection and/or agency notification"
-        static let previousInspectionSource = "Source"
-        static let previousInspectionDays = "No. Of Days"
+        static let previousInspection = "Previous inspection and/or agency notification  *"
+        static let previousInspectionSource = "Source *"
+        static let previousInspectionDays = "No. of Days *"
         static let cleanDrainDryAfter = "Is the watercraft Clean, Drain, Dry after full inspection without taking any further action?"
     }
     struct InspectionDetails {
@@ -116,7 +116,7 @@ struct WatercraftFieldHeaderConstants {
         static let ticketIssued = "Violation ticket issued"
     }
     struct HighriskAssessmentFields {
-        static let highriskAIS = "The watercraft is NOT clean, drain, dry after full inspection and further action must be taken AND/OR a full inspection can not be completed."
+        static let highriskAIS = "The watercraft is NOT Clean, Drain, Dry after full inspection and further action must be taken AND/OR a full inspection can not be completed."
         static let adultDreissenidFound = "Adult dreissenid mussels found"
     }
     struct GeneralComments {

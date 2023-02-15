@@ -146,12 +146,14 @@ class WatercraftInspectionFormHelper {
         inspectionTime.dependency.append(InputDependency(to: passportField, equalTo: false))
         sectionItems.append(inspectionTime)
         
-        let k9Inspection = SwitchInput(
+        let k9Inspection = NullSwitchInput(
             key: "k9Inspection",
             header: WatercraftFieldHeaderConstants.Passport.k9Inspection,
             editable: editable ?? true,
             value: object?.k9Inspection ?? nil,
-            width: .Third
+            width: .Third,
+            validationName: .k9InspectionInteracted,
+            interacted: object?.k9InspectionInteracted ?? false
         )
         k9Inspection.dependency.append(InputDependency(to: passportField, equalTo: false))
         sectionItems.append(k9Inspection)
@@ -246,12 +248,14 @@ class WatercraftInspectionFormHelper {
         
         /// ---------------------------
         
-        let previousInspection = SwitchInput(
+        let previousInspection = NullSwitchInput(
             key: "previousInspection",
             header: WatercraftFieldHeaderConstants.WatercraftDetails.previousInspection,
             editable: editable ?? true,
             value: object?.previousInspection ?? nil,
-            width: .Full
+            width: .Third,
+            validationName: .previousInspectionInteracted,
+            interacted: object?.previousInspectionInteracted ?? false
         )
         sectionItems.append(previousInspection)
         
@@ -261,7 +265,7 @@ class WatercraftInspectionFormHelper {
             header: WatercraftFieldHeaderConstants.WatercraftDetails.previousInspectionSource,
             editable: editable ?? true,
             value: object?.previousInspectionSource ?? nil,
-            width: .Full,
+            width: .Half,
             dropdownItems: DropdownHelper.shared.getDropDownObject(for: .previousInspectionSource),
             codes: DropdownHelper.shared.getDropDownCodes(for: .previousInspectionSource)
         )

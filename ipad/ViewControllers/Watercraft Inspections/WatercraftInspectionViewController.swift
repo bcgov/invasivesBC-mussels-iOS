@@ -221,9 +221,19 @@ class WatercraftInspectionViewController: BaseViewController {
         guard let model = self.model else { return message }
         var counter = 1
         
-        // Check if any of the watercraft types are at least greater than 0
-        // If this is a passport holder, watercraft types is visible when issuing
-        // a new passport or if launchedOutsideBC is checked as true
+        if model.inspectionTime == "" {
+            message = "\(message)\n\(counter). Missing Time of Inspection.\n"
+            counter += 1
+        }
+        
+        if !model.k9InspectionInteracted {
+            message = "\(message)\n\(counter). Please input k9 Inspection.\n"
+            counter += 1
+        }
+        
+        // Check if any of the Watercraft types are at least greater than 0
+        // If this is a passport holder, Watercraft types needs validation when
+        // issuing a new passport or if launchedOutsideBC is checked as true
         if (!model.isPassportHolder &&
             model.nonMotorized == 0 &&
             model.simple == 0 &&
@@ -241,8 +251,24 @@ class WatercraftInspectionViewController: BaseViewController {
             counter += 1
         }
         
-        if model.inspectionTime == "" {
-            message = "\(message)\n\(counter)- Missing Time of Inspection."
+        if !model.previousInspectionInteracted {
+            message = "\(message)\n\(counter). Please input Previous Inspection and/or Agency Notification.\n"
+            counter += 1
+        }
+        
+        // Previous Inspection has been interacted with and set to "Yes", but Previous Inspection Source is empty
+        if model.previousInspectionInteracted &&
+            model.previousInspection &&
+            model.previousInspectionSource.isEmpty {
+            message = "\(message)\n\(counter). Please input Source for Previous Inspection and/or Agency Notification.\n"
+            counter += 1
+        }
+        
+        // Previous Inspection has been interacted with and set to "Yes", but Previous Inspection Days is empty
+        if model.previousInspectionInteracted &&
+            model.previousInspection &&
+            model.previousInspectionDays.isEmpty {
+            message = "\(message)\n\(counter). Please input No. of Days for Previous Inspection and/or Agency Notification.\n"
             counter += 1
         }
         
@@ -250,7 +276,7 @@ class WatercraftInspectionViewController: BaseViewController {
             model.commercialManufacturerAsPreviousWaterBody == true ||
             model.previousDryStorage == true {
             if model.previousMajorCities.isEmpty {
-                message = "\(message)\n\(counter)- Please add Closest Major City for Previous Waterbody."
+                message = "\(message)\n\(counter). Please add Closest Major City for Previous Waterbody.\n"
                 counter += 1
             }
         }
@@ -259,7 +285,7 @@ class WatercraftInspectionViewController: BaseViewController {
             model.commercialManufacturerAsDestinationWaterBody == true ||
             model.destinationDryStorage == true {
             if model.destinationMajorCities.isEmpty {
-                message = "\(message)\n\(counter)- Please add Closest Major City for Destination Waterbody."
+                message = "\(message)\n\(counter). Please add Closest Major City for Destination Waterbody.\n"
                 counter += 1
             }
         }
@@ -267,12 +293,12 @@ class WatercraftInspectionViewController: BaseViewController {
         if !model.highRiskAssessments.isEmpty {
             for highRisk in model.highRiskAssessments {
                 if highRisk.sealIssued == true && highRisk.sealNumber <= 0 {
-                    message = "\(message)\n\(counter)- Please input the Seal #."
+                    message = "\(message)\n\(counter). Please input the Seal #.\n"
                     counter += 1
                 }
                 
                 if highRisk.decontaminationOrderIssued == true && highRisk.decontaminationOrderNumber <= 0 {
-                    message = "\(message)\n\(counter)- Please input the Decontamination order number."
+                    message = "\(message)\n\(counter). Please input the Decontamination order number.\n"
                     counter += 1
                 }
             }

@@ -206,6 +206,8 @@
 		5C82D3F92376036700B065BA /* WorkflowAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C82D3F82376036700B065BA /* WorkflowAPI.swift */; };
 		5C82D3FF23761B1400B065BA /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C82D3FE23761B1400B065BA /* API.swift */; };
 		5C82D404237B31C200B065BA /* WatercraftRiskAssessmentAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C82D403237B31C200B065BA /* WatercraftRiskAssessmentAPI.swift */; };
+		9620B078298849BF0084268C /* NullSwitchInputCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9620B076298849BF0084268C /* NullSwitchInputCollectionViewCell.swift */; };
+		9620B079298849BF0084268C /* NullSwitchInputCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9620B077298849BF0084268C /* NullSwitchInputCollectionViewCell.xib */; };
 		A7AE5275237CC3660044DBB7 /* unapproved-cross.json in Resources */ = {isa = PBXBuildFile; fileRef = A7AE5272237CC3660044DBB7 /* unapproved-cross.json */; };
 		A7AE5276237CC3660044DBB7 /* check-mark-success.json in Resources */ = {isa = PBXBuildFile; fileRef = A7AE5273237CC3660044DBB7 /* check-mark-success.json */; };
 		A7AE5277237CC3660044DBB7 /* sync-circle.json in Resources */ = {isa = PBXBuildFile; fileRef = A7AE5274237CC3660044DBB7 /* sync-circle.json */; };
@@ -441,6 +443,8 @@
 		5E19532C9F39231DE6E43099 /* Pods_ipad.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ipad.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		654A566D8395B17BDF172F9F /* Pods-ipad.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ipad.release.xcconfig"; path = "Target Support Files/Pods-ipad/Pods-ipad.release.xcconfig"; sourceTree = "<group>"; };
 		763C8716EF742F6764FFE7D7 /* Pods-ipad.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ipad.debug.xcconfig"; path = "Target Support Files/Pods-ipad/Pods-ipad.debug.xcconfig"; sourceTree = "<group>"; };
+		9620B076298849BF0084268C /* NullSwitchInputCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NullSwitchInputCollectionViewCell.swift; sourceTree = "<group>"; };
+		9620B077298849BF0084268C /* NullSwitchInputCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NullSwitchInputCollectionViewCell.xib; sourceTree = "<group>"; };
 		987374CFF5F2318652AA2FCC /* Pods-ipadTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ipadTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ipadTests/Pods-ipadTests.release.xcconfig"; sourceTree = "<group>"; };
 		99C48CD83AAD3AAA2CD083BF /* Pods-ipadTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ipadTests.release.xcconfig"; path = "Target Support Files/Pods-ipadTests/Pods-ipadTests.release.xcconfig"; sourceTree = "<group>"; };
 		A41A1378A874E8BDB895F235 /* Pods-ipad.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ipad.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ipad/Pods-ipad.debug.xcconfig"; sourceTree = "<group>"; };
@@ -505,6 +509,7 @@
 				29A9742F236CBEBA006C668F /* Date Input */,
 				296DEC17238C51650035E7FA /* Time Input */,
 				29A9742A236CB588006C668F /* Switch Input */,
+				9620B066298842130084268C /* Null Switch Input */,
 				29F29FA8236CA925004F12E7 /* Text Input */,
 				298BF7C223958A060072AA28 /* Spacer */,
 				29F29F9E236B8655004F12E7 /* Dropdown */,
@@ -1422,6 +1427,15 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		9620B066298842130084268C /* Null Switch Input */ = {
+			isa = PBXGroup;
+			children = (
+				9620B076298849BF0084268C /* NullSwitchInputCollectionViewCell.swift */,
+				9620B077298849BF0084268C /* NullSwitchInputCollectionViewCell.xib */,
+			);
+			path = "Null Switch Input";
+			sourceTree = "<group>";
+		};
 		A7AE5271237CC3660044DBB7 /* LottieAnimations */ = {
 			isa = PBXGroup;
 			children = (
@@ -1549,6 +1563,7 @@
 				296DEC21238C53930035E7FA /* NewShiftModal.xib in Resources */,
 				299BF01E23FC9D20001732CD /* PDFViewer.xib in Resources */,
 				299196932384725600634F81 /* TableView.xib in Resources */,
+				9620B079298849BF0084268C /* NullSwitchInputCollectionViewCell.xib in Resources */,
 				296DEC28238C61A80035E7FA /* IntegerStepperInputCollectionViewCell.xib in Resources */,
 				296DEC1B238C51810035E7FA /* TimeInputCollectionViewCell.xib in Resources */,
 				29A9742E236CB59F006C668F /* SwitchInputCollectionViewCell.xib in Resources */,
@@ -1758,6 +1773,7 @@
 				296DEC2D238C73BD0035E7FA /* TimePickerViewController.swift in Sources */,
 				29BAC5172367B12300A620F4 /* Colors.swift in Sources */,
 				1EE5FE5923EC968C00A06407 /* WaterbodyTableViewCell.swift in Sources */,
+				9620B078298849BF0084268C /* NullSwitchInputCollectionViewCell.swift in Sources */,
 				294D8F652385C7310094090D /* Table.swift in Sources */,
 				296DEC1A238C51810035E7FA /* TimeInputCollectionViewCell.swift in Sources */,
 				29FFEBC1237F1F6F00574E3F /* SettingsModel.swift in Sources */,
@@ -1981,9 +1997,8 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 323;
+				CURRENT_PROJECT_VERSION = 332;
 				DEVELOPMENT_TEAM = L796QSLV3E;
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = L796QSLV3E;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = ipad/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -2011,9 +2026,8 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 323;
+				CURRENT_PROJECT_VERSION = 332;
 				DEVELOPMENT_TEAM = L796QSLV3E;
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = L796QSLV3E;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = ipad/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
