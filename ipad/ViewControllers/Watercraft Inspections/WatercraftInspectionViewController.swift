@@ -351,6 +351,11 @@ class WatercraftInspectionViewController: BaseViewController {
                     message = "\(message)\n\(counter). Please input the Decontamination order number (High Risk Assessment).\n"
                     counter += 1
                 }
+                
+                if !highRisk.quarantinePeriodIssuedInteracted {
+                    message = "\(message)\n\(counter). Please input Quarantine period issued field (High Risk Assessment).\n"
+                    counter += 1
+                }
             }
         }
 

@@ -136,7 +136,7 @@ struct HighRiskFormFieldHeaders {
     
     struct InspectionOutcomes {
         static let otherInspectionFindings = "Other inspection findings"
-        static let quarantinePeriodIssued = "Quarantine period issued?"
+        static let quarantinePeriodIssued = "Quarantine period issued? *"
         static let standingWaterPresent = "Standing water present?"
         static let standingWaterLocation = "Standing Water Location"
         static let adultDreissenidMusselsFound = "Adult dreissenid mussels found?"
