@@ -314,6 +314,15 @@ class WatercraftInspectionViewController: BaseViewController {
                     counter += 1
                 }
                 
+                // Decontamination has been interacted with and set to "Yes", but a Record of Decontamintion number is empty
+                if highRisk.decontaminationPerformedInteracted &&
+                    highRisk.decontaminationPerformed &&
+                    highRisk.decontaminationReference.isEmpty {
+                    message = "\(message)\n\(counter). Please input a Record of Decontamination number.\n"
+                    counter += 1
+                }
+
+                
                 if !highRisk.decontaminationAppendixBInteracted {
                     message = "\(message)\n\(counter). Please input Appendix B filled out field.\n"
                     counter += 1
