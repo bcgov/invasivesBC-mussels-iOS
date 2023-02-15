@@ -221,13 +221,14 @@ class WatercraftInspectionViewController: BaseViewController {
         guard let model = self.model else { return message }
         var counter = 1
         
+        // --------- Basic Information Validations ---------
         if model.inspectionTime == "" {
-            message = "\(message)\n\(counter). Missing Time of Inspection.\n"
+            message = "\(message)\n\(counter). Missing Time of Inspection (Basic Information).\n"
             counter += 1
         }
         
         if !model.k9InspectionInteracted {
-            message = "\(message)\n\(counter). Please input k9 Inspection.\n"
+            message = "\(message)\n\(counter). Please input k9 Inspection (Basic Information).\n"
             counter += 1
         }
         
@@ -247,29 +248,31 @@ class WatercraftInspectionViewController: BaseViewController {
              model.complex == 0 &&
              model.veryComplex == 0) {
                    
-            message = "\(message)\n\(counter). Please input Watercraft Type:\n - Non-Motorized\n - Simple\n - Complex\n - Very Complex\n"
+            message = "\(message)\n\(counter). Please input Watercraft Type (Basic Information):\n - Non-Motorized\n - Simple\n - Complex\n - Very Complex\n"
             counter += 1
         }
+        // --------- End of Basic Information Validaiton ---------
         
+        // --------- Watercraft Details Validation ---------
         if !model.commerciallyHauledInteracted {
-            message = "\(message)\n\(counter). Please input Watercraft/equipment commerically hauled field.\n"
+            message = "\(message)\n\(counter). Please input Watercraft/equipment commerically hauled field (Watercraft Details).\n"
             counter += 1
         }
         
         if !model.previousAISKnowledeInteracted {
-            message = "\(message)\n\(counter). Please input Previous Knowledge of AIS or Clean, Drain, Dry field.\n"
+            message = "\(message)\n\(counter). Please input Previous Knowledge of AIS or Clean, Drain, Dry field (Watercraft Details).\n"
             counter += 1
         }
         
         if model.previousAISKnowledeInteracted &&
             model.previousAISKnowlede &&
             model.previousAISKnowledeSource.isEmpty {
-            message = "\(message)\n\(counter). Please input Source for Previous Knowledge of AIS or Clean, Drain, Dry.\n"
+            message = "\(message)\n\(counter). Please input Source for Previous Knowledge of AIS or Clean, Drain, Dry (Watercraft Details).\n"
             counter += 1
         }
         
         if !model.previousInspectionInteracted {
-            message = "\(message)\n\(counter). Please input Previous Inspection and/or Agency Notification field.\n"
+            message = "\(message)\n\(counter). Please input Previous Inspection and/or Agency Notification field (Watercraft Details).\n"
             counter += 1
         }
         
@@ -277,7 +280,7 @@ class WatercraftInspectionViewController: BaseViewController {
         if model.previousInspectionInteracted &&
             model.previousInspection &&
             model.previousInspectionSource.isEmpty {
-            message = "\(message)\n\(counter). Please input Source for Previous Inspection and/or Agency Notification.\n"
+            message = "\(message)\n\(counter). Please input Source for Previous Inspection and/or Agency Notification (Watercraft Details).\n"
             counter += 1
         }
         
@@ -285,15 +288,17 @@ class WatercraftInspectionViewController: BaseViewController {
         if model.previousInspectionInteracted &&
             model.previousInspection &&
             model.previousInspectionDays.isEmpty {
-            message = "\(message)\n\(counter). Please input No. of Days for Previous Inspection and/or Agency Notification.\n"
+            message = "\(message)\n\(counter). Please input No. of Days for Previous Inspection and/or Agency Notification (Watercraft Details).\n"
             counter += 1
         }
+        // --------- End of Watercraft Details Validaiton ---------
         
+        // --------- Journey Details Validation ---------
         if model.unknownPreviousWaterBody == true ||
             model.commercialManufacturerAsPreviousWaterBody == true ||
             model.previousDryStorage == true {
             if model.previousMajorCities.isEmpty {
-                message = "\(message)\n\(counter). Please add Closest Major City for Previous Waterbody.\n"
+                message = "\(message)\n\(counter). Please add Closest Major City for Previous Waterbody (Journey Details).\n"
                 counter += 1
             }
         }
@@ -302,15 +307,24 @@ class WatercraftInspectionViewController: BaseViewController {
             model.commercialManufacturerAsDestinationWaterBody == true ||
             model.destinationDryStorage == true {
             if model.destinationMajorCities.isEmpty {
-                message = "\(message)\n\(counter). Please add Closest Major City for Destination Waterbody.\n"
+                message = "\(message)\n\(counter). Please add Closest Major City for Destination Waterbody (Journey Details).\n"
                 counter += 1
             }
         }
-
+        // --------- End of Journey Details Validation ---------
+        
+        // --------- Inspection Details Validations ---------
+        if !model.dreissenidMusselsFoundPreviousInteracted {
+            message = "\(message)\n\(counter). Please input Dreissenid mussels found during previous inspection and FULL decontamination already completed field (Inspection Details).\n"
+            counter += 1
+        }
+        // --------- End of Inspection Details Validation ---------
+        
+        //  --------- High Risk Assessment Validations ---------
         if !model.highRiskAssessments.isEmpty {
             for highRisk in model.highRiskAssessments {
                 if !highRisk.decontaminationPerformedInteracted {
-                    message = "\(message)\n\(counter). Please input Decontamination performed field.\n"
+                    message = "\(message)\n\(counter). Please input Decontamination performed field (High Risk Assessment).\n"
                     counter += 1
                 }
                 
@@ -318,23 +332,23 @@ class WatercraftInspectionViewController: BaseViewController {
                 if highRisk.decontaminationPerformedInteracted &&
                     highRisk.decontaminationPerformed &&
                     highRisk.decontaminationReference.isEmpty {
-                    message = "\(message)\n\(counter). Please input a Record of Decontamination number.\n"
+                    message = "\(message)\n\(counter). Please input a Record of Decontamination number (High Risk Assessment).\n"
                     counter += 1
                 }
 
                 
                 if !highRisk.decontaminationAppendixBInteracted {
-                    message = "\(message)\n\(counter). Please input Appendix B filled out field.\n"
+                    message = "\(message)\n\(counter). Please input Appendix B filled out field (High Risk Assessment).\n"
                     counter += 1
                 }
                 
                 if highRisk.sealIssued == true && highRisk.sealNumber <= 0 {
-                    message = "\(message)\n\(counter). Please input the Seal #.\n"
+                    message = "\(message)\n\(counter). Please input the Seal # (High Risk Assessment).\n"
                     counter += 1
                 }
                 
                 if highRisk.decontaminationOrderIssued == true && highRisk.decontaminationOrderNumber <= 0 {
-                    message = "\(message)\n\(counter). Please input the Decontamination order number.\n"
+                    message = "\(message)\n\(counter). Please input the Decontamination order number (High Risk Assessment).\n"
                     counter += 1
                 }
             }
