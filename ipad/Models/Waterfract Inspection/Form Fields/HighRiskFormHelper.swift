@@ -91,12 +91,14 @@ class HighRiskFormHelper {
         sectionItems.append(spacer2)
         /// ---------------------------
         
-        let decontaminationPerformed = SwitchInput(
+        let decontaminationPerformed = NullSwitchInput(
             key: "highRisk-decontaminationPerformed",
             header: HighRiskFormFieldHeaders.InspectionOutcomes.decontaminationPerformed,
             editable: editable ?? true,
             value: object?.decontaminationPerformed ?? false,
-            width: .Full
+            width: .Full,
+            validationName: .decontaminationPerformedInteracted,
+            interacted: object?.decontaminationPerformedInteracted ?? false
         )
         sectionItems.append(decontaminationPerformed)
         
