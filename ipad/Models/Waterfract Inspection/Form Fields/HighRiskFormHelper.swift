@@ -201,12 +201,14 @@ class HighRiskFormHelper {
         )
         sectionItems.append(otherInspectionFindings)
         
-        let quarantinePeriodIssued = SwitchInput(
+        let quarantinePeriodIssued = NullSwitchInput(
             key: "highRisk-quarantinePeriodIssued",
             header: HighRiskFormFieldHeaders.InspectionOutcomes.quarantinePeriodIssued,
             editable: editable ?? true,
             value: object?.quarantinePeriodIssued ?? false,
-            width: .Half
+            width: .Half,
+            validationName: .quarantinePeriodIssuedInteracted,
+            interacted: object?.quarantinePeriodIssuedInteracted ?? false
         )
         sectionItems.append(quarantinePeriodIssued)
         
