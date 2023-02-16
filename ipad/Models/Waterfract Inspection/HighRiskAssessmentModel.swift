@@ -63,10 +63,12 @@ class HighRiskAssessmentModel: Object, BaseRealmObject {
     // Validators
     var validatorNames = ["decontaminationAppendixB",
                           "decontaminationPerformed",
-                          "quarantinePeriodIssued"]
+                          "quarantinePeriodIssued",
+                          "decontaminationOrderIssued"]
     @objc dynamic var decontaminationAppendixBInteracted = false
     @objc dynamic var decontaminationPerformedInteracted = false
     @objc dynamic var quarantinePeriodIssuedInteracted = false
+    @objc dynamic var decontaminationOrderIssuedInteracted = false
     
     // MARK: Setters
     func set(value: Any, for key: String) {
