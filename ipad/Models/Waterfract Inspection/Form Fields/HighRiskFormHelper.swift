@@ -128,17 +128,6 @@ class HighRiskFormHelper {
         )
         sectionItems.append(decontaminationOrderIssued)
         
-        let decontaminationAppendixB = NullSwitchInput(
-            key: "highRisk-decontaminationAppendixB",
-            header: HighRiskFormFieldHeaders.InspectionOutcomes.decontaminationAppendixB,
-            editable: editable ?? true,
-            value: object?.decontaminationAppendixB ?? false,
-            width: .Full,
-            validationName: .decontaminationAppendixBInteracted,
-            interacted: object?.decontaminationAppendixBInteracted ?? false
-        )
-        sectionItems.append(decontaminationAppendixB)
-        
         let decontaminationOrderNumber = IntegerInput(
             key: "highRisk-decontaminationOrderNumber",
             header: HighRiskFormFieldHeaders.InspectionOutcomes.decontaminationOrderNumber,
@@ -160,7 +149,18 @@ class HighRiskFormHelper {
         
         decontaminationOrderReason.dependency.append(InputDependency(to: decontaminationOrderIssued, equalTo: true))
         sectionItems.append(decontaminationOrderReason)
-                
+        
+        let decontaminationAppendixB = NullSwitchInput(
+            key: "highRisk-decontaminationAppendixB",
+            header: HighRiskFormFieldHeaders.InspectionOutcomes.decontaminationAppendixB,
+            editable: editable ?? true,
+            value: object?.decontaminationAppendixB ?? false,
+            width: .Full,
+            validationName: .decontaminationAppendixBInteracted,
+            interacted: object?.decontaminationAppendixBInteracted ?? false
+        )
+        sectionItems.append(decontaminationAppendixB)
+        
         let sealIssued = SwitchInput(
             key: "highRisk-sealIssued",
             header: HighRiskFormFieldHeaders.InspectionOutcomes.sealIssued,

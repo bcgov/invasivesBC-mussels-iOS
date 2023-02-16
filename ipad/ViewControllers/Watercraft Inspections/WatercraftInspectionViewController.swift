@@ -332,28 +332,35 @@ class WatercraftInspectionViewController: BaseViewController {
                 if highRisk.decontaminationPerformedInteracted &&
                     highRisk.decontaminationPerformed &&
                     highRisk.decontaminationReference.isEmpty {
-                    message = "\(message)\n\(counter). Please input a Record of Decontamination number (High Risk Assessment).\n"
+                    message = "\(message)\n\(counter). Please input a Record of Decontamination number (Inspection Outcomes).\n"
                     counter += 1
                 }
 
+                if !highRisk.decontaminationOrderIssuedInteracted {
+                    message = "\(message)\n\(counter). Please input Decontamination order issued field (Inspection Outcomes).\n"
+                    counter += 1
+                }
+                
+                // Decontamination order has been interacted with and set to "Yes", but a Record of Decontamintion number is empty
+                if highRisk.decontaminationOrderIssuedInteracted &&
+                    highRisk.decontaminationOrderIssued &&
+                    highRisk.decontaminationOrderNumber <= 0 {
+                    message = "\(message)\n\(counter). Please input the Decontamination order number (Inspection Outcomes).\n"
+                    counter += 1
+                }
                 
                 if !highRisk.decontaminationAppendixBInteracted {
-                    message = "\(message)\n\(counter). Please input Appendix B filled out field (High Risk Assessment).\n"
+                    message = "\(message)\n\(counter). Please input Appendix B filled out field (Inspection Outcomes).\n"
                     counter += 1
                 }
                 
                 if highRisk.sealIssued == true && highRisk.sealNumber <= 0 {
-                    message = "\(message)\n\(counter). Please input the Seal # (High Risk Assessment).\n"
-                    counter += 1
-                }
-                
-                if highRisk.decontaminationOrderIssued == true && highRisk.decontaminationOrderNumber <= 0 {
-                    message = "\(message)\n\(counter). Please input the Decontamination order number (High Risk Assessment).\n"
+                    message = "\(message)\n\(counter). Please input the Seal # (Inspection Outcomes).\n"
                     counter += 1
                 }
                 
                 if !highRisk.quarantinePeriodIssuedInteracted {
-                    message = "\(message)\n\(counter). Please input Quarantine period issued field (High Risk Assessment).\n"
+                    message = "\(message)\n\(counter). Please input Quarantine period issued field (Inspection Outcomes).\n"
                     counter += 1
                 }
             }
