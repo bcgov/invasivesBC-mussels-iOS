@@ -53,6 +53,7 @@ enum InteractedValidationName {
     case decontaminationOrderIssuedInteracted
     case decontaminationAppendixBInteracted
     case decontaminationPerformedInteracted
+    case sealIssuedInteracted
     case quarantinePeriodIssuedInteracted
 }
 
@@ -236,6 +237,8 @@ struct InteractedWithValue {
             return self.boolean
         case .decontaminationPerformedInteracted:
             return self.boolean
+        case .sealIssuedInteracted:
+            return self.boolean
         case .quarantinePeriodIssuedInteracted:
             return self.boolean
         }
@@ -260,6 +263,8 @@ struct InteractedWithValue {
         case .decontaminationAppendixBInteracted:
             self.boolean = value
         case .decontaminationPerformedInteracted:
+            self.boolean = value
+        case .sealIssuedInteracted:
             self.boolean = value
         case .quarantinePeriodIssuedInteracted:
             self.boolean = value

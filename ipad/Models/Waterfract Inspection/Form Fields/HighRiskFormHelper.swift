@@ -161,12 +161,14 @@ class HighRiskFormHelper {
         )
         sectionItems.append(decontaminationAppendixB)
         
-        let sealIssued = SwitchInput(
+        let sealIssued = NullSwitchInput(
             key: "highRisk-sealIssued",
             header: HighRiskFormFieldHeaders.InspectionOutcomes.sealIssued,
             editable: editable ?? true,
             value: object?.sealIssued ?? false,
-            width: .Full
+            width: .Full,
+            validationName: .sealIssuedInteracted,
+            interacted: object?.sealIssuedInteracted ?? false
         )
         sectionItems.append(sealIssued)
         
