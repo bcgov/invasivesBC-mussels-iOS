@@ -354,7 +354,14 @@ class WatercraftInspectionViewController: BaseViewController {
                     counter += 1
                 }
                 
-                if highRisk.sealIssued == true && highRisk.sealNumber <= 0 {
+                if !highRisk.sealIssuedInteracted {
+                    message = "\(message)\n\(counter). Please input Seal issued or existing seal field (Inspection Outcomes).\n"
+                    counter += 1
+                }
+                
+                if highRisk.sealIssuedInteracted &&
+                    highRisk.sealIssued &&
+                    highRisk.sealNumber <= 0 {
                     message = "\(message)\n\(counter). Please input the Seal # (Inspection Outcomes).\n"
                     counter += 1
                 }
