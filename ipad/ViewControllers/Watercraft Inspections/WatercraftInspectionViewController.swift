@@ -220,13 +220,15 @@ class WatercraftInspectionViewController: BaseViewController {
         var message: String = ""
         guard let model = self.model else { return message }
         // Take some common/repeated conditionals and assign to variables
+        // Check if any watercraft type has been incremented (need one type to be > 0)
         let isNoWatercraftTypeSelected =
           model.nonMotorized == 0 &&
           model.simple == 0 &&
           model.complex == 0 &&
           model.veryComplex == 0;
-        
-        let passportHolder = !model.isPassportHolder ||
+        // Check if there's a passport or if a new passport is issued
+        // Several form fields are hidden if passport holder, but reappear if new passport or launched outside of BC
+        let isPassportHolderNewOrLaunched = !model.isPassportHolder ||
         (model.isPassportHolder && (model.launchedOutsideBC || model.isNewPassportIssued))
         
         var counter = 1
@@ -243,9 +245,7 @@ class WatercraftInspectionViewController: BaseViewController {
         }
         
         // Check if any of the Watercraft types are at least greater than 0
-        // If this is a passport holder, Watercraft types needs validation when
-        // issuing a new passport or if launchedOutsideBC is checked as true
-        if passportHolder && isNoWatercraftTypeSelected {
+        if isPassportHolderNewOrLaunched && isNoWatercraftTypeSelected {
           message = "\(message) \(counter). Please input at least one Watercraft Type (Basic Information):\n - Non-Motorized\n - Simple\n - Complex\n - Very Complex\n";
           counter += 1;
         }
