@@ -228,7 +228,7 @@ class WatercraftInspectionViewController: BaseViewController {
         }
         
         if !model.k9InspectionInteracted {
-            message = "\(message)\n\(counter). Please input k9 Inspection (Basic Information).\n"
+            message = "\(message)\n\(counter). Please input k9 Inspection Performed field (Basic Information).\n"
             counter += 1
         }
         
@@ -248,7 +248,7 @@ class WatercraftInspectionViewController: BaseViewController {
              model.complex == 0 &&
              model.veryComplex == 0) {
                    
-            message = "\(message)\n\(counter). Please input Watercraft Type (Basic Information):\n - Non-Motorized\n - Simple\n - Complex\n - Very Complex\n"
+            message = "\(message)\n\(counter). Please input at least one Watercraft Type (Basic Information):\n - Non-Motorized\n - Simple\n - Complex\n - Very Complex\n"
             counter += 1
         }
         // --------- End of Basic Information Validaiton ---------
