@@ -219,6 +219,16 @@ class WatercraftInspectionViewController: BaseViewController {
     func validationMessage() -> String {
         var message: String = ""
         guard let model = self.model else { return message }
+        // Take some common/repeated conditionals and assign to variables
+        let isNoWatercraftTypeSelected =
+          model.nonMotorized == 0 &&
+          model.simple == 0 &&
+          model.complex == 0 &&
+          model.veryComplex == 0;
+        
+        let passportHolder = !model.isPassportHolder ||
+        (model.isPassportHolder && (model.launchedOutsideBC || model.isNewPassportIssued))
+        
         var counter = 1
         
         // --------- Basic Information Validations ---------
@@ -235,26 +245,15 @@ class WatercraftInspectionViewController: BaseViewController {
         // Check if any of the Watercraft types are at least greater than 0
         // If this is a passport holder, Watercraft types needs validation when
         // issuing a new passport or if launchedOutsideBC is checked as true
-        if (!model.isPassportHolder &&
-            model.nonMotorized == 0 &&
-            model.simple == 0 &&
-            model.complex == 0 &&
-            model.veryComplex == 0) ||
-            
-            (model.isPassportHolder &&
-             (model.launchedOutsideBC || model.isNewPassportIssued) &&
-             model.nonMotorized == 0 &&
-             model.simple == 0 &&
-             model.complex == 0 &&
-             model.veryComplex == 0) {
-                   
-            message = "\(message)\n\(counter). Please input at least one Watercraft Type (Basic Information):\n - Non-Motorized\n - Simple\n - Complex\n - Very Complex\n"
-            counter += 1
+        if passportHolder && isNoWatercraftTypeSelected {
+          message = "\(message) \(counter). Please input at least one Watercraft Type (Basic Information):\n - Non-Motorized\n - Simple\n - Complex\n - Very Complex\n";
+          counter += 1;
         }
         // --------- End of Basic Information Validaiton ---------
         
         // --------- Watercraft Details Validation ---------
-        if !model.commerciallyHauledInteracted {
+        if !model.isPassportHolder &&
+            !model.commerciallyHauledInteracted {
             message = "\(message)\n\(counter). Please input Watercraft/equipment commerically hauled field (Watercraft Details).\n"
             counter += 1
         }
