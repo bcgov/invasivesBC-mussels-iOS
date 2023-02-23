@@ -359,6 +359,7 @@ class WatercraftInspectionViewController: BaseViewController {
                     counter += 1
                 }
                 
+                // Seal Issued has been interacted with and set to "Yes", but Seal number is empty
                 if highRisk.sealIssuedInteracted &&
                     highRisk.sealIssued &&
                     highRisk.sealNumber <= 0 {
