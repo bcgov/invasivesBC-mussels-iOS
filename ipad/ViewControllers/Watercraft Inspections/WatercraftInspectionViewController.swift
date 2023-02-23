@@ -324,7 +324,7 @@ class WatercraftInspectionViewController: BaseViewController {
         if !model.highRiskAssessments.isEmpty {
             for highRisk in model.highRiskAssessments {
                 if !highRisk.decontaminationPerformedInteracted {
-                    message = "\(message)\n\(counter). Please input Decontamination performed field (High Risk Assessment).\n"
+                    message = "\(message)\n\(counter). Please input Decontamination performed field (Inspection Outcomes).\n"
                     counter += 1
                 }
                 
