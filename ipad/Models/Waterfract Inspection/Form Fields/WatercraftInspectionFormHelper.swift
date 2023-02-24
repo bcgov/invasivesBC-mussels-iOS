@@ -293,7 +293,7 @@ class WatercraftInspectionFormHelper {
         return sectionItems
     }
     
-    static func getInspectionDetailsFields(for object: WatercraftInspectionModel? = nil, editable: Bool? = true) -> [InputItem] {
+    static func getInspectionDetailsFields(for object: WatercraftInspectionModel? = nil, editable: Bool? = true, passportField: RadioSwitchInput) -> [InputItem]  {
         var sectionItems: [InputItem] = []
         let aquaticPlantsFound = SwitchInput(
             key: "aquaticPlantsFound",
@@ -341,6 +341,18 @@ class WatercraftInspectionFormHelper {
             interacted: object?.dreissenidMusselsFoundPreviousInteracted ?? false
         )
         sectionItems.append(dreissenidMusselsFoundPrevious)
+        
+        let k9Inspection = NullSwitchInput(
+            key: "k9Inspection",
+            header: WatercraftFieldHeaderConstants.Passport.k9Inspection,
+            editable: editable ?? true,
+            value: object?.k9Inspection ?? nil,
+            width: .Full,
+            validationName: .k9InspectionInteracted,
+            interacted: object?.k9InspectionInteracted ?? false
+        )
+        k9Inspection.dependency.append(InputDependency(to: passportField, equalTo: false))
+        sectionItems.append(k9Inspection)
         
         return sectionItems
     }
