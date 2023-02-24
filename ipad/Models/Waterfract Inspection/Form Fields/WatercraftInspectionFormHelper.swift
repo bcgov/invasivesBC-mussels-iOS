@@ -143,22 +143,10 @@ class WatercraftInspectionFormHelper {
             header: WatercraftFieldHeaderConstants.Passport.inspectionTime,
             editable: editable ?? true,
             value: object?.inspectionTime ?? nil,
-            width: .Third
+            width: .Half
         )
         inspectionTime.dependency.append(InputDependency(to: passportField, equalTo: false))
         sectionItems.append(inspectionTime)
-        
-        let k9Inspection = NullSwitchInput(
-            key: "k9Inspection",
-            header: WatercraftFieldHeaderConstants.Passport.k9Inspection,
-            editable: editable ?? true,
-            value: object?.k9Inspection ?? nil,
-            width: .Third,
-            validationName: .k9InspectionInteracted,
-            interacted: object?.k9InspectionInteracted ?? false
-        )
-        k9Inspection.dependency.append(InputDependency(to: passportField, equalTo: false))
-        sectionItems.append(k9Inspection)
         
         let spacer = InputSpacer(width: .Third)
         spacer.dependency.append(InputDependency(to: passportField, equalTo: true))
