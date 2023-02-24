@@ -226,8 +226,9 @@ class WatercraftInspectionViewController: BaseViewController {
           model.simple == 0 &&
           model.complex == 0 &&
           model.veryComplex == 0;
-        // Check if there's a passport or if a new passport is issued
-        // Several form fields are hidden if passport holder, but reappear if new passport or launched outside of BC
+        
+        // Check if this is a passport AND if a new passport is issued or launched outside BC is true
+        // Several form fields are hidden if passport holder, but reappear if it's new passport / launched
         let isPassportHolderNewOrLaunched = !model.isPassportHolder ||
         (model.isPassportHolder && (model.launchedOutsideBC || model.isNewPassportIssued))
         
@@ -246,7 +247,7 @@ class WatercraftInspectionViewController: BaseViewController {
         
         // Check if any of the Watercraft types are at least greater than 0
         if isPassportHolderNewOrLaunched && isNoWatercraftTypeSelected {
-          message = "\(message) \(counter). Please input at least one Watercraft Type (Basic Information):\n - Non-Motorized\n - Simple\n - Complex\n - Very Complex\n";
+          message = "\(message)\n\(counter). Please input at least one Watercraft Type (Basic Information):\n - Non-Motorized\n - Simple\n - Complex\n - Very Complex\n";
           counter += 1;
         }
         // --------- End of Basic Information Validaiton ---------
@@ -258,25 +259,29 @@ class WatercraftInspectionViewController: BaseViewController {
             counter += 1
         }
         
-        if !model.previousAISKnowledeInteracted {
+        if isPassportHolderNewOrLaunched &&
+            !model.previousAISKnowledeInteracted {
             message = "\(message)\n\(counter). Please input Previous Knowledge of AIS or Clean, Drain, Dry field (Watercraft Details).\n"
             counter += 1
         }
         
-        if model.previousAISKnowledeInteracted &&
+        if isPassportHolderNewOrLaunched &&
+            model.previousAISKnowledeInteracted &&
             model.previousAISKnowlede &&
             model.previousAISKnowledeSource.isEmpty {
             message = "\(message)\n\(counter). Please input Source for Previous Knowledge of AIS or Clean, Drain, Dry (Watercraft Details).\n"
             counter += 1
         }
         
-        if !model.previousInspectionInteracted {
+        if isPassportHolderNewOrLaunched &&
+            !model.previousInspectionInteracted {
             message = "\(message)\n\(counter). Please input Previous Inspection and/or Agency Notification field (Watercraft Details).\n"
             counter += 1
         }
         
         // Previous Inspection has been interacted with and set to "Yes", but Previous Inspection Source is empty
-        if model.previousInspectionInteracted &&
+        if isPassportHolderNewOrLaunched &&
+            model.previousInspectionInteracted &&
             model.previousInspection &&
             model.previousInspectionSource.isEmpty {
             message = "\(message)\n\(counter). Please input Source for Previous Inspection and/or Agency Notification (Watercraft Details).\n"
@@ -284,7 +289,8 @@ class WatercraftInspectionViewController: BaseViewController {
         }
         
         // Previous Inspection has been interacted with and set to "Yes", but Previous Inspection Days is empty
-        if model.previousInspectionInteracted &&
+        if isPassportHolderNewOrLaunched &&
+            model.previousInspectionInteracted &&
             model.previousInspection &&
             model.previousInspectionDays.isEmpty {
             message = "\(message)\n\(counter). Please input No. of Days for Previous Inspection and/or Agency Notification (Watercraft Details).\n"
@@ -313,14 +319,16 @@ class WatercraftInspectionViewController: BaseViewController {
         // --------- End of Journey Details Validation ---------
         
         // --------- Inspection Details Validations ---------
-        if !model.dreissenidMusselsFoundPreviousInteracted {
+        if isPassportHolderNewOrLaunched &&
+            !model.dreissenidMusselsFoundPreviousInteracted {
             message = "\(message)\n\(counter). Please input Dreissenid mussels found during previous inspection and FULL decontamination already completed field (Inspection Details).\n"
             counter += 1
         }
         // --------- End of Inspection Details Validation ---------
         
         //  --------- High Risk Assessment Validations ---------
-        if !model.highRiskAssessments.isEmpty {
+        if isPassportHolderNewOrLaunched &&
+            !model.highRiskAssessments.isEmpty {
             for highRisk in model.highRiskAssessments {
                 if !highRisk.decontaminationPerformedInteracted {
                     message = "\(message)\n\(counter). Please input Decontamination performed field (Inspection Outcomes).\n"
