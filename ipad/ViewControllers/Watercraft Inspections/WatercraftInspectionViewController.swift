@@ -356,6 +356,13 @@ class WatercraftInspectionViewController: BaseViewController {
                     counter += 1
                 }
                 
+                if highRisk.decontaminationOrderIssuedInteracted &&
+                    highRisk.decontaminationOrderIssued &&
+                    highRisk.decontaminationOrderReason.isEmpty {
+                    message = "\(message)\n\(counter). Please input the Reason for issuing a decontamination order (Inspection Outcomes).\n"
+                    counter += 1
+                }
+                
                 if !highRisk.decontaminationAppendixBInteracted {
                     message = "\(message)\n\(counter). Please input Appendix B filled out field (Inspection Outcomes).\n"
                     counter += 1
