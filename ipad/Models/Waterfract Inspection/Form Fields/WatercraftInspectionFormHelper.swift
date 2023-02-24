@@ -371,10 +371,18 @@ class WatercraftInspectionFormHelper {
     
     static func getGeneralCommentsFields(for object: WatercraftInspectionModel? = nil, editable: Bool? = true) -> [InputItem] {
         var sectionItems: [InputItem] = []
+        
+        // Only allow comments once mandatory sections have been completed
+        let editable =  object?.k9InspectionInteracted ?? false &&
+                        object?.previousInspectionInteracted ?? false &&
+                        object?.commerciallyHauledInteracted ?? false &&
+                        object?.previousAISKnowledeInteracted ?? false &&
+                        object?.dreissenidMusselsFoundPreviousInteracted ?? false
+        
         let generalComments = TextAreaInput(
             key: "generalComments",
             header: WatercraftFieldHeaderConstants.GeneralComments.generalComments,
-            editable: editable ?? true,
+            editable: editable,
             value: object?.generalComments ?? "",
             width: .Full
         )
