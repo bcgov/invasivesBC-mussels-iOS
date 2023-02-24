@@ -372,8 +372,19 @@ class WatercraftInspectionFormHelper {
     static func getGeneralCommentsFields(for object: WatercraftInspectionModel? = nil, editable: Bool? = true) -> [InputItem] {
         var sectionItems: [InputItem] = []
         
+        let isNoWatercraftTypeSelected =
+            object?.nonMotorized == 0 &&
+            object?.simple == 0 &&
+            object?.complex == 0 &&
+            object?.veryComplex == 0;
+        
+        let isPassportHolderNewOrLaunched = (!(object?.isPassportHolder ?? false)) ||
+        (object?.isPassportHolder ?? false && (object?.launchedOutsideBC ?? false || object?.isNewPassportIssued ?? false))
+        
         // Only allow comments once mandatory sections have been completed
-        let editable =  object?.k9InspectionInteracted ?? false &&
+        let editable =  !isNoWatercraftTypeSelected &&
+                        isPassportHolderNewOrLaunched &&
+                        object?.k9InspectionInteracted ?? false &&
                         object?.previousInspectionInteracted ?? false &&
                         object?.commerciallyHauledInteracted ?? false &&
                         object?.previousAISKnowledeInteracted ?? false &&
