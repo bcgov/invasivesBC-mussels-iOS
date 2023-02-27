@@ -107,6 +107,14 @@ extension Theme {
         textField.layer.borderColor = Colors.inputBackground.cgColor
     }
     
+    public func styleFieldInputWarning(textField: UITextView) {
+        textField.textColor = Colors.warn
+        textField.backgroundColor = Colors.inputBackground
+        textField.font = getInputFieldFont()
+        textField.layer.cornerRadius = 3
+        textField.layer.borderColor = Colors.inputBackground.cgColor
+    }
+    
     // Form Section title
     public func styleSectionTitle(label: UILabel) {
         label.textColor = Colors.primary

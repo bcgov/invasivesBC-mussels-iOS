@@ -42,11 +42,18 @@ class TextAreaInputCollectionViewCell: BaseInputCell<TextAreaInput>, UITextViewD
     // MARK: Style
     override func style() {
         styleFieldInput(textField: textArea)
+        
         styleFieldHeader(label: fieldHeader)
         textArea.isScrollEnabled = true
         
         if let m = model, let value = m.value.get(type: .TextArea) as? String, value.count > charLimit {
             textArea.backgroundColor = Colors.warn.withAlphaComponent(0.3)
+        }
+        
+        // General comments is only available if all mandatory fields have been completed/interacted with
+        // The string "Complete all required fields" will appear if this is the case
+        if let m = model, m.value.get(type: m.type) as? String ?? "" == "Complete all required fields (*) to add comments." {
+            styleFieldInputWarning(textField: textArea)
         }
     }
     
