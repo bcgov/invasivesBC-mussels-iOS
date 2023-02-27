@@ -394,9 +394,10 @@ class WatercraftInspectionFormHelper {
             key: "generalComments",
             header: WatercraftFieldHeaderConstants.GeneralComments.generalComments,
             editable: editable,
-            value: object?.generalComments ?? "",
+            value: editable ? (object?.generalComments ?? "") : "Complete all required fields (*) to add comments.",
             width: .Full
         )
+        
         sectionItems.append(generalComments)
         return sectionItems
     }
