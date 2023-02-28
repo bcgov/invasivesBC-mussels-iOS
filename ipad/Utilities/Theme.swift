@@ -66,6 +66,23 @@ extension Theme {
         label.textColor = Colors.inputHeaderText
         label.font = Fonts.getPrimaryBold(size: 14)
         label.adjustsFontSizeToFitWidth = true
+
+        let attributedText = NSMutableAttributedString(string: label.text ?? "")
+
+        // Define the attributes to apply to the headings with "*" character (required)
+        let asteriskAttributes: [NSAttributedString.Key: Any] = [
+            .foregroundColor: UIColor.red,
+            .font: UIFont.boldSystemFont(ofSize: 22)
+        ]
+
+        // Loop through the label text to find any "*" characters
+        for index in 0..<(label.text?.count ?? 0) {
+            if label.text?.prefix(index + 1).hasSuffix("*") ?? false {
+                attributedText.addAttributes(asteriskAttributes, range: NSRange(location: index, length: 1))
+            }
+        }
+
+        label.attributedText = attributedText
     }
     
     // Input field content
