@@ -305,7 +305,18 @@ class WatercraftInspectionViewController: BaseViewController {
         // --------- End of Watercraft Details Validaiton ---------
         
         // --------- Journey Details Validation ---------
-        if model.unknownPreviousWaterBody == true ||
+        if isPassportHolderNewOrLaunched &&
+            model.unknownPreviousWaterBody == false &&
+            model.commercialManufacturerAsPreviousWaterBody == false &&
+            model.previousDryStorage == false {
+            if model.previousWaterBodies.isEmpty {
+                    message = "\(message)\n\(counter). Please add a Previous Waterbody (Journey Details).\n"
+                    counter += 1
+            }
+        }
+        
+        if isPassportHolderNewOrLaunched &&
+            model.unknownPreviousWaterBody == true ||
             model.commercialManufacturerAsPreviousWaterBody == true ||
             model.previousDryStorage == true {
             if model.previousMajorCities.isEmpty {
@@ -313,8 +324,19 @@ class WatercraftInspectionViewController: BaseViewController {
                 counter += 1
             }
         }
+        
+        if isPassportHolderNewOrLaunched &&
+            model.unknownDestinationWaterBody == false &&
+            model.commercialManufacturerAsDestinationWaterBody == false &&
+            model.destinationDryStorage == false {
+            if model.destinationWaterBodies.isEmpty {
+                message = "\(message)\n\(counter). Please add a Destination Waterbody (Journey Details).\n"
+                counter += 1
+            }
+        }
 
-        if model.unknownDestinationWaterBody == true ||
+        if isPassportHolderNewOrLaunched &&
+            model.unknownDestinationWaterBody == true ||
             model.commercialManufacturerAsDestinationWaterBody == true ||
             model.destinationDryStorage == true {
             if model.destinationMajorCities.isEmpty {
@@ -1058,11 +1080,11 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
             return dividerCell
         case .PreviousHeader:
             let cell = getHeaderCell(indexPath: indexPath)
-            cell.setup(with: "Previous Waterbody")
+            cell.setup(with: "Previous Waterbody *")
             return cell
         case .DestinationHeader:
             let cell = getHeaderCell(indexPath: indexPath)
-            cell.setup(with: "Destination Waterbody")
+            cell.setup(with: "Destination Waterbody *")
             return cell
         }
     }
