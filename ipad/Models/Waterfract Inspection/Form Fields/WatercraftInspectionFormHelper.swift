@@ -397,6 +397,9 @@ class WatercraftInspectionFormHelper {
             
             // --------- Watercraft Details Validation ---------
             if !(object?.isPassportHolder ?? false) &&
+                object?.numberOfPeopleInParty ?? 0 < 1 { return false }
+            
+            if !(object?.isPassportHolder ?? false) &&
                 !(object?.commerciallyHauledInteracted ?? false) { return false }
                     
             if isPassportHolderNewOrLaunched &&
