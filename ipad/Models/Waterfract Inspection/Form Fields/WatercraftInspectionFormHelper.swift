@@ -508,7 +508,7 @@ class WatercraftInspectionFormHelper {
 
             let numberOfDaysOut = DropdownInput(
                 key: "previousWaterBody-numberOfDaysOut-\(index)",
-                header: "Number of days out of waterbody?",
+                header: "Number of days out of waterbody? *",
                 editable: isEditable ?? true,
                 value: item?["numberOfDaysOut"] as? String ?? "N/A",
                 width: .Full,

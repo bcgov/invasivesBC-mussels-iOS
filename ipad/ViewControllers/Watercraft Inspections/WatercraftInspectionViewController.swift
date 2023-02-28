@@ -313,6 +313,12 @@ class WatercraftInspectionViewController: BaseViewController {
                     message = "\(message)\n\(counter). Please add a Previous Waterbody (Journey Details).\n"
                     counter += 1
             }
+            for prev in model.previousWaterBodies {
+                if prev.numberOfDaysOut.isEmpty {
+                    message = "\(message)\n\(counter). Please add a Number of days out of waterbody (Journey Details).\n"
+                    counter += 1
+                }
+            }
         }
         
         if isPassportHolderNewOrLaunched &&
