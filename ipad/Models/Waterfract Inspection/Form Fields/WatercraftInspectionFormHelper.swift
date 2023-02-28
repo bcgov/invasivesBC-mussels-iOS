@@ -427,11 +427,39 @@ class WatercraftInspectionFormHelper {
             // --------- End of Watercraft Details Validaiton ---------
             
             // --------- Journey Details Validation ---------
-            if object?.unknownPreviousWaterBody == true ||
+            
+            if isPassportHolderNewOrLaunched &&
+                object?.unknownPreviousWaterBody == false ||
+                object?.commercialManufacturerAsPreviousWaterBody == false ||
+                object?.previousDryStorage == false {
+                if object?.previousWaterBodies.isEmpty ?? false { return false }
+                if let object = object {
+                    for prev in object.previousWaterBodies {
+                        if prev.numberOfDaysOut.isEmpty {
+                            return false
+                        }
+                    }
+                }
+            }
+                
+            if isPassportHolderNewOrLaunched &&
+                object?.unknownPreviousWaterBody == true ||
                 object?.commercialManufacturerAsPreviousWaterBody == true ||
-                object?.previousDryStorage == true { return false }
+                object?.previousDryStorage == true {
+                if object?.previousMajorCities.isEmpty ?? false {
+                    return false
+                }
+            }
 
-            if object?.unknownDestinationWaterBody == true ||
+            if isPassportHolderNewOrLaunched &&
+                object?.unknownDestinationWaterBody == false ||
+                object?.commercialManufacturerAsDestinationWaterBody == false ||
+                object?.destinationDryStorage == false {
+                if object?.destinationWaterBodies.isEmpty ?? false { return false }
+            }
+            
+            if isPassportHolderNewOrLaunched &&
+                object?.unknownDestinationWaterBody == true ||
                 object?.commercialManufacturerAsDestinationWaterBody == true ||
                 object?.destinationDryStorage == true {
                 if object?.destinationMajorCities.isEmpty ?? false { return false }
