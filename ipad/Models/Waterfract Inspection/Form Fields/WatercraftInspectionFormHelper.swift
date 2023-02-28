@@ -480,7 +480,8 @@ class WatercraftInspectionFormHelper {
 
             return true
         }
-           
+        
+        // general comment section is only available if mandatory fields are completed
         let editable = validationCheck()
         
         let generalComments = TextAreaInput(
