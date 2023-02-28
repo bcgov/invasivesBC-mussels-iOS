@@ -253,13 +253,13 @@ class WatercraftInspectionViewController: BaseViewController {
         // --------- End of Basic Information Validaiton ---------
         
         // --------- Watercraft Details Validation ---------
-        if !model.isPassportHolder &&
+        if isPassportHolderNewOrLaunched &&
             model.numberOfPeopleInParty < 1 {
             message = "\(message)\n\(counter). Please input the number of people in the party (Watercraft Details).\n"
             counter += 1
         }
         
-        if !model.isPassportHolder &&
+        if isPassportHolderNewOrLaunched &&
             !model.commerciallyHauledInteracted {
             message = "\(message)\n\(counter). Please input Watercraft/equipment commerically hauled field (Watercraft Details).\n"
             counter += 1

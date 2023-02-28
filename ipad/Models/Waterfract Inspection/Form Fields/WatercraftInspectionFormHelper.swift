@@ -396,10 +396,10 @@ class WatercraftInspectionFormHelper {
             // --------- End of Basic Information Validaiton ---------
             
             // --------- Watercraft Details Validation ---------
-            if !(object?.isPassportHolder ?? false) &&
+            if isPassportHolderNewOrLaunched &&
                 object?.numberOfPeopleInParty ?? 0 < 1 { return false }
             
-            if !(object?.isPassportHolder ?? false) &&
+            if isPassportHolderNewOrLaunched &&
                 !(object?.commerciallyHauledInteracted ?? false) { return false }
                     
             if isPassportHolderNewOrLaunched &&
