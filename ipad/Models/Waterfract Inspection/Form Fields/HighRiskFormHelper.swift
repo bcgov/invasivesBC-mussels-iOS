@@ -91,6 +91,16 @@ class HighRiskFormHelper {
         sectionItems.append(spacer2)
         /// ---------------------------
         
+        let otherInspectionFindings = DropdownInput(
+            key: "highRisk-otherInspectionFindings",
+            header: HighRiskFormFieldHeaders.InspectionOutcomes.otherInspectionFindings,
+            editable: editable ?? true,
+            value: object?.otherInspectionFindings ?? "",
+            width: .Full,
+            dropdownItems: DropdownHelper.shared.getDropdown(for: .otherObservations)
+        )
+        sectionItems.append(otherInspectionFindings)
+        
         let decontaminationPerformed = NullSwitchInput(
             key: "highRisk-decontaminationPerformed",
             header: HighRiskFormFieldHeaders.InspectionOutcomes.decontaminationPerformed,
@@ -195,22 +205,12 @@ class HighRiskFormHelper {
 //        )
 //        sectionItems.append(dreissenidMusselsFoundPrevious)
         
-        let otherInspectionFindings = DropdownInput(
-            key: "highRisk-otherInspectionFindings",
-            header: HighRiskFormFieldHeaders.InspectionOutcomes.otherInspectionFindings,
-            editable: editable ?? true,
-            value: object?.otherInspectionFindings ?? "",
-            width: .Half,
-            dropdownItems: DropdownHelper.shared.getDropdown(for: .otherObservations)
-        )
-        sectionItems.append(otherInspectionFindings)
-        
         let quarantinePeriodIssued = NullSwitchInput(
             key: "highRisk-quarantinePeriodIssued",
             header: HighRiskFormFieldHeaders.InspectionOutcomes.quarantinePeriodIssued,
             editable: editable ?? true,
             value: object?.quarantinePeriodIssued ?? false,
-            width: .Half,
+            width: .Full,
             validationName: .quarantinePeriodIssuedInteracted,
             interacted: object?.quarantinePeriodIssuedInteracted ?? false
         )
