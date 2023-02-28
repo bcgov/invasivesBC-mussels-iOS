@@ -109,10 +109,7 @@ extension Theme {
     
     public func styleFieldInputWarning(textField: UITextView) {
         textField.textColor = Colors.warn
-        textField.backgroundColor = Colors.inputBackground
-        textField.font = getInputFieldFont()
-        textField.layer.cornerRadius = 3
-        textField.layer.borderColor = Colors.inputBackground.cgColor
+        textField.font = Fonts.getPrimaryBold(size: 14)
     }
     
     // Form Section title

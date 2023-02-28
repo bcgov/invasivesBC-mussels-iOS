@@ -52,7 +52,7 @@ class TextAreaInputCollectionViewCell: BaseInputCell<TextAreaInput>, UITextViewD
         
         // General comments is only available if all mandatory fields have been completed/interacted with
         // The string "Complete all required fields" will appear if this is the case
-        if let m = model, m.value.get(type: m.type) as? String ?? "" == "Complete all required fields (*) to add comments." {
+        if let m = model, m.value.get(type: m.type) as? String ?? "" == "Please complete all required fields (*) before adding comments." {
             styleFieldInputWarning(textField: textArea)
         }
     }
