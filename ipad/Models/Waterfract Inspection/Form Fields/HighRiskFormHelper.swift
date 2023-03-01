@@ -91,12 +91,14 @@ class HighRiskFormHelper {
         sectionItems.append(spacer2)
         /// ---------------------------
         
-        let decontaminationPerformed = SwitchInput(
+        let decontaminationPerformed = NullSwitchInput(
             key: "highRisk-decontaminationPerformed",
             header: HighRiskFormFieldHeaders.InspectionOutcomes.decontaminationPerformed,
             editable: editable ?? true,
             value: object?.decontaminationPerformed ?? false,
-            width: .Full
+            width: .Full,
+            validationName: .decontaminationPerformedInteracted,
+            interacted: object?.decontaminationPerformedInteracted ?? false
         )
         sectionItems.append(decontaminationPerformed)
         
@@ -115,23 +117,16 @@ class HighRiskFormHelper {
         sectionItems.append(spacer3)
         /// ---------------------------
         
-        let decontaminationOrderIssued = SwitchInput(
+        let decontaminationOrderIssued = NullSwitchInput(
             key: "highRisk-decontaminationOrderIssued",
             header: HighRiskFormFieldHeaders.InspectionOutcomes.decontaminationOrderIssued,
             editable: editable ?? true,
             value: object?.decontaminationOrderIssued ?? false,
-            width: .Full
+            width: .Full,
+            validationName: .decontaminationOrderIssuedInteracted,
+            interacted: object?.decontaminationOrderIssuedInteracted ?? false
         )
         sectionItems.append(decontaminationOrderIssued)
-        
-        let decontaminationAppendixB = SwitchInput(
-            key: "highRisk-decontaminationAppendixB",
-            header: HighRiskFormFieldHeaders.InspectionOutcomes.decontaminationAppendixB,
-            editable: editable ?? true,
-            value: object?.decontaminationAppendixB ?? false,
-            width: .Full
-        )
-        sectionItems.append(decontaminationAppendixB)
         
         let decontaminationOrderNumber = IntegerInput(
             key: "highRisk-decontaminationOrderNumber",
@@ -154,13 +149,26 @@ class HighRiskFormHelper {
         
         decontaminationOrderReason.dependency.append(InputDependency(to: decontaminationOrderIssued, equalTo: true))
         sectionItems.append(decontaminationOrderReason)
-                
-        let sealIssued = SwitchInput(
+        
+        let decontaminationAppendixB = NullSwitchInput(
+            key: "highRisk-decontaminationAppendixB",
+            header: HighRiskFormFieldHeaders.InspectionOutcomes.decontaminationAppendixB,
+            editable: editable ?? true,
+            value: object?.decontaminationAppendixB ?? false,
+            width: .Full,
+            validationName: .decontaminationAppendixBInteracted,
+            interacted: object?.decontaminationAppendixBInteracted ?? false
+        )
+        sectionItems.append(decontaminationAppendixB)
+        
+        let sealIssued = NullSwitchInput(
             key: "highRisk-sealIssued",
             header: HighRiskFormFieldHeaders.InspectionOutcomes.sealIssued,
             editable: editable ?? true,
             value: object?.sealIssued ?? false,
-            width: .Full
+            width: .Full,
+            validationName: .sealIssuedInteracted,
+            interacted: object?.sealIssuedInteracted ?? false
         )
         sectionItems.append(sealIssued)
         
@@ -197,12 +205,14 @@ class HighRiskFormHelper {
         )
         sectionItems.append(otherInspectionFindings)
         
-        let quarantinePeriodIssued = SwitchInput(
+        let quarantinePeriodIssued = NullSwitchInput(
             key: "highRisk-quarantinePeriodIssued",
             header: HighRiskFormFieldHeaders.InspectionOutcomes.quarantinePeriodIssued,
             editable: editable ?? true,
             value: object?.quarantinePeriodIssued ?? false,
-            width: .Half
+            width: .Half,
+            validationName: .quarantinePeriodIssuedInteracted,
+            interacted: object?.quarantinePeriodIssuedInteracted ?? false
         )
         sectionItems.append(quarantinePeriodIssued)
         

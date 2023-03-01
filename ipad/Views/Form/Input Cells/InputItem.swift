@@ -42,8 +42,19 @@ enum InputItemWidthSize {
 }
 
 enum InteractedValidationName {
+    // Basic Info
     case k9InspectionInteracted
     case previousInspectionInteracted
+    case commerciallyHauledInteracted
+    case previousAISKnowledeInteracted
+    // Inspection Details
+    case dreissenidMusselsFoundPreviousInteracted
+    // High Risk fields
+    case decontaminationOrderIssuedInteracted
+    case decontaminationAppendixBInteracted
+    case decontaminationPerformedInteracted
+    case sealIssuedInteracted
+    case quarantinePeriodIssuedInteracted
 }
 
 struct InputValue {
@@ -207,17 +218,55 @@ struct InteractedWithValue {
     
     func get(type: InteractedValidationName) -> Bool? {
         switch type {
+        // Basic Info
         case .k9InspectionInteracted:
             return self.boolean
         case .previousInspectionInteracted:
+            return self.boolean
+        case .commerciallyHauledInteracted:
+            return self.boolean
+        case .previousAISKnowledeInteracted:
+            return self.boolean
+        // Inspection Details
+        case .dreissenidMusselsFoundPreviousInteracted:
+            return self.boolean
+        // High Risk
+        case .decontaminationOrderIssuedInteracted:
+            return self.boolean
+        case .decontaminationAppendixBInteracted:
+            return self.boolean
+        case .decontaminationPerformedInteracted:
+            return self.boolean
+        case .sealIssuedInteracted:
+            return self.boolean
+        case .quarantinePeriodIssuedInteracted:
             return self.boolean
         }
     }
     mutating func set(value: Bool?, type: InteractedValidationName) {
         switch type {
+        // Basic Info
         case .k9InspectionInteracted:
             self.boolean = value
         case .previousInspectionInteracted:
+            self.boolean = value
+        case .commerciallyHauledInteracted:
+            self.boolean = value
+        case .previousAISKnowledeInteracted:
+            self.boolean = value
+        // Inspection Details
+        case .dreissenidMusselsFoundPreviousInteracted:
+            self.boolean = value
+        // High Risk
+        case .decontaminationOrderIssuedInteracted:
+            self.boolean = value
+        case .decontaminationAppendixBInteracted:
+            self.boolean = value
+        case .decontaminationPerformedInteracted:
+            self.boolean = value
+        case .sealIssuedInteracted:
+            self.boolean = value
+        case .quarantinePeriodIssuedInteracted:
             self.boolean = value
         }
     }

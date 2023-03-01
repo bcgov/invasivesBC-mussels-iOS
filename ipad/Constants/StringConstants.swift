@@ -100,10 +100,10 @@ struct WatercraftFieldHeaderConstants {
     }
     struct WatercraftDetails {
         static let numberOfPeopleInParty = "Number of people in the party"
-        static let commerciallyHauled = "Watercraft/equipment commercially hauled"
+        static let commerciallyHauled = "Watercraft/equipment commercially hauled *"
         static let highRiskArea = "Watercraft coming from a high risk area for whirling disease"
-        static let previousAISKnowlede = "Previous Knowledge of AIS or Clean, Drain, Dry"
-        static let previousAISKnowledeSource = "Source"
+        static let previousAISKnowlede = "Previous Knowledge of AIS or Clean, Drain, Dry *"
+        static let previousAISKnowledeSource = "Source *"
         static let previousInspection = "Previous inspection and/or agency notification  *"
         static let previousInspectionSource = "Source *"
         static let previousInspectionDays = "No. of Days *"
@@ -136,19 +136,19 @@ struct HighRiskFormFieldHeaders {
     
     struct InspectionOutcomes {
         static let otherInspectionFindings = "Other inspection findings"
-        static let quarantinePeriodIssued = "Quarantine period issued?"
+        static let quarantinePeriodIssued = "Quarantine period issued? *"
         static let standingWaterPresent = "Standing water present?"
         static let standingWaterLocation = "Standing Water Location"
         static let adultDreissenidMusselsFound = "Adult dreissenid mussels found?"
         static let adultDreissenidMusselsLocation = "Adult Dreissenid mussels location"
-        static let dreisennidFoundPrevious = "Dreissenid mussels found during previous inspection and FULL decontamination already completed"
-        static let decontaminationPerformed = "Decontamination performed?"
+        static let dreisennidFoundPrevious = "Dreissenid mussels found during previous inspection and FULL decontamination already completed *"
+        static let decontaminationPerformed = "Decontamination performed? *"
         static let decontaminationReference = "Record of Decontamination number"
-        static let decontaminationOrderIssued = "Decontamination order issued?"
+        static let decontaminationOrderIssued = "Decontamination order issued? *"
         static let decontaminationOrderNumber = "Decontamination order number *"
-        static let decontaminationOrderReason = "Reason for issuing decontamination order"
-        static let decontaminationAppendixB = "Appendix B filled out?"
-        static let sealIssued = "Seal issued or existing seal?"
+        static let decontaminationOrderReason = "Reason for issuing decontamination order *"
+        static let decontaminationAppendixB = "Appendix B filled out? *"
+        static let sealIssued = "Seal issued or existing seal? *"
         static let sealNumber = "Seal # *"
     }
     

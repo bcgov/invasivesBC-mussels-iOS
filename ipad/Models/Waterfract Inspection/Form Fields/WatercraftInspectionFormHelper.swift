@@ -61,12 +61,14 @@ class WatercraftInspectionFormHelper {
         launchedOutsideBC.dependency.append(InputDependency(to: isPassportHolder, equalTo: true))
         items.append(launchedOutsideBC)
         
-        let k9Inspection = SwitchInput(
+        let k9Inspection = NullSwitchInput(
             key: "k9Inspection",
             header: WatercraftFieldHeaderConstants.Passport.k9Inspection,
             editable: editable ?? true,
             value: object?.k9Inspection ?? nil,
-            width: .Third
+            width: .Third,
+            validationName: .k9InspectionInteracted,
+            interacted: object?.k9InspectionInteracted ?? false
         )
         k9Inspection.dependency.append(InputDependency(to: isPassportHolder, equalTo: true))
         items.append(k9Inspection)
@@ -215,22 +217,26 @@ class WatercraftInspectionFormHelper {
         )
         sectionItems.append(numberOfPeopleInParty)
         
-        let commerciallyHauled = SwitchInput(
+        let commerciallyHauled = NullSwitchInput(
             key: "commerciallyHauled",
             header: WatercraftFieldHeaderConstants.WatercraftDetails.commerciallyHauled,
             editable: editable ?? true,
             value: object?.commerciallyHauled ?? false,
-            width: .Third
+            width: .Third,
+            validationName: .commerciallyHauledInteracted,
+            interacted: object?.commerciallyHauledInteracted ?? false
         )
         sectionItems.append(commerciallyHauled)
         sectionItems.append(InputSpacer())
         
-        let previousAISKnowlede = SwitchInput(
+        let previousAISKnowlede = NullSwitchInput(
             key: "previousAISKnowlede",
             header: WatercraftFieldHeaderConstants.WatercraftDetails.previousAISKnowlede,
             editable: editable ?? true,
             value: object?.previousAISKnowlede ?? nil,
-            width: .Full
+            width: .Full,
+            validationName: .previousAISKnowledeInteracted,
+            interacted: object?.previousAISKnowledeInteracted ?? false
         )
         sectionItems.append(previousAISKnowlede)
         
@@ -253,7 +259,7 @@ class WatercraftInspectionFormHelper {
             header: WatercraftFieldHeaderConstants.WatercraftDetails.previousInspection,
             editable: editable ?? true,
             value: object?.previousInspection ?? nil,
-            width: .Third,
+            width: .Full,
             validationName: .previousInspectionInteracted,
             interacted: object?.previousInspectionInteracted ?? false
         )
@@ -265,7 +271,7 @@ class WatercraftInspectionFormHelper {
             header: WatercraftFieldHeaderConstants.WatercraftDetails.previousInspectionSource,
             editable: editable ?? true,
             value: object?.previousInspectionSource ?? nil,
-            width: .Half,
+            width: .Full,
             dropdownItems: DropdownHelper.shared.getDropDownObject(for: .previousInspectionSource),
             codes: DropdownHelper.shared.getDropDownCodes(for: .previousInspectionSource)
         )
@@ -325,12 +331,14 @@ class WatercraftInspectionFormHelper {
 //        )
 //        sectionItems.append(cleanDrainDryAfter)
 
-        let dreissenidMusselsFoundPrevious = SwitchInput(
+        let dreissenidMusselsFoundPrevious = NullSwitchInput(
             key: "dreissenidMusselsFoundPrevious",
             header: HighRiskFormFieldHeaders.InspectionOutcomes.dreisennidFoundPrevious,
             editable: editable ?? true,
             value: object?.dreissenidMusselsFoundPrevious ?? false,
-            width: .Full
+            width: .Full,
+            validationName: .dreissenidMusselsFoundPreviousInteracted,
+            interacted: object?.dreissenidMusselsFoundPreviousInteracted ?? false
         )
         sectionItems.append(dreissenidMusselsFoundPrevious)
         

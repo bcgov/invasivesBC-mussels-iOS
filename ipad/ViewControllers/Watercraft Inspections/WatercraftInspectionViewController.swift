@@ -219,64 +219,91 @@ class WatercraftInspectionViewController: BaseViewController {
     func validationMessage() -> String {
         var message: String = ""
         guard let model = self.model else { return message }
+        // Take some common/repeated conditionals and assign to variables
+        // Check if any watercraft type has been incremented (need one type to be > 0)
+        let isNoWatercraftTypeSelected =
+          model.nonMotorized == 0 &&
+          model.simple == 0 &&
+          model.complex == 0 &&
+          model.veryComplex == 0;
+        
+        // Check if this is a passport AND if a new passport is issued or launched outside BC is true
+        // Several form fields are hidden if passport holder, but reappear if it's new passport / launched
+        let isPassportHolderNewOrLaunched = !model.isPassportHolder ||
+        (model.isPassportHolder && (model.launchedOutsideBC || model.isNewPassportIssued))
+        
         var counter = 1
         
+        // --------- Basic Information Validations ---------
         if model.inspectionTime == "" {
-            message = "\(message)\n\(counter). Missing Time of Inspection.\n"
+            message = "\(message)\n\(counter). Missing Time of Inspection (Basic Information).\n"
             counter += 1
         }
         
         if !model.k9InspectionInteracted {
-            message = "\(message)\n\(counter). Please input k9 Inspection.\n"
+            message = "\(message)\n\(counter). Please input k9 Inspection Performed field (Basic Information).\n"
             counter += 1
         }
         
         // Check if any of the Watercraft types are at least greater than 0
-        // If this is a passport holder, Watercraft types needs validation when
-        // issuing a new passport or if launchedOutsideBC is checked as true
-        if (!model.isPassportHolder &&
-            model.nonMotorized == 0 &&
-            model.simple == 0 &&
-            model.complex == 0 &&
-            model.veryComplex == 0) ||
-            
-            (model.isPassportHolder &&
-             (model.launchedOutsideBC || model.isNewPassportIssued) &&
-             model.nonMotorized == 0 &&
-             model.simple == 0 &&
-             model.complex == 0 &&
-             model.veryComplex == 0) {
-                   
-            message = "\(message)\n\(counter). Please input Watercraft Type:\n - Non-Motorized\n - Simple\n - Complex\n - Very Complex\n"
+        if isPassportHolderNewOrLaunched && isNoWatercraftTypeSelected {
+          message = "\(message)\n\(counter). Please input at least one Watercraft Type (Basic Information):\n - Non-Motorized\n - Simple\n - Complex\n - Very Complex\n";
+          counter += 1;
+        }
+        // --------- End of Basic Information Validaiton ---------
+        
+        // --------- Watercraft Details Validation ---------
+        if !model.isPassportHolder &&
+            !model.commerciallyHauledInteracted {
+            message = "\(message)\n\(counter). Please input Watercraft/equipment commerically hauled field (Watercraft Details).\n"
             counter += 1
         }
         
-        if !model.previousInspectionInteracted {
-            message = "\(message)\n\(counter). Please input Previous Inspection and/or Agency Notification.\n"
+        if isPassportHolderNewOrLaunched &&
+            !model.previousAISKnowledeInteracted {
+            message = "\(message)\n\(counter). Please input Previous Knowledge of AIS or Clean, Drain, Dry field (Watercraft Details).\n"
+            counter += 1
+        }
+        
+        if isPassportHolderNewOrLaunched &&
+            model.previousAISKnowledeInteracted &&
+            model.previousAISKnowlede &&
+            model.previousAISKnowledeSource.isEmpty {
+            message = "\(message)\n\(counter). Please input Source for Previous Knowledge of AIS or Clean, Drain, Dry (Watercraft Details).\n"
+            counter += 1
+        }
+        
+        if isPassportHolderNewOrLaunched &&
+            !model.previousInspectionInteracted {
+            message = "\(message)\n\(counter). Please input Previous Inspection and/or Agency Notification field (Watercraft Details).\n"
             counter += 1
         }
         
         // Previous Inspection has been interacted with and set to "Yes", but Previous Inspection Source is empty
-        if model.previousInspectionInteracted &&
+        if isPassportHolderNewOrLaunched &&
+            model.previousInspectionInteracted &&
             model.previousInspection &&
             model.previousInspectionSource.isEmpty {
-            message = "\(message)\n\(counter). Please input Source for Previous Inspection and/or Agency Notification.\n"
+            message = "\(message)\n\(counter). Please input Source for Previous Inspection and/or Agency Notification (Watercraft Details).\n"
             counter += 1
         }
         
         // Previous Inspection has been interacted with and set to "Yes", but Previous Inspection Days is empty
-        if model.previousInspectionInteracted &&
+        if isPassportHolderNewOrLaunched &&
+            model.previousInspectionInteracted &&
             model.previousInspection &&
             model.previousInspectionDays.isEmpty {
-            message = "\(message)\n\(counter). Please input No. of Days for Previous Inspection and/or Agency Notification.\n"
+            message = "\(message)\n\(counter). Please input No. of Days for Previous Inspection and/or Agency Notification (Watercraft Details).\n"
             counter += 1
         }
+        // --------- End of Watercraft Details Validaiton ---------
         
+        // --------- Journey Details Validation ---------
         if model.unknownPreviousWaterBody == true ||
             model.commercialManufacturerAsPreviousWaterBody == true ||
             model.previousDryStorage == true {
             if model.previousMajorCities.isEmpty {
-                message = "\(message)\n\(counter). Please add Closest Major City for Previous Waterbody.\n"
+                message = "\(message)\n\(counter). Please add Closest Major City for Previous Waterbody (Journey Details).\n"
                 counter += 1
             }
         }
@@ -285,20 +312,77 @@ class WatercraftInspectionViewController: BaseViewController {
             model.commercialManufacturerAsDestinationWaterBody == true ||
             model.destinationDryStorage == true {
             if model.destinationMajorCities.isEmpty {
-                message = "\(message)\n\(counter). Please add Closest Major City for Destination Waterbody.\n"
+                message = "\(message)\n\(counter). Please add Closest Major City for Destination Waterbody (Journey Details).\n"
                 counter += 1
             }
         }
-
-        if !model.highRiskAssessments.isEmpty {
+        // --------- End of Journey Details Validation ---------
+        
+        // --------- Inspection Details Validations ---------
+        if isPassportHolderNewOrLaunched &&
+            !model.dreissenidMusselsFoundPreviousInteracted {
+            message = "\(message)\n\(counter). Please input Dreissenid mussels found during previous inspection and FULL decontamination already completed field (Inspection Details).\n"
+            counter += 1
+        }
+        // --------- End of Inspection Details Validation ---------
+        
+        //  --------- High Risk Assessment Validations ---------
+        if isPassportHolderNewOrLaunched &&
+            !model.highRiskAssessments.isEmpty {
             for highRisk in model.highRiskAssessments {
-                if highRisk.sealIssued == true && highRisk.sealNumber <= 0 {
-                    message = "\(message)\n\(counter). Please input the Seal #.\n"
+                if !highRisk.decontaminationPerformedInteracted {
+                    message = "\(message)\n\(counter). Please input Decontamination performed field (Inspection Outcomes).\n"
                     counter += 1
                 }
                 
-                if highRisk.decontaminationOrderIssued == true && highRisk.decontaminationOrderNumber <= 0 {
-                    message = "\(message)\n\(counter). Please input the Decontamination order number.\n"
+                // Decontamination has been interacted with and set to "Yes", but a Record of Decontamintion number is empty
+                if highRisk.decontaminationPerformedInteracted &&
+                    highRisk.decontaminationPerformed &&
+                    highRisk.decontaminationReference.isEmpty {
+                    message = "\(message)\n\(counter). Please input a Record of Decontamination number (Inspection Outcomes).\n"
+                    counter += 1
+                }
+
+                if !highRisk.decontaminationOrderIssuedInteracted {
+                    message = "\(message)\n\(counter). Please input Decontamination order issued field (Inspection Outcomes).\n"
+                    counter += 1
+                }
+                
+                // Decontamination order has been interacted with and set to "Yes", but a Record of Decontamintion number is empty
+                if highRisk.decontaminationOrderIssuedInteracted &&
+                    highRisk.decontaminationOrderIssued &&
+                    highRisk.decontaminationOrderNumber <= 0 {
+                    message = "\(message)\n\(counter). Please input the Decontamination order number (Inspection Outcomes).\n"
+                    counter += 1
+                }
+                
+                if highRisk.decontaminationOrderIssuedInteracted &&
+                    highRisk.decontaminationOrderIssued &&
+                    highRisk.decontaminationOrderReason.isEmpty {
+                    message = "\(message)\n\(counter). Please input the Reason for issuing a decontamination order (Inspection Outcomes).\n"
+                    counter += 1
+                }
+                
+                if !highRisk.decontaminationAppendixBInteracted {
+                    message = "\(message)\n\(counter). Please input Appendix B filled out field (Inspection Outcomes).\n"
+                    counter += 1
+                }
+                
+                if !highRisk.sealIssuedInteracted {
+                    message = "\(message)\n\(counter). Please input Seal issued or existing seal field (Inspection Outcomes).\n"
+                    counter += 1
+                }
+                
+                // Seal Issued has been interacted with and set to "Yes", but Seal number is empty
+                if highRisk.sealIssuedInteracted &&
+                    highRisk.sealIssued &&
+                    highRisk.sealNumber <= 0 {
+                    message = "\(message)\n\(counter). Please input the Seal # (Inspection Outcomes).\n"
+                    counter += 1
+                }
+                
+                if !highRisk.quarantinePeriodIssuedInteracted {
+                    message = "\(message)\n\(counter). Please input Quarantine period issued field (Inspection Outcomes).\n"
                     counter += 1
                 }
             }

@@ -60,6 +60,18 @@ class HighRiskAssessmentModel: Object, BaseRealmObject {
     // General Comments
     @objc dynamic var generalComments: String = ""
     
+    // Validators
+    var validatorNames = ["decontaminationAppendixB",
+                          "decontaminationPerformed",
+                          "quarantinePeriodIssued",
+                          "decontaminationOrderIssued",
+                          "sealIssued"]
+    @objc dynamic var decontaminationAppendixBInteracted = false
+    @objc dynamic var decontaminationPerformedInteracted = false
+    @objc dynamic var quarantinePeriodIssuedInteracted = false
+    @objc dynamic var decontaminationOrderIssuedInteracted = false
+    @objc dynamic var sealIssuedInteracted = false
+    
     // MARK: Setters
     func set(value: Any, for key: String) {
         if self[key] == nil {
@@ -73,6 +85,23 @@ class HighRiskAssessmentModel: Object, BaseRealmObject {
             }
         } catch let error as NSError {
             print("** REALM ERROR")
+            print(error)
+        }
+        // Validation checks - check if this key requires interaction validation
+        if validatorNames.contains(key) {
+            setInteractedBool(validationName:"\(key)Interacted")
+        }
+    }
+    
+    // Validation check - if interacted with, set to true
+    func setInteractedBool(validationName: String) {
+        do {
+            let realm = try Realm()
+            try realm.write {
+                self[validationName] = true
+            }
+        } catch let error as NSError {
+            print("Error with finding validation")
             print(error)
         }
     }

@@ -12,6 +12,8 @@ class NullSwitchInputCollectionViewCell: BaseInputCell<NullSwitchInput> {
 
     @IBOutlet weak var headerLabel: UILabel!
     @IBOutlet weak var nullSwitchView: UISegmentedControl!
+    let colorNo = UIColor(hex: "#D8292F")
+    let colorYes = UIColor(hex: "#2E8540")
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -25,10 +27,10 @@ class NullSwitchInputCollectionViewCell: BaseInputCell<NullSwitchInput> {
         
         switch sender.selectedSegmentIndex {
         case 0:// Switch is set to "No"
-            nullSwitchView.selectedSegmentTintColor = .systemOrange
+            nullSwitchView.selectedSegmentTintColor = colorNo
             model.value.set(value: false, type: model.type)
         case 1:// Switch is set to "Yes"
-            nullSwitchView.selectedSegmentTintColor = .systemGreen
+            nullSwitchView.selectedSegmentTintColor = colorYes
             model.value.set(value: true, type: model.type)
         default:// Switch is unset and remains "nil"
             model.value.set(value: nil, type: model.type)
@@ -50,11 +52,11 @@ class NullSwitchInputCollectionViewCell: BaseInputCell<NullSwitchInput> {
             
             // If the button has been toggled before, then we show "No" as selected
             if model.interacted.get(type: model.validationName) ?? true {
-                nullSwitchView.selectedSegmentTintColor = .systemOrange
+                nullSwitchView.selectedSegmentTintColor = colorNo
                 self.nullSwitchView.selectedSegmentIndex = 0
             }
         case true:
-            nullSwitchView.selectedSegmentTintColor = .systemGreen
+            nullSwitchView.selectedSegmentTintColor = colorYes
             self.nullSwitchView.selectedSegmentIndex = 1
         default:
             self.nullSwitchView.selectedSegmentIndex = UISegmentedControl.noSegment
