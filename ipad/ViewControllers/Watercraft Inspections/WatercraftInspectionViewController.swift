@@ -240,11 +240,6 @@ class WatercraftInspectionViewController: BaseViewController {
             counter += 1
         }
         
-        if !model.k9InspectionInteracted {
-            message = "\(message)\n\(counter). Please input k9 Inspection Performed field (Basic Information).\n"
-            counter += 1
-        }
-        
         // Check if any of the Watercraft types are at least greater than 0
         if isPassportHolderNewOrLaunched && isNoWatercraftTypeSelected {
           message = "\(message)\n\(counter). Please input at least one Watercraft Type (Basic Information):\n - Non-Motorized\n - Simple\n - Complex\n - Very Complex\n";
@@ -356,6 +351,11 @@ class WatercraftInspectionViewController: BaseViewController {
         if isPassportHolderNewOrLaunched &&
             !model.dreissenidMusselsFoundPreviousInteracted {
             message = "\(message)\n\(counter). Please input Dreissenid mussels found during previous inspection and FULL decontamination already completed field (Inspection Details).\n"
+            counter += 1
+        }
+        
+        if !model.k9InspectionInteracted {
+            message = "\(message)\n\(counter). Please input k9 Inspection Performed field (Inspection Details).\n"
             counter += 1
         }
         // --------- End of Inspection Details Validation ---------
