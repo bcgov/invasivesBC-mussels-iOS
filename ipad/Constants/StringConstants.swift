@@ -99,7 +99,7 @@ struct WatercraftFieldHeaderConstants {
         static let veryComplex = "Very Complex"
     }
     struct WatercraftDetails {
-        static let numberOfPeopleInParty = "Number of people in the party"
+        static let numberOfPeopleInParty = "Number of people in the party *"
         static let commerciallyHauled = "Watercraft/equipment commercially hauled *"
         static let highRiskArea = "Watercraft coming from a high risk area for whirling disease"
         static let previousAISKnowlede = "Previous Knowledge of AIS or Clean, Drain, Dry *"
@@ -141,13 +141,13 @@ struct HighRiskFormFieldHeaders {
         static let standingWaterLocation = "Standing Water Location"
         static let adultDreissenidMusselsFound = "Adult dreissenid mussels found?"
         static let adultDreissenidMusselsLocation = "Adult Dreissenid mussels location"
-        static let dreisennidFoundPrevious = "Dreissenid mussels found during previous inspection and FULL decontamination already completed *"
+        static let dreisennidFoundPrevious = "Dreissenid mussels found during previous inspection and FULL decontamination already completed/determined to be CDD *"
         static let decontaminationPerformed = "Decontamination performed? *"
-        static let decontaminationReference = "Record of Decontamination number"
+        static let decontaminationReference = "Record of Decontamination number *"
         static let decontaminationOrderIssued = "Decontamination order issued? *"
         static let decontaminationOrderNumber = "Decontamination order number *"
         static let decontaminationOrderReason = "Reason for issuing decontamination order *"
-        static let decontaminationAppendixB = "Appendix B filled out? *"
+        static let decontaminationAppendixB = "Appendix B completed and served? *"
         static let sealIssued = "Seal issued or existing seal? *"
         static let sealNumber = "Seal # *"
     }

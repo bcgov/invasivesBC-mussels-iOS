@@ -143,22 +143,10 @@ class WatercraftInspectionFormHelper {
             header: WatercraftFieldHeaderConstants.Passport.inspectionTime,
             editable: editable ?? true,
             value: object?.inspectionTime ?? nil,
-            width: .Third
+            width: .Half
         )
         inspectionTime.dependency.append(InputDependency(to: passportField, equalTo: false))
         sectionItems.append(inspectionTime)
-        
-        let k9Inspection = NullSwitchInput(
-            key: "k9Inspection",
-            header: WatercraftFieldHeaderConstants.Passport.k9Inspection,
-            editable: editable ?? true,
-            value: object?.k9Inspection ?? nil,
-            width: .Third,
-            validationName: .k9InspectionInteracted,
-            interacted: object?.k9InspectionInteracted ?? false
-        )
-        k9Inspection.dependency.append(InputDependency(to: passportField, equalTo: false))
-        sectionItems.append(k9Inspection)
         
         let spacer = InputSpacer(width: .Third)
         spacer.dependency.append(InputDependency(to: passportField, equalTo: true))
@@ -293,7 +281,7 @@ class WatercraftInspectionFormHelper {
         return sectionItems
     }
     
-    static func getInspectionDetailsFields(for object: WatercraftInspectionModel? = nil, editable: Bool? = true) -> [InputItem] {
+    static func getInspectionDetailsFields(for object: WatercraftInspectionModel? = nil, editable: Bool? = true, passportField: RadioSwitchInput) -> [InputItem]  {
         var sectionItems: [InputItem] = []
         let aquaticPlantsFound = SwitchInput(
             key: "aquaticPlantsFound",
@@ -342,6 +330,18 @@ class WatercraftInspectionFormHelper {
         )
         sectionItems.append(dreissenidMusselsFoundPrevious)
         
+        let k9Inspection = NullSwitchInput(
+            key: "k9Inspection",
+            header: WatercraftFieldHeaderConstants.Passport.k9Inspection,
+            editable: editable ?? true,
+            value: object?.k9Inspection ?? nil,
+            width: .Full,
+            validationName: .k9InspectionInteracted,
+            interacted: object?.k9InspectionInteracted ?? false
+        )
+        k9Inspection.dependency.append(InputDependency(to: passportField, equalTo: false))
+        sectionItems.append(k9Inspection)
+        
         return sectionItems
     }
     
@@ -371,13 +371,158 @@ class WatercraftInspectionFormHelper {
     
     static func getGeneralCommentsFields(for object: WatercraftInspectionModel? = nil, editable: Bool? = true) -> [InputItem] {
         var sectionItems: [InputItem] = []
+        
+        func validationCheck() -> Bool {
+            // Take some common/repeated conditionals and assign to variables
+            // Check if any watercraft type has been incremented (need one type to be > 0)
+            let isNoWatercraftTypeSelected =
+              object?.nonMotorized == 0 &&
+              object?.simple == 0 &&
+              object?.complex == 0 &&
+              object?.veryComplex == 0;
+            
+            // Check if this is a passport AND if a new passport is issued or launched outside BC is true
+            // Several form fields are hidden if passport holder, but reappear if it's new passport / launched
+            let isPassportHolderNewOrLaunched = !(object?.isPassportHolder ?? false) ||
+            (object?.isPassportHolder ?? false && (object?.launchedOutsideBC ?? false || ((object?.isNewPassportIssued) != nil)))
+    
+            // --------- Basic Information Validations ---------
+            if object?.inspectionTime == "" { return false }
+                    
+            if !(object?.k9InspectionInteracted ?? false) { return false }
+                    
+            // Check if any of the Watercraft types are at least greater than 0
+            if isPassportHolderNewOrLaunched && isNoWatercraftTypeSelected { return false }
+            // --------- End of Basic Information Validaiton ---------
+            
+            // --------- Watercraft Details Validation ---------
+            if isPassportHolderNewOrLaunched &&
+                object?.numberOfPeopleInParty ?? 0 < 1 { return false }
+            
+            if isPassportHolderNewOrLaunched &&
+                !(object?.commerciallyHauledInteracted ?? false) { return false }
+                    
+            if isPassportHolderNewOrLaunched &&
+                !(object?.previousAISKnowledeInteracted ?? false) { return false }
+            
+            if isPassportHolderNewOrLaunched &&
+                object?.previousAISKnowledeInteracted ?? false &&
+                object?.previousAISKnowlede ?? false &&
+                object?.previousAISKnowledeSource.isEmpty ?? false { return false }
+            
+            if isPassportHolderNewOrLaunched &&
+                !(object?.previousInspectionInteracted ?? false) { return false }
+            
+            // Previous Inspection has been interacted with and set to "Yes", but Previous Inspection Source is empty
+            if isPassportHolderNewOrLaunched &&
+                object?.previousInspectionInteracted ?? false &&
+                object?.previousInspection ?? false &&
+                object?.previousInspectionSource.isEmpty ?? false { return false }
+            
+            // Previous Inspection has been interacted with and set to "Yes", but Previous Inspection Days is empty
+            if isPassportHolderNewOrLaunched &&
+                object?.previousInspectionInteracted ?? false &&
+                object?.previousInspection ?? false &&
+                object?.previousInspectionDays.isEmpty ?? false { return false }
+            // --------- End of Watercraft Details Validaiton ---------
+            
+            // --------- Journey Details Validation ---------
+            
+            if isPassportHolderNewOrLaunched &&
+                object?.unknownPreviousWaterBody == false ||
+                object?.commercialManufacturerAsPreviousWaterBody == false ||
+                object?.previousDryStorage == false {
+                if object?.previousWaterBodies.isEmpty ?? false { return false }
+                if let object = object {
+                    for prev in object.previousWaterBodies {
+                        if prev.numberOfDaysOut.isEmpty {
+                            return false
+                        }
+                    }
+                }
+            }
+                
+            if isPassportHolderNewOrLaunched &&
+                object?.unknownPreviousWaterBody == true ||
+                object?.commercialManufacturerAsPreviousWaterBody == true ||
+                object?.previousDryStorage == true {
+                if object?.previousMajorCities.isEmpty ?? false {
+                    return false
+                }
+            }
+
+            if isPassportHolderNewOrLaunched &&
+                object?.unknownDestinationWaterBody == false ||
+                object?.commercialManufacturerAsDestinationWaterBody == false ||
+                object?.destinationDryStorage == false {
+                if object?.destinationWaterBodies.isEmpty ?? false { return false }
+            }
+            
+            if isPassportHolderNewOrLaunched &&
+                object?.unknownDestinationWaterBody == true ||
+                object?.commercialManufacturerAsDestinationWaterBody == true ||
+                object?.destinationDryStorage == true {
+                if object?.destinationMajorCities.isEmpty ?? false { return false }
+            }
+            // --------- End of Journey Details Validation ---------
+            
+            // --------- Inspection Details Validations ---------
+            if isPassportHolderNewOrLaunched &&
+                !(object?.dreissenidMusselsFoundPreviousInteracted ?? false) { return false }
+            // --------- End of Inspection Details Validation ---------
+            
+                //  --------- High Risk Assessment Validations ---------
+                if isPassportHolderNewOrLaunched &&
+                !(object?.highRiskAssessments.isEmpty ?? false) {
+                    if let object = object {
+                        for highRisk in object.highRiskAssessments {
+                            
+                            if !highRisk.decontaminationPerformedInteracted { return false }
+                            
+                            // Decontamination has been interacted with and set to "Yes", but a Record of Decontamintion number is empty
+                            if highRisk.decontaminationPerformedInteracted &&
+                                highRisk.decontaminationPerformed &&
+                                highRisk.decontaminationReference.isEmpty { return false }
+                            
+                            if !highRisk.decontaminationOrderIssuedInteracted { return false }
+                            
+                            // Decontamination order has been interacted with and set to "Yes", but a Record of Decontamintion number is empty
+                            if highRisk.decontaminationOrderIssuedInteracted &&
+                                highRisk.decontaminationOrderIssued &&
+                                highRisk.decontaminationOrderNumber <= 0 { return false }
+                            
+                            if highRisk.decontaminationOrderIssuedInteracted &&
+                                highRisk.decontaminationOrderIssued &&
+                                highRisk.decontaminationOrderReason.isEmpty { return false }
+                            
+                            if !highRisk.decontaminationAppendixBInteracted { return false }
+                            
+                            if !highRisk.sealIssuedInteracted { return false }
+                            
+                            // Seal Issued has been interacted with and set to "Yes", but Seal number is empty
+                            if highRisk.sealIssuedInteracted &&
+                                highRisk.sealIssued &&
+                                highRisk.sealNumber <= 0 { return false }
+                            
+                            if !highRisk.quarantinePeriodIssuedInteracted { return false }
+                        }
+                    }
+                }
+
+            return true
+        }
+        
+        // general comment section is only available if mandatory fields are completed
+        let editable = validationCheck()
+        
         let generalComments = TextAreaInput(
             key: "generalComments",
             header: WatercraftFieldHeaderConstants.GeneralComments.generalComments,
-            editable: editable ?? true,
-            value: object?.generalComments ?? "",
+            editable: editable,
+            value: editable ? (object?.generalComments ?? "") : "Please complete all required fields (*) before adding comments.",
             width: .Full
         )
+        
         sectionItems.append(generalComments)
         return sectionItems
     }
@@ -391,7 +536,7 @@ class WatercraftInspectionFormHelper {
 
             let numberOfDaysOut = DropdownInput(
                 key: "previousWaterBody-numberOfDaysOut-\(index)",
-                header: "Number of days out of waterbody?",
+                header: "Number of days out of waterbody? *",
                 editable: isEditable ?? true,
                 value: item?["numberOfDaysOut"] as? String ?? "N/A",
                 width: .Full,

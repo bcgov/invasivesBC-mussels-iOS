@@ -240,11 +240,6 @@ class WatercraftInspectionViewController: BaseViewController {
             counter += 1
         }
         
-        if !model.k9InspectionInteracted {
-            message = "\(message)\n\(counter). Please input k9 Inspection Performed field (Basic Information).\n"
-            counter += 1
-        }
-        
         // Check if any of the Watercraft types are at least greater than 0
         if isPassportHolderNewOrLaunched && isNoWatercraftTypeSelected {
           message = "\(message)\n\(counter). Please input at least one Watercraft Type (Basic Information):\n - Non-Motorized\n - Simple\n - Complex\n - Very Complex\n";
@@ -253,7 +248,13 @@ class WatercraftInspectionViewController: BaseViewController {
         // --------- End of Basic Information Validaiton ---------
         
         // --------- Watercraft Details Validation ---------
-        if !model.isPassportHolder &&
+        if isPassportHolderNewOrLaunched &&
+            model.numberOfPeopleInParty < 1 {
+            message = "\(message)\n\(counter). Please input the number of people in the party (Watercraft Details).\n"
+            counter += 1
+        }
+        
+        if isPassportHolderNewOrLaunched &&
             !model.commerciallyHauledInteracted {
             message = "\(message)\n\(counter). Please input Watercraft/equipment commerically hauled field (Watercraft Details).\n"
             counter += 1
@@ -299,7 +300,24 @@ class WatercraftInspectionViewController: BaseViewController {
         // --------- End of Watercraft Details Validaiton ---------
         
         // --------- Journey Details Validation ---------
-        if model.unknownPreviousWaterBody == true ||
+        if isPassportHolderNewOrLaunched &&
+            model.unknownPreviousWaterBody == false &&
+            model.commercialManufacturerAsPreviousWaterBody == false &&
+            model.previousDryStorage == false {
+            if model.previousWaterBodies.isEmpty {
+                    message = "\(message)\n\(counter). Please add a Previous Waterbody (Journey Details).\n"
+                    counter += 1
+            }
+            for prev in model.previousWaterBodies {
+                if prev.numberOfDaysOut.isEmpty {
+                    message = "\(message)\n\(counter). Please add a Number of days out of waterbody (Journey Details).\n"
+                    counter += 1
+                }
+            }
+        }
+        
+        if isPassportHolderNewOrLaunched &&
+            model.unknownPreviousWaterBody == true ||
             model.commercialManufacturerAsPreviousWaterBody == true ||
             model.previousDryStorage == true {
             if model.previousMajorCities.isEmpty {
@@ -307,8 +325,19 @@ class WatercraftInspectionViewController: BaseViewController {
                 counter += 1
             }
         }
+        
+        if isPassportHolderNewOrLaunched &&
+            model.unknownDestinationWaterBody == false &&
+            model.commercialManufacturerAsDestinationWaterBody == false &&
+            model.destinationDryStorage == false {
+            if model.destinationWaterBodies.isEmpty {
+                message = "\(message)\n\(counter). Please add a Destination Waterbody (Journey Details).\n"
+                counter += 1
+            }
+        }
 
-        if model.unknownDestinationWaterBody == true ||
+        if isPassportHolderNewOrLaunched &&
+            model.unknownDestinationWaterBody == true ||
             model.commercialManufacturerAsDestinationWaterBody == true ||
             model.destinationDryStorage == true {
             if model.destinationMajorCities.isEmpty {
@@ -322,6 +351,11 @@ class WatercraftInspectionViewController: BaseViewController {
         if isPassportHolderNewOrLaunched &&
             !model.dreissenidMusselsFoundPreviousInteracted {
             message = "\(message)\n\(counter). Please input Dreissenid mussels found during previous inspection and FULL decontamination already completed field (Inspection Details).\n"
+            counter += 1
+        }
+        
+        if !model.k9InspectionInteracted {
+            message = "\(message)\n\(counter). Please input k9 Inspection Performed field (Inspection Details).\n"
             counter += 1
         }
         // --------- End of Inspection Details Validation ---------
@@ -1052,11 +1086,11 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
             return dividerCell
         case .PreviousHeader:
             let cell = getHeaderCell(indexPath: indexPath)
-            cell.setup(with: "Previous Waterbody")
+            cell.setup(with: "Previous Waterbody *")
             return cell
         case .DestinationHeader:
             let cell = getHeaderCell(indexPath: indexPath)
-            cell.setup(with: "Destination Waterbody")
+            cell.setup(with: "Destination Waterbody *")
             return cell
         }
     }
