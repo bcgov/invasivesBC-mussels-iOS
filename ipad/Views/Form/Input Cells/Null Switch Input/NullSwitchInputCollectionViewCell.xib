@@ -13,13 +13,13 @@
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="NullSwitchInputCollectionViewCell" customModule="Inspect" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="272" height="85"/>
-            <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
+            <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                 <rect key="frame" x="0.0" y="0.0" width="272" height="85"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aId-6E-4Fv">
-                        <rect key="frame" x="0.0" y="0.0" width="272" height="25"/>
+                        <rect key="frame" x="0.0" y="0.0" width="272" height="32"/>
                         <constraints>
                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="25" id="Csi-Ou-Txg"/>
                         </constraints>
@@ -29,7 +29,7 @@
                     </label>
                     <segmentedControl opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" id="fFi-uE-yov" userLabel="Null Switch View">
                         <rect key="frame" x="0.0" y="48" width="272" height="38"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <constraints>
                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="37" id="1pa-e4-F1h"/>
                         </constraints>
@@ -47,11 +47,17 @@
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <constraints>
                 <constraint firstItem="aId-6E-4Fv" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="2kA-d5-8tP"/>
+                <constraint firstItem="fFi-uE-yov" firstAttribute="top" secondItem="aId-6E-4Fv" secondAttribute="bottom" constant="16" id="Men-Xb-sTA"/>
                 <constraint firstItem="aId-6E-4Fv" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="Pia-wG-neS"/>
                 <constraint firstItem="fFi-uE-yov" firstAttribute="top" relation="greaterThanOrEqual" secondItem="aId-6E-4Fv" secondAttribute="bottom" constant="5" id="X2L-Jh-a8D"/>
                 <constraint firstAttribute="trailing" secondItem="aId-6E-4Fv" secondAttribute="trailing" id="tXf-BO-kjb"/>
             </constraints>
             <size key="customSize" width="279" height="85"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="X2L-Jh-a8D"/>
+                </mask>
+            </variation>
             <connections>
                 <outlet property="headerLabel" destination="aId-6E-4Fv" id="0kA-Wq-7Rg"/>
                 <outlet property="nullSwitchView" destination="fFi-uE-yov" id="9r0-xG-Fpl"/>
