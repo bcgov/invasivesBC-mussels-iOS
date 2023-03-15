@@ -29,10 +29,10 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <segmentedControl opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="left" contentVerticalAlignment="top" apportionsSegmentWidthsByContent="YES" segmentControlStyle="plain" id="fFi-uE-yov" userLabel="Null Switch View">
-                        <rect key="frame" x="0.0" y="32" width="260" height="41"/>
+                        <rect key="frame" x="0.0" y="28" width="260" height="41"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES"/>
                         <constraints>
-                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="rfb-k3-4kZ"/>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="32" id="rfb-k3-4kZ"/>
                         </constraints>
                         <segments>
                             <segment title="No" width="120"/>
