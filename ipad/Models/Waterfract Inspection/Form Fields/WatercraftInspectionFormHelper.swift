@@ -81,6 +81,7 @@ class WatercraftInspectionFormHelper {
             width: .Third,
             dropdownItems: DropdownHelper.shared.getDropdown(for: .k9InspectionResults)
         )
+        k9InspectionResults.dependency.append(InputDependency(to: k9Inspection, equalTo: true))
         k9InspectionResults.dependency.append(InputDependency(to: isPassportHolder, equalTo: true))
         items.append(k9InspectionResults)
         
