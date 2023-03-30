@@ -73,6 +73,17 @@ class WatercraftInspectionFormHelper {
         k9Inspection.dependency.append(InputDependency(to: isPassportHolder, equalTo: true))
         items.append(k9Inspection)
         
+        let k9InspectionResults = DropdownInput(
+            key: "k9InspectionResults",
+            header: WatercraftFieldHeaderConstants.Passport.k9InspectionResults,
+            editable: editable ?? true,
+            value: object?.k9InspectionResults ?? "",
+            width: .Third,
+            dropdownItems: DropdownHelper.shared.getDropdown(for: .k9InspectionResults)
+        )
+        k9InspectionResults.dependency.append(InputDependency(to: isPassportHolder, equalTo: true))
+        items.append(k9InspectionResults)
+        
         let marineSpeciesFound = SwitchInput(
             key: "marineSpeciesFound",
             header: WatercraftFieldHeaderConstants.Passport.marineSpeciesFound,
@@ -341,6 +352,17 @@ class WatercraftInspectionFormHelper {
         )
         k9Inspection.dependency.append(InputDependency(to: passportField, equalTo: false))
         sectionItems.append(k9Inspection)
+        
+        let k9InspectionResults = DropdownInput(
+            key: "k9InspectionResults",
+            header: WatercraftFieldHeaderConstants.Passport.k9InspectionResults,
+            editable: editable ?? true,
+            value: object?.k9InspectionResults ?? "",
+            width: .Half,
+            dropdownItems: DropdownHelper.shared.getDropdown(for: .k9InspectionResults)
+        )
+        k9InspectionResults.dependency.append(InputDependency(to: k9Inspection, equalTo: true))
+        sectionItems.append(k9InspectionResults)
         
         return sectionItems
     }

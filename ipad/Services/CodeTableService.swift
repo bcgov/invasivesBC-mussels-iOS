@@ -25,6 +25,7 @@ public enum CodeTableType {
     case adultMusselsLocation
     case decontaminationOrderReasons
     case daysOutOfWater
+    case k9InspectionResults
     case previousAISKnowledgeSource
     case previousInspectionSource
     case countryProvince

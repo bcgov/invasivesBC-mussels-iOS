@@ -33,6 +33,7 @@ class WatercraftInspectionModel: Object, BaseRealmObject {
     @objc dynamic var passportNumber: String = ""
     @objc dynamic var launchedOutsideBC : Bool = false
     @objc dynamic var k9Inspection: Bool = false
+    @objc dynamic var k9InspectionResults: String = ""
     @objc dynamic var decontaminationPerformed: Bool = false
     @objc dynamic var marineSpeciesFound: Bool = false
     @objc dynamic var aquaticPlantsFound: Bool = false
@@ -292,6 +293,7 @@ class WatercraftInspectionModel: Object, BaseRealmObject {
             "isNewPassportIssued": isNewPassportIssued,
             "inspectionTime": inspectionTime,
             "k9Inspection": k9Inspection,
+            "k9InspectionResults": k9InspectionResults,
             "marineSpeciesFound": marineSpeciesFound,
             "aquaticPlantsFound": aquaticPlantsFound,
             "previousAISKnowledge": previousAISKnowlede,

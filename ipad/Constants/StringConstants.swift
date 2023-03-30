@@ -87,6 +87,7 @@ struct WatercraftFieldHeaderConstants {
         static let passportNumber = "Passport Number"
         static let launchedOutsideBC = "Launched outside BC/AB in the last 30 days?"
         static let k9Inspection = "k9 Inspection Performed?  *"
+        static let k9InspectionResults = "k9 Inspection Results"
         static let decontaminationPerformed = "Decontamination Performed?"
         static let marineSpeciesFound = "Marine Species Found"
         static let aquaticPlantsFound = "Aquatic Plants Found"
