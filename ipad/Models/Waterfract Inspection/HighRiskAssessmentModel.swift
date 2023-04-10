@@ -112,21 +112,26 @@ class HighRiskAssessmentModel: Object, BaseRealmObject {
         }
     }
     
-    // MARK: To Dictionary
-    func toDictionary() -> [String : Any] {
+    // MARK: - To Dictionary
+    func toDictionary() -> [String: Any] {
         
+        // Original data capture
         let standingWaterLocationId = Storage.shared.codeId(type: .adultMusselsLocation, name: standingWaterLocation)
-        let standingWaterLocationId1 = Storage.shared.codeId(type: .adultMusselsLocation, name: standingWaterLocation1)
-        let standingWaterLocationId2 = Storage.shared.codeId(type: .adultMusselsLocation, name: standingWaterLocation2)
-        let standingWaterLocationId3 = Storage.shared.codeId(type: .adultMusselsLocation, name: standingWaterLocation3)
-    
-        
         let adultDreissenidMusselsLocationId = Storage.shared.codeId(type: .adultMusselsLocation, name: adultDreissenidMusselsLocation)
-        let adultDreissenidMusselsLocationId1 = Storage.shared.codeId(type: .adultMusselsLocation, name: adultDreissenidMusselsLocation1)
-        let adultDreissenidMusselsLocationId2 = Storage.shared.codeId(type: .adultMusselsLocation, name: adultDreissenidMusselsLocation2)
-        let adultDreissenidMusselsLocationId3 = Storage.shared.codeId(type: .adultMusselsLocation, name: adultDreissenidMusselsLocation3)
-
-        var body: [String : Any] = [
+        
+        // Capture other location data
+        let standingWaterLocationIds = [
+            Storage.shared.codeId(type: .adultMusselsLocation, name: standingWaterLocation1),
+            Storage.shared.codeId(type: .adultMusselsLocation, name: standingWaterLocation2),
+            Storage.shared.codeId(type: .adultMusselsLocation, name: standingWaterLocation3)
+        ]
+        let adultDreissenidMusselsLocationIds = [
+            Storage.shared.codeId(type: .adultMusselsLocation, name: adultDreissenidMusselsLocation1),
+            Storage.shared.codeId(type: .adultMusselsLocation, name: adultDreissenidMusselsLocation2),
+            Storage.shared.codeId(type: .adultMusselsLocation, name: adultDreissenidMusselsLocation3)
+        ]
+        
+        var body: [String: Any] = [
             "cleanDrainDryAfterInspection": cleanDrainDryAfterInspection,
             "quarantinePeriodIssued": quarantinePeriodIssued,
             "standingWaterPresent": standingWaterPresent,
@@ -145,30 +150,24 @@ class HighRiskAssessmentModel: Object, BaseRealmObject {
             "generalComments": generalComments.count > 1 ? generalComments : "None",
         ]
         
+        // Original data
         if let _standingWaterLocationId = standingWaterLocationId, standingWaterPresent {
             body["standingWaterLocation"] = _standingWaterLocationId
         }
-        if let _standingWaterLocationId1 = standingWaterLocationId1, standingWaterPresent {
-            body["standingWaterLocation1"] = _standingWaterLocationId1
-        }
-        if let _standingWaterLocationId2 = standingWaterLocationId2, standingWaterPresent {
-            body["standingWaterLocation2"] = _standingWaterLocationId2
-        }
-        if let _standingWaterLocationId3 = standingWaterLocationId3, standingWaterPresent {
-            body["standingWaterLocation3"] = _standingWaterLocationId3
-        }
-        
         if let _adultDreissenidMusselsLocationId = adultDreissenidMusselsLocationId, adultDreissenidMusselsFound {
             body["adultDreissenidaeMusselDetail"] = _adultDreissenidMusselsLocationId
         }
-        if let _adultDreissenidMusselsLocationId1 = adultDreissenidMusselsLocationId1, adultDreissenidMusselsFound {
-            body["adultDreissenidaeMusselDetail1"] = _adultDreissenidMusselsLocationId1
+        
+        // Capture and add other location data
+        for (index, id) in standingWaterLocationIds.enumerated() {
+            if let id = id, standingWaterPresent {
+                body["standingWaterLocation\(index + 1)"] = id
+            }
         }
-        if let _adultDreissenidMusselsLocationId2 = adultDreissenidMusselsLocationId2, adultDreissenidMusselsFound {
-            body["adultDreissenidaeMusselDetail2"] = _adultDreissenidMusselsLocationId2
-        }
-        if let _adultDreissenidMusselsLocationId3 = adultDreissenidMusselsLocationId3, adultDreissenidMusselsFound {
-            body["adultDreissenidaeMusselDetail3"] = _adultDreissenidMusselsLocationId3
+        for (index, id) in adultDreissenidMusselsLocationIds.enumerated() {
+            if let id = id, adultDreissenidMusselsFound {
+                body["adultDreissenidaeMusselDetail\(index + 1)"] = id
+            }
         }
         
         return body
