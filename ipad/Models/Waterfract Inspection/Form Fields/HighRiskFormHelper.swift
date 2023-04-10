@@ -130,7 +130,7 @@ class HighRiskFormHelper {
             key: "highRisk-adultDreissenidMusselsLocation1",
             header: HighRiskFormFieldHeaders.InspectionOutcomes.adultDreissenidMusselsLocationAlt,
             editable: editable ?? true,
-            value: object?.adultDreissenidMusselsLocation ?? "",
+            value: object?.adultDreissenidMusselsLocation1 ?? "",
             width: .Half,
             dropdownItems: DropdownHelper.shared.getDropDownObject(for: .adultMusselsLocation),
             codes: DropdownHelper.shared.getDropDownCodes(for: .adultMusselsLocation)
@@ -143,7 +143,7 @@ class HighRiskFormHelper {
             key: "highRisk-adultDreissenidMusselsLocation2",
             header: HighRiskFormFieldHeaders.InspectionOutcomes.adultDreissenidMusselsLocationAlt,
             editable: editable ?? true,
-            value: object?.adultDreissenidMusselsLocation ?? "",
+            value: object?.adultDreissenidMusselsLocation2 ?? "",
             width: .Half,
             dropdownItems: DropdownHelper.shared.getDropDownObject(for: .adultMusselsLocation),
             codes: DropdownHelper.shared.getDropDownCodes(for: .adultMusselsLocation)
@@ -156,7 +156,7 @@ class HighRiskFormHelper {
             key: "highRisk-adultDreissenidMusselsLocation3",
             header: HighRiskFormFieldHeaders.InspectionOutcomes.adultDreissenidMusselsLocationAlt,
             editable: editable ?? true,
-            value: object?.adultDreissenidMusselsLocation ?? "",
+            value: object?.adultDreissenidMusselsLocation3 ?? "",
             width: .Half,
             dropdownItems: DropdownHelper.shared.getDropDownObject(for: .adultMusselsLocation),
             codes: DropdownHelper.shared.getDropDownCodes(for: .adultMusselsLocation)
