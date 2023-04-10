@@ -40,9 +40,15 @@ class HighRiskAssessmentModel: Object, BaseRealmObject {
     
     @objc dynamic var standingWaterPresent: Bool = false
     @objc dynamic var standingWaterLocation: String = ""
+    @objc dynamic var standingWaterLocation1: String = ""
+    @objc dynamic var standingWaterLocation2: String = ""
+    @objc dynamic var standingWaterLocation3: String = ""
         
     @objc dynamic var adultDreissenidMusselsFound: Bool = false
     @objc dynamic var adultDreissenidMusselsLocation: String = ""
+    @objc dynamic var adultDreissenidMusselsLocation1: String = ""
+    @objc dynamic var adultDreissenidMusselsLocation2: String = ""
+    @objc dynamic var adultDreissenidMusselsLocation3: String = ""
     
     @objc dynamic var decontaminationPerformed: Bool = false
     @objc dynamic var decontaminationReference: String = ""
@@ -110,6 +116,11 @@ class HighRiskAssessmentModel: Object, BaseRealmObject {
     func toDictionary() -> [String : Any] {
         
         let standingWaterLocationId = Storage.shared.codeId(type: .adultMusselsLocation, name: standingWaterLocation)
+        let standingWaterLocationId1 = Storage.shared.codeId(type: .adultMusselsLocation, name: standingWaterLocation1)
+        let standingWaterLocationId2 = Storage.shared.codeId(type: .adultMusselsLocation, name: standingWaterLocation2)
+        let standingWaterLocationId3 = Storage.shared.codeId(type: .adultMusselsLocation, name: standingWaterLocation3)
+    
+        
         let adultDreissenidMusselsLocationId = Storage.shared.codeId(type: .adultMusselsLocation, name: adultDreissenidMusselsLocation)
         var body: [String : Any] = [
             "cleanDrainDryAfterInspection": cleanDrainDryAfterInspection,
@@ -130,12 +141,22 @@ class HighRiskAssessmentModel: Object, BaseRealmObject {
             "generalComments": generalComments.count > 1 ? generalComments : "None",
         ]
         
-        if let _standingWaterLocationId = standingWaterLocationId, standingWaterPresent {
-            body["standingWaterLocation"] = _standingWaterLocationId
-        }
+        let _standingWaterLocationId = Storage.shared.codeId(type: .adultMusselsLocation, name: standingWaterLocation)
+        let _standingWaterLocationId1 = Storage.shared.codeId(type: .adultMusselsLocation, name: standingWaterLocation1)
+        let _standingWaterLocationId2 = Storage.shared.codeId(type: .adultMusselsLocation, name: standingWaterLocation2)
+        let _standingWaterLocationId3 = Storage.shared.codeId(type: .adultMusselsLocation, name: standingWaterLocation3)
         
         if let _adultDreissenidMusselsLocationId = adultDreissenidMusselsLocationId, adultDreissenidMusselsFound {
             body["adultDreissenidaeMusselDetail"] = _adultDreissenidMusselsLocationId
+        }
+        if let _adultDreissenidMusselsLocationId1 = adultDreissenidMusselsLocationId, adultDreissenidMusselsFound {
+            body["adultDreissenidaeMusselDetail1"] = _adultDreissenidMusselsLocationId1
+        }
+        if let _adultDreissenidMusselsLocationId2 = adultDreissenidMusselsLocationId, adultDreissenidMusselsFound {
+            body["adultDreissenidaeMusselDetail2"] = _adultDreissenidMusselsLocationId2
+        }
+        if let _adultDreissenidMusselsLocationId3 = adultDreissenidMusselsLocationId, adultDreissenidMusselsFound {
+            body["adultDreissenidaeMusselDetail3"] = _adultDreissenidMusselsLocationId3
         }
         
         return body
