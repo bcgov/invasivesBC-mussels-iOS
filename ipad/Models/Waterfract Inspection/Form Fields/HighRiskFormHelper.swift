@@ -99,9 +99,6 @@ class HighRiskFormHelper {
         standingWaterLocation3.dependency.append(InputDependency(to: standingWaterPresent, equalTo: true))
         sectionItems.append(standingWaterLocation3)
         
-        let spacer1 = InputSpacer()
-        spacer1.dependency.append(InputDependency(to: standingWaterPresent, equalTo: true))
-        sectionItems.append(spacer1)
         /// ---------------------------
         
         let adultDreissenidMusselsFound = SwitchInput(
