@@ -130,7 +130,7 @@ class WatercraftInspectionModel: Object, BaseRealmObject {
             print("** REALM ERROR")
             print(error)
         }
-        if key == "highriskAIS" || key == "cleanDrainDryAfterInspection" {
+        if key == "highriskAIS" || key == "cleanDrainDryAfterInspection" || key == "adultDreissenidFound" {
             setRiskLevel()
         }
         
@@ -154,7 +154,7 @@ class WatercraftInspectionModel: Object, BaseRealmObject {
     }
     
     func setRiskLevel() {
-        if highriskAIS == true {
+        if highriskAIS == true || adultDreissenidFound == true {
             set(value: "High", for: "riskLevel")
         } else {
             set(value: "Low", for: "riskLevel")
