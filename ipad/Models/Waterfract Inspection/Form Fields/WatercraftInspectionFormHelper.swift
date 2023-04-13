@@ -399,7 +399,7 @@ class WatercraftInspectionFormHelper {
             key: "generalComments",
             header: WatercraftFieldHeaderConstants.GeneralComments.generalComments,
             editable: editable ?? true,
-            value: editable ?? true ? (object?.generalComments ?? "") : "Please complete all required fields (*) before adding comments.",
+            value: object?.generalComments,
             width: .Full
         )
         
