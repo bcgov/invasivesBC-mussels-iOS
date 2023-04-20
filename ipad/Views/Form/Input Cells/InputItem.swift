@@ -48,6 +48,9 @@ enum InteractedValidationName {
     case commerciallyHauledInteracted
     case previousAISKnowledeInteracted
     // Inspection Details
+    case aquaticPlantsFoundInteracted
+    case marineMusselsFoundInteracted
+    case highRiskAreaInteracted
     case dreissenidMusselsFoundPreviousInteracted
     // High Risk Assessment Fields
     case highriskAISInteracted
@@ -233,6 +236,12 @@ struct InteractedWithValue {
         case .previousAISKnowledeInteracted:
             return self.boolean
         // Inspection Details
+        case .aquaticPlantsFoundInteracted:
+            return self.boolean
+        case .marineMusselsFoundInteracted:
+            return self.boolean
+        case .highRiskAreaInteracted:
+            return self.boolean
         case .dreissenidMusselsFoundPreviousInteracted:
             return self.boolean
         // High Risk Assessment Fields
@@ -269,6 +278,12 @@ struct InteractedWithValue {
         case .previousAISKnowledeInteracted:
             self.boolean = value
         // Inspection Details
+        case .aquaticPlantsFoundInteracted:
+            self.boolean = value
+        case .marineMusselsFoundInteracted:
+            self.boolean = value
+        case .highRiskAreaInteracted:
+            self.boolean = value
         case .dreissenidMusselsFoundPreviousInteracted:
             self.boolean = value
         // High Risk Assessment Fields

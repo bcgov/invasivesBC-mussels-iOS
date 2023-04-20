@@ -110,6 +110,9 @@ class WatercraftInspectionModel: Object, BaseRealmObject {
                           "previousInspection",
                           "commerciallyHauled",
                           "previousAISKnowlede",
+                          "aquaticPlantsFound",
+                          "marineMusselsFound",
+                          "highRiskArea",
                           "dreissenidMusselsFoundPrevious"]
     @objc dynamic var highriskAISInteracted = false
     @objc dynamic var adultDreissenidFoundInteracted = false
@@ -117,6 +120,9 @@ class WatercraftInspectionModel: Object, BaseRealmObject {
     @objc dynamic var previousInspectionInteracted = false
     @objc dynamic var commerciallyHauledInteracted = false
     @objc dynamic var previousAISKnowledeInteracted = false
+    @objc dynamic var aquaticPlantsFoundInteracted = false
+    @objc dynamic var marineMusselsFoundInteracted = false
+    @objc dynamic var highRiskAreaInteracted = false
     @objc dynamic var dreissenidMusselsFoundPreviousInteracted = false
     
     // MARK: Setters

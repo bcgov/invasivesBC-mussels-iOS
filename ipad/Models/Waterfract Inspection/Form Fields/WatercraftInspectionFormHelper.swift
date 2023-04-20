@@ -295,30 +295,36 @@ class WatercraftInspectionFormHelper {
     
     static func getInspectionDetailsFields(for object: WatercraftInspectionModel? = nil, editable: Bool? = true, passportField: RadioSwitchInput) -> [InputItem]  {
         var sectionItems: [InputItem] = []
-        let aquaticPlantsFound = SwitchInput(
+        let aquaticPlantsFound = NullSwitchInput(
             key: "aquaticPlantsFound",
             header: WatercraftFieldHeaderConstants.InspectionDetails.aquaticPlantsFound,
             editable: editable ?? true,
-            value: object?.aquaticPlantsFound ?? nil,
-            width: .Third
+            value: object?.aquaticPlantsFound ?? false,
+            width: .Third,
+            validationName: .aquaticPlantsFoundInteracted,
+            interacted: object?.aquaticPlantsFoundInteracted ?? false
         )
         sectionItems.append(aquaticPlantsFound)
         
-        let marineMusselsFound = SwitchInput(
+        let marineMusselsFound = NullSwitchInput(
             key: "marineMusselsFound",
             header: WatercraftFieldHeaderConstants.InspectionDetails.marineMusselsFound,
             editable: editable ?? true,
-            value: object?.marineMusselsFound ?? nil,
-            width: .Third
+            value: object?.marineMusselsFound ?? false,
+            width: .Third,
+            validationName: .marineMusselsFoundInteracted,
+            interacted: object?.marineMusselsFoundInteracted ?? false
         )
         sectionItems.append(marineMusselsFound)
         
-        let highRiskArea = SwitchInput(
+        let highRiskArea = NullSwitchInput(
             key: "highRiskArea",
             header: WatercraftFieldHeaderConstants.WatercraftDetails.highRiskArea,
             editable: editable ?? true,
-            value: object?.highRiskArea ?? nil,
-            width: .Third
+            value: object?.highRiskArea ?? false,
+            width: .Third,
+            validationName: .highRiskAreaInteracted,
+            interacted: object?.highRiskAreaInteracted ?? false
         )
         sectionItems.append(highRiskArea)
 
