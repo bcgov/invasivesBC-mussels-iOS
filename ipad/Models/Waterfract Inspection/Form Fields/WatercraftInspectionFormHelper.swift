@@ -365,7 +365,7 @@ class WatercraftInspectionFormHelper {
             header: WatercraftFieldHeaderConstants.Passport.k9InspectionResults,
             editable: editable ?? true,
             value: object?.k9InspectionResults ?? "",
-            width: .Half,
+            width: .Full,
             dropdownItems: DropdownHelper.shared.getDropdown(for: .k9InspectionResults)
         )
         k9InspectionResults.dependency.append(InputDependency(to: k9Inspection, equalTo: true))
