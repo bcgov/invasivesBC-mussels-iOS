@@ -38,12 +38,15 @@ class HighRiskFormHelper {
     
     static func getInspectionOutcomesFields(for object: HighRiskAssessmentModel? = nil, editable: Bool? = true) -> [InputItem] {
         var sectionItems: [InputItem] = []
-        let standingWaterPresent = SwitchInput(
+    
+        let standingWaterPresent = NullSwitchInput(
             key: "highRisk-standingWaterPresent",
             header: HighRiskFormFieldHeaders.InspectionOutcomes.standingWaterPresent,
             editable: editable ?? true,
-            value: object?.standingWaterPresent ?? false,
-            width: .Full
+            value: object?.decontaminationPerformed ?? false,
+            width: .Full,
+            validationName: .standingWaterPresentInteracted,
+            interacted: object?.standingWaterPresentInteracted ?? false
         )
         sectionItems.append(standingWaterPresent)
         
