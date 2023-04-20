@@ -300,7 +300,7 @@ class WatercraftInspectionFormHelper {
             header: WatercraftFieldHeaderConstants.InspectionDetails.aquaticPlantsFound,
             editable: editable ?? true,
             value: object?.aquaticPlantsFound ?? false,
-            width: .Third,
+            width: .Full,
             validationName: .aquaticPlantsFoundInteracted,
             interacted: object?.aquaticPlantsFoundInteracted ?? false
         )
@@ -311,7 +311,7 @@ class WatercraftInspectionFormHelper {
             header: WatercraftFieldHeaderConstants.InspectionDetails.marineMusselsFound,
             editable: editable ?? true,
             value: object?.marineMusselsFound ?? false,
-            width: .Third,
+            width: .Full,
             validationName: .marineMusselsFoundInteracted,
             interacted: object?.marineMusselsFoundInteracted ?? false
         )
@@ -322,7 +322,7 @@ class WatercraftInspectionFormHelper {
             header: WatercraftFieldHeaderConstants.WatercraftDetails.highRiskArea,
             editable: editable ?? true,
             value: object?.highRiskArea ?? false,
-            width: .Third,
+            width: .Full,
             validationName: .highRiskAreaInteracted,
             interacted: object?.highRiskAreaInteracted ?? false
         )
