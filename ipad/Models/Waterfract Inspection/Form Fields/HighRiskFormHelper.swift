@@ -103,13 +103,14 @@ class HighRiskFormHelper {
         sectionItems.append(standingWaterLocation3)
         
         /// ---------------------------
-        
-        let adultDreissenidMusselsFound = SwitchInput(
-            key: "highRisk-adultDreissenidMusselsFound",
+        let adultDreissenidMusselsFound = NullSwitchInput(
+            key: "highRisk-decontaminationPerformed",
             header: HighRiskFormFieldHeaders.InspectionOutcomes.adultDreissenidMusselsFound,
             editable: editable ?? true,
             value: object?.adultDreissenidMusselsFound ?? false,
-            width: .Full
+            width: .Full,
+            validationName: .adultDreissenidMusselsFoundInteracted,
+            interacted: object?.adultDreissenidMusselsFoundInteracted ?? false
         )
         sectionItems.append(adultDreissenidMusselsFound)
         

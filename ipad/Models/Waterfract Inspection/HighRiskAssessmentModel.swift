@@ -68,12 +68,14 @@ class HighRiskAssessmentModel: Object, BaseRealmObject {
     
     // Validators
     var validatorNames = ["standingWaterPresent",
+                          "adultDreissenidMusselsFound",
                           "decontaminationAppendixB",
                           "decontaminationPerformed",
                           "quarantinePeriodIssued",
                           "decontaminationOrderIssued",
                           "sealIssued"]
     @objc dynamic var standingWaterPresentInteracted = false
+    @objc dynamic var adultDreissenidMusselsFoundInteracted = false
     @objc dynamic var decontaminationAppendixBInteracted = false
     @objc dynamic var decontaminationPerformedInteracted = false
     @objc dynamic var quarantinePeriodIssuedInteracted = false

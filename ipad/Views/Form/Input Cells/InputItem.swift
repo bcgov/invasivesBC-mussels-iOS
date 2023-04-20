@@ -51,6 +51,7 @@ enum InteractedValidationName {
     case dreissenidMusselsFoundPreviousInteracted
     // High Risk fields
     case standingWaterPresentInteracted
+    case adultDreissenidMusselsFoundInteracted
     case decontaminationOrderIssuedInteracted
     case decontaminationAppendixBInteracted
     case decontaminationPerformedInteracted
@@ -234,6 +235,8 @@ struct InteractedWithValue {
         // High Risk
         case .standingWaterPresentInteracted:
             return self.boolean
+        case .adultDreissenidMusselsFoundInteracted:
+            return self.boolean
         case .decontaminationOrderIssuedInteracted:
             return self.boolean
         case .decontaminationAppendixBInteracted:
@@ -262,6 +265,8 @@ struct InteractedWithValue {
             self.boolean = value
         // High Risk
         case .standingWaterPresentInteracted:
+            self.boolean = value
+        case .adultDreissenidMusselsFoundInteracted:
             self.boolean = value
         case .decontaminationOrderIssuedInteracted:
             self.boolean = value
