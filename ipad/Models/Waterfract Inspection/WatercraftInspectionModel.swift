@@ -104,11 +104,15 @@ class WatercraftInspectionModel: Object, BaseRealmObject {
     @objc dynamic var isNewPassportIssued: Bool = false
     
     // Validators
-    var validatorNames = ["k9Inspection",
+    var validatorNames = ["highriskAIS",
+                          "adultDreissenidFound",
+                          "k9Inspection",
                           "previousInspection",
                           "commerciallyHauled",
                           "previousAISKnowlede",
                           "dreissenidMusselsFoundPrevious"]
+    @objc dynamic var highriskAISInteracted = false
+    @objc dynamic var adultDreissenidFoundInteracted = false
     @objc dynamic var k9InspectionInteracted = false
     @objc dynamic var previousInspectionInteracted = false
     @objc dynamic var commerciallyHauledInteracted = false

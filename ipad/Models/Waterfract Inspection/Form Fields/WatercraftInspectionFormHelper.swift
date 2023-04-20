@@ -371,21 +371,25 @@ class WatercraftInspectionFormHelper {
     static func getHighriskAssessmentFieldsFields(for object: WatercraftInspectionModel? = nil, editable: Bool? = true) -> [InputItem] {
         var sectionItems: [InputItem] = []
 
-        let highriskAIS = SwitchInput(
+        let highriskAIS = NullSwitchInput(
             key: "highriskAIS",
             header: WatercraftFieldHeaderConstants.HighriskAssessmentFields.highriskAIS,
             editable: editable ?? true,
-            value: object?.highriskAIS ?? nil,
-            width: .Full
+            value: object?.highriskAIS ?? false,
+            width: .Full,
+            validationName: .highriskAISInteracted,
+            interacted: object?.highriskAISInteracted ?? false
         )
         sectionItems.append(highriskAIS)
 
-        let adultDreissenidFound = SwitchInput(
+        let adultDreissenidFound = NullSwitchInput(
             key: "adultDreissenidFound",
             header: WatercraftFieldHeaderConstants.HighriskAssessmentFields.adultDreissenidFound,
             editable: editable ?? true,
-            value: object?.adultDreissenidFound ?? nil,
-            width: .Full
+            value: object?.adultDreissenidFound ?? false,
+            width: .Full,
+            validationName: .adultDreissenidFoundInteracted,
+            interacted: object?.adultDreissenidFoundInteracted ?? false
         )
         sectionItems.append(adultDreissenidFound)
 
