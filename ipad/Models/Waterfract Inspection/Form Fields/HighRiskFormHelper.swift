@@ -43,7 +43,7 @@ class HighRiskFormHelper {
             key: "highRisk-standingWaterPresent",
             header: HighRiskFormFieldHeaders.InspectionOutcomes.standingWaterPresent,
             editable: editable ?? true,
-            value: object?.decontaminationPerformed ?? false,
+            value: object?.standingWaterPresent ?? false,
             width: .Full,
             validationName: .standingWaterPresentInteracted,
             interacted: object?.standingWaterPresentInteracted ?? false
