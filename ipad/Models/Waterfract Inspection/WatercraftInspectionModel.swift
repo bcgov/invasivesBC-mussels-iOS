@@ -33,6 +33,7 @@ class WatercraftInspectionModel: Object, BaseRealmObject {
     @objc dynamic var passportNumber: String = ""
     @objc dynamic var launchedOutsideBC : Bool = false
     @objc dynamic var k9Inspection: Bool = false
+    @objc dynamic var k9InspectionResults: String = ""
     @objc dynamic var decontaminationPerformed: Bool = false
     @objc dynamic var marineSpeciesFound: Bool = false
     @objc dynamic var aquaticPlantsFound: Bool = false
@@ -103,15 +104,25 @@ class WatercraftInspectionModel: Object, BaseRealmObject {
     @objc dynamic var isNewPassportIssued: Bool = false
     
     // Validators
-    var validatorNames = ["k9Inspection",
+    var validatorNames = ["highriskAIS",
+                          "adultDreissenidFound",
+                          "k9Inspection",
                           "previousInspection",
                           "commerciallyHauled",
                           "previousAISKnowlede",
+                          "aquaticPlantsFound",
+                          "marineMusselsFound",
+                          "highRiskArea",
                           "dreissenidMusselsFoundPrevious"]
+    @objc dynamic var highriskAISInteracted = false
+    @objc dynamic var adultDreissenidFoundInteracted = false
     @objc dynamic var k9InspectionInteracted = false
     @objc dynamic var previousInspectionInteracted = false
     @objc dynamic var commerciallyHauledInteracted = false
     @objc dynamic var previousAISKnowledeInteracted = false
+    @objc dynamic var aquaticPlantsFoundInteracted = false
+    @objc dynamic var marineMusselsFoundInteracted = false
+    @objc dynamic var highRiskAreaInteracted = false
     @objc dynamic var dreissenidMusselsFoundPreviousInteracted = false
     
     // MARK: Setters
@@ -129,7 +140,7 @@ class WatercraftInspectionModel: Object, BaseRealmObject {
             print("** REALM ERROR")
             print(error)
         }
-        if key == "highriskAIS" || key == "cleanDrainDryAfterInspection" {
+        if key == "highriskAIS" || key == "cleanDrainDryAfterInspection" || key == "adultDreissenidFound" {
             setRiskLevel()
         }
         
@@ -153,7 +164,7 @@ class WatercraftInspectionModel: Object, BaseRealmObject {
     }
     
     func setRiskLevel() {
-        if highriskAIS == true {
+        if highriskAIS == true || adultDreissenidFound == true {
             set(value: "High", for: "riskLevel")
         } else {
             set(value: "Low", for: "riskLevel")
@@ -292,6 +303,7 @@ class WatercraftInspectionModel: Object, BaseRealmObject {
             "isNewPassportIssued": isNewPassportIssued,
             "inspectionTime": inspectionTime,
             "k9Inspection": k9Inspection,
+            "k9InspectionResults": k9InspectionResults,
             "marineSpeciesFound": marineSpeciesFound,
             "aquaticPlantsFound": aquaticPlantsFound,
             "previousAISKnowledge": previousAISKnowlede,

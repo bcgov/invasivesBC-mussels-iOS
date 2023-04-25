@@ -48,8 +48,16 @@ enum InteractedValidationName {
     case commerciallyHauledInteracted
     case previousAISKnowledeInteracted
     // Inspection Details
+    case aquaticPlantsFoundInteracted
+    case marineMusselsFoundInteracted
+    case highRiskAreaInteracted
     case dreissenidMusselsFoundPreviousInteracted
-    // High Risk fields
+    // High Risk Assessment Fields
+    case highriskAISInteracted
+    case adultDreissenidFoundInteracted
+    // Inspection Outcomes
+    case standingWaterPresentInteracted
+    case adultDreissenidMusselsFoundInteracted
     case decontaminationOrderIssuedInteracted
     case decontaminationAppendixBInteracted
     case decontaminationPerformedInteracted
@@ -228,9 +236,24 @@ struct InteractedWithValue {
         case .previousAISKnowledeInteracted:
             return self.boolean
         // Inspection Details
+        case .aquaticPlantsFoundInteracted:
+            return self.boolean
+        case .marineMusselsFoundInteracted:
+            return self.boolean
+        case .highRiskAreaInteracted:
+            return self.boolean
         case .dreissenidMusselsFoundPreviousInteracted:
             return self.boolean
-        // High Risk
+        // High Risk Assessment Fields
+        case .highriskAISInteracted:
+            return self.boolean
+        case .adultDreissenidFoundInteracted:
+            return self.boolean
+        // Inspection Outcomes
+        case .standingWaterPresentInteracted:
+            return self.boolean
+        case .adultDreissenidMusselsFoundInteracted:
+            return self.boolean
         case .decontaminationOrderIssuedInteracted:
             return self.boolean
         case .decontaminationAppendixBInteracted:
@@ -255,9 +278,24 @@ struct InteractedWithValue {
         case .previousAISKnowledeInteracted:
             self.boolean = value
         // Inspection Details
+        case .aquaticPlantsFoundInteracted:
+            self.boolean = value
+        case .marineMusselsFoundInteracted:
+            self.boolean = value
+        case .highRiskAreaInteracted:
+            self.boolean = value
         case .dreissenidMusselsFoundPreviousInteracted:
             self.boolean = value
-        // High Risk
+        // High Risk Assessment Fields
+        case .highriskAISInteracted:
+            self.boolean = value
+        case .adultDreissenidFoundInteracted:
+            self.boolean = value
+        // Inspection Outcomes
+        case .standingWaterPresentInteracted:
+            self.boolean = value
+        case .adultDreissenidMusselsFoundInteracted:
+            self.boolean = value
         case .decontaminationOrderIssuedInteracted:
             self.boolean = value
         case .decontaminationAppendixBInteracted:

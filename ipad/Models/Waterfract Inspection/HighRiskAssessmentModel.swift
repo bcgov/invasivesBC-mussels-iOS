@@ -40,9 +40,15 @@ class HighRiskAssessmentModel: Object, BaseRealmObject {
     
     @objc dynamic var standingWaterPresent: Bool = false
     @objc dynamic var standingWaterLocation: String = ""
+    @objc dynamic var standingWaterLocation1: String = ""
+    @objc dynamic var standingWaterLocation2: String = ""
+    @objc dynamic var standingWaterLocation3: String = ""
         
     @objc dynamic var adultDreissenidMusselsFound: Bool = false
     @objc dynamic var adultDreissenidMusselsLocation: String = ""
+    @objc dynamic var adultDreissenidMusselsLocation1: String = ""
+    @objc dynamic var adultDreissenidMusselsLocation2: String = ""
+    @objc dynamic var adultDreissenidMusselsLocation3: String = ""
     
     @objc dynamic var decontaminationPerformed: Bool = false
     @objc dynamic var decontaminationReference: String = ""
@@ -61,11 +67,15 @@ class HighRiskAssessmentModel: Object, BaseRealmObject {
     @objc dynamic var generalComments: String = ""
     
     // Validators
-    var validatorNames = ["decontaminationAppendixB",
+    var validatorNames = ["standingWaterPresent",
+                          "adultDreissenidMusselsFound",
+                          "decontaminationAppendixB",
                           "decontaminationPerformed",
                           "quarantinePeriodIssued",
                           "decontaminationOrderIssued",
                           "sealIssued"]
+    @objc dynamic var standingWaterPresentInteracted = false
+    @objc dynamic var adultDreissenidMusselsFoundInteracted = false
     @objc dynamic var decontaminationAppendixBInteracted = false
     @objc dynamic var decontaminationPerformedInteracted = false
     @objc dynamic var quarantinePeriodIssuedInteracted = false
@@ -106,12 +116,26 @@ class HighRiskAssessmentModel: Object, BaseRealmObject {
         }
     }
     
-    // MARK: To Dictionary
-    func toDictionary() -> [String : Any] {
+    // MARK: - To Dictionary
+    func toDictionary() -> [String: Any] {
         
+        // Original data capture
         let standingWaterLocationId = Storage.shared.codeId(type: .adultMusselsLocation, name: standingWaterLocation)
         let adultDreissenidMusselsLocationId = Storage.shared.codeId(type: .adultMusselsLocation, name: adultDreissenidMusselsLocation)
-        var body: [String : Any] = [
+        
+        // Capture other location data
+        let standingWaterLocationIds = [
+            Storage.shared.codeId(type: .adultMusselsLocation, name: standingWaterLocation1),
+            Storage.shared.codeId(type: .adultMusselsLocation, name: standingWaterLocation2),
+            Storage.shared.codeId(type: .adultMusselsLocation, name: standingWaterLocation3)
+        ]
+        let adultDreissenidMusselsLocationIds = [
+            Storage.shared.codeId(type: .adultMusselsLocation, name: adultDreissenidMusselsLocation1),
+            Storage.shared.codeId(type: .adultMusselsLocation, name: adultDreissenidMusselsLocation2),
+            Storage.shared.codeId(type: .adultMusselsLocation, name: adultDreissenidMusselsLocation3)
+        ]
+        
+        var body: [String: Any] = [
             "cleanDrainDryAfterInspection": cleanDrainDryAfterInspection,
             "quarantinePeriodIssued": quarantinePeriodIssued,
             "standingWaterPresent": standingWaterPresent,
@@ -130,12 +154,24 @@ class HighRiskAssessmentModel: Object, BaseRealmObject {
             "generalComments": generalComments.count > 1 ? generalComments : "None",
         ]
         
+        // Original data
         if let _standingWaterLocationId = standingWaterLocationId, standingWaterPresent {
             body["standingWaterLocation"] = _standingWaterLocationId
         }
-        
         if let _adultDreissenidMusselsLocationId = adultDreissenidMusselsLocationId, adultDreissenidMusselsFound {
             body["adultDreissenidaeMusselDetail"] = _adultDreissenidMusselsLocationId
+        }
+        
+        // Capture and add other location data
+        for (index, id) in standingWaterLocationIds.enumerated() {
+            if let id = id, standingWaterPresent {
+                body["standingWaterLocation\(index + 1)"] = id
+            }
+        }
+        for (index, id) in adultDreissenidMusselsLocationIds.enumerated() {
+            if let id = id, adultDreissenidMusselsFound {
+                body["adultDreissenidaeMusselDetail\(index + 1)"] = id
+            }
         }
         
         return body

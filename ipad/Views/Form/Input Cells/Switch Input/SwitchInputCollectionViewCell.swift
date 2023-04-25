@@ -29,6 +29,7 @@ class SwitchInputCollectionViewCell: BaseInputCell<SwitchInput> {
     override func initialize(with model: SwitchInput) {
         self.headerLabel.text = model.header
         self.switchView.isOn = model.value.get(type: model.type) as? Bool ?? false
+        self.switchView.onTintColor = UIColor(hex: "#2E8540")
         self.switchView.accessibilityValue = model.header.removeWhitespaces().lowercased()
         self.switchView.accessibilityLabel = model.header.removeWhitespaces().lowercased()
         self.accessibilityValue = "\(model.header.removeWhitespaces().lowercased())cell"

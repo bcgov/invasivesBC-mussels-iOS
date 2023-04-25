@@ -38,12 +38,15 @@ class HighRiskFormHelper {
     
     static func getInspectionOutcomesFields(for object: HighRiskAssessmentModel? = nil, editable: Bool? = true) -> [InputItem] {
         var sectionItems: [InputItem] = []
-        let standingWaterPresent = SwitchInput(
+    
+        let standingWaterPresent = NullSwitchInput(
             key: "highRisk-standingWaterPresent",
             header: HighRiskFormFieldHeaders.InspectionOutcomes.standingWaterPresent,
             editable: editable ?? true,
             value: object?.standingWaterPresent ?? false,
-            width: .Full
+            width: .Full,
+            validationName: .standingWaterPresentInteracted,
+            interacted: object?.standingWaterPresentInteracted ?? false
         )
         sectionItems.append(standingWaterPresent)
         
@@ -60,17 +63,54 @@ class HighRiskFormHelper {
         standingWaterLocation.dependency.append(InputDependency(to: standingWaterPresent, equalTo: true))
         sectionItems.append(standingWaterLocation)
         
-        let spacer1 = InputSpacer()
-        spacer1.dependency.append(InputDependency(to: standingWaterPresent, equalTo: true))
-        sectionItems.append(spacer1)
-        /// ---------------------------
+        let standingWaterLocation1 = DropdownInput(
+            key: "highRisk-standingWaterLocation1",
+            header: HighRiskFormFieldHeaders.InspectionOutcomes.standingWaterLocationAlt,
+            editable: editable ?? true,
+            value: object?.standingWaterLocation1 ?? "",
+            width: .Half,
+            dropdownItems: DropdownHelper.shared.getDropDownObject(for: .adultMusselsLocation),
+            codes: DropdownHelper.shared.getDropDownCodes(for: .adultMusselsLocation)
+        )
         
-        let adultDreissenidMusselsFound = SwitchInput(
-            key: "highRisk-adultDreissenidMusselsFound",
+        standingWaterLocation1.dependency.append(InputDependency(to: standingWaterPresent, equalTo: true))
+        sectionItems.append(standingWaterLocation1)
+        
+        let standingWaterLocation2 = DropdownInput(
+            key: "highRisk-standingWaterLocation2",
+            header: HighRiskFormFieldHeaders.InspectionOutcomes.standingWaterLocationAlt,
+            editable: editable ?? true,
+            value: object?.standingWaterLocation2 ?? "",
+            width: .Half,
+            dropdownItems: DropdownHelper.shared.getDropDownObject(for: .adultMusselsLocation),
+            codes: DropdownHelper.shared.getDropDownCodes(for: .adultMusselsLocation)
+        )
+        
+        standingWaterLocation2.dependency.append(InputDependency(to: standingWaterPresent, equalTo: true))
+        sectionItems.append(standingWaterLocation2)
+        
+        let standingWaterLocation3 = DropdownInput(
+            key: "highRisk-standingWaterLocation3",
+            header: HighRiskFormFieldHeaders.InspectionOutcomes.standingWaterLocationAlt,
+            editable: editable ?? true,
+            value: object?.standingWaterLocation3 ?? "",
+            width: .Half,
+            dropdownItems: DropdownHelper.shared.getDropDownObject(for: .adultMusselsLocation),
+            codes: DropdownHelper.shared.getDropDownCodes(for: .adultMusselsLocation)
+        )
+        
+        standingWaterLocation3.dependency.append(InputDependency(to: standingWaterPresent, equalTo: true))
+        sectionItems.append(standingWaterLocation3)
+        
+        /// ---------------------------
+        let adultDreissenidMusselsFound = NullSwitchInput(
+            key: "highRisk-decontaminationPerformed",
             header: HighRiskFormFieldHeaders.InspectionOutcomes.adultDreissenidMusselsFound,
             editable: editable ?? true,
             value: object?.adultDreissenidMusselsFound ?? false,
-            width: .Full
+            width: .Full,
+            validationName: .adultDreissenidMusselsFoundInteracted,
+            interacted: object?.adultDreissenidMusselsFoundInteracted ?? false
         )
         sectionItems.append(adultDreissenidMusselsFound)
         
@@ -86,9 +126,45 @@ class HighRiskFormHelper {
         
         adultDreissenidMusselsLocation.dependency.append(InputDependency(to: adultDreissenidMusselsFound, equalTo: true))
         sectionItems.append(adultDreissenidMusselsLocation)
-        let spacer2 = InputSpacer()
-        spacer2.dependency.append(InputDependency(to: adultDreissenidMusselsFound, equalTo: true))
-        sectionItems.append(spacer2)
+        
+        let adultDreissenidMusselsLocation1 = DropdownInput(
+            key: "highRisk-adultDreissenidMusselsLocation1",
+            header: HighRiskFormFieldHeaders.InspectionOutcomes.adultDreissenidMusselsLocationAlt,
+            editable: editable ?? true,
+            value: object?.adultDreissenidMusselsLocation1 ?? "",
+            width: .Half,
+            dropdownItems: DropdownHelper.shared.getDropDownObject(for: .adultMusselsLocation),
+            codes: DropdownHelper.shared.getDropDownCodes(for: .adultMusselsLocation)
+        )
+        
+        adultDreissenidMusselsLocation1.dependency.append(InputDependency(to: adultDreissenidMusselsFound, equalTo: true))
+        sectionItems.append(adultDreissenidMusselsLocation1)
+        
+        let adultDreissenidMusselsLocation2 = DropdownInput(
+            key: "highRisk-adultDreissenidMusselsLocation2",
+            header: HighRiskFormFieldHeaders.InspectionOutcomes.adultDreissenidMusselsLocationAlt,
+            editable: editable ?? true,
+            value: object?.adultDreissenidMusselsLocation2 ?? "",
+            width: .Half,
+            dropdownItems: DropdownHelper.shared.getDropDownObject(for: .adultMusselsLocation),
+            codes: DropdownHelper.shared.getDropDownCodes(for: .adultMusselsLocation)
+        )
+        
+        adultDreissenidMusselsLocation2.dependency.append(InputDependency(to: adultDreissenidMusselsFound, equalTo: true))
+        sectionItems.append(adultDreissenidMusselsLocation2)
+        
+        let adultDreissenidMusselsLocation3 = DropdownInput(
+            key: "highRisk-adultDreissenidMusselsLocation3",
+            header: HighRiskFormFieldHeaders.InspectionOutcomes.adultDreissenidMusselsLocationAlt,
+            editable: editable ?? true,
+            value: object?.adultDreissenidMusselsLocation3 ?? "",
+            width: .Half,
+            dropdownItems: DropdownHelper.shared.getDropDownObject(for: .adultMusselsLocation),
+            codes: DropdownHelper.shared.getDropDownCodes(for: .adultMusselsLocation)
+        )
+        
+        adultDreissenidMusselsLocation3.dependency.append(InputDependency(to: adultDreissenidMusselsFound, equalTo: true))
+        sectionItems.append(adultDreissenidMusselsLocation3)
         /// ---------------------------
         
         let otherInspectionFindings = DropdownInput(
