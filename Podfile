@@ -33,7 +33,7 @@ target 'ipad' do
   # Reachability
   pod 'ReachabilitySwift'
   # Keycloack login
-  pod 'SingleSignOn', :git => 'https://github.com/bcgov/mobile-authentication-ios.git', :tag => 'v1.0.6'
+  pod 'SingleSignOn', :git => 'https://github.com/Christopher-walsh22/InspectMusclesSSO.git'
   # Extensions
   pod 'Extended'
   # Custom Modal

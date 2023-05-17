@@ -15,7 +15,7 @@ class AuthenticationService {
         return AuthServices(baseUrl: SSO.baseUrl, redirectUri: SSO.redirectUri,
                             clientId: SSO.clientId, realm: SSO.realmName,
                             idpHint: SSO.idpHint)
-    }()
+    }()!
     
     public static func refreshEnviormentConstants(withIdpHint: String?) {
         var idpHint = getIdpHint()
@@ -26,7 +26,7 @@ class AuthenticationService {
         
         self.authServices = AuthServices(baseUrl: SSO.baseUrl, redirectUri: SSO.redirectUri,
                                          clientId: SSO.clientId, realm: SSO.realmName,
-                                         idpHint: idpHint)
+                                         idpHint: idpHint)!
     }
     
     private static func getIdpHint() -> String {
