@@ -1,5 +1,5 @@
 # Uncomment the next line to define a global platform for your project
-platform :ios, '11.0'
+platform :ios, '13.0'
 
 # This is used to allow the CI build to work. The pod(s) are
 # signed with the credentials / profile provided and xcodebuild
@@ -44,7 +44,8 @@ target 'ipad' do
   pod 'SwiftyJSON'
   # add pods for desired Firebase products
   # https://firebase.google.com/docs/ios/setup#available-pods
-  pod 'Fabric'
+  pod 'Fabric', '~> 1.10'
+
 
 
 end
