@@ -17,11 +17,11 @@ jobs:
       IPA_NAME: ${{ 'invasivesbc-mussels.iOS.ipa' }}
 
     steps:
-      - name: run number with offset
+      - name: Increase build
         env:
-          NUM: ${{ github.run_number }}
+          GITHUB_RUN_NUMBER: ${{ github.run_number }}
         run: |
-          echo ::set-env name=GITHUB_RUN_NUMBER_WITH_OFFSET::$(($NUM+383))
+          echo "GITHUB_RUN_NUMBER_WITH_OFFSET=$(($GITHUB_RUN_NUMBER+383))" >> $GITHUB_ENV
 
       - name: Checkout
         uses: actions/checkout@v3
