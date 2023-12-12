@@ -83,7 +83,7 @@ jobs:
       - name: Build For Release
         run: |
           xcodebuild \
-          -workspace $PROJECT \
+          -workspace ipad.xcworkspace \
           -scheme $SCHEME \
           -configuration Release \
           -sdk iphoneos \
