@@ -18,6 +18,8 @@ jobs:
 
     steps:
       - name: Increase build
+        env:
+          GITHUB_RUN_NUMBER: ${{ github.run_number }}
         run: |
           echo "GITHUB_RUN_NUMBER_WITH_OFFSET=$(($GITHUB_RUN_NUMBER+383))" >> $GITHUB_ENV
 
