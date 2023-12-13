@@ -83,8 +83,8 @@ jobs:
       - name: Build For Release
         run: |
           xcodebuild \
-          -workspace invasivesbc-mussels.iOS.ipad.xcworkspace \
-          -scheme $SCHEME \
+          -workspace ipad.xcworkspace \
+          -scheme ipad \
           -configuration Release \
           -sdk iphoneos \
           -derivedDataPath $DATA_DIR \
