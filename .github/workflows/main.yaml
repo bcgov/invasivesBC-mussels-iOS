@@ -15,6 +15,7 @@ jobs:
       ARCHIVE_NAME:  ${{ 'invasivesbc-mussels.iOS.xcarchive' }}
       EXPORT_DIR: ${{ 'export' }}
       IPA_NAME: ${{ 'invasivesbc-mussels.iOS.ipa' }}
+      APP_BUILD_VERSION: "2.7"
 
     steps:
       - name: Increase build
@@ -108,3 +109,25 @@ jobs:
           path: ${{ env.EXPORT_DIR }}
           if-no-files-found: error
           retention-days: 5
+
+      # https://blog.codemagic.io/app-store-connect-api-codemagic-cli-tools/
+      - name: Install Codemagic CLI Tools
+        if: github.ref_name == 'master'
+        run: |
+          pip3 install codemagic-cli-tools
+
+      - name: Ship to App Store
+        if: github.ref_name == 'master'
+        env:
+          APP_STORE_CONNECT_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}
+          APP_STORE_CONNECT_KEY_IDENTIFIER: ${{ secrets.APP_STORE_CONNECT_KEY_IDENTIFIER_95 }}
+          APP_STORE_CONNECT_PRIVATE_KEY: ${{ secrets.APP_STORE_CONNECT_PRIVATE_KEY_95 }}
+          VERSION_CODE: ${{ env.GITHUB_RUN_NUMBER_WITH_OFFSET }}
+          VERSION_NAME: ${{ env.APP_BUILD_VERSION }}
+        run: |
+          export PATH=$PATH:/Library/Frameworks/Python.framework/Versions/3.11/bin
+          app-store-connect publish \
+          --enable-package-validation \
+          --max-build-processing-wait 10 \
+          --testflight \
+          --whats-new "Release ${VERSION_NAME}-${VERSION_CODE}"
