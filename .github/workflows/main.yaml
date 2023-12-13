@@ -83,7 +83,7 @@ jobs:
       - name: Build For Release
         run: |
           xcodebuild \
-          -workspace ipad.xcworkspace \
+          -workspace invasivesbc-mussels.iOS.ipad.xcworkspace \
           -scheme $SCHEME \
           -configuration Release \
           -sdk iphoneos \
