@@ -74,7 +74,7 @@ All changes merged into the `master` branch will create a new build in App Store
 
 **You will** need to increment the Version in Xcode under *ipad* > *General* > *Identity* > *Build Number* **as well as in the GitHub Action** in [`main.yaml`](https://github.com/bcgov/invasivesBC-mussels-iOS/blob/master/.github/workflows/main.yaml) as the `APP_BUILD_VERSION` env.
 
-However, you **will not** need to increment the build number as that's done automaticall through GitHub Actions.
+However, you **will not** need to increment the build number as that's done automatically through GitHub Actions.
 
 We use standard semantic versioning for the app in App Store Connect (`Major.Minor.Patch`) 
 
