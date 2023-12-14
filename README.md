@@ -40,12 +40,15 @@ open ipad.xcworkspace
 
 *Note: Always use `ipad.xcworkspace` to open this project.
 
-You may need to update the Signing & Capabilities to be able to run the application
-1) Open the `Project Navigator`
-2) Click the top most icon `ipad`
-3) Select 'iPad' under `Targets`
-3) Select the `Signing & Capabilities` tab
-4) Here you may need to sign-in or select the appropriate team.
+You may need to update the Signing & Capabilities to be able to run the application. More information in the [Provisioning Profile](#provisioning-profile-and-certificate) below.
+
+## Simulator
+
+You can run the app through the Simulator from Xcode. Ensure that the Simulator is also running with Rosetta active - this can be done by going to:
+
+*Product* > *Destination* > *Destination Architectures* > *Show Rosetta Destinations*
+
+Ensure that you’re running the simulator on **iPad (10th generation) (Rosetta)**
 
 ## Test
 The application's tests are [in this folder.](https://github.com/bcgov/invasivesBC-mussels-iOS/tree/master/ipadTests)
@@ -57,23 +60,110 @@ You can run individual tests by selecting the `Show the test navigator` tab on t
 
 *Note: You'll need to setup the environment variables under Schemes (Product -> Scheme -> Edit Scheme) and provide the values for TestIDIR and TestPassword. You can find the values in Openshift Secrets for dev.
 
-## Deploy
+# App Store Connect
 
-The Pipeline for this application was created by [Jason](https://github.com/jleach) using [Azure](https://docs.microsoft.com/en-us/azure/devops/pipelines/ecosystems/xcode?view=azure-devops).
-This pipeline allows developers to sign and deploy the application to [App Store Connect](https://appstoreconnect.apple.com/login) without having the elevated permission on the BC Government Apple account.
-Alternatively, you could sign the compiled IPA using [this mobile signing tool](https://signing-web-devhub-prod.pathfinder.gov.bc.ca/?intention=LOGIN#error=login_required), and upload through xcode.
+You should be able to access [App Store Connect](https://appstoreconnect.apple.com/) using your BCGov email as the Apple ID login. If you're not already part of the INSPECT app on App Store Connect, request an invite from a team member using [Apple's instructions here](https://developer.apple.com/help/account/manage-your-team/invite-team-members/).
 
-### Using the Pipeline
-You can upload your builds to `App Store Connect` through the pipeline by merging a pull request from `master`, by following the steps below.
-Note: `Build` number will be handled by the pipeline, but you need to update the `version` yourself after each app store release.
- 1) Create a pull request to `master` to trigger a build on the pipeline.
- 2) Check the status of the build [here](https://fullboar.visualstudio.com/Invasive%20Species%20BC/_build?definitionId=10&_a=summary).
- 3) When the build is successful, merge your pull request.
+
+## Building the App
+
+All changes merged into the `master` branch will create a new build in App Store Connect using GitHub Actions. This will also create a new build for testing in TestFlight.
+
+
+### Build Version and Build Number
+
+**You will** need to increment the Version in Xcode under *ipad* > *General* > *Identity* > *Build Number* **as well as in the GitHub Action** in [`main.yaml`](https://github.com/bcgov/invasivesBC-mussels-iOS/blob/master/.github/workflows/main.yaml) as the `APP_BUILD_VERSION` env.
+
+However, you **will not** need to increment the build number as that's done automaticall through GitHub Actions.
+
+We use standard semantic versioning for the app in App Store Connect (`Major.Minor.Patch`) 
+
+
+## Deploying the App
+
+Once you've fully tested the app on TestFlight, you are now ready to deploy the app to the App Store.
+
+1. Login to [App Store Connect](https://appstoreconnect.apple.com/) and select **My Apps** and choose **Inspect**. 
+2. Navigate to the **App Store** tab. 
+3. Select the "**+**" button beside iOS App to increment the next version of the app.
+4. Type the next version number and Select **Create**. 
+5. Update the **What’s New in This Version** text box with the changes outlined in the PR.
+6. Scroll to **Build** and select the "**+**" button.
+7. Choose the build you want to add and select **Next**. It should show the newly added build. 
+8. Scroll to the App Review Information section.
+    
+    Because there’s not an IDIR for the Apple Testing team to use to review the app, we record a screen capture of the app (clicking all buttons, scrolling through the app, etc.) for the current version. We then upload it to [Google Drive](https://drive.google.com/drive/home) and share the link in the App Review Information section, or attach the video for Apple to review. You'll need to provide a short explanation of the recording.
+    
+    Feel free to use the template below:
+
+    ```
+    Here are a few notes of the screen recording: 
+    - The videos are screen recordings of an iOS device (iPad Pro 12.9-inch 6th generation) running the app. 
+    - The screen recordings were captured using xCode's Simulator's screen recording. 
+    - The app was running locally using a local database. 
+    - I attempted to interact with every button and form field that was available to the user beyond the login screen (the login was completed automatically as I has signed in earlier) 
+
+    General notes: 
+    - The application is to be used by research scientists, BC Government Conservation officers and external partners and sister agencies. 
+    - This app uses a government identification system to authenticate users.  
+    ```
+    
+    You can record your screen in the xCode Simulator through **File** > **Record Screen**
+
  
- This will trigger another build [here](https://fullboar.visualstudio.com/Invasive%20Species%20BC/_build?definitionId=10&_a=summary), but this time it will also uplod the build to [App Store Connect](https://appstoreconnect.apple.com/login).
- Then you can [login into App store Connect](https://appstoreconnect.apple.com/login) and deploy a testflight build or create an App Store submission. 
+9. Scroll to **Version Release** and select **Manually release this version** if you want to release the version at your own discretion after the app is approved, otherwise you can select to **Automatically release the version as soon as it is approved by the Apple Review team**. 
+10. Select **Add for Review**.
+11. Once that’s added for review, you then need to select **Submit to App Review** to send the version to the App Store review team.
+ 
+Once it’s successfully submitted, you should be given a confirmation screen with a Submission ID. On average, submitted app reviews should only take a few hours before being approved, although Apple indicates it can take up to 24 hours for a response.
 
-*Note: The appstore submission provides `istest3` credentials to apple for testing. Make sure `istest3` has `Officer Mussel Inspect App` role and provide a new password in the submission if needed.
+
+## Provisioning Profile and Certificate
+
+GitHub Actions will sign the app using BCGov's provisioning profile, which is issued from the **Developer Experience** team. A provisioning profile expires after about one year, so you may need to request a new provisioning profile. The file will have a `.mobileprovision` extension.
+
+#### Add Provisioning Profile to Xcode
+
+Once you receive the provisioning profile, you can drag-and-drop it to Xcode, where it will then appear under *ipad* > *Signing & Capabilities* > *iOS* > *Provisioning Profile***. Select the new Provisioning Profile in Xcode.
+
+***Note: the `Status` in Xcode may show "no signing certificate", and that's because the Certificate is supplied by the BCGov Organization in the repo's [GitHub Actions secrets and variables](https://github.com/bcgov/invasivesBC-mussels-iOS/settings/secrets/actions).*
+
+#### Add Provisioning Profile to the Repo's Secrets and Variables
+
+Next, you will need to convert the provisioning profile file to Base64 and copy it to the repo's [GitHub Actions secrets and variables](https://github.com/bcgov/invasivesBC-mussels-iOS/settings/secrets/actions) as `IOS_PROVISION_PROFILE_BASE64`. Use the following command to convert the file to Base64 and copy it to your clipboard:
+
+    base64 -i File_Name_Here.mobileprovision | pbcopy
+
+Replace the `IOS_PROVISION_PROFILE_BASE64` secret.
+
+#### Provisioning Profile in `.plist` files
+
+You'll also need to update the strings for the provisioning **name** and **UUID** in the [`options.plist`](https://github.com/bcgov/invasivesBC-mussels-iOS/blob/master/options.plist) and [`exportOptions.plist`](https://github.com/bcgov/invasivesBC-mussels-iOS/blob/master/exportOptions.plist) files. You can print out the **Name** and **UUID** through the following command:
+
+    security cms -D -i File_Name_Here.mobileprovision
+
+And replace the values in the `.plist` files.
+
+`options.plist`:
+```plist
+    <dict>
+        <key>ca.bc.gov.InvasivesBC</key>
+        <string>bb2b59b7-03d0-4b86-8d8a-c1b827bf923f</string>  <!-- update UUID here -->
+    </dict>
+```
+`exportOptions.plist`:
+```plist exportOptions.plist
+    <dict>
+        <key>ca.bc.gov.InvasivesBC</key>
+        <string>InvasivesBC Muscles - 2023/24</string> <!-- update name here -->
+    </dict>
+```
+
+
+(The provisioning **name** should be what appears in Xcode under *ipad* > *Signing & Capabilities* > *iOS* > *Provisioning Profile*.)
+
+[**The Developer Experience team has more information on GitHub Actions and deploying to App Store Connect here**](https://mvp.developer.gov.bc.ca/docs/default/component/mobile-developer-guide/apple_app_signing/).
+
 
 # Workflows
 
