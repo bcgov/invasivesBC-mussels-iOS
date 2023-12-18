@@ -92,6 +92,13 @@ struct WatercraftFieldHeaderConstants {
         static let marineSpeciesFound = "Marine Species Found"
         static let aquaticPlantsFound = "Aquatic Plants Found"
     }
+    struct BlowBy {
+        static let isBlowBy = "Is this a Blow By?"
+        static let isBlowByInspected = "Was an inspection conducted after blow by?"
+        static let timeOfBlowBy = "Time of Blow By"
+        static let motorizedBlowBys = "Was this a motorized Blow By?"
+        
+    }
     struct BasicInfo {
         static let province = "Province/State of Boat Residence"
         static let nonMotorized = "Non-Motorized"

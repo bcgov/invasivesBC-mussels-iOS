@@ -23,7 +23,8 @@ private enum JourneyDetailsSectionRow {
 }
 
 public enum WatercraftFromSection: Int, CaseIterable {
-    case PassportInfo = 0
+    case BlowByInfo = 0
+    case PassportInfo
     case BasicInformation
     case WatercraftDetails
     case JourneyDetails
@@ -56,6 +57,7 @@ class WatercraftInspectionViewController: BaseViewController {
     var shiftModel: ShiftModel?
     var model: WatercraftInspectionModel? = nil
     private var showFullInspection: Bool = false
+    private var showJustPassport: Bool = false
     private var showHighRiskAssessment: Bool = false
     private var showFullHighRiskAssessment = false
     private var isEditable: Bool = true
@@ -93,12 +95,31 @@ class WatercraftInspectionViewController: BaseViewController {
     // MARK: Setup
     func setup(model: WatercraftInspectionModel) {
         self.model = model
+        print("model >> ", model)
         self.isEditable = model.getStatus() == .Draft
         self.styleNavBar()
-        if !model.isPassportHolder || model.launchedOutsideBC || model.isNewPassportIssued {
-            self.showFullInspection = true
-        }
         
+        if !model.isBlowBy && !model.isBlowByInspected {
+            // Blow by == no, Blow by inspection == no -> show whole form
+            self.showFullInspection = true
+            self.showJustPassport = false
+            
+        } else if model.isBlowBy && !model.isBlowByInspected {
+            // Blow by == yes, Blow by inspection == no -> show just Blow By
+            self.showJustPassport = false
+            self.showFullInspection = false
+            
+        } else if !model.isPassportHolder || model.launchedOutsideBC || model.isNewPassportIssued {
+            // Passport holder == no, Launched outside BC == yes, New passport == yes -> show whole form
+            self.showFullInspection = true
+            self.showJustPassport = false
+            
+        } else if model.isPassportHolder && (model.launchedOutsideBC || model.isNewPassportIssued) {
+            // Passport holder == yes, Launched outside BC == yes or New passport == yes -> show just passport
+            self.showFullInspection = false
+            self.showJustPassport = true
+        }
+
         self.showHighRiskAssessment = shouldShowHighRiskForm()
         self.showFullHighRiskAssessment = shouldShowFullHighRiskForm()
     }
@@ -569,40 +590,74 @@ class WatercraftInspectionViewController: BaseViewController {
             // TODO: needs cleanup for nil case
             model.set(value: item.value.get(type: item.type) as Any, for: item.key)
         }
-        // TODO: CLEANUP
-        // Handle Keys that alter form
-        if item.key.lowercased() == "isPassportHolder".lowercased() {
-            // If is NOT passport holder, Show full form
-            let fieldValue = item.value.get(type: item.type) as? Bool ?? nil
-            if fieldValue == false {
-                self.showFullInspection = true
+        
+        // If it's a blow by, don't show full form OR passport section
+        if item.key.lowercased() == "isBlowBy".lowercased() {
+            let isBlowBy = item.value.get(type: item.type) as? Bool ?? nil
+            if isBlowBy == true {
+                self.showFullInspection = false
+                self.showJustPassport = false
             } else {
-                if model.launchedOutsideBC {
-                    self.showFullInspection = true
-                } else {
-                    self.showFullInspection = false
-                }
+                self.showFullInspection = true
+                self.showJustPassport = false
             }
+            
             self.collectionView.reloadData()
         }
-        if item.key.lowercased() == "launchedOutsideBC".lowercased() {
-            // If IS passport holder, && launched outside BC, Show full form
-            let launchedOutsideBC = item.value.get(type: item.type) as? Bool ?? nil
-            if (launchedOutsideBC == true && model.isPassportHolder == true) {
+        
+        if item.key.lowercased() == "isBlowByInspected".lowercased() {
+            let isBlowByInspected = item.value.get(type: item.type) as? Bool ?? nil
+            if isBlowByInspected == true {
                 self.showFullInspection = true
+                self.showJustPassport = false
             } else {
                 self.showFullInspection = false
+                self.showJustPassport = false
+            }
+            
+            self.collectionView.reloadData()
+        }
+        
+        if item.key.lowercased() == "isPassportHolder".lowercased() {
+            let isPassportHolder = item.value.get(type: item.type) as? Bool ?? nil
+            if isPassportHolder == false {
+                self.showFullInspection = true
+                self.showJustPassport = false
+            } else {
+                self.showFullInspection = false
+                self.showJustPassport = true
+            }
+            
+            print("item >>", item)
+            
+            self.collectionView.reloadData()
+        }
+        
+        // If IS passport holder, && launched outside BC, show full form
+        if item.key.lowercased() == "launchedOutsideBC".lowercased() {
+            let launchedOutsideBC = item.value.get(type: item.type) as? Bool ?? nil
+            if launchedOutsideBC == true {
+                self.showFullInspection = true
+                self.showJustPassport = false
+            } else {
+                self.showFullInspection = false
+                self.showJustPassport = true
             }
             
             self.collectionView.reloadData()
         }
         
         if item.key.lowercased() == "isNewPassportIssued".lowercased() {
-            DispatchQueue.main.async {
-                let isNewPassportIssued = item.value.get(type: item.type) as? Bool ?? nil
-                self.showFullInspection = isNewPassportIssued == true && model.isPassportHolder
-                self.collectionView.reloadData()
+            let isNewPassportIssued = item.value.get(type: item.type) as? Bool ?? nil
+            if isNewPassportIssued == true {
+                self.showFullInspection = true
+                self.showJustPassport = false
+            } else {
+                self.showFullInspection = false
+                self.showJustPassport = true
             }
+            
+            self.collectionView.reloadData()
         }
     }
     
@@ -719,6 +774,8 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         if showFullInspection {
             return WatercraftFromSection.allCases.count
+        } else if showJustPassport {
+            return 2
         } else {
             return 1
         }
@@ -729,6 +786,10 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
             return UICollectionViewCell()
         }
         switch sectionType {
+        case .BlowByInfo:
+            let cell = getBasicCell(indexPath: indexPath)
+            cell.setup(title: "Blow By Information", input: model.getInputputFields(for: sectionType, editable: isEditable), delegate: self)
+            return cell
         case .PassportInfo:
             let cell = getBasicCell(indexPath: indexPath)
             cell.setup(title: "Passport Information", input: model.getInputputFields(for: sectionType, editable: isEditable), delegate: self)
@@ -792,6 +853,9 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
             return CGSize(width: 0, height: 0)
         }
         switch sectionType {
+        case .BlowByInfo:
+            let estimatedContentHeight = InputGroupView.estimateContentHeight(for: model.getInputputFields(for: sectionType))
+            return CGSize(width: self.collectionView.frame.width, height: estimatedContentHeight + BasicCollectionViewCell.minHeight)
         case .PassportInfo:
             let estimatedContentHeight = InputGroupView.estimateContentHeight(for: model.getInputputFields(for: sectionType))
             return CGSize(width: self.collectionView.frame.width, height: estimatedContentHeight + BasicCollectionViewCell.minHeight)

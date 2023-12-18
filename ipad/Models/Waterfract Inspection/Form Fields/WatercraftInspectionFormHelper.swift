@@ -137,6 +137,51 @@ class WatercraftInspectionFormHelper {
         return items
     }
     
+    // Blow By Form
+    static func getBlowByForm(for object: WatercraftInspectionModel? = nil, editable: Bool? = true) -> [InputItem] {
+        var items: [InputItem] = []
+        
+        let isBlowBy = RadioSwitchInput(
+            key: "isBlowBy",
+            header: WatercraftFieldHeaderConstants.BlowBy.isBlowBy,
+            editable: editable ?? true,
+            value: object?.isBlowBy ?? nil,
+            width: .Full
+        )
+        items.append(isBlowBy)
+        
+        let isBlowByInspected = RadioSwitchInput(
+            key: "isBlowByInspected",
+            header: WatercraftFieldHeaderConstants.BlowBy.isBlowByInspected,
+            editable: editable ?? true,
+            value: object?.isBlowByInspected ?? nil,
+            width: .Full)
+        isBlowByInspected.dependency.append(InputDependency(to: isBlowBy, equalTo: true))
+        items.append(isBlowByInspected)
+        
+        let timeOfBlowBy = TimeInput(
+            key: "timeOfBlowBy",
+            header: WatercraftFieldHeaderConstants.BlowBy.timeOfBlowBy,
+            editable: editable ?? true,
+            value: object?.timeOfBlowBy ?? nil,
+            width: .Third
+        )
+        timeOfBlowBy.dependency.append(InputDependency(to: isBlowBy, equalTo: true))
+        items.append(timeOfBlowBy)
+        
+        let motorizedBlowBys = SwitchInput(
+            key: "motorizedBlowBys",
+            header: WatercraftFieldHeaderConstants.BlowBy.motorizedBlowBys,
+            editable: editable ?? true,
+            value: object?.motorizedBlowBys ?? nil,
+            width: .Third
+        )
+        motorizedBlowBys.dependency.append(InputDependency(to: isBlowBy, equalTo: true))
+        items.append(motorizedBlowBys)
+        
+        return items
+    }
+    
     static func getBasicInfoFields(for object: WatercraftInspectionModel? = nil, editable: Bool? = true, passportField: RadioSwitchInput) -> [InputItem] {
         var sectionItems: [InputItem] = []
         let province = DropdownInput(

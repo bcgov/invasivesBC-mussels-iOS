@@ -37,6 +37,13 @@ class WatercraftInspectionModel: Object, BaseRealmObject {
     @objc dynamic var decontaminationPerformed: Bool = false
     @objc dynamic var marineSpeciesFound: Bool = false
     @objc dynamic var aquaticPlantsFound: Bool = false
+    
+    // BLOWBY INFO
+    @objc dynamic var isBlowBy: Bool = false
+    @objc dynamic var isBlowByInspected: Bool = false
+    @objc dynamic var timeOfBlowBy: String = ""
+    @objc dynamic var motorizedBlowBys: Bool = false
+    
     // Full Inspection
     // Basic
     // Province of residence
@@ -595,7 +602,9 @@ class WatercraftInspectionModel: Object, BaseRealmObject {
         for field in passportFields where field.key.lowercased() == "isPassportHolder".lowercased() {
             passportHolderField = field
         }
+        
         guard let _passportHolderField = passportHolderField as? RadioSwitchInput else {return []}
+        inputputFields[.BlowByInfo] = WatercraftInspectionFormHelper.getBlowByForm(for: self, editable: editable)
         inputputFields[.PassportInfo] = passportFields
         inputputFields[.BasicInformation] = WatercraftInspectionFormHelper.getBasicInfoFields(for: self, editable: editable, passportField: _passportHolderField)
         inputputFields[.WatercraftDetails] = WatercraftInspectionFormHelper.getWatercraftDetailsFields(for: self, editable: editable)
