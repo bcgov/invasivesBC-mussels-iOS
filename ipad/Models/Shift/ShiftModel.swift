@@ -32,6 +32,7 @@ class ShiftModel: Object, BaseRealmObject {
     
     @objc dynamic var startTime: String = ""
     @objc dynamic var endTime: String = ""
+    @objc dynamic var shiftStartDate: Date? = Date()
     @objc dynamic var boatsInspected: Bool = true
     @objc dynamic var motorizedBlowBys: Int = 0
     @objc dynamic var nonMotorizedBlowBys: Int = 0
@@ -193,6 +194,7 @@ class ShiftModel: Object, BaseRealmObject {
             "date": formattedDateFull,
             "startTime": startTimeFormatted,
             "endTime": endTimeFormatted,
+            "shiftStartDate": shiftStartDate,
             "station": station,
             "location": "NA",
             "shiftStartComment": shitStartComments.count > 1 ? shitStartComments : "None",

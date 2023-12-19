@@ -18,16 +18,25 @@ class ShiftFormHelper {
             header: ShiftFormHeaders.ShiftStart.startTime,
             editable: editable ?? true,
             value: object?.startTime ?? "",
-            width: .Half
+            width: .Third
         )
         sectionItems.append(startTime)
+        
+        let shiftStartDate = DateInput(
+            key: "shiftStartDate",
+            header: ShiftFormHeaders.ShiftStart.shiftStartDate,
+            editable: editable ?? true,
+            value: object?.shiftStartDate ?? Date(),
+            width: .Third
+        )
+        sectionItems.append(shiftStartDate)
         
         let station = DropdownInput(
             key: "station",
             header: ShiftFormHeaders.ShiftStart.station,
             editable: editable ?? true,
             value: object?.station,
-            width: .Half,
+            width: .Third,
             dropdownItems: DropdownHelper.shared.getDropdown(for: .stations)
         )
         sectionItems.append(station)
