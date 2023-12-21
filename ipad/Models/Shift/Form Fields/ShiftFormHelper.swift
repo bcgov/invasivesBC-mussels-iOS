@@ -13,15 +13,6 @@ class ShiftFormHelper {
     static func getShiftStartFields(for object: ShiftModel? = nil, editable: Bool? = true, modalSize: Bool? = false) -> [InputItem] {
         var sectionItems: [InputItem] = []
         
-        let startTime = TimeInput(
-            key: "startTime",
-            header: ShiftFormHeaders.ShiftStart.startTime,
-            editable: editable ?? true,
-            value: object?.startTime ?? "",
-            width: .Third
-        )
-        sectionItems.append(startTime)
-        
         let shiftStartDate = DateInput(
             key: "shiftStartDate",
             header: ShiftFormHeaders.ShiftStart.shiftStartDate,
@@ -30,6 +21,15 @@ class ShiftFormHelper {
             width: .Third
         )
         sectionItems.append(shiftStartDate)
+        
+        let startTime = TimeInput(
+            key: "startTime",
+            header: ShiftFormHeaders.ShiftStart.startTime,
+            editable: editable ?? true,
+            value: object?.startTime ?? "",
+            width: .Third
+        )
+        sectionItems.append(startTime)
         
         let station = DropdownInput(
             key: "station",

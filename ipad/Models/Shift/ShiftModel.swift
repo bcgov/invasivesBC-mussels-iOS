@@ -32,7 +32,7 @@ class ShiftModel: Object, BaseRealmObject {
     
     @objc dynamic var startTime: String = ""
     @objc dynamic var endTime: String = ""
-    @objc dynamic var shiftStartDate: Date? = Date()
+    @objc dynamic var shiftStartDate: Date = Date()
     @objc dynamic var boatsInspected: Bool = true
     @objc dynamic var motorizedBlowBys: Int = 0
     @objc dynamic var nonMotorizedBlowBys: Int = 0
@@ -130,7 +130,7 @@ class ShiftModel: Object, BaseRealmObject {
         do {
             let realm = try Realm()
             try realm.write {
-                self.date = newDate
+                self.date = self.shiftStartDate
             }
         } catch let error as NSError {
             print("** REALM ERROR")
@@ -170,7 +170,7 @@ class ShiftModel: Object, BaseRealmObject {
     func formattedDateTime(time: String, date: Date) -> String? {
         let timeFormatter = DateFormatter()
         timeFormatter.dateFormat = "YYYY-MM-dd hh:mm:ss"
-        let startDate = date
+        let startDate = shiftStartDate
         let startTimeSplit = time.components(separatedBy: ":")
         guard let timeInDate = startDate.setTime(hour: Int(startTimeSplit[0]) ?? 0, min: Int(startTimeSplit[1]) ?? 0, sec: 1) else {
             return nil
@@ -181,12 +181,11 @@ class ShiftModel: Object, BaseRealmObject {
     
     // MARK: To Dictionary
     func toDictionary() -> [String : Any] {
-        guard let date = date else {return [String : Any]()}
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "YYYY-MM-dd"
-        let formattedDateFull = dateFormatter.string(from: date)
+        let formattedDateFull = dateFormatter.string(from: shiftStartDate)
         
-        guard let startTimeFormatted = formattedDateTime(time: startTime, date: date), let endTimeFormatted = formattedDateTime(time: endTime, date: date) else {
+        guard let startTimeFormatted = formattedDateTime(time: startTime, date: shiftStartDate), let endTimeFormatted = formattedDateTime(time: endTime, date: shiftStartDate) else {
             return [String : Any]()
         }
         
@@ -194,7 +193,6 @@ class ShiftModel: Object, BaseRealmObject {
             "date": formattedDateFull,
             "startTime": startTimeFormatted,
             "endTime": endTimeFormatted,
-            "shiftStartDate": shiftStartDate,
             "station": station,
             "location": "NA",
             "shiftStartComment": shitStartComments.count > 1 ? shitStartComments : "None",
