@@ -40,11 +40,11 @@ public enum WatercraftFromSection: Int, CaseIterable {
 extension String {
     var readableSection: String {
         let sectionTitles: [String: String] = [
-            "basicInformation": "--- BASIC INFORMATION ---",
-            "watercraftDetails": "--- WATERCRAFT DETAILS ---",
-            "journeyDetails": "--- JOURNEY DETAILS ---",
-            "inspectionDetails": "--- INSPECTION DETAILS ---",
-            "inspectionOutcomes": "--- INSPECTION OUTCOMES ---"
+            "basicInformation": "- BASIC INFORMATION -",
+            "watercraftDetails": "- WATERCRAFT DETAILS -",
+            "journeyDetails": "- JOURNEY DETAILS -",
+            "inspectionDetails": "- INSPECTION DETAILS -",
+            "inspectionOutcomes": "- INSPECTION OUTCOMES -"
         ]
         return sectionTitles[self] ?? self.capitalized
     }
@@ -185,7 +185,25 @@ class WatercraftInspectionViewController: BaseViewController {
         setGradiantBackground(navigationBar: navigation.navigationBar)
         if let model = self.model, model.getStatus() == .Draft {
             setRightNavButtons()
+            setLeftNavButtons()
         }
+    }
+    
+    private func setLeftNavButtons() {
+        // Create a UIButton to hold the back icon and text
+        let backButton = UIButton(type: .custom)
+        backButton.setTitle(" Shift Overview", for: .normal)
+        backButton.setTitleColor(UIColor.white, for: .normal)
+        backButton.setImage(UIImage(systemName: "chevron.backward"), for: .normal)
+        backButton.addTarget(self, action: #selector(didTapBackButton(sender:)), for: .touchUpInside)
+        backButton.contentHorizontalAlignment = .left
+        backButton.semanticContentAttribute = .forceLeftToRight
+        
+        backButton.sizeToFit()
+
+        let backBarButtonItem = UIBarButtonItem(customView: backButton)
+        
+        navigationItem.leftBarButtonItem = backBarButtonItem
     }
     
     private func setRightNavButtons() {
@@ -196,6 +214,16 @@ class WatercraftInspectionViewController: BaseViewController {
         let saveButton = UIBarButtonItem(image: saveIcon,  style: .plain, target: self, action: #selector(self.didTapCheckmarkButton(sender:)))
         
         navigationItem.rightBarButtonItems = [saveButton, deleteButton]
+    }
+    
+    @objc func didTapBackButton(sender: UIBarButtonItem) {
+        self.dismissKeyboard()
+
+        if canSubmit() {
+            self.navigationController?.popViewController(animated: true)
+        } else {
+            Alert.show(title: "Incomplete", message: validationMessage())
+        }
     }
     
     // Navigation bar right button action
