@@ -33,8 +33,6 @@ class ShiftModel: Object, BaseRealmObject {
     @objc dynamic var startTime: String = ""
     @objc dynamic var endTime: String = ""
     @objc dynamic var boatsInspected: Bool = true
-    @objc dynamic var motorizedBlowBys: Int = 0
-    @objc dynamic var nonMotorizedBlowBys: Int = 0
     @objc dynamic var k9OnShif: Bool = false
     @objc dynamic var date: Date?
     @objc dynamic var station: String = ""
@@ -44,6 +42,8 @@ class ShiftModel: Object, BaseRealmObject {
     @objc dynamic var shitEndComments: String = ""
     
     var inspections: List<WatercraftInspectionModel> = List<WatercraftInspectionModel>()
+    
+    var blowBys: List<BlowByModel> = List<BlowByModel>()
     
     @objc dynamic var status: String = "Draft"
     // used for quary purposes (and displaying)
@@ -66,6 +66,25 @@ class ShiftModel: Object, BaseRealmObject {
                 self.inspections.append(inspection)
             }
             return inspection
+        } catch let error as NSError {
+            print("** REALM ERROR")
+            print(error)
+            return nil
+        }
+    }
+    
+    // MARK: Add Blow By object
+    func addblowBy() -> BlowByModel? {
+        let blowBy = BlowByModel()
+        blowBy.shouldSync = false
+        blowBy.userId = self.userId
+        blowBy.timeStamp = Date()
+        do {
+            let realm = try Realm()
+            try realm.write {
+                self.blowBys.append(blowBy)
+            }
+            return blowBy
         } catch let error as NSError {
             print("** REALM ERROR")
             print(error)
@@ -197,8 +216,6 @@ class ShiftModel: Object, BaseRealmObject {
             "location": "NA",
             "shiftStartComment": shitStartComments.count > 1 ? shitStartComments : "None",
             "shiftEndComment":  shitEndComments.count > 1 ? shitEndComments : "None",
-            "motorizedBlowBys": motorizedBlowBys,
-            "nonMotorizedBlowBys": nonMotorizedBlowBys,
             "boatsInspected": boatsInspected,
             "k9OnShift": k9OnShif
         ]

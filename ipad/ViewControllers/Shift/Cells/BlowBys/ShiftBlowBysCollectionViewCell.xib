@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="ipad10_9rounded" orientation="portrait" layout="fullscreen" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" userLabel="Blow Bys Collection View Cell" customClass="ShiftBlowBysCollectionViewCell" customModule="Inspect" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="355" height="34"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="355" height="34"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9zw-gq-R7h">
+                        <rect key="frame" x="20" y="16" width="315" height="2"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="2" id="J6J-NX-rGk"/>
+                        </constraints>
+                    </view>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EtQ-vg-oRn">
+                        <rect key="frame" x="20" y="26" width="315" height="0.0"/>
+                        <color key="backgroundColor" systemColor="systemGreenColor"/>
+                        <constraints>
+                            <constraint firstAttribute="height" id="ofz-Sq-M7a"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="EtQ-vg-oRn" secondAttribute="bottom" constant="8" id="1v6-gx-xGi"/>
+                <constraint firstItem="EtQ-vg-oRn" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="20" id="4nl-8d-lIh"/>
+                <constraint firstAttribute="trailing" secondItem="9zw-gq-R7h" secondAttribute="trailing" constant="20" id="GgL-Yz-Ozs"/>
+                <constraint firstAttribute="trailing" secondItem="EtQ-vg-oRn" secondAttribute="trailing" constant="20" id="QnD-kR-mIW"/>
+                <constraint firstItem="9zw-gq-R7h" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="20" id="hP5-6T-aLu"/>
+                <constraint firstItem="EtQ-vg-oRn" firstAttribute="top" secondItem="9zw-gq-R7h" secondAttribute="bottom" constant="8" id="qem-pF-51P"/>
+            </constraints>
+            <size key="customSize" width="355" height="94"/>
+            <connections>
+                <outlet property="divider" destination="9zw-gq-R7h" id="lWa-UI-QQF"/>
+                <outlet property="tableContainer" destination="EtQ-vg-oRn" id="KT1-Ea-4xY"/>
+                <outlet property="tableHeightConstraint" destination="ofz-Sq-M7a" id="Fhr-IT-ueu"/>
+            </connections>
+            <point key="canvasLocation" x="361.59420289855075" y="198.88392857142856"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGreenColor">
+            <color red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>

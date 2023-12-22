@@ -206,8 +206,13 @@
 		5C82D3F92376036700B065BA /* WorkflowAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C82D3F82376036700B065BA /* WorkflowAPI.swift */; };
 		5C82D3FF23761B1400B065BA /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C82D3FE23761B1400B065BA /* API.swift */; };
 		5C82D404237B31C200B065BA /* WatercraftRiskAssessmentAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C82D403237B31C200B065BA /* WatercraftRiskAssessmentAPI.swift */; };
+		96137F2E2B360E1400900D23 /* ShiftBlowBysHeaderCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96137F2D2B360E1400900D23 /* ShiftBlowBysHeaderCollectionViewCell.swift */; };
+		96137F302B360E2800900D23 /* ShiftBlowBysHeaderCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 96137F2F2B360E2800900D23 /* ShiftBlowBysHeaderCollectionViewCell.xib */; };
+		96137F332B361F1100900D23 /* BlowByModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96137F322B361F1100900D23 /* BlowByModel.swift */; };
 		9620B078298849BF0084268C /* NullSwitchInputCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9620B076298849BF0084268C /* NullSwitchInputCollectionViewCell.swift */; };
 		9620B079298849BF0084268C /* NullSwitchInputCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9620B077298849BF0084268C /* NullSwitchInputCollectionViewCell.xib */; };
+		9669088A2B35FDE00088A8D0 /* ShiftBlowBysCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966908892B35FDE00088A8D0 /* ShiftBlowBysCollectionViewCell.swift */; };
+		9669088C2B35FE220088A8D0 /* ShiftBlowBysCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9669088B2B35FE220088A8D0 /* ShiftBlowBysCollectionViewCell.xib */; };
 		A7AE5275237CC3660044DBB7 /* unapproved-cross.json in Resources */ = {isa = PBXBuildFile; fileRef = A7AE5272237CC3660044DBB7 /* unapproved-cross.json */; };
 		A7AE5276237CC3660044DBB7 /* check-mark-success.json in Resources */ = {isa = PBXBuildFile; fileRef = A7AE5273237CC3660044DBB7 /* check-mark-success.json */; };
 		A7AE5277237CC3660044DBB7 /* sync-circle.json in Resources */ = {isa = PBXBuildFile; fileRef = A7AE5274237CC3660044DBB7 /* sync-circle.json */; };
@@ -443,8 +448,13 @@
 		5E19532C9F39231DE6E43099 /* Pods_ipad.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ipad.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		654A566D8395B17BDF172F9F /* Pods-ipad.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ipad.release.xcconfig"; path = "Target Support Files/Pods-ipad/Pods-ipad.release.xcconfig"; sourceTree = "<group>"; };
 		763C8716EF742F6764FFE7D7 /* Pods-ipad.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ipad.debug.xcconfig"; path = "Target Support Files/Pods-ipad/Pods-ipad.debug.xcconfig"; sourceTree = "<group>"; };
+		96137F2D2B360E1400900D23 /* ShiftBlowBysHeaderCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShiftBlowBysHeaderCollectionViewCell.swift; sourceTree = "<group>"; };
+		96137F2F2B360E2800900D23 /* ShiftBlowBysHeaderCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ShiftBlowBysHeaderCollectionViewCell.xib; sourceTree = "<group>"; };
+		96137F322B361F1100900D23 /* BlowByModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlowByModel.swift; sourceTree = "<group>"; };
 		9620B076298849BF0084268C /* NullSwitchInputCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NullSwitchInputCollectionViewCell.swift; sourceTree = "<group>"; };
 		9620B077298849BF0084268C /* NullSwitchInputCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NullSwitchInputCollectionViewCell.xib; sourceTree = "<group>"; };
+		966908892B35FDE00088A8D0 /* ShiftBlowBysCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShiftBlowBysCollectionViewCell.swift; sourceTree = "<group>"; };
+		9669088B2B35FE220088A8D0 /* ShiftBlowBysCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ShiftBlowBysCollectionViewCell.xib; sourceTree = "<group>"; };
 		987374CFF5F2318652AA2FCC /* Pods-ipadTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ipadTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ipadTests/Pods-ipadTests.release.xcconfig"; sourceTree = "<group>"; };
 		99C48CD83AAD3AAA2CD083BF /* Pods-ipadTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ipadTests.release.xcconfig"; path = "Target Support Files/Pods-ipadTests/Pods-ipadTests.release.xcconfig"; sourceTree = "<group>"; };
 		A41A1378A874E8BDB895F235 /* Pods-ipad.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ipad.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ipad/Pods-ipad.debug.xcconfig"; sourceTree = "<group>"; };
@@ -590,6 +600,7 @@
 		2944BCD52433928400826F48 /* Shift */ = {
 			isa = PBXGroup;
 			children = (
+				96137F312B361EF800900D23 /* BlowBy */,
 				29DB4E4023870F2B00B13646 /* ShiftModel.swift */,
 				2944BCD92433931600826F48 /* Form Fields */,
 			);
@@ -676,6 +687,8 @@
 		2944BCDF243394A300826F48 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				96137F2C2B360DF800900D23 /* BlowBysHeader */,
+				966908882B35FB280088A8D0 /* BlowBys */,
 				29DB4E422387111700B13646 /* Base */,
 				29DB4E432387112000B13646 /* Header */,
 				29DB4E4B238712ED00B13646 /* Inspections */,
@@ -1427,6 +1440,23 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		96137F2C2B360DF800900D23 /* BlowBysHeader */ = {
+			isa = PBXGroup;
+			children = (
+				96137F2D2B360E1400900D23 /* ShiftBlowBysHeaderCollectionViewCell.swift */,
+				96137F2F2B360E2800900D23 /* ShiftBlowBysHeaderCollectionViewCell.xib */,
+			);
+			path = BlowBysHeader;
+			sourceTree = "<group>";
+		};
+		96137F312B361EF800900D23 /* BlowBy */ = {
+			isa = PBXGroup;
+			children = (
+				96137F322B361F1100900D23 /* BlowByModel.swift */,
+			);
+			path = BlowBy;
+			sourceTree = "<group>";
+		};
 		9620B066298842130084268C /* Null Switch Input */ = {
 			isa = PBXGroup;
 			children = (
@@ -1434,6 +1464,15 @@
 				9620B077298849BF0084268C /* NullSwitchInputCollectionViewCell.xib */,
 			);
 			path = "Null Switch Input";
+			sourceTree = "<group>";
+		};
+		966908882B35FB280088A8D0 /* BlowBys */ = {
+			isa = PBXGroup;
+			children = (
+				966908892B35FDE00088A8D0 /* ShiftBlowBysCollectionViewCell.swift */,
+				9669088B2B35FE220088A8D0 /* ShiftBlowBysCollectionViewCell.xib */,
+			);
+			path = BlowBys;
 			sourceTree = "<group>";
 		};
 		A7AE5271237CC3660044DBB7 /* LottieAnimations */ = {
@@ -1584,6 +1623,7 @@
 				A7AE5276237CC3660044DBB7 /* check-mark-success.json in Resources */,
 				298BF7C12394C0270072AA28 /* waterBodies.txt in Resources */,
 				2968861F260A65AC00ECA183 /* PreviousMajorCityCollectionViewCell.xib in Resources */,
+				9669088C2B35FE220088A8D0 /* ShiftBlowBysCollectionViewCell.xib in Resources */,
 				29F29FA2236B8670004F12E7 /* DropdownCollectionViewCell.xib in Resources */,
 				29DB0117237206D30046E605 /* HeaderCollectionViewCell.xib in Resources */,
 				29DB4E472387113900B13646 /* BaseShiftOverviewCollectionViewCell.xib in Resources */,
@@ -1601,6 +1641,7 @@
 				5C649C922412F6E300F01AE5 /* GoogleService-Info.plist in Resources */,
 				1E54FFB623D783940044721F /* InputTitleCollectionViewCell.xib in Resources */,
 				29CE5E1D2375E48000C54F96 /* ConditionalInputCollectionViewCell.xib in Resources */,
+				96137F302B360E2800900D23 /* ShiftBlowBysHeaderCollectionViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1664,6 +1705,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				29E4BBE82372120F0079475F /* DividerCollectionViewCell.swift in Sources */,
+				96137F2E2B360E1400900D23 /* ShiftBlowBysHeaderCollectionViewCell.swift in Sources */,
 				5C82D3E82374BCDB00B065BA /* GenericConst.swift in Sources */,
 				29E4BBF2237218610079475F /* DestinationWaterBodyCollectionViewCell.swift in Sources */,
 				29D5866D25D20F6500FEB37E /* MajorCitiesTableModel.swift in Sources */,
@@ -1727,6 +1769,7 @@
 				2907E4B72368D24900946B3F /* InputModal.swift in Sources */,
 				29547B4A23F0BF4F000173F1 /* SelectedWaterBodyCollectionViewCell.swift in Sources */,
 				2991969023846AE000634F81 /* ShiftViewController.swift in Sources */,
+				96137F332B361F1100900D23 /* BlowByModel.swift in Sources */,
 				29DB01092370EFD60046E605 /* TextAreaInputCollectionViewCell.swift in Sources */,
 				5C82D3EA2374BCFA00B065BA /* FoundationExtension.swift in Sources */,
 				29CEC91E23676424003B21B9 /* ViewController.swift in Sources */,
@@ -1786,6 +1829,7 @@
 				29CEC91C23676424003B21B9 /* SceneDelegate.swift in Sources */,
 				294D8F6123847C9A0094090D /* TableRowTableViewCell.swift in Sources */,
 				2958874A237B583C00224FFA /* HighRiskFormHelper.swift in Sources */,
+				9669088A2B35FDE00088A8D0 /* ShiftBlowBysCollectionViewCell.swift in Sources */,
 				29588748237B52F000224FFA /* HighRiskAssessmentModel.swift in Sources */,
 				29BAC50923676FDC00A620F4 /* ThemeGeneric.swift in Sources */,
 				1EF7EBEF23EC8E1D003886F6 /* WaterbodyPicker.swift in Sources */,

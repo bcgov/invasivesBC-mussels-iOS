@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="ipad10_9rounded" orientation="portrait" layout="fullscreen" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="ShiftBlowBysHeaderCollectionViewCell" customModule="Inspect" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="657" height="82"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="657" height="82"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nD0-72-lMV">
+                        <rect key="frame" x="20" y="71" width="608" height="2"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="2" id="tyX-d2-nOs"/>
+                        </constraints>
+                    </view>
+                    <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="d9k-mI-g2D">
+                        <rect key="frame" x="20" y="93" width="16" height="41"/>
+                    </stackView>
+                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B0K-89-AZf">
+                        <rect key="frame" x="438" y="20" width="199" height="42"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="199" id="Rjb-39-rgj"/>
+                            <constraint firstAttribute="height" constant="42" id="deU-zR-RwK"/>
+                        </constraints>
+                        <state key="normal" title="Add Blow By"/>
+                        <connections>
+                            <action selector="addBlowByClicked:" destination="gTV-IL-0wX" eventType="touchUpInside" id="rpW-BE-opd"/>
+                        </connections>
+                    </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Blow Bys" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HkN-A2-d6L">
+                        <rect key="frame" x="20" y="23" width="249" height="37"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <constraints>
+                <constraint firstItem="d9k-mI-g2D" firstAttribute="leading" secondItem="nD0-72-lMV" secondAttribute="leading" id="DAP-98-Uva"/>
+                <constraint firstItem="nD0-72-lMV" firstAttribute="trailing" secondItem="B0K-89-AZf" secondAttribute="trailing" id="Dbw-zP-hNk"/>
+                <constraint firstAttribute="trailing" secondItem="B0K-89-AZf" secondAttribute="trailing" constant="29" id="Tsc-44-dmt"/>
+                <constraint firstItem="B0K-89-AZf" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="20" id="d9l-ag-wKF"/>
+                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="d9k-mI-g2D" secondAttribute="trailing" constant="20" id="gxH-gz-kX4"/>
+                <constraint firstItem="nD0-72-lMV" firstAttribute="top" secondItem="B0K-89-AZf" secondAttribute="bottom" constant="9" id="hQM-gV-hwL"/>
+                <constraint firstAttribute="bottom" secondItem="d9k-mI-g2D" secondAttribute="bottom" constant="20" id="pPN-Wk-fKL"/>
+                <constraint firstItem="d9k-mI-g2D" firstAttribute="top" secondItem="nD0-72-lMV" secondAttribute="bottom" constant="20" id="vZj-tO-W1c"/>
+            </constraints>
+            <size key="customSize" width="657" height="154"/>
+            <connections>
+                <outlet property="addBlowByButton" destination="B0K-89-AZf" id="hmo-8n-trO"/>
+                <outlet property="divider" destination="nD0-72-lMV" id="Mo0-7d-S3s"/>
+                <outlet property="titleLabel" destination="HkN-A2-d6L" id="8o6-3I-fFV"/>
+            </connections>
+            <point key="canvasLocation" x="-88.170731707317074" y="81.355932203389841"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

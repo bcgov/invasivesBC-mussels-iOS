@@ -21,9 +21,15 @@ private enum ShiftInformationSectionRow: Int, CaseIterable {
     case EndShift
 }
 
+private enum ShiftBlowBysSectionRow: Int, CaseIterable {
+    case Header
+    case BlowBys
+}
+
 public enum ShiftViewSection: Int, CaseIterable {
     case Overview = 0
     case Information
+    case BlowBys
 }
 
 
@@ -34,7 +40,9 @@ class ShiftViewController: BaseViewController {
         "BasicCollectionViewCell",
         "ShifOverviewHeaderCollectionViewCell",
         "InspectionsTableCollectionViewCell",
-        "ShiftInformationHeaderCollectionViewCell"
+        "ShiftInformationHeaderCollectionViewCell",
+        "ShiftBlowBysCollectionViewCell",
+        "ShiftBlowBysHeaderCollectionViewCell"
     ]
     
     // MARK: Varialbes
@@ -42,6 +50,7 @@ class ShiftViewController: BaseViewController {
     var showShiftInfo: Bool = true
     var isEditable: Bool = true
     private var inspection: WatercraftInspectionModel?
+    private var blowBy: BlowByModel?
     
     // MARK: Outlets
     @IBOutlet weak var containerView: UIView!
@@ -319,6 +328,14 @@ extension ShiftViewController: UICollectionViewDataSource, UICollectionViewDeleg
         return collectionView!.dequeueReusableCell(withReuseIdentifier: "ShiftInformationHeaderCollectionViewCell", for: indexPath as IndexPath) as! ShiftInformationHeaderCollectionViewCell
     }
     
+    func getShiftBlowBysViewCell(indexPath: IndexPath) -> ShiftBlowBysCollectionViewCell {
+        return collectionView!.dequeueReusableCell(withReuseIdentifier: "ShiftBlowBysCollectionViewCell", for: indexPath as IndexPath) as! ShiftBlowBysCollectionViewCell
+    }
+    
+    func getShiftBlowBysHeaderViewCell(indexPath: IndexPath) -> ShiftBlowBysHeaderCollectionViewCell {
+        return collectionView!.dequeueReusableCell(withReuseIdentifier: "ShiftBlowBysHeaderCollectionViewCell", for: indexPath as IndexPath) as! ShiftBlowBysHeaderCollectionViewCell
+    }
+    
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         if model == nil { return 0}
         return ShiftViewSection.allCases.count
@@ -331,6 +348,8 @@ extension ShiftViewController: UICollectionViewDataSource, UICollectionViewDeleg
             return ShiftOverviewSectionRow.allCases.count
         case .Information:
             return showShiftInfo ? ShiftInformationSectionRow.allCases.count : 1
+        case .BlowBys:
+            return ShiftOverviewSectionRow.allCases.count
         }
     }
     
@@ -341,6 +360,8 @@ extension ShiftViewController: UICollectionViewDataSource, UICollectionViewDeleg
             return getShiftOverviewSectionRow(indexPath: indexPath)
         case .Information:
             return getShiftInformationSectionRow(indexPath: indexPath)
+        case .BlowBys:
+            return getShiftBlowBysSectionRow(indexPath: indexPath)
         }
     }
     
@@ -388,6 +409,25 @@ extension ShiftViewController: UICollectionViewDataSource, UICollectionViewDeleg
         }
     }
     
+    func getShiftBlowBysSectionRow(indexPath: IndexPath) -> UICollectionViewCell {
+        guard let rowType = ShiftBlowBysSectionRow(rawValue: Int(indexPath.row)), let model = self.model else {return UICollectionViewCell() }
+        switch rowType {
+        case .Header:
+            let cell = getShiftBlowBysHeaderViewCell(indexPath: indexPath)
+            cell.setup(object: model, callback: {[weak self] in
+                guard let strongSelf = self else {return}
+                if strongSelf.isEditable {
+                    strongSelf.nagivateToInspection(object: model.addInspection(), editable: strongSelf.isEditable)
+                }
+            })
+            return cell
+        case .BlowBys:
+            let cell = getShiftBlowBysViewCell(indexPath: indexPath)
+            cell.setup(object: model)
+            return cell
+        }
+    }
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         guard let sectionType = ShiftViewSection(rawValue: Int(indexPath.section)) else {
             return CGSize(width: 0, height: 0)
@@ -397,6 +437,8 @@ extension ShiftViewController: UICollectionViewDataSource, UICollectionViewDeleg
             return getSizeForShiftOverView(row: ShiftOverviewSectionRow(rawValue: Int(indexPath.row)))
         case .Information:
             return getSizeForShiftInfo(row: ShiftInformationSectionRow(rawValue: Int(indexPath.row)))
+        case .BlowBys:
+            return getSizeForShiftBlowBys(row: ShiftBlowBysSectionRow(rawValue: Int(indexPath.row)))
         }
     }
     
@@ -423,6 +465,19 @@ extension ShiftViewController: UICollectionViewDataSource, UICollectionViewDeleg
             let estimatedContentHeight = InputGroupView.estimateContentHeight(for: ShiftFormHelper.getShiftEndFields(for: model, editable: true))
             return CGSize(width: fullWdtih, height: estimatedContentHeight)
         case .EndShift:
+            let estimatedContentHeight = InputGroupView.estimateContentHeight(for: ShiftFormHelper.getShiftEndFields(for: model, editable: true))
+            return CGSize(width: fullWdtih, height: estimatedContentHeight)
+        }
+    }
+    
+    fileprivate func getSizeForShiftBlowBys(row: ShiftBlowBysSectionRow?) -> CGSize {
+        guard let row = row else {return CGSize(width: 0, height: 0)}
+        guard let model = model else {return CGSize(width: 0, height: 0)}
+        let fullWdtih = self.collectionView.frame.width
+        switch row {
+        case .Header:
+            return CGSize(width: fullWdtih, height: 35)
+        case .BlowBys:
             let estimatedContentHeight = InputGroupView.estimateContentHeight(for: ShiftFormHelper.getShiftEndFields(for: model, editable: true))
             return CGSize(width: fullWdtih, height: estimatedContentHeight)
         }
