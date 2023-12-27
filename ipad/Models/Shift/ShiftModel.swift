@@ -39,15 +39,13 @@ class ShiftModel: Object, BaseRealmObject {
     @objc dynamic var k9OnShif: Bool = false
     @objc dynamic var date: Date?
     @objc dynamic var station: String = ""
-//    @objc dynamic var location: String = " "
     ///
     @objc dynamic var shitStartComments: String = ""
     @objc dynamic var shitEndComments: String = ""
-    
     var inspections: List<WatercraftInspectionModel> = List<WatercraftInspectionModel>()
     
     @objc dynamic var status: String = "Draft"
-    // used for quary purposes (and displaying)
+    // used for query purposes (and displaying)
     @objc dynamic var formattedDate: String = ""
     
     // MARK: Save Object
@@ -84,6 +82,7 @@ class ShiftModel: Object, BaseRealmObject {
             let realm = try Realm()
             try realm.write {
                 self[key] = value
+                self.formattedDate = shiftStartDate.stringShort()
             }
         } catch let error as NSError {
             print("** REALM ERROR")
@@ -126,19 +125,17 @@ class ShiftModel: Object, BaseRealmObject {
         }
     }
     
-    func set(date newDate: Date) {
+    func set(shiftStartDate newDate: Date) {
         do {
             let realm = try Realm()
             try realm.write {
-                self.date = self.shiftStartDate
+                self.shiftStartDate = newDate
             }
         } catch let error as NSError {
             print("** REALM ERROR")
             print(error)
         }
-        if let unwrappedDate = date {
-            set(value: unwrappedDate.stringShort(), for: "formattedDate")
-        }
+        set(value: shiftStartDate.stringShort(), for: "formattedDate")
     }
     
     func set(remoteId: Int) {
@@ -178,7 +175,6 @@ class ShiftModel: Object, BaseRealmObject {
         
         return timeFormatter.string(from: timeInDate)
     }
-    
     // MARK: To Dictionary
     func toDictionary() -> [String : Any] {
         let dateFormatter = DateFormatter()

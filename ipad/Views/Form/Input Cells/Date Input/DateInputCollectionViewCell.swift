@@ -36,13 +36,18 @@ class DateInputCollectionViewCell: BaseInputCell<DateInput>, UITextFieldDelegate
         if model.editable {
             delegate.showDatepickerDelegate(on: textField, initialDate: model.getValue() ?? nil, minDate: nil, maxDate: Date()) { (selectedDate) in
                 if let selectedDate = selectedDate {
-                    model.setValue(value: selectedDate)
+                    if selectedDate < Date(timeIntervalSinceNow: 600) {
+                        model.setValue(value: selectedDate)
+                    } else {
+                        model.setValue(value: Date())
+                    }
                     self.textFieldText()
                     self.emitChange()
                 }
             }
         }
     }
+
     
     private func textFieldText() {
         if let model = self.model, let value: Date = model.value.get(type: model.type) as? Date  {
