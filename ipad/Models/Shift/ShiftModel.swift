@@ -32,7 +32,7 @@ class ShiftModel: Object, BaseRealmObject {
     
     @objc dynamic var startTime: String = ""
     @objc dynamic var endTime: String = ""
-    @objc dynamic var shiftStartDate: Date = Date()
+    @objc dynamic var shiftStartDate: Date = Calendar.current.startOfDay(for: Date())
     @objc dynamic var boatsInspected: Bool = true
     @objc dynamic var motorizedBlowBys: Int = 0
     @objc dynamic var nonMotorizedBlowBys: Int = 0
@@ -167,7 +167,7 @@ class ShiftModel: Object, BaseRealmObject {
     func formattedDateTime(time: String, date: Date) -> String? {
         let timeFormatter = DateFormatter()
         timeFormatter.dateFormat = "YYYY-MM-dd hh:mm:ss"
-        let startDate = shiftStartDate
+        let startDate = date
         let startTimeSplit = time.components(separatedBy: ":")
         guard let timeInDate = startDate.setTime(hour: Int(startTimeSplit[0]) ?? 0, min: Int(startTimeSplit[1]) ?? 0, sec: 1) else {
             return nil
