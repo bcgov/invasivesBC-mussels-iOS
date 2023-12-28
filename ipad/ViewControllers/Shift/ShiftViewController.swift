@@ -268,7 +268,6 @@ class ShiftViewController: BaseViewController {
     
     func createTestModel() {
         let model = ShiftModel()
-        model.date = Date()
         
         // Create dummy inspections
         let inspection1 = WatercraftInspectionModel()
