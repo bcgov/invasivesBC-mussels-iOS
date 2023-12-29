@@ -98,7 +98,7 @@ class ShiftModel: Object, BaseRealmObject {
             print("\(key) is nil")
             return
         }
-        do {
+        do { 
             let realm = try Realm()
             try realm.write {
                 self[key] = value
@@ -228,5 +228,9 @@ class ShiftModel: Object, BaseRealmObject {
     
     func getShiftEndFields(editable: Bool) -> [InputItem] {
         return ShiftFormHelper.getShiftEndFields(for: self, editable: editable)
+    }
+    
+    func getBlowByFields(editable: Bool) -> [InputItem] {
+        return BlowByFormHelper.getBlowByStartFields()
     }
 }

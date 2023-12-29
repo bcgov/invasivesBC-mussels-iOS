@@ -40,7 +40,7 @@ class ShiftBlowBysCollectionViewCell: BaseShiftOverviewCollectionViewCell {
         let table = Table()
         
         // Convert list to array
-        let inspections: [WatercraftInspectionModel] = model.inspections.map{ $0 }
+        let blowBys: [BlowByModel] = model.blowBys.map{ $0 }
         
         // Set table container height
         tableHeightConstraint.constant = ShiftBlowBysCollectionViewCell.getTableHeight(for: model)
@@ -52,13 +52,10 @@ class ShiftBlowBysCollectionViewCell: BaseShiftOverviewCollectionViewCell {
         
         // Create Column Config
         var columns: [TableViewColumnConfig] = []
-        columns.append(TableViewColumnConfig(key: "", header: "#", type: .Counter, showHeader: false))
-        columns.append(TableViewColumnConfig(key: "remoteId", header: "ID", type: .Normal))
-        columns.append(TableViewColumnConfig(key: "riskLevel", header: "Risk Level", type: .Normal))
-        columns.append(TableViewColumnConfig(key: "inspectionTime", header: "Time Added", type: .Normal))
-        columns.append(TableViewColumnConfig(key: "status", header: "Status", type: .WithIcon))
-        columns.append(TableViewColumnConfig(key: "", header: "Actions", type: .Button, buttonName: buttonName, showHeader: false))
-        let tableView = table.show(columns: columns, in: inspections, container: tableContainer, emptyTitle: "It's looking a little empty around here.", emptyMessage: "You have not added any inspections to this shift.")
+        columns.append(TableViewColumnConfig(key: "blowByTime", header: BlowByFormHeaders.blowByTime, type: .Normal));
+        columns.append(TableViewColumnConfig(key: "watercraftComplexity", header: BlowByFormHeaders.watercraftComplexity, type: .Normal));
+        columns.append(TableViewColumnConfig(key: "reportedToRapp", header: BlowByFormHeaders.reportedToRapp, type: .Normal));
+        let tableView = table.show(columns: columns, in: blowBys, container: tableContainer, emptyTitle: "It's looking a little empty around here.", emptyMessage: "You have not added any Blowbys to this shift.")
         tableView.layoutIfNeeded()
         self.layoutIfNeeded()
     }

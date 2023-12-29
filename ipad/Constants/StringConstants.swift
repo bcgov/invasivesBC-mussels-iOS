@@ -60,6 +60,13 @@ struct StringConstants {
     }
 }
 
+// MARK: Blowby
+struct BlowByFormHeaders {
+    static let watercraftComplexity = "Watercraft Complexity *"
+    static let blowByTime = "Time of Blow By *"
+    static let reportedToRapp = "Reported to Rapp? *"
+}
+
 // MARK: Shift
 struct ShiftFormHeaders {
     struct ShiftStart {

@@ -42,10 +42,10 @@ class ShiftViewController: BaseViewController {
         "InspectionsTableCollectionViewCell",
         "ShiftInformationHeaderCollectionViewCell",
         "ShiftBlowBysCollectionViewCell",
-        "ShiftBlowBysHeaderCollectionViewCell"
+        "ShiftBlowBysHeaderCollectionViewCell",
     ]
     
-    // MARK: Varialbes
+    // MARK: Variables
     var model: ShiftModel?
     var showShiftInfo: Bool = true
     var isEditable: Bool = true
@@ -89,6 +89,7 @@ class ShiftViewController: BaseViewController {
         self.isEditable = model.getStatus() == .Draft ||  model.getStatus() == .PendingSync
         if model.getStatus() == .PendingSync {
             model.set(shouldSync: false)
+            print(model.blowBys)
             for inspection in model.inspections {
                 inspection.set(shouldSync: false)
             }
@@ -147,7 +148,10 @@ class ShiftViewController: BaseViewController {
         guard let actionModel = notification.object as? TableClickActionModel, let inspectionModel = actionModel.object as? WatercraftInspectionModel else {return}
         nagivateToInspection(object: inspectionModel, editable: isEditable)
     }
-    
+    @objc func addBlowByClicked() {
+        Alert.show(title: "Add Blow By!", message: "Now What?")
+        self.model?.addblowBy()
+    }
     func nagivateToInspection(object: WatercraftInspectionModel?, editable: Bool) {
         self.inspection = object
         self.performSegue(withIdentifier: "showWatercraftInspectionForm", sender: self)
@@ -349,7 +353,7 @@ extension ShiftViewController: UICollectionViewDataSource, UICollectionViewDeleg
         case .Information:
             return showShiftInfo ? ShiftInformationSectionRow.allCases.count : 1
         case .BlowBys:
-            return ShiftOverviewSectionRow.allCases.count
+            return ShiftInformationSectionRow.allCases.count
         }
     }
     
@@ -417,7 +421,7 @@ extension ShiftViewController: UICollectionViewDataSource, UICollectionViewDeleg
             cell.setup(object: model, callback: {[weak self] in
                 guard let strongSelf = self else {return}
                 if strongSelf.isEditable {
-                    strongSelf.nagivateToInspection(object: model.addInspection(), editable: strongSelf.isEditable)
+                    strongSelf.addBlowByClicked();
                 }
             })
             return cell

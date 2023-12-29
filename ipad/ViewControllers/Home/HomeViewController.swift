@@ -296,7 +296,7 @@ class HomeViewController: BaseViewController {
         
     }
     
-    // Add listener for when recahbility status changes
+    // Add listener for when reachability status changes
     private func beginReachabilityNotification() {
         NotificationCenter.default.removeObserver(self, name: .reachabilityChanged, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(reachabilityChanged), name: .reachabilityChanged, object: reachability)
@@ -307,7 +307,7 @@ class HomeViewController: BaseViewController {
         }
     }
     
-    // Handle recahbility status change
+    // Handle reachability status change
     @objc func reachabilityChanged(note: Notification) {
         guard let reachability = note.object as? Reachability else {return}
         switch reachability.connection {
@@ -322,7 +322,7 @@ class HomeViewController: BaseViewController {
         }
     }
     
-    // End recahbility listener
+    // End reachability listener
     private func endReachabilityNotification() {
         reachability.stopNotifier()
         NotificationCenter.default.removeObserver(self, name: .reachabilityChanged, object: reachability)
