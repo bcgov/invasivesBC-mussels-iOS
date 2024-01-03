@@ -13,8 +13,13 @@ import UIKit
 private enum ShiftOverviewSectionRow: Int, CaseIterable {
     case Header
     case Inspections
+    case Blowbys
 }
 
+private enum BlowbyOverviewSectionRow: Int, CaseIterable {
+    case Header
+    case Blowbys
+}
 private enum ShiftInformationSectionRow: Int, CaseIterable {
     case Header
     case StartShift
@@ -34,7 +39,9 @@ class ShiftViewController: BaseViewController {
         "BasicCollectionViewCell",
         "ShifOverviewHeaderCollectionViewCell",
         "InspectionsTableCollectionViewCell",
-        "ShiftInformationHeaderCollectionViewCell"
+        "BlowbyTableCollectionViewCell",
+        "ShiftInformationHeaderCollectionViewCell",
+        "ShiftBlowbysHeaderCollectionViewCell",
     ]
     
     // MARK: Varialbes
@@ -42,6 +49,7 @@ class ShiftViewController: BaseViewController {
     var showShiftInfo: Bool = true
     var isEditable: Bool = true
     private var inspection: WatercraftInspectionModel?
+    private var blowby: BlowbyModel?
     
     // MARK: Outlets
     @IBOutlet weak var containerView: UIView!
@@ -74,7 +82,10 @@ class ShiftViewController: BaseViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(self.tableButtonClicked(notification:)), name: .TableButtonClicked, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.inputItemValueChanged(notification:)), name: .InputItemValueChanged, object: nil)
     }
-    
+  @objc func addBlowByClicked() {
+    Alert.show(title: "Add BlowBy!", message: "Now What?");
+    self.model?.addBlowby();
+  }
     func setup(model: ShiftModel) {
         self.model = model
         self.isEditable = model.getStatus() == .Draft ||  model.getStatus() == .PendingSync
@@ -114,6 +125,10 @@ class ShiftViewController: BaseViewController {
         }
     }
     
+  @objc func addBlowbyClicked(sender: UIButton) {
+    Alert.show(title: "didTapAddBlowBy", message: "Yup");
+  }
+  
     @objc func completeAction(sender: UIBarButtonItem) {
         guard let model = self.model else { return }
         self.dismissKeyboard()
@@ -310,7 +325,13 @@ extension ShiftViewController: UICollectionViewDataSource, UICollectionViewDeleg
     func getShiftOverViewCell(indexPath: IndexPath) -> ShifOverviewHeaderCollectionViewCell {
         return collectionView!.dequeueReusableCell(withReuseIdentifier: "ShifOverviewHeaderCollectionViewCell", for: indexPath as IndexPath) as! ShifOverviewHeaderCollectionViewCell
     }
-    
+  func getShiftBlowbysHeaderCollectionViewCell(indexPath: IndexPath) -> ShiftBlowBysHeaderCollectionViewCell {
+    return collectionView!.dequeueReusableCell(withReuseIdentifier: "ShiftBlowBysHeaderCollectionViewCell", for: indexPath as IndexPath) as! ShiftBlowBysHeaderCollectionViewCell;
+  }
+  
+    func getBlowbyTableCell(indexPath: IndexPath) -> BlowbyTableCollectionViewCell {
+      return collectionView!.dequeueReusableCell(withReuseIdentifier: "BlowbyTableCollectionViewCell", for: indexPath as IndexPath) as! BlowbyTableCollectionViewCell
+    }
     func getInspectionsTableCell(indexPath: IndexPath) -> InspectionsTableCollectionViewCell {
         return collectionView!.dequeueReusableCell(withReuseIdentifier: "InspectionsTableCollectionViewCell", for: indexPath as IndexPath) as! InspectionsTableCollectionViewCell
     }
@@ -360,6 +381,15 @@ extension ShiftViewController: UICollectionViewDataSource, UICollectionViewDeleg
             let cell = getInspectionsTableCell(indexPath: indexPath)
             cell.setup(object: model)
             return cell
+        case .Blowbys:
+            let cell = getBlowbyTableCell(indexPath: indexPath)
+          cell.setup(object: model, callback: {[weak self] in
+            guard let strongSelf = self else {return}
+            if strongSelf.isEditable {
+              strongSelf.addBlowByClicked()
+            }
+          })
+            return cell
         }
     }
     
@@ -388,6 +418,25 @@ extension ShiftViewController: UICollectionViewDataSource, UICollectionViewDeleg
         }
     }
     
+  func getBlowbyOverviewSectionRow(indexPath: IndexPath) -> UICollectionViewCell {
+      guard let rowType = BlowbyOverviewSectionRow(rawValue: Int(indexPath.row)), let model = self.model else {return UICollectionViewCell() }
+      switch rowType {
+      case .Header:
+          let cell = getShiftBlowbysHeaderCollectionViewCell(indexPath: indexPath)
+          cell.setup(object: model, callback: {[weak self] in
+              guard let strongSelf = self else {return}
+              if strongSelf.isEditable {
+                print("Yolo")
+              }
+          })
+          return cell
+      case .Blowbys:
+          let cell = getBlowbyTableCell(indexPath: indexPath)
+          cell.setup(object: model)
+          return cell
+      }
+  }
+  
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         guard let sectionType = ShiftViewSection(rawValue: Int(indexPath.section)) else {
             return CGSize(width: 0, height: 0)
@@ -409,6 +458,9 @@ extension ShiftViewController: UICollectionViewDataSource, UICollectionViewDeleg
         case .Inspections:
             let height = InspectionsTableCollectionViewCell.getContentHeight(for: model)
             return CGSize(width: fullWidth, height: height)
+        case .Blowbys:
+            let height = BlowbyTableCollectionViewCell.getContentHeight(for: model)
+            return CGSize(width: fullWidth, height: height);
         }
     }
     

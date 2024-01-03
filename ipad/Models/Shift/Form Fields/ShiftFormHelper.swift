@@ -65,36 +65,6 @@ class ShiftFormHelper {
         )
         sectionItems.append(k9OnShift)
         
-        let boatsInspected = SwitchInput(
-            key: "boatsInspected",
-            header: ShiftFormHeaders.ShiftEnd.boatsInspected,
-            editable: editable ?? true,
-            value: object?.boatsInspected,
-            width: .Third
-        )
-        sectionItems.append(boatsInspected)
-        
-        let motorizedBlowBys = IntegerStepperInput(
-            key: "motorizedBlowBys",
-            header: ShiftFormHeaders.ShiftEnd.motorizedBlowBys,
-            editable: editable ?? true,
-            value: object?.motorizedBlowBys,
-            width: .Third
-        )
-        sectionItems.append(motorizedBlowBys)
-        
-        let nonMotorizedBlowBys = IntegerStepperInput(
-            key: "nonMotorizedBlowBys",
-            header: ShiftFormHeaders.ShiftEnd.nonMotorizedBlowBys,
-            editable: editable ?? true,
-            value: object?.nonMotorizedBlowBys,
-            width: .Third
-        )
-        sectionItems.append(nonMotorizedBlowBys)
-        
-        let spacer = InputSpacer()
-        sectionItems.append(spacer)
-        
         let shitEndComments = TextAreaInput(
             key: "shitEndComments",
             header: ShiftFormHeaders.ShiftEnd.comments,

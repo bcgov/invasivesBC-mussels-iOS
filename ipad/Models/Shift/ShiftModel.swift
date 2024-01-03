@@ -33,20 +33,17 @@ class ShiftModel: Object, BaseRealmObject {
     @objc dynamic var startTime: String = ""
     @objc dynamic var endTime: String = ""
     @objc dynamic var boatsInspected: Bool = true
-    @objc dynamic var motorizedBlowBys: Int = 0
-    @objc dynamic var nonMotorizedBlowBys: Int = 0
     @objc dynamic var k9OnShif: Bool = false
     @objc dynamic var date: Date?
     @objc dynamic var station: String = ""
-//    @objc dynamic var location: String = " "
     ///
     @objc dynamic var shitStartComments: String = ""
     @objc dynamic var shitEndComments: String = ""
     
     var inspections: List<WatercraftInspectionModel> = List<WatercraftInspectionModel>()
-    
+    var blowbys: List<BlowbyModel> = List<BlowbyModel>()
     @objc dynamic var status: String = "Draft"
-    // used for quary purposes (and displaying)
+    // used for query purposes (and displaying)
     @objc dynamic var formattedDate: String = ""
     
     // MARK: Save Object
@@ -73,6 +70,23 @@ class ShiftModel: Object, BaseRealmObject {
         }
     }
     
+  func addBlowby() -> BlowbyModel? {
+    let blowby = BlowbyModel()
+    blowby.shouldSync = false;
+    blowby.userId = self.userId;
+    blowby.timeStamp = Date();
+    do {
+      let realm = try Realm();
+      try realm.write {
+        self.blowbys.append(blowby);
+      }
+      return blowby;
+    } catch let error as NSError {
+      print("** REALM ERROR");
+      print(error);
+      return nil;
+    }
+  }
     // MARK: Setters
     func set(value: Any, for key: String) {
         if self[key] == nil {
@@ -197,8 +211,6 @@ class ShiftModel: Object, BaseRealmObject {
             "location": "NA",
             "shiftStartComment": shitStartComments.count > 1 ? shitStartComments : "None",
             "shiftEndComment":  shitEndComments.count > 1 ? shitEndComments : "None",
-            "motorizedBlowBys": motorizedBlowBys,
-            "nonMotorizedBlowBys": nonMotorizedBlowBys,
             "boatsInspected": boatsInspected,
             "k9OnShift": k9OnShif
         ]
@@ -212,4 +224,12 @@ class ShiftModel: Object, BaseRealmObject {
     func getShiftEndFields(editable: Bool) -> [InputItem] {
         return ShiftFormHelper.getShiftEndFields(for: self, editable: editable)
     }
+  
+  func getBlowbyFields(editable: Bool) -> [[InputItem]] {
+    var blowbyfields: [[InputItem]] = [];
+    self.blowbys.forEach { blowby in
+      blowbyfields.append(BlowByFormHelper.getBlowByStartFields(for: blowby))
+    }
+    return blowbyfields
+  }
 }
