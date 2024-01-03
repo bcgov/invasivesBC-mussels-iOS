@@ -79,13 +79,17 @@ class ShiftViewController: BaseViewController {
     private func addListeners() {
         NotificationCenter.default.removeObserver(self, name: .TableButtonClicked, object: nil)
         NotificationCenter.default.removeObserver(self, name: .InputItemValueChanged, object: nil)
+        NotificationCenter.default.removeObserver(self, name: .BlowbyDeleteClicked, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.tableButtonClicked(notification:)), name: .TableButtonClicked, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.inputItemValueChanged(notification:)), name: .InputItemValueChanged, object: nil)
     }
   @objc func addBlowByClicked() {
     Alert.show(title: "Add BlowBy!", message: "Now What?");
-    self.model?.addBlowby();
+    _ = self.model?.addBlowby();
+    self.view.setNeedsDisplay()
+    self.viewWillAppear(true)
   }
+  
     func setup(model: ShiftModel) {
         self.model = model
         self.isEditable = model.getStatus() == .Draft ||  model.getStatus() == .PendingSync
@@ -124,9 +128,17 @@ class ShiftViewController: BaseViewController {
             return
         }
     }
-    
-  @objc func addBlowbyClicked(sender: UIButton) {
-    Alert.show(title: "didTapAddBlowBy", message: "Yup");
+  @objc func didTapDeleteBlowbyButton(blowbyToDelete: BlowbyModel) {
+      guard let model = self.model else { return }
+      self.dismissKeyboard()
+      
+      Alert.show(title: "Deleting Blowby", message: "Would you like to delete this Blowby?", yes: {
+            model.deleteBlowby(blowbyToDelete: blowbyToDelete);
+            self.view.setNeedsDisplay()
+            self.viewWillAppear(true)
+      }) {
+          return
+      }
   }
   
     @objc func completeAction(sender: UIBarButtonItem) {
@@ -147,11 +159,16 @@ class ShiftViewController: BaseViewController {
             Alert.show(title: "Incomplete", message: validationMessage())
         }
     }
-    
     // Table Button clicked
     @objc func tableButtonClicked(notification: Notification) {
-        guard let actionModel = notification.object as? TableClickActionModel, let inspectionModel = actionModel.object as? WatercraftInspectionModel else {return}
+      guard let actionModel = notification.object as? TableClickActionModel else {return}
+      if let blowbyModel = actionModel.object as? BlowbyModel {
+        didTapDeleteBlowbyButton(blowbyToDelete: blowbyModel);
+      } else if let inspectionModel = actionModel.object as? WatercraftInspectionModel {
         nagivateToInspection(object: inspectionModel, editable: isEditable)
+      } else {
+        return;
+      }
     }
     
     func nagivateToInspection(object: WatercraftInspectionModel?, editable: Bool) {
