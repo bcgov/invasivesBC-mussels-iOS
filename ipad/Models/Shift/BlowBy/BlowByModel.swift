@@ -21,11 +21,12 @@ class BlowByModel: Object, BaseRealmObject {
         return "localId"
     }
     
+    @objc dynamic var remoteId: Int = -1
+    @objc dynamic var shouldSync: Bool = true
+    
     @objc dynamic var timeStamp: Date = Date()
     
-    @objc dynamic var remoteId: Int = -1
-    @objc dynamic var shouldSync: Bool = false
-    
+    @objc dynamic var shiftId: String = ""
     @objc dynamic var blowByTime: String = ""
     @objc dynamic var watercraftComplexity: String = ""
     @objc dynamic var reportedToRapp: Bool = false
@@ -47,10 +48,27 @@ class BlowByModel: Object, BaseRealmObject {
         }
     }
     
+    func set(remoteId: Int) {
+        do {
+            let realm = try Realm()
+            try realm.write {
+                self.remoteId = remoteId
+            }
+        } catch let error as NSError {
+            print("** REALM ERROR")
+            print(error)
+        }
+    }
+    
     // MARK: - To Dictionary
-    func toDictionary() -> [String: Any] {
+    func toDictionary() -> [String : Any] {
+        return toDictionary(shift: -1)
+    }
+    
+    func toDictionary(shift id: Int) -> [String : Any] {
         
-        var body: [String: Any] = [
+        let body: [String: Any] = [
+            "shiftId": shiftId,
             "blowByTime": blowByTime,
             "watercraftComplexity": watercraftComplexity,
             "reportedToRapp": reportedToRapp
@@ -58,16 +76,4 @@ class BlowByModel: Object, BaseRealmObject {
         
         return body
     }
-    
-    // MARK: UI Helpers
-//    func getInputputFields(for section: HighRiskFormSection, editable: Bool? = nil) -> [InputItem] {
-//        switch section {
-//        case .BasicInformation:
-//            return HighRiskFormHelper.getBasicInfoFields(for: self, editable: editable)
-////        case .Inspection:
-////            return HighRiskFormHelper.getInspectionFields(for: self, editable: editable)
-//        case .InspectionOutcomes:
-//            return HighRiskFormHelper.getInspectionOutcomesFields(for: self, editable: editable)
-//        }
-//    }
 }

@@ -150,7 +150,7 @@ class ShiftViewController: BaseViewController {
     }
     @objc func addBlowByClicked() {
         Alert.show(title: "Add Blow By!", message: "Now What?")
-        self.model?.addblowBy()
+        self.model?.addBlowBy()
     }
     func nagivateToInspection(object: WatercraftInspectionModel?, editable: Bool) {
         self.inspection = object

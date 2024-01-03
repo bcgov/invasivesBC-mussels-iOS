@@ -115,6 +115,14 @@ class Storage {
         return object
     }
     
+    // MARK: BlowBys
+    public func blowBy(withLocalId localId: String) -> BlowByModel? {
+        guard let realm = try? Realm(), let object = realm.objects(BlowByModel.self).filter("localId = %@", localId).first else {
+            return nil
+        }
+        return object
+    }
+    
     // MARK: Code Tables
     public func codeTable(type: CodeTableType) -> [String] {
         do {
