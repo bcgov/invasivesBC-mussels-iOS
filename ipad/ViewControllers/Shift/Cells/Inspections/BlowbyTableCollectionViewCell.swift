@@ -46,10 +46,10 @@ class BlowbyTableCollectionViewCell: BaseShiftOverviewCollectionViewCell {
         let table = Table()
         
         // Convert list to array
-        let inspections: [BlowbyModel] = model.blowbys.map{ $0 }
+        let blowbys: [BlowbyModel] = model.blowbys.map{ $0 }
         
         // Set table container height
-        tableHeightConstraint.constant = InspectionsTableCollectionViewCell.getTableHeight(for: model)
+        tableHeightConstraint.constant = BlowbyTableCollectionViewCell.getTableHeight(for: model)
                 
         // Create Column Config
         var columns: [TableViewColumnConfig] = []
@@ -57,7 +57,7 @@ class BlowbyTableCollectionViewCell: BaseShiftOverviewCollectionViewCell {
         columns.append(TableViewColumnConfig(key: "watercraftComplexity", header: "Watercraft Complexity", type: .Normal))
         columns.append(TableViewColumnConfig(key: "blowByTime", header: "Blowby Time", type: .Normal))
         columns.append(TableViewColumnConfig(key: "", header: "Delete", type: .Button, buttonName: "Delete", showHeader: false))
-        let tableView = table.show(columns: columns, in: inspections, container: tableContainer, emptyTitle: "It's looking a little empty around here.", emptyMessage: "You have not added any blowbys to this shift.")
+        let tableView = table.show(columns: columns, in: blowbys, container: tableContainer, emptyTitle: "It's looking a little empty around here.", emptyMessage: "You have not added any blowbys to this shift.")
         tableView.layoutIfNeeded()
         self.layoutIfNeeded()
     }
@@ -71,13 +71,13 @@ class BlowbyTableCollectionViewCell: BaseShiftOverviewCollectionViewCell {
     }
     
     static func getTableHeight(for model: ShiftModel) -> CGFloat {
-        if model.inspections.isEmpty {
+        if model.blowbys.isEmpty {
             return 250
         }
         // Convert list to array
         
-        let inspections: [WatercraftInspectionModel] = model.inspections.map{ $0 }
-        let numberOfRows = inspections.count
+        let blowbys: [BlowbyModel] = model.blowbys.map{ $0 }
+        let numberOfRows = blowbys.count
         
         let rowHeight = Table.rowHeight
         let headerHeight = Table.headerLabelHeight
