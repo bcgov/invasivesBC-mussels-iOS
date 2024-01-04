@@ -65,6 +65,14 @@ class ShiftFormHelper {
         )
         sectionItems.append(k9OnShift)
         
+        let boatsInspected = SwitchInput(
+            key: "boatsInspected",
+            header: ShiftFormHeaders.ShiftEnd.boatsInspected,
+            editable: editable ?? true,
+            value: object?.boatsInspected,
+            width: .Third
+        )
+      sectionItems.append(boatsInspected)
         let shitEndComments = TextAreaInput(
             key: "shitEndComments",
             header: ShiftFormHeaders.ShiftEnd.comments,
