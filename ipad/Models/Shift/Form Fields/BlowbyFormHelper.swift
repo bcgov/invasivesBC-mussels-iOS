@@ -15,7 +15,7 @@ class BlowByFormHelper {
     ///     - editable: Should the data display in a editable or static format?
     ///     - modalSize: Will be used in a scaled down
     ///  - Returns: [InputItems]
-    static func getBlowByStartFields(for object: BlowbyModel? = nil, editable: Bool? = true, modalSize: Bool? = false) -> [InputItem] {
+    static func getBlowByFields(for object: BlowbyModel? = nil, editable: Bool? = true, modalSize: Bool? = false) -> [InputItem] {
         var sectionItems: [InputItem] = []
         let blowByTime = TimeInput(
             key: "blowByTime",
@@ -32,7 +32,12 @@ class BlowByFormHelper {
             editable: editable ?? true,
             value: object?.watercraftComplexity,
             width: .Third,
-            dropdownItems: DropdownHelper.shared.getDropdown(for: .stations)
+            dropdownItems: [
+              DropdownModel(display: "Non-motorized", key: "Non-motorized"),
+              DropdownModel(display: "Simple", key: "Simple"),
+              DropdownModel(display: "Complex", key: "Complex"),
+              DropdownModel(display: "Very Complex", key: "Very Complex")
+            ]
         );
         sectionItems.append(watercraftComplexity);
 

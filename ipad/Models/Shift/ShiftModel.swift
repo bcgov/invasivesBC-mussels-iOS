@@ -41,7 +41,7 @@ class ShiftModel: Object, BaseRealmObject {
     ///
     @objc dynamic var shitStartComments: String = ""
     @objc dynamic var shitEndComments: String = ""
-    
+    let BlowbyFields = ["reportedToRapp", "blowByTime", "watercraftComplexity"];
     var inspections: List<WatercraftInspectionModel> = List<WatercraftInspectionModel>()
     var blowbys: List<BlowbyModel> = List<BlowbyModel>()
     @objc dynamic var status: String = "Draft"
@@ -72,14 +72,10 @@ class ShiftModel: Object, BaseRealmObject {
         }
     }
     
-    func addBlowby() -> BlowbyModel? {
-        let blowby = BlowbyModel()
+  func addBlowby(blowby: BlowbyModel) -> BlowbyModel? {
         blowby.shouldSync = true;
         blowby.userId = self.userId;
-        blowby.timeStamp = Date();
-        blowby.reportedToRapp = true;
-        blowby.watercraftComplexity = "Complex"
-        blowby.blowByTime = "3:30"
+        blowby.timeStamp = Date()
         do {
             let realm = try Realm();
             try realm.write {
@@ -95,6 +91,7 @@ class ShiftModel: Object, BaseRealmObject {
     
     // MARK: Setters
     func set(value: Any, for key: String) {
+      if BlowbyFields.contains(key){return}
         if self[key] == nil {
             print("\(key) is nil")
             return
@@ -246,11 +243,7 @@ class ShiftModel: Object, BaseRealmObject {
         return ShiftFormHelper.getShiftEndFields(for: self, editable: editable)
     }
   
-  func getBlowbyFields(editable: Bool) -> [[InputItem]] {
-    var blowbyfields: [[InputItem]] = [];
-    self.blowbys.forEach { blowby in
-      blowbyfields.append(BlowByFormHelper.getBlowByStartFields(for: blowby))
-    }
-    return blowbyfields
+  func getBlowbyFields(editable: Bool) -> [InputItem] {
+    return BlowByFormHelper.getBlowByFields(for: BlowbyModel());
   }
 }

@@ -27,7 +27,7 @@ class BlowbyModel: Object, BaseRealmObject {
     @objc dynamic var timeStamp: Date = Date()
 
     @objc dynamic var blowByTime: String = ""
-    @objc dynamic var watercraftComplexity: String = ""
+    @objc dynamic var watercraftComplexity: String = "Non-Motorized"
     @objc dynamic var reportedToRapp: Bool = false
 
     // MARK: Setters
@@ -36,16 +36,9 @@ class BlowbyModel: Object, BaseRealmObject {
             print("\(key) is nil")
             return
         }
-        do {
-            let realm = try Realm()
-            try realm.write {
-                self[key] = value
-            }
-        } catch let error as NSError {
-            print("** REALM ERROR")
-            print(error)
-        }
+          self[key] = value
     }
+
 
     func set(remoteId: Int) {
         do {
@@ -58,7 +51,9 @@ class BlowbyModel: Object, BaseRealmObject {
             print(error)
         }
     }
-
+    func getThisBlowbyFields(editable: Bool, modalSize: Bool) -> [InputItem] {
+      return BlowByFormHelper.getBlowByFields(for: self, editable: editable, modalSize: modalSize)
+    }
     // MARK: - To Dictionary
     func toDictionary() -> [String : Any] {
         return toDictionary(shift: -1)

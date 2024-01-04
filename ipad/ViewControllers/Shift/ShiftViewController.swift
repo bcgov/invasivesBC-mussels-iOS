@@ -83,13 +83,21 @@ class ShiftViewController: BaseViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(self.tableButtonClicked(notification:)), name: .TableButtonClicked, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.inputItemValueChanged(notification:)), name: .InputItemValueChanged, object: nil)
     }
+
   @objc func addBlowByClicked() {
-    Alert.show(title: "Add BlowBy!", message: "Now What?");
-    _ = self.model?.addBlowby();
+      let blowbyModal: NewBlowbyModal = NewBlowbyModal.fromNib()
+      guard let currentShiftModel = model else { return }
+      blowbyModal.initialize(shift: currentShiftModel, delegate: self, onStart: { [weak self] (model) in
+          guard let _self = self else { return }
+          // Handle the start action
+      }) {
+          // Canceled
+      }
     self.view.setNeedsDisplay()
     self.viewWillAppear(true)
   }
-  
+
+
     func setup(model: ShiftModel) {
         self.model = model
         self.isEditable = model.getStatus() == .Draft ||  model.getStatus() == .PendingSync
