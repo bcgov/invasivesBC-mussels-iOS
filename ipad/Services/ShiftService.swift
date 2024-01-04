@@ -46,20 +46,40 @@ class ShiftService {
         }
     }
     
-    public func submit(shift: ShiftModel, then: @escaping (_ success: Bool) -> Void) {
+     public func submit(shift: ShiftModel, then: @escaping (_ success: Bool) -> Void) {
         let shiftLocalId = shift.localId
         // Post call
         post(shift: shift) { (shiftId) in
-            // Fetch shift object - For realm thread issues
-            guard let rempteId = shiftId, let refetchedShift = Storage.shared.shift(withLocalId: shiftLocalId) else {
+            guard let remoteId = shiftId, let refetchedShift = Storage.shared.shift(withLocalId: shiftLocalId) else {
                 return then(false)
             }
-            refetchedShift.set(remoteId: rempteId)
-            self.submit(inspections: Array(refetchedShift.inspections), shiftId: rempteId) { (success) in
-                return then(success)
+            refetchedShift.set(remoteId: remoteId)
+
+            var inspectionSuccess = false
+            var blowBySuccess = false
+
+            let group = DispatchGroup()
+
+            group.enter()
+            self.submit(inspections: Array(refetchedShift.inspections), shiftId: remoteId) { (success) in
+                inspectionSuccess = success
+                group.leave()
+            }
+
+            group.enter()
+            self.submit(theBlowBys: Array(refetchedShift.blowbys), shiftId: remoteId) { (success) in
+                blowBySuccess = success
+                group.leave()
+            }
+
+            // Wait for both submissions to complete
+            group.notify(queue: .main) {
+                return then(inspectionSuccess && blowBySuccess)
             }
         }
-    }
+     }
+
+
     
     private func isOnline() -> Bool {
         do {
@@ -125,6 +145,22 @@ class ShiftService {
         }
     }
     
+    private func post(blowBy: BlowbyModel, shift id: Int,then: @escaping (_ id: Int?) -> Void) {
+        if (!isOnline()) {return then(nil)}
+        guard let endpoint = URL(string: APIURL.blowBys) else { return then(nil)}
+        APIRequest.request(type: .Post, endpoint: endpoint, params: blowBy.toDictionary(shift: id)) { (result) in
+            guard let responseJSON = result else {
+                Banner.show(message: "Didn't receive a valid API response when posting blow by")
+                return then(nil)
+            }
+            guard let dataDict = responseJSON["data"].dictionary, let id = dataDict["blow_by_id"]?.int else {
+                self.showError(in: responseJSON)
+                return then(nil)
+            }
+            return then(id)
+        }
+    }
+    
     // Submit inspection objects recursively
     private func submit(inspections: [WatercraftInspectionModel], shiftId: Int,then: @escaping (_ success: Bool) -> Void) {
         var remainingInspections = inspections
@@ -144,4 +180,28 @@ class ShiftService {
             self.submit(inspections: remainingInspections, shiftId: shiftId, then: then)
         }
     }
+
+    // Submit blowby objects recursively
+     private func submit(theBlowBys: [BlowbyModel], shiftId: Int, then: @escaping (_ success: Bool) -> Void) {
+          var remainingBlowBys = theBlowBys
+          if remainingBlowBys.count < 1 {
+               return then(true)
+          }
+          guard isOnline() else {
+               return then(false)
+          }
+          
+          guard let theBlowBy = remainingBlowBys.popLast() else {
+               return then(false)
+          }
+          let blowByLocalId = theBlowBy.localId
+          
+          post(blowBy: theBlowBy, shift: shiftId) { (blowById) in
+               guard let id = blowById, let refetchedBlowBy = Storage.shared.blowBy(withLocalId: blowByLocalId) else {
+                    return then(false)
+               }
+               refetchedBlowBy.set(remoteId: id)
+               self.submit(theBlowBys: remainingBlowBys, shiftId: shiftId, then: then)
+          }
+     }
 }

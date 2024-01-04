@@ -34,6 +34,8 @@ class ShiftModel: Object, BaseRealmObject {
     @objc dynamic var endTime: String = ""
     @objc dynamic var boatsInspected: Bool = true
     @objc dynamic var k9OnShif: Bool = false
+    @objc dynamic var motorizedBlowBys: Int = 0
+    @objc dynamic var nonMotorizedBlowBys: Int = 0
     @objc dynamic var date: Date?
     @objc dynamic var station: String = ""
     ///
@@ -70,23 +72,27 @@ class ShiftModel: Object, BaseRealmObject {
         }
     }
     
-  func addBlowby() -> BlowbyModel? {
-    let blowby = BlowbyModel()
-    blowby.shouldSync = false;
-    blowby.userId = self.userId;
-    blowby.timeStamp = Date();
-    do {
-      let realm = try Realm();
-      try realm.write {
-        self.blowbys.append(blowby);
-      }
-      return blowby;
-    } catch let error as NSError {
-      print("** REALM ERROR");
-      print(error);
-      return nil;
+    func addBlowby() -> BlowbyModel? {
+        let blowby = BlowbyModel()
+        blowby.shouldSync = true;
+        blowby.userId = self.userId;
+        blowby.timeStamp = Date();
+        blowby.reportedToRapp = true;
+        blowby.watercraftComplexity = "Complex"
+        blowby.blowByTime = "3:30"
+        do {
+            let realm = try Realm();
+            try realm.write {
+                self.blowbys.append(blowby);
+            }
+            return blowby;
+        } catch let error as NSError {
+            print("** REALM ERROR");
+            print(error);
+            return nil;
+        }
     }
-  }
+    
     // MARK: Setters
     func set(value: Any, for key: String) {
         if self[key] == nil {
@@ -222,6 +228,8 @@ class ShiftModel: Object, BaseRealmObject {
             "endTime": endTimeFormatted,
             "station": station,
             "location": "NA",
+            "motorizedBlowBys": motorizedBlowBys,
+            "nonMotorizedBlowBys": nonMotorizedBlowBys,
             "shiftStartComment": shitStartComments.count > 1 ? shitStartComments : "None",
             "shiftEndComment":  shitEndComments.count > 1 ? shitEndComments : "None",
             "boatsInspected": boatsInspected,

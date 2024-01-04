@@ -86,6 +86,7 @@ enum EndPoints: String {
     case user = "/account/me"
     case uploads = "/uploads/report-issue"
     case majorCities = "/mussels/major-cities"
+    case blowBys = "/mussels/blow-bys"
 }
 
 /**
@@ -123,6 +124,10 @@ struct APIURL {
     
     static let uploads: String = {
         return Self.baseURL + EndPoints.uploads.rawValue
+    }()
+    
+    static let blowBys: String = {
+        return Self.baseURL + EndPoints.blowBys.rawValue
     }()
 }
 
