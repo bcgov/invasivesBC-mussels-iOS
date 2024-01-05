@@ -60,7 +60,7 @@ struct StringConstants {
     }
 }
 struct BlowbyFormHeaders {
-  static let blowByTime = "Blowby time"
+  static let timeStamp = "Blowby time"
   static let watercraftComplexity = "Watercraft Complexity"
   static let reportedToRapp = "Reported to RAPP"
 }

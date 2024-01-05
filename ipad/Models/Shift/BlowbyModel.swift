@@ -24,8 +24,9 @@ class BlowbyModel: Object, BaseRealmObject {
     @objc dynamic var remoteId: Int = -1
     @objc dynamic var shouldSync: Bool = true
 
-    @objc dynamic var timeStamp: Date = Date()
-
+    @objc dynamic var date: Date = Date()
+    @objc dynamic var timeStamp: String = ""
+    
     @objc dynamic var blowByTime: String = ""
     @objc dynamic var watercraftComplexity: String = "Non-Motorized"
     @objc dynamic var reportedToRapp: Bool = false
@@ -51,19 +52,38 @@ class BlowbyModel: Object, BaseRealmObject {
             print(error)
         }
     }
+    
     func getThisBlowbyFields(editable: Bool, modalSize: Bool) -> [InputItem] {
       return BlowByFormHelper.getBlowByFields(for: self, editable: editable, modalSize: modalSize)
     }
+    
+    func formattedDateTime(time: String, date: Date) -> String? {
+        let timeFormatter = DateFormatter()
+        timeFormatter.dateFormat = "YYYY-MM-dd HH:mm:ss"
+        timeFormatter.timeZone = TimeZone(abbreviation: "UTC")
+        let startDate = date
+        let startTimeSplit = time.components(separatedBy: ":")
+        guard let timeInDate = startDate.setTime(hour: Int(startTimeSplit[0]) ?? 0, min: Int(startTimeSplit[1]) ?? 0, sec: 1) else {
+            return nil
+        }
+        
+        return timeFormatter.string(from: timeInDate)
+    }
+    
     // MARK: - To Dictionary
     func toDictionary() -> [String : Any] {
         return toDictionary(shift: -1)
     }
 
     func toDictionary(shift id: Int) -> [String : Any] {
+        let date = self.date
+        guard let blowByTimeFormatted = formattedDateTime(time: timeStamp, date: date) else {
+            return [String : Any]()
+        }
 
         let body: [String: Any] = [
             "observerWorkflowId": id,
-            "blowByTime": blowByTime,
+            "blowByTime": blowByTimeFormatted,
             "watercraftComplexity": watercraftComplexity,
             "reportedToRapp": reportedToRapp
         ]

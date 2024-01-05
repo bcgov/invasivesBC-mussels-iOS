@@ -55,7 +55,7 @@ class BlowbyTableCollectionViewCell: BaseShiftOverviewCollectionViewCell {
         var columns: [TableViewColumnConfig] = []
         columns.append(TableViewColumnConfig(key: "reportedToRapp", header: "Reported to Rapp", type: .Normal))
         columns.append(TableViewColumnConfig(key: "watercraftComplexity", header: "Watercraft Complexity", type: .Normal))
-        columns.append(TableViewColumnConfig(key: "blowByTime", header: "Blowby Time", type: .Normal))
+        columns.append(TableViewColumnConfig(key: "timeStamp", header: "Blowby Time", type: .Normal))
         columns.append(TableViewColumnConfig(key: "", header: "Delete", type: .Button, buttonName: "Delete", showHeader: false))
         let tableView = table.show(columns: columns, in: blowbys, container: tableContainer, emptyTitle: "It's looking a little empty around here.", emptyMessage: "You have not added any blowbys to this shift.")
         tableView.layoutIfNeeded()

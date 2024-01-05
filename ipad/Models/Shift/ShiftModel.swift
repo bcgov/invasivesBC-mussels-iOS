@@ -41,7 +41,7 @@ class ShiftModel: Object, BaseRealmObject {
     ///
     @objc dynamic var shitStartComments: String = ""
     @objc dynamic var shitEndComments: String = ""
-    let BlowbyFields = ["reportedToRapp", "blowByTime", "watercraftComplexity"];
+    let BlowbyFields = ["reportedToRapp", "timeStamp", "watercraftComplexity"];
     var inspections: List<WatercraftInspectionModel> = List<WatercraftInspectionModel>()
     var blowbys: List<BlowbyModel> = List<BlowbyModel>()
     @objc dynamic var status: String = "Draft"
@@ -75,7 +75,6 @@ class ShiftModel: Object, BaseRealmObject {
   func addBlowby(blowby: BlowbyModel) -> BlowbyModel? {
         blowby.shouldSync = true;
         blowby.userId = self.userId;
-        blowby.timeStamp = Date()
         do {
             let realm = try Realm();
             try realm.write {

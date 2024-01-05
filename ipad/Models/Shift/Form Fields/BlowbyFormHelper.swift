@@ -17,14 +17,14 @@ class BlowByFormHelper {
     ///  - Returns: [InputItems]
     static func getBlowByFields(for object: BlowbyModel? = nil, editable: Bool? = true, modalSize: Bool? = false) -> [InputItem] {
         var sectionItems: [InputItem] = []
-        let blowByTime = TimeInput(
-            key: "blowByTime",
-            header: BlowbyFormHeaders.blowByTime,
+        let timeStamp = TimeInput(
+            key: "timeStamp",
+            header: BlowbyFormHeaders.timeStamp,
             editable: editable ?? true,
-            value: object?.blowByTime,
+            value: object?.timeStamp,
             width: .Third
         );
-        sectionItems.append(blowByTime);
+        sectionItems.append(timeStamp);
 
         let watercraftComplexity = DropdownInput (
             key: "watercraftComplexity",
@@ -57,7 +57,7 @@ class BlowByFormHelper {
     /// - Returns: [TableViewColumnConfig]
     func getTableColumns() -> [TableViewColumnConfig] {
         var columns: [TableViewColumnConfig] = []
-        columns.append(TableViewColumnConfig(key: "blowByTime", header: BlowbyFormHeaders.blowByTime, type: .Normal));
+        columns.append(TableViewColumnConfig(key: "timeStamp", header: BlowbyFormHeaders.timeStamp, type: .Normal));
         columns.append(TableViewColumnConfig(key: "watercraftComplexity", header: BlowbyFormHeaders.watercraftComplexity, type: .Normal));
         columns.append(TableViewColumnConfig(key: "reportedToRapp", header: BlowbyFormHeaders.reportedToRapp, type: .Normal));
         return columns;
