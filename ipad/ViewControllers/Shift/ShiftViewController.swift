@@ -136,19 +136,20 @@ class ShiftViewController: BaseViewController {
             return
         }
     }
-  @objc func didTapDeleteBlowbyButton(blowbyToDelete: BlowbyModel) {
-      guard let model = self.model else { return }
-      self.dismissKeyboard()
-      
-      Alert.show(title: "Deleting Blowby", message: "Would you like to delete this Blowby?", yes: {
+    
+    @objc func didTapDeleteBlowbyButton(blowbyToDelete: BlowbyModel) {
+        guard let model = self.model else { return }
+        self.dismissKeyboard()
+        
+        Alert.show(title: "Deleting Blowby", message: "Would you like to delete this Blowby?", yes: {
             model.deleteBlowby(blowbyToDelete: blowbyToDelete);
             self.view.setNeedsDisplay()
             self.viewWillAppear(true)
-      }) {
-          return
-      }
-  }
-  
+        }) {
+            return
+        }
+    }
+
     @objc func completeAction(sender: UIBarButtonItem) {
         guard let model = self.model else { return }
         self.dismissKeyboard()
@@ -169,14 +170,21 @@ class ShiftViewController: BaseViewController {
     }
     // Table Button clicked
     @objc func tableButtonClicked(notification: Notification) {
-      guard let actionModel = notification.object as? TableClickActionModel else {return}
-      if let blowbyModel = actionModel.object as? BlowbyModel {
-        didTapDeleteBlowbyButton(blowbyToDelete: blowbyModel);
-      } else if let inspectionModel = actionModel.object as? WatercraftInspectionModel {
-        nagivateToInspection(object: inspectionModel, editable: isEditable)
-      } else {
+        guard let actionModel = notification.object as? TableClickActionModel else {return}
+        
+//        if actionModel.buttonName.lowercased() == "edit", let blowbyModel = actionModel.object as? BlowbyModel {
+//            didTapEditBlowbyButton(blowbyToEdit: blowbyModel);
+//        }
+        
+        if actionModel.buttonName.lowercased() == "delete", let blowbyModel = actionModel.object as? BlowbyModel {
+            didTapDeleteBlowbyButton(blowbyToDelete: blowbyModel);
+        }
+        
+        if let inspectionModel = actionModel.object as? WatercraftInspectionModel {
+            nagivateToInspection(object: inspectionModel, editable: isEditable)
+        }
+        
         return;
-      }
     }
     
     func nagivateToInspection(object: WatercraftInspectionModel?, editable: Bool) {

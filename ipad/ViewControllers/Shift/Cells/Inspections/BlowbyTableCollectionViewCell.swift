@@ -57,7 +57,16 @@ class BlowbyTableCollectionViewCell: BaseShiftOverviewCollectionViewCell {
         columns.append(TableViewColumnConfig(key: "watercraftComplexity", header: "Watercraft Complexity", type: .Normal))
         columns.append(TableViewColumnConfig(key: "timeStamp", header: "Blowby Time", type: .Normal))
         columns.append(TableViewColumnConfig(key: "", header: "Delete", type: .Button, buttonName: "Delete", showHeader: false))
+        
+        // Disable adding blowbys if not completed and hide delete button
+        if model.getStatus() != .Draft {
+            columns.removeLast()
+            blowByButton.alpha = 0
+            blowByButton.isEnabled = false
+        }
+        
         let tableView = table.show(columns: columns, in: blowbys, container: tableContainer, emptyTitle: "It's looking a little empty around here.", emptyMessage: "You have not added any blowbys to this shift.")
+        
         tableView.layoutIfNeeded()
         self.layoutIfNeeded()
     }
@@ -98,6 +107,12 @@ class BlowbyTableCollectionViewCell: BaseShiftOverviewCollectionViewCell {
     
     // MARK: Style
     override func style() {
+        // Title
+        titleLabel.font = Fonts.getPrimaryBold(size: 28)
+        titleLabel.textColor = Colors.primary
+        // Button
+        styleFillButton(button: blowByButton)
+
         styleSectionTitle(label: titleLabel)
         styleDivider(view: divider)
     }

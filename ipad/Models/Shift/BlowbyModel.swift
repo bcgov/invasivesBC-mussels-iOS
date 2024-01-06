@@ -28,7 +28,7 @@ class BlowbyModel: Object, BaseRealmObject {
     @objc dynamic var timeStamp: String = ""
     
     @objc dynamic var blowByTime: String = ""
-    @objc dynamic var watercraftComplexity: String = "Non-Motorized"
+    @objc dynamic var watercraftComplexity: String = ""
     @objc dynamic var reportedToRapp: Bool = false
 
     // MARK: Setters

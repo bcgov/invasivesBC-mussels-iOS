@@ -194,16 +194,16 @@ class ShiftModel: Object, BaseRealmObject {
         return timeFormatter.string(from: timeInDate)
     }
   
-  func deleteBlowby(blowbyToDelete: BlowbyModel) -> Void {
+    func deleteBlowby(blowbyToDelete: BlowbyModel) -> Void {
         // Open a write transaction
         do {
-          let realm = try Realm()
-          try realm.write {
-            // Delete the object from Realm
-            realm.delete(blowbyToDelete)
-          }
+            let realm = try Realm()
+            try realm.write {
+                // Delete the object from Realm
+                realm.delete(blowbyToDelete)
+            }
         }  catch {
-          print("Error deleting blowby: \(error)")
+            print("Error deleting blowby: \(error)")
         }
     }
   

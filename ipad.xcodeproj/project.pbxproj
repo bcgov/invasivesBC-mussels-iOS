@@ -214,6 +214,8 @@
 		5C82D404237B31C200B065BA /* WatercraftRiskAssessmentAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C82D403237B31C200B065BA /* WatercraftRiskAssessmentAPI.swift */; };
 		9620B078298849BF0084268C /* NullSwitchInputCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9620B076298849BF0084268C /* NullSwitchInputCollectionViewCell.swift */; };
 		9620B079298849BF0084268C /* NullSwitchInputCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9620B077298849BF0084268C /* NullSwitchInputCollectionViewCell.xib */; };
+		96CDB9632B4886FF009A45C7 /* NewBlowbyModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96CDB9612B4886FF009A45C7 /* NewBlowbyModal.swift */; };
+		96CDB9642B4886FF009A45C7 /* NewBlowbyModal.xib in Resources */ = {isa = PBXBuildFile; fileRef = 96CDB9622B4886FF009A45C7 /* NewBlowbyModal.xib */; };
 		A7AE5275237CC3660044DBB7 /* unapproved-cross.json in Resources */ = {isa = PBXBuildFile; fileRef = A7AE5272237CC3660044DBB7 /* unapproved-cross.json */; };
 		A7AE5276237CC3660044DBB7 /* check-mark-success.json in Resources */ = {isa = PBXBuildFile; fileRef = A7AE5273237CC3660044DBB7 /* check-mark-success.json */; };
 		A7AE5277237CC3660044DBB7 /* sync-circle.json in Resources */ = {isa = PBXBuildFile; fileRef = A7AE5274237CC3660044DBB7 /* sync-circle.json */; };
@@ -457,6 +459,8 @@
 		763C8716EF742F6764FFE7D7 /* Pods-ipad.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ipad.debug.xcconfig"; path = "Target Support Files/Pods-ipad/Pods-ipad.debug.xcconfig"; sourceTree = "<group>"; };
 		9620B076298849BF0084268C /* NullSwitchInputCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NullSwitchInputCollectionViewCell.swift; sourceTree = "<group>"; };
 		9620B077298849BF0084268C /* NullSwitchInputCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NullSwitchInputCollectionViewCell.xib; sourceTree = "<group>"; };
+		96CDB9612B4886FF009A45C7 /* NewBlowbyModal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewBlowbyModal.swift; sourceTree = "<group>"; };
+		96CDB9622B4886FF009A45C7 /* NewBlowbyModal.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewBlowbyModal.xib; sourceTree = "<group>"; };
 		987374CFF5F2318652AA2FCC /* Pods-ipadTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ipadTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ipadTests/Pods-ipadTests.release.xcconfig"; sourceTree = "<group>"; };
 		99C48CD83AAD3AAA2CD083BF /* Pods-ipadTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ipadTests.release.xcconfig"; path = "Target Support Files/Pods-ipadTests/Pods-ipadTests.release.xcconfig"; sourceTree = "<group>"; };
 		A41A1378A874E8BDB895F235 /* Pods-ipad.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ipad.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ipad/Pods-ipad.debug.xcconfig"; sourceTree = "<group>"; };
@@ -754,6 +758,7 @@
 		2944BCF52437C0EA00826F48 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				96CDB9602B4886FF009A45C7 /* New Blowby Modal */,
 				2968859026030F9D00ECA183 /* Major Cities Picker */,
 				2907E4B52368D21D00946B3F /* Input Modal */,
 				29A97437236FD615006C668F /* Form */,
@@ -1462,6 +1467,15 @@
 			path = "Null Switch Input";
 			sourceTree = "<group>";
 		};
+		96CDB9602B4886FF009A45C7 /* New Blowby Modal */ = {
+			isa = PBXGroup;
+			children = (
+				96CDB9612B4886FF009A45C7 /* NewBlowbyModal.swift */,
+				96CDB9622B4886FF009A45C7 /* NewBlowbyModal.xib */,
+			);
+			path = "New Blowby Modal";
+			sourceTree = "<group>";
+		};
 		A7AE5271237CC3660044DBB7 /* LottieAnimations */ = {
 			isa = PBXGroup;
 			children = (
@@ -1606,6 +1620,7 @@
 				295051112374F54A000FBD6E /* IntegerInputCollectionViewCell.xib in Resources */,
 				299BF02023FCA19A001732CD /* pdfMap.pdf in Resources */,
 				294D8F6223847C9A0094090D /* TableRowTableViewCell.xib in Resources */,
+				96CDB9642B4886FF009A45C7 /* NewBlowbyModal.xib in Resources */,
 				296885B526030FE900ECA183 /* MajorCityPicker.xib in Resources */,
 				F5EB30A127B5C77400F22712 /* Main.storyboard in Resources */,
 				A7AE5276237CC3660044DBB7 /* check-mark-success.json in Resources */,
@@ -1712,6 +1727,7 @@
 				296DEC27238C61A80035E7FA /* IntegerStepperInputCollectionViewCell.swift in Sources */,
 				5C7D32F424304CFC00AFCE43 /* UIViewControllerExtensions.swift in Sources */,
 				29BAC5192367B34000A620F4 /* Fonts.swift in Sources */,
+				96CDB9632B4886FF009A45C7 /* NewBlowbyModal.swift in Sources */,
 				5C82D404237B31C200B065BA /* WatercraftRiskAssessmentAPI.swift in Sources */,
 				41CAEC712B44BF19002B2960 /* BlowbyTableCollectionViewCell.swift in Sources */,
 				5C82D3D82374AECC00B065BA /* HighRiskModalView.swift in Sources */,

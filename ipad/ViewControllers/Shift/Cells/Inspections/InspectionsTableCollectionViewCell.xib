@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="ipad10_9rounded" orientation="portrait" layout="fullscreen" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -19,9 +19,9 @@
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Inspections" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f37-hA-2EK">
-                        <rect key="frame" x="20" y="8" width="88" height="60"/>
+                        <rect key="frame" x="20" y="8" width="88" height="50"/>
                         <constraints>
-                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="xrr-3b-BcA"/>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="25" id="xrr-3b-BcA"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
@@ -52,8 +52,8 @@
                 <constraint firstAttribute="trailing" secondItem="9zw-gq-R7h" secondAttribute="trailing" constant="20" id="GgL-Yz-Ozs"/>
                 <constraint firstAttribute="trailing" secondItem="EtQ-vg-oRn" secondAttribute="trailing" constant="20" id="QnD-kR-mIW"/>
                 <constraint firstItem="f37-hA-2EK" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="8" id="WCe-TQ-KXj"/>
+                <constraint firstItem="9zw-gq-R7h" firstAttribute="top" secondItem="f37-hA-2EK" secondAttribute="bottom" constant="18" id="ftQ-v9-XK8"/>
                 <constraint firstItem="9zw-gq-R7h" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="20" id="hP5-6T-aLu"/>
-                <constraint firstItem="9zw-gq-R7h" firstAttribute="top" secondItem="f37-hA-2EK" secondAttribute="bottom" constant="8" id="jym-pW-eWm"/>
                 <constraint firstItem="EtQ-vg-oRn" firstAttribute="top" secondItem="9zw-gq-R7h" secondAttribute="bottom" constant="8" id="qem-pF-51P"/>
             </constraints>
             <size key="customSize" width="355" height="94"/>
@@ -71,7 +71,7 @@
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemGreenColor">
-            <color red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
