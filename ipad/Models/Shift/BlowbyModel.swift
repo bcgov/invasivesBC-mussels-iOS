@@ -30,6 +30,7 @@ class BlowbyModel: Object, BaseRealmObject {
     @objc dynamic var blowByTime: String = ""
     @objc dynamic var watercraftComplexity: String = ""
     @objc dynamic var reportedToRapp: Bool = false
+    @objc dynamic var formattedReporttoRapp: String = "False"
 
     // MARK: Setters
     func set(value: Any, for key: String) {
@@ -38,6 +39,11 @@ class BlowbyModel: Object, BaseRealmObject {
             return
         }
           self[key] = value
+      if key == "reportedToRapp" {
+        if let reported = value as? Bool {
+          formattedReporttoRapp = reported ? "True" : "False";
+        }
+      }
     }
 
 

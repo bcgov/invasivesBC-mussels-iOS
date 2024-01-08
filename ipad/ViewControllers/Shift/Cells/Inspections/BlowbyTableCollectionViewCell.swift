@@ -53,7 +53,7 @@ class BlowbyTableCollectionViewCell: BaseShiftOverviewCollectionViewCell {
                 
         // Create Column Config
         var columns: [TableViewColumnConfig] = []
-        columns.append(TableViewColumnConfig(key: "reportedToRapp", header: "Reported to Rapp", type: .Normal))
+        columns.append(TableViewColumnConfig(key: "formattedReporttoRapp", header: "Reported to Rapp", type: .Normal))
         columns.append(TableViewColumnConfig(key: "watercraftComplexity", header: "Watercraft Complexity", type: .Normal))
         columns.append(TableViewColumnConfig(key: "timeStamp", header: "Blowby Time", type: .Normal))
         columns.append(TableViewColumnConfig(key: "", header: "Delete", type: .Button, buttonName: "Delete", showHeader: false))

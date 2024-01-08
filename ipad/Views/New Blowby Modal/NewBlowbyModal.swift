@@ -14,6 +14,7 @@ class NewBlowbyModal: ModalView, Theme {
     // MARK: Variables
     var onStart: ((_ model: ShiftModel) -> Void)?
     var onCancel: (() -> Void)?
+    var onSubmit: (() -> Void)?
     var model: ShiftModel?
     var newBlowBy: BlowbyModel = BlowbyModel()
     weak var inputGroup: UIView?
@@ -38,9 +39,6 @@ class NewBlowbyModal: ModalView, Theme {
         
         // If (Valid) Add Blowby, remove and return
         var invalidFields: [String] = []
-        if !newBlowBy.reportedToRapp {
-            invalidFields.append("Reported to RAPP")
-        }
         if newBlowBy.watercraftComplexity == "" {
             invalidFields.append("Watercraft Complexity")
         }
@@ -52,6 +50,7 @@ class NewBlowbyModal: ModalView, Theme {
             Alert.show(title: "Can't continue", message: "Please complete the following fields: " + invalidFields.joined(separator: ", "))
         } else {
             _ = model.addBlowby(blowby: newBlowBy);
+            onSubmit?()
             self.remove()
             return onClick(model)
         }

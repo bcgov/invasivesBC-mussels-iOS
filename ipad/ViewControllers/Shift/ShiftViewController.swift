@@ -86,17 +86,22 @@ class ShiftViewController: BaseViewController {
 
   @objc func addBlowByClicked() {
       let blowbyModal: NewBlowbyModal = NewBlowbyModal.fromNib()
+      blowbyModal.onSubmit = { [weak self] in
+          // Refresh the screen when data is submitted
+          self?.refreshScreen()
+      }
       guard let currentShiftModel = model else { return }
       blowbyModal.initialize(shift: currentShiftModel, delegate: self, onStart: { [weak self] (model) in
           guard let _self = self else { return }
-          // Handle the start action
       }) {
           // Canceled
       }
+  }
+
+  func refreshScreen(){
     self.view.setNeedsDisplay()
     self.viewWillAppear(true)
   }
-
 
     func setup(model: ShiftModel) {
         self.model = model
@@ -143,8 +148,7 @@ class ShiftViewController: BaseViewController {
         
         Alert.show(title: "Deleting Blowby", message: "Would you like to delete this Blowby?", yes: {
             model.deleteBlowby(blowbyToDelete: blowbyToDelete);
-            self.view.setNeedsDisplay()
-            self.viewWillAppear(true)
+            self.refreshScreen()
         }) {
             return
         }
