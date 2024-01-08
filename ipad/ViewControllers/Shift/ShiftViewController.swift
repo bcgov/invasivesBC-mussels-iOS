@@ -84,6 +84,8 @@ class ShiftViewController: BaseViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(self.inputItemValueChanged(notification:)), name: .InputItemValueChanged, object: nil)
     }
 
+  
+  /// Handler for when 'Add Blowby' is pressed. Brings up the shift modal, and refreshing the screen on submit action
   @objc func addBlowByClicked() {
       let blowbyModal: NewBlowbyModal = NewBlowbyModal.fromNib()
       blowbyModal.onSubmit = { [weak self] in
@@ -142,17 +144,35 @@ class ShiftViewController: BaseViewController {
         }
     }
     
-    @objc func didTapDeleteBlowbyButton(blowbyToDelete: BlowbyModel) {
-        guard let model = self.model else { return }
-        self.dismissKeyboard()
-        
-        Alert.show(title: "Deleting Blowby", message: "Would you like to delete this Blowby?", yes: {
-            model.deleteBlowby(blowbyToDelete: blowbyToDelete);
-            self.refreshScreen()
-        }) {
-            return
-        }
+  @objc func didTapBlowbyToggle(blowbyToEdit: BlowbyModel){
+    Alert.show(title: "Row tapped", message: "Action continues")
+  }
+  
+  
+    /// Handler for Edit button in Blowby table section. Brings up the modal with the existing Blowby so user can submit new data
+    /// - Parameter blowbyToEdit: Blowby to populate the view, allowing editing to occur on the model
+    @objc func didTapEditBlowbyButton(blowbyToEdit: BlowbyModel) {
+      let blowbyModal: NewBlowbyModal = NewBlowbyModal.fromNib()
+      blowbyModal.onSubmit = { [weak self] in
+          // Refresh the screen when data is submitted
+          self?.refreshScreen()
+      }
+      guard let currentShiftModel = model else { return }
+      blowbyModal.initialize(shift: currentShiftModel, newBlowby: blowbyToEdit, delegate: self, onStart: { [weak self] (model) in
+          guard let _self = self else { return }
+      }) {
+          // Canceled
+      }
     }
+  
+  /// Handler to delete a Blowby from the Shift
+  /// - Parameter blowbyToDelete: Instance of Blowby model that will be removed via realm
+  @objc func deleteBlowby(blowbyToDelete: BlowbyModel) {
+      guard let model = self.model else { return }
+      self.dismissKeyboard()
+      model.deleteBlowby(blowbyToDelete: blowbyToDelete);
+      self.refreshScreen()
+  }
 
     @objc func completeAction(sender: UIBarButtonItem) {
         guard let model = self.model else { return }
@@ -176,12 +196,8 @@ class ShiftViewController: BaseViewController {
     @objc func tableButtonClicked(notification: Notification) {
         guard let actionModel = notification.object as? TableClickActionModel else {return}
         
-//        if actionModel.buttonName.lowercased() == "edit", let blowbyModel = actionModel.object as? BlowbyModel {
-//            didTapEditBlowbyButton(blowbyToEdit: blowbyModel);
-//        }
-        
-        if actionModel.buttonName.lowercased() == "delete", let blowbyModel = actionModel.object as? BlowbyModel {
-            didTapDeleteBlowbyButton(blowbyToDelete: blowbyModel);
+        if actionModel.buttonName.lowercased() == "edit", let blowbyModel = actionModel.object as? BlowbyModel {
+            didTapEditBlowbyButton(blowbyToEdit: blowbyModel);
         }
         
         if let inspectionModel = actionModel.object as? WatercraftInspectionModel {

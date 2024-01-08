@@ -30,9 +30,14 @@ class BlowbyModel: Object, BaseRealmObject {
     @objc dynamic var blowByTime: String = ""
     @objc dynamic var watercraftComplexity: String = ""
     @objc dynamic var reportedToRapp: Bool = false
-    @objc dynamic var formattedReporttoRapp: String = "False"
+    @objc dynamic var formattedReporttoRapp: String = "No"
 
     // MARK: Setters
+  
+  /// Setter method for BlowbyModel, used when new Blowbys are created, as they are not Realm objects
+  /// - Parameters:
+  ///   - value: value to change Models key to
+  ///   - key: Text representation of the key to be changed in the model
     func set(value: Any, for key: String) {
         if self[key] == nil {
             print("\(key) is nil")
@@ -41,12 +46,34 @@ class BlowbyModel: Object, BaseRealmObject {
           self[key] = value
       if key == "reportedToRapp" {
         if let reported = value as? Bool {
-          formattedReporttoRapp = reported ? "True" : "False";
+          formattedReporttoRapp = reported ? "Yes" : "No";
         }
       }
     }
-
-
+  
+  /// Setter method for BlowbyModel, used when editing a new Blowby, since Realm objects must be edited in a write transaction
+  /// - Parameters:
+  ///   - value: Value to change Models key to
+  ///   - key: Text representation of the key to be changed in the model
+  func editSet(value: Any, for key: String) {
+    do {
+      let realm = try Realm()
+      try realm.write {
+          self[key] = value;
+          if key == "reportedToRapp" {
+            if let reported = value as? Bool {
+              formattedReporttoRapp = reported ? "Yes" : "No";
+            }
+          }
+        }
+    } catch let error as NSError {
+      print("** REALM ERROR")
+      print(error)
+    }
+  }
+  
+  /// Function for setting RemoteID of Object managed by Realm
+  /// - Parameter remoteId: remoteID Integer
     func set(remoteId: Int) {
         do {
             let realm = try Realm()
@@ -58,11 +85,21 @@ class BlowbyModel: Object, BaseRealmObject {
             print(error)
         }
     }
-    
+  
+  /// Returns Blowby fields set to this instance of object
+  /// - Parameters:
+  ///   - editable: Boolean for determining if values can be edited, or remain static
+  ///   - modalSize: Boolean to determine if Large or small size of input fields are returned
+  /// - Returns: Array of InputItems tailored to this model instance
     func getThisBlowbyFields(editable: Bool, modalSize: Bool) -> [InputItem] {
       return BlowByFormHelper.getBlowByFields(for: self, editable: editable, modalSize: modalSize)
     }
-    
+  
+  /// <#Description#>
+  /// - Parameters:
+  ///   - time: <#time description#>
+  ///   - date: <#date description#>
+  /// - Returns: <#description#>
     func formattedDateTime(time: String, date: Date) -> String? {
         let timeFormatter = DateFormatter()
         timeFormatter.dateFormat = "YYYY-MM-dd HH:mm:ss"

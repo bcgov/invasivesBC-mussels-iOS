@@ -56,7 +56,7 @@ class BlowbyTableCollectionViewCell: BaseShiftOverviewCollectionViewCell {
         columns.append(TableViewColumnConfig(key: "formattedReporttoRapp", header: "Reported to Rapp", type: .Normal))
         columns.append(TableViewColumnConfig(key: "watercraftComplexity", header: "Watercraft Complexity", type: .Normal))
         columns.append(TableViewColumnConfig(key: "timeStamp", header: "Blowby Time", type: .Normal))
-        columns.append(TableViewColumnConfig(key: "", header: "Delete", type: .Button, buttonName: "Delete", showHeader: false))
+        columns.append(TableViewColumnConfig(key: "", header: "Edit", type: .Button, buttonName: "Edit", showHeader: false))
         
         // Disable adding blowbys if not completed and hide delete button
         if model.getStatus() != .Draft {

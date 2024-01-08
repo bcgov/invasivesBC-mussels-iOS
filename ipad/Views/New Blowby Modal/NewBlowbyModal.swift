@@ -8,6 +8,7 @@
 
 import Foundation
 import Modal
+import UIKit
 
 class NewBlowbyModal: ModalView, Theme {
     
@@ -16,8 +17,9 @@ class NewBlowbyModal: ModalView, Theme {
     var onCancel: (() -> Void)?
     var onSubmit: (() -> Void)?
     var model: ShiftModel?
-    var newBlowBy: BlowbyModel = BlowbyModel()
+    var newBlowBy: BlowbyModel?
     weak var inputGroup: UIView?
+    var editingBlowby: Bool = false;
     
     // MARK: Outlets
     @IBOutlet weak var iconImage: UIImageView!
@@ -26,53 +28,86 @@ class NewBlowbyModal: ModalView, Theme {
     @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var startNowButton: UIButton!
     @IBOutlet weak var inputContainer: UIView!
-    
+  
+  /// When cancel button is pressed, responds by closing modal
     @IBAction func cancelAction(_ sender: UIButton) {
         guard let onClick = self.onCancel else {return}
         self.remove()
         return onClick()
     }
-    
-  /// Action taken when the Confirmation button is pressed
+  
+  /// When delete button is pressed, sends confirmation for users action then deletes Blowby from list
+    @IBAction func deleteAction(_ sender: UIButton) {
+        Alert.show(title: "Deleting Blowby", message: "Would you like to delete this Blowby?", yes: {
+          self.model?.deleteBlowby(blowbyToDelete: self.newBlowBy!)
+          self.onSubmit?()
+          self.remove()
+        }) {
+            return
+        }
+
+    }
+  
+  /// When button is pressed, validates information in the BlowbyModel, alerting user of unfilled fields
+  /// If we are not in edit mode, new BlowbyModel is appended to list of blowbys, and modal closes
+  /// If we are in in edit mode, Modal only closes.
     @IBAction func startNowAction(_ sender: UIButton) {
         guard let model = self.model, let onClick = self.onStart else {return}
         
         // If (Valid) Add Blowby, remove and return
         var invalidFields: [String] = []
-        if newBlowBy.watercraftComplexity == "" {
-            invalidFields.append("Watercraft Complexity")
-        }
-        if newBlowBy.timeStamp == "" {
+        if newBlowBy!.timeStamp == "" {
             invalidFields.append("Blowby Time")
         }
-        
+        if newBlowBy!.watercraftComplexity == "" {
+            invalidFields.append("Watercraft Complexity")
+        }
         if !invalidFields.isEmpty {
-            Alert.show(title: "Can't continue", message: "Please complete the following fields: " + invalidFields.joined(separator: ", "))
+            Alert.show(title: "Can't continue", message: "Please complete the following fields:\n-" + invalidFields.joined(separator: "\n-"))
         } else {
-            _ = model.addBlowby(blowby: newBlowBy);
+          if(!editingBlowby){
+            _ = model.addBlowby(blowby: newBlowBy!);
+          }
             onSubmit?()
             self.remove()
             return onClick(model)
         }
     }
 
-    /// Entrance for modal, Initializer sets the model to the current shift we are editing in
-  func initialize(shift: ShiftModel, delegate: InputDelegate, onStart: @escaping (_ model: ShiftModel) -> Void, onCancel:  @escaping () -> Void) {
-      self.onStart = onStart
-      self.onCancel = onCancel
-      setFixed(width: 550, height: 400)
-      present()
-      style()
-
-      // Use the passed shift model instead of creating a new one
-      self.model = shift
-    
-      generateInput(delegate: delegate)
-      addListeners()
-      accessibilityLabel = "newShiftModal"
-      accessibilityValue = "newShiftModal"
+    /// Entry for Modal view, Sets modal to editing mode if a Blowby modal is passed in as argument, else remains in create mode.
+    func initialize(shift: ShiftModel, newBlowby: BlowbyModel? = BlowbyModel(),  delegate: InputDelegate, onStart: @escaping (_ model: ShiftModel) -> Void, onCancel:  @escaping () -> Void) {
+        self.onStart = onStart
+        self.onCancel = onCancel
+        setFixed(width: 550, height: 400);
+        present();
+        style();
+      
+        //Give the modal a refernce to the current shift, and set the Blowby
+        self.model = shift;
+        self.newBlowBy = newBlowby;
+        // since a valid modal would have a timeStamp passed in, we can determine if this is an empty model or an existing one
+        self.editingBlowby = newBlowBy!.timeStamp != "";
+        if(self.editingBlowby) {
+          editingMode();
+        }
+        generateInput(delegate: delegate);
+        addListeners();
+        accessibilityLabel = "newShiftModal";
+        accessibilityValue = "newShiftModal";
+    }
+  
+  /// Changes Buttons in view to reflect that we are editing a modal, to help differentiate that we are not creating a modal.
+  private func editingMode() {
+    cancelButton.setTitle("Delete", for: .normal);
+    cancelButton.removeTarget(nil, action: #selector(cancelAction(_:)), for: .touchUpInside)
+    cancelButton.addTarget(self, action: #selector(deleteAction(_:)), for: .touchUpInside)
+    cancelButton.layer.borderWidth = 1.0
+    cancelButton.layer.borderColor = CGColor(red:0,green:0,blue:0,alpha:1.0);
+    cancelButton.layer.backgroundColor = CGColor(red: 220/255.0, green: 53/255.0, blue: 69/255.0, alpha: 1.0)
+    cancelButton.setTitleColor(UIColor.white, for: .normal)
+    startNowButton.setTitle("Ok", for: .normal);
+    headerLabel.text = "Edit Blowby";
   }
-
     
     private func addListeners() {
         NotificationCenter.default.addObserver(self, selector: #selector(self.inputItemValueChanged(notification:)), name: .InputItemValueChanged, object: nil)
@@ -82,11 +117,15 @@ class NewBlowbyModal: ModalView, Theme {
     @objc func inputItemValueChanged(notification: Notification) {
         guard let item: InputItem = notification.object as? InputItem else {return}
         // Set value in Realm object
-      self.newBlowBy.set(value: item.value.get(type: item.type) as Any, for: item.key)
+      if(editingBlowby){
+        self.newBlowBy!.editSet(value: item.value.get(type: item.type) as Any, for: item.key)
+      } else {
+        self.newBlowBy!.set(value: item.value.get(type: item.type) as Any, for: item.key)
+      }
     }
     
     func generateInput(delegate: InputDelegate) {
-        let fields = newBlowBy.getThisBlowbyFields(editable: true, modalSize: true)
+        let fields = newBlowBy!.getThisBlowbyFields(editable: true, modalSize: true)
         self.inputGroup?.removeFromSuperview()
         let inputGroup: InputGroupView = InputGroupView()
         self.inputGroup = inputGroup
