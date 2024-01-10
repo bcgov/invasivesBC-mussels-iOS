@@ -105,6 +105,20 @@ class ShiftModel: Object, BaseRealmObject {
             print(error)
         }
     }
+  func updateBlowbyTimeStamps(newDate: Date) {
+      do {
+          let realm = try Realm()
+          try realm.write {
+              for blowby in self.blowbys {
+                  blowby.date = combineDateWithCurrentTime(targetDate: newDate, targetTime: blowby.date)
+                  _ = blowby.formattedDateTime(time: blowby.timeStamp,date: blowby.date)
+              }
+          }
+      } catch let error as NSError {
+          print("** REALM ERROR")
+          print(error)
+      }
+  }
     
   func addBlowby(blowby: BlowbyModel) -> BlowbyModel? {
         blowby.shouldSync = true;
@@ -139,6 +153,7 @@ class ShiftModel: Object, BaseRealmObject {
                     self.formattedDate = shiftStartDate.stringShort()
                 }
                 updateInspectionTimeStamps(newDate: shiftStartDate);
+                updateBlowbyTimeStamps(newDate: shiftStartDate)
             }
         } catch let error as NSError {
             print("** REALM ERROR")
