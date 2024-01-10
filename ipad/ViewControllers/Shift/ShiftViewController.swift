@@ -178,8 +178,12 @@ class ShiftViewController: BaseViewController {
         guard let model = self.model else { return }
         self.dismissKeyboard()
         // if can submit
+        var alertMessage = "This shift and the inspections will be uploaded when possible"
+        if model.shiftStartDate < Calendar.current.startOfDay(for: Date()) {
+            alertMessage += "\n\n You've entered a date that occurred before today. If this was intentional, no problem! Otherwise, please double-check the entered date: \n\(model.shiftStartDate.stringShort())"
+        }
         if canSubmit() {
-            Alert.show(title: "Are you sure?", message: "This shift and the inspections will be uploaded when possible", yes: {[weak self] in
+            Alert.show(title: "Are you sure?", message: alertMessage, yes: {[weak self] in
                 guard let strongSelf = self else { return }
                 model.set(shouldSync: true)
                 for inspection in model.inspections {
@@ -332,7 +336,6 @@ class ShiftViewController: BaseViewController {
     
     func createTestModel() {
         let model = ShiftModel()
-        model.date = Date()
         
         // Create dummy inspections
         let inspection1 = WatercraftInspectionModel()

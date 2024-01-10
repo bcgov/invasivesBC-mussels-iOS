@@ -58,7 +58,7 @@ class Storage {
         
         if !invalidShifts.isEmpty {
             NotificationCenter.default.post(name: .shouldRefreshTable, object: nil)
-            Alert.show(title: "Review your submissions", message: "Some of your records have been changed to darft state.\nPlease make sure all comment fields have at most 300 characters and that you have selected a station for all shifts before submitting.")
+            Alert.show(title: "Review your submissions", message: "Some of your records have been changed to draft state.\nPlease make sure all comment fields have at most 300 characters and that you have selected a station for all shifts before submitting.")
         }
     }
     

@@ -11,7 +11,7 @@ import Modal
 
 class NewShiftModal: ModalView, Theme {
     
-    // MARK: Vatiables
+    // MARK: Variables
     var onStart: ((_ model: ShiftModel) -> Void)?
     var onCancel: (() -> Void)?
     var model: ShiftModel?
@@ -33,7 +33,6 @@ class NewShiftModal: ModalView, Theme {
     
     @IBAction func startNowAction(_ sender: UIButton) {
         guard let model = self.model, let onClick = self.onStart else {return}
-        model.set(date: Date())
         model.set(shouldSync: false)
         self.remove()
         return onClick(model)
