@@ -34,7 +34,6 @@ class ShiftModel: Object, BaseRealmObject {
     @objc dynamic var k9OnShif: Bool = false
     @objc dynamic var motorizedBlowBys: Int = 0
     @objc dynamic var nonMotorizedBlowBys: Int = 0
-    @objc dynamic var k9OnShif: Bool = false
     @objc dynamic var station: String = ""
     @objc dynamic var shitStartComments: String = ""
     @objc dynamic var shitEndComments: String = ""
@@ -104,22 +103,6 @@ class ShiftModel: Object, BaseRealmObject {
         } catch let error as NSError {
             print("** REALM ERROR")
             print(error)
-        }
-    }
-    
-  func addBlowby(blowby: BlowbyModel) -> BlowbyModel? {
-        blowby.shouldSync = true;
-        blowby.userId = self.userId;
-        do {
-            let realm = try Realm();
-            try realm.write {
-                self.blowbys.append(blowby);
-            }
-            return blowby;
-        } catch let error as NSError {
-            print("** REALM ERROR");
-            print(error);
-            return nil;
         }
     }
     
