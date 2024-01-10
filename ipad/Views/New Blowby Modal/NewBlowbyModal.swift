@@ -85,11 +85,12 @@ class NewBlowbyModal: ModalView, Theme {
         //Give the modal a refernce to the current shift, and set the Blowby
         self.model = shift;
         self.newBlowBy = newBlowby;
-        self.newBlowBy!.date = self.model!.shiftStartDate;
         // since a valid modal would have a timeStamp passed in, we can determine if this is an empty model or an existing one
         self.editingBlowby = newBlowBy!.timeStamp != "";
         if(self.editingBlowby) {
           editingMode();
+        } else {
+          self.newBlowBy!.date = self.model!.shiftStartDate;
         }
         generateInput(delegate: delegate);
         addListeners();

@@ -32,11 +32,11 @@ enum RemoteEnv: String {
         case .local:
             return LOCAL_URL
         case .dev:
-            return DEV_URL
+            return LOCAL_URL
         case .test:
-            return TEST_URL
+            return LOCAL_URL
         case .prod:
-            return PROD_URL
+            return LOCAL_URL
         }
     }
     
@@ -45,9 +45,9 @@ enum RemoteEnv: String {
         case .local,.dev:
             return KC_DEV_URL
         case .test:
-            return KC_TEST_URL
+            return KC_DEV_URL
         case .prod:
-            return KC_PROD_URL
+            return KC_DEV_URL
         }
     }
 }
