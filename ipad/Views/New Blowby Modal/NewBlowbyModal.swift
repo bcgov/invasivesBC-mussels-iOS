@@ -10,6 +10,7 @@ import Foundation
 import Modal
 import UIKit
 
+/// Modal for displaying and editing Blowby information occuring in a shift
 class NewBlowbyModal: ModalView, Theme {
     
     // MARK: Variables
@@ -82,7 +83,6 @@ class NewBlowbyModal: ModalView, Theme {
         present();
         style();
       
-        //Give the modal a refernce to the current shift, and set the Blowby
         self.model = shift;
         self.newBlowBy = newBlowby;
         // since a valid modal would have a timeStamp passed in, we can determine if this is an empty model or an existing one
@@ -98,7 +98,7 @@ class NewBlowbyModal: ModalView, Theme {
         accessibilityValue = "newShiftModal";
     }
   
-  /// Changes Buttons in view to reflect that we are editing a modal, to help differentiate that we are not creating a modal.
+  /// Changes Buttons and Headers in Modal to reflect we are editing a Blowby.
   private func editingMode() {
     cancelButton.setTitle("Delete", for: .normal);
     cancelButton.removeTarget(nil, action: #selector(cancelAction(_:)), for: .touchUpInside)

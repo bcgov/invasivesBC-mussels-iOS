@@ -2,8 +2,8 @@
 //  BlowbyModel.swift
 //  ipad
 //
-//  Created by Matthew Logan on 2024-01-02.
-//  Copyright © 2024 Amir Shayegh. All rights reserved.
+//  Created by Sustainment Team on 2024-01-02.
+//  Copyright © Sustainment Team. All rights reserved.
 //
 
 import Foundation
@@ -11,6 +11,7 @@ import Foundation
 import Realm
 import RealmSwift
 
+/// Model for displaying Blowbys that occur during a shift, complies with Realm protocols
 class BlowbyModel: Object, BaseRealmObject {
     @objc dynamic var userId: String = ""
     @objc dynamic var localId: String = {
@@ -95,11 +96,11 @@ class BlowbyModel: Object, BaseRealmObject {
       return BlowByFormHelper.getBlowByFields(for: self, editable: editable, modalSize: modalSize)
     }
   
-  /// <#Description#>
+  /// Creates a formatted Date time object for displaying Blowby Data
   /// - Parameters:
-  ///   - time: <#time description#>
-  ///   - date: <#date description#>
-  /// - Returns: <#description#>
+  ///   - time: Value from the TimeInput field
+  ///   - date: Value from the Date Input field
+  /// - Returns: Date object taking the calendar date from date object, and time value from time String
     func formattedDateTime(time: String, date: Date) -> String? {
         let timeFormatter = DateFormatter()
         timeFormatter.dateFormat = "YYYY-MM-dd HH:mm:ss"

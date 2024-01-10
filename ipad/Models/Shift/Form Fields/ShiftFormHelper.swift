@@ -8,8 +8,16 @@
 
 import Foundation
 
+
+/// Helper class for producing input fields for Shiftmodels
 class ShiftFormHelper {
-    
+  
+  /// Gets the required Input objects needed for the ShiftStartFields section of shift
+  /// - Parameters:
+  ///   - object: Instance of the ShiftModel
+  ///   - editable: Will forms be editable, or viewable only
+  ///   - modalSize: Small rendering of components, or regular size rendering of components
+  /// - Returns: [InputItems] Form input items
     static func getShiftStartFields(for object: ShiftModel? = nil, editable: Bool? = true, modalSize: Bool? = false) -> [InputItem] {
         var sectionItems: [InputItem] = []
         
@@ -52,7 +60,11 @@ class ShiftFormHelper {
         
         return sectionItems
     }
-    
+  /// Gets the required Input objects needed for the ShiftEndFields section of shift
+  /// - Parameters:
+  ///   - object: Instance of the ShiftModel
+  ///   - editable: Will forms be editable, or viewable only
+  /// - Returns: [InputItems] Form input items
     static func getShiftEndFields(for object: ShiftModel? = nil, editable: Bool? = true) -> [InputItem] {
         var sectionItems: [InputItem] = []
         
@@ -94,6 +106,9 @@ class ShiftFormHelper {
         return sectionItems
     }
     
+  
+  /// Return the columns for displaying Shift Overview information
+  /// - Returns: [TableViewColumnConfig]  Array of table column configuration objects
     func getTableColumns() -> [TableViewColumnConfig] {
         // Create Column Config
         var columns: [TableViewColumnConfig] = []
