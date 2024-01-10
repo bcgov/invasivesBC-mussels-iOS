@@ -31,16 +31,23 @@ class DateInputCollectionViewCell: BaseInputCell<DateInput>, UITextFieldDelegate
         self.textField.addGestureRecognizer(gesture)
     }
     
-    @objc func onClick(sender : UITapGestureRecognizer) {
-        guard let model = self.model, let delegate = self.inputDelegate else {return}
+    @objc func onClick(sender: UITapGestureRecognizer) {
+        guard let model = self.model, let delegate = self.inputDelegate else { return }
         if model.editable {
-            delegate.showDatepickerDelegate(on: textField, initialDate: model.value.get(type: .Date) as? Date ?? nil, minDate: nil, maxDate: nil) { (selectedDate) in
-                model.value.set(value: selectedDate, type: .Date)
-                self.textFieldText()
-                self.emitChange()
+            delegate.showDatepickerDelegate(on: textField, initialDate: model.getValue() ?? nil, minDate: nil, maxDate: Date()) { (selectedDate) in
+                if let selectedDate = selectedDate {
+                    if selectedDate < Date(timeIntervalSinceNow: 600) {
+                        model.setValue(value: selectedDate)
+                    } else {
+                        model.setValue(value: Date())
+                    }
+                    self.textFieldText()
+                    self.emitChange()
+                }
             }
         }
     }
+
     
     private func textFieldText() {
         if let model = self.model, let value: Date = model.value.get(type: model.type) as? Date  {
