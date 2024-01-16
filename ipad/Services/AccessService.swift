@@ -8,6 +8,7 @@
 
 import Foundation
 import Reachability
+import RealmSwift
 
 class AccessService {
     
@@ -56,6 +57,40 @@ class AccessService {
         }
     }
     
+    private func userHasClientRoles() -> Bool {
+       let clientRoles = Settings.shared.getUserClientRoles().map { $0 }
+       
+       var roleModels = [UserRoleModel]()
+       for role in clientRoles {
+           var roleName: String
+           var roleCodeName: String
+           var roleCode: Int
+           
+           switch role {
+           case "admin":
+               roleName = "admin"
+               roleCodeName = "admin"
+               roleCode = 1
+           case "data-editor":
+               roleName = "data-editor"
+               roleCodeName = "data-editor"
+               roleCode = 6
+           default:
+               roleName = role
+               roleCodeName = role
+               roleCode = 2
+           }
+           
+           roleModels.append(UserRoleModel(role: roleName, code: roleCodeName, roleCode: roleCode))
+       }
+       
+       // Check if the user has any of the desired roles
+       if roleModels.contains(where: { $0.role == "admin" || $0.role == "data-editor" }) {
+           return true
+       }
+       return false
+    }
+    
     private func setAccess() {
         // Reachability
         do {
@@ -69,9 +104,12 @@ class AccessService {
             print(error)
         }
         
-        APIRequest.checkAccess { (hasAccess) in
-            self.hasAppAccess = hasAccess
-            Settings.shared.setUserHasAppAccess(hasAccess: hasAccess)
+        let userClientRoles = userHasClientRoles()
+        self.hasAppAccess = userClientRoles
+        Settings.shared.setUserHasAppAccess(hasAccess: userClientRoles)
+        
+        if (!userClientRoles) {
+            self.sendAccessRequest()
         }
     }
 
@@ -79,23 +117,25 @@ class AccessService {
         if reachability.connection == .unavailable {
             return completion(Settings.shared.userHasAppAccess())
         }
-        APIRequest.checkAccess { (hasAccess) in
-            self.hasAppAccess = hasAccess
-            Settings.shared.setUserHasAppAccess(hasAccess: hasAccess)
-            if (!hasAccess) {
-                self.sendAccessRequest()
-            }
-            return completion(hasAccess)
+        
+        let userClientRoles = userHasClientRoles()
+        self.hasAppAccess = userClientRoles
+        Settings.shared.setUserHasAppAccess(hasAccess: userClientRoles)
+       
+        if (!userClientRoles) {
+            self.sendAccessRequest()
         }
+        
+        return completion(userClientRoles)
     }
     
     public func sendAccessRequest(completion: ((Bool)->Void)? = nil) {
-        APIRequest.sendAccessRequest { (success) in
-            print("Access Request created: \(String(describing: success))")
-            if let callback = completion {
-                return callback(success ?? false)
-            }
-        }
+//        APIRequest.sendAccessRequest { (success) in
+//            print("Access Request created: \(String(describing: success))")
+//            if let callback = completion {
+//                return callback(success ?? false)
+//            }
+//        }
     }
     
 }

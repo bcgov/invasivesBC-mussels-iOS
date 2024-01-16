@@ -50,13 +50,16 @@ class ViewController: UIViewController, Theme {
     }
     
     private func showPendingAccess() {
-        let awaitingAccessResponseView: AwaitingAccessResponse = UIView.fromNib()
-        awaitingAccessResponseView.show(in: self.view, onRefresh: { [weak self] in
-            guard let _self = self else {return}
-            awaitingAccessResponseView.removeFromSuperview()
-            _self.presentNext()
-        })
+       let awaitingAccessResponseView: AwaitingAccessResponse = UIView.fromNib()
+       awaitingAccessResponseView.show(in: self.view, onRefresh: { [weak self] in
+           guard let _self = self else {
+               return
+           }
+           awaitingAccessResponseView.removeFromSuperview()
+           _self.segueToLoginPage()
+       })
     }
+
     
     private func showHomePage() {
         if !SyncService.shared.shouldPerformInitialSync() {
@@ -89,6 +92,12 @@ class ViewController: UIViewController, Theme {
         
         // 2) We have stored user's Id
         guard let storedUserId = Settings.shared.getUserAuthId() else {
+            AuthenticationService.logout()
+            return false
+        }
+        
+        let storedUserClientRoles = Settings.shared.getUserClientRoles()
+        if storedUserClientRoles.isEmpty {
             AuthenticationService.logout()
             return false
         }

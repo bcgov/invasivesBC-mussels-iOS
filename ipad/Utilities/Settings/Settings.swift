@@ -77,6 +77,7 @@ class Settings {
     func isCorrectUser() -> Bool {
         guard let storedId = getUserAuthId() else {
             setUserAuthId()
+            setUserClientRoles()
             return true
         }
         return AuthenticationService.getUserID() == storedId
@@ -90,6 +91,16 @@ class Settings {
     public func setUserAuthId() {
         guard let model = Settings.getModel() else {return}
         model.setAuth(id: AuthenticationService.getUserID())
+    }
+    
+    public func getUserClientRoles() -> List<String>{
+        guard let model = Settings.getModel() else {return List<String>()}
+        return model.authClientRoles
+    }
+    
+    public func setUserClientRoles() {
+        guard let model = Settings.getModel() else {return}
+        model.setClientRoles(clientRoles: AuthenticationService.getClientRoles())
     }
     
     // MARK: Users

@@ -8,6 +8,7 @@
 
 import Foundation
 import SingleSignOn
+import RealmSwift
 
 class AuthenticationService {
     
@@ -73,8 +74,20 @@ class AuthenticationService {
         return decoded["preferred_username"] as? String ?? ""
     }
     
+    public static func getClientRoles() -> List<String> {
+       guard let token = getAccessToken() else {return List<String>()}
+       let decoded = JWTDecoder.decode(jwtToken: token)
+       let roles = decoded["client_roles"] as? Array<String> ?? ["invalid"]
+       let roleList = List<String>()
+       for role in roles {
+           roleList.append(role)
+       }
+       return roleList
+    }
+
+    
     public static func refreshCredentials(completion: @escaping(_ success: Bool) -> Void) {
-        authServices.refreshCredientials(completion: { (credentials: Credentials?, error: Error?) in
+        authServices.refreshCredientials(completion: { (credentials: SingleSignOn.Credentials?, error: Error?) in
             if let error = error as? AuthenticationError, case .expired = error {
                 let vc = authServices.viewController() { (credentials, error) in
                     

@@ -42,6 +42,7 @@ class SettingsModel: Object {
     @objc dynamic var userLastName: String = ""
     @objc dynamic var isIdirLogin: Bool = true
     @objc dynamic var authId: String = ""
+    var authClientRoles = List<String>()
     
     func clone() -> SettingsModel {
         let new = SettingsModel()
@@ -96,6 +97,20 @@ class SettingsModel: Object {
             }
         } catch _ {
         }
+    }
+    
+    func setClientRoles(clientRoles: List<String>) {
+       do {
+           let realm = try Realm()
+           try realm.write {
+               authClientRoles.removeAll()
+               for role in clientRoles {
+                   authClientRoles.append(role)
+               }
+           }
+       } catch let error as NSError {
+           ErrorLog("** REALM ERROR: \(error)")
+       }
     }
     
     func setUserAccess(hasAccess: Bool) {

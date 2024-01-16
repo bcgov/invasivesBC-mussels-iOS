@@ -75,6 +75,7 @@ class LoginViewController: BaseViewController {
     
     private func afterLogin() {
         Settings.shared.setUserAuthId()
+        Settings.shared.setUserClientRoles()
         self.dismiss(animated: true, completion: nil)
     }
     
