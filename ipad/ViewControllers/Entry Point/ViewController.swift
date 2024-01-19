@@ -52,9 +52,11 @@ class ViewController: UIViewController, Theme {
     private func showPendingAccess() {
         let awaitingAccessResponseView: AwaitingAccessResponse = UIView.fromNib()
         awaitingAccessResponseView.show(in: self.view, onRefresh: { [weak self] in
-            guard let _self = self else {return}
-            awaitingAccessResponseView.removeFromSuperview()
-            _self.presentNext()
+           guard let _self = self else {
+               return
+           }
+           awaitingAccessResponseView.removeFromSuperview()
+           _self.segueToLoginPage()
         })
     }
     
