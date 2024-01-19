@@ -34,22 +34,6 @@ public enum WatercraftFromSection: Int, CaseIterable {
     case GeneralComments
 }
 
-/// Dictionary mapping specific section keys to their readable titles for validation errors
-/// Return the corresponding readable section title if it exists in the dictionary,
-/// otherwise, capitalize and return the original string
-extension String {
-    var readableSection: String {
-        let sectionTitles: [String: String] = [
-            "basicInformation": "- BASIC INFORMATION -",
-            "watercraftDetails": "- WATERCRAFT DETAILS -",
-            "journeyDetails": "- JOURNEY DETAILS -",
-            "inspectionDetails": "- INSPECTION DETAILS -",
-            "inspectionOutcomes": "- INSPECTION OUTCOMES -"
-        ]
-        return sectionTitles[self] ?? self.capitalized
-    }
-}
-
 class WatercraftInspectionViewController: BaseViewController {
     
     // MARK: Outlets
@@ -336,13 +320,21 @@ class WatercraftInspectionViewController: BaseViewController {
         case errorDecontaminationOrderReason = "Reason for issuing a decontamination order."
         case errorSealNumber = "Seal #"
     }
+    
+    enum Section: String {
+        case basicInformation = "- BASIC INFORMATION -"
+        case watercraftDetails = "- WATERCRAFT DETAILS -"
+        case journeyDetails = "- JOURNEY DETAILS -"
+        case inspectionDetails = "- INSPECTION DETAILS -"
+        case inspectionOutcomes = "- INSPECTION OUTCOMES -"
+    }
 
     /// Validation struct for the errors, their messages, and the condition where they should be called in validation process
     struct Validation {
         var type: ValidationType
         var errorMessage: ValidationError
         var condition: Bool
-        var section: String
+        var section: Section
     }
 
     
@@ -353,12 +345,12 @@ class WatercraftInspectionViewController: BaseViewController {
     ///
     /// - Returns: String of validation messages to display in the alert
     func validationMessage() -> String {
-        var validationErrors: [(section: String, errors: [String])] = [
-            ("basicInformation", []),
-            ("watercraftDetails", []),
-            ("journeyDetails", []),
-            ("inspectionDetails", []),
-            ("inspectionOutcomes", [])
+        var validationErrors: [(section: Section, errors: [String])] = [
+            (.basicInformation, []),
+            (.watercraftDetails, []),
+            (.journeyDetails, []),
+            (.inspectionDetails, []),
+            (.inspectionOutcomes, [])
         ]
         guard let model = self.model else { return "" }
         
@@ -443,62 +435,62 @@ class WatercraftInspectionViewController: BaseViewController {
                 type: .commerciallyHauledInteracted,
                 errorMessage: .errorCommerciallyHauledInteracted,
                 condition: !model.commerciallyHauledInteracted,
-                section: "watercraftDetails"
+                section: .watercraftDetails
             ),
             Validation(
                 type: .previousAISKnowledgeInteracted,
                 errorMessage: .errorPreviousAISKnowledgeInteracted,
                 condition: !model.previousAISKnowledeInteracted,
-                section: "watercraftDetails"
+                section: .watercraftDetails
             ),
             Validation(
                 type: .previousInspectionInteracted,
                 errorMessage: .errorPreviousInspectionInteracted,
                 condition: !model.previousInspectionInteracted,
-                section: "watercraftDetails"
+                section: .watercraftDetails
             ),
             Validation(
                 type: .dreissenidMusselsFoundPreviousInteracted,
                 errorMessage: .errorDreissenidMusselsFoundPreviousInteracted,
                 condition: isPassportHolderNewOrLaunched
                     && !model.dreissenidMusselsFoundPreviousInteracted,
-                section: "inspectionDetails"
+                section: .inspectionDetails
             ),
             Validation(
                 type: .k9InspectionInteracted,
                 errorMessage: .errorK9InspectionInteracted,
                 condition: !model.k9InspectionInteracted,
-                section: "inspectionDetails"
+                section: .inspectionDetails
             ),
             Validation(
                 type: .decontaminationPerformedInteracted,
                 errorMessage: .errorDecontaminationPerformedInteracted,
                 condition: !highRiskDecontaminationPerformedInteracted,
-                section: "inspectionOutcomes"
+                section: .inspectionOutcomes
             ),
             Validation(
                 type: .decontaminationOrderIssuedInteracted,
                 errorMessage: .errorDecontaminationOrderIssuedInteracted,
                 condition: !highRiskDecontaminationOrderIssuedInteracted,
-                section: "inspectionOutcomes"
+                section: .inspectionOutcomes
             ),
             Validation(
                 type: .decontaminationAppendixBInteracted,
                 errorMessage: .errorDecontaminationAppendixBInteracted,
                 condition: !highRiskDecontaminationAppendixBInteracted,
-                section: "inspectionOutcomes"
+                section: .inspectionOutcomes
             ),
             Validation(
                 type: .sealIssuedInteracted,
                 errorMessage: .errorSealIssuedInteracted,
                 condition: !highRiskSealIssuedInteracted,
-                section: "inspectionOutcomes"
+                section: .inspectionOutcomes
             ),
             Validation(
                 type: .quarantinePeriodIssuedInteracted,
                 errorMessage: .errorQuarantinePeriodIssuedInteracted,
                 condition: !highRiskQuarantinePeriodIssuedInteracted,
-                section: "inspectionOutcomes"
+                section: .inspectionOutcomes
             ),
             
             // Basic Information validation
@@ -506,13 +498,13 @@ class WatercraftInspectionViewController: BaseViewController {
                 type: .inspectionTime,
                 errorMessage: .errorInspectionTime,
                 condition: model.inspectionTime.isEmpty,
-                section: "basicInformation"
+                section: .basicInformation
             ),
             Validation(
                 type: .isNoWatercraftTypeSelected,
                 errorMessage: .errorIsNoWatercraftTypeSelected,
                 condition: isNoWatercraftTypeSelected,
-                section: "basicInformation"
+                section: .basicInformation
             ),
             
             // Watercraft Details validation
@@ -520,7 +512,7 @@ class WatercraftInspectionViewController: BaseViewController {
                 type: .numberOfPeopleInParty,
                 errorMessage: .errorNumberOfPeopleInParty,
                 condition: model.numberOfPeopleInParty < 1,
-                section: "watercraftDetails"
+                section: .watercraftDetails
             ),
             Validation(
                 type: .previousAISKnowledge,
@@ -528,7 +520,7 @@ class WatercraftInspectionViewController: BaseViewController {
                 condition: model.previousAISKnowledeInteracted
                     && model.previousAISKnowlede
                     && model.previousAISKnowledeSource.isEmpty,
-                section: "watercraftDetails"
+                section: .watercraftDetails
             ),
             Validation(
                 type: .previousInspectionSource,
@@ -536,7 +528,7 @@ class WatercraftInspectionViewController: BaseViewController {
                 condition: model.previousInspectionInteracted
                     && model.previousInspection
                     && model.previousInspectionSource.isEmpty,
-                section: "watercraftDetails"
+                section: .watercraftDetails
             ),
             Validation(
                 type: .previousInspectionDays,
@@ -544,7 +536,7 @@ class WatercraftInspectionViewController: BaseViewController {
                 condition: model.previousInspectionInteracted
                     && model.previousInspection
                     && model.previousInspectionDays.isEmpty,
-                section: "watercraftDetails"
+                section: .watercraftDetails
             ),
             
             // Journey Details validation
@@ -553,35 +545,35 @@ class WatercraftInspectionViewController: BaseViewController {
                 errorMessage: .errorPreviousWaterBodies,
                 condition: isPreviousWaterbody
                     && model.previousWaterBodies.isEmpty,
-                section: "journeyDetails"
+                section: .journeyDetails
             ),
             Validation(
                 type: .previousMajorCities,
                 errorMessage: .errorPreviousMajorCities,
                 condition: isPreviousClosestCity
                     && model.previousMajorCities.isEmpty,
-                section: "journeyDetails"
+                section: .journeyDetails
             ),
             Validation(
                 type: .destinationWaterBodies,
                 errorMessage: .errorDestinationWaterBodies,
                 condition: isDestinationWaterbody
                     && model.destinationWaterBodies.isEmpty,
-                section: "journeyDetails"
+                section: .journeyDetails
             ),
             Validation(
                 type: .destinationMajorCities,
                 errorMessage: .errorDestinationMajorCities,
                 condition: isDestinationClosestCity
                     && model.destinationMajorCities.isEmpty,
-                section: "journeyDetails"
+                section: .journeyDetails
             ),
             Validation(
                 type: .numberOfDaysOut,
                 errorMessage: .errorNumberOfDaysOut,
                 condition: !model.previousWaterBodies.isEmpty
                     && previousNumberOfDays.isEmpty,
-                section: "journeyDetails"
+                section: .journeyDetails
             ),
             
             // Inspection Details
@@ -594,7 +586,7 @@ class WatercraftInspectionViewController: BaseViewController {
                 errorMessage: .errorInspectionTime,
                 condition: !isPassportHolderNewOrLaunched
                     && model.inspectionTime.isEmpty,
-                section: "inspectionDetails"
+                section: .inspectionDetails
             ),
             
             // Inspection Outcomes validation (High Risk form)
@@ -603,28 +595,28 @@ class WatercraftInspectionViewController: BaseViewController {
                 errorMessage: .errorDecontaminationPerformed,
                 condition: highRiskDecontaminationPerformed
                     && highRiskDecontaminationReference.isEmpty,
-                section: "inspectionOutcomes"
+                section: .inspectionOutcomes
             ),
             Validation(
                 type: .decontaminationOrderNumber,
                 errorMessage: .errorDecontaminationOrderNumber,
                 condition: highRiskDecontaminationOrderIssued
                     && highRiskDecontaminationOrderNumber <= 0,
-                section: "inspectionOutcomes"
+                section: .inspectionOutcomes
             ),
             Validation(
                 type: .decontaminationOrderReason,
                 errorMessage: .errorDecontaminationOrderReason,
                 condition: highRiskDecontaminationOrderIssued
                     && highRiskDecontaminationOrderReason.isEmpty,
-                section: "inspectionOutcomes"
+                section: .inspectionOutcomes
             ),
             Validation(
                 type: .sealNumber,
                 errorMessage: .errorSealNumber,
                 condition: highRiskSealIssued
                 && highRiskSealNumber <= 0,
-                section: "inspectionOutcomes"
+                section: .inspectionOutcomes
             ),
         ]
 
@@ -632,33 +624,31 @@ class WatercraftInspectionViewController: BaseViewController {
         // Aggregates the error messages into their respective arrays
         for validation in validationItems {
             switch validation.section {
-            case "basicInformation":
+            case .basicInformation:
                 if isPassportHolderNewOrLaunched && validation.condition {
                     validationErrors[0].errors.append(validation.errorMessage.rawValue)
                 }
-            case "watercraftDetails":
+            case .watercraftDetails:
                 if isPassportHolderNewOrLaunched && validation.condition {
                     validationErrors[1].errors.append(validation.errorMessage.rawValue)
                 }
-            case "journeyDetails":
+            case .journeyDetails:
                 if isPassportHolderNewOrLaunched && validation.condition {
                     validationErrors[2].errors.append(validation.errorMessage.rawValue)
                 }
-            case "inspectionDetails":
+            case .inspectionDetails:
                 // isPassportHolderNewOrLaunched only applies to dreissenidMusselsFound,
                 // not to k9Inspection, so added in condition in Validation above
                 if validation.condition {
                     validationErrors[3].errors.append(validation.errorMessage.rawValue)
                 }
-            case "inspectionOutcomes":
+            case .inspectionOutcomes:
                 // Only need to check if highRiskAssessment isn't empty
                 if isPassportHolderNewOrLaunched
                     && !model.highRiskAssessments.isEmpty
                     && validation.condition {
                     validationErrors[4].errors.append(validation.errorMessage.rawValue)
                 }
-            default:
-                break
             }
         }
             
@@ -666,7 +656,7 @@ class WatercraftInspectionViewController: BaseViewController {
 
         // Build the errors into a readable format, by section
         for sectionError in validationErrors {
-            let section = sectionError.section.readableSection
+            let section = sectionError.section.rawValue
             let errors = sectionError.errors
             
             if !errors.isEmpty {
