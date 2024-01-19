@@ -52,15 +52,7 @@ class FormButtonCollectionViewCell: UICollectionViewCell, Theme {
     }
     
     var disableMajorCityButton: Bool {
-        if (dryStorageSwitch?.isOn ?? true) {
-            return false
-        } else if (unknownWaterBodySwitch?.isOn ?? true) {
-            return false
-        } else if (commercialManufacturerSwitch?.isOn ?? true) {
-            return false
-        } else {
-            return true
-        }
+        return false
     }
     
     var result: Result {
@@ -119,13 +111,12 @@ class FormButtonCollectionViewCell: UICollectionViewCell, Theme {
     
     func set(status: Bool) {
         self.button?.isEnabled = !status
-        self.majorCityButton?.isEnabled = status;
         if status {
             styleDisable(button: self.button)
             styleHollowButton(button: self.majorCityButton)
         } else {
             styleHollowButton(button: button)
-            styleDisable(button: majorCityButton)
+            styleHollowButton(button: self.majorCityButton)
         }
     }
     

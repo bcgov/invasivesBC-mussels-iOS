@@ -308,10 +308,10 @@ class WatercraftInspectionViewController: BaseViewController {
         case errorPreviousInspectionDays = "No. of Days for Previous Inspection and/or Agency Notification."
         
         // Journey Details
-        case errorPreviousWaterBodies = "Previous Waterbody."
+        case errorPreviousWaterBodies = "Previous Waterbody\n(or toggle New, Unknown, or Stored)."
         case errorNumberOfDaysOut = "Number of days out of waterbody."
         case errorPreviousMajorCities = "Closest Major City for Previous Waterbody."
-        case errorDestinationWaterBodies = "Destination Waterbody."
+        case errorDestinationWaterBodies = "Destination Waterbody\n(or toggle New, Unknown, or Stored)."
         case errorDestinationMajorCities = "Closest Major City for Destination Waterbody."
         
         // Inspection Outcomes (High Risk form)
@@ -917,50 +917,31 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
             DestinationMajorCityCollectionViewCell
     }
     
-    private func arePreviousTogglesChecked(ref: WatercraftInspectionModel) -> Bool {
-        if ref.commercialManufacturerAsPreviousWaterBody || ref.unknownPreviousWaterBody || ref.previousDryStorage {
-            return true
-        } else {
-            return false
-        }
-    }
-    
-    private func areDestinationTogglesChecked(ref: WatercraftInspectionModel) -> Bool {
-        if ref.commercialManufacturerAsDestinationWaterBody || ref.unknownDestinationWaterBody || ref.destinationDryStorage {
-            return true
-        } else {
-            return false
-        }
-    }
-    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        guard let sectionType = WatercraftFromSection(rawValue: Int(section)), let model = self.model else {return 0}
-        
-        switch sectionType {
-        case .JourneyDetails:
-            if !arePreviousTogglesChecked(ref: model) && !areDestinationTogglesChecked(ref: model) {
-                return model.previousWaterBodies.count + model.destinationWaterBodies.count + 6
-            } else if arePreviousTogglesChecked(ref: model) && !areDestinationTogglesChecked(ref: model) {
-                return model.previousMajorCities.count + model.destinationWaterBodies.count + 6
-            } else if !arePreviousTogglesChecked(ref: model) && areDestinationTogglesChecked(ref: model) {
-                return model.previousWaterBodies.count + model.previousMajorCities.count + 6
-            } else {
-                return model.previousMajorCities.count + model.destinationMajorCities.count + 6
-            }
-    
-        case .HighRiskAssessment:
-            if !showHighRiskAssessment {
-                return 0
-            }
-            if self.showFullHighRiskAssessment == true {
-                return HighRiskFormSection.allCases.count
-            } else {
-                return 2
-            }
-        default:
-            return 1
-        }
+       guard let sectionType = WatercraftFromSection(rawValue: Int(section)), let model = self.model else {return 0}
+       
+       switch sectionType {
+       case .JourneyDetails:
+           let totalPreviousMajorCities = model.previousMajorCities.count
+           let totalPreviousWaterBodies = model.previousWaterBodies.count
+           let totalDestinationMajorCities = model.destinationMajorCities.count
+           let totalDestinationWaterBodies = model.destinationWaterBodies.count
+           return totalPreviousMajorCities + totalPreviousWaterBodies + totalDestinationMajorCities + totalDestinationWaterBodies + 6
+       
+       case .HighRiskAssessment:
+           if !showHighRiskAssessment {
+               return 0
+           }
+           if self.showFullHighRiskAssessment == true {
+               return HighRiskFormSection.allCases.count
+           } else {
+               return 2
+           }
+       default:
+           return 1
+       }
     }
+
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         if showFullInspection {
@@ -1169,22 +1150,21 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
             })
             return cell
         case .DestinationWaterBody:
-            let cell = getDestinationWaterBodyCell(indexPath: indexPath)
-            var itemsIndex: Int = 0
-            if arePreviousTogglesChecked(ref: model) {
-                itemsIndex = indexPath.row - (model.previousMajorCities.count + 4)
-            } else {
-                itemsIndex = indexPath.row - (model.previousWaterBodies.count + 4)
-            }
-            let destinationWaterBody = model.destinationWaterBodies[itemsIndex]
-            cell.setup(with: destinationWaterBody, isEditable: self.isEditable, delegate: self, onDelete: { [weak self] in
-                guard let strongSelf = self else {return}
-                model.removeDestinationWaterBody(at: itemsIndex)
-                strongSelf.collectionView.performBatchUpdates({
-                    strongSelf.collectionView.reloadSections(IndexSet(integer: indexPath.section))
-                }, completion: nil)
-            })
-            return cell
+          let cell = getDestinationWaterBodyCell(indexPath: indexPath)
+          var itemsIndex: Int = 0
+          itemsIndex = indexPath.row - (model.previousMajorCities.count + model.previousWaterBodies.count + 4)
+          if itemsIndex >= 0 && itemsIndex < model.destinationWaterBodies.count {
+              let destinationWaterBody = model.destinationWaterBodies[itemsIndex]
+              cell.setup(with: destinationWaterBody, isEditable: self.isEditable, delegate: self, onDelete: { [weak self] in
+                  guard let strongSelf = self else {return}
+                  model.removeDestinationWaterBody(at: itemsIndex)
+                  strongSelf.collectionView.performBatchUpdates({
+                      strongSelf.collectionView.reloadSections(IndexSet(integer: indexPath.section))
+                  }, completion: nil)
+              })
+          }
+          return cell
+
         
         case .PreviousMajorCity:
             let cell = getPreviousMajorCityCell(indexPath: indexPath)
@@ -1369,76 +1349,88 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
         }
     }
     
+    
+    /// Determines the type of cell for a given index path in the journey details section.
+    ///
+    /// This function calculates the type of cell to display in the journey details section based on the index path.
+    /// It takes into account the counts of  previous water bodies, previous major cities, destination water bodies,
+    /// and destination major cities.
+    ///
+    /// - Parameter indexPath: The index path for which the cell type needs to be determined.
+    /// - Returns: The type of cell for the given index path.
     private func getJourneyDetailsCellType(for indexPath: IndexPath) -> JourneyDetailsSectionRow {
         guard let model = self.model else {return .Divider}
+        
+        // Header for "Journey Details" always at top
         if indexPath.row == 0 {
             return .Header
         }
         
-        if indexPath.row ==  1 {
+        // Previous Waterbody comes second
+        if indexPath.row == 1 {
             return .PreviousHeader
         }
         
-        if arePreviousTogglesChecked(ref: model)  {
-            if indexPath.row == model.previousMajorCities.count + 2 {
-                return .AddPreviousWaterBody
-            }
-            
-            if indexPath.row == model.previousMajorCities.count + 3 {
-                return .DestinationHeader
-            }
-
-            if indexPath.row <= model.previousMajorCities.count + 3 {
-                return .PreviousMajorCity
-            }
-        } else {
-            if indexPath.row == model.previousWaterBodies.count + 2 {
-                return .AddPreviousWaterBody
-            }
-            if indexPath.row == model.previousWaterBodies.count + 3 {
-                return .DestinationHeader
-            }
-            if indexPath.row <= model.previousWaterBodies.count + 3 {
-                return .PreviousWaterBody
-            }
+        /// If we had 0 previous waterbodies we would skip this
+        /// Row = 2
+        /// previousWaterBody.count == 0
+        /// 2 <= min(2 - 2, 0 - 1) + 2 --> false, skip
+        ///
+        /// Comparatively, if we have 1 previousWaterBody we would show this cell for the row
+        /// Row = 2
+        /// previousWaterBody.count = 1
+        /// 2 <= min(2 - 2, 1 - 1) + 2 --> true,  show the previous waterbody
+        // Essentially, we hit this if the indexPath.row == 2 AND there is at least
+        // 1 previousWaterBody to show. It will continue to post all waterbodies here as well
+        let previousWaterBodyCount = min(indexPath.row - 2, model.previousWaterBodies.count - 1)
+        if indexPath.row <= previousWaterBodyCount + 2 {
+            return .PreviousWaterBody
         }
         
-        if areDestinationTogglesChecked(ref: model) && arePreviousTogglesChecked(ref: model) {
-            if indexPath.row <= (model.previousMajorCities.count + model.destinationMajorCities.count + 3) {
-                return .DestinationMajorCity
-            }
-            if indexPath.row == model.previousMajorCities.count + model.destinationMajorCities.count + 4 {
-                return .AddDestinationWaterBody
-            }
-        }
-        else if areDestinationTogglesChecked(ref: model) && !arePreviousTogglesChecked(ref: model) {
-            if indexPath.row <= (model.previousWaterBodies.count + model.destinationMajorCities.count + 3) {
-                return .DestinationMajorCity
-            }
-            if indexPath.row == model.previousWaterBodies.count + model.destinationMajorCities.count + 4 {
-                return .AddDestinationWaterBody
-            }
-        }
-        else if !areDestinationTogglesChecked(ref: model) && arePreviousTogglesChecked(ref: model) {
-            if indexPath.row <= (model.previousMajorCities.count + model.destinationWaterBodies.count + 3) {
-                return .DestinationWaterBody
-            }
-            if indexPath.row == model.previousMajorCities.count + model.destinationWaterBodies.count + 4 {
-                return .AddDestinationWaterBody
-            }
-        }
-        else {
-            model.deleteMajorCity(isPrevious: false)
-            model.deleteMajorCity(isPrevious: true)
-            if indexPath.row == model.previousWaterBodies.count + model.destinationWaterBodies.count + 4 {
-                return .AddDestinationWaterBody
-            }
-            
-            if indexPath.row <= (model.previousWaterBodies.count + model.destinationWaterBodies.count + 3) {
-                return .DestinationWaterBody
-            }
+        /// No previousWaterBodies, we should get to this part on Row = 2
+        /// Row = 2
+        /// previousWaterBody.count = 0
+        /// 2 == min(3 - 2, 0 - 1) + 3  --> true, show the Add Previous Water Button
+        ///
+        /// Comparatively, if we had 1 previousWaterBody, we reach this button on Row = 3
+        /// Row = 3
+        /// previousWaterBody.count = 1
+        /// 3 == min(2 - 2, 1 - 1) + 3 --> true, show the Add Previous Water Button
+        // This shows the Add Previous Waterbody (and Previous Major Cities button) after we've listed all
+        // the previous waterbodies above.
+        if indexPath.row == previousWaterBodyCount + 3 {
+            return .AddPreviousWaterBody
         }
         
+        // This will show the Previous Major City, and it will be below the Previous Add buttons
+        let previousMajorCityCount = min(indexPath.row - previousWaterBodyCount - 4, model.previousMajorCities.count - 1)
+        if indexPath.row <= previousWaterBodyCount + previousMajorCityCount + 4 {
+            return .PreviousMajorCity
+        }
+        
+        // Destination header always comes after Previous Major City
+        if indexPath.row == previousWaterBodyCount + previousMajorCityCount + 5 {
+            return .DestinationHeader
+        }
+        
+        // Similar to above, we perpetually list any destination waterbodies above the Previous Add buttons
+        let destinationWaterBodyCount = min(indexPath.row - previousWaterBodyCount - previousMajorCityCount - 6, model.destinationWaterBodies.count - 1)
+        if indexPath.row <= previousWaterBodyCount + previousMajorCityCount + destinationWaterBodyCount + 6 {
+            return .DestinationWaterBody
+        }
+        
+        // Eventually, we will list our Destination Add buttons once all Destination Waterbodies are listed
+        if indexPath.row == previousWaterBodyCount + previousMajorCityCount + destinationWaterBodyCount + 7 {
+            return .AddDestinationWaterBody
+        }
+        
+        // We show our Destination Major City beneath the Destination Add Buttons
+        let destinationMajorCityCount = min(indexPath.row - previousWaterBodyCount - previousMajorCityCount - destinationWaterBodyCount - 8, model.destinationMajorCities.count - 1)
+        if indexPath.row <= previousWaterBodyCount + previousMajorCityCount + destinationWaterBodyCount + destinationMajorCityCount + 8 {
+            return .DestinationMajorCity
+        }
+        
+        // Finally, once everything is exhausted, we show the Divider
         return .Divider
     }
 }
