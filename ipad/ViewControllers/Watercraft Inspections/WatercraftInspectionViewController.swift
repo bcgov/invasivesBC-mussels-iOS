@@ -169,7 +169,25 @@ class WatercraftInspectionViewController: BaseViewController {
         setGradiantBackground(navigationBar: navigation.navigationBar)
         if let model = self.model, model.getStatus() == .Draft {
             setRightNavButtons()
+            setLeftNavButtons()
         }
+    }
+    
+    private func setLeftNavButtons() {
+        // Create a UIButton to hold the back icon and text
+        let backButton = UIButton(type: .custom)
+        backButton.setTitle(" Shift Overview", for: .normal)
+        backButton.setTitleColor(UIColor.white, for: .normal)
+        backButton.setImage(UIImage(systemName: "chevron.backward"), for: .normal)
+        backButton.addTarget(self, action: #selector(didTapBackButton(sender:)), for: .touchUpInside)
+        backButton.contentHorizontalAlignment = .left
+        backButton.semanticContentAttribute = .forceLeftToRight
+        
+        backButton.sizeToFit()
+
+        let backBarButtonItem = UIBarButtonItem(customView: backButton)
+        
+        navigationItem.leftBarButtonItem = backBarButtonItem
     }
     
     private func setRightNavButtons() {
@@ -180,6 +198,16 @@ class WatercraftInspectionViewController: BaseViewController {
         let saveButton = UIBarButtonItem(image: saveIcon,  style: .plain, target: self, action: #selector(self.didTapCheckmarkButton(sender:)))
         
         navigationItem.rightBarButtonItems = [saveButton, deleteButton]
+    }
+    
+    @objc func didTapBackButton(sender: UIBarButtonItem) {
+        self.dismissKeyboard()
+
+        if canSubmit() {
+            self.navigationController?.popViewController(animated: true)
+        } else {
+            Alert.show(title: "Incomplete", message: validationMessage())
+        }
     }
     
     // Navigation bar right button action
@@ -216,209 +244,418 @@ class WatercraftInspectionViewController: BaseViewController {
         return validationMessage() == ""
     }
     
+    /// Enum error cases grouped by sections for clarity
+    enum ValidationType {
+        // Null Switch Interactions
+        case commerciallyHauledInteracted               // Basic Information
+        case previousAISKnowledgeInteracted             // Watercraft Details
+        case previousInspectionInteracted               // Watercraft Details
+        case dreissenidMusselsFoundPreviousInteracted   // Inspection Details
+        case k9InspectionInteracted                     // Inspection Details
+        case decontaminationPerformedInteracted         // High Risk Form
+        case decontaminationOrderIssuedInteracted       // High Risk Form
+        case decontaminationAppendixBInteracted         // High Risk Form
+        case sealIssuedInteracted                       // High Risk Form
+        case quarantinePeriodIssuedInteracted           // High Risk Form
+        
+        // Basic
+        case inspectionTime
+        case numberOfPeopleInParty
+        case isNoWatercraftTypeSelected
+        
+        // Watercraft Details
+        case previousAISKnowledge
+        case previousInspectionSource
+        case previousInspectionDays
+        
+        // Journey Details
+        case previousWaterBodies
+        case numberOfDaysOut
+        case previousMajorCities
+        case destinationWaterBodies
+        case destinationMajorCities
+        
+        // Inspection Outcomes (High Risk form)
+        case decontaminationPerformed
+        case decontaminationOrderNumber
+        case decontaminationOrderReason
+        case sealNumber
+        
+    }
+
+    /// Enum error messages grouped by sections for clarity
+    enum ValidationError: String {
+        // Null Switch Interaction errors
+        case errorCommerciallyHauledInteracted = "Watercraft/equipment commercially hauled."
+        case errorPreviousAISKnowledgeInteracted = "Previous Knowledge of AIS or Clean, Drain, Dry."
+        case errorPreviousInspectionInteracted = "Previous Inspection and/or Agency Notification."
+        case errorDreissenidMusselsFoundPreviousInteracted = "Dreissenid mussels found during previous inspection and FULL decontamination already completed/determined to be CDD."
+        case errorK9InspectionInteracted = "K9 Inspection Performed."
+        case errorDecontaminationPerformedInteracted = "Decontamination performed."
+        case errorDecontaminationOrderIssuedInteracted = "Decontamination order issued."
+        case errorDecontaminationAppendixBInteracted = "Appendix B filled out field."
+        case errorSealIssuedInteracted = "Seal issued or existing seal field."
+        case errorQuarantinePeriodIssuedInteracted = "Quarantine period issued field."
+        
+        // Basic
+        case errorInspectionTime = "Time of Inspection."
+        case errorNumberOfPeopleInParty = "Number of people in the party."
+        case errorIsNoWatercraftTypeSelected = "Watercraft Type needed:\n  · Non-Motorized\n  · Simple\n  · Complex\n  · Very Complex"
+        
+        // Watercraft Details
+        case errorPreviousAISKnowledge = "Source for Previous Knowledge of AIS or Clean, Drain, Dry."
+        case errorPreviousInspectionSource = "Source for Previous Inspection and/or Agency Notification."
+        case errorPreviousInspectionDays = "No. of Days for Previous Inspection and/or Agency Notification."
+        
+        // Journey Details
+        case errorPreviousWaterBodies = "Previous Waterbody\n(or toggle New, Unknown, or Stored)."
+        case errorNumberOfDaysOut = "Number of days out of waterbody."
+        case errorPreviousMajorCities = "Closest Major City for Previous Waterbody."
+        case errorDestinationWaterBodies = "Destination Waterbody\n(or toggle New, Unknown, or Stored)."
+        case errorDestinationMajorCities = "Closest Major City for Destination Waterbody."
+        
+        // Inspection Outcomes (High Risk form)
+        case errorDecontaminationPerformed = "Record of Decontamination number."
+        case errorDecontaminationOrderNumber = "Decontamination order number."
+        case errorDecontaminationOrderReason = "Reason for issuing a decontamination order."
+        case errorSealNumber = "Seal #"
+    }
+    
+    enum Section: String {
+        case basicInformation = "- BASIC INFORMATION -"
+        case watercraftDetails = "- WATERCRAFT DETAILS -"
+        case journeyDetails = "- JOURNEY DETAILS -"
+        case inspectionDetails = "- INSPECTION DETAILS -"
+        case inspectionOutcomes = "- INSPECTION OUTCOMES -"
+    }
+
+    /// Validation struct for the errors, their messages, and the condition where they should be called in validation process
+    struct Validation {
+        var type: ValidationType
+        var errorMessage: ValidationError
+        var condition: Bool
+        var section: Section
+    }
+
+    
+    /// Performs validation checks on the Inspection, separating the distinct sections
+    /// of Basic Information, Watercraft Details, Journey Details, Inspection Details,
+    /// and Inspection Outcomes (High Risk form). Checks specific conditions
+    /// and generates error messages for failed validations within each section.
+    ///  
+    /// - Returns: String of validation messages to display in the alert
     func validationMessage() -> String {
-        var message: String = ""
-        guard let model = self.model else { return message }
-        // Take some common/repeated conditionals and assign to variables
-        // Check if any watercraft type has been incremented (need one type to be > 0)
+        var validationErrors: [(section: Section, errors: [String])] = [
+            (.basicInformation, []),
+            (.watercraftDetails, []),
+            (.journeyDetails, []),
+            (.inspectionDetails, []),
+            (.inspectionOutcomes, [])
+        ]
+        guard let model = self.model else { return "" }
+        
+        // The inspection form only appears if Passport is new, or if the toggle
+        // "Launched outside BC/AB..." is toggled ON. Otherwise, we don't need to
+        // check the inspection fields below because they will be hidden.
+        let isPassportHolderNewOrLaunched = !model.isPassportHolder || (model.isPassportHolder && (model.launchedOutsideBC || model.isNewPassportIssued))
+        
+        // User should have entered at least one watercraft type
         let isNoWatercraftTypeSelected =
           model.nonMotorized == 0 &&
           model.simple == 0 &&
           model.complex == 0 &&
           model.veryComplex == 0;
         
-        // Check if this is a passport AND if a new passport is issued or launched outside BC is true
-        // Several form fields are hidden if passport holder, but reappear if it's new passport / launched
-        let isPassportHolderNewOrLaunched = !model.isPassportHolder ||
-        (model.isPassportHolder && (model.launchedOutsideBC || model.isNewPassportIssued))
+        // PREVIOUS WATERBODY
+        // Commercial, unknown waterbody, AND previously stored are false
+        let isPreviousWaterbody = !model.unknownPreviousWaterBody
+            && !model.commercialManufacturerAsPreviousWaterBody
+            && !model.previousDryStorage
         
-        var counter = 1
+        // DESTINATION WATERBODY
+        // Commercial, unknown waterbody, AND will be stored are false
+        let isDestinationWaterbody = !model.unknownDestinationWaterBody
+            && !model.commercialManufacturerAsDestinationWaterBody
+            && !model.destinationDryStorage
         
-        // --------- Basic Information Validations ---------
-        if model.inspectionTime == "" {
-            message = "\(message)\n\(counter). Missing Time of Inspection (Basic Information).\n"
-            counter += 1
-        }
-        
-        // Check if any of the Watercraft types are at least greater than 0
-        if isPassportHolderNewOrLaunched && isNoWatercraftTypeSelected {
-          message = "\(message)\n\(counter). Please input at least one Watercraft Type (Basic Information):\n - Non-Motorized\n - Simple\n - Complex\n - Very Complex\n";
-          counter += 1;
-        }
-        // --------- End of Basic Information Validaiton ---------
-        
-        // --------- Watercraft Details Validation ---------
-        if isPassportHolderNewOrLaunched &&
-            model.numberOfPeopleInParty < 1 {
-            message = "\(message)\n\(counter). Please input the number of people in the party (Watercraft Details).\n"
-            counter += 1
-        }
-        
-        if isPassportHolderNewOrLaunched &&
-            !model.commerciallyHauledInteracted {
-            message = "\(message)\n\(counter). Please input Watercraft/equipment commerically hauled field (Watercraft Details).\n"
-            counter += 1
-        }
-        
-        if isPassportHolderNewOrLaunched &&
-            !model.previousAISKnowledeInteracted {
-            message = "\(message)\n\(counter). Please input Previous Knowledge of AIS or Clean, Drain, Dry field (Watercraft Details).\n"
-            counter += 1
-        }
-        
-        if isPassportHolderNewOrLaunched &&
-            model.previousAISKnowledeInteracted &&
-            model.previousAISKnowlede &&
-            model.previousAISKnowledeSource.isEmpty {
-            message = "\(message)\n\(counter). Please input Source for Previous Knowledge of AIS or Clean, Drain, Dry (Watercraft Details).\n"
-            counter += 1
-        }
-        
-        if isPassportHolderNewOrLaunched &&
-            !model.previousInspectionInteracted {
-            message = "\(message)\n\(counter). Please input Previous Inspection and/or Agency Notification field (Watercraft Details).\n"
-            counter += 1
-        }
-        
-        // Previous Inspection has been interacted with and set to "Yes", but Previous Inspection Source is empty
-        if isPassportHolderNewOrLaunched &&
-            model.previousInspectionInteracted &&
-            model.previousInspection &&
-            model.previousInspectionSource.isEmpty {
-            message = "\(message)\n\(counter). Please input Source for Previous Inspection and/or Agency Notification (Watercraft Details).\n"
-            counter += 1
-        }
-        
-        // Previous Inspection has been interacted with and set to "Yes", but Previous Inspection Days is empty
-        if isPassportHolderNewOrLaunched &&
-            model.previousInspectionInteracted &&
-            model.previousInspection &&
-            model.previousInspectionDays.isEmpty {
-            message = "\(message)\n\(counter). Please input No. of Days for Previous Inspection and/or Agency Notification (Watercraft Details).\n"
-            counter += 1
-        }
-        // --------- End of Watercraft Details Validaiton ---------
-        
-        // --------- Journey Details Validation ---------
-        if isPassportHolderNewOrLaunched &&
-            model.unknownPreviousWaterBody == false &&
-            model.commercialManufacturerAsPreviousWaterBody == false &&
-            model.previousDryStorage == false {
-            if model.previousWaterBodies.isEmpty {
-                    message = "\(message)\n\(counter). Please add a Previous Waterbody (Journey Details).\n"
-                    counter += 1
-            }
+        // Set values for any missing "Number of days out of waterbody" fields, if they exist
+        var previousNumberOfDays: String = ""
+        if isPassportHolderNewOrLaunched && !model.previousWaterBodies.isEmpty {
             for prev in model.previousWaterBodies {
-                if prev.numberOfDaysOut.isEmpty {
-                    message = "\(message)\n\(counter). Please add a Number of days out of waterbody (Journey Details).\n"
-                    counter += 1
-                }
+                previousNumberOfDays = prev.numberOfDaysOut
             }
         }
         
-        if isPassportHolderNewOrLaunched &&
-            model.unknownPreviousWaterBody == true ||
-            model.commercialManufacturerAsPreviousWaterBody == true ||
-            model.previousDryStorage == true {
-            if model.previousMajorCities.isEmpty {
-                message = "\(message)\n\(counter). Please add Closest Major City for Previous Waterbody (Journey Details).\n"
-                counter += 1
-            }
-        }
+        // Set values for High Risk form, if it exists
+        var highRiskDecontaminationPerformedInteracted: Bool = false
+        var highRiskDecontaminationOrderIssuedInteracted: Bool = false
+        var highRiskDecontaminationAppendixBInteracted: Bool = false
+        var highRiskSealIssuedInteracted: Bool = false
+        var highRiskQuarantinePeriodIssuedInteracted: Bool = false
         
-        if isPassportHolderNewOrLaunched &&
-            model.unknownDestinationWaterBody == false &&
-            model.commercialManufacturerAsDestinationWaterBody == false &&
-            model.destinationDryStorage == false {
-            if model.destinationWaterBodies.isEmpty {
-                message = "\(message)\n\(counter). Please add a Destination Waterbody (Journey Details).\n"
-                counter += 1
-            }
+        var highRiskDecontaminationPerformed: Bool = false
+        var highRiskDecontaminationReference: String = ""
+        var highRiskDecontaminationOrderIssued: Bool = false
+        var highRiskDecontaminationOrderNumber: Int = 0
+        var highRiskDecontaminationOrderReason: String = ""
+        var highRiskSealIssued: Bool = false
+        var highRiskSealNumber: Int = 0
+        
+        if isPassportHolderNewOrLaunched, let highRisk = model.highRiskAssessments.first {
+            // Null Switches
+            highRiskDecontaminationPerformedInteracted = highRisk.decontaminationPerformedInteracted
+            highRiskDecontaminationOrderIssuedInteracted = highRisk.decontaminationOrderIssuedInteracted
+            highRiskDecontaminationAppendixBInteracted = highRisk.decontaminationAppendixBInteracted
+            highRiskSealIssuedInteracted = highRisk.sealIssuedInteracted
+            highRiskQuarantinePeriodIssuedInteracted = highRisk.quarantinePeriodIssuedInteracted
+            // Other form fields (if "Yes" is selected)
+            highRiskDecontaminationPerformed = highRisk.decontaminationPerformed
+            highRiskDecontaminationReference = highRisk.decontaminationReference
+            highRiskDecontaminationOrderIssued = highRisk.decontaminationOrderIssued
+            highRiskDecontaminationOrderNumber = highRisk.decontaminationOrderNumber
+            highRiskDecontaminationOrderReason = highRisk.decontaminationOrderReason
+            highRiskSealIssued = highRisk.sealIssued
+            highRiskSealNumber = highRisk.sealNumber
         }
 
-        if isPassportHolderNewOrLaunched &&
-            model.unknownDestinationWaterBody == true ||
-            model.commercialManufacturerAsDestinationWaterBody == true ||
-            model.destinationDryStorage == true {
-            if model.destinationMajorCities.isEmpty {
-                message = "\(message)\n\(counter). Please add Closest Major City for Destination Waterbody (Journey Details).\n"
-                counter += 1
+        /// This is where we write out the conditional logic for when the validation
+        /// e.g. if the previousAISKnowledgeSource field isEmpty, then the validation will fail
+        /// and the corresponding errorMessage will be shown when attempting to submit
+        let validationItems: [Validation] = [
+            // Null Switch validation
+            Validation(
+                type: .commerciallyHauledInteracted,
+                errorMessage: .errorCommerciallyHauledInteracted,
+                condition: !model.commerciallyHauledInteracted,
+                section: .watercraftDetails
+            ),
+            Validation(
+                type: .previousAISKnowledgeInteracted,
+                errorMessage: .errorPreviousAISKnowledgeInteracted,
+                condition: !model.previousAISKnowledeInteracted,
+                section: .watercraftDetails
+            ),
+            Validation(
+                type: .previousInspectionInteracted,
+                errorMessage: .errorPreviousInspectionInteracted,
+                condition: !model.previousInspectionInteracted,
+                section: .watercraftDetails
+            ),
+            Validation(
+                type: .dreissenidMusselsFoundPreviousInteracted,
+                errorMessage: .errorDreissenidMusselsFoundPreviousInteracted,
+                condition: isPassportHolderNewOrLaunched
+                    && !model.dreissenidMusselsFoundPreviousInteracted,
+                section: .inspectionDetails
+            ),
+            Validation(
+                type: .k9InspectionInteracted,
+                errorMessage: .errorK9InspectionInteracted,
+                condition: !model.k9InspectionInteracted,
+                section: .inspectionDetails
+            ),
+            Validation(
+                type: .decontaminationPerformedInteracted,
+                errorMessage: .errorDecontaminationPerformedInteracted,
+                condition: !highRiskDecontaminationPerformedInteracted,
+                section: .inspectionOutcomes
+            ),
+            Validation(
+                type: .decontaminationOrderIssuedInteracted,
+                errorMessage: .errorDecontaminationOrderIssuedInteracted,
+                condition: !highRiskDecontaminationOrderIssuedInteracted,
+                section: .inspectionOutcomes
+            ),
+            Validation(
+                type: .decontaminationAppendixBInteracted,
+                errorMessage: .errorDecontaminationAppendixBInteracted,
+                condition: !highRiskDecontaminationAppendixBInteracted,
+                section: .inspectionOutcomes
+            ),
+            Validation(
+                type: .sealIssuedInteracted,
+                errorMessage: .errorSealIssuedInteracted,
+                condition: !highRiskSealIssuedInteracted,
+                section: .inspectionOutcomes
+            ),
+            Validation(
+                type: .quarantinePeriodIssuedInteracted,
+                errorMessage: .errorQuarantinePeriodIssuedInteracted,
+                condition: !highRiskQuarantinePeriodIssuedInteracted,
+                section: .inspectionOutcomes
+            ),
+            
+            // Basic Information validation
+            Validation(
+                type: .inspectionTime,
+                errorMessage: .errorInspectionTime,
+                condition: model.inspectionTime.isEmpty,
+                section: .basicInformation
+            ),
+            Validation(
+                type: .isNoWatercraftTypeSelected,
+                errorMessage: .errorIsNoWatercraftTypeSelected,
+                condition: isNoWatercraftTypeSelected,
+                section: .basicInformation
+            ),
+            
+            // Watercraft Details validation
+            Validation(
+                type: .numberOfPeopleInParty,
+                errorMessage: .errorNumberOfPeopleInParty,
+                condition: model.numberOfPeopleInParty < 1,
+                section: .watercraftDetails
+            ),
+            Validation(
+                type: .previousAISKnowledge,
+                errorMessage: .errorPreviousAISKnowledge,
+                condition: model.previousAISKnowledeInteracted
+                    && model.previousAISKnowlede
+                    && model.previousAISKnowledeSource.isEmpty,
+                section: .watercraftDetails
+            ),
+            Validation(
+                type: .previousInspectionSource,
+                errorMessage: .errorPreviousInspectionSource,
+                condition: model.previousInspectionInteracted
+                    && model.previousInspection
+                    && model.previousInspectionSource.isEmpty,
+                section: .watercraftDetails
+            ),
+            Validation(
+                type: .previousInspectionDays,
+                errorMessage: .errorPreviousInspectionDays,
+                condition: model.previousInspectionInteracted
+                    && model.previousInspection
+                    && model.previousInspectionDays.isEmpty,
+                section: .watercraftDetails
+            ),
+            
+            // Journey Details validation
+            // Note: Prev and Dest Major City are required on all submissions
+            Validation(
+                type: .previousWaterBodies,
+                errorMessage: .errorPreviousWaterBodies,
+                condition: isPreviousWaterbody
+                    && model.previousWaterBodies.isEmpty,
+                section: .journeyDetails
+            ),
+            Validation(
+                type: .previousMajorCities,
+                errorMessage: .errorPreviousMajorCities,
+                condition: model.previousMajorCities.isEmpty,
+                section: .journeyDetails
+            ),
+            Validation(
+                type: .destinationWaterBodies,
+                errorMessage: .errorDestinationWaterBodies,
+                condition: isDestinationWaterbody
+                    && model.destinationWaterBodies.isEmpty,
+                section: .journeyDetails
+            ),
+            Validation(
+                type: .destinationMajorCities,
+                errorMessage: .errorDestinationMajorCities,
+                condition: model.destinationMajorCities.isEmpty,
+                section: .journeyDetails
+            ),
+            Validation(
+                type: .numberOfDaysOut,
+                errorMessage: .errorNumberOfDaysOut,
+                condition: !model.previousWaterBodies.isEmpty
+                    && previousNumberOfDays.isEmpty,
+                section: .journeyDetails
+            ),
+            
+            // Inspection Details
+            // K9 inspection and time of inspection are the only
+            // two fields that persist between Passport and non-Passport
+            // so we put inspection time here under the condition it's not
+            // a new Passport or "Launched outside BC/AB..."
+            Validation(
+                type: .inspectionTime,
+                errorMessage: .errorInspectionTime,
+                condition: !isPassportHolderNewOrLaunched
+                    && model.inspectionTime.isEmpty,
+                section: .inspectionDetails
+            ),
+            
+            // Inspection Outcomes validation (High Risk form)
+            Validation(
+                type: .decontaminationPerformed,
+                errorMessage: .errorDecontaminationPerformed,
+                condition: highRiskDecontaminationPerformed
+                    && highRiskDecontaminationReference.isEmpty,
+                section: .inspectionOutcomes
+            ),
+            Validation(
+                type: .decontaminationOrderNumber,
+                errorMessage: .errorDecontaminationOrderNumber,
+                condition: highRiskDecontaminationOrderIssued
+                    && highRiskDecontaminationOrderNumber <= 0,
+                section: .inspectionOutcomes
+            ),
+            Validation(
+                type: .decontaminationOrderReason,
+                errorMessage: .errorDecontaminationOrderReason,
+                condition: highRiskDecontaminationOrderIssued
+                    && highRiskDecontaminationOrderReason.isEmpty,
+                section: .inspectionOutcomes
+            ),
+            Validation(
+                type: .sealNumber,
+                errorMessage: .errorSealNumber,
+                condition: highRiskSealIssued
+                && highRiskSealNumber <= 0,
+                section: .inspectionOutcomes
+            ),
+        ]
+
+        // Iterates through the validationItems and checks conditions for any failures
+        // Aggregates the error messages into their respective arrays
+        for validation in validationItems {
+            switch validation.section {
+            case .basicInformation:
+                if isPassportHolderNewOrLaunched && validation.condition {
+                    validationErrors[0].errors.append(validation.errorMessage.rawValue)
+                }
+            case .watercraftDetails:
+                if isPassportHolderNewOrLaunched && validation.condition {
+                    validationErrors[1].errors.append(validation.errorMessage.rawValue)
+                }
+            case .journeyDetails:
+                if isPassportHolderNewOrLaunched && validation.condition {
+                    validationErrors[2].errors.append(validation.errorMessage.rawValue)
+                }
+            case .inspectionDetails:
+                // isPassportHolderNewOrLaunched only applies to dreissenidMusselsFound,
+                // not to k9Inspection, so added in condition in Validation above
+                if validation.condition {
+                    validationErrors[3].errors.append(validation.errorMessage.rawValue)
+                }
+            case .inspectionOutcomes:
+                // Only need to check if highRiskAssessment isn't empty
+                if isPassportHolderNewOrLaunched
+                    && !model.highRiskAssessments.isEmpty
+                    && validation.condition {
+                    validationErrors[4].errors.append(validation.errorMessage.rawValue)
+                }
             }
         }
-        // --------- End of Journey Details Validation ---------
-        
-        // --------- Inspection Details Validations ---------
-        if isPassportHolderNewOrLaunched &&
-            !model.dreissenidMusselsFoundPreviousInteracted {
-            message = "\(message)\n\(counter). Please input Dreissenid mussels found during previous inspection and FULL decontamination already completed field (Inspection Details).\n"
-            counter += 1
-        }
-        
-        if !model.k9InspectionInteracted {
-            message = "\(message)\n\(counter). Please input k9 Inspection Performed field (Inspection Details).\n"
-            counter += 1
-        }
-        // --------- End of Inspection Details Validation ---------
-        
-        //  --------- High Risk Assessment Validations ---------
-        if isPassportHolderNewOrLaunched &&
-            !model.highRiskAssessments.isEmpty {
-            for highRisk in model.highRiskAssessments {
-                if !highRisk.decontaminationPerformedInteracted {
-                    message = "\(message)\n\(counter). Please input Decontamination performed field (Inspection Outcomes).\n"
-                    counter += 1
-                }
-                
-                // Decontamination has been interacted with and set to "Yes", but a Record of Decontamintion number is empty
-                if highRisk.decontaminationPerformedInteracted &&
-                    highRisk.decontaminationPerformed &&
-                    highRisk.decontaminationReference.isEmpty {
-                    message = "\(message)\n\(counter). Please input a Record of Decontamination number (Inspection Outcomes).\n"
-                    counter += 1
-                }
+            
+        var message = ""
 
-                if !highRisk.decontaminationOrderIssuedInteracted {
-                    message = "\(message)\n\(counter). Please input Decontamination order issued field (Inspection Outcomes).\n"
-                    counter += 1
+        // Build the errors into a readable format, by section
+        for sectionError in validationErrors {
+            let section = sectionError.section.rawValue
+            let errors = sectionError.errors
+            
+            if !errors.isEmpty {
+                message += "\(section)\n\n"
+                for error in errors {
+                    message += "· \(error)\n\n"
                 }
-                
-                // Decontamination order has been interacted with and set to "Yes", but a Record of Decontamintion number is empty
-                if highRisk.decontaminationOrderIssuedInteracted &&
-                    highRisk.decontaminationOrderIssued &&
-                    highRisk.decontaminationOrderNumber <= 0 {
-                    message = "\(message)\n\(counter). Please input the Decontamination order number (Inspection Outcomes).\n"
-                    counter += 1
-                }
-                
-                if highRisk.decontaminationOrderIssuedInteracted &&
-                    highRisk.decontaminationOrderIssued &&
-                    highRisk.decontaminationOrderReason.isEmpty {
-                    message = "\(message)\n\(counter). Please input the Reason for issuing a decontamination order (Inspection Outcomes).\n"
-                    counter += 1
-                }
-                
-                if !highRisk.decontaminationAppendixBInteracted {
-                    message = "\(message)\n\(counter). Please input Appendix B filled out field (Inspection Outcomes).\n"
-                    counter += 1
-                }
-                
-                if !highRisk.sealIssuedInteracted {
-                    message = "\(message)\n\(counter). Please input Seal issued or existing seal field (Inspection Outcomes).\n"
-                    counter += 1
-                }
-                
-                // Seal Issued has been interacted with and set to "Yes", but Seal number is empty
-                if highRisk.sealIssuedInteracted &&
-                    highRisk.sealIssued &&
-                    highRisk.sealNumber <= 0 {
-                    message = "\(message)\n\(counter). Please input the Seal # (Inspection Outcomes).\n"
-                    counter += 1
-                }
-                
-                if !highRisk.quarantinePeriodIssuedInteracted {
-                    message = "\(message)\n\(counter). Please input Quarantine period issued field (Inspection Outcomes).\n"
-                    counter += 1
-                }
+                message += "\n"
             }
         }
 
@@ -671,50 +908,31 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
             DestinationMajorCityCollectionViewCell
     }
     
-    private func arePreviousTogglesChecked(ref: WatercraftInspectionModel) -> Bool {
-        if ref.commercialManufacturerAsPreviousWaterBody || ref.unknownPreviousWaterBody || ref.previousDryStorage {
-            return true
-        } else {
-            return false
-        }
-    }
-    
-    private func areDestinationTogglesChecked(ref: WatercraftInspectionModel) -> Bool {
-        if ref.commercialManufacturerAsDestinationWaterBody || ref.unknownDestinationWaterBody || ref.destinationDryStorage {
-            return true
-        } else {
-            return false
-        }
-    }
-    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        guard let sectionType = WatercraftFromSection(rawValue: Int(section)), let model = self.model else {return 0}
-        
-        switch sectionType {
-        case .JourneyDetails:
-            if !arePreviousTogglesChecked(ref: model) && !areDestinationTogglesChecked(ref: model) {
-                return model.previousWaterBodies.count + model.destinationWaterBodies.count + 6
-            } else if arePreviousTogglesChecked(ref: model) && !areDestinationTogglesChecked(ref: model) {
-                return model.previousMajorCities.count + model.destinationWaterBodies.count + 6
-            } else if !arePreviousTogglesChecked(ref: model) && areDestinationTogglesChecked(ref: model) {
-                return model.previousWaterBodies.count + model.previousMajorCities.count + 6
-            } else {
-                return model.previousMajorCities.count + model.destinationMajorCities.count + 6
-            }
-    
-        case .HighRiskAssessment:
-            if !showHighRiskAssessment {
-                return 0
-            }
-            if self.showFullHighRiskAssessment == true {
-                return HighRiskFormSection.allCases.count
-            } else {
-                return 2
-            }
-        default:
-            return 1
-        }
+       guard let sectionType = WatercraftFromSection(rawValue: Int(section)), let model = self.model else {return 0}
+       
+       switch sectionType {
+       case .JourneyDetails:
+           let totalPreviousMajorCities = model.previousMajorCities.count
+           let totalPreviousWaterBodies = model.previousWaterBodies.count
+           let totalDestinationMajorCities = model.destinationMajorCities.count
+           let totalDestinationWaterBodies = model.destinationWaterBodies.count
+           return totalPreviousMajorCities + totalPreviousWaterBodies + totalDestinationMajorCities + totalDestinationWaterBodies + 6
+       
+       case .HighRiskAssessment:
+           if !showHighRiskAssessment {
+               return 0
+           }
+           if self.showFullHighRiskAssessment == true {
+               return HighRiskFormSection.allCases.count
+           } else {
+               return 2
+           }
+       default:
+           return 1
+       }
     }
+
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         if showFullInspection {
@@ -923,22 +1141,21 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
             })
             return cell
         case .DestinationWaterBody:
-            let cell = getDestinationWaterBodyCell(indexPath: indexPath)
-            var itemsIndex: Int = 0
-            if arePreviousTogglesChecked(ref: model) {
-                itemsIndex = indexPath.row - (model.previousMajorCities.count + 4)
-            } else {
-                itemsIndex = indexPath.row - (model.previousWaterBodies.count + 4)
-            }
-            let destinationWaterBody = model.destinationWaterBodies[itemsIndex]
-            cell.setup(with: destinationWaterBody, isEditable: self.isEditable, delegate: self, onDelete: { [weak self] in
-                guard let strongSelf = self else {return}
-                model.removeDestinationWaterBody(at: itemsIndex)
-                strongSelf.collectionView.performBatchUpdates({
-                    strongSelf.collectionView.reloadSections(IndexSet(integer: indexPath.section))
-                }, completion: nil)
-            })
-            return cell
+          let cell = getDestinationWaterBodyCell(indexPath: indexPath)
+          var itemsIndex: Int = 0
+          itemsIndex = indexPath.row - (model.previousMajorCities.count + model.previousWaterBodies.count + 4)
+          if itemsIndex >= 0 && itemsIndex < model.destinationWaterBodies.count {
+              let destinationWaterBody = model.destinationWaterBodies[itemsIndex]
+              cell.setup(with: destinationWaterBody, isEditable: self.isEditable, delegate: self, onDelete: { [weak self] in
+                  guard let strongSelf = self else {return}
+                  model.removeDestinationWaterBody(at: itemsIndex)
+                  strongSelf.collectionView.performBatchUpdates({
+                      strongSelf.collectionView.reloadSections(IndexSet(integer: indexPath.section))
+                  }, completion: nil)
+              })
+          }
+          return cell
+
         
         case .PreviousMajorCity:
             let cell = getPreviousMajorCityCell(indexPath: indexPath)
@@ -1123,76 +1340,88 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
         }
     }
     
+    
+    /// Determines the type of cell for a given index path in the journey details section.
+    ///
+    /// This function calculates the type of cell to display in the journey details section based on the index path.
+    /// It takes into account the counts of  previous water bodies, previous major cities, destination water bodies,
+    /// and destination major cities.
+    ///
+    /// - Parameter indexPath: The index path for which the cell type needs to be determined.
+    /// - Returns: The type of cell for the given index path.
     private func getJourneyDetailsCellType(for indexPath: IndexPath) -> JourneyDetailsSectionRow {
         guard let model = self.model else {return .Divider}
+        
+        // Header for "Journey Details" always at top
         if indexPath.row == 0 {
             return .Header
         }
         
-        if indexPath.row ==  1 {
+        // Previous Waterbody comes second
+        if indexPath.row == 1 {
             return .PreviousHeader
         }
         
-        if arePreviousTogglesChecked(ref: model)  {
-            if indexPath.row == model.previousMajorCities.count + 2 {
-                return .AddPreviousWaterBody
-            }
-            
-            if indexPath.row == model.previousMajorCities.count + 3 {
-                return .DestinationHeader
-            }
-
-            if indexPath.row <= model.previousMajorCities.count + 3 {
-                return .PreviousMajorCity
-            }
-        } else {
-            if indexPath.row == model.previousWaterBodies.count + 2 {
-                return .AddPreviousWaterBody
-            }
-            if indexPath.row == model.previousWaterBodies.count + 3 {
-                return .DestinationHeader
-            }
-            if indexPath.row <= model.previousWaterBodies.count + 3 {
-                return .PreviousWaterBody
-            }
+        /// If we had 0 previous waterbodies we would skip this
+        /// Row = 2
+        /// previousWaterBody.count == 0
+        /// 2 <= min(2 - 2, 0 - 1) + 2 --> false, skip
+        ///
+        /// Comparatively, if we have 1 previousWaterBody we would show this cell for the row
+        /// Row = 2
+        /// previousWaterBody.count = 1
+        /// 2 <= min(2 - 2, 1 - 1) + 2 --> true,  show the previous waterbody
+        // Essentially, we hit this if the indexPath.row == 2 AND there is at least
+        // 1 previousWaterBody to show. It will continue to post all waterbodies here as well
+        let previousWaterBodyCount = min(indexPath.row - 2, model.previousWaterBodies.count - 1)
+        if indexPath.row <= previousWaterBodyCount + 2 {
+            return .PreviousWaterBody
         }
         
-        if areDestinationTogglesChecked(ref: model) && arePreviousTogglesChecked(ref: model) {
-            if indexPath.row <= (model.previousMajorCities.count + model.destinationMajorCities.count + 3) {
-                return .DestinationMajorCity
-            }
-            if indexPath.row == model.previousMajorCities.count + model.destinationMajorCities.count + 4 {
-                return .AddDestinationWaterBody
-            }
-        }
-        else if areDestinationTogglesChecked(ref: model) && !arePreviousTogglesChecked(ref: model) {
-            if indexPath.row <= (model.previousWaterBodies.count + model.destinationMajorCities.count + 3) {
-                return .DestinationMajorCity
-            }
-            if indexPath.row == model.previousWaterBodies.count + model.destinationMajorCities.count + 4 {
-                return .AddDestinationWaterBody
-            }
-        }
-        else if !areDestinationTogglesChecked(ref: model) && arePreviousTogglesChecked(ref: model) {
-            if indexPath.row <= (model.previousMajorCities.count + model.destinationWaterBodies.count + 3) {
-                return .DestinationWaterBody
-            }
-            if indexPath.row == model.previousMajorCities.count + model.destinationWaterBodies.count + 4 {
-                return .AddDestinationWaterBody
-            }
-        }
-        else {
-            model.deleteMajorCity(isPrevious: false)
-            model.deleteMajorCity(isPrevious: true)
-            if indexPath.row == model.previousWaterBodies.count + model.destinationWaterBodies.count + 4 {
-                return .AddDestinationWaterBody
-            }
-            
-            if indexPath.row <= (model.previousWaterBodies.count + model.destinationWaterBodies.count + 3) {
-                return .DestinationWaterBody
-            }
+        /// No previousWaterBodies, we should get to this part on Row = 2
+        /// Row = 2
+        /// previousWaterBody.count = 0
+        /// 2 == min(3 - 2, 0 - 1) + 3  --> true, show the Add Previous Water Button
+        ///
+        /// Comparatively, if we had 1 previousWaterBody, we reach this button on Row = 3
+        /// Row = 3
+        /// previousWaterBody.count = 1
+        /// 3 == min(2 - 2, 1 - 1) + 3 --> true, show the Add Previous Water Button
+        // This shows the Add Previous Waterbody (and Previous Major Cities button) after we've listed all
+        // the previous waterbodies above.
+        if indexPath.row == previousWaterBodyCount + 3 {
+            return .AddPreviousWaterBody
         }
         
+        // This will show the Previous Major City, and it will be below the Previous Add buttons
+        let previousMajorCityCount = min(indexPath.row - previousWaterBodyCount - 4, model.previousMajorCities.count - 1)
+        if indexPath.row <= previousWaterBodyCount + previousMajorCityCount + 4 {
+            return .PreviousMajorCity
+        }
+        
+        // Destination header always comes after Previous Major City
+        if indexPath.row == previousWaterBodyCount + previousMajorCityCount + 5 {
+            return .DestinationHeader
+        }
+        
+        // Similar to above, we perpetually list any destination waterbodies above the Previous Add buttons
+        let destinationWaterBodyCount = min(indexPath.row - previousWaterBodyCount - previousMajorCityCount - 6, model.destinationWaterBodies.count - 1)
+        if indexPath.row <= previousWaterBodyCount + previousMajorCityCount + destinationWaterBodyCount + 6 {
+            return .DestinationWaterBody
+        }
+        
+        // Eventually, we will list our Destination Add buttons once all Destination Waterbodies are listed
+        if indexPath.row == previousWaterBodyCount + previousMajorCityCount + destinationWaterBodyCount + 7 {
+            return .AddDestinationWaterBody
+        }
+        
+        // We show our Destination Major City beneath the Destination Add Buttons
+        let destinationMajorCityCount = min(indexPath.row - previousWaterBodyCount - previousMajorCityCount - destinationWaterBodyCount - 8, model.destinationMajorCities.count - 1)
+        if indexPath.row <= previousWaterBodyCount + previousMajorCityCount + destinationWaterBodyCount + destinationMajorCityCount + 8 {
+            return .DestinationMajorCity
+        }
+        
+        // Finally, once everything is exhausted, we show the Divider
         return .Divider
     }
 }
