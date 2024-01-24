@@ -342,7 +342,7 @@ class WatercraftInspectionViewController: BaseViewController {
     /// of Basic Information, Watercraft Details, Journey Details, Inspection Details,
     /// and Inspection Outcomes (High Risk form). Checks specific conditions
     /// and generates error messages for failed validations within each section.
-    ///
+    ///  
     /// - Returns: String of validation messages to display in the alert
     func validationMessage() -> String {
         var validationErrors: [(section: Section, errors: [String])] = [
@@ -372,21 +372,11 @@ class WatercraftInspectionViewController: BaseViewController {
             && !model.commercialManufacturerAsPreviousWaterBody
             && !model.previousDryStorage
         
-        // Either commercial, unknown waterbody, OR previously stored are true
-        let isPreviousClosestCity = model.unknownPreviousWaterBody
-            || model.commercialManufacturerAsPreviousWaterBody
-            || model.previousDryStorage
-        
         // DESTINATION WATERBODY
         // Commercial, unknown waterbody, AND will be stored are false
         let isDestinationWaterbody = !model.unknownDestinationWaterBody
             && !model.commercialManufacturerAsDestinationWaterBody
             && !model.destinationDryStorage
-        
-        // Either commercial, unknown waterbody, OR will be stored are true
-        let isDestinationClosestCity = model.unknownDestinationWaterBody
-            || model.commercialManufacturerAsDestinationWaterBody
-            || model.destinationDryStorage
         
         // Set values for any missing "Number of days out of waterbody" fields, if they exist
         var previousNumberOfDays: String = ""
@@ -428,7 +418,9 @@ class WatercraftInspectionViewController: BaseViewController {
             highRiskSealNumber = highRisk.sealNumber
         }
 
-        
+        /// This is where we write out the conditional logic for when the validation
+        /// e.g. if the previousAISKnowledgeSource field isEmpty, then the validation will fail
+        /// and the corresponding errorMessage will be shown when attempting to submit
         let validationItems: [Validation] = [
             // Null Switch validation
             Validation(
@@ -540,6 +532,7 @@ class WatercraftInspectionViewController: BaseViewController {
             ),
             
             // Journey Details validation
+            // Note: Prev and Dest Major City are required on all submissions
             Validation(
                 type: .previousWaterBodies,
                 errorMessage: .errorPreviousWaterBodies,
@@ -550,8 +543,7 @@ class WatercraftInspectionViewController: BaseViewController {
             Validation(
                 type: .previousMajorCities,
                 errorMessage: .errorPreviousMajorCities,
-                condition: isPreviousClosestCity
-                    && model.previousMajorCities.isEmpty,
+                condition: model.previousMajorCities.isEmpty,
                 section: .journeyDetails
             ),
             Validation(
@@ -564,8 +556,7 @@ class WatercraftInspectionViewController: BaseViewController {
             Validation(
                 type: .destinationMajorCities,
                 errorMessage: .errorDestinationMajorCities,
-                condition: isDestinationClosestCity
-                    && model.destinationMajorCities.isEmpty,
+                condition: model.destinationMajorCities.isEmpty,
                 section: .journeyDetails
             ),
             Validation(
