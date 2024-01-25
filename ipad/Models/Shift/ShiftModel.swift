@@ -31,14 +31,17 @@ class ShiftModel: Object, BaseRealmObject {
     @objc dynamic var endTime: String = ""
     @objc dynamic var shiftStartDate: Date = Calendar.current.startOfDay(for: Date())
     @objc dynamic var boatsInspected: Bool = true
+    @objc dynamic var k9OnShif: Bool = false
     @objc dynamic var motorizedBlowBys: Int = 0
     @objc dynamic var nonMotorizedBlowBys: Int = 0
-    @objc dynamic var k9OnShif: Bool = false
     @objc dynamic var station: String = ""
     @objc dynamic var shitStartComments: String = ""
     @objc dynamic var shitEndComments: String = ""
+    let BlowbyFields = ["reportedToRapp", "timeStamp", "watercraftComplexity"];
     var inspections: List<WatercraftInspectionModel> = List<WatercraftInspectionModel>()
+    var blowbys: List<BlowbyModel> = List<BlowbyModel>()
     @objc dynamic var status: String = "Draft"
+    // used for query purposes (and displaying)
     // used for query purposes (and displaying)
     @objc dynamic var formattedDate: String = ""
 
@@ -102,9 +105,40 @@ class ShiftModel: Object, BaseRealmObject {
             print(error)
         }
     }
+  func updateBlowbyTimeStamps(newDate: Date) {
+      do {
+          let realm = try Realm()
+          try realm.write {
+              for blowby in self.blowbys {
+                  blowby.date = combineDateWithCurrentTime(targetDate: newDate, targetTime: blowby.date)
+                  _ = blowby.formattedDateTime(time: blowby.timeStamp,date: blowby.date)
+              }
+          }
+      } catch let error as NSError {
+          print("** REALM ERROR")
+          print(error)
+      }
+  }
+    
+  func addBlowby(blowby: BlowbyModel) -> BlowbyModel? {
+        blowby.shouldSync = true;
+        blowby.userId = self.userId;
+        do {
+            let realm = try Realm();
+            try realm.write {
+                self.blowbys.append(blowby);
+            }
+            return blowby;
+        } catch let error as NSError {
+            print("** REALM ERROR");
+            print(error);
+            return nil;
+        }
+    }
     
     // MARK: Setters
     func set(value: Any, for key: String) {
+      if BlowbyFields.contains(key){return}
         if self[key] == nil {
             print("\(key) is nil")
             return
@@ -119,6 +153,7 @@ class ShiftModel: Object, BaseRealmObject {
                     self.formattedDate = shiftStartDate.stringShort()
                 }
                 updateInspectionTimeStamps(newDate: shiftStartDate);
+                updateBlowbyTimeStamps(newDate: shiftStartDate)
             }
         } catch let error as NSError {
             print("** REALM ERROR")
@@ -200,6 +235,20 @@ class ShiftModel: Object, BaseRealmObject {
         }
         return timeFormatter.string(from: timeInDate)
     }
+  
+    func deleteBlowby(blowbyToDelete: BlowbyModel) -> Void {
+        // Open a write transaction
+        do {
+            let realm = try Realm()
+            try realm.write {
+                // Delete the object from Realm
+                realm.delete(blowbyToDelete)
+            }
+        }  catch {
+            print("Error deleting blowby: \(error)")
+        }
+    }
+  
     // MARK: To Dictionary
     func toDictionary() -> [String : Any] {
         let dateFormatter = DateFormatter()
@@ -216,10 +265,10 @@ class ShiftModel: Object, BaseRealmObject {
             "endTime": endTimeFormatted,
             "station": station,
             "location": "NA",
-            "shiftStartComment": shitStartComments.count > 1 ? shitStartComments : "None",
-            "shiftEndComment":  shitEndComments.count > 1 ? shitEndComments : "None",
             "motorizedBlowBys": motorizedBlowBys,
             "nonMotorizedBlowBys": nonMotorizedBlowBys,
+            "shiftStartComment": shitStartComments.count > 1 ? shitStartComments : "None",
+            "shiftEndComment":  shitEndComments.count > 1 ? shitEndComments : "None",
             "boatsInspected": boatsInspected,
             "k9OnShift": k9OnShif
         ]
@@ -233,4 +282,8 @@ class ShiftModel: Object, BaseRealmObject {
     func getShiftEndFields(editable: Bool) -> [InputItem] {
         return ShiftFormHelper.getShiftEndFields(for: self, editable: editable)
     }
+  
+  func getBlowbyFields(editable: Bool) -> [InputItem] {
+    return BlowByFormHelper.getBlowByFields(for: BlowbyModel());
+  }
 }

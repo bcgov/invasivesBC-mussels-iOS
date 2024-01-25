@@ -13,6 +13,7 @@ extension Notification.Name {
     static let ShouldResizeInputGroup = Notification.Name("ShouldResizeInputGroup")
     static let InputFieldShouldUpdate = Notification.Name("InputFieldShouldUpdate")
     static let TableButtonClicked = Notification.Name("tableButtonClicked")
+    static let BlowbyDeleteClicked = Notification.Name("BlowbyDeleteClicked")
     static let syncExecuted = Notification.Name("syncExecuted")
     static let shouldRefreshTable = Notification.Name("shouldRefreshTable")
     

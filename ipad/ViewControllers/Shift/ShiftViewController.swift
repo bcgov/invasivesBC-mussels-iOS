@@ -13,8 +13,13 @@ import UIKit
 private enum ShiftOverviewSectionRow: Int, CaseIterable {
     case Header
     case Inspections
+    case Blowbys
 }
 
+private enum BlowbyOverviewSectionRow: Int, CaseIterable {
+    case Header
+    case Blowbys
+}
 private enum ShiftInformationSectionRow: Int, CaseIterable {
     case Header
     case StartShift
@@ -34,7 +39,9 @@ class ShiftViewController: BaseViewController {
         "BasicCollectionViewCell",
         "ShifOverviewHeaderCollectionViewCell",
         "InspectionsTableCollectionViewCell",
-        "ShiftInformationHeaderCollectionViewCell"
+        "BlowbyTableCollectionViewCell",
+        "ShiftInformationHeaderCollectionViewCell",
+        "ShiftBlowbysHeaderCollectionViewCell",
     ]
     
     // MARK: Varialbes
@@ -42,6 +49,7 @@ class ShiftViewController: BaseViewController {
     var showShiftInfo: Bool = true
     var isEditable: Bool = true
     private var inspection: WatercraftInspectionModel?
+    private var blowby: BlowbyModel?
     
     // MARK: Outlets
     @IBOutlet weak var containerView: UIView!
@@ -71,10 +79,32 @@ class ShiftViewController: BaseViewController {
     private func addListeners() {
         NotificationCenter.default.removeObserver(self, name: .TableButtonClicked, object: nil)
         NotificationCenter.default.removeObserver(self, name: .InputItemValueChanged, object: nil)
+        NotificationCenter.default.removeObserver(self, name: .BlowbyDeleteClicked, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.tableButtonClicked(notification:)), name: .TableButtonClicked, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.inputItemValueChanged(notification:)), name: .InputItemValueChanged, object: nil)
     }
-    
+
+  
+  /// Handler for when 'Add Blowby' is pressed. Brings up the shift modal, and refreshing the screen on submit action
+  @objc func addBlowByClicked() {
+      let blowbyModal: NewBlowbyModal = NewBlowbyModal.fromNib()
+      blowbyModal.onSubmit = { [weak self] in
+          // Refresh the screen when data is submitted
+          self?.refreshScreen()
+      }
+      guard let currentShiftModel = model else { return }
+      blowbyModal.initialize(shift: currentShiftModel, delegate: self, onStart: { [weak self] (model) in
+          guard let _self = self else { return }
+      }) {
+          // Canceled
+      }
+  }
+
+  func refreshScreen(){
+    self.view.setNeedsDisplay()
+    self.viewWillAppear(true)
+  }
+
     func setup(model: ShiftModel) {
         self.model = model
         self.isEditable = model.getStatus() == .Draft ||  model.getStatus() == .PendingSync
@@ -114,6 +144,36 @@ class ShiftViewController: BaseViewController {
         }
     }
     
+  @objc func didTapBlowbyToggle(blowbyToEdit: BlowbyModel){
+    Alert.show(title: "Row tapped", message: "Action continues")
+  }
+  
+  
+    /// Handler for Edit button in Blowby table section. Brings up the modal with the existing Blowby so user can submit new data
+    /// - Parameter blowbyToEdit: Blowby to populate the view, allowing editing to occur on the model
+    @objc func didTapEditBlowbyButton(blowbyToEdit: BlowbyModel) {
+      let blowbyModal: NewBlowbyModal = NewBlowbyModal.fromNib()
+      blowbyModal.onSubmit = { [weak self] in
+          // Refresh the screen when data is submitted
+          self?.refreshScreen()
+      }
+      guard let currentShiftModel = model else { return }
+      blowbyModal.initialize(shift: currentShiftModel, newBlowby: blowbyToEdit, delegate: self, onStart: { [weak self] (model) in
+          guard let _self = self else { return }
+      }) {
+          // Canceled
+      }
+    }
+  
+  /// Handler to delete a Blowby from the Shift
+  /// - Parameter blowbyToDelete: Instance of Blowby model that will be removed via realm
+  @objc func deleteBlowby(blowbyToDelete: BlowbyModel) {
+      guard let model = self.model else { return }
+      self.dismissKeyboard()
+      model.deleteBlowby(blowbyToDelete: blowbyToDelete);
+      self.refreshScreen()
+  }
+
     @objc func completeAction(sender: UIBarButtonItem) {
         guard let model = self.model else { return }
         self.dismissKeyboard()
@@ -136,11 +196,19 @@ class ShiftViewController: BaseViewController {
             Alert.show(title: "Incomplete", message: validationMessage())
         }
     }
-    
     // Table Button clicked
     @objc func tableButtonClicked(notification: Notification) {
-        guard let actionModel = notification.object as? TableClickActionModel, let inspectionModel = actionModel.object as? WatercraftInspectionModel else {return}
-        nagivateToInspection(object: inspectionModel, editable: isEditable)
+        guard let actionModel = notification.object as? TableClickActionModel else {return}
+        
+        if actionModel.buttonName.lowercased() == "edit", let blowbyModel = actionModel.object as? BlowbyModel {
+            didTapEditBlowbyButton(blowbyToEdit: blowbyModel);
+        }
+        
+        if let inspectionModel = actionModel.object as? WatercraftInspectionModel {
+            nagivateToInspection(object: inspectionModel, editable: isEditable)
+        }
+        
+        return;
     }
     
     func nagivateToInspection(object: WatercraftInspectionModel?, editable: Bool) {
@@ -313,7 +381,13 @@ extension ShiftViewController: UICollectionViewDataSource, UICollectionViewDeleg
     func getShiftOverViewCell(indexPath: IndexPath) -> ShifOverviewHeaderCollectionViewCell {
         return collectionView!.dequeueReusableCell(withReuseIdentifier: "ShifOverviewHeaderCollectionViewCell", for: indexPath as IndexPath) as! ShifOverviewHeaderCollectionViewCell
     }
-    
+  func getShiftBlowbysHeaderCollectionViewCell(indexPath: IndexPath) -> ShiftBlowBysHeaderCollectionViewCell {
+    return collectionView!.dequeueReusableCell(withReuseIdentifier: "ShiftBlowBysHeaderCollectionViewCell", for: indexPath as IndexPath) as! ShiftBlowBysHeaderCollectionViewCell;
+  }
+  
+    func getBlowbyTableCell(indexPath: IndexPath) -> BlowbyTableCollectionViewCell {
+      return collectionView!.dequeueReusableCell(withReuseIdentifier: "BlowbyTableCollectionViewCell", for: indexPath as IndexPath) as! BlowbyTableCollectionViewCell
+    }
     func getInspectionsTableCell(indexPath: IndexPath) -> InspectionsTableCollectionViewCell {
         return collectionView!.dequeueReusableCell(withReuseIdentifier: "InspectionsTableCollectionViewCell", for: indexPath as IndexPath) as! InspectionsTableCollectionViewCell
     }
@@ -363,6 +437,15 @@ extension ShiftViewController: UICollectionViewDataSource, UICollectionViewDeleg
             let cell = getInspectionsTableCell(indexPath: indexPath)
             cell.setup(object: model)
             return cell
+        case .Blowbys:
+            let cell = getBlowbyTableCell(indexPath: indexPath)
+          cell.setup(object: model, callback: {[weak self] in
+            guard let strongSelf = self else {return}
+            if strongSelf.isEditable {
+              strongSelf.addBlowByClicked()
+            }
+          })
+            return cell
         }
     }
     
@@ -391,6 +474,25 @@ extension ShiftViewController: UICollectionViewDataSource, UICollectionViewDeleg
         }
     }
     
+  func getBlowbyOverviewSectionRow(indexPath: IndexPath) -> UICollectionViewCell {
+      guard let rowType = BlowbyOverviewSectionRow(rawValue: Int(indexPath.row)), let model = self.model else {return UICollectionViewCell() }
+      switch rowType {
+      case .Header:
+          let cell = getShiftBlowbysHeaderCollectionViewCell(indexPath: indexPath)
+          cell.setup(object: model, callback: {[weak self] in
+              guard let strongSelf = self else {return}
+              if strongSelf.isEditable {
+                print("Yolo")
+              }
+          })
+          return cell
+      case .Blowbys:
+          let cell = getBlowbyTableCell(indexPath: indexPath)
+          cell.setup(object: model)
+          return cell
+      }
+  }
+  
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         guard let sectionType = ShiftViewSection(rawValue: Int(indexPath.section)) else {
             return CGSize(width: 0, height: 0)
@@ -412,6 +514,9 @@ extension ShiftViewController: UICollectionViewDataSource, UICollectionViewDeleg
         case .Inspections:
             let height = InspectionsTableCollectionViewCell.getContentHeight(for: model)
             return CGSize(width: fullWidth, height: height)
+        case .Blowbys:
+            let height = BlowbyTableCollectionViewCell.getContentHeight(for: model)
+            return CGSize(width: fullWidth, height: height);
         }
     }
     

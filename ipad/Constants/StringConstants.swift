@@ -59,7 +59,11 @@ struct StringConstants {
         static let inspections: String = ""
     }
 }
-
+struct BlowbyFormHeaders {
+  static let timeStamp = "Blowby time"
+  static let watercraftComplexity = "Watercraft Complexity"
+  static let reportedToRapp = "Reported to RAPP"
+}
 // MARK: Shift
 struct ShiftFormHeaders {
     struct ShiftStart {
