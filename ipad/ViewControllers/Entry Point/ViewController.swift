@@ -54,7 +54,7 @@ class ViewController: UIViewController, Theme {
         awaitingAccessResponseView.show(in: self.view, onRefresh: { [weak self] in
             guard let _self = self else {return}
             awaitingAccessResponseView.removeFromSuperview()
-            _self.presentNext()
+            _self.segueToLoginPage()
         })
     }
     
