@@ -16,6 +16,7 @@ class BasicCollectionViewCell: UICollectionViewCell, Theme {
     @IBOutlet weak var divider: UIView!
     @IBOutlet weak var leadingMargin: NSLayoutConstraint!
     @IBOutlet weak var trailingMargin: NSLayoutConstraint!
+    @IBOutlet weak var topDivider: UIView!
     
     weak var inputGroup: UIView?
     
@@ -25,6 +26,7 @@ class BasicCollectionViewCell: UICollectionViewCell, Theme {
     
     var showBox = false
     var showDivider = true
+    var showTopDivider = false
     var extraPadding: CGFloat = 0
     var boxPadding: CGFloat = 8
     
@@ -33,12 +35,13 @@ class BasicCollectionViewCell: UICollectionViewCell, Theme {
         style()
     }
     
-    public func setup(title: String, input items: [InputItem], delegate: InputDelegate, boxed: Bool? = false, showDivider: Bool? = true, padding: CGFloat? = 0, buttonName: String? = nil, buttonIcon: String? = nil, onButtonClick: (()->Void)? = nil) {
+    public func setup(title: String, input items: [InputItem], delegate: InputDelegate, boxed: Bool? = false, showDivider: Bool? = true, showTopDivider: Bool? = false, padding: CGFloat? = 0, buttonName: String? = nil, buttonIcon: String? = nil, onButtonClick: (()->Void)? = nil) {
         self.inputGroup?.removeFromSuperview()
         
         self.extraPadding = padding ?? 0
         self.showBox = boxed ?? false
         self.showDivider = showDivider ?? true
+        self.showTopDivider = showTopDivider ?? false
         
         button.alpha = 0
         if let btnName = buttonName {
@@ -71,6 +74,7 @@ class BasicCollectionViewCell: UICollectionViewCell, Theme {
         styleSectionTitle(label: titleLabel)
         styleBox()
         styleDivider()
+        styleTopDivider()
     }
     
     private func styleBox() {
@@ -93,6 +97,15 @@ class BasicCollectionViewCell: UICollectionViewCell, Theme {
             styleDivider(view: divider)
         } else {
             divider.alpha = 0
+        }
+    }
+    
+    private func styleTopDivider() {
+        if showTopDivider {
+            topDivider.alpha = 1
+            styleTopDivider(view: topDivider)
+        } else {
+            topDivider.alpha = 0
         }
     }
     

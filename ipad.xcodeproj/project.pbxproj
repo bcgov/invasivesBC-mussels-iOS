@@ -214,6 +214,8 @@
 		5C82D404237B31C200B065BA /* WatercraftRiskAssessmentAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C82D403237B31C200B065BA /* WatercraftRiskAssessmentAPI.swift */; };
 		9620B078298849BF0084268C /* NullSwitchInputCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9620B076298849BF0084268C /* NullSwitchInputCollectionViewCell.swift */; };
 		9620B079298849BF0084268C /* NullSwitchInputCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9620B077298849BF0084268C /* NullSwitchInputCollectionViewCell.xib */; };
+		966B0B782B7AA1BD00B33478 /* BlankCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966B0B762B7AA1BD00B33478 /* BlankCollectionViewCell.swift */; };
+		966B0B792B7AA1BD00B33478 /* BlankCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 966B0B772B7AA1BD00B33478 /* BlankCollectionViewCell.xib */; };
 		96CDB9632B4886FF009A45C7 /* NewBlowbyModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96CDB9612B4886FF009A45C7 /* NewBlowbyModal.swift */; };
 		96CDB9642B4886FF009A45C7 /* NewBlowbyModal.xib in Resources */ = {isa = PBXBuildFile; fileRef = 96CDB9622B4886FF009A45C7 /* NewBlowbyModal.xib */; };
 		A7AE5275237CC3660044DBB7 /* unapproved-cross.json in Resources */ = {isa = PBXBuildFile; fileRef = A7AE5272237CC3660044DBB7 /* unapproved-cross.json */; };
@@ -459,6 +461,8 @@
 		763C8716EF742F6764FFE7D7 /* Pods-ipad.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ipad.debug.xcconfig"; path = "Target Support Files/Pods-ipad/Pods-ipad.debug.xcconfig"; sourceTree = "<group>"; };
 		9620B076298849BF0084268C /* NullSwitchInputCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NullSwitchInputCollectionViewCell.swift; sourceTree = "<group>"; };
 		9620B077298849BF0084268C /* NullSwitchInputCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NullSwitchInputCollectionViewCell.xib; sourceTree = "<group>"; };
+		966B0B762B7AA1BD00B33478 /* BlankCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlankCollectionViewCell.swift; sourceTree = "<group>"; };
+		966B0B772B7AA1BD00B33478 /* BlankCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BlankCollectionViewCell.xib; sourceTree = "<group>"; };
 		96CDB9612B4886FF009A45C7 /* NewBlowbyModal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewBlowbyModal.swift; sourceTree = "<group>"; };
 		96CDB9622B4886FF009A45C7 /* NewBlowbyModal.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewBlowbyModal.xib; sourceTree = "<group>"; };
 		987374CFF5F2318652AA2FCC /* Pods-ipadTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ipadTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ipadTests/Pods-ipadTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -1243,6 +1247,7 @@
 		29DB4E3A23870B1F00B13646 /* Shared cells */ = {
 			isa = PBXGroup;
 			children = (
+				966B0B752B7AA1A300B33478 /* Blank */,
 				29DB010B2371EE2F0046E605 /* Basic (header + Input group) */,
 				29E4BBE5237211F10079475F /* Divider */,
 				29DB0113237206B90046E605 /* Header */,
@@ -1467,6 +1472,15 @@
 			path = "Null Switch Input";
 			sourceTree = "<group>";
 		};
+		966B0B752B7AA1A300B33478 /* Blank */ = {
+			isa = PBXGroup;
+			children = (
+				966B0B762B7AA1BD00B33478 /* BlankCollectionViewCell.swift */,
+				966B0B772B7AA1BD00B33478 /* BlankCollectionViewCell.xib */,
+			);
+			path = Blank;
+			sourceTree = "<group>";
+		};
 		96CDB9602B4886FF009A45C7 /* New Blowby Modal */ = {
 			isa = PBXGroup;
 			children = (
@@ -1600,6 +1614,7 @@
 				299BF01923FC9045001732CD /* JourneyHeaderCollectionViewCell.xib in Resources */,
 				29DB4E4F2387131000B13646 /* InspectionsTableCollectionViewCell.xib in Resources */,
 				2950510A2374D764000FBD6E /* DoubleInputCollectionViewCell.xib in Resources */,
+				966B0B792B7AA1BD00B33478 /* BlankCollectionViewCell.xib in Resources */,
 				29E4BBE92372120F0079475F /* DividerCollectionViewCell.xib in Resources */,
 				296DEC21238C53930035E7FA /* NewShiftModal.xib in Resources */,
 				299BF01E23FC9D20001732CD /* PDFViewer.xib in Resources */,
@@ -1844,6 +1859,7 @@
 				5C82D3F52374D09000B065BA /* UtilityObjC.m in Sources */,
 				298BF7CC2395D45C0072AA28 /* PreviousWaterBodyModel.swift in Sources */,
 				5C82D3DE2374B9D700B065BA /* RemoteAPI.swift in Sources */,
+				966B0B782B7AA1BD00B33478 /* BlankCollectionViewCell.swift in Sources */,
 				5C82D3F92376036700B065BA /* WorkflowAPI.swift in Sources */,
 				41CAEC7D2B45C538002B2960 /* ShiftBlowbysHeaderCollectionViewCell.swift in Sources */,
 				29BAC51C2367B5B500A620F4 /* RealmRequests.swift in Sources */,

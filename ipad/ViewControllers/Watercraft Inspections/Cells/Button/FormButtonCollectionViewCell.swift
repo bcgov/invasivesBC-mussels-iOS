@@ -29,6 +29,8 @@ class FormButtonCollectionViewCell: UICollectionViewCell, Theme {
         var isPreviousJourney: Bool = false
         var displaySwitch: Bool = false
         var displayUnknowSwitch: Bool = false
+        var otherWaterbodyPrev: Bool = false
+        var otherWaterbodyDest: Bool = false
     }
     
 
@@ -47,12 +49,38 @@ class FormButtonCollectionViewCell: UICollectionViewCell, Theme {
     @objc weak var target: NSObject?
     @objc var _selector: Selector?
     
+    var configuration = Config()
+    
     var disableButton: Bool {
-        return (dryStorageSwitch?.isOn ?? false) || (unknownWaterBodySwitch?.isOn ?? false) || (commercialManufacturerSwitch?.isOn ?? false)
+        if configuration.otherWaterbodyPrev || configuration.otherWaterbodyDest {
+            return true
+        }
+        
+        if (dryStorageSwitch?.isOn ?? false) {
+            return false
+        } else if (unknownWaterBodySwitch?.isOn ?? false) {
+            return false
+        } else if (commercialManufacturerSwitch?.isOn ?? false) {
+            return false
+        } else {
+            return true
+        }
     }
     
     var disableMajorCityButton: Bool {
-        return false
+        if configuration.otherWaterbodyPrev || configuration.otherWaterbodyDest {
+            return true
+        }
+        
+        if (dryStorageSwitch?.isOn ?? true) {
+            return false
+        } else if (unknownWaterBodySwitch?.isOn ?? true) {
+            return false
+        } else if (commercialManufacturerSwitch?.isOn ?? true) {
+            return false
+        } else {
+            return true
+        }
     }
     
     var result: Result {
@@ -64,6 +92,8 @@ class FormButtonCollectionViewCell: UICollectionViewCell, Theme {
     @IBAction func buttonAction(_ sender: UIButton) {
         // let _ = self.target?.perform(_selector, with: [:])
         guard let onClick = self.completion else {return}
+        self.set(status: disableButton)
+        self.set(status: disableMajorCityButton)
         return onClick(.add)
     }
     
@@ -111,12 +141,21 @@ class FormButtonCollectionViewCell: UICollectionViewCell, Theme {
     
     func set(status: Bool) {
         self.button?.isEnabled = !status
+        self.majorCityButton?.isEnabled = status;
         if status {
             styleDisable(button: self.button)
             styleHollowButton(button: self.majorCityButton)
         } else {
             styleHollowButton(button: button)
-            styleHollowButton(button: self.majorCityButton)
+            styleDisable(button: majorCityButton)
+        }
+        
+        // if the user has entered an otherWaterbody, we set both buttons as available
+        if configuration.otherWaterbodyPrev || configuration.otherWaterbodyDest {
+            self.button?.isEnabled = true
+            self.majorCityButton?.isEnabled = true
+            styleHollowButton(button: button)
+            styleHollowButton(button: majorCityButton)
         }
     }
     
@@ -124,6 +163,8 @@ class FormButtonCollectionViewCell: UICollectionViewCell, Theme {
         self.dryStorageSwitch?.isHidden = !config.displaySwitch
         self.switchLabel?.isHidden = !config.displaySwitch
         self.dryStorageSwitch?.isOn = config.status
+        self.configuration.otherWaterbodyPrev = config.otherWaterbodyPrev
+        self.configuration.otherWaterbodyDest = config.otherWaterbodyDest
         if config.isPreviousJourney {
             self.switchLabel?.text = "Previously Stored"
         } else {
@@ -135,7 +176,7 @@ class FormButtonCollectionViewCell: UICollectionViewCell, Theme {
         self.commercialManufacturerSwitch?.isOn = config.commercialManufacturerStatus
         
         if config.displaySwitch || config.displayUnknowSwitch {
-            set(status: (config.status || config.unknownWaterBodyStatus || config.commercialManufacturerStatus))
+            set(status: (config.status || config.unknownWaterBodyStatus || config.commercialManufacturerStatus || config.otherWaterbodyPrev || config.otherWaterbodyDest))
         } else {
             set(status: true)
         }

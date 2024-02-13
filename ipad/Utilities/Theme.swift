@@ -193,4 +193,7 @@ extension Theme {
     public func styleDividerGrey(view: UIView) {
         view.backgroundColor = Colors.Status.LightGray
     }
+    public func styleTopDivider(view: UIView) {
+        view.backgroundColor = Colors.secondary
+    }
 }
