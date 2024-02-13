@@ -1408,14 +1408,28 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
     private func getJourneyDetailsCellType(for indexPath: IndexPath) -> JourneyDetailsSectionRow {
         guard let model = self.model else {return .Divider}
         
-        // If the prev commercial/unknown/stored are toggled off, we delete the cities from model
+        // If the prev commercial/unknown/stored are toggled OFF, we delete the cities from model
         if !arePreviousTogglesChecked(ref: model) && model.previousWaterBodies.isEmpty {
             model.deleteMajorCity(isPrevious: true)
         }
         
-        // If the dest commercial/unknown/stored are toggled off, we delete the cities from model
+        // If the prev commercial/unknown/stored are toggled ON, we delete the waterbodies from model
+        if arePreviousTogglesChecked(ref: model) && !model.previousWaterBodies.isEmpty {
+            for index in stride(from: model.previousWaterBodies.count -  1, through:  0, by: -1) {
+                model.removePreviousWaterBody(at: index)
+            }
+        }
+        
+        // If the dest commercial/unknown/stored are toggled OFF, we delete the cities from model
         if !areDestinationTogglesChecked(ref: model) && model.destinationWaterBodies.isEmpty {
             model.deleteMajorCity(isPrevious: false)
+        }
+        
+        // If the dest commercial/unknown/stored are toggled ON, we delete the waterbodies from model
+        if areDestinationTogglesChecked(ref: model) && !model.destinationWaterBodies.isEmpty {
+            for index in stride(from: model.destinationWaterBodies.count -  1, through:  0, by: -1) {
+                model.removeDestinationWaterBody(at: index)
+            }
         }
         
         // Header for "Journey Details" always at top
