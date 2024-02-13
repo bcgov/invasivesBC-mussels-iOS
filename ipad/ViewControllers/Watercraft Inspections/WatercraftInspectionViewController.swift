@@ -20,6 +20,7 @@ private enum JourneyDetailsSectionRow {
     case PreviousHeader
     case DestinationHeader
     case Divider
+    case Blank
 }
 
 public enum WatercraftFromSection: Int, CaseIterable {
@@ -49,7 +50,8 @@ class WatercraftInspectionViewController: BaseViewController {
         "PreviousWaterBodyCollectionViewCell",
         "JourneyHeaderCollectionViewCell",
         "PreviousMajorCityCollectionViewCell",
-        "DestinationMajorCityCollectionViewCell"
+        "DestinationMajorCityCollectionViewCell",
+        "BlankCollectionViewCell"
     ]
     
     // MARK: Variables
@@ -274,6 +276,8 @@ class WatercraftInspectionViewController: BaseViewController {
         case previousMajorCities
         case destinationWaterBodies
         case destinationMajorCities
+        case prevOtherWaterbodyNoCity
+        case destOtherWaterbodyNoCity
         
         // Inspection Outcomes (High Risk form)
         case decontaminationPerformed
@@ -313,6 +317,8 @@ class WatercraftInspectionViewController: BaseViewController {
         case errorPreviousMajorCities = "Closest Major City for Previous Waterbody."
         case errorDestinationWaterBodies = "Destination Waterbody\n(or toggle New, Unknown, or Stored)."
         case errorDestinationMajorCities = "Closest Major City for Destination Waterbody."
+        case errorPrevOtherWaterbodyNoCity = "To improve identification for the 'Other' Waterbody, add a Previous Closest Major City."
+        case errorDestOtherWaterbodyNoCity = "To improve identification for the 'Other' Waterbody, add a Destination Closest Major City."
         
         // Inspection Outcomes (High Risk form)
         case errorDecontaminationPerformed = "Record of Decontamination number."
@@ -385,6 +391,9 @@ class WatercraftInspectionViewController: BaseViewController {
                 previousNumberOfDays = prev.numberOfDaysOut
             }
         }
+        
+        let prevHasNonEmptyOtherWaterbody = model.previousWaterBodies.contains { !$0.otherWaterbody.isEmpty }
+        let destHasNonEmptyOtherWaterbody = model.destinationWaterBodies.contains { !$0.otherWaterbody.isEmpty }
         
         // Set values for High Risk form, if it exists
         var highRiskDecontaminationPerformedInteracted: Bool = false
@@ -532,7 +541,7 @@ class WatercraftInspectionViewController: BaseViewController {
             ),
             
             // Journey Details validation
-            // Note: Prev and Dest Major City are required on all submissions
+            // Note: Prev and Dest Major City are required on all otherWaterbody submissions
             Validation(
                 type: .previousWaterBodies,
                 errorMessage: .errorPreviousWaterBodies,
@@ -543,7 +552,8 @@ class WatercraftInspectionViewController: BaseViewController {
             Validation(
                 type: .previousMajorCities,
                 errorMessage: .errorPreviousMajorCities,
-                condition: model.previousMajorCities.isEmpty,
+                condition: !isPreviousWaterbody
+                    && model.previousMajorCities.isEmpty,
                 section: .journeyDetails
             ),
             Validation(
@@ -556,7 +566,8 @@ class WatercraftInspectionViewController: BaseViewController {
             Validation(
                 type: .destinationMajorCities,
                 errorMessage: .errorDestinationMajorCities,
-                condition: model.destinationMajorCities.isEmpty,
+                condition: !isDestinationWaterbody
+                    && model.destinationMajorCities.isEmpty,
                 section: .journeyDetails
             ),
             Validation(
@@ -564,6 +575,20 @@ class WatercraftInspectionViewController: BaseViewController {
                 errorMessage: .errorNumberOfDaysOut,
                 condition: !model.previousWaterBodies.isEmpty
                     && previousNumberOfDays.isEmpty,
+                section: .journeyDetails
+            ),
+            Validation(
+                type: .prevOtherWaterbodyNoCity,
+                errorMessage: .errorPrevOtherWaterbodyNoCity,
+                condition: prevHasNonEmptyOtherWaterbody
+                    && model.previousMajorCities.isEmpty,
+                section: .journeyDetails
+            ),
+            Validation(
+                type: .destOtherWaterbodyNoCity,
+                errorMessage: .errorDestOtherWaterbodyNoCity,
+                condition: destHasNonEmptyOtherWaterbody
+                    && model.destinationMajorCities.isEmpty,
                 section: .journeyDetails
             ),
             
@@ -908,6 +933,27 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
             DestinationMajorCityCollectionViewCell
     }
     
+    func getBlankCell(indexPath: IndexPath) -> BlankCollectionViewCell {
+        return collectionView!.dequeueReusableCell(withReuseIdentifier: "BlankCollectionViewCell", for: indexPath as IndexPath) as!
+            BlankCollectionViewCell
+    }
+    
+    private func arePreviousTogglesChecked(ref: WatercraftInspectionModel) -> Bool {
+        if ref.commercialManufacturerAsPreviousWaterBody || ref.unknownPreviousWaterBody || ref.previousDryStorage {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    private func areDestinationTogglesChecked(ref: WatercraftInspectionModel) -> Bool {
+        if ref.commercialManufacturerAsDestinationWaterBody || ref.unknownDestinationWaterBody || ref.destinationDryStorage {
+            return true
+        } else {
+            return false
+        }
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
        guard let sectionType = WatercraftFromSection(rawValue: Int(section)), let model = self.model else {return 0}
        
@@ -963,7 +1009,7 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
             return getJourneyDetailsCell(for: indexPath)
         case .InspectionDetails:
             let cell = getBasicCell(indexPath: indexPath)
-            cell.setup(title: "Inspection Details", input: model.getInputputFields(for: sectionType, editable: isEditable), delegate: self, showDivider: false, buttonName: "View Map", buttonIcon: "map", onButtonClick: { [weak self] in
+            cell.setup(title: "Inspection Details", input: model.getInputputFields(for: sectionType, editable: isEditable), delegate: self, showDivider: false, showTopDivider: true, buttonName: "View Map", buttonIcon: "map", onButtonClick: { [weak self] in
                 guard let strongSelf = self else {return}
                 strongSelf.showPDFMap()
             })
@@ -1185,6 +1231,7 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
             
             return cell
         case .AddPreviousWaterBody:
+            let hasNonEmptyOtherWaterbody = model.previousWaterBodies.contains { !$0.otherWaterbody.isEmpty } 
             let cell = getButtonCell(indexPath: indexPath)
             cell.setup(
                 with: "Add Previous Water Body",
@@ -1195,7 +1242,8 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
                     commercialManufacturerStatus: self.model?.commercialManufacturerAsPreviousWaterBody ?? false,
                     isPreviousJourney: true,
                     displaySwitch: true,
-                    displayUnknowSwitch: true)
+                    displayUnknowSwitch: true,
+                    otherWaterbodyPrev: hasNonEmptyOtherWaterbody)
             ) { [weak self] action in
                 guard let strongSelf = self else {return}
                 /// ----- Switch Action ------
@@ -1242,6 +1290,7 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
             }
             return cell
         case .AddDestinationWaterBody:
+            let hasNonEmptyOtherWaterbody = model.destinationWaterBodies.contains { !$0.otherWaterbody.isEmpty }
             let cell = getButtonCell(indexPath: indexPath)
             cell.setup(
                 with: "Add Destination Water Body",
@@ -1252,7 +1301,8 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
                     commercialManufacturerStatus: self.model?.commercialManufacturerAsDestinationWaterBody ?? false,
                     isPreviousJourney: false,
                     displaySwitch: true,
-                    displayUnknowSwitch: true)
+                    displayUnknowSwitch: true,
+                    otherWaterbodyDest: hasNonEmptyOtherWaterbody)
             ) { [weak self] action in
                 
                 guard let strongSelf = self else {return}
@@ -1309,6 +1359,10 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
             let cell = getHeaderCell(indexPath: indexPath)
             cell.setup(with: "Destination Waterbody *")
             return cell
+        case .Blank:
+            let blankCell = getBlankCell(indexPath: indexPath)
+            blankCell.setup(visible: true)
+            return blankCell
         }
     }
     
@@ -1337,6 +1391,8 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
             return CGSize(width: width, height: 50)
         case .DestinationHeader:
             return CGSize(width: width, height: 50)
+        case .Blank:
+            return CGSize(width: width, height: 1)
         }
     }
     
@@ -1351,6 +1407,16 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
     /// - Returns: The type of cell for the given index path.
     private func getJourneyDetailsCellType(for indexPath: IndexPath) -> JourneyDetailsSectionRow {
         guard let model = self.model else {return .Divider}
+        
+        // If the prev commercial/unknown/stored are toggled off, we delete the cities from model
+        if !arePreviousTogglesChecked(ref: model) && model.previousWaterBodies.isEmpty {
+            model.deleteMajorCity(isPrevious: true)
+        }
+        
+        // If the dest commercial/unknown/stored are toggled off, we delete the cities from model
+        if !areDestinationTogglesChecked(ref: model) && model.destinationWaterBodies.isEmpty {
+            model.deleteMajorCity(isPrevious: false)
+        }
         
         // Header for "Journey Details" always at top
         if indexPath.row == 0 {
@@ -1417,11 +1483,13 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
         
         // We show our Destination Major City beneath the Destination Add Buttons
         let destinationMajorCityCount = min(indexPath.row - previousWaterBodyCount - previousMajorCityCount - destinationWaterBodyCount - 8, model.destinationMajorCities.count - 1)
+        
         if indexPath.row <= previousWaterBodyCount + previousMajorCityCount + destinationWaterBodyCount + destinationMajorCityCount + 8 {
             return .DestinationMajorCity
         }
         
-        // Finally, once everything is exhausted, we show the Divider
-        return .Divider
+        // Finally, once everything is exhausted, we show the blank spot unless we skipped it earlier
+        // a divider is provided as topDivider for the Inspection Details
+        return .Blank
     }
 }

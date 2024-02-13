@@ -43,7 +43,7 @@ class ShiftModel: Object, BaseRealmObject {
     @objc dynamic var status: String = "Draft"
     // used for query purposes (and displaying)
     // used for query purposes (and displaying)
-    @objc dynamic var formattedDate: String = ""
+    @objc dynamic var formattedDate: String = Calendar.current.startOfDay(for: Date()).stringShort()
 
     /// Takes the Date of one Date object and combines it with the Time from another date object
     /// - Parameters:
