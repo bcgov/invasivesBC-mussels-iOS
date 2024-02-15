@@ -58,13 +58,13 @@ Any local changes to a [Realm](https://realm.io/realm-swift/) model will require
 
 You can increment the build in
     
-    ipad > General > Identity.
+**ipad > General > Identity.**
 
 ## Simulator
 
 You can run the app through the Simulator from Xcode. Ensure that the Simulator is also running with Rosetta active - this can be done by going to:
 
-    Product > Destination > Destination Architectures > Show Rosetta Destinations
+**Product > Destination > Destination Architectures > Show Rosetta Destinations**
 
 Ensure that you’re running the simulator on **iPad (10th generation) (Rosetta)**
 
