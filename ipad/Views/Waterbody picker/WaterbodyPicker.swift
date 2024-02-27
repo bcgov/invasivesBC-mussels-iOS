@@ -50,6 +50,8 @@ class WaterbodyPicker: UIView, Theme {
     @IBOutlet weak var addManuallyButton: UIButton!
     @IBOutlet weak var selectionsHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var manualLocationField: UITextField!
+    @IBOutlet weak var footerContainer: UIView!
+    @IBOutlet weak var otherWaterbodies: UIButton!
     
     // MARK: Constants
     private let tableCells = [
@@ -83,6 +85,10 @@ class WaterbodyPicker: UIView, Theme {
         dismissWithAnimation()
     }
     
+    @IBAction func otherWaterbodyAction(_ sender: UIButton) {
+        self.showOtherDialog()
+    }
+    
     private func dismissWithAnimation() {
         UIView.animate(withDuration: 0.3, animations: {
             self.alpha = 0
@@ -106,7 +112,7 @@ class WaterbodyPicker: UIView, Theme {
     }
     
     /**
-     Displays Wateroicker in Container and returns DropdownModel Result
+     Displays Waterpicker in Container and returns DropdownModel Result
      */
     func setup(result: @escaping([WaterBodyTableModel]) -> Void) {
         self.completion = result
@@ -220,7 +226,7 @@ class WaterbodyPicker: UIView, Theme {
         }
     }
     
-    // Filter Reaults
+    // Filter Results
     private func filter(by text: String) {
         self.otherContainer.alpha = 0
         self.filteredItems = items.filter{$0.display.lowercased().contains(text.lowercased())}.sorted(by: { (first, second) -> Bool in
@@ -290,6 +296,8 @@ class WaterbodyPicker: UIView, Theme {
         self.selectButton.setTitleColor(.white, for: .normal)
         self.searchBar.barTintColor = Colors.primary
         self.titleLabel.textColor = UIColor.white
+        self.footerContainer.backgroundColor = Colors.primary
+        self.otherWaterbodies.setTitleColor(.white, for: .normal)
         searchBar.setPlaceholderTextColorTo(color: .white)
         searchBar.setMagnifyingGlassColorTo(color: .white)
         let attributes = [
