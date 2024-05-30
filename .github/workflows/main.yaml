@@ -1,18 +1,18 @@
 name: Build
-on: 
+on:
   push:
-    branches: [ "master" ]
+    branches: ["master"]
 
 jobs:
   build-ios:
     name: Build and sign ios
-    runs-on: macos-latest
+    runs-on: macos-14
 
     env:
       PROJECT: ${{ 'invasivesbc-mussels.iOS.xcworkspace' }}
       SCHEME: ${{ 'invasivesbc-mussels.iOS' }}
       DATA_DIR: ${{ 'xcbuild' }}
-      ARCHIVE_NAME:  ${{ 'invasivesbc-mussels.iOS.xcarchive' }}
+      ARCHIVE_NAME: ${{ 'invasivesbc-mussels.iOS.xcarchive' }}
       EXPORT_DIR: ${{ 'export' }}
       IPA_NAME: ${{ 'invasivesbc-mussels.iOS.ipa' }}
       APP_BUILD_VERSION: "2.7"
@@ -29,7 +29,7 @@ jobs:
 
       - name: Display XCode Path for debug
         run: |
-          xcode-select -p  
+          xcode-select -p
 
       - name: Cache Pods
         uses: actions/cache@v3
@@ -37,10 +37,10 @@ jobs:
           path: ios/Pods
           key: ${{ runner.os }}-pods-${{ hashFiles('**/Podfile.lock') }}
           restore-keys: |
-            ${{ runner.os }}-pods-   
+            ${{ runner.os }}-pods-
 
       - name: CocoaPod Install
-        run: pod install 
+        run: pod install
 
       # from https://docs.github.com/en/enterprise-cloud@latest/actions/deployment/deploying-xcode-applications/installing-an-apple-certificate-on-macos-runners-for-xcode-development
       - name: Install the Apple certificate and provisioning profile
@@ -72,7 +72,7 @@ jobs:
 
           # apply provisioning profile
           mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
-          cp $PP_PATH ~/Library/MobileDevice/Provisioning\ Profiles    
+          cp $PP_PATH ~/Library/MobileDevice/Provisioning\ Profiles
 
       - name: Increment Build No.
         env:
@@ -92,7 +92,7 @@ jobs:
           -archivePath ${DATA_DIR}/${ARCHIVE_NAME} \
           archive
 
-      - name: Export Archive 
+      - name: Export Archive
         # This is the step that signs the build
         run: |
           xcodebuild \
