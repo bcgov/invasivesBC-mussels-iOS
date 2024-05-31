@@ -82,15 +82,15 @@ jobs:
           agvtool new-version -all ${BUILD_NO}
 
       - name: Build For Release
-        run: |
-          xcodebuild \
-          -workspace ipad.xcworkspace \
-          -scheme ipad \
-          -configuration Release \
-          -sdk iphoneos \
-          -derivedDataPath $DATA_DIR \
-          -archivePath ${DATA_DIR}/${ARCHIVE_NAME} \
-          archive
+        uses: xcode@v3
+        with:
+          xcode-version: 15.4
+          workspace: ipad.xcworkspace
+          scheme: ipad
+          configuration: Release
+          sdk: iphoneos
+          derivedDataPath: $DATA_DIR
+          archivePath: ${DATA_DIR}/${ARCHIVE_NAME}
 
       - name: Export Archive
         # This is the step that signs the build
