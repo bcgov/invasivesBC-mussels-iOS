@@ -1,5 +1,5 @@
 # Uncomment the next line to define a global platform for your project
-platform :ios, '11.0'
+platform :ios, '13.0'
 
 # This is used to allow the CI build to work. The pod(s) are
 # signed with the credentials / profile provided and xcodebuild
@@ -8,6 +8,7 @@ platform :ios, '11.0'
 post_install do |installer|
     installer.pods_project.targets.each do |target|
         target.build_configurations.each do |config|
+            config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '13.0'
             config.build_settings['EXPANDED_CODE_SIGN_IDENTITY'] = "-"
             config.build_settings['EXPANDED_CODE_SIGN_IDENTITY_NAME'] = "-"
             config.build_settings['CODE_SIGNING_REQUIRED'] = "NO"
