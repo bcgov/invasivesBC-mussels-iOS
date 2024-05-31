@@ -90,7 +90,6 @@ jobs:
           -sdk iphoneos \
           -derivedDataPath $DATA_DIR \
           -archivePath ${DATA_DIR}/${ARCHIVE_NAME} \
-          -arch x86_64 \
           archive
 
       - name: Export Archive

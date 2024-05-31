@@ -13,9 +13,11 @@ post_install do |installer|
             config.build_settings['EXPANDED_CODE_SIGN_IDENTITY_NAME'] = "-"
             config.build_settings['CODE_SIGNING_REQUIRED'] = "NO"
             config.build_settings['CODE_SIGNING_ALLOWED'] = "NO"
+
         end
     end
 end
+
 
 target 'ipad' do
   # Comment the next line if you don't want to use dynamic frameworks
@@ -43,9 +45,4 @@ target 'ipad' do
   pod 'DatePicker'
   # JSON handler
   pod 'SwiftyJSON'
-  # add pods for desired Firebase products
-  # https://firebase.google.com/docs/ios/setup#available-pods
-  pod 'Fabric'
-
-
 end
