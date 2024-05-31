@@ -40,13 +40,13 @@ class LoginView: ModalView, Theme {
     }
     
     @IBAction func forgotPasswordAction(_ sender: Any) {
-        guard let url = URL(string: "https://www.bceid.ca/clp/account_recovery.aspx"), let callback = onForgotPassword else { return }
+        guard let _ = URL(string: "https://www.bceid.ca/clp/account_recovery.aspx"), let callback = onForgotPassword else { return }
 //        UIApplication.shared.open(url)
         callback()
     }
     
     @IBAction func signUpAction(_ sender: Any) {
-        guard let url = URL(string: "https://www.bceid.ca/register/"), let callback = onSignUp else { return }
+        guard let _ = URL(string: "https://www.bceid.ca/register/"), let callback = onSignUp else { return }
 //        UIApplication.shared.open(url)
         callback()
     }

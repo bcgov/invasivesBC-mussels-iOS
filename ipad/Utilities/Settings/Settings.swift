@@ -22,7 +22,6 @@ class Settings {
     
     private init() {
         guard Settings.getModel() != nil else {
-            RealmRequests.getObject(SettingsModel.self)
             let newModel = SettingsModel()
             RealmRequests.saveObject(object: newModel)
             return

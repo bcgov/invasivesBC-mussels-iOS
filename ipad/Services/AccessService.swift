@@ -49,8 +49,6 @@ class AccessService {
             setAccess()
         case .cellular:
             setAccess()
-        case .none:
-            return
         case .unavailable:
             return
         }

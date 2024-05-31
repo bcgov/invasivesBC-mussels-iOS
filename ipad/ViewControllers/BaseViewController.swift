@@ -9,7 +9,7 @@
 import UIKit
 import DatePicker
 
-protocol InputDelegate: class {
+protocol InputDelegate: AnyObject {
     func showDropdownDelegate(items: [DropdownModel], on view: UIView, callback: @escaping (_ selection: DropdownModel?) -> Void)
     func showDatepickerDelegate(on view: UIView, initialDate: Date?, minDate: Date?, maxDate: Date?, callback: @escaping (_ date: Date?) -> Void)
     func showTimePickerDelegate(on view: UIView, initialTime: Time?, completion: @escaping (_ time: Time?) -> Void)
@@ -147,7 +147,7 @@ class BaseViewController: UIViewController, Theme ,InputDelegate {
                 return completion(selectedDate)
             }
         }
-        datepicker.displayPopOver(on: view, in: self, completion: {})
+        datepicker.show(in: self, on: view)
     }
     
     // MARK: Delegates
