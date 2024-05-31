@@ -6,7 +6,7 @@ on:
 jobs:
   build-ios:
     name: Build and sign ios
-    runs-on: macos-14
+    runs-on: macos-13-large
 
     env:
       PROJECT: ${{ 'invasivesbc-mussels.iOS.xcworkspace' }}
