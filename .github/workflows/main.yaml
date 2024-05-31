@@ -82,7 +82,7 @@ jobs:
           agvtool new-version -all ${BUILD_NO}
 
       - name: Build For Release
-        uses: xcode@v3
+        uses: actions/xcode@v3
         with:
           xcode-version: 15.4
           workspace: ipad.xcworkspace
