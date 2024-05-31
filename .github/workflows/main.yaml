@@ -90,6 +90,7 @@ jobs:
           -sdk iphoneos \
           -derivedDataPath $DATA_DIR \
           -archivePath ${DATA_DIR}/${ARCHIVE_NAME} \
+          ARCHS=x86_64 \
           EXCLUDED_ARCHS=arm64 \
           archive
 
