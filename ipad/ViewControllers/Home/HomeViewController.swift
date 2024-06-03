@@ -315,8 +315,6 @@ class HomeViewController: BaseViewController {
             online = true
         case .cellular:
             online = true
-        case .none:
-            online = false
         case .unavailable:
             online = false
         }

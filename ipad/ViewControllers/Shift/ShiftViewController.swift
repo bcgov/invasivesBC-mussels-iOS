@@ -94,7 +94,7 @@ class ShiftViewController: BaseViewController {
       }
       guard let currentShiftModel = model else { return }
       blowbyModal.initialize(shift: currentShiftModel, delegate: self, onStart: { [weak self] (model) in
-          guard let _self = self else { return }
+        guard self != nil else { return }
       }) {
           // Canceled
       }
@@ -159,7 +159,7 @@ class ShiftViewController: BaseViewController {
       }
       guard let currentShiftModel = model else { return }
       blowbyModal.initialize(shift: currentShiftModel, newBlowby: blowbyToEdit, delegate: self, onStart: { [weak self] (model) in
-          guard let _self = self else { return }
+        guard self != nil else { return }
       }) {
           // Canceled
       }
