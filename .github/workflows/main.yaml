@@ -115,6 +115,16 @@ jobs:
           retention-days: 5
 
       # https://blog.codemagic.io/app-store-connect-api-codemagic-cli-tools/
+
+      - name: Create Virtual Environment
+        if: github.ref_name == 'master'
+        run: |
+          python3 -m venv venv
+
+      - name: Activate Virtual Environment
+        if: github.ref_name == 'master'
+        run: source venv/bin/activate
+
       - name: Install Codemagic CLI Tools
         if: github.ref_name == 'master'
         run: |
