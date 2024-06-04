@@ -682,8 +682,7 @@ class WatercraftInspectionViewController: BaseViewController {
                 }
             }
         }
-      print(model.watercraftHasDrainplugs, model.watercraftHasDrainplugsInteracted)
-      print(model.drainplugRemovedAtInspection, model.drainplugRemovedAtInspectionInteracted)
+
         var message = ""
 
         // Build the errors into a readable format, by section
