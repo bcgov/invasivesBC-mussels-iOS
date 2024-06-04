@@ -370,7 +370,30 @@ class WatercraftInspectionFormHelper {
         )
         k9InspectionResults.dependency.append(InputDependency(to: k9Inspection, equalTo: true))
         sectionItems.append(k9InspectionResults)
+          
+        let watercraftHasDrainplugs = NullSwitchInput(
+          key: "watercraftHasDrainplugs",
+          header: WatercraftFieldHeaderConstants.InspectionDetails.watercraftHasDrainplugs,
+          editable: editable ?? true,
+          value: object?.watercraftHasDrainplugs ?? nil,
+          width: .Full,
+          validationName: .watercraftHasDrainplugsInteracted,
+          interacted: object?.watercraftHasDrainplugsInteracted ?? false
+        )
+        sectionItems.append(watercraftHasDrainplugs)
         
+        let drainplugRemovedAtInspection = NullSwitchInput(
+          key: "drainplugRemovedAtInspection",
+          header: WatercraftFieldHeaderConstants.InspectionDetails.drainplugRemovedAtInspection,
+          editable: editable ?? true,
+          value: object?.drainplugRemovedAtInspection ?? nil,
+          width: .Full,
+          validationName: .drainplugRemovedAtInspectionInteracted,
+          interacted: object?.drainplugRemovedAtInspectionInteracted ?? false
+        )
+        drainplugRemovedAtInspection.dependency.append(InputDependency(to: watercraftHasDrainplugs, equalTo: true))
+        sectionItems.append(drainplugRemovedAtInspection)
+      
         return sectionItems
     }
     

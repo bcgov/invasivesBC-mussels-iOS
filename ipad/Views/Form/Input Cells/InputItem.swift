@@ -52,6 +52,8 @@ enum InteractedValidationName {
     case marineMusselsFoundInteracted
     case highRiskAreaInteracted
     case dreissenidMusselsFoundPreviousInteracted
+    case watercraftHasDrainplugsInteracted
+    case drainplugRemovedAtInspectionInteracted
     // High Risk Assessment Fields
     case highriskAISInteracted
     case adultDreissenidFoundInteracted
@@ -227,6 +229,10 @@ struct InteractedWithValue {
     func get(type: InteractedValidationName) -> Bool? {
         switch type {
         // Basic Info
+        case .watercraftHasDrainplugsInteracted:
+            return self.boolean
+        case .drainplugRemovedAtInspectionInteracted:
+            return self.boolean
         case .k9InspectionInteracted:
             return self.boolean
         case .previousInspectionInteracted:
@@ -269,6 +275,10 @@ struct InteractedWithValue {
     mutating func set(value: Bool?, type: InteractedValidationName) {
         switch type {
         // Basic Info
+        case .watercraftHasDrainplugsInteracted:
+            self.boolean = value
+        case .drainplugRemovedAtInspectionInteracted:
+            self.boolean = value
         case .k9InspectionInteracted:
             self.boolean = value
         case .previousInspectionInteracted:

@@ -254,6 +254,8 @@ class WatercraftInspectionViewController: BaseViewController {
         case previousInspectionInteracted               // Watercraft Details
         case dreissenidMusselsFoundPreviousInteracted   // Inspection Details
         case k9InspectionInteracted                     // Inspection Details
+        case watercraftHasDrainplugsInteracted
+        case drainplugRemovedAtInspectionInteracted
         case decontaminationPerformedInteracted         // High Risk Form
         case decontaminationOrderIssuedInteracted       // High Risk Form
         case decontaminationAppendixBInteracted         // High Risk Form
@@ -300,6 +302,8 @@ class WatercraftInspectionViewController: BaseViewController {
         case errorDecontaminationAppendixBInteracted = "Appendix B filled out field."
         case errorSealIssuedInteracted = "Seal issued or existing seal field."
         case errorQuarantinePeriodIssuedInteracted = "Quarantine period issued field."
+        case errorWatercraftHasDrainplugsInteracted = "Watercraft has Drain plugs field."
+        case errorDrainplugRemovedAtInspectionInteracted = "Drain plug removed field."
         
         // Basic
         case errorInspectionTime = "Time of Inspection."
@@ -319,7 +323,6 @@ class WatercraftInspectionViewController: BaseViewController {
         case errorDestinationMajorCities = "Closest Major City for Destination Waterbody."
         case errorPrevOtherWaterbodyNoCity = "To improve identification for the 'Other' Waterbody, add a Previous Closest Major City."
         case errorDestOtherWaterbodyNoCity = "To improve identification for the 'Other' Waterbody, add a Destination Closest Major City."
-        
         // Inspection Outcomes (High Risk form)
         case errorDecontaminationPerformed = "Record of Decontamination number."
         case errorDecontaminationOrderNumber = "Decontamination order number."
@@ -432,6 +435,18 @@ class WatercraftInspectionViewController: BaseViewController {
         /// and the corresponding errorMessage will be shown when attempting to submit
         let validationItems: [Validation] = [
             // Null Switch validation
+            Validation(
+              type: .watercraftHasDrainplugsInteracted,
+              errorMessage: .errorWatercraftHasDrainplugsInteracted,
+              condition: !model.watercraftHasDrainplugsInteracted,
+              section: .inspectionDetails
+            ),
+            Validation(
+              type: .drainplugRemovedAtInspectionInteracted,
+              errorMessage: .errorDrainplugRemovedAtInspectionInteracted,
+              condition: model.watercraftHasDrainplugs && !model.drainplugRemovedAtInspectionInteracted,
+              section: .inspectionDetails
+            ),
             Validation(
                 type: .commerciallyHauledInteracted,
                 errorMessage: .errorCommerciallyHauledInteracted,
@@ -667,7 +682,8 @@ class WatercraftInspectionViewController: BaseViewController {
                 }
             }
         }
-            
+      print(model.watercraftHasDrainplugs, model.watercraftHasDrainplugsInteracted)
+      print(model.drainplugRemovedAtInspection, model.drainplugRemovedAtInspectionInteracted)
         var message = ""
 
         // Build the errors into a readable format, by section
