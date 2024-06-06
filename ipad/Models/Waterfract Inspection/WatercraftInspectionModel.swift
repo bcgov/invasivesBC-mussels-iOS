@@ -63,6 +63,8 @@ class WatercraftInspectionModel: Object, BaseRealmObject {
     @objc dynamic var marineMusselsFound: Bool = false
     @objc dynamic var cleanDrainDryAfterInspection: Bool = false
     @objc dynamic var dreissenidMusselsFoundPrevious: Bool = false
+    @objc dynamic var watercraftHasDrainplugs: Bool = false
+    @objc dynamic var drainplugRemovedAtInspection: Bool = false
     
     // Dry Storage
     @objc dynamic var previousDryStorage: Bool = false
@@ -113,17 +115,21 @@ class WatercraftInspectionModel: Object, BaseRealmObject {
                           "aquaticPlantsFound",
                           "marineMusselsFound",
                           "highRiskArea",
-                          "dreissenidMusselsFoundPrevious"]
-    @objc dynamic var highriskAISInteracted = false
-    @objc dynamic var adultDreissenidFoundInteracted = false
-    @objc dynamic var k9InspectionInteracted = false
-    @objc dynamic var previousInspectionInteracted = false
-    @objc dynamic var commerciallyHauledInteracted = false
-    @objc dynamic var previousAISKnowledeInteracted = false
-    @objc dynamic var aquaticPlantsFoundInteracted = false
-    @objc dynamic var marineMusselsFoundInteracted = false
-    @objc dynamic var highRiskAreaInteracted = false
-    @objc dynamic var dreissenidMusselsFoundPreviousInteracted = false
+                          "dreissenidMusselsFoundPrevious",
+                          "watercraftHasDrainplugs",
+                          "drainplugRemovedAtInspection"]
+    @objc dynamic var highriskAISInteracted: Bool = false
+    @objc dynamic var adultDreissenidFoundInteracted: Bool = false
+    @objc dynamic var k9InspectionInteracted: Bool = false
+    @objc dynamic var previousInspectionInteracted: Bool = false
+    @objc dynamic var commerciallyHauledInteracted: Bool = false
+    @objc dynamic var previousAISKnowledeInteracted: Bool = false
+    @objc dynamic var aquaticPlantsFoundInteracted: Bool = false
+    @objc dynamic var marineMusselsFoundInteracted: Bool = false
+    @objc dynamic var highRiskAreaInteracted: Bool = false
+    @objc dynamic var dreissenidMusselsFoundPreviousInteracted: Bool = false
+    @objc dynamic var drainplugRemovedAtInspectionInteracted: Bool = false
+    @objc dynamic var watercraftHasDrainplugsInteracted: Bool = false
     
     // MARK: Setters
     func set(value: Any, for key: String) {
@@ -304,6 +310,8 @@ class WatercraftInspectionModel: Object, BaseRealmObject {
             "inspectionTime": inspectionTime,
             "k9Inspection": k9Inspection,
             "k9InspectionResults": k9InspectionResults,
+            "watercraftHasDrainplugs": watercraftHasDrainplugs,
+            "drainplugRemovedAtInspection": drainplugRemovedAtInspection,
             "marineSpeciesFound": marineSpeciesFound,
             "aquaticPlantsFound": aquaticPlantsFound,
             "previousAISKnowledge": previousAISKnowlede,
@@ -537,7 +545,7 @@ class WatercraftInspectionModel: Object, BaseRealmObject {
                 }
             }
         } catch let error as NSError {
-            ErrorLog("** RELAM ERROR: \(error)")
+            ErrorLog("** REALM ERROR: \(error)")
         }
     }
         
