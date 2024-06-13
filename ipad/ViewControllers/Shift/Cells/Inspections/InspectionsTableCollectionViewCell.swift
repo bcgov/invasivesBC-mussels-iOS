@@ -47,7 +47,7 @@ class InspectionsTableCollectionViewCell: BaseShiftOverviewCollectionViewCell {
         tableHeightConstraint.constant = InspectionsTableCollectionViewCell.getTableHeight(for: model)
         
         var buttonName = "View"
-        if model.getStatus() == .Draft {
+        if [.Draft, .Errors].contains(model.getStatus()) {
             buttonName = "Edit"
         }
         

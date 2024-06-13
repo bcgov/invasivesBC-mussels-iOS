@@ -68,6 +68,18 @@ class ShiftService {
     ///  - then: A closure that gets called once the shift has been submitted. It receives a boolean indicating whether the operation was successful.
     public func submit(shift: ShiftModel, then: @escaping (_ success: Bool) -> Void) {
         let shiftLocalId = shift.localId
+        if(!shift.inspections.allSatisfy(){item in return item.formDidValidate}) {
+          shift.set(shouldSync: false)
+          shift.set(status: .Errors)
+          shift.inspections.forEach(){inspection in
+            if (!inspection.formDidValidate){
+              inspection.set(shouldSync: false)
+              inspection.set(status: .Errors)
+            }
+          }
+          Alert.show(title: "Submission Error", message: "A shift contains non-validated inspections, please re-visit inspections and correct outstanding issues")
+          return then(false);
+        }
         // Post call
         post(shift: shift) { (shiftId) in
             guard let remoteId = shiftId, let refetchedShift = Storage.shared.shift(withLocalId: shiftLocalId) else {
