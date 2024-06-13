@@ -94,6 +94,7 @@ class WatercraftInspectionViewController: BaseViewController {
     
     // MARK: Setup
     func setup(model: WatercraftInspectionModel) {
+        model.set(value: false, for: "formDidValidate")
         self.model = model
         self.isEditable = [.Draft, .Errors].contains(model.getStatus())
         self.styleNavBar()
