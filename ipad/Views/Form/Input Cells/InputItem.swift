@@ -561,7 +561,7 @@ class TimeInput: InputItem {
     
     func getValue() -> Time? {
         let stringValue: String = self.value.get(type: self.type) as? String ?? ""
-        if stringValue == "" {return nil}
+        if stringValue.isEmpty {return nil}
         return Time(string: stringValue)
     }
     

@@ -57,10 +57,10 @@ class NewBlowbyModal: ModalView, Theme {
         
         // If (Valid) Add Blowby, remove and return
         var invalidFields: [String] = []
-        if newBlowBy!.timeStamp == "" {
+        if newBlowBy!.timeStamp.isEmpty {
             invalidFields.append("Blowby Time")
         }
-        if newBlowBy!.watercraftComplexity == "" {
+        if newBlowBy!.watercraftComplexity.isEmpty {
             invalidFields.append("Watercraft Complexity")
         }
         if !invalidFields.isEmpty {
