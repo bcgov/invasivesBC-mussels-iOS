@@ -438,7 +438,7 @@ class WatercraftInspectionViewController: BaseViewController {
             Validation(
               type: .watercraftHasDrainplugsInteracted,
               errorMessage: .errorWatercraftHasDrainplugsInteracted,
-              condition: !model.watercraftHasDrainplugsInteracted,
+              condition: isPassportHolderNewOrLaunched && !model.watercraftHasDrainplugsInteracted,
               section: .inspectionDetails
             ),
             Validation(
