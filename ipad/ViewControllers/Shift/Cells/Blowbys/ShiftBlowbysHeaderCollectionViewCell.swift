@@ -17,7 +17,7 @@ class ShiftBlowBysHeaderCollectionViewCell: BaseShiftOverviewCollectionViewCell 
 
     override func autofill() {
         guard let model = self.model else {return}
-        if model.getStatus() != .Draft {
+      if [.Draft, .Errors].contains(model.getStatus()) {
             addBlowByButton.alpha = 0
             addBlowByButton.isEnabled = false
         }
@@ -49,6 +49,8 @@ class ShiftBlowBysHeaderCollectionViewCell: BaseShiftOverviewCollectionViewCell 
             return Colors.Status.Green
         case .Draft:
             return Colors.Status.DarkGray
+        case .Errors:
+            return Colors.Status.Red
         }
     }
 }

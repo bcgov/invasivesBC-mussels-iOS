@@ -71,11 +71,28 @@ class ShiftViewController: BaseViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        self.updateStatuses();
         setupCollectionView()
         self.collectionView.reloadData()
         addListeners()
     }
-    
+    /// Iterates through inspections checking formDidValidate. If any for
+    private func updateStatuses() {
+      if(self.model!.status != "Completed"){
+        if (self.model!.inspections.allSatisfy(){$0.formDidValidate}){
+          self.model!.set(status: .Draft)
+        } else {
+          self.model!.set(status: .Draft)
+          self.model!.inspections.forEach{ inspection in
+            if(inspection.formDidValidate){
+              inspection.set(status: .Draft);
+            } else {
+              inspection.set(status: .Errors);
+            }
+          }
+        }
+      }
+    }
     private func addListeners() {
         NotificationCenter.default.removeObserver(self, name: .TableButtonClicked, object: nil)
         NotificationCenter.default.removeObserver(self, name: .InputItemValueChanged, object: nil)
@@ -96,7 +113,7 @@ class ShiftViewController: BaseViewController {
       blowbyModal.initialize(shift: currentShiftModel, delegate: self, onStart: { [weak self] (model) in
         guard self != nil else { return }
       }) {
-          // Canceled
+          // Cancelled
       }
   }
 
@@ -107,7 +124,7 @@ class ShiftViewController: BaseViewController {
 
     func setup(model: ShiftModel) {
         self.model = model
-        self.isEditable = model.getStatus() == .Draft ||  model.getStatus() == .PendingSync
+        self.isEditable = [.Draft, .PendingSync, .Errors].contains(model.getStatus())
         if model.getStatus() == .PendingSync {
             model.set(shouldSync: false)
             for inspection in model.inspections {
@@ -116,8 +133,8 @@ class ShiftViewController: BaseViewController {
             Alert.show(title: "Changed to draft", message: "Status changed to draft. tap submit when you've made your changes.")
         }
         
-        if model.getStatus() == .Draft {
-            // make sure inspections are editable. 
+      if [.Draft, .Errors].contains(model.getStatus()) {
+            // make sure inspections are editable.
             for inspection in model.inspections {
                 inspection.set(shouldSync: false)
             }
@@ -253,7 +270,7 @@ class ShiftViewController: BaseViewController {
         navigation.navigationBar.tintColor = .white
         navigation.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
         setGradiantBackground(navigationBar: navigation.navigationBar)
-        if let model = self.model, model.getStatus() == .Draft {
+        if let model = self.model, [.Draft, .Errors].contains(model.getStatus()) {
             setRightNavButtons()
         }
     }
