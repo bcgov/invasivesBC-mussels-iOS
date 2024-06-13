@@ -76,7 +76,7 @@ class ShiftViewController: BaseViewController {
         self.collectionView.reloadData()
         addListeners()
     }
-    /// Iterates through inspections checking formDidValidate. If any for
+    /// Iterates through inspections checking formDidValidate. If any form does validate, modifies all appropraite statuses to `.Errors`
     private func updateStatuses() {
       if(self.model!.status != "Completed"){
         if (self.model!.inspections.allSatisfy(){$0.formDidValidate}){
@@ -84,11 +84,7 @@ class ShiftViewController: BaseViewController {
         } else {
           self.model!.set(status: .Draft)
           self.model!.inspections.forEach{ inspection in
-            if(inspection.formDidValidate){
-              inspection.set(status: .Draft);
-            } else {
-              inspection.set(status: .Errors);
-            }
+            inspection.set(status: inspection.formDidValidate ? .Draft : .Errors)
           }
         }
       }
@@ -285,19 +281,19 @@ class ShiftViewController: BaseViewController {
 
     // MARK: Validation
     func canSubmit() -> Bool {
-        return validationMessage() == ""
+        return validationMessage().isEmpty
     }
     
     func validationMessage() -> String {
         var message: String = ""
         guard let model = self.model else { return message }
         var counter = 1
-        if model.startTime == "" {
+        if model.startTime.isEmpty {
             message = "\(message)\n\(counter)- Missing Shift Start time."
             counter += 1
         }
         
-        if model.endTime == "" {
+        if model.endTime.isEmpty {
             message = "\(message)\n\(counter)- Missing Shift End time."
             counter += 1
         }
@@ -323,7 +319,7 @@ class ShiftViewController: BaseViewController {
         }
         
         for inspection in model.inspections {
-            if inspection.inspectionTime == "" {
+            if inspection.inspectionTime.isEmpty {
                 message = "\(message)\n\(counter)- Missing Time of Inspection."
                 counter += 1
             }

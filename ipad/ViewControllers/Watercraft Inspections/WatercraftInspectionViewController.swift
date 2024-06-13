@@ -243,7 +243,7 @@ class WatercraftInspectionViewController: BaseViewController {
     }
     
     func canSubmit() -> Bool {
-        return validationMessage() == ""
+        return validationMessage().isEmpty
     }
     
     /// Enum error cases grouped by sections for clarity
@@ -698,8 +698,8 @@ class WatercraftInspectionViewController: BaseViewController {
                 message += "\n"
             }
         }
-        model.set(value: message == "", for: "formDidValidate")
-        if (message == "") {
+        model.set(value: message.isEmpty, for: "formDidValidate")
+        if (message.isEmpty) {
           model.set(status: .Draft)
         }
         

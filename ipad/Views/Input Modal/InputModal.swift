@@ -66,7 +66,7 @@ class InputModal: ModalView, Theme {
     }
     
     func validateInput(text: String) -> Bool {
-        if text.removeWhitespaces() == "" {
+        if text.removeWhitespaces().isEmpty {
             invalidInput(message: "Please enter a value")
             return false
         } else {
