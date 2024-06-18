@@ -12,6 +12,7 @@ import Realm
 import RealmSwift
 
 class WatercraftInspectionModel: Object, BaseRealmObject {
+    @objc dynamic var formDidValidate: Bool = false
     @objc dynamic var userId: String = ""
     @objc dynamic var localId: String = {
         return UUID().uuidString
@@ -190,18 +191,19 @@ class WatercraftInspectionModel: Object, BaseRealmObject {
     }
     
     func set(shouldSync should: Bool) {
-        set(status: should ? .PendingSync : .Draft )
+      if (formDidValidate) {
         do {
-            let realm = try Realm()
-            try realm.write {
-                self.shouldSync = should
-                self.status = should ? "Pending Sync" : "Draft"
-            }
+          let realm = try Realm()
+          try realm.write {
+            self.shouldSync = should
+            self.status = should ? "Pending Sync" : "Draft"
+          }
         } catch let error as NSError {
-            print("** REALM ERROR")
-            print(error)
+          print("** REALM ERROR")
+          print(error)
         }
         set(status: should ? .PendingSync : .Draft )
+      }
     }
     
     func set(status statusEnum: SyncableItemStatus) {
@@ -213,6 +215,8 @@ class WatercraftInspectionModel: Object, BaseRealmObject {
             newStatus = "Pending Sync"
         case .Completed:
             newStatus = "Completed"
+        case .Errors:
+            newStatus = "Not Validated"
         }
         do {
             let realm = try Realm()
@@ -270,6 +274,8 @@ class WatercraftInspectionModel: Object, BaseRealmObject {
             return .PendingSync
         case "completed":
             return .Completed
+        case "not validated":
+            return .Errors
         default:
             return .Draft
         }

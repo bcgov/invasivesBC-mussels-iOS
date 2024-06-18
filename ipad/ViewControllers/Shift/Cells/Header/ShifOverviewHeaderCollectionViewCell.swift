@@ -26,7 +26,7 @@ class ShifOverviewHeaderCollectionViewCell: BaseShiftOverviewCollectionViewCell 
         self.locationLabel.text = model.station
         self.statusLabel.text = model.status
         self.statusIndicator.backgroundColor = StatusColor.color(for: model.status)
-        if model.getStatus() != .Draft {
+        if ![.Draft, .Errors].contains(model.getStatus()) {
             addInspectionButton.alpha = 0
             addInspectionButton.isEnabled = false
         }
@@ -65,6 +65,8 @@ class ShifOverviewHeaderCollectionViewCell: BaseShiftOverviewCollectionViewCell 
             return Colors.Status.Green
         case .Draft:
             return Colors.Status.DarkGray
+        case .Errors:
+            return Colors.Status.Red
         }
     }
 }
