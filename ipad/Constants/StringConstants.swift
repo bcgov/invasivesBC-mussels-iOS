@@ -121,7 +121,7 @@ struct WatercraftFieldHeaderConstants {
         static let failedToStop = "Watercraft pulled over for failing to stop at the inspection station"
         static let ticketIssued = "Violation ticket issued"
         static let watercraftHasDrainplugs = "Does the watercraft have a drain plug located on the lower transom? *"
-        static let drainplugRemovedAtInspection = "Was the drain plug already removed when arrived at the inspection station? *"
+        static let drainplugRemovedAtInspection = "Was the drain plug already removed when the watercraft arrived at the inspection station? *"
     }
     struct HighriskAssessmentFields {
         static let highriskAIS = "The watercraft is NOT Clean, Drain, Dry after full inspection and further action must be taken AND/OR a full inspection can not be completed."
