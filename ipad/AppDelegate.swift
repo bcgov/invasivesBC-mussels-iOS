@@ -34,7 +34,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         ApplicationLogger.defalutLogger.start()
         //////
         // Keyboard settings
-        IQKeyboardManager.shared.enable = true
+        IQKeyboardManager.shared.isEnabled = true
         IQKeyboardManager.shared.resignOnTouchOutside = true
         IQKeyboardManager.shared.enableAutoToolbar = false
         print("documents = \(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!)")

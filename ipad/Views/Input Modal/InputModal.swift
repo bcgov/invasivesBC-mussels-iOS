@@ -128,7 +128,7 @@ class InputModal: ModalView, Theme {
         autoFill()
         DispatchQueue.main.asyncAfter(deadline: .now() + (SettingsConstants.animationDuration + 0.1)) {
             self.layoutIfNeeded()
-            IQKeyboardManager.shared.keyboardDistanceFromTextField = self.getDistanceFromField()
+            IQKeyboardManager.shared.keyboardDistance = self.getDistanceFromField()
             self.input.becomeFirstResponder()
         }
     }
