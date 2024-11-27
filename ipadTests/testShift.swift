@@ -59,7 +59,7 @@ class testShift: XCTestCase {
         vc.setup(model: shiftModel)
         shiftModel.inspections.append(createTestInspection())
         shiftModel.boatsInspected = false
-        XCTAssert(vc.canSubmit() == false && (shiftModel.startTime == "" || shiftModel.endTime == ""))
+        XCTAssert(vc.canSubmit() == false && (shiftModel.startTime.isEmpty || shiftModel.endTime.isEmpty))
     }
     
     func testValidShiftForSubmission() {
@@ -70,7 +70,7 @@ class testShift: XCTestCase {
         shiftModel.endTime = "18:00"
         shiftModel.inspections.append(createTestInspection())
         shiftModel.boatsInspected = true
-        XCTAssert(vc.canSubmit() == true && (shiftModel.startTime != "" || shiftModel.endTime != ""))
+        XCTAssert(vc.canSubmit() == true && (shiftModel.startTime.isEmpty || !shiftModel.endTime.isEmpty))
     }
 
 }
