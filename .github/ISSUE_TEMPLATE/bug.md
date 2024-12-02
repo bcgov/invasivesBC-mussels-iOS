@@ -2,7 +2,7 @@
 name: Bug
 about: an undesirable behaviour that needs correction
 title: ''
-labels: ''
+labels: User Story
 assignees: ''
 
 ---
