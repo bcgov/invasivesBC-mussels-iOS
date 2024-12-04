@@ -35,8 +35,9 @@ class ShiftModel: Object, BaseRealmObject {
     @objc dynamic var motorizedBlowBys: Int = 0
     @objc dynamic var nonMotorizedBlowBys: Int = 0
     @objc dynamic var station: String = ""
-    @objc dynamic var shitStartComments: String = ""
-    @objc dynamic var shitEndComments: String = ""
+    @objc dynamic var stationComments: String = ""
+    @objc dynamic var shiftStartComments: String = ""
+    @objc dynamic var shiftEndComments: String = ""
     let BlowbyFields = ["reportedToRapp", "timeStamp", "watercraftComplexity"];
     var inspections: List<WatercraftInspectionModel> = List<WatercraftInspectionModel>()
     var blowbys: List<BlowbyModel> = List<BlowbyModel>()
@@ -267,8 +268,9 @@ class ShiftModel: Object, BaseRealmObject {
             "location": "NA",
             "motorizedBlowBys": motorizedBlowBys,
             "nonMotorizedBlowBys": nonMotorizedBlowBys,
-            "shiftStartComment": shitStartComments.count > 1 ? shitStartComments : "None",
-            "shiftEndComment":  shitEndComments.count > 1 ? shitEndComments : "None",
+            "stationComments": stationComments.count > 1 ? stationComments : "",
+            "shiftStartComment": shiftStartComments.count > 1 ? shiftStartComments : "",
+            "shiftEndComment":  shiftEndComments.count > 1 ? shiftEndComments : "",
             "boatsInspected": boatsInspected,
             "k9OnShift": k9OnShif
         ]
@@ -285,5 +287,11 @@ class ShiftModel: Object, BaseRealmObject {
   
   func getBlowbyFields(editable: Bool) -> [InputItem] {
     return BlowByFormHelper.getBlowByFields(for: BlowbyModel());
+  }
+
+  public static func stationRequired(_ station: String?) -> Bool {
+    guard let station = station else { return false }
+    let requiredStations = ["Other", "Project", "Emergency Response"]
+    return requiredStations.contains(station)
   }
 }

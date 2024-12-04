@@ -35,7 +35,7 @@ class Storage {
         let shifts = Storage.shared.getSyncableItems()
         var invalidShifts: [ShiftModel] = []
         for shift in shifts {
-            if shift.shitEndComments.count > 300 || shift.shitStartComments.count > 300 {
+            if shift.shiftEndComments.count > 300 || shift.shiftStartComments.count > 300 {
                 invalidShifts.append(shift)
                 continue
             }

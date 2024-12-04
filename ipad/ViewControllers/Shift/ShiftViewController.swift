@@ -218,10 +218,17 @@ class ShiftViewController: BaseViewController {
     
     // MARK: Input Item Changed
     @objc func inputItemValueChanged(notification: Notification) {
-        guard let item: InputItem = notification.object as? InputItem else {return}
-        // Set value in Realm object
-        if let m = model {
-            m.set(value: item.value.get(type: item.type) as Any, for: item.key)
+        guard let item: InputItem = notification.object as? InputItem else { return }
+        
+        // Handle station selection changes
+        if item.key.lowercased() == "station" {
+            // Trigger form reload to update dependencies
+            self.collectionView.reloadData()
+        }
+        
+        // Update model
+        if let model = self.model {
+            model.set(value: item.value.get(type: item.type) as Any, for: item.key)
         }
     }
     
@@ -257,7 +264,8 @@ class ShiftViewController: BaseViewController {
         let spacer = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
         navigationItem.setRightBarButtonItems([saveButton, spacer, deleteButton], animated: true)
     }
-    
+
+
     // MARK: Validation
     func canSubmit() -> Bool {
         return validationMessage() == ""
@@ -289,6 +297,11 @@ class ShiftViewController: BaseViewController {
         
         if model.station.isEmpty {
             message = "\(message)\n\(counter)- Please choose a station."
+            counter += 1
+        }
+
+        if model.stationComments.isEmpty && ShiftModel.stationRequired(model.station) {
+            message = "\(message)\n\(counter)- Please add station information."
             counter += 1
         }
         
@@ -481,9 +494,6 @@ extension ShiftViewController: UICollectionViewDataSource, UICollectionViewDeleg
           let cell = getShiftBlowbysHeaderCollectionViewCell(indexPath: indexPath)
           cell.setup(object: model, callback: {[weak self] in
               guard let strongSelf = self else {return}
-              if strongSelf.isEditable {
-                print("Yolo")
-              }
           })
           return cell
       case .Blowbys:
@@ -528,11 +538,11 @@ extension ShiftViewController: UICollectionViewDataSource, UICollectionViewDeleg
         case .Header:
             return CGSize(width: fullWdtih, height: 35)
         case .StartShift:
-            let estimatedContentHeight = InputGroupView.estimateContentHeight(for: ShiftFormHelper.getShiftEndFields(for: model, editable: true))
-            return CGSize(width: fullWdtih, height: estimatedContentHeight)
+            let estimatedContentHeight = InputGroupView.estimateContentHeight(for: ShiftFormHelper.getShiftStartFields(for: model, editable: true))
+            return CGSize(width: fullWdtih, height: estimatedContentHeight + 110)
         case .EndShift:
             let estimatedContentHeight = InputGroupView.estimateContentHeight(for: ShiftFormHelper.getShiftEndFields(for: model, editable: true))
-            return CGSize(width: fullWdtih, height: estimatedContentHeight)
+            return CGSize(width: fullWdtih, height: estimatedContentHeight + 110)
         }
     }
 }

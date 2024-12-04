@@ -45,7 +45,7 @@ class NewShiftModal: ModalView, Theme {
     public func initialize(delegate: InputDelegate, onStart: @escaping (_ model: ShiftModel) -> Void, onCancel:  @escaping () -> Void) {
         self.onStart = onStart
         self.onCancel = onCancel
-        setFixed(width: 550, height: 400)
+        setFixed(width: 800, height: 500)
         present()
         style()
         self.model = ShiftModel()
