@@ -48,16 +48,28 @@ class ShiftFormHelper {
             dropdownItems: DropdownHelper.shared.getDropdown(for: .stations)
         )
         sectionItems.append(station)
-        
-        let shitStartComments = TextAreaInput(
-            key: "shitStartComments",
+
+        let shiftStartComments = TextAreaInput(
+            key: "shiftStartComments",
             header: ShiftFormHeaders.ShiftStart.comments,
             editable: editable ?? true,
-            value: object?.shitStartComments ?? "",
+            value: object?.shiftStartComments ?? "",
             width: .Full
         )
-        sectionItems.append(shitStartComments)
-        
+        sectionItems.append(shiftStartComments)
+
+        let stationComments = TextAreaInput(
+            key: "stationComments",
+            header: stationRequired(object?.station ?? "") 
+                ? ShiftFormHeaders.ShiftStart.stationCommentsRequired 
+                : ShiftFormHeaders.ShiftStart.stationComments,
+            editable: editable ?? true,
+            value: object?.stationComments ?? "",
+            width: .Full
+        )
+
+        sectionItems.append(stationComments)
+
         return sectionItems
     }
   /// Gets the required Input objects needed for the ShiftEndFields section of shift
@@ -94,14 +106,14 @@ class ShiftFormHelper {
             width: .Third
         )
       sectionItems.append(boatsInspected)
-        let shitEndComments = TextAreaInput(
-            key: "shitEndComments",
+        let shiftEndComments = TextAreaInput(
+            key: "shiftEndComments",
             header: ShiftFormHeaders.ShiftEnd.comments,
             editable: editable ?? true,
-            value: object?.shitEndComments ?? "",
+            value: object?.shiftEndComments ?? "",
             width: .Full
         )
-        sectionItems.append(shitEndComments)
+        sectionItems.append(shiftEndComments)
         
         return sectionItems
     }
@@ -120,4 +132,9 @@ class ShiftFormHelper {
         return columns
     }
     
+    private static func stationRequired(_ station: String?) -> Bool {
+        guard let station = station else { return false }
+        let requiredStations = ["Other", "Project", "Emergency Response"]
+        return requiredStations.contains(station)
+    }
 }
