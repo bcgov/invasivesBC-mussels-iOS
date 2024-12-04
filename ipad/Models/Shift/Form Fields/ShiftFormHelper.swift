@@ -60,7 +60,7 @@ class ShiftFormHelper {
 
         let stationComments = TextAreaInput(
             key: "stationComments",
-            header: stationRequired(object?.station ?? "") 
+            header: ShiftModel.stationRequired(object?.station ?? "") 
                 ? ShiftFormHeaders.ShiftStart.stationCommentsRequired 
                 : ShiftFormHeaders.ShiftStart.stationComments,
             editable: editable ?? true,
@@ -132,9 +132,4 @@ class ShiftFormHelper {
         return columns
     }
     
-    private static func stationRequired(_ station: String?) -> Bool {
-        guard let station = station else { return false }
-        let requiredStations = ["Other", "Project", "Emergency Response"]
-        return requiredStations.contains(station)
-    }
 }

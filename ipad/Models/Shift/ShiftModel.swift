@@ -269,7 +269,6 @@ class ShiftModel: Object, BaseRealmObject {
             "motorizedBlowBys": motorizedBlowBys,
             "nonMotorizedBlowBys": nonMotorizedBlowBys,
             "stationComments": stationComments.count > 1 ? stationComments : "",
-            "stationCommentsRequired": stationCommentsRequired.count > 1 ? stationCommentsRequired : "",
             "shiftStartComment": shiftStartComments.count > 1 ? shiftStartComments : "",
             "shiftEndComment":  shiftEndComments.count > 1 ? shiftEndComments : "",
             "boatsInspected": boatsInspected,
@@ -288,5 +287,11 @@ class ShiftModel: Object, BaseRealmObject {
   
   func getBlowbyFields(editable: Bool) -> [InputItem] {
     return BlowByFormHelper.getBlowByFields(for: BlowbyModel());
+  }
+
+  public static func stationRequired(_ station: String?) -> Bool {
+    guard let station = station else { return false }
+    let requiredStations = ["Other", "Project", "Emergency Response"]
+    return requiredStations.contains(station)
   }
 }

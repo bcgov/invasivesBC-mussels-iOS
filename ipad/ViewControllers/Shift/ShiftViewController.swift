@@ -265,10 +265,6 @@ class ShiftViewController: BaseViewController {
         navigationItem.setRightBarButtonItems([saveButton, spacer, deleteButton], animated: true)
     }
 
-    private func stationRequired(_ station: String) -> Bool {
-        let requiresComments = ["Other", "Project", "Emergency Response"]
-        return requiresComments.contains(station)
-    }
 
     // MARK: Validation
     func canSubmit() -> Bool {
@@ -304,7 +300,7 @@ class ShiftViewController: BaseViewController {
             counter += 1
         }
 
-        if model.stationComments.isEmpty && stationRequired(model.station) {
+        if model.stationComments.isEmpty && ShiftModel.stationRequired(model.station) {
             message = "\(message)\n\(counter)- Please add station information."
             counter += 1
         }
