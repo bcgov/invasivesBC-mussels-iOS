@@ -94,8 +94,9 @@ class WatercraftInspectionViewController: BaseViewController {
     
     // MARK: Setup
     func setup(model: WatercraftInspectionModel) {
+        model.set(value: false, for: "formDidValidate")
         self.model = model
-        self.isEditable = model.getStatus() == .Draft
+        self.isEditable = [.Draft, .Errors].contains(model.getStatus())
         self.styleNavBar()
         if !model.isPassportHolder || model.launchedOutsideBC || model.isNewPassportIssued {
             self.showFullInspection = true
@@ -169,7 +170,7 @@ class WatercraftInspectionViewController: BaseViewController {
         navigation.navigationBar.tintColor = .white
         navigation.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
         setGradiantBackground(navigationBar: navigation.navigationBar)
-        if let model = self.model, model.getStatus() == .Draft {
+        if let model = self.model, [.Draft, .Errors].contains(model.getStatus()) {
             setRightNavButtons()
             setLeftNavButtons()
         }
@@ -243,7 +244,7 @@ class WatercraftInspectionViewController: BaseViewController {
     }
     
     func canSubmit() -> Bool {
-        return validationMessage() == ""
+        return validationMessage().isEmpty
     }
     
     /// Enum error cases grouped by sections for clarity
@@ -698,7 +699,11 @@ class WatercraftInspectionViewController: BaseViewController {
                 message += "\n"
             }
         }
-
+        model.set(value: message.isEmpty, for: "formDidValidate")
+        if (message.isEmpty) {
+          model.set(status: .Draft)
+        }
+        
         return message
     }
     

@@ -105,6 +105,8 @@ class Table {
             return Colors.Status.Green
         case "draft":
             return Colors.Status.DarkGray
+        case "contains errors", "not validated":
+            return Colors.Status.Red
         default:
             return Colors.Status.DarkGray
         }

@@ -94,7 +94,7 @@ class MajorCityPicker: UIView, Theme {
         self.searchBar.delegate = self
         self.tableView.reloadData()
         self.selectionsHeightConstraint.constant = 0
-        self.selectButton.isEnabled = !(self.selection.display == "")
+        self.selectButton.isEnabled = !(self.selection.display.isEmpty)
         searchBar.isAccessibilityElement = true
         searchBar.accessibilityLabel = "search-majorcities"
         searchBar.accessibilityValue = "search-majorcities"
@@ -142,12 +142,12 @@ class MajorCityPicker: UIView, Theme {
     }
     
     private func showOrHideSelectionsIfNeeded() {
-        let selectTitle = !(self.selection.display == "") ? "Select (1)" : "Select"
+        let selectTitle = !(self.selection.display.isEmpty) ? "Select (1)" : "Select"
         self.selectButton.setTitle(selectTitle, for: .normal)
-        self.selectButton.isEnabled = !(self.selection.display == "")
+        self.selectButton.isEnabled = !(self.selection.display.isEmpty)
         UIView.animate(withDuration: 0.3) {
-            self.selectionsHeightConstraint.constant = !(self.selection.display == "") ? 60 : 0
-            self.collectionView.alpha = !(self.selection.display == "") ? 1 : 0
+            self.selectionsHeightConstraint.constant = !(self.selection.display.isEmpty) ? 60 : 0
+            self.collectionView.alpha = !(self.selection.display.isEmpty) ? 1 : 0
             self.layoutIfNeeded()
         }
     }
