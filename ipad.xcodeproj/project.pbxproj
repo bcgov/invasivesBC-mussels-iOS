@@ -601,7 +601,7 @@
 			path = Shift;
 			sourceTree = "<group>";
 		};
-		2944BCD62433929700826F48 /* Waterfract Inspection */ = {
+		2944BCD62433929700826F48 /* Watercraft Inspection */ = {
 			isa = PBXGroup;
 			children = (
 				294D9A872379C62F00BD4928 /* WatercraftInspectionModel.swift */,
@@ -611,7 +611,7 @@
 				298BF7CD2395D57E0072AA28 /* DestinationWaterBodyModel.swift */,
 				2944BCD8243392F600826F48 /* Form Fields */,
 			);
-			path = "Waterfract Inspection";
+			path = "Watercraft Inspection";
 			sourceTree = "<group>";
 		};
 		2944BCD8243392F600826F48 /* Form Fields */ = {

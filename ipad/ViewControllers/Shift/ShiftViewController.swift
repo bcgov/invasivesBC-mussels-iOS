@@ -66,7 +66,6 @@ class ShiftViewController: BaseViewController {
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        print(self)
         NotificationCenter.default.removeObserver(self)
     }
     
@@ -78,16 +77,20 @@ class ShiftViewController: BaseViewController {
     }
     /// Iterates through inspections checking formDidValidate. If any form does validate, modifies all appropraite statuses to `.Errors`
     private func updateStatuses() {
-      if(self.model!.status != "Completed"){
-        if (self.model!.inspections.allSatisfy(){$0.formDidValidate}){
-          self.model!.set(status: .Draft)
-        } else {
-          self.model!.set(status: .Draft)
-          self.model!.inspections.forEach{ inspection in
-            inspection.set(status: inspection.formDidValidate ? .Draft : .Errors)
-          }
+        guard let model = self.model else { return }
+        if(model.status != "Completed"){
+            if (model.inspections.allSatisfy(){$0.formDidValidate}){
+                model.set(status: .Draft)
+                model.inspections.forEach { inspection in
+                    inspection.set(status: .Draft)
+                }
+            } else {
+                model.set(status: .Errors)
+                model.inspections.forEach { inspection in
+                    inspection.set(status: inspection.formDidValidate ? .Draft : .Errors)
+                }
+            }
         }
-      }
     }
     private func addListeners() {
         NotificationCenter.default.removeObserver(self, name: .TableButtonClicked, object: nil)
@@ -190,12 +193,14 @@ class ShiftViewController: BaseViewController {
     @objc func completeAction(sender: UIBarButtonItem) {
         guard let model = self.model else { return }
         self.dismissKeyboard()
+
+        self.updateStatuses()
         // if can submit
         var alertMessage = "This shift and the inspections will be uploaded when possible"
         if model.shiftStartDate < Calendar.current.startOfDay(for: Date()) {
             alertMessage += "\n\n You've entered a date that occurred before today. If this was intentional, no problem! Otherwise, please double-check the entered date: \n\(model.shiftStartDate.stringShort())"
         }
-        if canSubmit() {
+        if canSubmit() && model.inspections.allSatisfy({ $0.formDidValidate }) {
             Alert.show(title: "Are you sure?", message: alertMessage, yes: {[weak self] in
                 guard let strongSelf = self else { return }
                 model.set(shouldSync: true)
@@ -355,6 +360,17 @@ class ShiftViewController: BaseViewController {
                     }
                 }
             }
+        }
+
+        // Check for invalid inspections
+        let invalidInspections = model.inspections.filter { !$0.formDidValidate }
+        if !invalidInspections.isEmpty {
+            message = "\(message)\n\(counter)- One or more inspections contain validation errors. Please review each inspection."
+            counter += 1
+        }
+
+        if !message.isEmpty {
+            model.set(status: .Errors)
         }
         
         return message

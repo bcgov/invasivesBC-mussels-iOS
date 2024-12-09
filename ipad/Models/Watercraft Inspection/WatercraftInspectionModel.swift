@@ -191,28 +191,30 @@ class WatercraftInspectionModel: Object, BaseRealmObject {
     }
     
     func set(shouldSync should: Bool) {
-      if (formDidValidate) {
-        do {
-          let realm = try Realm()
-          try realm.write {
-            self.shouldSync = should
-            self.status = should ? "Pending Sync" : "Draft"
-          }
-        } catch let error as NSError {
-          print("** REALM ERROR")
-          print(error)
+        if (formDidValidate) {
+            do {
+                let realm = try Realm()
+                try realm.write {
+                    self.shouldSync = should
+                    self.status = should ? "Pending Sync" : "Draft"
+                }
+            } catch let error as NSError {
+                print("** REALM ERROR")
+                print(error)
+            }
+        } else {
+            // If form isn't validated, force status to Errors
+            set(status: .Errors)
         }
-        set(status: should ? .PendingSync : .Draft )
-      }
     }
     
     func set(status statusEnum: SyncableItemStatus) {
         var newStatus = "\(statusEnum)"
         switch statusEnum {
         case .Draft:
-            newStatus = "Draft"
+            newStatus = formDidValidate ? "Draft" : "Not Validated"
         case .PendingSync:
-            newStatus = "Pending Sync"
+           newStatus = formDidValidate ? "Pending Sync" : "Not Validated"
         case .Completed:
             newStatus = "Completed"
         case .Errors:
