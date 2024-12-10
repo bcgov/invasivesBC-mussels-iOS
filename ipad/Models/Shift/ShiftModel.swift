@@ -15,6 +15,7 @@ enum SyncableItemStatus {
     case Draft
     case PendingSync
     case Completed
+    case Errors
 }
 
 /// Represents a shift model for tracking inspection details and shift information.
@@ -184,6 +185,8 @@ class ShiftModel: Object, BaseRealmObject {
             newStatus = "Pending Sync"
         case .Completed:
             newStatus = "Completed"
+        case .Errors:
+            newStatus = "Contains Errors"
         }
         do {
             let realm = try Realm()
@@ -217,6 +220,8 @@ class ShiftModel: Object, BaseRealmObject {
             return .PendingSync
         case "completed":
             return .Completed
+        case "contains errors":
+            return .Errors
         default:
             return .Draft
         }

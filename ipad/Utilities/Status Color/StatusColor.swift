@@ -18,6 +18,8 @@ class StatusColor {
             return Colors.Status.Yellow
         case "completed":
             return Colors.Status.Green
+        case "contains errors", "not validated":
+            return Colors.Status.Red
         default:
             return Colors.Status.LightGray
         }

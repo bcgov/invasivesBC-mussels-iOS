@@ -59,7 +59,7 @@ class BlowbyTableCollectionViewCell: BaseShiftOverviewCollectionViewCell {
         columns.append(TableViewColumnConfig(key: "", header: "Edit", type: .Button, buttonName: "Edit", showHeader: false))
         
         // Disable adding blowbys if not completed and hide delete button
-        if model.getStatus() != .Draft {
+      if ![.Draft, .Errors].contains(model.getStatus()) {
             columns.removeLast()
             blowByButton.alpha = 0
             blowByButton.isEnabled = false

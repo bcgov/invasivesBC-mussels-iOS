@@ -12,6 +12,7 @@ import Realm
 import RealmSwift
 
 class WatercraftInspectionModel: Object, BaseRealmObject {
+    @objc dynamic var formDidValidate: Bool = false
     @objc dynamic var userId: String = ""
     @objc dynamic var localId: String = {
         return UUID().uuidString
@@ -190,29 +191,34 @@ class WatercraftInspectionModel: Object, BaseRealmObject {
     }
     
     func set(shouldSync should: Bool) {
-        set(status: should ? .PendingSync : .Draft )
-        do {
-            let realm = try Realm()
-            try realm.write {
-                self.shouldSync = should
-                self.status = should ? "Pending Sync" : "Draft"
+        if (formDidValidate) {
+            do {
+                let realm = try Realm()
+                try realm.write {
+                    self.shouldSync = should
+                    self.status = should ? "Pending Sync" : "Draft"
+                }
+            } catch let error as NSError {
+                print("** REALM ERROR")
+                print(error)
             }
-        } catch let error as NSError {
-            print("** REALM ERROR")
-            print(error)
+        } else {
+            // If form isn't validated, force status to Errors
+            set(status: .Errors)
         }
-        set(status: should ? .PendingSync : .Draft )
     }
     
     func set(status statusEnum: SyncableItemStatus) {
         var newStatus = "\(statusEnum)"
         switch statusEnum {
         case .Draft:
-            newStatus = "Draft"
+            newStatus = formDidValidate ? "Draft" : "Not Validated"
         case .PendingSync:
-            newStatus = "Pending Sync"
+           newStatus = formDidValidate ? "Pending Sync" : "Not Validated"
         case .Completed:
             newStatus = "Completed"
+        case .Errors:
+            newStatus = "Not Validated"
         }
         do {
             let realm = try Realm()
@@ -270,6 +276,8 @@ class WatercraftInspectionModel: Object, BaseRealmObject {
             return .PendingSync
         case "completed":
             return .Completed
+        case "not validated":
+            return .Errors
         default:
             return .Draft
         }
