@@ -547,7 +547,7 @@
 			isa = PBXGroup;
 			children = (
 				2944BCD52433928400826F48 /* Shift */,
-				2944BCD62433929700826F48 /* Waterfract Inspection */,
+				2944BCD62433929700826F48 /* Watercraft Inspection */,
 				2933DD60238DC5120068E9DF /* CodeTableModel.swift */,
 				298BF7C7239590730072AA28 /* WaterBodyTableModel.swift */,
 				29FEA09F23FF12C200F490DB /* UserRoleModel.swift */,
