@@ -290,90 +290,81 @@ class ShiftViewController: BaseViewController {
     }
     
     func validationMessage() -> String {
-        var message: String = ""
-        guard let model = self.model else { return message }
-        var counter = 1
+        var messages: [String] = []
+        guard let model = self.model else { return "" }
+        
+        // Group validation messages by category
+        
+        // Shift Time Validations
         if model.startTime.isEmpty {
-            message = "\(message)\n\(counter)- Missing Shift Start time."
-            counter += 1
+            messages.append("⏰ Shift Start time is required")
         }
         
         if model.endTime.isEmpty {
-            message = "\(message)\n\(counter)- Missing Shift End time."
-            counter += 1
+            messages.append("⏰ Shift End time is required")
         }
         
+        // Inspection Count Validations
         if model.inspections.count > 0 && model.boatsInspected == false {
-            message = "\(message)\n\(counter)- You indicated that no boats were inspected, but inspections exist."
-            counter += 1
+            messages.append("⚠️ Inspection count mismatch: You indicated no boats were inspected, but inspections exist")
         }
         
         if model.inspections.count < 1 && model.boatsInspected == true {
-            message = "\(message)\n\(counter)- You indicated that boats were inspected but inspections are missing."
-            counter += 1
+            messages.append("⚠️ Inspection count mismatch: You indicated boats were inspected but no inspections are recorded")
         }
         
+        // Station Validations
         if model.station.isEmpty {
-            message = "\(message)\n\(counter)- Please choose a station."
-            counter += 1
+            messages.append("📍 Station selection is required")
         }
 
         if model.stationComments.isEmpty && ShiftModel.stationRequired(model.station) {
-            message = "\(message)\n\(counter)- Please add station information."
-            counter += 1
+            messages.append("📍 Station information is required")
         }
         
-        for inspection in model.inspections {
+        // Inspection Detail Validations
+        for (index, inspection) in model.inspections.enumerated() {
             if inspection.inspectionTime.isEmpty {
-                message = "\(message)\n\(counter)- Missing Time of Inspection."
-                counter += 1
+                messages.append("🕒 Inspection #\(index + 1): Time of inspection is required")
             }
             
-            if inspection.unknownPreviousWaterBody == true ||
-                inspection.commercialManufacturerAsPreviousWaterBody == true ||
-                inspection.previousDryStorage == true {
-                if inspection.previousMajorCities.isEmpty {
-                    message = "\(message)\n\(counter)- Please add Closest Major City for Previous Waterbody."
-                    counter += 1
-                }
+            // Previous Waterbody Validations
+            if (inspection.unknownPreviousWaterBody || 
+                inspection.commercialManufacturerAsPreviousWaterBody || 
+                inspection.previousDryStorage) {
+                messages.append("🌊 Inspection #\(index + 1): Previous waterbody requires closest major city")
             }
             
-            if inspection.unknownDestinationWaterBody == true ||
-                inspection.commercialManufacturerAsDestinationWaterBody == true ||
-                inspection.destinationDryStorage == true {
-                if inspection.destinationMajorCities.isEmpty {
-                    message = "\(message)\n\(counter)- Please add Closest Major City for Destination Waterbody."
-                    counter += 1
-                }
+            // Destination Waterbody Validations
+            if (inspection.unknownDestinationWaterBody || 
+                inspection.commercialManufacturerAsDestinationWaterBody || 
+                inspection.destinationDryStorage) && inspection.destinationMajorCities.isEmpty {
+                messages.append("🎯 Inspection #\(index + 1): Destination waterbody requires closest major city")
             }
 
-            if !inspection.highRiskAssessments.isEmpty {
-                for highRisk in inspection.highRiskAssessments {
-                    if highRisk.sealIssued == true && highRisk.sealNumber <= 0 {
-                        message = "\(message)\n\(counter)- Please input the Seal #."
-                        counter += 1
-                    }
-                    
-                    if highRisk.decontaminationOrderIssued == true && highRisk.decontaminationOrderNumber <= 0 {
-                        message = "\(message)\n\(counter)- Please input the Decontamination order number."
-                        counter += 1
-                    }
+            // High Risk Assessment Validations
+            for (riskIndex, highRisk) in inspection.highRiskAssessments.enumerated() {
+                if highRisk.sealIssued && highRisk.sealNumber <= 0 {
+                    messages.append("🏷️ Inspection #\(index + 1) Risk #\(riskIndex + 1): Seal number is required")
+                }
+                
+                if highRisk.decontaminationOrderIssued && highRisk.decontaminationOrderNumber <= 0 {
+                    messages.append("📄 Inspection #\(index + 1) Risk #\(riskIndex + 1): Decontamination order number is required")
                 }
             }
         }
 
-        // Check for invalid inspections
+        // Form Validation Status
         let invalidInspections = model.inspections.filter { !$0.formDidValidate }
         if !invalidInspections.isEmpty {
-            message = "\(message)\n\(counter)- One or more inspections contain validation errors. Please review each inspection."
-            counter += 1
+            messages.append("❌ One or more inspections contain validation errors")
         }
 
-        if !message.isEmpty {
-            model.set(status: .Errors)
-        }
+       if !messages.isEmpty {
+           model.set(status: .Errors)
+       }
         
-        return message
+        return messages.joined(separator: "\n\n")
     }
     
     func createTestModel() {

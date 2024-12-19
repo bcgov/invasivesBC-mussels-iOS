@@ -209,7 +209,7 @@ class WatercraftInspectionViewController: BaseViewController {
         if canSubmit() {
             self.navigationController?.popViewController(animated: true)
         } else {
-            Alert.show(title: "Incomplete", message: validationMessage())
+            Alert.showValidation(title: "Inspection Incomplete", message: validationMessage())
         }
     }
     
@@ -332,11 +332,11 @@ class WatercraftInspectionViewController: BaseViewController {
     }
     
     enum Section: String {
-        case basicInformation = "- BASIC INFORMATION -"
-        case watercraftDetails = "- WATERCRAFT DETAILS -"
-        case journeyDetails = "- JOURNEY DETAILS -"
-        case inspectionDetails = "- INSPECTION DETAILS -"
-        case inspectionOutcomes = "- INSPECTION OUTCOMES -"
+        case basicInformation = " BASIC INFORMATION "
+        case watercraftDetails = " WATERCRAFT DETAILS "
+        case journeyDetails = " JOURNEY DETAILS "
+        case inspectionDetails = " INSPECTION DETAILS "
+        case inspectionOutcomes = " INSPECTION OUTCOMES "
     }
 
     /// Validation struct for the errors, their messages, and the condition where they should be called in validation process
@@ -684,27 +684,48 @@ class WatercraftInspectionViewController: BaseViewController {
             }
         }
 
+        // Build the errors into a readable format, by section
         var message = ""
 
-        // Build the errors into a readable format, by section
         for sectionError in validationErrors {
             let section = sectionError.section.rawValue
             let errors = sectionError.errors
             
             if !errors.isEmpty {
-                message += "\(section)\n\n"
+                // Add section header
+                message += "📋 \(section)\n\n"
+                
+                // Add bullet points with emojis
                 for error in errors {
-                    message += "· \(error)\n\n"
+                    let emoji = getEmoji(for: error)
+                    message += "\(emoji) \(error)\n"
                 }
-                message += "\n"
+                message += "\n\n"
             }
         }
+
         model.set(value: message.isEmpty, for: "formDidValidate")
         if (message.isEmpty) {
-          model.set(status: .Draft)
+            model.set(status: .Draft)
         }
         
         return message
+    }
+    
+    private func getEmoji(for error: String) -> String {
+        if error.lowercased().contains("time") {
+            return "⏰"
+        } else if error.lowercased().contains("waterbody") {
+            return "🌊"
+        } else if error.lowercased().contains("destination") {
+            return "🎯"
+        } else if error.lowercased().contains("seal") {
+            return "🏷️"
+        } else if error.lowercased().contains("decontamination") {
+            return "💧"
+        } else {
+            return "❌"
+        }
     }
     
     @objc func didTapCheckmarkButton(sender: UIBarButtonItem) {
@@ -713,7 +734,7 @@ class WatercraftInspectionViewController: BaseViewController {
         if canSubmit() {
             self.navigationController?.popViewController(animated: true)
         } else {
-            Alert.show(title: "Incomplete", message: validationMessage())
+            Alert.showValidation(title: "Inspection Incomplete", message: validationMessage())
         }
     }
     
