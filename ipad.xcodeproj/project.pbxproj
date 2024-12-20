@@ -221,6 +221,7 @@
 		A7AE5275237CC3660044DBB7 /* unapproved-cross.json in Resources */ = {isa = PBXBuildFile; fileRef = A7AE5272237CC3660044DBB7 /* unapproved-cross.json */; };
 		A7AE5276237CC3660044DBB7 /* check-mark-success.json in Resources */ = {isa = PBXBuildFile; fileRef = A7AE5273237CC3660044DBB7 /* check-mark-success.json */; };
 		A7AE5277237CC3660044DBB7 /* sync-circle.json in Resources */ = {isa = PBXBuildFile; fileRef = A7AE5274237CC3660044DBB7 /* sync-circle.json */; };
+		E42434792D1499A800C7EF20 /* ScrollAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42434782D14999600C7EF20 /* ScrollAlert.swift */; };
 		F5EB30A127B5C77400F22712 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 29CEC91F23676424003B21B9 /* Main.storyboard */; };
 /* End PBXBuildFile section */
 
@@ -467,6 +468,7 @@
 		A7AE5272237CC3660044DBB7 /* unapproved-cross.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "unapproved-cross.json"; sourceTree = "<group>"; };
 		A7AE5273237CC3660044DBB7 /* check-mark-success.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "check-mark-success.json"; sourceTree = "<group>"; };
 		A7AE5274237CC3660044DBB7 /* sync-circle.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "sync-circle.json"; sourceTree = "<group>"; };
+		E42434782D14999600C7EF20 /* ScrollAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollAlert.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -724,6 +726,7 @@
 				299BF01A23FC9CE9001732CD /* PDFViewer */,
 				294EF3102370884300EEB3B6 /* Banner */,
 				29BAC50523676EA400A620F4 /* Alert.swift */,
+				E42434782D14999600C7EF20 /* ScrollAlert.swift */,
 				29BAC50F2367984000A620F4 /* GradiantView.swift */,
 			);
 			path = UI;
@@ -1774,6 +1777,7 @@
 				2907E4B72368D24900946B3F /* InputModal.swift in Sources */,
 				29547B4A23F0BF4F000173F1 /* SelectedWaterBodyCollectionViewCell.swift in Sources */,
 				2991969023846AE000634F81 /* ShiftViewController.swift in Sources */,
+				E42434792D1499A800C7EF20 /* ScrollAlert.swift in Sources */,
 				29DB01092370EFD60046E605 /* TextAreaInputCollectionViewCell.swift in Sources */,
 				5C82D3EA2374BCFA00B065BA /* FoundationExtension.swift in Sources */,
 				29CEC91E23676424003B21B9 /* ViewController.swift in Sources */,
@@ -2059,7 +2063,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.8.4;
+				MARKETING_VERSION = 2.8.5;
 				PRODUCT_BUNDLE_IDENTIFIER = ca.bc.gov.InvasivesBC;
 				PRODUCT_NAME = Inspect;
 				PROVISIONING_PROFILE_SPECIFIER = "InvasivesBC Muscles - 2023/24";
@@ -2089,7 +2093,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.8.4;
+				MARKETING_VERSION = 2.8.5;
 				PRODUCT_BUNDLE_IDENTIFIER = ca.bc.gov.InvasivesBC;
 				PRODUCT_NAME = Inspect;
 				PROVISIONING_PROFILE_SPECIFIER = "InvasivesBC Muscles - 2023/24";
