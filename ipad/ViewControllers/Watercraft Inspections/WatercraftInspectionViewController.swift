@@ -309,7 +309,7 @@ class WatercraftInspectionViewController: BaseViewController {
         // Basic
         case errorInspectionTime = "Time of Inspection."
         case errorNumberOfPeopleInParty = "Number of people in the party."
-        case errorIsNoWatercraftTypeSelected = "Watercraft Type needed:\n  · Non-Motorized\n  · Simple\n  · Complex\n  · Very Complex"
+        case errorIsNoWatercraftTypeSelected = "Watercraft Type needed:\n  ⛵ Non-Motorized\n  ⛵ Simple\n  ⛵ Complex\n  ⛵ Very Complex"
         
         // Watercraft Details
         case errorPreviousAISKnowledge = "Source for Previous Knowledge of AIS or Clean, Drain, Dry."
@@ -715,16 +715,8 @@ class WatercraftInspectionViewController: BaseViewController {
     private func getEmoji(for error: String) -> String {
         if error.lowercased().contains("time") {
             return "⏰"
-        } else if error.lowercased().contains("waterbody") {
-            return "🌊"
-        } else if error.lowercased().contains("destination") {
-            return "🎯"
-        } else if error.lowercased().contains("seal") {
-            return "🏷️"
-        } else if error.lowercased().contains("decontamination") {
-            return "💧"
         } else {
-            return "❌"
+            return "🔴"
         }
     }
     
@@ -750,6 +742,17 @@ class WatercraftInspectionViewController: BaseViewController {
         // Set value in Realm object
         // Keys that need a pop up/ additional actions
         let highRiskFieldKeys = WatercraftInspectionFormHelper.getHighriskAssessmentFieldsFields().map{ $0.key}
+
+        // Handle watercraftHasDrainplugs changes
+        if item.key == "watercraftHasDrainplugs" {
+            let newValue = item.value.get(type: item.type) as? Bool ?? false
+            if !newValue {
+                // If watercraftHasDrainplugs is set to false, also set drainplugRemovedAtInspection to false
+                model.set(value: false, for: "drainplugRemovedAtInspection")
+                model.set(value: false, for: "drainplugRemovedAtInspectionInteracted")
+                self.collectionView.reloadData()
+            }
+        }
 
         if highRiskFieldKeys.contains(item.key) {
             let value = item.value.get(type: item.type) as? Bool
