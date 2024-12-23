@@ -273,7 +273,7 @@ class ShiftModel: Object, BaseRealmObject {
             "location": "NA",
             "motorizedBlowBys": motorizedBlowBys,
             "nonMotorizedBlowBys": nonMotorizedBlowBys,
-            "stationComments": stationComments.count > 1 ? stationComments : "",
+            "stationInformation": stationComments.count > 1 ? stationComments : "",
             "shiftStartComment": shiftStartComments.count > 1 ? shiftStartComments : "",
             "shiftEndComment":  shiftEndComments.count > 1 ? shiftEndComments : "",
             "boatsInspected": boatsInspected,
