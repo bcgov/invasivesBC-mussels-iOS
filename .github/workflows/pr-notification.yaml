@@ -2,7 +2,7 @@ name: Notify Teams on Pull Requests
 
 on:
   pull_request:
-    types: [opened, closed, reopened]
+    types: [opened, reopened]
 
 jobs:
   notify-teams:
@@ -24,7 +24,38 @@ jobs:
                       "type": "TextBlock",
                       "size": "Large",
                       "weight": "Bolder",
-                      "text": "Pull Request ${{ github.event.action }}"
+                      "text": "${{ github.repository && github.repository.split('/')[1] || github.repository }} - Pull Request ${{ github.event.action }}"
+                    },
+                    {
+                      "type": "ColumnSet",
+                      "columns": [
+                        {
+                          "type": "Column",
+                          "width": "auto",
+                          "items": [
+                            {
+                              "type": "Image",
+                              "url": "${{ github.event.pull_request.user.avatar_url }}",
+                              "size": "small",
+                              "style": "person",
+                              "width": "32px",
+                              "height": "32px"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "Column",
+                          "width": "stretch",
+                          "items": [
+                            {
+                              "type": "TextBlock",
+                              "text": "${{ github.event.pull_request.user.login }}",
+                              "weight": "bolder",
+                              "wrap": true
+                            }
+                          ]
+                        }
+                      ]
                     },
                     {
                       "type": "FactSet",
@@ -34,16 +65,12 @@ jobs:
                           "value": "${{ github.event.pull_request.title }}"
                         },
                         {
-                          "title": "Author",
-                          "value": "${{ github.event.pull_request.user.login }}"
-                        },
-                        {
                           "title": "Status",
                           "value": "${{ github.event.pull_request.state }}"
                         },
                         {
                           "title": "Repository",
-                          "value": "${{ github.repository }}"
+                          "value": "${{ github.repository && github.repository.split('/')[1] || github.repository }}"
                         },
                         {
                           "title": "Branch",
