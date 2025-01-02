@@ -1,0 +1,67 @@
+name: Notify Teams on Pull Requests
+
+on:
+  pull_request:
+    types: [opened, closed, reopened]
+
+jobs:
+  notify-teams:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send Notification to Teams
+        env:
+          TEAMS_WEBHOOK_URL: ${{ secrets.TEAMS_WEBHOOK_URL }}
+        run: |
+          curl -H "Content-Type: application/json" -d '{
+            "type": "message",
+            "attachments": [
+              {
+                "contentType": "application/vnd.microsoft.card.adaptive",
+                "content": {
+                  "type": "AdaptiveCard",
+                  "body": [
+                    {
+                      "type": "TextBlock",
+                      "size": "Large",
+                      "weight": "Bolder",
+                      "text": "Pull Request ${{ github.event.action }}"
+                    },
+                    {
+                      "type": "FactSet",
+                      "facts": [
+                        {
+                          "title": "Title",
+                          "value": "${{ github.event.pull_request.title }}"
+                        },
+                        {
+                          "title": "Author",
+                          "value": "${{ github.event.pull_request.user.login }}"
+                        },
+                        {
+                          "title": "Status",
+                          "value": "${{ github.event.pull_request.state }}"
+                        },
+                        {
+                          "title": "Repository",
+                          "value": "${{ github.repository }}"
+                        },
+                        {
+                          "title": "Branch",
+                          "value": "${{ github.event.pull_request.head.ref }} → ${{ github.event.pull_request.base.ref }}"
+                        }
+                      ]
+                    }
+                  ],
+                  "actions": [
+                    {
+                      "type": "Action.OpenUrl",
+                      "title": "View Pull Request",
+                      "url": "${{ github.event.pull_request.html_url }}"
+                    }
+                  ],
+                  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+                  "version": "1.0"
+                }
+              }
+            ]
+          }' $TEAMS_WEBHOOK_URL
