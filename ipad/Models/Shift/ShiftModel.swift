@@ -47,6 +47,21 @@ class ShiftModel: Object, BaseRealmObject {
     // used for query purposes (and displaying)
     @objc dynamic var formattedDate: String = Calendar.current.startOfDay(for: Date()).stringShort()
 
+
+    private static let dateOnlyFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        formatter.timeZone = TimeZone(identifier: "UTC")!
+        return formatter
+    }()
+
+    private static let dateTimeFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        formatter.timeZone = TimeZone(identifier: "UTC")!
+        return formatter
+    }()
+
     /// Takes the Date of one Date object and combines it with the Time from another date object
     /// - Parameters:
     ///     - targetDate: The date to be captured in the new Date object
@@ -228,18 +243,36 @@ class ShiftModel: Object, BaseRealmObject {
     }
     /// Formats a Date object with a Time String into a readable format
     /// - Parameters:
-    ///     - time: String object representing time "10:42"
-    ///     - date: Date object representing given day
-    /// - Returns: Formatted date string YYYY-MM-DD hh:mm:ss
+    ///     - time: String object representing time in "HH:mm" format (e.g. "10:42")
+    ///     - date: Date object representing the target date
+    /// - Returns: Formatted date string in "yyyy-MM-dd HH:mm:ss" format
     func formattedDateTime(time: String, date: Date) -> String? {
-        let timeFormatter = DateFormatter()
-        timeFormatter.dateFormat = "YYYY-MM-dd hh:mm:ss"
-        let startDate = shiftStartDate
-        let startTimeSplit = time.components(separatedBy: ":")
-        guard let timeInDate = startDate.setTime(hour: Int(startTimeSplit[0]) ?? 0, min: Int(startTimeSplit[1]) ?? 0, sec: 1) else {
+        let timeParts = time.components(separatedBy: ":")
+        
+        // Validate time format
+        guard timeParts.count == 2,
+              let hour = Int(timeParts[0]),
+              let minute = Int(timeParts[1]),
+              hour >= 0 && hour < 24,
+              minute >= 0 && minute < 60 else {
             return nil
         }
-        return timeFormatter.string(from: timeInDate)
+        
+        // Create a calendar in the station's timezone
+        var calendar = Calendar.current
+        calendar.timeZone = ShiftModel.getTimezoneForStation(self.station)
+        
+        // Create components in station's timezone
+        var components = calendar.dateComponents([.year, .month, .day], from: date)
+        components.hour = hour
+        components.minute = minute
+        components.second = 1
+        
+        guard let localDate = calendar.date(from: components) else {
+            return nil
+        }
+        
+        return ShiftModel.dateTimeFormatter.string(from: localDate)
     }
   
     func deleteBlowby(blowbyToDelete: BlowbyModel) -> Void {
@@ -257,11 +290,11 @@ class ShiftModel: Object, BaseRealmObject {
   
     // MARK: To Dictionary
     func toDictionary() -> [String : Any] {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "YYYY-MM-dd"
-        let formattedDateFull = dateFormatter.string(from: shiftStartDate)
+        let formattedDateFull = ShiftModel.dateOnlyFormatter.string(from: shiftStartDate)
         
-        guard let startTimeFormatted = formattedDateTime(time: startTime, date: shiftStartDate), let endTimeFormatted = formattedDateTime(time: endTime, date: shiftStartDate) else {
+        // Use the existing shiftDateFormatter for the full date-time
+        guard let startTimeFormatted = formattedDateTime(time: startTime, date: shiftStartDate),
+              let endTimeFormatted = formattedDateTime(time: endTime, date: shiftStartDate) else {
             return [String : Any]()
         }
         
@@ -298,5 +331,40 @@ class ShiftModel: Object, BaseRealmObject {
     guard let station = station else { return false }
     let requiredStations = ["Other", "Project", "Emergency Response"]
     return requiredStations.contains(station)
+  }
+
+  private static func getTimezoneForStation(_ station: String) -> TimeZone {
+    // Stations that observe Mountain Time with DST (MDT/MST)
+    let mountainTimeDSTStations = [
+        "Golden",
+        "Olsen (Hwy 3)",
+        "Cutts (Hwy 93)",
+        "Cranbrook Roving - Scheduled Inspection",
+        "Cranbrook Roving - Rykerts",
+        "Cranbrook Roving - Nelway",
+        "Cranbrook Roving - Waneta",
+        "Cranbrook Roving - Patterson",
+        "Cranbrook Roving - Outreach"
+    ]
+    
+    // Stations that observe Mountain Time without DST (MST only)
+    let mountainTimeNoDSTStations = [
+        "Dawson Creek",
+        "Yahk"
+    ]
+    
+    if mountainTimeDSTStations.contains(station) {
+        // America/Edmonton observes MDT/MST
+        return TimeZone(identifier: "America/Edmonton") ?? TimeZone.current
+    }
+    
+    if mountainTimeNoDSTStations.contains(station) {
+        // America/Phoenix doesn't observe DST, staying on MST
+        return TimeZone(identifier: "America/Phoenix") ?? TimeZone.current
+    }
+    
+    // All other stations use Pacific Time (PST/PDT)
+    // America/Vancouver observes PDT/PST
+    return TimeZone(identifier: "America/Vancouver") ?? TimeZone.current
   }
 }
