@@ -2,7 +2,7 @@ name: Notify Teams on Pull Requests
 
 on:
   pull_request:
-    types: [opened, closed, reopened]
+    types: [opened, reopened]
 
 jobs:
   notify-teams:
