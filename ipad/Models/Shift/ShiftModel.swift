@@ -241,6 +241,26 @@ class ShiftModel: Object, BaseRealmObject {
             return .Draft
         }
     }
+    // Determine if shift is overnight
+    func isOvernightShift() -> Bool {
+        let startTime = self.startTime.components(separatedBy: ":")
+        let endTime = self.endTime.components(separatedBy: ":")
+
+        guard startTime.count == 2, endTime.count == 2,
+            let startHour = Int(startTime[0]),
+            let endHour = Int(endTime[0]),
+            let startMinute = Int(startTime[1]),
+            let endMinute = Int(endTime[1]) else {
+                return false
+            }
+
+        if startHour == endHour {
+            if endMinute < startMinute {
+                return true
+            }
+        }
+        return startHour > endHour
+    }
     /// Formats a Date object with a Time String into a readable format
     /// - Parameters:
     ///     - time: String object representing time in "HH:mm" format (e.g. "10:42")
@@ -262,8 +282,13 @@ class ShiftModel: Object, BaseRealmObject {
         var calendar = Calendar.current
         calendar.timeZone = ShiftModel.getTimezoneForStation(self.station)
         
-        // Create components in station's timezone
-        var components = calendar.dateComponents([.year, .month, .day], from: date)
+        // If shift is overnight and this is the end time, add a day
+        var targetDate = date
+        if time == endTime && isOvernightShift() {
+            targetDate = calendar.date(byAdding: .day, value: 1, to: date) ?? date
+        }
+        
+        var components = calendar.dateComponents([.year, .month, .day], from: targetDate)
         components.hour = hour
         components.minute = minute
         components.second = 1
