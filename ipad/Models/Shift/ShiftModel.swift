@@ -358,7 +358,7 @@ class ShiftModel: Object, BaseRealmObject {
     return requiredStations.contains(station)
   }
 
-  private static func getTimezoneForStation(_ station: String) -> TimeZone {
+  internal static func getTimezoneForStation(_ station: String) -> TimeZone {
     // Stations that observe Mountain Time with DST (MDT/MST)
     let mountainTimeDSTStations = [
         "Golden",

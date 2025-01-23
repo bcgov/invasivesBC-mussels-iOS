@@ -132,6 +132,14 @@ class WatercraftInspectionModel: Object, BaseRealmObject {
     @objc dynamic var drainplugRemovedAtInspectionInteracted: Bool = false
     @objc dynamic var watercraftHasDrainplugsInteracted: Bool = false
     
+     private static let dateTimeFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        formatter.timeZone = TimeZone(identifier: "UTC")!
+        return formatter
+    }()
+
+    
     // MARK: Setters
     func set(value: Any, for key: String) {
         if self[key] == nil {
@@ -291,9 +299,12 @@ class WatercraftInspectionModel: Object, BaseRealmObject {
     func toDictionary(shift id: Int) -> [String : Any] {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "YYYY-MM-dd'T'HH:mm:ss.SSSZ"
+        dateFormatter.timeZone = TimeZone(identifier: "UTC")!
         let formattedDateFull = dateFormatter.string(from: self.timeStamp)
-        print(formattedDateFull)
-        
+
+        guard let formattedInspectionTime = formattedDateTime(time: inspectionTime, date: timeStamp) else {
+            return [String: Any]()
+        }
         // Create dictionary for high-risk assessment
         var highRiskAssessmentForm: [String: Any] = [String: Any] ()
         if let highRiskAssessment = self.highRiskAssessments.first {
@@ -315,7 +326,7 @@ class WatercraftInspectionModel: Object, BaseRealmObject {
             "timestamp": formattedDateFull,
             "passportHolder": isPassportHolder,
             "isNewPassportIssued": isNewPassportIssued,
-            "inspectionTime": inspectionTime,
+            "inspectionTime": formattedInspectionTime,
             "k9Inspection": k9Inspection,
             "k9InspectionResults": k9InspectionResults,
             "watercraftHasDrainplugs": watercraftHasDrainplugs,
@@ -621,5 +632,50 @@ class WatercraftInspectionModel: Object, BaseRealmObject {
         inputputFields[.Divider] = []
         inputputFields[.HighRiskAssessment] = []
         return inputputFields[section] ?? []
+    }
+
+    // Add the linkToShift property to access parent shift
+    let linkToShift = LinkingObjects(fromType: ShiftModel.self, property: "inspections")
+
+    func formattedDateTime(time: String, date: Date) -> String? {
+        let timeParts = time.components(separatedBy: ":")
+        
+        // Validate time format
+        guard timeParts.count == 2,
+              let hour = Int(timeParts[0]),
+              let minute = Int(timeParts[1]),
+              hour >= 0 && hour < 24,
+              minute >= 0 && minute < 60 else {
+            return nil
+        }
+        
+        // Get station timezone from parent shift
+        guard let parentShift = linkToShift.first else { return nil }
+        let stationTimezone = ShiftModel.getTimezoneForStation(parentShift.station)
+        
+        // Create a calendar in the station's timezone
+        var calendar = Calendar.current
+        calendar.timeZone = stationTimezone
+        
+        // Check if this is an overnight shift
+        var targetDate = date
+        if let shiftStartTime = Int(parentShift.startTime.components(separatedBy: ":")[0]),
+           let inspectionHour = Int(time.components(separatedBy: ":")[0]) {
+            if shiftStartTime > inspectionHour {
+                // If shift start hour is greater than inspection hour, this is next day
+                targetDate = calendar.date(byAdding: .day, value: 1, to: date) ?? date
+            }
+        }
+        
+        var components = calendar.dateComponents([.year, .month, .day], from: targetDate)
+        components.hour = hour
+        components.minute = minute
+        components.second = 1
+        
+        guard let localDate = calendar.date(from: components) else {
+            return nil
+        }
+        
+        return WatercraftInspectionModel.dateTimeFormatter.string(from: localDate)
     }
 }
