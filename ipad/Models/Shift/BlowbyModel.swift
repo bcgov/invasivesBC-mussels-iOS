@@ -32,6 +32,7 @@ class BlowbyModel: Object, BaseRealmObject {
     @objc dynamic var reportedToRapp: Bool = false
     @objc dynamic var formattedReporttoRapp: String = "No"
     
+    // This can be placed into a date utils file in the future
     private static let dateTimeFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
@@ -39,7 +40,7 @@ class BlowbyModel: Object, BaseRealmObject {
         return formatter
     }()
 
-    // Add this property to link back to parent shift
+    // This property is used to link back to the parent shift to get the station timezone
     let linkToShift = LinkingObjects(fromType: ShiftModel.self, property: "blowbys")
 
     // MARK: Setters

@@ -131,7 +131,8 @@ class WatercraftInspectionModel: Object, BaseRealmObject {
     @objc dynamic var drainplugRemovedAtInspectionInteracted: Bool = false
     @objc dynamic var watercraftHasDrainplugsInteracted: Bool = false
     
-     private static let dateTimeFormatter: DateFormatter = {
+    // This can be placed into a date utils file in the future
+    private static let dateTimeFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         formatter.timeZone = TimeZone(identifier: "UTC")!
