@@ -7,7 +7,6 @@
 //
 
 import Foundation
-
 import Realm
 import RealmSwift
 
@@ -32,6 +31,17 @@ class BlowbyModel: Object, BaseRealmObject {
     @objc dynamic var watercraftComplexity: String = ""
     @objc dynamic var reportedToRapp: Bool = false
     @objc dynamic var formattedReporttoRapp: String = "No"
+    
+    // This can be placed into a date utils file in the future
+    private static let dateTimeFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        formatter.timeZone = TimeZone(identifier: "UTC")!
+        return formatter
+    }()
+
+    // This property is used to link back to the parent shift to get the station timezone
+    let linkToShift = LinkingObjects(fromType: ShiftModel.self, property: "blowbys")
 
     // MARK: Setters
   
@@ -102,16 +112,45 @@ class BlowbyModel: Object, BaseRealmObject {
   ///   - date: Value from the Date Input field
   /// - Returns: Date object taking the calendar date from date object, and time value from time String
     func formattedDateTime(time: String, date: Date) -> String? {
-        let timeFormatter = DateFormatter()
-        timeFormatter.dateFormat = "YYYY-MM-dd HH:mm:ss"
-        timeFormatter.timeZone = TimeZone(abbreviation: "UTC")
-        let startDate = date
-        let startTimeSplit = time.components(separatedBy: ":")
-        guard let timeInDate = startDate.setTime(hour: Int(startTimeSplit[0]) ?? 0, min: Int(startTimeSplit[1]) ?? 0, sec: 1) else {
+        let timeParts = time.components(separatedBy: ":")
+        
+        // Validate time format
+        guard timeParts.count == 2,
+              let hour = Int(timeParts[0]),
+              let minute = Int(timeParts[1]),
+              hour >= 0 && hour < 24,
+              minute >= 0 && minute < 60 else {
             return nil
         }
         
-        return timeFormatter.string(from: timeInDate)
+        // Get station timezone from parent shift
+        guard let parentShift = linkToShift.first else { return nil }
+        let stationTimezone = ShiftModel.getTimezoneForStation(parentShift.station)
+        
+        // Create a calendar in the station's timezone
+        var calendar = Calendar.current
+        calendar.timeZone = stationTimezone
+        
+        // Check if this is an overnight shift
+        var targetDate = date
+        if let shiftStartTime = Int(parentShift.startTime.components(separatedBy: ":")[0]),
+           let blowbyHour = Int(time.components(separatedBy: ":")[0]) {
+            if shiftStartTime > blowbyHour {
+                // If shift start hour is greater than blowby hour, this is next day
+                targetDate = calendar.date(byAdding: .day, value: 1, to: date) ?? date
+            }
+        }
+        
+        var components = calendar.dateComponents([.year, .month, .day], from: targetDate)
+        components.hour = hour
+        components.minute = minute
+        components.second = 1
+        
+        guard let localDate = calendar.date(from: components) else {
+            return nil
+        }
+        
+        return BlowbyModel.dateTimeFormatter.string(from: localDate)
     }
     
     // MARK: - To Dictionary
