@@ -203,16 +203,27 @@ class ShiftViewController: BaseViewController {
         if model.isOvernightShift() {
             alertMessage += "\n\n 🔵 You've entered an overnight shift. This shift will carry over to the next day. If this was intentional, no problem! Otherwise, please double-check the entered shift times. \n"
         }
-        if canSubmit() && model.inspections.allSatisfy({ $0.formDidValidate }) {
-            Alert.show(title: "Are you sure?", message: alertMessage, yes: {[weak self] in
-                guard let strongSelf = self else { return }
-                model.set(shouldSync: true)
-                for inspection in model.inspections {
-                    inspection.set(shouldSync: true)
-                }
-                strongSelf.navigationController?.popViewController(animated: true)
-            }) {}
+        
+        if canSubmit() && (model.inspections.allSatisfy({ $0.formDidValidate })) {
+            let alert = UIAlertController(title: "Are you sure?", message: alertMessage, preferredStyle: .alert)
             
+            alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { [weak self] _ in
+                guard let strongSelf = self else { return }
+                
+                // First navigate
+                strongSelf.navigationController?.popViewController(animated: true)
+                
+                // Then update model after a longer delay to ensure view hierarchy is ready
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                    model.set(shouldSync: true)
+                    for inspection in model.inspections {
+                        inspection.set(shouldSync: true)
+                    }
+                }
+            }))
+            
+            alert.addAction(UIAlertAction(title: "No", style: .cancel))
+            self.present(alert, animated: true)
         } else {
             Alert.show(title: "Incomplete", message: validationMessage())
         }
