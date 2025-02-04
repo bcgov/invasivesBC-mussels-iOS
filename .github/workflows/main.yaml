@@ -107,7 +107,7 @@ jobs:
           -verbose
 
       - name: Upload a Build Artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: ios-release
           path: ${{ env.EXPORT_DIR }}
