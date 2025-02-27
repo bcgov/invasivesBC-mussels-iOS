@@ -395,6 +395,17 @@ class WatercraftInspectionModel: Object, BaseRealmObject {
             }
         }
         
+        // Add previous major cities as journeys
+        for previousMajorCity in self.previousMajorCities {
+            let journeyDict: [String: Any] = [
+                "journeyType": 1,
+                "numberOfDaysOut": previousMajorCity.numberOfDaysOut.count > 0 ? previousMajorCity.numberOfDaysOut : "N/A",
+                "waterBody": previousMajorCity.remoteId
+            ]
+            journeys.append(journeyDict)
+        }
+        
+        // Add destination water bodies
         for destinationJourney in self.destinationWaterBodies {
             let journeyDict = destinationJourney.toDictionary()
             if journeyDict.count > 1 {
@@ -429,6 +440,14 @@ class WatercraftInspectionModel: Object, BaseRealmObject {
             let key = String(splitKey[1])
             if self.destinationWaterBodies.count - 1 >= index {
                 self.destinationWaterBodies[index].set(value: value, for: key)
+            }
+        } else if inputItemKey.contains("previousMajorCity") {
+            // Previous Major City
+            let splitKey = inputItemKey.split(separator: "-")
+            guard let index = Int(splitKey[2]) else {return}
+            let key = String(splitKey[1])
+            if self.previousMajorCities.count - 1 >= index {
+                self.previousMajorCities[index].set(value: value, for: key)
             }
         }
     }
@@ -555,10 +574,31 @@ class WatercraftInspectionModel: Object, BaseRealmObject {
             let realm = try Realm()
             try realm.write {
                 if isPrevious {
+                    // Create a journey entry for the major city
+                    let waterBody = PreviousWaterbodyModel()
+                    waterBody.waterbody = majorCity.closest_water_body
+                    waterBody.nearestCity = majorCity.city_name
+                    waterBody.province = majorCity.province
+                    waterBody.numberOfDaysOut = "N/A" // This will be updated through the UI
+                    
+                    // Clear existing and add new
+                    self.previousWaterBodies.removeAll()
+                    self.previousWaterBodies.append(waterBody)
+                    
+                    // Set the major city
                     self.previousMajorCities.removeAll()
                     self.previousMajorCities.append(object)
-
                 } else {
+                    // Create a journey entry for the destination major city
+                    let waterBody = DestinationWaterbodyModel()
+                    waterBody.waterbody = majorCity.closest_water_body
+                    waterBody.nearestCity = majorCity.city_name
+                    waterBody.province = majorCity.province
+                    
+                    // Clear existing and add new
+                    self.destinationWaterBodies.removeAll()
+                    self.destinationWaterBodies.append(waterBody)
+                    
                     self.destinationMajorCities.removeAll()
                     self.destinationMajorCities.append(object)
                 }
@@ -585,13 +625,24 @@ class WatercraftInspectionModel: Object, BaseRealmObject {
                 }
             }
             
-            let relam = try Realm()
-            try relam.write {
+            let realm = try Realm()
+            try realm.write {
                 if isPrevious {
                     self.previousDryStorage = dryStorage
                     self.unknownPreviousWaterBody = unknown
                     self.commercialManufacturerAsPreviousWaterBody = commercialManufacturer
-                    self.previousWaterBodies =  List<PreviousWaterbodyModel>()
+                    self.previousWaterBodies = List<PreviousWaterbodyModel>()
+                    
+                    // Create a new PreviousWaterbodyModel with N/A values if unknown is true
+                    if unknown {
+                        let newWaterBody = PreviousWaterbodyModel()
+                        newWaterBody.waterbody = "N/A"
+                        newWaterBody.nearestCity = "N/A"
+                        newWaterBody.province = "N/A"
+                        newWaterBody.numberOfDaysOut = "N/A"
+                        realm.add(newWaterBody)
+                        self.previousWaterBodies.append(newWaterBody)
+                    }
                 } else {
                     self.destinationDryStorage = dryStorage
                     self.unknownDestinationWaterBody = unknown
@@ -609,6 +660,13 @@ class WatercraftInspectionModel: Object, BaseRealmObject {
         if let existing = inputputFields[section] { return existing}
         var inputFields: [WatercraftFromSection: [InputItem]] = [WatercraftFromSection: [InputItem]]()
         inputFields[section] = WatercraftInspectionFormHelper.getPreviousWaterBodyFields(for: self, index: index, isEditable: editable)
+        return inputFields[section] ?? []
+    }
+    
+    func getPreviousMajorCityInputFields(for section: WatercraftFromSection, editable: Bool? = nil, index: Int) -> [InputItem] {
+        if let existing = inputputFields[section] { return existing}
+        var inputFields: [WatercraftFromSection: [InputItem]] = [WatercraftFromSection: [InputItem]]()
+        inputFields[section] = WatercraftInspectionFormHelper.getPreviousMajorCityFields(for: self, index: index, isEditable: editable)
         return inputFields[section] ?? []
     }
     

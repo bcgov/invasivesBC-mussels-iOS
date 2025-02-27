@@ -2,6 +2,7 @@ import Foundation
 import Realm
 import RealmSwift
 
+
 class MajorCityModel: JourneyModel, BaseRealmObject {
     @objc dynamic var userId: String = ""
     
@@ -28,6 +29,19 @@ class MajorCityModel: JourneyModel, BaseRealmObject {
                 self.latitude  = model.city_latitude
                 self.longitude = model.city_longitude
                 self.country = model.country_code
+                self.numberOfDaysOut = ""
+            }
+        } catch let error as NSError {
+            print("** REALM ERROR")
+            print(error)
+        }
+    }
+    
+    func setNumberOfDaysOut(_ value: String) {
+        do {
+            let realm = try Realm()
+            try realm.write {
+                self.numberOfDaysOut = value
             }
         } catch let error as NSError {
             print("** REALM ERROR")
@@ -43,11 +57,54 @@ class MajorCityModel: JourneyModel, BaseRealmObject {
         do {
             let realm = try Realm()
             try realm.write {
-                self[key] = value
+                if key == "numberOfDaysOut" {
+                    self.numberOfDaysOut = value as? String ?? "N/A"
+                } else {
+                    self[key] = value
+                }
             }
         } catch let error as NSError {
             print("** REALM ERROR")
             print(error)
+        }
+    }
+    
+    override subscript(key: String) -> Any? {
+        get {
+            switch key {
+            case "majorCity":
+                return self.majorCity
+            case "province":
+                return self.province
+            case "country":
+                return self.country
+            case "numberOfDaysOut":
+                return self.numberOfDaysOut
+            default:
+                return super[key]
+            }
+        }
+        set {
+            switch key {
+            case "majorCity":
+                if let value = newValue as? String {
+                    self.majorCity = value
+                }
+            case "province":
+                if let value = newValue as? String {
+                    self.province = value
+                }
+            case "country":
+                if let value = newValue as? String {
+                    self.country = value
+                }
+            case "numberOfDaysOut":
+                if let value = newValue as? String {
+                    self.numberOfDaysOut = value
+                }
+            default:
+                super[key] = newValue
+            }
         }
     }
     
@@ -60,7 +117,8 @@ class MajorCityModel: JourneyModel, BaseRealmObject {
             "name": majorCity,
             "nearestWaterBody": nearestWaterBody,
             "province": province,
-            "country": country
+            "country": country,
+            "numberOfDaysOut": numberOfDaysOut.count > 0 ? numberOfDaysOut : "N/A"
         ]
     }
 }
