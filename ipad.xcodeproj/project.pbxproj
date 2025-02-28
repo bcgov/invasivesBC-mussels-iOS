@@ -2053,7 +2053,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 394;
+				CURRENT_PROJECT_VERSION = 392;
 				DEVELOPMENT_TEAM = L796QSLV3E;
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = L796QSLV3E;
 				ENABLE_BITCODE = NO;
@@ -2063,7 +2063,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.8.9;
+				MARKETING_VERSION = 2.8.10;
 				PRODUCT_BUNDLE_IDENTIFIER = ca.bc.gov.InvasivesBC;
 				PRODUCT_NAME = Inspect;
 				PROVISIONING_PROFILE_SPECIFIER = "InvasivesBC Muscles - 2023/24";
@@ -2083,7 +2083,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 394;
+				CURRENT_PROJECT_VERSION = 392;
 				DEVELOPMENT_TEAM = L796QSLV3E;
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = L796QSLV3E;
 				ENABLE_BITCODE = NO;
@@ -2093,7 +2093,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.8.9;
+				MARKETING_VERSION = 2.8.10;
 				PRODUCT_BUNDLE_IDENTIFIER = ca.bc.gov.InvasivesBC;
 				PRODUCT_NAME = Inspect;
 				PROVISIONING_PROFILE_SPECIFIER = "InvasivesBC Muscles - 2023/24";
