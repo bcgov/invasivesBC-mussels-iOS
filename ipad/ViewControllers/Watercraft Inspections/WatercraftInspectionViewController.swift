@@ -1251,7 +1251,7 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
             let cell = getPreviousMajorCityCell(indexPath: indexPath)
             let itemsIndex: Int = 0
             let previousMajorCity = model.previousMajorCities[itemsIndex]
-            cell.setup(with: previousMajorCity, isEditable: self.isEditable, delegate: self, onDelete: { [weak self] in
+            cell.setup(with: previousMajorCity, isEditable: self.isEditable, input: model.getPreviousMajorCityInputFields(for: .JourneyDetails, editable: isEditable, index: itemsIndex), delegate: self, onDelete: { [weak self] in
                 guard let strongSelf = self else {return}
                 model.deleteMajorCity(isPrevious: true)
                 strongSelf.collectionView.performBatchUpdates({

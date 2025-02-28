@@ -460,6 +460,25 @@ class WatercraftInspectionFormHelper {
         return sectionItems
     }
     
+    public static func getPreviousMajorCityFields(for object: WatercraftInspectionModel? = nil, index: Int, isEditable: Bool? = true) -> [InputItem] {
+        var sectionItems: [InputItem] = []
+        
+        if (object?.previousMajorCities.count ?? 0 > 0) {
+            if let item = object?.previousMajorCities[index] {
+                let numberOfDaysOut = DropdownInput(
+                    key: "previousMajorCity-numberOfDaysOut-\(index)",
+                    header: "Number of days out of waterbody? *",
+                    editable: isEditable ?? true,
+                    value: item.numberOfDaysOut,
+                    width: .Full,
+                    dropdownItems: DropdownHelper.shared.getDropdown(for: .daysOutOfWater)
+                )
+                sectionItems.append(numberOfDaysOut)
+            }
+        }
+        return sectionItems
+    }
+    
     public static func watercraftInspectionDestinationWaterBodyInputs(for object: WatercraftInspectionModel? = nil, index: Int, isEditable: Bool? = true) -> [InputItem] {
         let item = object?.destinationWaterBodies[index] ?? nil
         var sectionItems: [InputItem] = []

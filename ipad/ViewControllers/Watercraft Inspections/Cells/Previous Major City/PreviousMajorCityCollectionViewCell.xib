@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="ipad10_9rounded" orientation="portrait" layout="fullscreen" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -18,11 +18,11 @@
                 <rect key="frame" x="0.0" y="0.0" width="493" height="196"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FPg-OO-giY">
-                        <rect key="frame" x="20" y="44" width="453" height="118"/>
+                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FPg-OO-giY">
+                        <rect key="frame" x="13" y="24" width="453" height="152"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7yb-zz-P1X">
-                                <rect key="frame" x="411" y="44" width="40" height="30"/>
+                                <rect key="frame" x="411" y="61" width="40" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="56J-to-Q5d"/>
                                     <constraint firstAttribute="width" constant="40" id="NG1-OK-3o2"/>
@@ -32,14 +32,14 @@
                                     <action selector="optionsAction:" destination="DUm-v6-mUj" eventType="touchUpInside" id="vLU-eJ-SV0"/>
                                 </connections>
                             </button>
-                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="PSy-Hu-zqR">
-                                <rect key="frame" x="20" y="20" width="383" height="78"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="PSy-Hu-zqR">
+                                <rect key="frame" x="11" y="20" width="383" height="152"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="DWq-fq-yFC">
-                                        <rect key="frame" x="0.0" y="0.0" width="383" height="78"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="DWq-fq-yFC">
+                                        <rect key="frame" x="0.0" y="0.0" width="181.5" height="152"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Closest Major City to Previous Water Body" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kEG-ue-9XT">
-                                                <rect key="frame" x="0.0" y="0.0" width="383" height="25"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Major City" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kEG-ue-9XT">
+                                                <rect key="frame" x="0.0" y="0.0" width="181.5" height="25"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="25" id="kEo-1t-Pzb"/>
                                                 </constraints>
@@ -48,13 +48,26 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8Cy-t0-KOc">
-                                                <rect key="frame" x="0.0" y="25" width="383" height="53"/>
+                                                <rect key="frame" x="0.0" y="33" width="181.5" height="40"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="60" id="Yil-Fe-W6Y"/>
+                                                    <constraint firstAttribute="height" constant="40" id="Yil-Fe-W6Y"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="spacer">
+                                                <rect key="frame" x="0.0" y="81" width="181.5" height="71"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </view>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="right-stack">
+                                        <rect key="frame" x="201.5" y="0.0" width="181.5" height="152"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xyz-Ab-123">
+                                                <rect key="frame" x="0.0" y="33" width="181.5" height="119"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </view>
                                         </subviews>
                                     </stackView>
                                 </subviews>
@@ -83,6 +96,7 @@
             <connections>
                 <outlet property="cellContainer" destination="FPg-OO-giY" id="vao-RQ-CgR"/>
                 <outlet property="deleteButton" destination="7yb-zz-P1X" id="m0g-Tj-cvH"/>
+                <outlet property="dropdownContainer" destination="Xyz-Ab-123" id="new-id"/>
                 <outlet property="fieldHeader" destination="kEG-ue-9XT" id="FkN-Cu-qOX"/>
                 <outlet property="inputField" destination="8Cy-t0-KOc" id="rkq-rT-i0y"/>
             </connections>
@@ -90,7 +104,7 @@
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="trash.fill" catalog="system" width="121" height="128"/>
+        <image name="trash.fill" catalog="system" width="117" height="128"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
