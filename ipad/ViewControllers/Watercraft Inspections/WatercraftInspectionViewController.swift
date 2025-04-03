@@ -287,7 +287,6 @@ class WatercraftInspectionViewController: BaseViewController {
         case decontaminationOrderNumber
         case decontaminationOrderReason
         case sealNumber
-        
     }
 
     /// Enum error messages grouped by sections for clarity
@@ -873,7 +872,38 @@ class WatercraftInspectionViewController: BaseViewController {
         } else {
             // All other keys, store directly
             // TODO: needs cleanup for nil case
-            model.set(value: item.value.get(type: item.type) as Any, for: item.key)
+            
+            // Special handling for the watercraft inspection fields that can interfere with each other
+            if item.key == "previousInspection" {
+                // When toggling previousInspection to true, we need special handling
+                let newValue = item.value.get(type: item.type) as? Bool ?? false
+                
+                // First store the value normally
+                model.set(value: newValue, for: item.key)
+                
+                // If we're turning it on and have AIS knowledge source set, make sure
+                // days field doesn't get auto-populated with the wrong value
+                if newValue == true {
+                    // Clear the days field to prevent it from being populated with AIS source
+                    model.set(value: "", for: "previousInspectionDays")
+                    self.collectionView.reloadData()
+                }
+            } else if item.key == "previousInspectionDays" && model.previousInspection {
+                // Only set the value if it's different from the AIS knowledge source
+                let newValue = item.value.get(type: item.type) as? String ?? ""
+                
+                if newValue == model.previousAISKnowledeSource && !model.previousAISKnowledeSource.isEmpty {
+                    // Don't allow days to be set to the AIS knowledge source
+                    model.set(value: "", for: "previousInspectionDays")
+                    self.collectionView.reloadData()
+                } else {
+                    // Otherwise set it normally
+                    model.set(value: newValue, for: item.key)
+                }
+            } else {
+                // For all other fields, just set the value normally
+                model.set(value: item.value.get(type: item.type) as Any, for: item.key)
+            }
         }
         // TODO: CLEANUP
         // Handle Keys that alter form
