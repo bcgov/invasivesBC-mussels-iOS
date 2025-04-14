@@ -343,9 +343,8 @@ class ShiftViewController: BaseViewController {
             }
             
             // Previous Waterbody Validations
-            if ((inspection.unknownPreviousWaterBody && inspection.previousMajorCities.isEmpty) ||
-                inspection.commercialManufacturerAsPreviousWaterBody ||
-                inspection.previousDryStorage) {
+            if (((inspection.unknownPreviousWaterBody || inspection.previousDryStorage) && inspection.previousMajorCities.isEmpty) ||
+                inspection.commercialManufacturerAsPreviousWaterBody) {
                 messages.append("🌊 Inspection #\(index + 1): Previous waterbody requires closest major city")
             }
             
