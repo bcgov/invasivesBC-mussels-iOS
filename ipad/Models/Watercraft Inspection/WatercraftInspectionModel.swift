@@ -570,9 +570,14 @@ class WatercraftInspectionModel: Object, BaseRealmObject {
     func setMajorCity(isPrevious: Bool, majorCity: MajorCitiesTableModel) {
         let object = MajorCityModel()
         object.set(from: majorCity)
+        
         do {
             let realm = try Realm()
             try realm.write {
+                // Set default numberOfDaysOut value if commercial manufacturer is selected
+                if isPrevious && self.commercialManufacturerAsPreviousWaterBody {
+                    object.numberOfDaysOut = "N/A"
+                } 
                 if isPrevious {
                     // Create a journey entry for the major city
                     let waterBody = PreviousWaterbodyModel()
