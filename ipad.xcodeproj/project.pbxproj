@@ -2071,7 +2071,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = ca.bc.gov.InvasivesBC;
 				PRODUCT_NAME = Inspect;
 				PROVISIONING_PROFILE_SPECIFIER = "InvasivesBC Muscles - 2023/24";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "InvasivesBC Muscles";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "InvasivesBC Mussels";
 				SWIFT_OBJC_BRIDGING_HEADER = "ipad/Utilities/GenericCore/ObjC/ipad-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -2101,7 +2101,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = ca.bc.gov.InvasivesBC;
 				PRODUCT_NAME = Inspect;
 				PROVISIONING_PROFILE_SPECIFIER = "InvasivesBC Muscles - 2023/24";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "InvasivesBC Muscles";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "InvasivesBC Mussels";
 				SWIFT_OBJC_BRIDGING_HEADER = "ipad/Utilities/GenericCore/ObjC/ipad-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 2;
