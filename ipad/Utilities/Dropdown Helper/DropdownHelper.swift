@@ -46,7 +46,7 @@ class DropdownHelper {
         let pacificBorderRoving = uniqueItems.filter { $0 == "Pacific Border" }
         let pentictonRoving = uniqueItems.filter { $0.contains("Penticton Roving") }.sorted()
         let cranbrookRoving = uniqueItems.filter { $0.contains("Cranbrook Roving") }.sorted()
-        let sumasRoving = uniqueItems.filter {$0 == "Sumas" }
+        let sumasRoving = uniqueItems.filter {$0 == "Sumas/Huntington" }
         let specialStations = uniqueItems.filter { isSpecialStation($0) }.sorted()
         
         // Combine all of our stations in the desired order
