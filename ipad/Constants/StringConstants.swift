@@ -70,6 +70,7 @@ struct ShiftFormHeaders {
         static let startTime = "Shift Start Time *"
         static let k9OnShift = "k9 On Shift"
         static let station = "Station *"
+        static let projectDetails = "Project Name, Location and Purpose *"
         static let comments = "Shift Start Comments"
         static let shiftStartDate = "Shift Start Date *"
         static let stationComments = "Station Information"

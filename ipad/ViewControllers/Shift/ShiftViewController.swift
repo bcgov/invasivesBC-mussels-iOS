@@ -335,6 +335,12 @@ class ShiftViewController: BaseViewController {
         if model.stationComments.isEmpty && ShiftModel.stationRequired(model.station) {
             messages.append("📍 Station information is required")
         }
+
+        // add validation message for if station is "Project" then require field
+        if ShiftModel.projectDetailsRequired(model.station) {
+            if model.projectDetails.isEmpty {
+                messages.append("📍 Project name, location, and purpose is required for 'Project' station")
+        }
         
         // Inspection Detail Validations
         for (index, inspection) in model.inspections.enumerated() {
