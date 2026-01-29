@@ -36,6 +36,7 @@ class ShiftModel: Object, BaseRealmObject {
     @objc dynamic var motorizedBlowBys: Int = 0
     @objc dynamic var nonMotorizedBlowBys: Int = 0
     @objc dynamic var station: String = ""
+    @objc dynamic var projectDetails: String = ""
     @objc dynamic var stationComments: String = ""
     @objc dynamic var shiftStartComments: String = ""
     @objc dynamic var shiftEndComments: String = ""
@@ -328,6 +329,7 @@ class ShiftModel: Object, BaseRealmObject {
             "startTime": startTimeFormatted,
             "endTime": endTimeFormatted,
             "station": station,
+            "projectDetails": projectDetails,
             "location": "NA",
             "motorizedBlowBys": motorizedBlowBys,
             "nonMotorizedBlowBys": nonMotorizedBlowBys,
@@ -358,6 +360,7 @@ class ShiftModel: Object, BaseRealmObject {
     return requiredStations.contains(station)
   }
 
+  // req project details field if station is Project
   public static func projectDetailsRequired(_ station: String?) -> Bool {
     guard let station = station else { return false }
     return station == "Project"
