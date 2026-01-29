@@ -354,8 +354,13 @@ class ShiftModel: Object, BaseRealmObject {
 
   public static func stationRequired(_ station: String?) -> Bool {
     guard let station = station else { return false }
-    let requiredStations = ["Other", "Project", "Emergency Response"]
+    let requiredStations = ["Project", "Emergency Response"]
     return requiredStations.contains(station)
+  }
+
+  public static func projectDetailsRequired(_ station: String?) -> Bool {
+    guard let station = station else { return false }
+    return station == "Project"
   }
 
   internal static func getTimezoneForStation(_ station: String) -> TimeZone {

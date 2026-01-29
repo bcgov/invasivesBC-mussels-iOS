@@ -49,6 +49,18 @@ class ShiftFormHelper {
         )
         sectionItems.append(station)
 
+        // If selected station "Project" then mandatory details field
+        let projectDetails = TextInput(
+            key: "projectDetails",
+            header: ShiftFormHeaders.ShiftStart.projectDetails,
+            editable: editable ?? true,
+            value: object?.projectDetails ?? "",
+            width: .Full
+        )
+        if ShiftModel.projectDetailsRequired(object?.station ?? "") {
+            sectionItems.append(projectName)
+        }
+
         let shiftStartComments = TextAreaInput(
             key: "shiftStartComments",
             header: ShiftFormHeaders.ShiftStart.comments,
