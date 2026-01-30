@@ -104,9 +104,9 @@ Anyone with an `IDIR` can log into the application, but only users with the foll
 
 Roles are requested through the Inspect team or the [Sustainment Team](mailto:sustainment.team@gov.bc.ca).
 
-The Inspect and Sustainment team provision roles through the [Common Hosted Single Sign-on (CSS) Dashboard](https://bcgov.github.io/sso-requests/my-dashboard/integrations). To assign a user a role, go to the dashboard and follow these steps:
+The Inspect and Sustainment team provision roles through the [Common Hosted Single Sign-on (CSS) Dashboard](https://sso-requests.apps.gold.devops.gov.bc.ca/). To assign a user a role, go to the dashboard and follow these steps:
 
-1. Login with your IDIR to the [CSS Dashboard](https://bcgov.github.io/sso-requests/my-dashboard/integrations).
+1. Login with your IDIR to the [CSS Dashboard](https://sso-requests.apps.gold.devops.gov.bc.ca/).
 2. Select **InspectBC Mussels**
 3. In **INTEGRATION DETAILS**, select the **Assign Users to Roles** tab.
 4. Under **Search for a user based on the selection criteria below**, select the realm for the user: **Dev**, **Test**, or **Prod**.
