@@ -149,13 +149,22 @@ class WatercraftInspectionFormHelper {
             codes: DropdownHelper.shared.getProvinceCodes()
         )
         sectionItems.append(province)
+
+        let officerInspection = SwitchInput(
+            key: "officerInspection",
+            header: WatercraftFieldHeaderConstants.Passport.officerInspection,
+            editable: editable ?? true,
+            value: object?.officerInspection ?? nil,
+            width: .Third
+        )
+        sectionItems.append(officerInspection)
         
         let inspectionTime = TimeInput(
             key: "inspectionTime",
             header: WatercraftFieldHeaderConstants.Passport.inspectionTime,
             editable: editable ?? true,
             value: object?.inspectionTime ?? nil,
-            width: .Half
+            width: .Third
         )
         inspectionTime.dependency.append(InputDependency(to: passportField, equalTo: false))
         sectionItems.append(inspectionTime)
@@ -163,9 +172,6 @@ class WatercraftInspectionFormHelper {
         let spacer = InputSpacer(width: .Third)
         spacer.dependency.append(InputDependency(to: passportField, equalTo: true))
         sectionItems.append(spacer)
-        let spacer2 = InputSpacer(width: .Third)
-        spacer2.dependency.append(InputDependency(to: passportField, equalTo: true))
-        sectionItems.append(spacer2)
         
         let nonMotorized = IntegerStepperInput(
             key: "nonMotorized",

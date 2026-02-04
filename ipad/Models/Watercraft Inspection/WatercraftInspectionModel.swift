@@ -30,6 +30,7 @@ class WatercraftInspectionModel: Object, BaseRealmObject {
     // PASSPORT INFO
     @objc dynamic var isPassportHolder: Bool = false
     @objc dynamic var inspectionTime: String = ""
+    @objc dynamic var officerInspection: Bool = false
     @objc dynamic var passportNumber: String = ""
     @objc dynamic var launchedOutsideBC : Bool = false
     @objc dynamic var k9Inspection: Bool = false
@@ -327,6 +328,7 @@ class WatercraftInspectionModel: Object, BaseRealmObject {
             "passportHolder": isPassportHolder,
             "isNewPassportIssued": isNewPassportIssued,
             "inspectionTime": formattedInspectionTime,
+            "officerInspection": officerInspection,
             "k9Inspection": k9Inspection,
             "k9InspectionResults": k9InspectionResults,
             "watercraftHasDrainplugs": watercraftHasDrainplugs,

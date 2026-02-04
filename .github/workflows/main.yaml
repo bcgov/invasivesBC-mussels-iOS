@@ -15,7 +15,7 @@ jobs:
       ARCHIVE_NAME: ${{ 'invasivesbc-mussels.iOS.xcarchive' }}
       EXPORT_DIR: ${{ 'export' }}
       IPA_NAME: ${{ 'invasivesbc-mussels.iOS.ipa' }}
-      APP_BUILD_VERSION: "2.7.14"
+      APP_BUILD_VERSION: "2.7.15"
 
     steps:
       - uses: maxim-lobanov/setup-xcode@v1

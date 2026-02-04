@@ -92,6 +92,7 @@ struct WatercraftFieldHeaderConstants {
         static let isPassportHolder = "Is this a Passport Holder?"
         static let isNewPassportIssued = "Was a new passport issued?"
         static let inspectionTime = "Time of Inspection *"
+        static let officerInspection = "Officer Directed Inspection"
         static let passportNumber = "Passport Number"
         static let launchedOutsideBC = "Launched outside BC/AB in the last 30 days?"
         static let k9Inspection = "k9 Inspection Performed?  *"
