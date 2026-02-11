@@ -402,7 +402,8 @@ class WatercraftInspectionModel: Object, BaseRealmObject {
             let journeyDict: [String: Any] = [
                 "journeyType": 1,
                 "numberOfDaysOut": previousMajorCity.numberOfDaysOut.count > 0 ? previousMajorCity.numberOfDaysOut : "N/A",
-                "waterBody": previousMajorCity.remoteId
+                // when its a major city there is no water body id but we do want the number of days out
+                // "waterBody": previousMajorCity.remoteId
             ]
             journeys.append(journeyDict)
         }
@@ -639,6 +640,8 @@ class WatercraftInspectionModel: Object, BaseRealmObject {
                     self.unknownPreviousWaterBody = unknown
                     self.commercialManufacturerAsPreviousWaterBody = commercialManufacturer
                     self.previousWaterBodies = List<PreviousWaterbodyModel>()
+                    self.previousWaterBodies.removeAll()
+
                     
                     // Create a new PreviousWaterbodyModel with N/A values if unknown is true
                     if unknown {
@@ -655,6 +658,7 @@ class WatercraftInspectionModel: Object, BaseRealmObject {
                     self.unknownDestinationWaterBody = unknown
                     self.commercialManufacturerAsDestinationWaterBody = commercialManufacturer
                     self.destinationWaterBodies = List<DestinationWaterbodyModel>()
+                    self.destinationWaterBodies.removeAll()
                 }
             }
             

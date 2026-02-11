@@ -67,6 +67,7 @@ class FormButtonCollectionViewCell: UICollectionViewCell, Theme {
         }
     }
     
+    // if option toggles selected then disable the major city button
     var disableMajorCityButton: Bool {
         if configuration.otherWaterbodyPrev || configuration.otherWaterbodyDest {
             return true

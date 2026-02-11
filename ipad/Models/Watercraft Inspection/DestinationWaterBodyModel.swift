@@ -75,7 +75,7 @@ class DestinationWaterbodyModel: JourneyModel, BaseRealmObject {
         
         return [
             "journeyType": 2,
-            "waterBody": remoteId
+            // "waterBody": remoteId
         ]
     }
 }
