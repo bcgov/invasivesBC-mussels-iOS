@@ -591,6 +591,7 @@ class WatercraftInspectionModel: Object, BaseRealmObject {
                     
                     // Clear existing and add new
                     self.previousWaterBodies.removeAll()
+                    realm.add(waterBody)
                     self.previousWaterBodies.append(waterBody)
                     
                     // Set the major city
@@ -637,6 +638,8 @@ class WatercraftInspectionModel: Object, BaseRealmObject {
                         newWaterBody.province = "N/A"
                         newWaterBody.numberOfDaysOut = "N/A"
                         realm.add(newWaterBody)
+                        InfoLog("newWaterBody is-------------------------------------")
+                        InfoLog(newWaterBody)
                         self.previousWaterBodies.append(newWaterBody)
                     }
                 } else {
