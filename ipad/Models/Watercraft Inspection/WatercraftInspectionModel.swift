@@ -402,7 +402,8 @@ class WatercraftInspectionModel: Object, BaseRealmObject {
             let journeyDict: [String: Any] = [
                 "journeyType": 1,
                 "numberOfDaysOut": previousMajorCity.numberOfDaysOut.count > 0 ? previousMajorCity.numberOfDaysOut : "N/A",
-                "waterBody": previousMajorCity.remoteId
+                // when its a major city there is no water body id but we do want the number of days out
+                // "waterBody": previousMajorCity.remoteId
             ]
             journeys.append(journeyDict)
         }
@@ -581,7 +582,7 @@ class WatercraftInspectionModel: Object, BaseRealmObject {
                     object.numberOfDaysOut = "N/A"
                 } 
                 if isPrevious {
-                    // Create a journey entry for the major city
+                    // Create a journey entry for previous closest major city
                     let waterBody = PreviousWaterbodyModel()
                     waterBody.waterbody = majorCity.closest_water_body
                     waterBody.nearestCity = majorCity.city_name
@@ -590,6 +591,7 @@ class WatercraftInspectionModel: Object, BaseRealmObject {
                     
                     // Clear existing and add new
                     self.previousWaterBodies.removeAll()
+                    realm.add(waterBody)
                     self.previousWaterBodies.append(waterBody)
                     
                     // Set the major city
@@ -617,30 +619,18 @@ class WatercraftInspectionModel: Object, BaseRealmObject {
         
     func setJournyStatusFlags(dryStorage: Bool, unknown: Bool, commercialManufacturer: Bool, isPrevious: Bool) {
         do {
-            // Removing existing waterbodies
-            // 1. Convert into array iterator
-            let waterBodies: [Any] = isPrevious ? Array(self.previousWaterBodies) : Array(self.destinationWaterBodies)
-            // 2. Removing each item
-            for item in waterBodies {
-                if let body: JourneyModel = item as? JourneyModel {
-                    guard
-                        let realm = try? Realm(),
-                        let object = realm.objects(JourneyModel.self).filter("localId = %@", body.localId).first else {
-                            continue
-                    }
-                    RealmRequests.deleteObject(object)
-                }
-            }
-            
             let realm = try Realm()
             try realm.write {
                 if isPrevious {
                     self.previousDryStorage = dryStorage
                     self.unknownPreviousWaterBody = unknown
                     self.commercialManufacturerAsPreviousWaterBody = commercialManufacturer
-                    self.previousWaterBodies = List<PreviousWaterbodyModel>()
-                    
-                    // Create a new PreviousWaterbodyModel with N/A values if unknown is true
+
+                    // delete current previous water bodies and unlink the list
+                    realm.delete(self.previousWaterBodies)
+                    self.previousWaterBodies.removeAll()
+
+                    // Create a new PreviousWaterbodyModel with N/A values if unknown is true for numberOfDaysOut to be stored
                     if unknown {
                         let newWaterBody = PreviousWaterbodyModel()
                         newWaterBody.waterbody = "N/A"
@@ -648,21 +638,26 @@ class WatercraftInspectionModel: Object, BaseRealmObject {
                         newWaterBody.province = "N/A"
                         newWaterBody.numberOfDaysOut = "N/A"
                         realm.add(newWaterBody)
+                        InfoLog("newWaterBody is-------------------------------------")
+                        InfoLog(newWaterBody)
                         self.previousWaterBodies.append(newWaterBody)
                     }
                 } else {
                     self.destinationDryStorage = dryStorage
                     self.unknownDestinationWaterBody = unknown
                     self.commercialManufacturerAsDestinationWaterBody = commercialManufacturer
-                    self.destinationWaterBodies = List<DestinationWaterbodyModel>()
+
+                    // delete destination water bodies
+                    realm.delete(self.destinationWaterBodies)
+                    self.destinationWaterBodies.removeAll()
+
                 }
             }
-            
         } catch let error as NSError {
             ErrorLog("** RELAM ERROR: \(error)")
         }
     }
-    
+  
     func getPreviousWaterBodyInputFields(for section: WatercraftFromSection, editable: Bool? = nil, index: Int) -> [InputItem] {
         if let existing = inputputFields[section] { return existing}
         var inputFields: [WatercraftFromSection: [InputItem]] = [WatercraftFromSection: [InputItem]]()

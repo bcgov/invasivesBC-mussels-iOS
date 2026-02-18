@@ -1278,12 +1278,17 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
 
         
         case .PreviousMajorCity:
+            // delete prev waterbodies
             let cell = getPreviousMajorCityCell(indexPath: indexPath)
             let itemsIndex: Int = 0
             let previousMajorCity = model.previousMajorCities[itemsIndex]
             cell.setup(with: previousMajorCity, isEditable: self.isEditable, input: model.getPreviousMajorCityInputFields(for: .JourneyDetails, editable: isEditable, index: itemsIndex), delegate: self, onDelete: { [weak self] in
                 guard let strongSelf = self else {return}
                 model.deleteMajorCity(isPrevious: true)
+                InfoLog("case prev major city")
+                for item in model.previousWaterBodies {
+                    RealmRequests.deleteObject(item)
+                }
                 strongSelf.collectionView.performBatchUpdates({
                     strongSelf.collectionView.reloadSections(IndexSet(integer: indexPath.section))
                 }, completion: nil)
@@ -1298,6 +1303,11 @@ extension WatercraftInspectionViewController: UICollectionViewDataSource, UIColl
             cell.setup(with: destinationMajorCity, isEditable: self.isEditable, delegate: self, onDelete: { [weak self] in
                 guard let strongSelf = self else {return}
                 model.deleteMajorCity(isPrevious: false)
+                // delete waterbodies
+                InfoLog("case prev major city")
+                for item in model.destinationWaterBodies {
+                  RealmRequests.deleteObject(item)
+                }
                 strongSelf.collectionView.performBatchUpdates({
                     strongSelf.collectionView.reloadSections(IndexSet(integer: indexPath.section))
                 }, completion: nil)
