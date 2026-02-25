@@ -23,6 +23,7 @@ class HighRiskFormHelper {
         return sectionItems
     }
     
+    // this field has been commented out of the high risk assessment model
     static func getInspectionFields(for object: HighRiskAssessmentModel? = nil, editable: Bool? = true) -> [InputItem] {
         var sectionItems: [InputItem] = []
         let cleanDrainDryAfterInspection = RadioSwitchInput(
@@ -267,6 +268,8 @@ class HighRiskFormHelper {
         )
         sealNumber.dependency.append(InputDependency(to: sealIssued, equalTo: true))
         sectionItems.append(sealNumber)
+
+        // moved dreisennidFoundPrevious to watercraft inspection form
 //        let spacer5 = InputSpacer()
 //        spacer5.dependency = InputDependency(to: sealIssued, equalTo: true)
 //        sectionItems.append(spacer5)
