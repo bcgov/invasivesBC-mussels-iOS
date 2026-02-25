@@ -753,16 +753,16 @@ class WatercraftInspectionViewController: BaseViewController {
             }
         }
 
-        // // Handle dreissenidMusselsFoundPrevious changes
+        // Handle dreissenidMusselsFoundPrevious changes
         if item.key == "dreissenidMusselsFoundPrevious" {
             let newValue = item.value.get(type: item.type) as? Bool ?? false
             // if toggling on dreissenidMusselsFoundPrevious, check if high risk fields are toggled on, if so show alert and toggle off dreissenidMusselsFoundPrevious
             if model.highriskAIS == true && newValue == true || model.adultDreissenidFound == true && newValue == true {
-                Alert.show(title: "Invalid Entry", message: "Yes YES cannot be selected for both Dreissenid Mussels Found in Previous Inspection and High Risk Assessment fields")
+                Alert.show(title: "Invalid Entry", message: "YES cannot be selected for both Dreissenid Mussels Found in Previous Inspection and High Risk Assessment fields")
 
                 model.set(value: false, for: item.key)
                 item.value.set(value: false, type: item.type)
-                NotificationCenter.default.post(name: .InputFieldShouldUpdate, object: item)
+                self.collectionView.reloadData()
             }
         }
 
@@ -771,15 +771,16 @@ class WatercraftInspectionViewController: BaseViewController {
             let value = item.value.get(type: item.type) as? Bool
             let alreadyHasHighRiskForm = !model.highRiskAssessments.isEmpty
 
-            // if toggling on high risk field, check if Dreissenid Mussels Found in Previous Inspection is toggled on, if so show alert and toggle off high risk field
-            // this is overriding high risk asessment warning
+            // if toggling on high risk field, check if Dreissenid Mussels Found in Previous Inspection is toggled on, if so show alert and toggle off dreissenidMusselsFoundPrevious
             if model.dreissenidMusselsFoundPrevious == true && value == true {
                 Alert.show(title: "Invalid Entry", message: "YES cannot be selected for both High Risk Assessment fields and Dreissenid Mussels Found in Previous Inspection")
 
-                model.set(value: false, for: item.key)
-                item.value.set(value: false, type: item.type)
-                NotificationCenter.default.post(name: .InputFieldShouldUpdate, object: item)
-            } else if value == true && alreadyHasHighRiskForm {
+                model.set(value: false, for: "dreissenidMusselsFoundPrevious")
+                item.value.set(value: false, type: Inspect.InputItemType.NullSwitch)
+                self.collectionView.reloadData()
+            }
+            
+            if value == true && alreadyHasHighRiskForm {
                 // set value
                 model.set(value: true, for: item.key)
                 self.showHighRiskForm(show: true)
