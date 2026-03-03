@@ -2067,7 +2067,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.8.18;
+				MARKETING_VERSION = 2.8.19;
 				PRODUCT_BUNDLE_IDENTIFIER = ca.bc.gov.InvasivesBC;
 				PRODUCT_NAME = Inspect;
 				PROVISIONING_PROFILE_SPECIFIER = "InvasivesBC Muscles - 2023/24";
@@ -2097,7 +2097,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.8.18;
+				MARKETING_VERSION = 2.8.19;
 				PRODUCT_BUNDLE_IDENTIFIER = ca.bc.gov.InvasivesBC;
 				PRODUCT_NAME = Inspect;
 				PROVISIONING_PROFILE_SPECIFIER = "InvasivesBC Muscles - 2023/24";

@@ -802,7 +802,6 @@ class WatercraftInspectionViewController: BaseViewController {
                     self.showHighRiskForm(show: true)
                 }) {
                     // Cancelled
-                    // how to make this not delayed
                     model.set(value: false, for: item.key)
                     item.value.set(value: false, type: item.type)
                     NotificationCenter.default.post(name: .InputFieldShouldUpdate, object: item)
