@@ -360,10 +360,11 @@ class ShiftModel: Object, BaseRealmObject {
     return requiredStations.contains(station)
   }
 
-  // req project details field if station is Project
+  // req project details field if station is Project or Emergency Response
   public static func projectDetailsRequired(_ station: String?) -> Bool {
     guard let station = station else { return false }
-    return station == "Project"
+    let requiredStations = ["Project", "Emergency Response"]
+    return requiredStations.contains(station)
   }
 
   internal static func getTimezoneForStation(_ station: String) -> TimeZone {

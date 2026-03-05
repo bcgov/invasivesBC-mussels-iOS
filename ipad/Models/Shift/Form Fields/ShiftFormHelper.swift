@@ -72,9 +72,7 @@ class ShiftFormHelper {
 
         let stationComments = TextAreaInput(
             key: "stationComments",
-            header: ShiftModel.stationRequired(object?.station ?? "") 
-                ? ShiftFormHeaders.ShiftStart.stationCommentsRequired 
-                : ShiftFormHeaders.ShiftStart.stationComments,
+            header: ShiftFormHeaders.ShiftStart.stationComments,
             editable: editable ?? true,
             value: object?.stationComments ?? "",
             width: .Full
