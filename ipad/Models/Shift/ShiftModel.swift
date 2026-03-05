@@ -354,16 +354,11 @@ class ShiftModel: Object, BaseRealmObject {
     return BlowByFormHelper.getBlowByFields(for: BlowbyModel());
   }
 
-  public static func stationRequired(_ station: String?) -> Bool {
+  // req project details field if station is Project or Emergency Response
+  public static func projectDetailsRequired(_ station: String?) -> Bool {
     guard let station = station else { return false }
     let requiredStations = ["Project", "Emergency Response"]
     return requiredStations.contains(station)
-  }
-
-  // req project details field if station is Project
-  public static func projectDetailsRequired(_ station: String?) -> Bool {
-    guard let station = station else { return false }
-    return station == "Project"
   }
 
   internal static func getTimezoneForStation(_ station: String) -> TimeZone {
