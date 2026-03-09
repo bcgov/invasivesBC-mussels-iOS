@@ -361,7 +361,7 @@ class ShiftViewController: BaseViewController {
                 }
                 
                 if highRisk.decontaminationOrderIssued && highRisk.decontaminationOrderNumber <= 0 {
-                    messages.append("📄 Inspection #\(index + 1) Risk #\(riskIndex + 1): Decontamination order number is required")
+                    messages.append("📄 Inspection #\(index + 1) Risk #\(riskIndex + 1): Mussel Prevention Order number is required")
                 }
             }
         }

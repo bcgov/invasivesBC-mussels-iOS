@@ -298,7 +298,7 @@ class WatercraftInspectionViewController: BaseViewController {
         case errorDreissenidMusselsFoundPreviousInteracted = "Dreissenid mussels found during previous inspection and FULL decontamination already completed/determined to be CDD."
         case errorK9InspectionInteracted = "K9 Inspection Performed."
         case errorDecontaminationPerformedInteracted = "Decontamination performed."
-        case errorDecontaminationOrderIssuedInteracted = "Decontamination order issued."
+        case errorDecontaminationOrderIssuedInteracted = "Mussel Prevention Order issued."
         case errorDecontaminationAppendixBInteracted = "Appendix B filled out field."
         case errorSealIssuedInteracted = "Seal issued or existing seal field."
         case errorQuarantinePeriodIssuedInteracted = "Quarantine period issued field."
@@ -324,8 +324,8 @@ class WatercraftInspectionViewController: BaseViewController {
         case errorPrevOtherWaterbodyNoCity = "To improve identification for the 'Other' Waterbody, add a Previous Closest Major City."
         case errorDestOtherWaterbodyNoCity = "To improve identification for the 'Other' Waterbody, add a Destination Closest Major City."
         // Inspection Outcomes (High Risk form)
-        case errorDecontaminationPerformed = "Record of Decontamination number."
-        case errorDecontaminationOrderNumber = "Decontamination order number."
+        case errorDecontaminationPerformed = "Mussel Prevention Order # (MPO)."
+        case errorDecontaminationOrderNumber = "Mussel Prevention Order number."
         case errorDecontaminationOrderReason = "Reason for issuing a decontamination order."
         case errorSealNumber = "Seal #"
     }
