@@ -18,9 +18,9 @@
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X9m-fe-BEs">
-                        <rect key="frame" x="20" y="121" width="220" height="43"/>
+                        <rect key="frame" x="20" y="121" width="205" height="43"/>
                         <constraints>
-                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="220" id="3tN-Od-xqE"/>
+                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="205" id="3tN-Od-xqE"/>
                             <constraint firstAttribute="height" constant="43" id="hRr-QE-zJH"/>
                         </constraints>
                         <state key="normal" title="Button"/>
@@ -34,11 +34,11 @@
                             <action selector="dryStorageSwitchAction:" destination="gTV-IL-0wX" eventType="valueChanged" id="fPx-zb-Ooa"/>
                         </connections>
                     </switch>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Previously Stored" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f0F-1A-sf6">
-                        <rect key="frame" x="659" y="100.5" width="60" height="34"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="751" verticalHuggingPriority="251" text="Previously Stored" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f0F-1A-sf6">
+                        <rect key="frame" x="659" y="100.5" width="59" height="34"/>
                         <constraints>
+                            <constraint firstAttribute="width" constant="59" id="fre-Xf-Rkz"/>
                             <constraint firstAttribute="height" constant="34" id="PQu-Jh-PjI"/>
-                            <constraint firstAttribute="width" constant="60" id="fre-Xf-Rkz"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <nil key="textColor"/>
@@ -50,10 +50,10 @@
                             <action selector="unknownSwitchAction:" destination="gTV-IL-0wX" eventType="valueChanged" id="GEO-ua-TJm"/>
                         </connections>
                     </switch>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Unknown Water Body" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aL0-zi-zQ5">
-                        <rect key="frame" x="500" y="95" width="80" height="45"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="751" verticalHuggingPriority="251" misplaced="YES" text="Unknown Water Body" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aL0-zi-zQ5">
+                        <rect key="frame" x="500" y="95" width="66" height="45"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="80" id="0Jl-Xl-mvv"/>
+                            <constraint firstAttribute="width" constant="66" id="0Jl-Xl-mvv"/>
                             <constraint firstAttribute="height" constant="45" id="a4n-lC-Q56"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -66,10 +66,10 @@
                             <action selector="commercialManufacturerSwitchAction:" destination="gTV-IL-0wX" eventType="valueChanged" id="DGR-ff-Nx0"/>
                         </connections>
                     </switch>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Commercial Manufacturer / New Boat" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iVs-PP-3iX">
-                        <rect key="frame" x="341" y="82.5" width="80" height="70"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="751" verticalHuggingPriority="251" text="Commercial Manufacturer / New Boat" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iVs-PP-3iX">
+                        <rect key="frame" x="341" y="82.5" width="78" height="70"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="80" id="pbh-JM-SEu"/>
+                            <constraint firstAttribute="width" constant="78" id="pbh-JM-SEu"/>
                             <constraint firstAttribute="height" constant="70" id="ps1-kU-CAQ"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -77,10 +77,10 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EJI-ov-fuh">
-                        <rect key="frame" x="20" y="87" width="220" height="43"/>
+                        <rect key="frame" x="20" y="87" width="205" height="42"/>
                         <constraints>
-                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="220" id="a6a-DB-mRE"/>
-                            <constraint firstAttribute="height" constant="43" id="kGE-du-aDu"/>
+                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="205" id="a6a-DB-mRE"/>
+                            <constraint firstAttribute="height" constant="42" id="kGE-du-aDu"/>
                         </constraints>
                         <state key="normal" title="Button"/>
                         <connections>
@@ -116,7 +116,7 @@
                 <outlet property="unknownWaterBodySwitch" destination="DaX-9v-2TV" id="TJK-de-URj"/>
                 <outlet property="unknownWaterBodySwitchLabel" destination="aL0-zi-zQ5" id="Iul-ZE-t2S"/>
             </connections>
-            <point key="canvasLocation" x="-15.217391304347828" y="31.808035714285712"/>
+            <point key="canvasLocation" x="-15.73170731707317" y="31.779661016949156"/>
         </collectionViewCell>
     </objects>
 </document>
