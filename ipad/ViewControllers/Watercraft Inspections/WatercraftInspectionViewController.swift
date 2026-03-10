@@ -324,7 +324,7 @@ class WatercraftInspectionViewController: BaseViewController {
         case errorPrevOtherWaterbodyNoCity = "To improve identification for the 'Other' Waterbody, add a Previous Closest Major City."
         case errorDestOtherWaterbodyNoCity = "To improve identification for the 'Other' Waterbody, add a Destination Closest Major City."
         // Inspection Outcomes (High Risk form)
-        case errorDecontaminationPerformed = "Mussel Prevention Order # (MPO)."
+        case errorDecontaminationPerformed = "Mussel Prevention Order #."
         case errorDecontaminationOrderNumber = "Mussel Prevention Order number."
         case errorDecontaminationOrderReason = "Reason for issuing a decontamination order."
         case errorSealNumber = "Seal #"

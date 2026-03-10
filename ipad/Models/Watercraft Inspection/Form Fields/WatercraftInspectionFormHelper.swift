@@ -228,12 +228,11 @@ class WatercraftInspectionFormHelper {
             header: WatercraftFieldHeaderConstants.WatercraftDetails.commerciallyHauled,
             editable: editable ?? true,
             value: object?.commerciallyHauled ?? false,
-            width: .Third,
+            width: .Half,
             validationName: .commerciallyHauledInteracted,
             interacted: object?.commerciallyHauledInteracted ?? false
         )
         sectionItems.append(commerciallyHauled)
-        sectionItems.append(InputSpacer())
         
         let previousAISKnowlede = NullSwitchInput(
             key: "previousAISKnowlede",

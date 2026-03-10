@@ -157,7 +157,7 @@ struct HighRiskFormFieldHeaders {
         static let adultDreissenidMusselsLocationAlt = "Additional adult mussels location"
         static let dreisennidFoundPrevious = "Dreissenid mussels found during previous inspection and FULL decontamination already completed/determined to be CDD *"
         static let decontaminationPerformed = "Decontamination performed? *"
-        static let decontaminationReference = "Mussel Prevention Order # (MPO) *"
+        static let decontaminationReference = "Mussel Prevention Order # *"
         static let decontaminationOrderIssued = "Mussel Prevention Order issued? *"
         static let decontaminationOrderNumber = "Mussel Prevention Order number *"
         static let decontaminationOrderReason = "Reason for issuing Mussel Prevention Order *"
