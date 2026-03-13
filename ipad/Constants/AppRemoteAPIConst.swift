@@ -52,15 +52,12 @@ enum RemoteEnv: String {
     }
 }
 
-// works on .local, we push to repo and testflight with .dev, and push to prod with .prod
-// is something broken in .dev with authentication?
-// are the openshift routes not working for .dev?
 class RemoteURLManager {
     var env: RemoteEnv = .dev
     static var `default` = {
         // Here We Can use Target Flag to customize
         // Switch Env 
-        return RemoteURLManager(.prod)
+        return RemoteURLManager(.dev)
     }()
     
     init(_ env: RemoteEnv) {
