@@ -129,7 +129,7 @@ struct WatercraftFieldHeaderConstants {
     }
     struct HighriskAssessmentFields {
         static let highriskAIS = "The watercraft is NOT Clean, Drain, Dry after full inspection and further action must be taken AND/OR a full inspection can not be completed."
-        static let adultDreissenidFound = "Adult dreissenid mussels found"
+        static let adultDreissenidFound = "Invasive mussels found"
     }
     struct GeneralComments {
         static let generalComments = "Inspection Comments"
@@ -152,7 +152,7 @@ struct HighRiskFormFieldHeaders {
         static let standingWaterPresent = "Standing water present?"
         static let standingWaterLocation = "Standing Water Location"
         static let standingWaterLocationAlt = "Additional Standing Water Location"
-        static let adultDreissenidMusselsFound = "Adult dreissenid mussels found?"
+        static let adultDreissenidMusselsFound = "Invasive mussels found?"
         static let adultDreissenidMusselsLocation = "Adult Dreissenid mussels location"
         static let adultDreissenidMusselsLocationAlt = "Additional adult mussels location"
         static let dreisennidFoundPrevious = "Dreissenid mussels found during previous inspection and FULL decontamination already completed/determined to be CDD *"
