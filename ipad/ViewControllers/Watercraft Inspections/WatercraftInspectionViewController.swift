@@ -753,19 +753,6 @@ class WatercraftInspectionViewController: BaseViewController {
             }
         }
 
-        // Handle dreissenidMusselsFoundPrevious changes
-        if item.key == "dreissenidMusselsFoundPrevious" {
-            let newValue = item.value.get(type: item.type) as? Bool ?? false
-            // if toggling on dreissenidMusselsFoundPrevious, check if high risk fields are toggled on, if so show alert and toggle off dreissenidMusselsFoundPrevious
-            if model.highriskAIS == true && newValue == true || model.adultDreissenidFound == true && newValue == true {
-                Alert.show(title: "Invalid Entry", message: "YES cannot be selected for both Dreissenid Mussels Found in Previous Inspection and High Risk Assessment fields")
-
-                model.set(value: false, for: item.key)
-                item.value.set(value: false, type: item.type)
-                self.collectionView.reloadData()
-            }
-        }
-
         // checks highRiskAIS and adultDreissenidFound toggled on
         if highRiskFieldKeys.contains(item.key) {
             let value = item.value.get(type: item.type) as? Bool
@@ -812,6 +799,12 @@ class WatercraftInspectionViewController: BaseViewController {
                 self.showHighRiskForm(show: shouldShowHighRisk)
                 if !shouldShowHighRisk {
                     model.removeHighRiskAssessment()
+                }
+                if shouldShowHighRisk && item.key == "adultDreissenidFound" {
+                    let highRisk = model.highRiskAssessments.first
+                    highRisk?.set(value: false, for: "adultDreissenidMusselsFound")
+                    item.value.set(value: false, type: item.type)
+                    self.collectionView.reloadData()
                 }
             }
         } else if
@@ -886,6 +879,29 @@ class WatercraftInspectionViewController: BaseViewController {
                     model.removeHighRiskAssessment()
                 }
             }
+        } else if item.key.lowercased().contains("adultDreissenidMusselsFound".lowercased()) {
+          // extract the new value from the item
+          let value = item.value.get(type: item.type) as? Bool ?? false
+          let highRisk = model.highRiskAssessments.first
+
+          // update the value in the model for adultDreissenidMusselsFound
+          model.set(value: value, for: item.key)
+
+          // if adultDreissenidMusselsFound set to true, set adultDreissenidFound to true, if set to false, set adultDreissenidFound to false
+          highRisk?.set(value: value, for: "adultDreissenidFound")
+        } else if item.key.lowercased().contains("dreissenidMusselsFoundPrevious".lowercased()) {
+          let value = item.value.get(type: item.type) as? Bool ?? false
+
+          // if dreissenidMusselsFoundPrevious is being toggled on and either high risk field is also toggled on, show alert and reject change
+          if model.highriskAIS == true && value == true {
+                Alert.show(title: "Invalid Entry", message: "YES cannot be selected for both Dreissenid Mussels Found in Previous Inspection and High Risk Assessment fields")
+                // reject change and set dreissenidMusselsFoundPrevious back to false
+                model.set(value: false, for: item.key)
+                self.collectionView.reloadData()
+          } else {
+            // update the value in the model for dreissenidMusselsFoundPrevious
+            model.set(value: value, for: item.key)
+          }
         } else {
             // All other keys, store directly
             // TODO: needs cleanup for nil case
