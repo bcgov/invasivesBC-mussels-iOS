@@ -398,6 +398,18 @@ class WatercraftInspectionFormHelper {
         )
         drainplugRemovedAtInspection.dependency.append(InputDependency(to: watercraftHasDrainplugs, equalTo: true))
         sectionItems.append(drainplugRemovedAtInspection)
+
+        let invertedFullyDrained = NullSwitchInput(
+          key: "invertedFullyDrained",
+          header: WatercraftFieldHeaderConstants.InspectionDetails.invertedFullyDrained,
+          editable: editable ?? true,
+          value: object?.invertedFullyDrained ?? nil,
+          width: .Full,
+          validationName: .invertedFullyDrainedInteracted,
+          interacted: object?.invertedFullyDrainedInteracted ?? false
+        )
+        invertedFullyDrained.dependency.append(InputDependency(to: drainplugRemovedAtInspection, equalTo: false))
+        sectionItems.append(invertedFullyDrained)
       
         return sectionItems
     }
