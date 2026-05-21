@@ -54,6 +54,7 @@ enum InteractedValidationName {
     case dreissenidMusselsFoundPreviousInteracted
     case watercraftHasDrainplugsInteracted
     case drainplugRemovedAtInspectionInteracted
+    case invertedFullyDrainedInteracted
     // High Risk Assessment Fields
     case highriskAISInteracted
     case adultDreissenidFoundInteracted
@@ -233,6 +234,8 @@ struct InteractedWithValue {
             return self.boolean
         case .drainplugRemovedAtInspectionInteracted:
             return self.boolean
+        case .invertedFullyDrainedInteracted:
+            return self.boolean
         case .k9InspectionInteracted:
             return self.boolean
         case .previousInspectionInteracted:
@@ -278,6 +281,8 @@ struct InteractedWithValue {
         case .watercraftHasDrainplugsInteracted:
             self.boolean = value
         case .drainplugRemovedAtInspectionInteracted:
+            self.boolean = value
+        case .invertedFullyDrainedInteracted:
             self.boolean = value
         case .k9InspectionInteracted:
             self.boolean = value

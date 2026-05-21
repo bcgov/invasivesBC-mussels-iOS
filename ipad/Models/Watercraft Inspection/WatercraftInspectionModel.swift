@@ -66,6 +66,7 @@ class WatercraftInspectionModel: Object, BaseRealmObject {
     @objc dynamic var dreissenidMusselsFoundPrevious: Bool = false
     @objc dynamic var watercraftHasDrainplugs: Bool = false
     @objc dynamic var drainplugRemovedAtInspection: Bool = false
+    @objc dynamic var invertedFullyDrained: Bool = false
     
     // Dry Storage
     @objc dynamic var previousDryStorage: Bool = false
@@ -118,7 +119,8 @@ class WatercraftInspectionModel: Object, BaseRealmObject {
                           "highRiskArea",
                           "dreissenidMusselsFoundPrevious",
                           "watercraftHasDrainplugs",
-                          "drainplugRemovedAtInspection"]
+                          "drainplugRemovedAtInspection",
+                          "invertedFullyDrained"]
     @objc dynamic var highriskAISInteracted: Bool = false
     @objc dynamic var adultDreissenidFoundInteracted: Bool = false
     @objc dynamic var k9InspectionInteracted: Bool = false
@@ -131,6 +133,7 @@ class WatercraftInspectionModel: Object, BaseRealmObject {
     @objc dynamic var dreissenidMusselsFoundPreviousInteracted: Bool = false
     @objc dynamic var drainplugRemovedAtInspectionInteracted: Bool = false
     @objc dynamic var watercraftHasDrainplugsInteracted: Bool = false
+    @objc dynamic var invertedFullyDrainedInteracted: Bool = false
     
     // This can be placed into a date utils file in the future
     private static let dateTimeFormatter: DateFormatter = {
@@ -333,6 +336,7 @@ class WatercraftInspectionModel: Object, BaseRealmObject {
             "k9InspectionResults": k9InspectionResults,
             "watercraftHasDrainplugs": watercraftHasDrainplugs,
             "drainplugRemovedAtInspection": drainplugRemovedAtInspection,
+            "invertedFullyDrained": invertedFullyDrained,
             "marineSpeciesFound": marineSpeciesFound,
             "aquaticPlantsFound": aquaticPlantsFound,
             "previousAISKnowledge": previousAISKnowlede,
