@@ -257,7 +257,6 @@ class WatercraftInspectionViewController: BaseViewController {
         case k9InspectionInteracted                     // Inspection Details
         case watercraftHasDrainplugsInteracted
         case drainplugRemovedAtInspectionInteracted
-        case invertedFullyDrainedInteracted
         case decontaminationPerformedInteracted         // High Risk Form
         case decontaminationOrderIssuedInteracted       // High Risk Form
         case decontaminationAppendixBInteracted         // High Risk Form
@@ -305,7 +304,6 @@ class WatercraftInspectionViewController: BaseViewController {
         case errorQuarantinePeriodIssuedInteracted = "Quarantine period issued field."
         case errorWatercraftHasDrainplugsInteracted = "Watercraft has Drain plugs field."
         case errorDrainplugRemovedAtInspectionInteracted = "Drain plug removed field."
-        case errorInvertedFullyDrainedInteracted = "Boat transported inverted and fully drained field."
         
         // Basic
         case errorInspectionTime = "Time of Inspection."
@@ -447,12 +445,6 @@ class WatercraftInspectionViewController: BaseViewController {
               type: .drainplugRemovedAtInspectionInteracted,
               errorMessage: .errorDrainplugRemovedAtInspectionInteracted,
               condition: model.watercraftHasDrainplugs && !model.drainplugRemovedAtInspectionInteracted,
-              section: .inspectionDetails
-            ),
-            Validation(
-              type: .invertedFullyDrainedInteracted,
-              errorMessage: .errorInvertedFullyDrainedInteracted,
-              condition: model.watercraftHasDrainplugs && !model.invertedFullyDrainedInteracted,
               section: .inspectionDetails
             ),
             Validation(
