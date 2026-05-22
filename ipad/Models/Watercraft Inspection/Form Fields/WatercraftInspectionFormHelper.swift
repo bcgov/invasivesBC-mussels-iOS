@@ -408,6 +408,7 @@ class WatercraftInspectionFormHelper {
           validationName: .invertedFullyDrainedInteracted,
           interacted: object?.invertedFullyDrainedInteracted ?? false
         )
+        invertedFullyDrained.dependency.append(InputDependency(to: watercraftHasDrainplugs, equalTo: true))
         invertedFullyDrained.dependency.append(InputDependency(to: drainplugRemovedAtInspection, equalTo: false))
         sectionItems.append(invertedFullyDrained)
       
