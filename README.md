@@ -190,12 +190,12 @@ Once you've fully tested the app on TestFlight, you are now ready to deploy the 
 
 1. **Make sure the app is set to look at** `.prod`**!**
 2. Login to [App Store Connect](https://appstoreconnect.apple.com/) and select **My Apps** and choose **Inspect**.
-3. Navigate to the **App Store** tab.
+3. Navigate to the **Distribution** tab.
 4. Select the "**+**" button beside iOS App to increment the next version of the app.
 5. Type the next version number and Select **Create**.
 6. Update the **What’s New in This Version** text box with the changes outlined in the PR(s).
 7. Scroll to **Build** and select the "**+**" button.
-8. Choose the build you want to add and select **Next**. It should show the newly added build.
+8. Choose the build you want to add. It should show the newly added build.
 9. Scroll to the App Review Information section.
 
    Because there’s not an IDIR for the Apple Testing team to use to review the app, we record a screen capture of the app (clicking all buttons, scrolling through the app, etc.) for the current version. We then attach the video for Apple to review, or upload it to [Google Drive](https://drive.google.com/drive/home) and share the link in the App Review Information section. You'll need to provide a short explanation of the recording.
