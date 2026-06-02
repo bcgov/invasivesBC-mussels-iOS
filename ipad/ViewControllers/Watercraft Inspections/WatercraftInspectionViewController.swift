@@ -452,7 +452,7 @@ class WatercraftInspectionViewController: BaseViewController {
             Validation(
               type: .invertedFullyDrainedInteracted,
               errorMessage: .errorInvertedFullyDrainedInteracted,
-              condition: model.watercraftHasDrainplugs && !model.invertedFullyDrainedInteracted,
+              condition: model.watercraftHasDrainplugs && !model.invertedFullyDrainedInteracted && !model.drainplugRemovedAtInspectionInteracted,
               section: .inspectionDetails
             ),
             Validation(
